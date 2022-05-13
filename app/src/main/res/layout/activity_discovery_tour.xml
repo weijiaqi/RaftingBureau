@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/discovery_bg"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_title"/>
+
+
+    <ImageView
+        android:id="@+id/iv_start_discovery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:src="@drawable/start_discovery" />
+
+    <ImageView
+        android:id="@+id/tv_way_to_explore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_start_discovery"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:src="@drawable/way_to_explore" />
+
+    <ImageView
+        android:id="@+id/iv_planet"
+        android:layout_width="148dp"
+        android:layout_height="91dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="101dp"
+        android:layout_toRightOf="@+id/rl_plant1"
+        android:src="@drawable/plant1" />
+
+
+    <RelativeLayout
+        android:id="@+id/rl_plant1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_planet"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="-35dp">
+
+        <ImageView
+            android:id="@+id/iv_planet1"
+            android:layout_width="148dp"
+            android:layout_height="91dp" />
+
+        <com.hjq.shape.view.ShapeTextView
+            android:id="@+id/tv_planet1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_planet1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="3dp"
+            android:text="传递漂"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:shape_radius="100dp"
+            app:shape_strokeColor="@color/color_99"
+            app:shape_strokeWidth="1dp" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_way_to_explore"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="40dp"
+        android:layout_toLeftOf="@+id/rl_plant1"
+        android:background="@drawable/message_box"
+        android:visibility="invisible">
+
+
+        <TextView
+            android:id="@+id/tv_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="6dp"
+            android:text="漂来新信息"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <com.hjq.shape.view.ShapeTextView
+            android:id="@+id/tv_open"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_message"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:paddingHorizontal="17dp"
+            android:text="开启"
+            android:textColor="@color/color_00"
+            android:textSize="12sp"
+            app:shape_endColor="@color/color_6c"
+            app:shape_radius="100dp"
+            app:shape_startColor="@color/color_6d" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_rocket"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_message"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/rocket"
+        android:visibility="gone" />
+
+
+    <RelativeLayout
+        android:id="@+id/rl_plant2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_plant1"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="-38dp">
+
+        <ImageView
+            android:id="@+id/iv_planet2"
+            android:layout_width="208dp"
+            android:layout_height="124dp" />
+
+        <com.hjq.shape.view.ShapeTextView
+            android:id="@+id/tv_planet2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_planet2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="3dp"
+            android:text="传递漂"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:shape_radius="100dp"
+            app:shape_strokeColor="@color/color_99"
+            app:shape_strokeWidth="1dp" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_planet3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_plant2"
+        android:layout_marginTop="30dp">
+
+        <ImageView
+            android:id="@+id/iv_planet3"
+            android:layout_width="148dp"
+            android:layout_height="91dp"
+            android:layout_marginLeft="-10dp" />
+
+        <com.hjq.shape.view.ShapeTextView
+            android:id="@+id/tv_planet3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_planet3"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="3dp"
+            android:text="传递漂"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:shape_radius="100dp"
+            app:shape_strokeColor="@color/color_99"
+            app:shape_strokeWidth="1dp" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_planet4"
+        android:layout_width="148dp"
+        android:layout_height="91dp"
+        android:layout_below="@+id/rl_planet3"
+        android:layout_marginTop="45dp"
+        android:layout_marginRight="20dp"
+        android:layout_toLeftOf="@+id/rl_planet3" />
+
+
+    <TextView
+        android:id="@+id/tv_about_me"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="29dp"
+        android:layout_marginBottom="122dp"
+        android:drawableTop="@drawable/about_me"
+        android:text="关于我"
+        android:drawablePadding="4dp"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+
+
+    <TextView
+        android:id="@+id/tv_space_capsule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="29dp"
+        android:layout_marginBottom="49dp"
+        android:drawableTop="@drawable/space_capsule"
+        android:text="太空舱"
+        android:drawablePadding="4dp"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+
+
+</RelativeLayout>

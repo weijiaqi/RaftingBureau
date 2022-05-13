@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/color_01"
+    android:orientation="vertical">
+
+
+    <ImageView
+        android:id="@+id/iv_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="90dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/claim_planet" />
+
+    <com.drifting.bureau.view.FontTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:text="恭喜你获得专属星球!"
+        android:textColor="@color/color_6ce"
+        android:textSize="14sp"
+         app:fontType="Noto_bold" />
+
+    <com.drifting.bureau.view.FontTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="12sp"
+        app:fontType="Noto_light"
+        android:text="可通过探索、填写资料等方式完善你的星球！"
+        android:textColor="@color/color_6ce" />
+
+    <TextView
+        android:id="@+id/tv_enter_rb"
+        android:layout_width="163dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/solid_blue_block_button"
+        android:gravity="center"
+        android:text="进入漂流局"
+        android:textStyle="bold"
+        android:layout_marginTop="48dp"
+        android:textColor="@color/color_01"
+        android:textSize="14sp" />
+</LinearLayout>

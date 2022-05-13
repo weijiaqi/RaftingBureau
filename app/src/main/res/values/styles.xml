@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/purple_200</item>
+        <item name="colorPrimaryDark">@color/purple_200</item>
+        <item name="colorAccent">@color/purple_200</item>
+        <item name="android:windowAnimationStyle">@style/Animation_Activity</item>
+    </style>
+
+    <style name="Animation_Activity">
+<!--        <item name="android:activityOpenEnterAnimation">@anim/translate_right_to_center</item>-->
+<!--        <item name="android:activityOpenExitAnimation">@anim/translate_center_to_left</item>-->
+<!--        <item name="android:activityCloseEnterAnimation">@anim/translate_left_to_center</item>-->
+<!--        <item name="android:activityCloseExitAnimation">@anim/translate_center_to_right</item>-->
+    </style>
+
+    <!--设置背景图Theme-->
+    <style name="AppSplash" parent="AppTheme">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowAnimationStyle">@style/RemoveTransitions</item>
+        <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="LOLLIPOP">false</item>
+    </style>
+
+    <!--移除转场效果-->
+    <style name="RemoveTransitions">
+        <item name="android:activityOpenEnterAnimation">@null</item>
+        <item name="android:activityOpenExitAnimation">@null</item>
+        <item name="android:activityCloseEnterAnimation">@null</item>
+        <item name="android:activityCloseExitAnimation">@null</item>
+        <item name="android:taskOpenEnterAnimation">@null</item>
+        <item name="android:taskOpenExitAnimation">@null</item>
+        <item name="android:taskCloseEnterAnimation">@null</item>
+        <item name="android:taskCloseExitAnimation">@null</item>
+        <item name="android:taskToFrontEnterAnimation">@null</item>
+        <item name="android:taskToFrontExitAnimation">@null</item>
+        <item name="android:taskToBackEnterAnimation">@null</item>
+        <item name="android:taskToBackExitAnimation">@null</item>
+    </style>
+    <!--三角形-->
+    <declare-styleable name="TriangleView">
+        <attr name="trv_color" format="color" />
+        <attr name="trv_direction">
+            <enum name="top" value="0" />
+            <enum name="bottom" value="1" />
+            <enum name="right" value="2" />
+            <enum name="left" value="3" />
+        </attr>
+    </declare-styleable>
+
+
+    <!-- 自定义dialog样式评价-->
+    <style name="EnterDialog" parent="android:Animation">
+        <!--//进入时的动画-->
+        <item name="android:windowEnterAnimation">@anim/anim_float_window_enter</item>
+        <!--//退出时的动画-->
+        <item name="android:windowExitAnimation">@anim/anim_float_window_exit</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
+</resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="72dp"
+    android:layout_marginBottom="29dp">
+
+    <ImageView
+        android:id="@+id/iv_head"
+        android:layout_width="47dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="20dp"
+        android:src="@drawable/hint_head" />
+
+    <include
+        android:layout_marginStart="14dp"
+        android:layout_toRightOf="@+id/iv_head"
+        layout="@layout/include_claim_planet"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content" />
+
+
+</RelativeLayout>

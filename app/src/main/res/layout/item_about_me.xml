@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.hjq.shape.layout.ShapeLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="91dp"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="14dp"
+    android:gravity="center"
+    android:orientation="vertical"
+    app:shape_radius="5dp"
+    app:shape_solidColor="@color/color_162">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:text="漂流轨迹"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+
+    <ImageView
+        android:id="@+id/iv_pic"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:layout_marginVertical="10dp"
+        android:src="@drawable/guide_planet" />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="18dp"
+        android:text="查看你的漂流"
+        android:textColor="@color/color_6ca"
+        android:textSize="11sp" />
+</com.hjq.shape.layout.ShapeLinearLayout>
