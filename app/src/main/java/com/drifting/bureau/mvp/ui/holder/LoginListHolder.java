@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.data.entity.LoginLocallyEntity;
-import com.drifting.bureau.view.SDAdaptiveTextView;
+
 import com.jess.arms.base.BaseRecyclerHolder;
 
 import java.util.List;

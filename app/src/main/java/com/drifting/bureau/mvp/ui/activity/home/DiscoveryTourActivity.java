@@ -39,6 +39,8 @@ import com.drifting.bureau.mvp.model.entity.CustomerEntity;
 
 import com.drifting.bureau.mvp.model.entity.PlanetEntity;
 import com.drifting.bureau.mvp.ui.activity.index.DriftingBottleActivity;
+import com.drifting.bureau.mvp.ui.activity.index.SpaceCapsuleActivity;
+import com.drifting.bureau.mvp.ui.activity.index.ViewRaftingActivity;
 import com.drifting.bureau.mvp.ui.activity.user.AboutMeActivity;
 import com.drifting.bureau.mvp.ui.dialog.RaftingInforDialog;
 import com.jess.arms.base.BaseActivity;
@@ -173,7 +175,6 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
         imageView.getLocationOnScreen(location);
         int x = location[0];
         int y = location[1];
-        Log.e("1---------", "left---" + x + "top-----" + y);
     }
 
 
@@ -187,7 +188,7 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
     }
 
 
-    @OnClick({R.id.rl_plant2, R.id.iv_planet1, R.id.iv_planet3, R.id.tv_planet2, R.id.tv_open, R.id.tv_about_me})
+    @OnClick({R.id.rl_plant2, R.id.iv_planet1, R.id.iv_planet3, R.id.tv_planet2, R.id.tv_open, R.id.tv_about_me,R.id.tv_space_capsule})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rl_plant2:  //星球点击
@@ -209,14 +210,19 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
                 raftingInforDialog = new RaftingInforDialog(this);
                 raftingInforDialog.show();
                 raftingInforDialog.setOnClickCallback(type -> {
-                    if (type == RaftingInforDialog.SELECT_FINISH) {
+                    if (type == RaftingInforDialog.CLICK_FINISH) {
                         mRlMessage.setVisibility(View.INVISIBLE);
                         objectAnimation(2, mIvRocket, mRlMessage, 0, 0, 1000, -500, 250);
+                    }else if (type == RaftingInforDialog.CLICK_SELECT){
+                        ViewRaftingActivity.start(this,false);
                     }
                 });
                 break;
             case R.id.tv_about_me: //关于我
                 AboutMeActivity.start(this, false);
+                break;
+            case R.id.tv_space_capsule: //太空舱
+                SpaceCapsuleActivity.start(this,false);
                 break;
         }
     }

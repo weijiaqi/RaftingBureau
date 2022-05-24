@@ -9,6 +9,11 @@ package="com.drifting.bureau">
 <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+<uses-permission android:name="android.permission.RECORD_AUDIO" />
+<uses-permission android:name="android.permission.CAMERA" />
+<uses-permission
+    android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+    tools:ignore="ProtectedPermissions" />
 
 <application
     android:name=".app.application.RBureauApplication"
@@ -33,9 +38,9 @@ package="com.drifting.bureau">
     </activity>
 
     <!-- 只要依赖 AutoSize 就必须填写设计图尺寸, 否则报错, 不想使用 AutoSize 就不要依赖 AutoSize
-      只要填写完设计图的尺寸, AutoSize 就会自动启动, 以下 dp 尺寸是根据公式 px / (dpi / 160) 求出, 运算时使用测试机的 dpi 即可
-      AutoSize 的详细介绍请看这里 https://juejin.im/post/5bce688e6fb9a05cf715d1c2
-      -->
+                  只要填写完设计图的尺寸, AutoSize 就会自动启动, 以下 dp 尺寸是根据公式 px / (dpi / 160) 求出, 运算时使用测试机的 dpi 即可
+                  AutoSize 的详细介绍请看这里 https://juejin.im/post/5bce688e6fb9a05cf715d1c2
+                  -->
     <meta-data
         android:name="design_width_in_dp"
         android:value="360" />
@@ -54,34 +59,31 @@ package="com.drifting.bureau">
         android:launchMode="singleTask"
         android:windowSoftInputMode="adjustResize" />
 
-    <activity
-        android:name=".mvp.ui.activity.user.BuildGuideActivity"
-        tools:ignore="DuplicateActivity" />
+    <activity android:name=".mvp.ui.activity.user.BuildGuideActivity" />
+
+    <activity android:name=".mvp.ui.activity.user.SignLoginHintActivity" />
+    <activity android:name=".mvp.ui.activity.user.LoginActivity" />
+    <activity android:name=".mvp.ui.activity.user.ClaimPlanetActivity" />
+    <activity android:name=".mvp.ui.activity.user.AboutMeActivity" />
+    <activity android:name=".mvp.ui.activity.index.DriftingBottleActivity" />
+
+    <activity android:name=".mvp.ui.activity.index.VideoActivity" />
+
+    <activity android:name=".mvp.ui.activity.index.VideoRecordingActivity" />
+    <activity android:name=".mvp.ui.activity.web.ShowWebViewActivity" />
+
+    <activity android:name=".mvp.ui.activity.pay.PaymentInfoActivity" />
+
+    <activity android:name=".mvp.ui.activity.user.SetUpActivity" />
+    <activity android:name=".mvp.ui.activity.index.ViewRaftingActivity" />
+    <activity android:name=".mvp.ui.activity.index.RaftingDetailsActivity" />
+
+    <activity android:name=".mvp.ui.activity.index.DeliveryDetailsActivity" />
+
+    <activity android:name=".mvp.ui.activity.index.SpaceCapsuleActivity" />
 
     <activity
-        android:name=".mvp.ui.activity.user.SignLoginHintActivity"
-        tools:ignore="DuplicateActivity" />
-    <activity
-        android:name=".mvp.ui.activity.user.LoginActivity"
-        android:screenOrientation="portrait" />
-    <activity
-        android:name=".mvp.ui.activity.user.ClaimPlanetActivity"
-        android:screenOrientation="portrait" />
-    <activity
-        android:name=".mvp.ui.activity.user.AboutMeActivity"
-        android:screenOrientation="portrait" />
-    <activity
-        android:name=".mvp.ui.activity.index.DriftingBottleActivity"
-        android:screenOrientation="portrait"
-      />
-    <activity
-        android:name=".mvp.ui.activity.web.ShowWebViewActivity"
-        tools:ignore="DuplicateActivity" />
-    <activity
-        android:name=".mvp.ui.activity.user.SetUpActivity"
+        android:name="com.drifting.bureau.mvp.ui.activity.index.GetSpaceStationActivity"
         android:screenOrientation="portrait" />
 </application>
-
 </manifest>
-
-

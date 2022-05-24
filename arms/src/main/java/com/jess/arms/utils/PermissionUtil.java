@@ -105,10 +105,31 @@ public class PermissionUtil {
     }
 
     /**
+     * 请求语音权限
+     */
+    public static void launchAudioStorage(RequestPermission requestPermission, RxPermissions rxPermissions, RxErrorHandler errorHandler) {
+        requestPermission(requestPermission, rxPermissions, errorHandler, Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+    }
+
+    /**
+     * 请求语音权限
+     */
+    public static void launchVideo(RequestPermission requestPermission, RxPermissions rxPermissions, RxErrorHandler errorHandler) {
+        requestPermission(requestPermission, rxPermissions, errorHandler, Manifest.permission.CAMERA,Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+    }
+
+    /**
      * 请求外部存储的权限
      */
     public static void externalStorage(RequestPermission requestPermission, RxPermissions rxPermissions, RxErrorHandler errorHandler) {
         requestPermission(requestPermission, rxPermissions, errorHandler, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+    }
+
+    /**
+     * 请求外部存储的权限
+     */
+    public static void externalReadStorage(RequestPermission requestPermission, RxPermissions rxPermissions, RxErrorHandler errorHandler) {
+        requestPermission(requestPermission, rxPermissions, errorHandler, Manifest.permission.READ_EXTERNAL_STORAGE);
     }
 
     /**
@@ -130,6 +151,13 @@ public class PermissionUtil {
      */
     public static void readPhonestate(RequestPermission requestPermission, RxPermissions rxPermissions, RxErrorHandler errorHandler) {
         requestPermission(requestPermission, rxPermissions, errorHandler, Manifest.permission.READ_PHONE_STATE);
+    }
+
+    /**
+     * 请求语音权限
+     */
+    public static void launchAudio(RequestPermission requestPermission, RxPermissions rxPermissions, RxErrorHandler errorHandler) {
+        requestPermission(requestPermission, rxPermissions, errorHandler, Manifest.permission.RECORD_AUDIO);
     }
 
     public interface RequestPermission {

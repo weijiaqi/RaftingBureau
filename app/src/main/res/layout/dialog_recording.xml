@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.hjq.shape.layout.ShapeLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:custom_android="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="278dp"
     android:gravity="center_horizontal"
@@ -15,21 +16,192 @@
         android:padding="10dp"
         android:src="@drawable/drifting_next" />
 
-    <ImageView
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="71dp"
-        android:src="@drawable/drifting_recording" />
+        android:layout_marginTop="10dp">
 
-    <TextView
-        android:id="@+id/tv_start_recording"
+
+        <ImageView
+            android:id="@+id/iv_horizontal_line"
+            android:layout_width="200dp"
+            android:layout_height="45dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/drifting_horizontal_line" />
+
+        <com.drifting.bureau.view.VoiceWave
+            android:id="@+id/videoView"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_prepare"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
-        android:drawableTop="@drawable/drifting_start_recording"
-        android:drawablePadding="9dp"
         android:gravity="center"
-        android:text="开始录音"
-        android:textColor="@color/color_00"
-        android:textSize="12sp" />
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="62dp"
+            android:layout_height="62dp"
+            android:src="@drawable/drifting_start_recording" />
+
+        <TextView
+            android:id="@+id/tv_start_recording"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:text="开始录音"
+            android:textColor="@color/color_00"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="29dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="15S"
+            android:textColor="@color/color_00"
+            android:textSize="14sp" />
+
+        <RelativeLayout
+            android:layout_width="62dp"
+            android:layout_height="62dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp">
+
+
+            <com.drifting.bureau.view.CircleProgressView
+                android:id="@+id/progress"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:backColor="@color/color_82_ed"
+                app:backWidth="3dp"
+                app:progColor="@color/color_82"
+                app:progWidth="3dp" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/bg_voice_stop" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_logging_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:gravity="center"
+            android:text="正在录入"
+            android:textColor="@color/color_33"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_play"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="29dp"
+        android:visibility="gone">
+
+        <com.hjq.shape.view.ShapeTextView
+            android:id="@+id/tv_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="29dp"
+            android:layout_toLeftOf="@+id/ll_play"
+            android:paddingHorizontal="13dp"
+            android:paddingVertical="4dp"
+            android:text="删除"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:shape_radius="13dp"
+            app:shape_solidColor="@color/color_cc" />
+
+        <LinearLayout
+            android:id="@+id/ll_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_play_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="15S"
+                android:textColor="@color/color_00"
+                android:textSize="14sp" />
+
+            <RelativeLayout
+                android:layout_width="62dp"
+                android:layout_height="62dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp">
+
+
+                <com.drifting.bureau.view.CircleProgressView
+                    android:id="@+id/cp_play"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:backColor="@color/color_82_ed"
+                    app:backWidth="3dp"
+                    app:progColor="@color/color_82"
+                    app:progWidth="3dp" />
+
+                <View
+                    android:id="@+id/iv_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/drifting_play" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_play"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:gravity="center"
+                android:text="点击播放"
+                android:textColor="@color/color_33"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <com.hjq.shape.view.ShapeTextView
+            android:id="@+id/tv_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="29dp"
+            android:layout_toRightOf="@+id/ll_play"
+            android:paddingHorizontal="13dp"
+            android:paddingVertical="4dp"
+            android:text="完成"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:shape_radius="13dp"
+            app:shape_solidColor="@color/color_f1" />
+
+    </RelativeLayout>
+
 </com.hjq.shape.layout.ShapeLinearLayout>

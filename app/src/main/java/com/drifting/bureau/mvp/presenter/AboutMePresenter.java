@@ -1,12 +1,24 @@
 package com.drifting.bureau.mvp.presenter;
 import android.app.Application;
+
+import com.drifting.bureau.mvp.model.entity.CustomerEntity;
+import com.drifting.bureau.mvp.model.entity.UserEntity;
+import com.jess.arms.base.BaseEntity;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
+
 import javax.inject.Inject;
 import com.drifting.bureau.mvp.contract.AboutMeContract;
+import com.jess.arms.utils.RxLifecycleUtils;
+
+import java.util.List;
 
 /**
  * ================================================
@@ -34,6 +46,30 @@ public class AboutMePresenter extends BasePresenter<AboutMeContract.Model, About
     @Inject
     public AboutMePresenter (AboutMeContract.Model model, AboutMeContract.View rootView) {
         super(model, rootView);
+    }
+
+    /**
+     * 关于我
+     */
+    public void getUser() {
+        mModel.user().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseEntity<UserEntity>>(mErrorHandler) {
+                    @Override
+                    public void onNext(BaseEntity<UserEntity> baseEntity) {
+                        if (mRootView != null) {
+                            if (baseEntity.getCode() == 200) {
+                                mRootView.userSuccess(baseEntity.getData());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
     }
 
     @Override
