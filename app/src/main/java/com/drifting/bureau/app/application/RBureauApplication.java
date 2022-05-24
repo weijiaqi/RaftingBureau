@@ -6,8 +6,10 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
+import com.danikula.videocache.HttpProxyCacheServer;
 import com.drifting.bureau.app.api.Api;
 import com.drifting.bureau.storageinfo.Preferences;
+import com.drifting.bureau.util.FileGenerator;
 import com.hjq.toast.ToastUtils;
 import com.jess.arms.base.App;
 import com.jess.arms.base.BaseApplication;
@@ -28,7 +30,7 @@ public class RBureauApplication extends Application implements App {
     private static RBureauApplication instance = null;
     private AppLifecycles mAppDelegate;
     private static Context mContext;
-
+    private HttpProxyCacheServer proxy;
     /**
      * 这里会在 {@link BaseApplication#onCreate} 之前被调用,可以做一些较早的初始化
      * 常用于 MultiDex 以及插件化框架的初始化
@@ -135,6 +137,19 @@ public class RBureauApplication extends Application implements App {
         //设置屏幕适配逻辑策略类, 一般不用设置, 使用框架默认的就好
 //                .setAutoAdaptStrategy(new AutoAdaptStrategy())
         ;
+    }
+
+
+    public static HttpProxyCacheServer getProxy(Context context) {
+        RBureauApplication app = (RBureauApplication) context.getApplicationContext();
+        return app.proxy == null ? (app.proxy = app.newProxy()) : app.proxy;
+    }
+
+    private HttpProxyCacheServer newProxy() {
+        return new HttpProxyCacheServer.Builder(this)
+                .maxCacheSize(1024 * 1024 * 1024)       // 1 Gb for cache
+                .fileNameGenerator(new FileGenerator())
+                .build();
     }
 
 

@@ -19,6 +19,9 @@ public class FontTextView extends AppCompatTextView {
 
     private final int Noto_light = 3;
 
+
+    private final int Pingfang_bold = 4;
+
     public FontTextView(Context context) {
         super(context);
     }
@@ -46,6 +49,9 @@ public class FontTextView extends AppCompatTextView {
                 break;
             case Noto_light:
                 fontPath = "fonts/NotoSansHans-Light.otf";
+                break;
+            case Pingfang_bold:
+                fontPath = "fonts/PingFang Bold.ttf";
                 break;
             default:
         }

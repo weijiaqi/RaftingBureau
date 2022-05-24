@@ -3,6 +3,7 @@ package com.drifting.bureau.app.api;
 
 import com.drifting.bureau.mvp.model.entity.CustomerEntity;
 import com.drifting.bureau.mvp.model.entity.LoginEntity;
+import com.drifting.bureau.mvp.model.entity.UserEntity;
 import com.jess.arms.base.BaseEntity;
 
 import java.util.List;
@@ -49,6 +50,15 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("n/user/passwordlogin")
     Observable<BaseEntity<LoginEntity>> passwordlogin(@Field("mobile") String mobile, @Field("password") String password);
+
+
+    /**
+     * 关于我
+     * @return
+     */
+    @GET("v/user/home")
+    Observable<BaseEntity<UserEntity>> userhome();
+
 
 
     /**

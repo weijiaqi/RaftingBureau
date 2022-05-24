@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_01"
-
     android:orientation="vertical">
 
 
@@ -41,6 +41,7 @@
                 android:textSize="11sp" />
 
             <TextView
+                android:id="@+id/tv_place_esidence"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="18dp"
@@ -85,6 +86,7 @@
                 android:textSize="11sp" />
 
             <TextView
+                android:id="@+id/tv_identity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="9dp"
@@ -168,6 +170,7 @@
                     android:textSize="11sp" />
 
                 <TextView
+                    android:id="@+id/tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="你的小太阳"
@@ -188,9 +191,9 @@
                     android:textSize="11sp" />
 
                 <TextView
+                    android:id="@+id/tv_identity2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:text="星际开荒者"
                     android:textColor="@color/color_6de" />
             </LinearLayout>
@@ -205,6 +208,7 @@
             android:textSize="11sp" />
 
         <TextView
+            android:id="@+id/tv_place_esidence2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="荒芜星球"
@@ -222,19 +226,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/iv_green_progress"
+            <!--            <ImageView-->
+            <!--                android:id="@+id/iv_green_progress"-->
+            <!--                android:layout_width="168dp"-->
+            <!--                android:layout_height="8dp"-->
+            <!--                android:layout_centerVertical="true"-->
+            <!--                android:src="@drawable/bg_green_progress" />-->
+
+
+            <ProgressBar
+                android:id="@+id/pr_upload_value"
+                style="@android:style/Widget.ProgressBar.Horizontal"
                 android:layout_width="168dp"
                 android:layout_height="8dp"
-                android:layout_centerVertical="true"
-                android:src="@drawable/bg_green_progress" />
+                android:layout_marginTop="8dp"
+                android:max="100"
+                android:min="0"
+                android:progressDrawable="@drawable/progressbar" />
+
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginBottom="2dp"
-                android:layout_toRightOf="@+id/iv_green_progress"
+                android:layout_toRightOf="@+id/pr_upload_value"
                 android:text="12%"
                 android:textColor="@color/color_6de"
                 android:textSize="12sp"

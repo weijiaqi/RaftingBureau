@@ -20,10 +20,12 @@ import android.content.Context;
 
 import com.drifting.bureau.BuildConfig;
 import com.jess.arms.base.delegate.AppLifecycles;
+import com.jess.arms.integration.cache.IntelligentCache;
+import com.jess.arms.utils.ArmsUtils;
+
 
 import androidx.annotation.NonNull;
 import butterknife.ButterKnife;
-
 import timber.log.Timber;
 
 /**

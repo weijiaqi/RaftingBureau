@@ -7,7 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-   <color name="color_0d">#0D1114</color>
+    <color name="color_0d">#0D1114</color>
     <color name="color_01">#010103</color>
     <color name="transparent">#00000000</color>
     <color name="color_6d">#6DECEA</color>
@@ -18,7 +18,7 @@
     <color name="color_d6">#D64CB6</color>
     <color name="color_c5">#C54BBC</color>
     <color name="color_21">#21212A</color>
-   <color name="color_8b">#8B46CF</color>
+    <color name="color_8b">#8B46CF</color>
     <color name="color_fe">#FEFEFE</color>
     <color name="color_6ce">#6CECCB</color>
     <color name="color_cc">#CCCCCC</color>
@@ -31,4 +31,26 @@
     <color name="color_6de">#6DECDF</color>
     <color name="color_162">#16202B</color>
     <color name="color_6ca">#6CECCA</color>
+    <color name="color_e3_7f">#7fE3E3E3</color><!--50% -->
+
+    <color name="color_82">#82E7DC</color>
+    <color name="color_82_19">#1982E7DC</color><!--10% -->
+    <color name="color_82_ed">#4d82E7DC</color><!--30% -->
+    <color name="color_82_7f">#7f82E7DC</color><!--50% -->
+    <color name="color_82_99">#9982E7DC</color><!--60% -->
+    <color name="color_82_ccffffff">#cc82E7DC</color><!--80% -->
+    <color name="color_82_e6ffffff">#e682E7DC</color><!--90% -->
+
+    <color name="color_00_7f">#7f000000</color><!--50% -->
+    <color name="color_82_6d">#4d6DECEA</color>
+    <color name="color_33">#333333</color>
+    <color name="color_f1">#F13232</color>
+    <color name="color_7d">#7D45D4</color>
+    <color name="color_66">#666666</color>
+    <color name="color_f15">#F15C5C</color>
+    <color name="color_1a">#1A1A1A</color>
+    <color name="color_26">#26262B</color>
+    <color name="color_80">#808080</color>
+    <color name="color_96">#960202</color>
+    <color name="color_15">#154de4</color>
 </resources>

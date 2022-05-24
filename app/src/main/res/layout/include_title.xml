@@ -31,14 +31,21 @@
         android:textSize="17sp"
         tools:text="" />
 
-    <ImageView
-        android:id="@+id/iv_right"
+    <RelativeLayout
+        android:id="@+id/rl_right"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_centerVertical="true"
-        android:layout_gravity="end"
-        android:paddingHorizontal="14dp"
-        android:visibility="gone" />
+        android:layout_gravity="end">
+
+        <ImageView
+            android:id="@+id/iv_right"
+            android:paddingHorizontal="14dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
+
 
     <RelativeLayout
         android:id="@+id/rl_info"

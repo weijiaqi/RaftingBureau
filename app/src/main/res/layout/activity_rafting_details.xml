@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_01"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_title" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="20dp"
+        android:text="看看他们都在说什么？"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tv_passer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="15dp"
+        android:text=""
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+
+    <com.drifting.bureau.view.AutoPollRecyclerView
+        android:id="@+id/rcy_barrage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp" />
+
+
+    <com.hjq.shape.layout.ShapeLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="175dp"
+        android:layout_marginHorizontal="37dp"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:padding="15dp"
+        app:shape_radius="10dp"
+        app:shape_solidColor="@color/color_0b">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="昵称： 你的小太阳"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_passer_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/tv_name"
+                android:layout_alignParentEnd="true"
+                android:text="已传递5858人>"
+                android:textColor="@color/color_cc"
+                android:textSize="11sp" />
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/tv_word"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ellipsize="end"
+            android:maxLines="5"
+            android:text="宋代盛行的一种中
+            国文学体裁，宋词是一宋词是一种相对于古体诗的新体诗歌之一宋词是一种相对于古体诗的新体诗歌之一宋词是一种相对于古体诗的新体诗歌之一宋词是一种相对于古体诗的新体诗歌之一宋词是一种相对于古体诗的新体诗歌之一宋词是一种相对于古体诗的新体诗歌之一种相对于古体诗的新体诗歌之一，为宋代儒客文人智慧精华，标志宋代文学的最高成就。宋词句子有长有短，便于歌唱。因是合乐的歌词，故又称曲子词、乐府、乐章、长短句、诗余..."
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:visibility="gone" />
+
+        <include
+            layout="@layout/include_voice_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="38dp"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/rl_video_play"
+            layout="@layout/include_video_play"
+            android:layout_width="wrap_content"
+            android:layout_height="121dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal" />
+    </com.hjq.shape.layout.ShapeLinearLayout>
+</LinearLayout>

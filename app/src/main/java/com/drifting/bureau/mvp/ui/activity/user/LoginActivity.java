@@ -181,15 +181,14 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
                 @Override
                 public void onTick(long millisUntilFinished) {
                     //剩余秒数
-                    int surplusSeconds = (int) (millisUntilFinished / 1000);
                     mTvSubmit.setEnabled(false);
-                    mTvSubmit.setText(surplusSeconds + "S");
+                    mTvSubmit.setText((Math.round((double) millisUntilFinished / 1000) - 1) + "S");
                 }
 
                 @Override
                 public void onFinish() {
                     mTvSubmit.setEnabled(true);
-                    mTvSubmit.setText("重新获取");
+                    mTvSubmit.setText("");
                     cleanCountDown();
                 }
             }.start();
@@ -243,7 +242,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     @Override
     public void registerSuccess(LoginEntity loginEntity) {
         LogInOutDataUtil.successInSetData(loginEntity);
-        setData("恭喜你，信息创建成功!\n 请领取你的专属星球！", 3, true);
+        setData("恭喜你，信息创建成功!\n请领取你的专属星球！", 3, true);
         setEditHint("");
     }
 

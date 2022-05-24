@@ -7,7 +7,7 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <include layout="@layout/include_title"/>
+    <include layout="@layout/include_title" />
 
 
     <ImageView
@@ -41,7 +41,7 @@
 
     <RelativeLayout
         android:id="@+id/rl_plant1"
-        android:layout_width="wrap_content"
+        android:layout_width="148dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/iv_planet"
         android:layout_alignParentEnd="true"
@@ -49,7 +49,7 @@
 
         <ImageView
             android:id="@+id/iv_planet1"
-            android:layout_width="148dp"
+            android:layout_width="match_parent"
             android:layout_height="91dp" />
 
         <com.hjq.shape.view.ShapeTextView
@@ -122,7 +122,7 @@
 
     <RelativeLayout
         android:id="@+id/rl_plant2"
-        android:layout_width="wrap_content"
+        android:layout_width="208dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rl_plant1"
         android:layout_marginStart="52dp"
@@ -130,7 +130,7 @@
 
         <ImageView
             android:id="@+id/iv_planet2"
-            android:layout_width="208dp"
+            android:layout_width="match_parent"
             android:layout_height="124dp" />
 
         <com.hjq.shape.view.ShapeTextView
@@ -154,16 +154,16 @@
 
     <RelativeLayout
         android:id="@+id/rl_planet3"
-        android:layout_width="wrap_content"
+        android:layout_width="148dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rl_plant2"
+        android:layout_marginLeft="-10dp"
         android:layout_marginTop="30dp">
 
         <ImageView
             android:id="@+id/iv_planet3"
-            android:layout_width="148dp"
-            android:layout_height="91dp"
-            android:layout_marginLeft="-10dp" />
+            android:layout_width="match_parent"
+            android:layout_height="91dp" />
 
         <com.hjq.shape.view.ShapeTextView
             android:id="@+id/tv_planet3"
@@ -171,6 +171,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/iv_planet3"
             android:layout_centerHorizontal="true"
+            android:layout_marginLeft="-10dp"
             android:layout_marginTop="10dp"
             android:paddingHorizontal="12dp"
             android:paddingVertical="3dp"
@@ -202,8 +203,8 @@
         android:layout_marginEnd="29dp"
         android:layout_marginBottom="122dp"
         android:drawableTop="@drawable/about_me"
-        android:text="关于我"
         android:drawablePadding="4dp"
+        android:text="关于我"
         android:textColor="@color/white"
         android:textSize="12sp" />
 
@@ -217,8 +218,8 @@
         android:layout_marginEnd="29dp"
         android:layout_marginBottom="49dp"
         android:drawableTop="@drawable/space_capsule"
-        android:text="太空舱"
         android:drawablePadding="4dp"
+        android:text="太空舱"
         android:textColor="@color/white"
         android:textSize="12sp" />
 
