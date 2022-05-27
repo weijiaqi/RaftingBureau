@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="29dp"
-        android:text="已成功发送"
+        android:text="制作完成"
         android:textColor="@color/color_00"
         android:textSize="14sp"
         android:textStyle="bold" />
@@ -26,7 +26,7 @@
         android:layout_marginTop="19dp"
         android:layout_marginHorizontal="46dp"
         android:gravity="center"
-        android:text=""
+        android:text="已经制作完成并发往太空了 拥有该订单带来的收益"
         android:textColor="@color/color_99"
         android:textSize="12sp" />
 
@@ -36,7 +36,7 @@
         android:layout_height="38dp"
         android:layout_marginVertical="24dp"
         android:gravity="center"
-        android:text="返回首页"
+        android:text="确定"
         android:textColor="@color/color_00"
         android:textStyle="bold"
         app:shape_endColor="@color/color_6d"

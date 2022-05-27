@@ -226,20 +226,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <!--            <ImageView-->
-            <!--                android:id="@+id/iv_green_progress"-->
-            <!--                android:layout_width="168dp"-->
-            <!--                android:layout_height="8dp"-->
-            <!--                android:layout_centerVertical="true"-->
-            <!--                android:src="@drawable/bg_green_progress" />-->
-
 
             <ProgressBar
                 android:id="@+id/pr_upload_value"
                 style="@android:style/Widget.ProgressBar.Horizontal"
                 android:layout_width="168dp"
                 android:layout_height="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_centerVertical="true"
                 android:max="100"
                 android:min="0"
                 android:progressDrawable="@drawable/progressbar" />
@@ -249,6 +242,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:layout_marginBottom="2dp"
                 android:layout_toRightOf="@+id/pr_upload_value"
                 android:text="12%"
                 android:textColor="@color/color_6de"
@@ -259,6 +253,8 @@
         </RelativeLayout>
 
     </LinearLayout>
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcy_mylist"

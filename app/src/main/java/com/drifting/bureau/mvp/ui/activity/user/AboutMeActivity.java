@@ -14,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -22,7 +21,6 @@ import android.widget.TextView;
 import com.billy.android.swipe.SmartSwipe;
 import com.billy.android.swipe.SmartSwipeWrapper;
 import com.billy.android.swipe.SwipeConsumer;
-import com.billy.android.swipe.consumer.ActivitySlidingBackConsumer;
 import com.billy.android.swipe.consumer.DrawerConsumer;
 import com.billy.android.swipe.consumer.SlidingConsumer;
 import com.billy.android.swipe.listener.SimpleSwipeListener;
@@ -32,8 +30,9 @@ import com.drifting.bureau.di.component.DaggerAboutMeComponent;
 import com.drifting.bureau.mvp.model.entity.UserEntity;
 import com.drifting.bureau.mvp.ui.adapter.AboutMeAdapter;
 import com.drifting.bureau.util.ClickUtil;
-import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.TextUtil;
+import com.drifting.bureau.animation.ProgressBarAnimation;
+import com.drifting.bureau.util.ToastUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 
@@ -61,6 +60,7 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
     RecyclerView mRcyList;
     @BindView(R.id.pr_upload_value)
     ProgressBar mPrUpload;
+
     private AboutMeAdapter aboutMeAdapter;
 
     public static void start(Context context, boolean closePage) {
@@ -96,6 +96,8 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
             mPresenter.getUser();
         }
         mPrUpload.setProgress(50);
+
+
 
         View topMenu = LayoutInflater.from(this).inflate(R.layout.activity_build_guide, null);
         topMenu.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -140,6 +142,7 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
     public Activity getActivity() {
         return this;
     }
+
 
 
     @OnClick({R.id.toolbar_back})

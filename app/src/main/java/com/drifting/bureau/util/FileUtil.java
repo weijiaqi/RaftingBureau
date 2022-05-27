@@ -26,7 +26,7 @@ public class FileUtil {
      */
     @RequiresApi(api = Build.VERSION_CODES.N)
     public static String saveVoicePath(Context context) {
-        String fileName = "voice_" + new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date()) + ".amr";
+        String fileName = "voice_" + new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date()) + ".mp3";
         File appDir = StorageUtils.getCacheDirectory(context);
         if (!appDir.exists()) {
             appDir.mkdir();

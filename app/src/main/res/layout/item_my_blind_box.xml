@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.hjq.shape.layout.ShapeRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="14dp"
+    android:layout_marginBottom="19dp"
+    android:paddingLeft="19dp"
+    app:shape_radius="10dp"
+    app:shape_strokeColor="@color/color_99"
+    app:shape_strokeWidth="1dp">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="初级空间站必中盲盒"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+
+    <com.hjq.shape.view.ShapeTextView
+        android:id="@+id/tv_open_blind_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_title"
+        android:layout_marginTop="14dp"
+        android:paddingHorizontal="18dp"
+        android:paddingVertical="3dp"
+        android:text="开启盲盒"
+        android:textColor="@color/color_01"
+        android:textSize="12sp"
+        app:shape_endColor="@color/color_6d"
+        app:shape_radius="100dp"
+        app:shape_startColor="@color/color_6c" />
+
+    <com.hjq.shape.view.ShapeTextView
+        android:id="@+id/tv_give_blind_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_open_blind_box"
+        android:layout_marginTop="13dp"
+        android:layout_marginBottom="20dp"
+        android:paddingHorizontal="18dp"
+        android:paddingVertical="3dp"
+        android:text="转赠盲盒"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:shape_endColor="@color/color_70"
+        app:shape_radius="100dp"
+        app:shape_startColor="@color/color_d6" />
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/demo_blind_box" />
+</com.hjq.shape.layout.ShapeRelativeLayout>

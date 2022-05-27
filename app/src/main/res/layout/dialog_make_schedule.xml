@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/demo_v_drink" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="制作传递杯中"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+
+    <ProgressBar
+        android:id="@+id/tv_make"
+        android:layout_marginTop="20dp"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_below="@+id/ll_center"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="50dp"
+        android:max="100"
+        android:min="0"
+        android:progressDrawable="@drawable/progress_make_bar" />
+
+    <TextView
+        android:id="@+id/tv_passer_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:text="100%"
+        android:layout_marginTop="20dp"
+        />
+
+</LinearLayout>

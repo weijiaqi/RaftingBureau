@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.drifting.bureau.R;
+import com.drifting.bureau.mvp.ui.activity.user.MySpaceStationActivity;
 import com.drifting.bureau.mvp.ui.dialog.HowToPlayDialog;
 import com.drifting.bureau.util.ClickUtil;
 import com.jess.arms.base.BaseActivity;
@@ -53,7 +54,7 @@ public class SpaceCapsuleActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.toolbar_back, R.id.tv_how_to_play,R.id.tv_space_obtain})
+    @OnClick({R.id.toolbar_back, R.id.tv_how_to_play,R.id.tv_space_obtain,R.id.tv_space_enter})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
@@ -66,6 +67,9 @@ public class SpaceCapsuleActivity extends BaseActivity {
                     break;
                 case R.id.tv_space_obtain:  //获取空间站
                     GetSpaceStationActivity.start(this,false);
+                    break;
+                case R.id.tv_space_enter:  //进入空间站
+                    MySpaceStationActivity.start(this,false);
                     break;
             }
         }

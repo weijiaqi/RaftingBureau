@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/my_treasury_bg"
+    android:orientation="vertical">
+
+    <com.hjq.shape.view.ShapeTextView
+        android:id="@+id/my_trea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="15dp"
+        android:text="我的库藏"
+        android:textSize="14sp"
+        app:shape_textEndColor="@color/color_ee"
+        app:shape_textGradientOrientation="vertical"
+        app:shape_textStartColor="@color/color_96f" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcy_my_trea"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@+id/my_trea"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="5dp"
+        android:layout_weight="1" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="23dp"
+        android:background="@drawable/my_treasury_space_bg">
+
+        <com.hjq.shape.layout.ShapeRelativeLayout
+            android:id="@+id/rl_pic"
+            android:layout_width="62dp"
+            android:layout_height="62dp"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="14dp"
+            app:shape_radius="5dp"
+            app:shape_strokeColor="@color/color_97"
+            app:shape_strokeWidth="0.4dp">
+
+            <ImageView
+                android:id="@+id/iv_picture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/demo_treasury" />
+        </com.hjq.shape.layout.ShapeRelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/rl_pic"
+            android:text="初级空间站"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_title"
+            android:layout_alignLeft="@+id/tv_title"
+            android:layout_marginTop="3dp"
+            android:text="数量 200"
+            android:textColor="@color/color_cc"
+            android:textSize="12sp" />
+
+        <com.hjq.shape.view.ShapeTextView
+            android:id="@+id/tv_use"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_num"
+            android:layout_alignLeft="@+id/tv_title"
+            android:layout_marginTop="7dp"
+            android:paddingHorizontal="13dp"
+            android:text="使用"
+            android:textColor="@color/color_0101"
+            android:textSize="12sp"
+            app:shape_endColor="@color/color_6d"
+            app:shape_radius="100dp"
+            app:shape_startColor="@color/color_6c" />
+
+        <com.hjq.shape.view.ShapeTextView
+            android:id="@+id/tv_give_away"
+            android:layout_alignTop="@+id/tv_use"
+            android:layout_toRightOf="@+id/tv_use"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="13dp"
+            android:layout_marginStart="10dp"
+            android:text="转赠"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:shape_endColor="@color/color_70"
+            app:shape_radius="100dp"
+            app:shape_startColor="@color/color_d6" />
+
+        <com.hjq.shape.view.ShapeTextView
+            android:id="@+id/tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_below="@+id/rl_pic"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:text="可用来创建和升级自己的空间站"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            app:shape_radius="5dp"
+            app:shape_solidColor="@color/color_1515" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -103,8 +103,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:paddingEnd="10dp"
             android:button="@drawable/selector_protocol"
+            android:paddingEnd="10dp"
             android:textColor="@color/white"
             android:textSize="11sp" />
 
@@ -113,9 +113,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:singleLine="true"
-            android:ellipsize="end"
             android:layout_toRightOf="@+id/ck_protocol"
+            android:ellipsize="end"
+            android:singleLine="true"
             android:text=""
             android:textColor="@color/color_99"
             android:textSize="11sp" />
