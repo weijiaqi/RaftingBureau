@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--     进度条的背景色-->
+    <item android:id="@android:id/background">
+        <shape>
+            <corners android:radius="5dp" />
+            <solid android:color="@color/color_31" />
+        </shape>
+    </item>
+    <!--    缓冲进度条的背景色-->
+    <item android:id="@android:id/secondaryProgress">
+       <scale android:scaleWidth="100%">
+            <shape>
+                <corners android:radius="5dp" />
+                <gradient
+                    android:startColor="@color/color_6c"
+                    android:endColor="@color/color_6d"
+                    />
+            </shape>
+       </scale>
+    </item>
+    <!--  进度条的背景色-->
+    <item android:id="@android:id/progress">
+        <scale android:scaleWidth="100%">
+            <shape android:shape="rectangle">
+                <!-- solid指定形状的填充色，只有android:color一个属性 -->
+                <gradient
+                    android:startColor="@color/color_6c"
+                    android:endColor="@color/color_6d"
+                    />
+                <!-- padding设置内容区域离边界的间距 -->
+                <!-- corners设置圆角，只适用于rectangle -->
+                <corners android:radius="5dp"/>
+            </shape>
+        </scale>
+    </item>
+</layer-list>

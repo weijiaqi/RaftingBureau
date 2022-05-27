@@ -5,7 +5,195 @@
     android:layout_height="match_parent"
     android:background="@color/color_01"
     android:fitsSystemWindows="true"
+    android:gravity="center_horizontal"
     android:orientation="vertical">
 
     <include layout="@layout/include_title" />
+
+
+    <com.drifting.bureau.view.AutoPollRecyclerView
+        android:id="@+id/rcy_barrage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/space_blind_box" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/space_base" />
+
+    <com.drifting.bureau.view.FontTextView
+        android:id="@+id/tv_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:text="999"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        app:fontType="Pingfang_bold" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/space_blind_box_button"
+        android:gravity="center"
+        android:text="初级必中盲盒"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="53dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="奖品预览"
+                android:paddingBottom="7dp"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_buy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/space_buy_blind_box_button"
+                android:gravity="center"
+                android:text="买盲盒×1"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_my_blind_box"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我的盲盒"
+                android:paddingBottom="7dp"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_buy_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:background="@drawable/space_buy_blind_box_button"
+                android:gravity="center"
+                android:text="买盲盒×10"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:gravity="bottom"
+        android:paddingBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp">
+
+        <RelativeLayout
+            android:id="@+id/rl_check"
+            android:visibility="gone"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="-7.5dp"
+            android:layout_alignLeft="@+id/rl_agree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.hjq.shape.view.ShapeTextView
+                android:id="@+id/tv_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="11dp"
+                android:paddingVertical="1dp"
+                android:text="请阅读并勾选"
+                android:textColor="@color/white"
+                android:textSize="11sp"
+                app:shape="rectangle"
+                app:shape_angle="45"
+                app:shape_endColor="@color/color_70"
+                app:shape_radius="9dp"
+                app:shape_startColor="@color/color_d6" />
+
+            <com.drifting.bureau.view.TriangleView
+                android:layout_width="8dp"
+                android:layout_height="6dp"
+                android:layout_below="@+id/tv_check"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                app:trv_color="@color/color_c5"
+                app:trv_direction="bottom" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_agree"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl_check"
+            android:gravity="center">
+
+            <CheckBox
+                android:id="@+id/ck_protocol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:button="@drawable/selector_protocol"
+                android:paddingEnd="10dp"
+                android:textColor="@color/white"
+                android:textSize="11sp" />
+
+            <TextView
+                android:id="@+id/tv_protocol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/ck_protocol"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="我已阅读并同意《盲盒购买须知》"
+                android:textColor="@color/color_99"
+                android:textSize="11sp" />
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
 </LinearLayout>

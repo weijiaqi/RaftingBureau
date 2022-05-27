@@ -163,7 +163,7 @@ public class PostDriftingFragment extends BaseFragment<PostDriftingPresenter> im
                 case R.id.tv_video://视频
                     setSelected(3);
                     break;
-                case R.id.iv_voice:  //语音
+                case R.id.iv_voice:  //语音录制
                     if (mPresenter != null) {
                         mPresenter.showDialog(getActivity());
                     }

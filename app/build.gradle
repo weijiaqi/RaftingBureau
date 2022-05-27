@@ -97,6 +97,8 @@ dependencies {
     implementation(rootProject.ext.dependencies["paginate"]) {
         exclude module: 'recyclerview'
     }
+    //rbcore
+    implementation project(':rbcore')
     //arms
     implementation project(':arms')
     //videoprocessor
@@ -125,4 +127,9 @@ dependencies {
 
     //视频缓存
     implementation 'com.danikula:videocache:2.7.1'
+
+    //下拉刷新
+    implementation  'io.github.scwang90:refresh-layout-kernel:2.0.5'      //核心必须依赖
+    implementation  'io.github.scwang90:refresh-header-classics:2.0.5'    //经典刷新头
+    implementation  'io.github.scwang90:refresh-footer-classics:2.0.5'    //经典加载
 }

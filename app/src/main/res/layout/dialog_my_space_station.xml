@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.hjq.shape.layout.ShapeLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="19dp"
+    app:shape_radius="10dp"
+    app:shape_solidColor="@color/white">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="我的空间站"
+        android:textColor="@color/color_00"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="当前空间站等级：超级空间站"
+        android:textColor="@color/color_00"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcy_interests"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp" />
+
+
+    <LinearLayout
+        android:layout_marginTop="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/my_space_staion_upgrade_bg"
+        android:orientation="vertical"
+        android:paddingLeft="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="已升至满级"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <ProgressBar
+                android:id="@+id/pr_upgrade"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="157dp"
+                android:layout_height="5dp"
+                android:layout_centerVertical="true"
+                android:max="100"
+                android:min="0"
+                android:progressDrawable="@drawable/progressbar_upgrade_bar" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="23dp"
+                android:layout_marginBottom="2dp"
+                android:layout_toRightOf="@+id/pr_upgrade"
+                android:text="155/585"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+    <com.hjq.shape.view.ShapeTextView
+        android:layout_width="156dp"
+        android:layout_height="38dp"
+        android:gravity="center"
+        android:text="去升级"
+        android:textSize="14sp"
+        android:layout_marginTop="14dp"
+        android:layout_marginBottom="5dp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/color_00"
+        android:textStyle="bold"
+        app:shape_endColor="@color/color_6d"
+        app:shape_radius="100dp"
+        app:shape_startColor="@color/color_6c" />
+
+
+</com.hjq.shape.layout.ShapeLinearLayout>
