@@ -310,6 +310,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/rl_withdrawal"
                 android:layout_width="122dp"
                 android:layout_height="73dp"
                 android:background="@drawable/my_space_station_bottom_content"

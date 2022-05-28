@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.hjq.shape.layout.ShapeLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="14dp"
+    android:layout_marginBottom="19dp"
+    android:orientation="vertical"
+    app:shape_radius="10dp"
+    app:shape_solidColor="@color/color_1c">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="19dp"
+        android:paddingTop="19dp"
+        android:paddingEnd="15dp"
+        android:paddingBottom="13dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rafting_frame"
+            android:gravity="center"
+            android:text="传递漂"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:gravity="end"
+            android:text="2022-10-25 24：00"
+            android:textColor="@color/color_99"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="12dp"
+        android:paddingEnd="15dp">
+
+
+        <ImageView
+            android:id="@+id/iv_axis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/drifting_track_axis" />
+
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="3dp"
+            android:layout_toRightOf="@+id/iv_axis"
+            android:text="你的小太阳"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <com.hjq.shape.view.ShapeTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_name"
+            android:layout_alignLeft="@+id/tv_name"
+            android:layout_marginTop="2dp"
+            android:text="发起人"
+            android:textSize="12sp"
+            app:shape_textEndColor="@color/color_6d"
+            app:shape_textStartColor="@color/color_6c" />
+
+        <TextView
+            android:id="@+id/tv_to_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_axis"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="-13dp"
+            android:layout_toRightOf="@+id/iv_axis"
+            android:text="你的小太阳"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <com.hjq.shape.view.ShapeTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_to_name"
+            android:layout_alignLeft="@+id/tv_to_name"
+            android:layout_marginTop="2dp"
+            android:text="传递中"
+            android:textSize="12sp"
+            app:shape_textEndColor="@color/color_70"
+            app:shape_textStartColor="@color/color_d6" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="已传递5858人>"
+            android:textColor="@color/white"
+            android:textSize="11sp" />
+
+
+        <com.hjq.shape.view.ShapeTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/tv_to_name"
+            android:layout_marginTop="-8dp"
+            android:layout_alignParentEnd="true"
+            android:paddingHorizontal="25dp"
+            android:paddingVertical="5dp"
+            android:text="我参与"
+            android:textColor="@color/white"
+            app:shape_endColor="@color/color_70"
+            app:shape_radius="100dp"
+            app:shape_startColor="@color/color_d6" />
+    </RelativeLayout>
+
+</com.hjq.shape.layout.ShapeLinearLayout>

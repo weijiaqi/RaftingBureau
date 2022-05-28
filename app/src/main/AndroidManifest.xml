@@ -99,5 +99,14 @@ package="com.drifting.bureau">
     <activity
         android:name="com.drifting.bureau.mvp.ui.activity.user.MakingRecordActivity"
         android:screenOrientation="portrait" />
+    <activity
+        android:name="com.drifting.bureau.mvp.ui.activity.user.WithdrawalActivity"
+        android:screenOrientation="portrait" />
+    <activity
+        android:name="com.drifting.bureau.mvp.ui.activity.user.AccountSettingsActivity"
+        android:screenOrientation="portrait" />
+    <activity
+        android:name="com.drifting.bureau.mvp.ui.activity.user.DriftingTrackActivity"
+        android:screenOrientation="portrait" />
 </application>
 </manifest>

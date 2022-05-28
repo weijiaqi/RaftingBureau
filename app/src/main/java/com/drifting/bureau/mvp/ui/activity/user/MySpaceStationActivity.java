@@ -81,7 +81,7 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
     }
 
 
-    @OnClick({R.id.toolbar_back, R.id.tv_select, R.id.tv_my_treasury, R.id.tv_upgrade,R.id.rl_total_revenue,R.id.rl_making_records})
+    @OnClick({R.id.toolbar_back, R.id.tv_select, R.id.tv_my_treasury, R.id.tv_upgrade,R.id.rl_total_revenue,R.id.rl_making_records,R.id.rl_withdrawal})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
@@ -118,6 +118,10 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
                     IncomeRecordActivity.start(this,false);
                     break;
                 case R.id.rl_making_records:  //制作记录
+                    MakingRecordActivity.start(this,false);
+                    break;
+                case R.id.rl_withdrawal: //提现
+                    WithdrawalActivity.start(this,false);
                     break;
             }
         }
