@@ -27,6 +27,7 @@ import com.billy.android.swipe.listener.SimpleSwipeListener;
 import com.drifting.bureau.R;
 
 import com.drifting.bureau.di.component.DaggerAboutMeComponent;
+import com.drifting.bureau.mvp.model.entity.AoubtMeEntity;
 import com.drifting.bureau.mvp.model.entity.UserEntity;
 import com.drifting.bureau.mvp.ui.adapter.AboutMeAdapter;
 import com.drifting.bureau.util.ClickUtil;
@@ -40,6 +41,7 @@ import com.drifting.bureau.mvp.contract.AboutMeContract;
 import com.drifting.bureau.mvp.presenter.AboutMePresenter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -92,11 +94,14 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
         mRcyList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         aboutMeAdapter = new AboutMeAdapter(new ArrayList<>());
         mRcyList.setAdapter(aboutMeAdapter);
+        aboutMeAdapter.setData(getData());
+
+
+
         if (mPresenter != null) {
             mPresenter.getUser();
         }
         mPrUpload.setProgress(50);
-
 
 
         View topMenu = LayoutInflater.from(this).inflate(R.layout.activity_build_guide, null);
@@ -116,6 +121,15 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
                 //将SwipeConsumer类型转换为DrawerConsumer类型
                 .as(DrawerConsumer.class);
         SmartSwipe.wrap(this).addConsumer(slidingConsumer);
+    }
+
+
+    public  List<AoubtMeEntity> getData() {
+        List<AoubtMeEntity> list = new ArrayList<>();
+        list.add(new AoubtMeEntity("漂流轨迹", "我的漂流"));
+        list.add(new AoubtMeEntity("订单记录", "我的漂流"));
+        list.add(new AoubtMeEntity("星际战队", "战队成员"));
+        return list;
     }
 
 
@@ -144,13 +158,15 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
     }
 
 
-
-    @OnClick({R.id.toolbar_back})
+    @OnClick({R.id.toolbar_back, R.id.iv_right})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
                 case R.id.toolbar_back:
                     finish();
+                    break;
+                case R.id.iv_right:
+                    AccountSettingsActivity.start(this, false);
                     break;
             }
         }

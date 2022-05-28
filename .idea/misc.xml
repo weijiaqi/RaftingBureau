@@ -22,9 +22,11 @@
         <entry key="..\:/Drifting/app/src/main/res/drawable/progress_make_bar_ct.xml" value="0.142" />
         <entry key="..\:/Drifting/app/src/main/res/drawable/progressbar.xml" value="0.175" />
         <entry key="..\:/Drifting/app/src/main/res/drawable/progressbar_upgrade.xml" value="0.142" />
+        <entry key="..\:/Drifting/app/src/main/res/drawable/progressbar_upgrade_bar.xml" value="0.1405" />
         <entry key="..\:/Drifting/app/src/main/res/drawable/progressbar_upgrade_bar_ct.xml" value="0.142" />
         <entry key="..\:/Drifting/app/src/main/res/drawable/se_protocol.xml" value="0.278" />
         <entry key="..\:/Drifting/app/src/main/res/drawable/selector_protocol.xml" value="0.278" />
+        <entry key="..\:/Drifting/app/src/main/res/drawable/shape_6d_circle.xml" value="0.1405" />
         <entry key="..\:/Drifting/app/src/main/res/drawable/shape_blue_solid_block.xml" value="0.1545" />
         <entry key="..\:/Drifting/app/src/main/res/drawable/shape_circle.xml" value="0.278" />
         <entry key="..\:/Drifting/app/src/main/res/drawable/shape_dotted_line.xml" value="0.241" />
@@ -35,12 +37,15 @@
         <entry key="..\:/Drifting/app/src/main/res/drawable/shape_red_circle.xml" value="0.278" />
         <entry key="..\:/Drifting/app/src/main/res/drawable/shape_solid_block.xml" value="0.214" />
         <entry key="..\:/Drifting/app/src/main/res/drawable/shape_white_toast.xml" value="0.278" />
+        <entry key="..\:/Drifting/app/src/main/res/drawable/text_cursor.xml" value="0.1405" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_about_me.xml" value="0.165" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/activity_account_settings.xml" value="0.165" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_build_guide.xml" value="0.33" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_claim_planet.xml" value="0.2644927536231884" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_delivery_details.xml" value="0.25" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_discovery_tour.xml" value="0.25" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_drifting_bottle.xml" value="0.25" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/activity_drifting_track.xml" value="0.10280797101449275" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_get_space_station.xml" value="0.165" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_home.xml" value="0.33" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_login.xml" value="0.33" />
@@ -57,6 +62,7 @@
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_video.xml" value="0.26992753623188404" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_video_recording.xml" value="0.25" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_view_rafting.xml" value="0.10872855701311807" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/activity_withdrawal.xml" value="0.25" />
         <entry key="..\:/Drifting/app/src/main/res/layout/dialog_currency.xml" value="0.10872855701311807" />
         <entry key="..\:/Drifting/app/src/main/res/layout/dialog_how_to_play.xml" value="0.10552536231884058" />
         <entry key="..\:/Drifting/app/src/main/res/layout/dialog_make_schedule.xml" value="0.14356884057971014" />
@@ -84,10 +90,12 @@
         <entry key="..\:/Drifting/app/src/main/res/layout/item_delivery_video.xml" value="0.25" />
         <entry key="..\:/Drifting/app/src/main/res/layout/item_delivery_voice.xml" value="0.335" />
         <entry key="..\:/Drifting/app/src/main/res/layout/item_delivery_word.xml" value="0.335" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/item_drifting_track.xml" value="0.25" />
         <entry key="..\:/Drifting/app/src/main/res/layout/item_income_record.xml" value="0.10141271442986882" />
         <entry key="..\:/Drifting/app/src/main/res/layout/item_login_left.xml" value="0.2644927536231884" />
         <entry key="..\:/Drifting/app/src/main/res/layout/item_login_left_planet.xml" value="0.2644927536231884" />
         <entry key="..\:/Drifting/app/src/main/res/layout/item_login_right.xml" value="0.2644927536231884" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/item_making_record.xml" value="0.25" />
         <entry key="..\:/Drifting/app/src/main/res/layout/item_my_blind_box.xml" value="0.165" />
         <entry key="..\:/Drifting/app/src/main/res/layout/item_my_treasury.xml" value="0.335" />
         <entry key="..\:/Drifting/app/src/main/res/layout/item_rafting_details.xml" value="0.25833333333333336" />
@@ -97,6 +105,7 @@
         <entry key="..\:/Drifting/app/src/main/res/layout/layout_show_state.xml" value="0.10544904137235116" />
         <entry key="..\:/Drifting/app/src/main/res/layout/layout_voice_play.xml" value="0.2916666666666667" />
         <entry key="..\:/Drifting/app/src/main/res/layout/toast_layout_center.xml" value="0.2644927536231884" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/view_3d_color_line.xml" value="0.1118659420289855" />
         <entry key="..\:/Drifting/app/src/main/res/layout/view_color_line.xml" value="0.26992753623188404" />
         <entry key="..\:/Drifting/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.296" />
         <entry key="..\:/Drifting/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.296" />
