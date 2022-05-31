@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_01"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_title" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@+id/toolbar"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="请留下你的反馈意见"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+
+        <com.hjq.shape.view.ShapeEditText
+            android:layout_width="match_parent"
+            android:layout_height="197dp"
+            android:layout_marginTop="14dp"
+            android:gravity="top"
+            android:hint="请留下你的反馈意见，我们会认真查阅"
+            android:padding="9dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/color_9a"
+            android:textSize="12sp"
+            app:shape_radius="10dp"
+            app:shape_solidColor="@color/color_1c" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="19dp"
+            android:text="联系方式"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <com.hjq.shape.view.ShapeEditText
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:gravity="center_vertical"
+            android:layout_marginTop="14dp"
+            android:hint="请输入你的联系方式"
+            android:paddingHorizontal="9dp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textColorHint="@color/color_9a"
+            app:shape_radius="10dp"
+            app:shape_solidColor="@color/color_1c" />
+
+        <com.hjq.shape.view.ShapeTextView
+            android:id="@+id/tv_click"
+            android:layout_width="156dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="38dp"
+            android:layout_marginBottom="27dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="确定"
+            android:textColor="@color/color_00"
+            android:textStyle="bold"
+            app:shape_endColor="@color/color_6d"
+            app:shape_radius="100dp"
+            app:shape_startColor="@color/color_6c" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

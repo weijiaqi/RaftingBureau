@@ -11,11 +11,23 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.drifting.bureau.R;
+
+import com.drifting.bureau.di.component.DaggerSpaceCapsuleComponent;
+import com.drifting.bureau.mvp.contract.GetSpaceStationContract;
+import com.drifting.bureau.mvp.contract.MySpaceStationContract;
+import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
+import com.drifting.bureau.mvp.model.entity.SpaceCheckEntity;
+import com.drifting.bureau.mvp.model.entity.SpaceStationEntity;
+import com.drifting.bureau.mvp.presenter.GetSpaceStationPresenter;
+import com.drifting.bureau.mvp.presenter.MySpaceStationPresenter;
 import com.drifting.bureau.mvp.ui.activity.user.MySpaceStationActivity;
 import com.drifting.bureau.mvp.ui.dialog.HowToPlayDialog;
 import com.drifting.bureau.util.ClickUtil;
+import com.drifting.bureau.util.ToastUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -25,7 +37,7 @@ import butterknife.OnClick;
  * @Author : WeiJiaQI
  * @Time : 2022/5/24 9:39
  */
-public class SpaceCapsuleActivity extends BaseActivity {
+public class SpaceCapsuleActivity  extends BaseActivity<GetSpaceStationPresenter> implements GetSpaceStationContract.View {
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
 
@@ -39,6 +51,12 @@ public class SpaceCapsuleActivity extends BaseActivity {
 
     @Override
     public void setupActivityComponent(@NonNull AppComponent appComponent) {
+        DaggerSpaceCapsuleComponent //如找不到该类,请编译一下项目
+                .builder()
+                .appComponent(appComponent)
+                .view(this)
+                .build()
+                .inject(this);
 
     }
 
@@ -69,9 +87,47 @@ public class SpaceCapsuleActivity extends BaseActivity {
                     GetSpaceStationActivity.start(this,false);
                     break;
                 case R.id.tv_space_enter:  //进入空间站
-                    MySpaceStationActivity.start(this,false);
+                     if (mPresenter!=null){
+                         mPresenter.spacecheck();
+                     }
                     break;
             }
         }
+    }
+
+    @Override
+    public void onGetSpaceList(List<SpaceStationEntity> list) {
+
+    }
+
+    @Override
+    public void onCreateOrderSpaceSuccess(CreateOrderEntity entity) {
+
+    }
+
+    @Override
+    public void onSpaceCheck(SpaceCheckEntity entity) {
+          if (entity!=null){
+              if (entity.getStatus()==0){
+                  showMessage("检测到您还没拥有空间站,请去获取!");
+              }else {
+                  MySpaceStationActivity.start(this,entity.getSpace_id(),false);
+              }
+          }
+    }
+
+    @Override
+    public void onNetError() {
+
+    }
+
+    @Override
+    public Activity getActivity() {
+        return this;
+    }
+
+    @Override
+    public void showMessage(@NonNull String message) {
+        ToastUtil.showToast(message);
     }
 }

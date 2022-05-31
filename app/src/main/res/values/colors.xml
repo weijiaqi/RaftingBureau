@@ -7,6 +7,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="color_white_ed">#4dFFFFFF</color><!--30% -->
+    <color name="color_white_7f">#7fFFFFFF</color><!--50% -->
+    <color name="color_white_cc">#ccFFFFFF</color><!--80% -->
+
     <color name="color_0d">#0D1114</color>
     <color name="color_01">#010103</color>
     <color name="transparent">#00000000</color>
@@ -41,6 +46,9 @@
     <color name="color_82_ccffffff">#cc82E7DC</color><!--80% -->
     <color name="color_82_e6ffffff">#e682E7DC</color><!--90% -->
 
+    <color name="color_tran_19">#19000000</color>
+    <color name="color_tran_7f">#7f000000</color><!--50% -->
+    <color name="color_tran_ed">#4d000000</color><!--30% -->
 
     <color name="color_01_19">#19010103</color><!--10% -->
     <color name="color_01_ed">#4d010103</color><!--30% -->
@@ -76,4 +84,10 @@
     <color name="color_e6">#E6E6E6</color>
     <color name="color_a6">#A60606</color>
     <color name="color_3d">#3D3D41</color>
+    <color name="color_f6">#F65C5C</color>
+    <color name="color_ff2">#FF2E32</color>
+    <color name="color_ff3">#FF3883</color>
+    <color name="color_313">#313138</color>
+    <color name="color_9a">#9A9A9A</color>
+    <color name="color_53">#539987</color>
 </resources>

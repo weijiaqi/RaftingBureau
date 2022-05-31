@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -91,7 +92,7 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
         setStatusBar(true);
         setStatusBarHeight(mTvBar);
         TextUtil.setRightImage(mIvRight, R.drawable.setting);
-        mRcyList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        mRcyList.setLayoutManager(new GridLayoutManager(this, 3));
         aboutMeAdapter = new AboutMeAdapter(new ArrayList<>());
         mRcyList.setAdapter(aboutMeAdapter);
         aboutMeAdapter.setData(getData());
@@ -129,6 +130,7 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
         list.add(new AoubtMeEntity("漂流轨迹", "我的漂流"));
         list.add(new AoubtMeEntity("订单记录", "我的漂流"));
         list.add(new AoubtMeEntity("星际战队", "战队成员"));
+        list.add(new AoubtMeEntity("附近门店", "漂流局茶饮店"));
         return list;
     }
 

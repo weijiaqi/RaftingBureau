@@ -18,6 +18,7 @@ package com.jess.arms.http;
 import androidx.annotation.NonNull;
 
 import okhttp3.HttpUrl;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * ================================================
@@ -36,4 +37,5 @@ public interface BaseUrl {
      */
     @NonNull
     HttpUrl url();
+
 }

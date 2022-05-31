@@ -16,6 +16,8 @@ public class Preferences {
 
     private static final String KEY_USER_TOKEN = "user_token";
     private static final String KEY_USER_PHONE = "user_phone";
+    private static final String KEY_USER_ID = "user_id";
+
     private static final String KEY_USER_PASSWORD = "user_password";
 
     private static final String KEY_USER_IS_ANONY = "isanony";//是否为匿名状态
@@ -56,7 +58,7 @@ public class Preferences {
         return getString(KEY_USER_TOKEN);
     }
 
-    //用户唯一标识符
+    //用户手机号
     public static void savePhone(String phone) {
         saveString(KEY_USER_PHONE, phone);
     }
@@ -64,6 +66,17 @@ public class Preferences {
     public static String getPhone() {
         return getString(KEY_USER_PHONE);
     }
+
+
+    //用户ID
+    public static void saveUserId(String userid) {
+        saveString(KEY_USER_ID, userid);
+    }
+
+    public static String getUserId() {
+        return getString(KEY_USER_ID);
+    }
+
 
     //用户随机密码
     public static void savePassword(String password) {

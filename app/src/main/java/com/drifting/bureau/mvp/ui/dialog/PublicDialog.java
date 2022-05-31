@@ -14,13 +14,15 @@ import com.jess.arms.base.BaseDialog;
  */
 public class PublicDialog extends BaseDialog  implements View.OnClickListener{
 
-    private TextView mTvClick;
+    private TextView  mTvTitle,mTvContent,  mTvClick;
 
     public static final int SELECT_FINISH = 0x01;
 
     @Override
     protected void initDatas() {
         super.initDatas();
+        mTvTitle=findViewById(R.id.tv_title);
+        mTvContent=findViewById(R.id.tv_content);
         mTvClick=findViewById(R.id.tv_click);
     }
 
@@ -49,8 +51,30 @@ public class PublicDialog extends BaseDialog  implements View.OnClickListener{
         switch (view.getId()){
             case R.id.tv_click:
                 dismiss();
-
+                if (onClickCallback != null) {
+                    onClickCallback.onClickType(SELECT_FINISH);
+                }
                 break;
         }
+    }
+
+    /**
+     * 大标题文案设置
+     *
+     * @param title
+     */
+    public PublicDialog setTitleText(String title) {
+        mTvTitle.setText(title);
+        return this;
+    }
+
+    /**
+     * 内容
+     *
+     * @param content
+     */
+    public PublicDialog setContentText(String content) {
+        mTvContent.setText(content);
+        return this;
     }
 }

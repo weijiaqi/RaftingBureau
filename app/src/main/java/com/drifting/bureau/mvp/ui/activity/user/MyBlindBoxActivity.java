@@ -11,28 +11,27 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.drifting.bureau.R;
+import com.drifting.bureau.data.event.MyBlindBoxRefreshEvent;
 import com.drifting.bureau.di.component.DaggerMyBlindBoxComponent;
 import com.drifting.bureau.mvp.model.entity.MyBlindBoxEntity;
 import com.drifting.bureau.mvp.ui.adapter.MyBlindBoxAdapter;
 import com.drifting.bureau.util.ClickUtil;
+import com.drifting.bureau.util.ViewUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 
 import com.drifting.bureau.mvp.contract.MyBlindBoxContract;
 import com.drifting.bureau.mvp.presenter.MyBlindBoxPresenter;
-import com.scwang.smart.refresh.footer.ClassicsFooter;
-import com.scwang.smart.refresh.header.ClassicsHeader;
-import com.scwang.smart.refresh.layout.api.RefreshFooter;
-import com.scwang.smart.refresh.layout.api.RefreshHeader;
-import com.scwang.smart.refresh.layout.api.RefreshLayout;
-import com.scwang.smart.refresh.layout.constant.RefreshState;
-import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
-import com.scwang.smart.refresh.layout.listener.OnMultiListener;
-import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
+import com.rb.core.xrecycleview.XRecyclerView;
+
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,17 +43,20 @@ import butterknife.OnClick;
 /**
  * Created on 2022/05/24 14:44
  *
- * @author 谢况
+ * @author 我的盲盒
  * module name is MyBlindBoxActivity
  */
-public class MyBlindBoxActivity extends BaseActivity<MyBlindBoxPresenter> implements MyBlindBoxContract.View {
+public class MyBlindBoxActivity extends BaseActivity<MyBlindBoxPresenter> implements MyBlindBoxContract.View, XRecyclerView.LoadingListener {
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
-//    @BindView(R.id.refreshLayout)
-//    RefreshLayout refreshLayout;
     @BindView(R.id.rcy_public)
-    RecyclerView mRcyPublic;
+    XRecyclerView mRcyPublic;
+    @BindView(R.id.fl_container)
+    FrameLayout mFlState;
     private MyBlindBoxAdapter myBlindBoxAdapter;
+    private int mPage = 1;
+    private int limit = 10;
+
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, MyBlindBoxActivity.class);
         context.startActivity(intent);
@@ -84,32 +86,81 @@ public class MyBlindBoxActivity extends BaseActivity<MyBlindBoxPresenter> implem
     }
 
     public void initListener() {
-
         mRcyPublic.setLayoutManager(new LinearLayoutManager(this));
-        myBlindBoxAdapter=new MyBlindBoxAdapter(new ArrayList<>());
+        mRcyPublic.setLoadingListener(this);
+        myBlindBoxAdapter = new MyBlindBoxAdapter(new ArrayList<>());
         mRcyPublic.setAdapter(myBlindBoxAdapter);
-        myBlindBoxAdapter.setData(getData());
-//        refreshLayout.setOnRefreshListener(refreshlayout -> {
-//            refreshLayout.getLayout().postDelayed(() -> {
-//                refreshLayout.finishRefresh();
-//                refreshLayout.resetNoMoreData();//setNoMoreData(false);//恢复上拉状态
-//            }, 2000);
-//        });
-//        refreshLayout.setOnLoadMoreListener(refreshlayout -> {
-//            refreshLayout.getLayout().postDelayed(() -> {
-//                refreshLayout.finishLoadMore();
-//            }, 1000);
-
-//        });
+        getData(mPage, true);
     }
 
-    public List<MyBlindBoxEntity> getData(){
-        List<MyBlindBoxEntity> list=new ArrayList<>();
-        list.add(new MyBlindBoxEntity("初级空间站必中盲盒"));
-        list.add(new MyBlindBoxEntity("初级空间站必中盲盒"));
-        list.add(new MyBlindBoxEntity("初级空间站必中盲盒"));
-        list.add(new MyBlindBoxEntity("初级空间站必中盲盒"));
-        return list;
+    @Override
+    public void onRefresh() {
+        mPage = 1;
+        getData(mPage, true);
+    }
+
+    @Override
+    public void onLoadMore() {
+        getData(mPage, false);
+    }
+
+    public void getData(int mPage, boolean loadType) {
+        if (mPresenter != null) {
+            mPresenter.mySteryboxList(mPage, limit, loadType);
+        }
+    }
+
+    @Override
+    public void onloadStart() {
+        if (myBlindBoxAdapter.getDatas() == null || myBlindBoxAdapter.getDatas().size() == 0) {
+            ViewUtil.create().setAnimation(this, mFlState);
+        }
+    }
+
+    @Override
+    public void mySteryboxListSuccess(MyBlindBoxEntity entity, boolean isNotData) {
+        if (mPage == 1 && myBlindBoxAdapter.getItemCount() != 0) {
+            myBlindBoxAdapter.clearData();
+        }
+        List<MyBlindBoxEntity.ListBean> list = entity.getList();
+        if (list != null && list.size() > 0) {
+            if (isNotData) {
+                mPage = 2;
+                myBlindBoxAdapter.setData(list);
+            } else {
+                mPage++;
+                myBlindBoxAdapter.addData(list);
+            }
+        }
+    }
+
+    @Override
+    public void loadFinish(boolean loadType, boolean isNotData) {
+        if (mRcyPublic == null) {
+            return;
+        }
+        if (!loadType && isNotData) {
+            mRcyPublic.loadEndLine();
+        } else {
+            mRcyPublic.refreshEndComplete();
+        }
+    }
+
+    @Override
+    public void loadState(int type) {
+        if (mPage == 1) {
+            if (type == ViewUtil.NOT_DATA) {
+                ViewUtil.create().setView(this, mFlState, ViewUtil.NOT_DATA);
+            } else if (type == ViewUtil.NOT_SERVER) {
+                ViewUtil.create().setView(this, mFlState, ViewUtil.NOT_SERVER);
+            } else if (type == ViewUtil.NOT_NETWORK) {
+                ViewUtil.create().setView(this, mFlState, ViewUtil.NOT_NETWORK);
+            } else {
+                ViewUtil.create().setView(mFlState);
+            }
+        } else {
+            ViewUtil.create().setView(mFlState);
+        }
     }
 
     public Activity getActivity() {
@@ -127,9 +178,16 @@ public class MyBlindBoxActivity extends BaseActivity<MyBlindBoxPresenter> implem
         }
     }
 
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void MyBlindBoxRefreshEvent(MyBlindBoxRefreshEvent myBlindBoxRefreshEvent) {
+        if (myBlindBoxRefreshEvent != null) {
+            onRefresh();
+        }
+    }
+
     @Override
     public void showMessage(@NonNull String message) {
 
     }
-
 }

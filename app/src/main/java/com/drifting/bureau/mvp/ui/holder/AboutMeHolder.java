@@ -10,7 +10,10 @@ import androidx.annotation.NonNull;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.AoubtMeEntity;
+import com.drifting.bureau.mvp.ui.activity.index.TeaShopActivity;
 import com.drifting.bureau.mvp.ui.activity.user.DriftingTrackActivity;
+import com.drifting.bureau.mvp.ui.activity.user.OrderRecordActivity;
+import com.drifting.bureau.mvp.ui.activity.user.SpaceMarinesActivity;
 import com.drifting.bureau.util.TextUtil;
 import com.jess.arms.base.BaseRecyclerHolder;
 
@@ -40,6 +43,12 @@ public class AboutMeHolder extends BaseRecyclerHolder {
         mLlContent.setOnClickListener(v -> {
             if (position == 0) {  //漂流轨迹
                 DriftingTrackActivity.start(context,false);
+            }else if (position==1){  //订单记录
+                OrderRecordActivity.start(context,false);
+            }else if (position==2){ //星际战队
+                SpaceMarinesActivity.start(context,false);
+            }else if (position==3){ //漂流局店
+                TeaShopActivity.start(context,false);
             }
         });
     }

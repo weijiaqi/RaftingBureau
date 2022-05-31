@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.di.component.DaggerAccountSettingsComponent;
+import com.drifting.bureau.mvp.ui.dialog.ModifyNicknameDialog;
 import com.drifting.bureau.util.ClickUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
@@ -32,6 +33,7 @@ public class AccountSettingsActivity extends BaseActivity<AccountSettingsPresent
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
 
+    private ModifyNicknameDialog modifyNicknameDialog;
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, AccountSettingsActivity.class);
         context.startActivity(intent);
@@ -64,12 +66,19 @@ public class AccountSettingsActivity extends BaseActivity<AccountSettingsPresent
 
     }
 
-    @OnClick({R.id.toolbar_back})
+    @OnClick({R.id.toolbar_back,R.id.rl_nikename,R.id.rl_feedback})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
                 case R.id.toolbar_back:
                     finish();
+                    break;
+                case R.id.rl_nikename:
+                    modifyNicknameDialog=new ModifyNicknameDialog(this);
+                    modifyNicknameDialog.show();
+                    break;
+                case R.id.rl_feedback:
+                    FeedBackActivity.start(this,false);
                     break;
             }
         }

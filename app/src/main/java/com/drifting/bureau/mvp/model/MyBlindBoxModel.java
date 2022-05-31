@@ -1,11 +1,19 @@
 package com.drifting.bureau.mvp.model;
 import android.app.Application;
+
+import com.drifting.bureau.app.api.ApiService;
+import com.drifting.bureau.mvp.model.entity.MyBlindBoxEntity;
 import com.google.gson.Gson;
+import com.jess.arms.base.BaseEntity;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
 import com.jess.arms.di.scope.ActivityScope;
 import javax.inject.Inject;
 import com.drifting.bureau.mvp.contract.MyBlindBoxContract;
+
+import java.util.List;
+
+import io.reactivex.Observable;
 
 /**
  * ================================================
@@ -36,5 +44,10 @@ public class MyBlindBoxModel extends BaseModel implements MyBlindBoxContract.Mod
         super.onDestroy();
         this.mGson = null;
         this.mApplication = null;
+    }
+
+    @Override
+    public Observable<BaseEntity<MyBlindBoxEntity>> mySteryboxList(int page,int limit) {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).mySteryboxList(page,limit);
     }
 }

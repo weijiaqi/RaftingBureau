@@ -1,12 +1,27 @@
 package com.drifting.bureau.mvp.presenter;
 import android.app.Application;
+import android.text.TextUtils;
+
+import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
+import com.drifting.bureau.mvp.model.entity.SpaceCheckEntity;
+import com.drifting.bureau.mvp.model.entity.SpaceStationEntity;
+import com.drifting.bureau.util.ToastUtil;
+import com.jess.arms.base.BaseEntity;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
+
 import javax.inject.Inject;
 import com.drifting.bureau.mvp.contract.GetSpaceStationContract;
+import com.jess.arms.utils.RxLifecycleUtils;
+
+import java.util.List;
 
 /**
  * ================================================
@@ -34,6 +49,100 @@ public class GetSpaceStationPresenter extends BasePresenter<GetSpaceStationContr
     @Inject
     public GetSpaceStationPresenter (GetSpaceStationContract.Model model, GetSpaceStationContract.View rootView) {
         super(model, rootView);
+    }
+
+
+    /**
+     * 盲盒列表
+     */
+    public void getSpaceList() {
+        mModel.space().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseEntity<List<SpaceStationEntity>>>(mErrorHandler) {
+                    @Override
+                    public void onNext(BaseEntity<List<SpaceStationEntity>> baseEntity) {
+                        if (mRootView != null) {
+                            mRootView.hideLoading();
+                            if (baseEntity.getCode() == 200) {
+                                mRootView.onGetSpaceList(baseEntity.getData());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        if (mRootView != null) {
+                            mRootView.onNetError();
+                        }
+                    }
+                });
+
+    }
+
+
+    /**
+     * 创建订单（空间站）
+     */
+    public void createOrderSpace(String sku_code, String sku_num) {
+        mModel.createOrderSpace(sku_code,sku_num).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseEntity<CreateOrderEntity>>(mErrorHandler) {
+                    @Override
+                    public void onNext(BaseEntity<CreateOrderEntity> baseEntity) {
+                        if (mRootView != null) {
+                            mRootView.hideLoading();
+                            if (baseEntity.getCode() == 200) {
+                                mRootView.onCreateOrderSpaceSuccess(baseEntity.getData());
+                            } else {
+                                if (!TextUtils.isEmpty(baseEntity.getMsg())) {
+                                    mRootView.showMessage(baseEntity.getMsg());
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        if (mRootView != null) {
+                            mRootView.onNetError();
+                        }
+                    }
+                });
+    }
+
+
+
+    /**
+     * 检查是否有空间站
+     */
+    public void spacecheck() {
+        mModel.spacecheck().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseEntity<SpaceCheckEntity>>(mErrorHandler) {
+                    @Override
+                    public void onNext(BaseEntity<SpaceCheckEntity> baseEntity) {
+                        if (mRootView != null) {
+                            mRootView.hideLoading();
+                            if (baseEntity.getCode() == 200) {
+                                mRootView.onSpaceCheck(baseEntity.getData());
+                            } else {
+                                if (!TextUtils.isEmpty(baseEntity.getMsg())) {
+                                    mRootView.showMessage((baseEntity.getMsg()));
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        if (mRootView != null) {
+                            mRootView.onNetError();
+                        }
+                    }
+                });
     }
 
     @Override

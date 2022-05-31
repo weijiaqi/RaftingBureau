@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_1c"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+               android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp">
+
+                <com.hjq.shape.layout.ShapeLinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="24dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    app:shape_radius="12dp"
+                    app:shape_solidColor="@color/color_313">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/shop_search" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="输入城市名称"
+                        android:textColor="@color/color_99"
+                        android:textSize="11sp" />
+
+
+                </com.hjq.shape.layout.ShapeLinearLayout>
+
+                <com.hjq.shape.view.ShapeTextView
+                    android:id="@+id/tv_exit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="23dp"
+                    android:paddingEnd="15dp"
+                    android:text="取消"
+                    android:textSize="14sp"
+                    app:shape_solidColor="@color/transparent"
+                    app:shape_textEndColor="@color/color_6d"
+                    app:shape_textStartColor="@color/color_6c" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="23dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="当前定位"
+                    android:textColor="@color/color_99"
+                    android:textSize="12sp" />
+
+                <RelativeLayout
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp">
+
+                    <TextView
+                        android:id="@+id/tv_location_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:drawableLeft="@drawable/shop_location"
+                        android:drawablePadding="5dp"
+                        android:text="北京市"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <com.hjq.shape.view.ShapeTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:paddingStart="23dp"
+                        android:paddingEnd="15dp"
+                        android:text="重新定位"
+                        android:textSize="14sp"
+                        app:shape_solidColor="@color/transparent"
+                        app:shape_textEndColor="@color/color_6d"
+                        app:shape_textStartColor="@color/color_6c" />
+
+                </RelativeLayout>
+
+
+                <TextView
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="39dp"
+                    android:text="热门城市"
+                    android:textColor="@color/color_99"
+                    android:textSize="12sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcy_hotlist"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginBottom="22dp" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/city_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@color/color_01" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/city_dialog"
+            android:layout_width="80.0dip"
+            android:layout_height="80.0dip"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="30.0sp"
+            android:visibility="gone" />
+
+        <com.drifting.bureau.view.location.QuickLocationBar
+            android:id="@+id/city_loactionbar"
+            android:layout_width="25dp"
+            android:layout_marginTop="60dp"
+            android:layout_height="fill_parent"
+            android:layout_gravity="right|center" />
+
+    </FrameLayout>
+
+</LinearLayout>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.hjq.shape.layout.ShapeRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="19dp"
+    android:layout_marginHorizontal="14dp"
+    android:padding="19dp"
+    app:shape_radius="10dp"
+    app:shape_solidColor="@color/color_1c">
+
+    <com.drifting.bureau.view.FontTextView
+        android:id="@+id/tv_shop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="北京大兴超级好喝茶饮店"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:fontType="Pingfang_bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tv_shop"
+        android:layout_alignParentEnd="true"
+        android:text="距离250m"
+        android:textColor="@color/color_99"
+        android:textSize="11sp" />
+
+    <com.hjq.shape.view.ShapeTextView
+        android:id="@+id/tv_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_shop"
+        android:layout_marginTop="14dp"
+        android:text="营业中"
+        android:textSize="12sp"
+        app:shape_textEndColor="@color/color_6d"
+        app:shape_textStartColor="@color/color_6c" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tv_status"
+        android:layout_marginStart="17dp"
+        android:layout_toRightOf="@+id/tv_status"
+        android:text="8:00-21:00"
+        android:textColor="@color/color_99"
+        android:textSize="11sp" />
+
+    <TextView
+        android:id="@+id/tv_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_status"
+        android:layout_marginTop="14dp"
+        android:text="北京市大兴区8号院24层昧光科技"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tv_address"
+        android:layout_marginEnd="10dp"
+        android:layout_toLeftOf="@+id/iv_call"
+        android:src="@drawable/shop_list_location" />
+
+
+    <ImageView
+        android:id="@+id/iv_call"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tv_address"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/shop_list_call" />
+</com.hjq.shape.layout.ShapeRelativeLayout>

@@ -14,6 +14,7 @@ public class LogInOutDataUtil {
     public static void successInSetData(LoginEntity entity) {
         Preferences.setAnony(true);
         Preferences.saveToken(entity == null ? "" : entity.getToken());
+        Preferences.saveUserId(entity == null ? "" : entity.getUser_id());
         Preferences.savePhone(entity == null ? "" : entity.getMobile());
         Preferences.savePassword(entity == null ? "" : entity.getPassword());
     }

@@ -64,7 +64,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_rafting_type"
                     android:layout_marginTop="14dp"
-                    android:text="昵称：你的小太阳"
+                    android:text=""
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -75,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_name"
                     android:layout_marginTop="11dp"
-                    android:text="荒芜星球人"
+                    android:text=""
                     android:textColor="@color/color_6ce"
                     android:textSize="11sp" />
 
@@ -86,7 +86,7 @@
                     android:layout_alignTop="@+id/tv_planet"
                     android:layout_marginStart="15dp"
                     android:layout_toRightOf="@+id/tv_planet"
-                    android:text="星际开荒者"
+                    android:text=""
                     android:textColor="@color/color_6ce"
                     android:textSize="11sp" />
 
@@ -130,6 +130,7 @@
 
                 <TextView
                     android:id="@+id/tv_word"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="17dp"
@@ -139,8 +140,8 @@
                     android:hint=""
                     android:lineSpacingExtra="2dp"
                     android:maxEms="10"
-                    android:scrollbars="vertical"
-                    android:text="宋代盛行的一种中国文学体裁，宋词是一种相对于古体诗的新体诗歌之一，为宋代儒客文人智慧精华，标志宋代文学的最高成就。宋词句子有长有短，便于歌唱。因是合乐的歌词，故又称曲子词、乐府、乐章、长短句、诗余、琴趣等。宋词的代表人物主要有苏轼、辛弃疾(豪放派代表词人)、柳永、李清照"
+                    android:scrollbars="none"
+                    android:text=""
                     android:textColor="@color/white"
                     android:textColorHint="@color/color_99"
                     android:textSize="12sp" />
@@ -151,8 +152,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginHorizontal="6dp"
-                    android:visibility="gone" />
+                    android:layout_marginHorizontal="6dp" />
 
 
                 <include
