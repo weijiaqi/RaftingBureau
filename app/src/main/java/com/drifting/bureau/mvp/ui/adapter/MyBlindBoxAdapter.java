@@ -9,9 +9,9 @@ import com.jess.arms.base.BaseRecyclerHolder;
 
 import java.util.List;
 
-public class MyBlindBoxAdapter extends BaseRecyclerAdapter<MyBlindBoxEntity> {
+public class MyBlindBoxAdapter extends BaseRecyclerAdapter<MyBlindBoxEntity.ListBean> {
 
-    public MyBlindBoxAdapter(List<MyBlindBoxEntity> infos) {
+    public MyBlindBoxAdapter(List<MyBlindBoxEntity.ListBean> infos) {
         super(infos);
     }
 

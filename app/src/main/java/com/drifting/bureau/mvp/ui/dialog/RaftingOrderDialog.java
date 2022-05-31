@@ -73,7 +73,7 @@ public class RaftingOrderDialog extends BaseDialog implements View.OnClickListen
         switch (view.getId()) {
             case R.id.tv_buy_now:
                 dismiss();
-                PaymentInfoActivity.start(context, false);
+                PaymentInfoActivity.start(context, "",false);
                 break;
         }
     }

@@ -8,11 +8,17 @@ import androidx.annotation.Nullable;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.di.component.DaggerMySpaceStationComponent;
+import com.drifting.bureau.mvp.model.entity.OrderDetailEntity;
+import com.drifting.bureau.mvp.model.entity.OrderOneEntity;
+import com.drifting.bureau.mvp.model.entity.SpaceInfoEntity;
+import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.ui.activity.index.GetSpaceStationActivity;
 import com.drifting.bureau.mvp.ui.dialog.CurrencyDialog;
 import com.drifting.bureau.mvp.ui.dialog.HowToPlayDialog;
@@ -21,7 +27,9 @@ import com.drifting.bureau.mvp.ui.dialog.MySpaceStationDialog;
 import com.drifting.bureau.mvp.ui.dialog.MyTreasuryDialog;
 import com.drifting.bureau.mvp.ui.dialog.PublicDialog;
 import com.drifting.bureau.mvp.ui.dialog.SelectOrderDialog;
+import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
+import com.drifting.bureau.util.StringUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.base.BaseDialog;
 import com.jess.arms.di.component.AppComponent;
@@ -41,15 +49,34 @@ import butterknife.OnClick;
 public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter> implements MySpaceStationContract.View {
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
-
+    @BindView(R.id.tv_levle_name)
+    TextView mTvlevelName;
+    @BindView(R.id.tv_whole_make)
+    TextView mTvWholeMake;
+    @BindView(R.id.tv_whole_income)
+    TextView mTvWholeIncome;
+    @BindView(R.id.tv_today_make)
+    TextView mTvTodayMake;
+    @BindView(R.id.tv_withdrawal)
+    TextView mTvWithdrawal;
+    @BindView(R.id.ll_content)
+    LinearLayout mLlContent;
+    @BindView(R.id.tv_not_data)
+    TextView mTvNotData;
+    @BindView(R.id.tv_timeliness)
+    TextView mTvTimeLine;
     private SelectOrderDialog selectOrderDialog;
     private MakeScheduleDialog makeScheduleDialog;
     private PublicDialog publicDialog;
     private MyTreasuryDialog myTreasuryDialog;
     private MySpaceStationDialog mySpaceStationDialog;
-
-    public static void start(Context context, boolean closePage) {
+    private int SpaceId;
+    private static final String EXTRA_SPACE_ID = "extra_space_id";
+    private OrderOneEntity orderOneEntity;
+    private UserInfoEntity userInfoEntity;
+    public static void start(Context context, int space_id, boolean closePage) {
         Intent intent = new Intent(context, MySpaceStationActivity.class);
+        intent.putExtra(EXTRA_SPACE_ID, space_id);
         context.startActivity(intent);
         if (closePage) ((Activity) context).finish();
     }
@@ -73,15 +100,21 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
         mToolbarTitle.setText("我的空间站");
+        if (getIntent() != null) {
+            SpaceId = getIntent().getIntExtra(EXTRA_SPACE_ID, 0);
+        }
         initListener();
     }
 
     public void initListener() {
-
+        if (mPresenter != null) {
+            mPresenter.orderone();
+            mPresenter.spaceinfo(Preferences.getUserId());
+        }
     }
 
 
-    @OnClick({R.id.toolbar_back, R.id.tv_select, R.id.tv_my_treasury, R.id.tv_upgrade,R.id.rl_total_revenue,R.id.rl_making_records,R.id.rl_withdrawal})
+    @OnClick({R.id.toolbar_back, R.id.tv_select, R.id.tv_my_treasury, R.id.tv_upgrade, R.id.rl_total_revenue, R.id.rl_making_records, R.id.rl_withdrawal})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
@@ -89,22 +122,9 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
                     finish();
                     break;
                 case R.id.tv_select:   //查看
-                    selectOrderDialog = new SelectOrderDialog(this);
-                    selectOrderDialog.show();
-                    selectOrderDialog.setCancelable(false);
-                    selectOrderDialog.setOnClickCallback(type -> {
-                        if (type == SelectOrderDialog.SELECT_FINISH) {
-                            makeScheduleDialog = new MakeScheduleDialog(this);
-                            makeScheduleDialog.show();
-                            makeScheduleDialog.setCancelable(false);
-                            makeScheduleDialog.setOnClickCallback(type1 -> {
-                                if (type1 == SelectOrderDialog.SELECT_FINISH) {
-                                    publicDialog = new PublicDialog(this);
-                                    publicDialog.show();
-                                }
-                            });
-                        }
-                    });
+                    if (mPresenter != null & orderOneEntity != null) {
+                        mPresenter.userplayer(orderOneEntity.getUser_id()+"");
+                    }
                     break;
                 case R.id.tv_my_treasury: //我的库存
                     myTreasuryDialog = new MyTreasuryDialog(this);
@@ -115,18 +135,75 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
                     mySpaceStationDialog.show();
                     break;
                 case R.id.rl_total_revenue: //收支记录
-                    IncomeRecordActivity.start(this,false);
+                    IncomeRecordActivity.start(this, false);
                     break;
                 case R.id.rl_making_records:  //制作记录
-                    MakingRecordActivity.start(this,false);
+                    MakingRecordActivity.start(this, false);
                     break;
                 case R.id.rl_withdrawal: //提现
-                    WithdrawalActivity.start(this,false);
+                    WithdrawalActivity.start(this, false);
                     break;
             }
         }
     }
 
+
+    @Override
+    public void onSpcaeInfoSuccess(SpaceInfoEntity entity) {
+        if (entity != null) {
+            mTvlevelName.setText(entity.getLevel_name());
+            mTvWholeMake.setText(entity.getTotal_make());
+            mTvWholeIncome.setText(StringUtil.frontValue(entity.getTotal_income()));
+            mTvTodayMake.setText(entity.getToday_make());
+            mTvWithdrawal.setText(StringUtil.frontValue(entity.getWithdrawable()));
+        }
+    }
+
+    @Override
+    public void onOrderOneSuccess(OrderOneEntity entity) {
+        if (entity != null) {
+            orderOneEntity = entity;
+            mTvTimeLine.setText(orderOneEntity.getTimeout() + "秒后将消失");
+        } else {
+            mLlContent.setVisibility(View.GONE);
+            mTvNotData.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void onOrderDetailSuccess(OrderDetailEntity entity) {
+        if (entity!=null){
+            selectOrderDialog = new SelectOrderDialog(this,  userInfoEntity ,entity);
+            selectOrderDialog.show();
+            selectOrderDialog.setCancelable(false);
+            selectOrderDialog.setOnClickCallback(type -> {
+                if (type == SelectOrderDialog.SELECT_FINISH) {
+                    makeScheduleDialog = new MakeScheduleDialog(this);
+                    makeScheduleDialog.show();
+                    makeScheduleDialog.setCancelable(false);
+                    makeScheduleDialog.setOnClickCallback(type1 -> {
+                        if (type1 == SelectOrderDialog.SELECT_FINISH) {
+                            publicDialog = new PublicDialog(this);
+                            publicDialog.show();
+                        }
+                    });
+                }
+            });
+        }
+    }
+
+    @Override
+    public void onUserInfoSuccess(UserInfoEntity entity) {
+        if (entity!=null){
+            userInfoEntity=entity;
+            mPresenter.orderdetail(orderOneEntity.getSpace_order_id());
+        }
+    }
+
+    @Override
+    public void onNetError() {
+
+    }
 
     public Activity getActivity() {
         return this;

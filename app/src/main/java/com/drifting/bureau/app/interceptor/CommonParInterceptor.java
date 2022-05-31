@@ -3,6 +3,7 @@ package com.drifting.bureau.app.interceptor;
 import android.text.TextUtils;
 
 import com.drifting.bureau.app.application.RBureauApplication;
+import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.AppUtil;
 import com.drifting.bureau.util.StringUtil;
 import com.jess.arms.utils.SystemUtil;
@@ -35,9 +36,9 @@ public class CommonParInterceptor implements Interceptor {
                 FormBody formBody = (FormBody) originalRequest.body();
                 originalRequest = originalRequest.newBuilder().removeHeader("User-Agent")//移除旧的
                         .addHeader("User-Agent", SystemUtil.getUserAgent(RBureauApplication.getContext()))//添加真正的头部
-                        .addHeader("Token", "")
+                        .addHeader("Token", StringUtil.formatNullString(Preferences.getToken()))
                         .addHeader("Version", StringUtil.formatNullString(AppUtil.getVerName(RBureauApplication.getContext()) + ""))
-                        .addHeader("Sign",StringUtil.formatNullString(getSign("")))
+                        .addHeader("Sign",StringUtil.formatNullString(getSign(Preferences.getPhone())))
                         .addHeader("source","Android")
                         .addHeader("Accept", "application/json")
                         .post(formBody)
@@ -50,9 +51,9 @@ public class CommonParInterceptor implements Interceptor {
             Request request = new Request.Builder()
                     .removeHeader("User-Agent").addHeader("User-Agent",
                             SystemUtil.getUserAgent(RBureauApplication.getContext()))
-                    .addHeader("Token", "")
+                    .addHeader("Token", StringUtil.formatNullString(Preferences.getToken()))
                     .addHeader("Version", StringUtil.formatNullString(AppUtil.getVerName(RBureauApplication.getContext()) + ""))
-                    .addHeader("Sign",StringUtil.formatNullString(getSign("")))
+                    .addHeader("Sign",StringUtil.formatNullString(getSign(Preferences.getPhone())))
                     .addHeader("source","Android")
                     .url(originalRequest.url())
                     .build();

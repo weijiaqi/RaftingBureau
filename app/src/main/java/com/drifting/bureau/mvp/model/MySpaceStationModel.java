@@ -1,11 +1,20 @@
 package com.drifting.bureau.mvp.model;
 import android.app.Application;
+
+import com.drifting.bureau.app.api.ApiService;
+import com.drifting.bureau.mvp.model.entity.OrderDetailEntity;
+import com.drifting.bureau.mvp.model.entity.OrderOneEntity;
+import com.drifting.bureau.mvp.model.entity.SpaceInfoEntity;
+import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.google.gson.Gson;
+import com.jess.arms.base.BaseEntity;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
 import com.jess.arms.di.scope.ActivityScope;
 import javax.inject.Inject;
 import com.drifting.bureau.mvp.contract.MySpaceStationContract;
+
+import io.reactivex.Observable;
 
 /**
  * ================================================
@@ -37,4 +46,25 @@ public class MySpaceStationModel extends BaseModel implements MySpaceStationCont
         this.mGson = null;
         this.mApplication = null;
     }
+
+    @Override
+    public Observable<BaseEntity<SpaceInfoEntity>> spaceinfo(String user_id) {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).spaceinfo(user_id);
+    }
+
+    @Override
+    public Observable<BaseEntity<OrderOneEntity>> orderone() {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).orderone();
+    }
+
+    @Override
+    public Observable<BaseEntity<OrderDetailEntity>> orderdetail( int space_order_id) {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).orderdetail(space_order_id);
+    }
+
+    @Override
+    public Observable<BaseEntity<UserInfoEntity>> userplayer(String user_id) {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).userplayer(user_id);
+    }
+
 }

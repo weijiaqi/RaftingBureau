@@ -1,12 +1,21 @@
 package com.drifting.bureau.mvp.presenter;
 import android.app.Application;
+
+import com.drifting.bureau.mvp.model.entity.PayOrderEntity;
+import com.jess.arms.base.BaseEntity;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
+
 import javax.inject.Inject;
 import com.drifting.bureau.mvp.contract.PaymentInfoContract;
+import com.jess.arms.utils.RxLifecycleUtils;
 
 /**
  * ================================================
@@ -34,6 +43,33 @@ public class PaymentInfoPresenter extends BasePresenter<PaymentInfoContract.Mode
     @Inject
     public PaymentInfoPresenter (PaymentInfoContract.Model model, PaymentInfoContract.View rootView) {
         super(model, rootView);
+    }
+
+    /**
+     * 支付订单
+     */
+
+    public void payOrder(String sn) {
+        mModel.payOrder(sn)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseEntity<PayOrderEntity>>(mErrorHandler) {
+                    @Override
+                    public void onNext(BaseEntity<PayOrderEntity> baseEntity) {
+                        if (mRootView != null) {
+                            if (baseEntity.getCode() == 200) {
+                                mRootView.payOrderSuccess(baseEntity.getData());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        mRootView.onNetError();
+                        t.printStackTrace();
+                    }
+                });
     }
 
     @Override

@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="初级空间站必中盲盒"
+        android:text=""
         android:textColor="@color/white"
         android:textSize="14sp" />
 
@@ -52,10 +52,10 @@
 
 
     <ImageView
+        android:id="@+id/iv_pic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="5dp"
-        android:layout_marginEnd="20dp"
-        android:src="@drawable/demo_blind_box" />
+        android:layout_marginEnd="20dp"/>
 </com.hjq.shape.layout.ShapeRelativeLayout>

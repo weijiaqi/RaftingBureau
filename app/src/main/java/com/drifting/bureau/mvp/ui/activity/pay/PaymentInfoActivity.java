@@ -14,7 +14,9 @@ import android.widget.TextView;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.data.event.PaymentEvent;
+import com.drifting.bureau.mvp.model.entity.PayOrderEntity;
 import com.drifting.bureau.util.ClickUtil;
+import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.view.ClockView;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
@@ -45,8 +47,12 @@ public class PaymentInfoActivity extends BaseActivity<PaymentInfoPresenter> impl
     @BindView(R.id.clockview)
     ClockView mTvClockview;
 
-    public static void start(Context context, boolean closePage) {
+    private static final String EXRA_SN = "exra_sn";
+    private String sn;
+
+    public static void start(Context context, String sn, boolean closePage) {
         Intent intent = new Intent(context, PaymentInfoActivity.class);
+        intent.putExtra(EXRA_SN, sn);
         context.startActivity(intent);
         if (closePage) ((Activity) context).finish();
     }
@@ -70,6 +76,9 @@ public class PaymentInfoActivity extends BaseActivity<PaymentInfoPresenter> impl
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
         mToobarTitle.setText("订单支付");
+        if (getIntent() != null) {
+            sn = getIntent().getStringExtra(EXRA_SN);
+        }
         initListener();
     }
 
@@ -80,13 +89,23 @@ public class PaymentInfoActivity extends BaseActivity<PaymentInfoPresenter> impl
         mTvClockview.setEndTime(curTime);
     }
 
+    @Override
+    public void payOrderSuccess(PayOrderEntity entity) {
+         showMessage("购买成功");
+    }
+
+    @Override
+    public void onNetError() {
+
+    }
+
     public Activity getActivity() {
         return this;
     }
 
     @Override
     public void showMessage(@NonNull String message) {
-
+        ToastUtil.showToast(message);
     }
 
     @OnClick({R.id.toolbar_back, R.id.rl_wechat, R.id.ck_wecheat, R.id.rl_alipay, R.id.ck_alipay, R.id.tv_cofim_pay})
@@ -105,8 +124,11 @@ public class PaymentInfoActivity extends BaseActivity<PaymentInfoPresenter> impl
                     setCheckStatus(2);
                     break;
                 case R.id.tv_cofim_pay: //立即购买
-                    EventBus.getDefault().post(new PaymentEvent());
-                    finish();
+//                    EventBus.getDefault().post(new PaymentEvent());
+//                    finish();
+                    if (mPresenter!=null){
+                        mPresenter.payOrder(sn);
+                    }
                     break;
             }
         }

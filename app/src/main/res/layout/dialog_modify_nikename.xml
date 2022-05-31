@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.hjq.shape.layout.ShapeLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    app:shape_radius="10dp"
+    app:shape_solidColor="@color/white">
+
+    <com.drifting.bureau.view.FontTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="29dp"
+        android:text="修改昵称"
+        android:textColor="@color/color_00"
+        android:textSize="14sp"
+        app:fontType="Pingfang_bold" />
+
+
+    <com.hjq.shape.view.ShapeEditText
+        android:layout_width="182dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:hint="请输入新的昵称"
+        android:background="@null"
+        android:textCursorDrawable="@drawable/text_cursor"
+        android:textColorHint="@color/color_66"
+        android:textSize="12sp"
+        android:textColor="@color/color_00"
+        app:shape_radius="100dp"
+        app:shape_solidColor="@color/color_e6" />
+
+    <com.hjq.shape.view.ShapeTextView
+        android:id="@+id/tv_click"
+        android:layout_width="156dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginBottom="27dp"
+        android:gravity="center"
+        android:text="确定"
+        android:textColor="@color/color_00"
+        android:textStyle="bold"
+        app:shape_endColor="@color/color_6d"
+        app:shape_radius="100dp"
+        app:shape_startColor="@color/color_6c" />
+
+
+</com.hjq.shape.layout.ShapeLinearLayout>

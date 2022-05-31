@@ -6,16 +6,18 @@ import android.text.TextUtils;
 import android.widget.CheckBox;
 
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.security.MessageDigest;
+import java.text.DecimalFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringUtil {
 
     /**
-    * @description   勾选框
-    */
-    public static String checkProtocol( CheckBox checkBox) {
+     * @description 勾选框
+     */
+    public static String checkProtocol(CheckBox checkBox) {
         String result = null;
         if (!checkBox.isChecked()) {
             result = "请阅读并勾选用户协议!";
@@ -23,8 +25,8 @@ public class StringUtil {
         return result;
     }
 
-     /**
-     * @description  手机号校验
+    /**
+     * @description 手机号校验
      */
     public static String checkMobile(String mobile) {
         String result = null;
@@ -85,5 +87,16 @@ public class StringUtil {
             hexValue.append(Integer.toHexString(val));
         }
         return hexValue.toString();
+    }
+
+    /**
+     * 保留两位小数点
+     * @param frontValue
+     * @return
+     */
+    public static String frontValue(double frontValue) {
+        java.text.DecimalFormat myformat = new java.text.DecimalFormat("0.00");
+        String str = myformat.format(frontValue);
+        return str;
     }
 }

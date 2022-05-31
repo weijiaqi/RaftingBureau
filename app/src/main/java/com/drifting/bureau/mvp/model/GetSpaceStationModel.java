@@ -1,11 +1,21 @@
 package com.drifting.bureau.mvp.model;
 import android.app.Application;
+
+import com.drifting.bureau.app.api.ApiService;
+import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
+import com.drifting.bureau.mvp.model.entity.SpaceCheckEntity;
+import com.drifting.bureau.mvp.model.entity.SpaceStationEntity;
 import com.google.gson.Gson;
+import com.jess.arms.base.BaseEntity;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
 import com.jess.arms.di.scope.ActivityScope;
 import javax.inject.Inject;
 import com.drifting.bureau.mvp.contract.GetSpaceStationContract;
+
+import java.util.List;
+
+import io.reactivex.Observable;
 
 /**
  * ================================================
@@ -36,5 +46,20 @@ public class GetSpaceStationModel extends BaseModel implements GetSpaceStationCo
         super.onDestroy();
         this.mGson = null;
         this.mApplication = null;
+    }
+
+    @Override
+    public Observable<BaseEntity<List<SpaceStationEntity>>> space() {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).space();
+    }
+
+    @Override
+    public Observable<BaseEntity<CreateOrderEntity>> createOrderSpace(String sku_code,String sku_num) {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).createOrderSpace(sku_code,sku_num);
+    }
+
+    @Override
+    public Observable<BaseEntity<SpaceCheckEntity>> spacecheck() {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).spacecheck();
     }
 }
