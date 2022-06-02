@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.hjq.shape.layout.ShapeRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_answer_bg"
+    android:layout_width="273dp"
+    android:layout_height="320dp"
+    app:shape_radius="10dp"
+    app:shape_solidColor="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="19dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="问题"
+            android:textColor="@color/color_6d4"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="6"
+            android:textColor="@color/color_6d4"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"
+            android:textColor="@color/color_6d4_7f"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10"
+            android:textColor="@color/color_6d4_7f"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+
+    <com.drifting.bureau.view.FontTextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="69dp"
+        android:gravity="center"
+        android:maxEms="9"
+        android:singleLine="false"
+        android:text="很多时候你宁愿自己看一场电影也不愿参加聚会"
+        android:textColor="@color/color_22"
+        android:textSize="18sp"
+        app:fontType="Pingfang_bold" />
+
+
+    <com.hjq.shape.layout.ShapeRelativeLayout
+        app:shape_endColor="@color/color_70"
+        app:shape_radius="100dp"
+        app:shape_startColor="@color/color_d6"
+        android:layout_width="228dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="96dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="25dp"
+            android:src="@drawable/answer_select" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="A.是的"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+
+    </com.hjq.shape.layout.ShapeRelativeLayout>
+
+    <com.hjq.shape.layout.ShapeRelativeLayout
+        app:shape_radius="100dp"
+        app:shape_strokeColor="@color/color_6d4"
+        app:shape_strokeWidth="1dp"
+        android:layout_width="228dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="41dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="25dp"
+            android:src="@drawable/answer_select"
+            android:visibility="gone" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="B.我喜欢参加聚会"
+            android:textColor="@color/color_6d4"
+            android:textSize="13sp" />
+
+
+    </com.hjq.shape.layout.ShapeRelativeLayout>
+
+
+</com.hjq.shape.layout.ShapeRelativeLayout>

@@ -30,11 +30,16 @@ public interface MySpaceStationContract {
 
         void onSpcaeInfoSuccess(SpaceInfoEntity entity);
 
-        void onOrderOneSuccess(OrderOneEntity entity);
+        void onOrderOneSuccess( OrderOneEntity entity);
 
         void onOrderDetailSuccess(OrderDetailEntity entity);
 
         void onUserInfoSuccess(UserInfoEntity entity);
+
+
+        void onOrderMakingSuccess();
+
+        void onOrderThrowSuccess();
 
         void onNetError();
 
@@ -51,5 +56,9 @@ public interface MySpaceStationContract {
         Observable<BaseEntity<OrderDetailEntity>> orderdetail(int space_order_id);
 
         Observable<BaseEntity<UserInfoEntity>> userplayer(String user_id);
+
+        Observable<BaseEntity> orderthrow(int space_order_id);
+
+        Observable<BaseEntity> ordermaking(int space_order_id);
     }
 }

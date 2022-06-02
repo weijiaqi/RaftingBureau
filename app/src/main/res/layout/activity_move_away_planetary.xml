@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/planetary_bg"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_title" />
+
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar">
+
+        <ImageView
+            android:id="@+id/iv_star1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="38dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/move_away_stars_01" />
+
+        <com.drifting.bureau.view.FontTextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_star1"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/iv_star1"
+            android:shadowColor="@color/color_b8"
+            android:shadowDx="2"
+            android:shadowDy="1"
+            android:shadowRadius="3.0"
+            android:text="鉴定你的元宇宙属性"
+            android:textColor="@color/white"
+            android:textSize="28sp"
+            app:fontType="Pingfang_bold" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="35dp"
+            android:layout_toRightOf="@+id/tv_title"
+            android:src="@drawable/move_away_stars_02" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_rule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_top"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="查看规则"
+        android:textColor="@color/white"
+        android:textSize="13sp" />
+
+    <RelativeLayout
+        android:id="@+id/rl_center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tv_rule"
+        android:layout_marginBottom="106dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcy_answer"
+            android:layout_centerHorizontal="true"
+            android:layout_width="match_parent"
+            android:layout_height="370dp" />
+
+
+        <ImageView
+            android:id="@+id/iv_bg"
+            android:layout_marginTop="-8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="30dp"
+            android:src="@drawable/answer_bg" />
+
+        <com.hjq.shape.view.ShapeTextView
+            android:id="@+id/tv_next"
+            android:layout_below="@+id/iv_bg"
+            android:layout_width="204dp"
+            android:layout_height="43dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="-10dp"
+            android:gravity="center"
+            android:text="进入下一题"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:shape_radius="100dp"
+            app:shape_solidColor="@color/color_9a"
+            app:shape_strokeColor="@color/white"
+            app:shape_strokeWidth="1dp" />
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

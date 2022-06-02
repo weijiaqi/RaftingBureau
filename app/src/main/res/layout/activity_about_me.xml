@@ -51,17 +51,19 @@
                 android:textSize="12sp" />
 
             <com.hjq.shape.view.ShapeTextView
+                android:id="@+id/tv_select"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="5dp"
                 android:paddingHorizontal="14dp"
+                android:paddingVertical="1dp"
                 android:text="查看"
                 android:textColor="@color/color_00"
                 android:textSize="12sp"
-                app:shape_endColor="@color/color_6c"
+                app:shape_endColor="@color/color_6d"
                 app:shape_radius="100dp"
-                app:shape_startColor="@color/color_6d" />
+                app:shape_startColor="@color/color_6c" />
         </LinearLayout>
 
 

@@ -47,7 +47,7 @@
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:layout_marginEnd="10dp"
-        android:text="15S"
+        android:text=""
         android:textColor="@color/color_00"
         android:textSize="12sp"
         android:textStyle="bold" />

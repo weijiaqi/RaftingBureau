@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_01"
+    android:fitsSystemWindows="true">
+
+    <include layout="@layout/include_title" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar">
+
+
+        <ImageView
+            android:id="@+id/iv_planet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_top"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+
+            android:src="@drawable/planetary_detail" />
+
+
+        <LinearLayout
+            android:id="@+id/ll_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/iv_planet"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="65dp"
+            android:layout_marginEnd="33dp"
+            android:layout_marginBottom="-10dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <com.hjq.shape.view.ShapeTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="当前居住人数"
+                android:textSize="12sp"
+                app:shape_textEndColor="@color/color_6d"
+                app:shape_textStartColor="@color/color_6c" />
+
+            <com.hjq.shape.view.ShapeTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="345"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:shape_textEndColor="@color/color_6d"
+                app:shape_textStartColor="@color/color_6c" />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+    <com.hjq.shape.layout.ShapeLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="36dp"
+        android:layout_marginBottom="35dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:shape_radius="10dp"
+        app:shape_solidColor="@color/white">
+
+        <com.drifting.bureau.view.FontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="15dp"
+            android:text="荒芜星球"
+            android:textColor="@color/color_00"
+            android:textSize="14sp"
+            app:fontType="Pingfang_bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="22dp"
+            android:paddingEnd="26dp"
+            android:text="元宇宙基础星球，任何进入元宇宙漂流局的用户都会短暂居住在这里，这里不含有任何基础元素"
+            android:textColor="@color/color_33"
+            android:textSize="12sp" />
+
+        <com.hjq.shape.view.ShapeTextView
+            android:layout_width="86dp"
+            android:layout_height="29dp"
+            android:layout_marginVertical="20dp"
+            android:gravity="center"
+            android:text="暂无属性"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:shape_radius="100dp"
+            app:shape_solidColor="@color/color_00" />
+    </com.hjq.shape.layout.ShapeLinearLayout>
+</RelativeLayout>

@@ -9,12 +9,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.di.component.DaggerMakingRecordComponent;
 import com.drifting.bureau.mvp.model.entity.MakingRecordEntity;
+import com.drifting.bureau.mvp.model.entity.MyBlindBoxEntity;
 import com.drifting.bureau.mvp.ui.adapter.MakingRecordAdapter;
+import com.drifting.bureau.util.ToastUtil;
+import com.drifting.bureau.util.ViewUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.drifting.bureau.mvp.contract.MakingRecordContract;
@@ -33,12 +37,15 @@ import butterknife.BindView;
  * @author 制作记录
  * module name is MakingRecordActivity
  */
-public class MakingRecordActivity extends BaseActivity<MakingRecordPresenter> implements MakingRecordContract.View {
+public class MakingRecordActivity extends BaseActivity<MakingRecordPresenter> implements MakingRecordContract.View, XRecyclerView.LoadingListener {
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
     @BindView(R.id.rcy_public)
     XRecyclerView mRcyPublic;
-
+    @BindView(R.id.fl_container)
+    FrameLayout mFlState;
+    private int mPage = 1;
+    private int limit = 10;
     private MakingRecordAdapter makingRecordAdapter;
 
     public static void start(Context context, boolean closePage) {
@@ -71,27 +78,90 @@ public class MakingRecordActivity extends BaseActivity<MakingRecordPresenter> im
 
     public void initListener() {
         mRcyPublic.setLayoutManager(new LinearLayoutManager(this));
+        mRcyPublic.setLoadingListener(this);
         makingRecordAdapter = new MakingRecordAdapter(new ArrayList<>());
         mRcyPublic.setAdapter(makingRecordAdapter);
-        makingRecordAdapter.setData(getdata());
+        getData(mPage, true);
     }
 
-    public List<MakingRecordEntity> getdata(){
-        List<MakingRecordEntity>  list=new ArrayList<>();
-        list.add(new MakingRecordEntity("10.5"));
-        list.add(new MakingRecordEntity("10.5"));
-        list.add(new MakingRecordEntity("10.5"));
-        list.add(new MakingRecordEntity("10.5"));
-        list.add(new MakingRecordEntity("10.5"));
-        list.add(new MakingRecordEntity("10.5"));
-        return  list;
+    public void getData(int mPage, boolean loadType) {
+        if (mPresenter != null) {
+            mPresenter.ordermadelog(mPage, limit, loadType);
+        }
     }
+
+
+    @Override
+    public void onRefresh() {
+        mPage = 1;
+        getData(mPage, true);
+    }
+
+    @Override
+    public void onLoadMore() {
+        getData(mPage, false);
+    }
+
+    @Override
+    public void onloadStart() {
+        if (makingRecordAdapter.getDatas() == null || makingRecordAdapter.getDatas().size() == 0) {
+            ViewUtil.create().setAnimation(this, mFlState);
+        }
+    }
+
+    @Override
+    public void myOrderMadeSuccess(MakingRecordEntity entity, boolean isNotData) {
+        if (mPage == 1 && makingRecordAdapter.getItemCount() != 0) {
+            makingRecordAdapter.clearData();
+        }
+        List<MakingRecordEntity.ListBean> list = entity.getList();
+        if (list != null && list.size() > 0) {
+            if (isNotData) {
+                mPage = 2;
+                makingRecordAdapter.setData(list);
+            } else {
+                mPage++;
+                makingRecordAdapter.addData(list);
+            }
+        }
+    }
+
+    @Override
+    public void loadFinish(boolean loadType, boolean isNotData) {
+        if (mRcyPublic == null) {
+            return;
+        }
+        if (!loadType && isNotData) {
+            mRcyPublic.loadEndLine();
+        } else {
+            mRcyPublic.refreshEndComplete();
+        }
+    }
+
+    @Override
+    public void loadState(int type) {
+        if (makingRecordAdapter.getDatas() == null || makingRecordAdapter.getDatas().size() == 0) {
+            if (type == ViewUtil.NOT_DATA) {
+                ViewUtil.create().setView(this, mFlState, ViewUtil.NOT_DATA);
+            } else if (type == ViewUtil.NOT_SERVER) {
+                ViewUtil.create().setView(this, mFlState, ViewUtil.NOT_SERVER);
+            } else if (type == ViewUtil.NOT_NETWORK) {
+                ViewUtil.create().setView(this, mFlState, ViewUtil.NOT_NETWORK);
+            } else {
+                ViewUtil.create().setView(mFlState);
+            }
+        } else {
+            ViewUtil.create().setView(mFlState);
+        }
+    }
+
     public Activity getActivity() {
         return this;
     }
 
     @Override
     public void showMessage(@NonNull String message) {
-
+        ToastUtil.showToast(message);
     }
+
 }

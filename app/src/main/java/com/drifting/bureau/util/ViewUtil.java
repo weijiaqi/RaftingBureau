@@ -122,16 +122,16 @@ public class ViewUtil {
             TextView textView = inflate.findViewById(R.id.tv_content);
 
             if (type == NOT_SERVER) {
-                imageView.setImageResource(R.drawable.icon_coin_not_data);
+                imageView.setImageResource(R.drawable.icon_not_network);
                 textView.setText("暂无内容");
             } else if (type == NOT_NETWORK) {
-                imageView.setImageResource(R.drawable.icon_coin_not_data);
-                textView.setText("暂无内容");
+                imageView.setImageResource(R.drawable.icon_not_network);
+                textView.setText("网络连接失败");
             } else if (type == HAS_DELETED) {
-                imageView.setImageResource(R.drawable.icon_coin_not_data);
+                imageView.setImageResource(R.drawable.icon_not_data);
                 textView.setText("此内容已被删除，若有疑问请联系官方");
             }  else {
-                imageView.setImageResource(R.drawable.icon_coin_not_data);
+                imageView.setImageResource(R.drawable.icon_not_data);
                 textView.setText("暂无内容");
             }
             frameLayout.addView(linearLayout);
@@ -167,24 +167,6 @@ public class ViewUtil {
     }
 
 
-    public void setTokenView(Context context, FrameLayout frameLayout, int drawable, String content,String content2, View.OnClickListener onClickListener) {
-        if (frameLayout == null) return;
-        if (mStack.size() > 0) {
-            frameLayout.removeAllViews();
-        }
-        View inflate = LayoutInflater.from(context).inflate(R.layout.layout_not_data, null);
-        LinearLayout linearLayout = inflate.findViewById(R.id.ll_retry);
-        ImageView imageView = inflate.findViewById(R.id.iv_show);
-        TextView textView = inflate.findViewById(R.id.tv_content);
-        TextView textView2 = inflate.findViewById(R.id.tv_content2);
-        imageView.setImageResource(drawable);
-        textView.setText(content);
-        textView2.setText(content2);
-        textView2.setOnClickListener(onClickListener);
-        frameLayout.addView(inflate);
-        frameLayout.setVisibility(View.VISIBLE);
-        mStack.push(inflate);
-    }
 
     /**
      * 容器移除
