@@ -21,6 +21,7 @@ import com.drifting.bureau.R;
 import com.drifting.bureau.data.event.PaymentEvent;
 import com.drifting.bureau.data.event.VideoEvent;
 import com.drifting.bureau.di.component.DaggerViewRaftingComponent;
+import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
 import com.drifting.bureau.mvp.ui.dialog.RaftingOrderDialog;
 import com.drifting.bureau.mvp.ui.fragment.PostDriftingFragment;
 import com.drifting.bureau.util.BitmapUtil;
@@ -118,9 +119,7 @@ public class ViewRaftingActivity extends BaseActivity<ViewRaftingPresenter> impl
                     finish();
                     break;
                 case R.id.iv_play: //语音播放
-                    if (mPresenter != null) {
-                        mPresenter.startVoicePlay(this, "/data/user/0/com.drifting.bureau/files/voice_20220520_093022.amr", mIvPlay, mVideoView, mTvTime);
-                    }
+                    PermissionDialog.startVoicePlay(this, "/data/user/0/com.drifting.bureau/files/voice_20220520_093022.amr", mIvPlay, mVideoView, mTvTime);
                     break;
                 case R.id.rl_video_play://播放视频
                     VideoActivity.start(this, "http://vfx.mtime.cn/Video/2019/02/04/mp4/190204084208765161.mp4", false);

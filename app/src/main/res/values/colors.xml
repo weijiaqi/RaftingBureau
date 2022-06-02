@@ -90,4 +90,12 @@
     <color name="color_313">#313138</color>
     <color name="color_9a">#9A9A9A</color>
     <color name="color_53">#539987</color>
+    <color name="color_f8">#F85252</color>
+    <color name="color_b8">#b83c62ff</color>
+    <color name="color_6d4">#6D47FF</color>
+    <color name="color_6d4_7f">#7f6D47FF</color><!--50% -->
+    <color name="color_22">#222222</color>
+    <color name="color_c74">#C74BBB</color>
+    <color name="color_7f_c74">#7fC74BBB</color>
+    <color name="color_7c4">#7C45D4</color>
 </resources>

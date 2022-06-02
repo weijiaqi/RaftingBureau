@@ -1,7 +1,9 @@
 package com.drifting.bureau.mvp.ui.dialog;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -10,6 +12,8 @@ import androidx.annotation.NonNull;
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.OrderDetailEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
+import com.drifting.bureau.mvp.ui.activity.index.VideoActivity;
+import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.view.VoiceWave;
 import com.jess.arms.base.BaseDialog;
 
@@ -24,14 +28,19 @@ public class SelectOrderDialog extends BaseDialog implements View.OnClickListene
     public static final int SELECT_FINISH = 0x01;
     public static final int SELECT_CANCEL = 0x02;
 
-    private TextView mTvLeaveSpace, mTvMadeForHim, mTvname, mTvPlanet, mTvIdentity, mTvWord;
+    private TextView mTvLeaveSpace, mTvMadeForHim, mTvname, mTvPlanet, mTvIdentity, mTvWord, mTvTime;
     private RelativeLayout mRlVoicePlay, mRlVideoPlay;
-    private VoiceWave voiceWave;
+    private ImageView mIvPlay, mIvPic;
+    private VoiceWave mVideoView;
+
     private UserInfoEntity userInfoEntity;
     private OrderDetailEntity orderDetailEntity;
 
+    private Context context;
+
     public SelectOrderDialog(@NonNull Context context, UserInfoEntity userInfoEntity, OrderDetailEntity orderDetailEntity) {
         super(context);
+        this.context = context;
         this.userInfoEntity = userInfoEntity;
         this.orderDetailEntity = orderDetailEntity;
     }
@@ -47,6 +56,10 @@ public class SelectOrderDialog extends BaseDialog implements View.OnClickListene
         mRlVoicePlay = findViewById(R.id.rl_voice_play);
         mRlVideoPlay = findViewById(R.id.rl_video_play);
         mTvWord = findViewById(R.id.tv_word);
+        mTvTime = findViewById(R.id.tv_time);
+        mIvPlay = findViewById(R.id.iv_play);
+        mVideoView = findViewById(R.id.videoView);
+        mIvPic = findViewById(R.id.iv_pic);
     }
 
     @Override
@@ -54,6 +67,8 @@ public class SelectOrderDialog extends BaseDialog implements View.OnClickListene
         super.initEvents();
         mTvLeaveSpace.setOnClickListener(this);
         mTvMadeForHim.setOnClickListener(this);
+        mIvPlay.setOnClickListener(this);
+        mRlVideoPlay.setOnClickListener(this);
         mTvname.setText("昵称：" + userInfoEntity.getUser().getName());
         mTvPlanet.setText(userInfoEntity.getPlanet().getName());
         mTvIdentity.setText(userInfoEntity.getUser().getName());
@@ -67,6 +82,7 @@ public class SelectOrderDialog extends BaseDialog implements View.OnClickListene
                 break;
             case 3:
                 mRlVideoPlay.setVisibility(View.VISIBLE);
+                GlideUtil.create().loadNormalPic(context, orderDetailEntity.getImage(), mIvPic);
                 break;
         }
     }
@@ -85,7 +101,6 @@ public class SelectOrderDialog extends BaseDialog implements View.OnClickListene
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_leave_space:
-                dismiss();
                 if (onClickCallback != null) {
                     onClickCallback.onClickType(SELECT_CANCEL);
                 }
@@ -95,6 +110,12 @@ public class SelectOrderDialog extends BaseDialog implements View.OnClickListene
                 if (onClickCallback != null) {
                     onClickCallback.onClickType(SELECT_FINISH);
                 }
+                break;
+            case R.id.iv_play: //语音播放
+                PermissionDialog.startVoicePlay((Activity) context, orderDetailEntity.getContent(), mIvPlay, mVideoView, mTvTime);
+                break;
+            case R.id.rl_video_play://播放视频
+                VideoActivity.start(context, orderDetailEntity.getContent(), false);
                 break;
         }
     }

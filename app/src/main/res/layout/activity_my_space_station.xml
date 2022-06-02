@@ -73,15 +73,17 @@
                     android:textSize="11sp" />
             </LinearLayout>
 
-            <TextView
-                android:visibility="gone"
+            <com.drifting.bureau.view.FontTextView
                 android:id="@+id/tv_not_data"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="暂无订单"
+                android:gravity="center"
+                android:text="暂无新订单\n请等待"
                 android:textColor="@color/white"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:visibility="gone"
+                app:fontType="Pingfang_bold" />
 
         </FrameLayout>
 

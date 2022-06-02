@@ -30,6 +30,7 @@ import com.drifting.bureau.R;
 import com.drifting.bureau.di.component.DaggerAboutMeComponent;
 import com.drifting.bureau.mvp.model.entity.AoubtMeEntity;
 import com.drifting.bureau.mvp.model.entity.UserEntity;
+import com.drifting.bureau.mvp.ui.activity.index.PlanetarySelectActivity;
 import com.drifting.bureau.mvp.ui.adapter.AboutMeAdapter;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.TextUtil;
@@ -160,7 +161,7 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
     }
 
 
-    @OnClick({R.id.toolbar_back, R.id.iv_right})
+    @OnClick({R.id.toolbar_back, R.id.iv_right,R.id.tv_select})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
@@ -169,6 +170,9 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
                     break;
                 case R.id.iv_right:
                     AccountSettingsActivity.start(this, false);
+                    break;
+                case R.id.tv_select: //查看
+                    PlanetarySelectActivity.start(this,false);
                     break;
             }
         }

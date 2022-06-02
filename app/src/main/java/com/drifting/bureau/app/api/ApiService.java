@@ -4,7 +4,9 @@ package com.drifting.bureau.app.api;
 import com.drifting.bureau.mvp.model.entity.BoxOpenEntity;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
 import com.drifting.bureau.mvp.model.entity.CustomerEntity;
+import com.drifting.bureau.mvp.model.entity.IncomeRecordEntity;
 import com.drifting.bureau.mvp.model.entity.LoginEntity;
+import com.drifting.bureau.mvp.model.entity.MakingRecordEntity;
 import com.drifting.bureau.mvp.model.entity.MyBlindBoxEntity;
 import com.drifting.bureau.mvp.model.entity.OrderDetailEntity;
 import com.drifting.bureau.mvp.model.entity.OrderOneEntity;
@@ -142,6 +144,42 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("v/user/player")
     Observable<BaseEntity<UserInfoEntity>> userplayer(@Field("user_id") String user_id);
+
+
+    /**
+     *空间站丢回太空（把订单丢回太空）
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/space/order/throw")
+    Observable<BaseEntity> orderthrow(@Field("space_order_id") int space_order_id);
+
+
+    /**
+     *制作订单（空间站为他制作）
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/space/order/throw")
+    Observable<BaseEntity> ordermaking(@Field("space_order_id") int space_order_id);
+
+
+    /**
+     *制作记录
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/space/order/madelog")
+    Observable<BaseEntity<MakingRecordEntity>> ordermadelog(@Field("page") int page, @Field("limit") int limit);
+
+    /**
+     *收支记录
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/space/bill/logs")
+    Observable<BaseEntity<IncomeRecordEntity>> spacebillogs(@Field("page") int page, @Field("limit") int limit);
+
 
 
     /**

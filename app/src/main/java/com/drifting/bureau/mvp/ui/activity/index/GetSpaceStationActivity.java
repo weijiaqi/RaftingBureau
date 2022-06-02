@@ -72,9 +72,6 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
     TextView mTvPrice;
     @BindView(R.id.tv_protocol)
     TextView mTvProtocol;
-
-
-
     @BindView(R.id.iv_blind_box)
     ImageView mIvbLindBox;
     @BindView(R.id.iv_blind_box2)

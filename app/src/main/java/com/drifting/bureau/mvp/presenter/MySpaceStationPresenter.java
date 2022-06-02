@@ -121,6 +121,7 @@ public class MySpaceStationPresenter extends BasePresenter<MySpaceStationContrac
                             mRootView.onOrderDetailSuccess(baseEntity.getData());
                         }
                     }
+
                     @Override
                     public void onError(Throwable t) {
                         if (mRootView != null) {
@@ -132,10 +133,9 @@ public class MySpaceStationPresenter extends BasePresenter<MySpaceStationContrac
 
 
     /**
-     * 新订单的详情（空间站查看漂来的订单）
+     * 用户信息
      */
-
-    public void userplayer(String  user_id) {
+    public void userplayer(String user_id) {
         mModel.userplayer(user_id).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
@@ -146,6 +146,56 @@ public class MySpaceStationPresenter extends BasePresenter<MySpaceStationContrac
                             mRootView.onUserInfoSuccess(baseEntity.getData());
                         }
                     }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        if (mRootView != null) {
+                            mRootView.onNetError();
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 丢回太空
+     */
+    public void orderthrow(int space_order_id) {
+        mModel.orderthrow(space_order_id).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseEntity>(mErrorHandler) {
+                    @Override
+                    public void onNext(BaseEntity baseEntity) {
+                        if (mRootView != null) {
+                            mRootView.onOrderThrowSuccess();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        if (mRootView != null) {
+                            mRootView.onNetError();
+                        }
+                    }
+                });
+    }
+
+
+    /**
+     * 制作订单（空间站为他制作）
+     */
+    public void ordermaking(int space_order_id) {
+        mModel.ordermaking(space_order_id).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseEntity>(mErrorHandler) {
+                    @Override
+                    public void onNext(BaseEntity baseEntity) {
+                        if (mRootView != null) {
+                            mRootView.onOrderMakingSuccess();
+                        }
+                    }
+
                     @Override
                     public void onError(Throwable t) {
                         if (mRootView != null) {

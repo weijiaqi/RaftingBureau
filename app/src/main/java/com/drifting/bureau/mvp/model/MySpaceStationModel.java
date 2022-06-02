@@ -67,4 +67,14 @@ public class MySpaceStationModel extends BaseModel implements MySpaceStationCont
         return mRepositoryManager.obtainRetrofitService(ApiService.class).userplayer(user_id);
     }
 
+    @Override
+    public Observable<BaseEntity> orderthrow(int space_order_id) {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).orderthrow(space_order_id);
+    }
+
+    @Override
+    public Observable<BaseEntity> ordermaking(int space_order_id) {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).ordermaking(space_order_id);
+    }
+
 }

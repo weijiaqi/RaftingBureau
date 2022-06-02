@@ -9,6 +9,8 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.security.MessageDigest;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -58,6 +60,55 @@ public class StringUtil {
         return input;
     }
 
+
+    /**
+     * 将时间戳转换为时间
+     */
+    public static String stampToDate(long time) {
+        try {
+            String res;
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("CCT"));
+            Date date = new Date(time * 1000);
+            res = simpleDateFormat.format(date);
+            return res;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return getCurrentTime();
+        }
+    }
+
+    /**
+     * 将时间戳转换为时间
+     */
+    public static long stampToLong(String time, String pattern) {
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat(pattern);
+            Date date = null;
+            date = formatter.parse(time);
+            if (date == null) {
+                return 0;
+            } else {
+                long currentTime = date.getTime();
+                return currentTime;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+
+    /**
+     * 获取当前时间
+     *
+     * @return
+     */
+    public static String getCurrentTime() {
+        long l = System.currentTimeMillis();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(new Date());
+    }
     /**
      * MD5加密
      */

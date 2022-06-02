@@ -10,9 +10,9 @@ import com.jess.arms.base.BaseRecyclerHolder;
 
 import java.util.List;
 
-public class IncomeRecordAdapter extends BaseRecyclerAdapter<IncomeRecordEntity> {
+public class IncomeRecordAdapter extends BaseRecyclerAdapter<IncomeRecordEntity.ListBean> {
 
-    public IncomeRecordAdapter(List<IncomeRecordEntity> infos) {
+    public IncomeRecordAdapter(List<IncomeRecordEntity.ListBean> infos) {
         super(infos);
     }
 

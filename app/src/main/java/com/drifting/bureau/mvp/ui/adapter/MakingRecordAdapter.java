@@ -10,9 +10,9 @@ import com.jess.arms.base.BaseRecyclerHolder;
 
 import java.util.List;
 
-public class MakingRecordAdapter extends BaseRecyclerAdapter<MakingRecordEntity> {
+public class MakingRecordAdapter extends BaseRecyclerAdapter<MakingRecordEntity.ListBean> {
 
-    public MakingRecordAdapter(List<MakingRecordEntity> infos) {
+    public MakingRecordAdapter(List<MakingRecordEntity.ListBean> infos) {
         super(infos);
     }
 

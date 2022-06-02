@@ -55,28 +55,6 @@ public class ViewRaftingPresenter extends BasePresenter<ViewRaftingContract.Mode
     }
 
 
-    /**
-     *   语音播放
-     */
-    public void startVoicePlay(Activity activity, String uri, ImageView mIvPlay, VoiceWave mVideoView, TextView mTvTime) {
-        PermissionUtil.launchAudio(new PermissionUtil.RequestPermission() {
-            @Override
-            public void onRequestPermissionSuccess() {
-                VideoUtil.startVoicePlay(uri, 4, mIvPlay, mVideoView, mTvTime);
-            }
-
-            @Override
-            public void onRequestPermissionFailure(List<String> permissions) {
-
-            }
-
-            @Override
-            public void onRequestPermissionFailureWithAskNeverAgain(List<String> permissions) {
-                PermissionDialog.create().showDialog(activity, permissions);
-            }
-        }, new RxPermissions((FragmentActivity) activity), mErrorHandler);
-
-    }
 
     /**
      * @description 播放视频
