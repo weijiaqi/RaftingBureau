@@ -74,7 +74,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="8"
+                    android:text="10898"
                     android:textColor="@color/color_00"
                     android:textSize="23sp"
                     android:textStyle="bold" />
@@ -98,7 +98,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="8"
+                    android:text="807"
                     android:textColor="@color/color_00"
                     android:textSize="23sp"
                     android:textStyle="bold" />
@@ -161,7 +161,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="8"
+                android:text="9998"
                 android:textColor="@color/color_00"
                 android:textSize="17sp"
                 android:textStyle="bold" />
@@ -190,7 +190,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="8"
+                    android:text="9998"
                     android:textColor="@color/color_00"
                     android:textSize="17sp"
                     android:textStyle="bold" />
@@ -213,7 +213,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="8"
+                    android:text="0"
                     android:textColor="@color/color_00"
                     android:textSize="17sp"
                     android:textStyle="bold" />
@@ -283,7 +283,7 @@
                 android:layout_alignBottom="@+id/iv_order"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/iv_order"
-                android:text="260份"
+                android:text="1879"
                 android:textColor="@color/color_66"
                 android:textSize="12sp" />
 
@@ -319,7 +319,7 @@
                 android:layout_alignBottom="@+id/iv_ranking"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/iv_ranking"
-                android:text="2620"
+                android:text="2"
                 android:textColor="@color/color_66"
                 android:textSize="12sp" />
 

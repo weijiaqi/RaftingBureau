@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.drifting.bureau.R;
 import com.drifting.bureau.di.component.DaggerDriftingBottleComponent;
+import com.drifting.bureau.mvp.ui.activity.user.DriftingTrackActivity;
 import com.drifting.bureau.mvp.ui.fragment.PostDriftingFragment;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.ToastUtil;
@@ -70,12 +71,15 @@ public class DriftingBottleActivity extends BaseActivity<DriftingBottlePresenter
     }
 
 
-    @OnClick({R.id.toolbar_back})
+    @OnClick({R.id.toolbar_back,R.id.tv_slect_trajectory})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
                 case R.id.toolbar_back:
                     finish();
+                    break;
+                case R.id.tv_slect_trajectory: //查看轨迹
+                    DriftingTrackActivity.start(this,false);
                     break;
             }
         }

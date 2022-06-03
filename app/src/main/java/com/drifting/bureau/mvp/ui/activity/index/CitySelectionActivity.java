@@ -21,6 +21,7 @@ import com.drifting.bureau.mvp.ui.adapter.CityListAdapter;
 import com.drifting.bureau.mvp.ui.adapter.HotListAdapter;
 import com.drifting.bureau.util.AssessUtil;
 import com.drifting.bureau.util.ClickUtil;
+import com.drifting.bureau.util.GsonUtil;
 import com.drifting.bureau.view.location.QuickLocationBar;
 import com.google.gson.Gson;
 import com.jess.arms.base.BaseActivity;
@@ -54,8 +55,8 @@ public class CitySelectionActivity extends BaseActivity<CitySelectionPresenter> 
     @BindView(R.id.city_loactionbar)
     QuickLocationBar mQuicLocationBar;
 
-    private CityEntity mCityEntity;
-    private List<CityEntity.AreaListBean> listBeans;
+    private List<CityEntity> mCityEntity;
+
 
     private CityListAdapter cityListAdapter;
     private HotListAdapter hotListAdapter;
@@ -93,18 +94,14 @@ public class CitySelectionActivity extends BaseActivity<CitySelectionPresenter> 
         hotListAdapter = new HotListAdapter(new ArrayList<>());
         mHotList.setAdapter(hotListAdapter);
         hotListAdapter.setData(getData());
-
         mQuicLocationBar.setOnTouchLitterChangedListener(new LetterListViewListener());
-
         mCityLit.setLayoutManager(new LinearLayoutManager(this));
         cityListAdapter = new CityListAdapter(new ArrayList<>());
         mCityLit.setAdapter(cityListAdapter);
-
         String cityjson = AssessUtil.getJson("city.json", this);
-        mCityEntity = new Gson().fromJson(cityjson, CityEntity.class);
-        listBeans = mCityEntity.getAreaList();
-        Collections.sort(listBeans);
-        cityListAdapter.setData(listBeans);
+        mCityEntity = GsonUtil.getObjectList(cityjson,CityEntity.class);
+       Collections.sort(mCityEntity);
+        cityListAdapter.setData(mCityEntity);
     }
 
 

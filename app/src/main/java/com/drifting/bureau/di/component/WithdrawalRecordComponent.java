@@ -1,0 +1,40 @@
+package com.drifting.bureau.di.component;
+import dagger.BindsInstance;
+import dagger.Component;
+
+import com.drifting.bureau.mvp.contract.WithdrawalContract;
+import com.drifting.bureau.mvp.contract.WithdrawalRecordContract;
+import com.jess.arms.di.component.AppComponent;
+import com.drifting.bureau.di.module.WithdrawalRecordModule;
+
+import com.jess.arms.di.scope.ActivityScope;
+import com.drifting.bureau.mvp.ui.activity.user.WithdrawalRecordActivity;
+
+/**
+ * ================================================
+ * Description:
+ * <p>
+ * Created by MVPArmsTemplate on 2022/06/03 19:16
+ * <a href="mailto:jess.yan.effort@gmail.com">Contact me</a>
+ * <a href="https://github.com/JessYanCoding">Follow me</a>
+ * <a href="https://github.com/JessYanCoding/MVPArms">Star me</a>
+ * <a href="https://github.com/JessYanCoding/MVPArms/wiki">See me</a>
+ * <a href="https://github.com/JessYanCoding/MVPArmsTemplate">模版请保持更新</a>
+ * ================================================
+ */
+@ActivityScope
+@Component(modules = WithdrawalRecordModule.class,dependencies = AppComponent.class)
+public interface WithdrawalRecordComponent {
+
+    void inject(WithdrawalRecordActivity activity);
+
+    @Component.Builder
+    interface Builder {
+        @BindsInstance
+        Builder view(WithdrawalRecordContract.View view);
+
+        Builder appComponent(AppComponent appComponent);
+
+        WithdrawalRecordComponent build();
+    }
+}

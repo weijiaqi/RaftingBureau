@@ -172,19 +172,39 @@
     </RelativeLayout>
 
 
-    <com.hjq.shape.view.ShapeTextView
-        android:id="@+id/tv_starry_sky"
+    <com.hjq.shape.layout.ShapeLinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:paddingVertical="3dp"
+        android:paddingHorizontal="29dp"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="35dp"
         android:layout_marginBottom="80dp"
-        android:paddingHorizontal="41dp"
-        android:paddingVertical="10dp"
-        android:text="丢入星空"
-        android:textColor="@color/color_00"
-        android:textStyle="bold"
+        android:orientation="vertical"
         app:shape_endColor="@color/color_6d"
-        app:shape_radius="19dp"
-        app:shape_startColor="@color/color_6c" />
+        app:shape_radius="100dp"
+        app:shape_startColor="@color/color_6c">
+
+        <TextView
+            android:id="@+id/tv_starry_sky"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+
+            android:text="丢入星空"
+            android:textColor="@color/color_00"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="(免费次数：10)"
+            android:textColor="@color/color_00"
+            android:textSize="12sp" />
+
+
+    </com.hjq.shape.layout.ShapeLinearLayout>
 </LinearLayout>

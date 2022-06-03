@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CityListAdapter  extends BaseRecyclerAdapter<CityEntity.AreaListBean> {
+public class CityListAdapter  extends BaseRecyclerAdapter<CityEntity> {
 
 
 
@@ -23,7 +23,7 @@ public class CityListAdapter  extends BaseRecyclerAdapter<CityEntity.AreaListBea
     private String[] sections;
 
 
-    public CityListAdapter(List<CityEntity.AreaListBean> infos) { super(infos);}
+    public CityListAdapter(List<CityEntity> infos) { super(infos);}
 
 
 
@@ -39,7 +39,7 @@ public class CityListAdapter  extends BaseRecyclerAdapter<CityEntity.AreaListBea
     }
 
 
-    public void setData(List<CityEntity.AreaListBean> infos){
+    public void setData(List<CityEntity> infos){
         this.mDatas=infos;
         alphaIndexer = new HashMap<String, Integer>();
         sections = new String[mDatas.size()];

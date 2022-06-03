@@ -10,10 +10,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.preference.Preference;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.drifting.bureau.R;
@@ -22,9 +21,6 @@ import com.drifting.bureau.mvp.model.entity.OrderDetailEntity;
 import com.drifting.bureau.mvp.model.entity.OrderOneEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceInfoEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
-import com.drifting.bureau.mvp.ui.activity.index.GetSpaceStationActivity;
-import com.drifting.bureau.mvp.ui.dialog.CurrencyDialog;
-import com.drifting.bureau.mvp.ui.dialog.HowToPlayDialog;
 import com.drifting.bureau.mvp.ui.dialog.MakeScheduleDialog;
 import com.drifting.bureau.mvp.ui.dialog.MySpaceStationDialog;
 import com.drifting.bureau.mvp.ui.dialog.MyTreasuryDialog;
@@ -34,12 +30,10 @@ import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.StringUtil;
 import com.jess.arms.base.BaseActivity;
-import com.jess.arms.base.BaseDialog;
 import com.jess.arms.di.component.AppComponent;
 import com.drifting.bureau.mvp.contract.MySpaceStationContract;
 import com.drifting.bureau.mvp.presenter.MySpaceStationPresenter;
 
-import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -56,6 +50,8 @@ import butterknife.OnClick;
 public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter> implements MySpaceStationContract.View {
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
+    @BindView(R.id.rl_top)
+    RelativeLayout mRlTop;
     @BindView(R.id.tv_levle_name)
     TextView mTvlevelName;
     @BindView(R.id.tv_whole_make)
@@ -189,6 +185,24 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
     @Override
     public void onSpcaeInfoSuccess(SpaceInfoEntity entity) {
         if (entity != null) {
+            switch (entity.getLevel()) {
+                case 1:
+                    mRlTop.setBackgroundResource(R.drawable.my_space_station_top1);
+                    break;
+                case 2:
+                    mRlTop.setBackgroundResource(R.drawable.my_space_station_top2);
+                    break;
+                case 3:
+                    mRlTop.setBackgroundResource(R.drawable.my_space_station_top3);
+                    break;
+                case 4:
+                    mRlTop.setBackgroundResource(R.drawable.my_space_station_top4);
+                    break;
+                case 5:
+                    mRlTop.setBackgroundResource(R.drawable.my_space_station_top5);
+                    break;
+            }
+
             mTvlevelName.setText(entity.getLevel_name());
             mTvWholeMake.setText(entity.getTotal_make());
             mTvWholeIncome.setText(StringUtil.frontValue(entity.getTotal_income()));

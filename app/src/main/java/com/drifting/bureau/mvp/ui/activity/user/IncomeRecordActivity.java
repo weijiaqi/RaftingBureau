@@ -53,6 +53,7 @@ public class IncomeRecordActivity extends BaseActivity<IncomeRecordPresenter> im
     private int mPage = 1;
     private int limit = 10;
 
+
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, IncomeRecordActivity.class);
         context.startActivity(intent);

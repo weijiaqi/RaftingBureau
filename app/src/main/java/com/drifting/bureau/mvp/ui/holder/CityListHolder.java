@@ -34,7 +34,7 @@ public class CityListHolder extends BaseRecyclerHolder {
     }
 
 
-    public void setData(@NonNull List<CityEntity.AreaListBean> data, int position) {
+    public void setData(@NonNull List<CityEntity> data, int position) {
         TextUtil.setText(name, data.get(position).getName());
         String currentStr = DigitUtil.getPinYinFirst(data.get(position).getName());
         String previewStr = (position - 1) >= 0 ? DigitUtil.getPinYinFirst(data.get(position - 1)

@@ -71,7 +71,7 @@ public class SpaceMarinesActivity extends BaseActivity<SpaceMarinesPresenter> im
                     WithdrawalActivity.start(this,false);
                     break;
                 case R.id.tv_withdrawal_record://提现记录
-                    IncomeRecordActivity.start(this,false);
+                    WithdrawalRecordActivity.start(this,false);
                     break;
                 case R.id.tv_share: //分享
                     shareDialog=new ShareDialog(this);

@@ -2,6 +2,7 @@ package com.drifting.bureau.mvp.presenter;
 import android.app.Application;
 
 import com.drifting.bureau.mvp.model.entity.CustomerEntity;
+import com.drifting.bureau.util.ToastUtil;
 import com.jess.arms.base.BaseEntity;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
@@ -18,6 +19,8 @@ import com.drifting.bureau.mvp.contract.DiscoveryTourContract;
 import com.jess.arms.utils.RxLifecycleUtils;
 
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * ================================================
@@ -41,6 +44,8 @@ public class DiscoveryTourPresenter extends BasePresenter<DiscoveryTourContract.
     ImageLoader mImageLoader;
     @Inject
     AppManager mAppManager;
+
+    private static boolean isExit;
 
     @Inject
     public DiscoveryTourPresenter (DiscoveryTourContract.Model model, DiscoveryTourContract.View rootView) {
@@ -69,6 +74,26 @@ public class DiscoveryTourPresenter extends BasePresenter<DiscoveryTourContract.
                         t.printStackTrace();
                     }
                 });
+    }
+
+    /**
+     * 调用双击退出函数
+     */
+    public void exitBy2Click() {
+        Timer tExit;
+        if (!isExit) {
+            isExit = true;
+            ToastUtil.showToast("再按一次退出");
+            tExit = new Timer();
+            tExit.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    isExit = false;
+                }
+            }, 2000);
+        } else {
+            mRootView.finishSuccess();
+        }
     }
 
     @Override

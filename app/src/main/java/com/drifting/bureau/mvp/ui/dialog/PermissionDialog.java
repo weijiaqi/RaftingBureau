@@ -60,12 +60,13 @@ public class PermissionDialog {
 
             @Override
             public void onAlwaysFailure() {//禁止
-                list = new ArrayList<>();
-                list.add("android.permission.RECORD_AUDIO");
-                showDialog(activity, list);
+                showDialog(activity,"android.permission.RECORD_AUDIO");
             }
         });
     }
+
+
+
 
 
     /**
@@ -108,6 +109,37 @@ public class PermissionDialog {
                     }
                 });
     }
+
+
+    /**
+     * 拨打电话权限
+     *
+     * @param activity           FragmentActivity
+     * @param permissionCallBack 状态回调
+     */
+    public static void requestPhonePermissions(Activity activity, PermissionCallBack permissionCallBack) {
+        new RxPermissions((FragmentActivity) activity)
+                .requestEachCombined(Manifest.permission.CALL_PHONE)
+                .subscribe(permission -> {
+                    if (permission.granted) {
+                        permissionCallBack.onSuccess();
+                    } else if (permission.shouldShowRequestPermissionRationale) {
+                        permissionCallBack.onFailure();
+                    } else {
+                        permissionCallBack.onAlwaysFailure();
+                    }
+                });
+    }
+
+    /**
+     * 传权限参数
+     */
+    public static void  showDialog(Activity activity, String permission){
+        list = new ArrayList<>();
+        list.add(permission);
+        showDialog(activity, list);
+    }
+
 
     /**
      * 存储权限状态回调 onSuccess() 同意该权限  onFailure() 拒绝了该权限，没有选中『不再询问』 onAlwaysFailure() 用户拒绝了该权限，并且选中『不再询问』

@@ -38,6 +38,7 @@ import com.drifting.bureau.mvp.ui.activity.pay.PaymentInfoActivity;
 import com.drifting.bureau.mvp.ui.activity.user.MyBlindBoxActivity;
 import com.drifting.bureau.mvp.ui.activity.web.ShowWebViewActivity;
 import com.drifting.bureau.mvp.ui.adapter.SpaceBarrageAdapter;
+import com.drifting.bureau.mvp.ui.dialog.PrizepreviewDialog;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.SpannableUtil;
 import com.drifting.bureau.util.StringUtil;
@@ -93,6 +94,7 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
     private List<SpaceStationEntity> list;
     private String skuCode;
     private SpannableStringBuilder passer;
+    private PrizepreviewDialog prizepreviewDialog;
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, GetSpaceStationActivity.class);
         context.startActivity(intent);
@@ -193,11 +195,15 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
     public List<BarrageEntity> getData() {
         List<BarrageEntity> list = new ArrayList<>();
         list.add(new BarrageEntity(""));
-        list.add(new BarrageEntity(""));
-        list.add(new BarrageEntity("恭喜你的小太阳获得初级空间站"));
-        list.add(new BarrageEntity("恭喜你的小太阳获得初级空间站"));
-        list.add(new BarrageEntity("恭喜你的小太阳获得初级空间站"));
-        list.add(new BarrageEntity("恭喜你的小太阳获得初级空间站"));
+        list.add(new BarrageEntity("                          "));
+        list.add(new BarrageEntity("恭喜芭芘零食屋获得MED空间站"));
+        list.add(new BarrageEntity("恭喜唇边回味奶茶浓香获得SUP空间站"));
+        list.add(new BarrageEntity("恭喜无所谓的记忆获得TN空间站"));
+        list.add(new BarrageEntity("恭喜陽咣丅啲憂喐获得HIGH空间站"));
+        list.add(new BarrageEntity("恭喜数学不好有错么获得TN空间站"));
+        list.add(new BarrageEntity("恭喜嘴角残留的余香获得SUP空间站"));
+        list.add(new BarrageEntity("恭喜我就说是巧克力获得TN空间站"));
+        list.add(new BarrageEntity("恭喜纯净的眸子获得HIGH空间站"));
         return list;
     }
 
@@ -265,7 +271,7 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
     }
 
 
-    @OnClick({R.id.toolbar_back, R.id.tv_buy, R.id.tv_buy_more, R.id.tv_my_blind_box, R.id.iv_blind_box2, R.id.iv_blind_box3})
+    @OnClick({R.id.toolbar_back, R.id.tv_buy, R.id.tv_buy_more, R.id.tv_my_blind_box, R.id.iv_blind_box2, R.id.iv_blind_box3,R.id.tv_prize_preview})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
@@ -288,6 +294,10 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
                 case R.id.iv_blind_box3:
                     index++;
                     setFrame();
+                    break;
+                case R.id.tv_prize_preview:  //奖品预览
+                    prizepreviewDialog=new PrizepreviewDialog(this);
+                    prizepreviewDialog.show();
                     break;
             }
         }

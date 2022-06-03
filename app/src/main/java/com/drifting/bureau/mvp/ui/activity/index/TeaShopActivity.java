@@ -31,7 +31,7 @@ import butterknife.OnClick;
  * @author 附近门店
  * module name is TeaShopActivity
  */
-public class TeaShopActivity extends BaseActivity<TeaShopPresenter> implements TeaShopContract.View {
+public class TeaShopActivity extends BaseActivity<TeaShopPresenter> implements TeaShopContract.View,XRecyclerView.LoadingListener {
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
     @BindView(R.id.rcy_public)
@@ -69,15 +69,16 @@ public class TeaShopActivity extends BaseActivity<TeaShopPresenter> implements T
         mRcyPublic.setLayoutManager(new LinearLayoutManager(this));
         teaShopAdapter=new TeaShopAdapter(new ArrayList<>());
         mRcyPublic.setAdapter(teaShopAdapter);
+        mRcyPublic.setLoadingListener(this);
         teaShopAdapter.setData(getData());
     }
 
     public List<TeaShopEntity> getData(){
         List<TeaShopEntity> list=new ArrayList<>();
-        list.add(new TeaShopEntity("北京大兴超级好喝茶饮店"));
-        list.add(new TeaShopEntity("北京大兴超级好喝茶饮店"));
-        list.add(new TeaShopEntity("北京大兴超级好喝茶饮店"));
-        list.add(new TeaShopEntity("北京大兴超级好喝茶饮店"));
+        list.add(new TeaShopEntity("北京丰台茶饮店","北京市丰台区金泽西路8号院","15.2km",1));
+        list.add(new TeaShopEntity("北京石景山茶饮店","北京市石景山区石景山路2号(地铁玉泉路A出口西侧)","25km",1));
+        list.add(new TeaShopEntity("北京通州奶茶店","北京市通州区梨园镇东六环与G1京哈高速交叉口西北角","32km",1));
+        list.add(new TeaShopEntity("北京海淀奶茶店","北京市海淀区新建宫门路19号","12km",2));
         return list;
     }
 
@@ -103,5 +104,15 @@ public class TeaShopActivity extends BaseActivity<TeaShopPresenter> implements T
     @Override
     public void showMessage(@NonNull String message) {
 
+    }
+
+    @Override
+    public void onRefresh() {
+        mRcyPublic.refreshEndComplete();
+    }
+
+    @Override
+    public void onLoadMore() {
+        mRcyPublic.loadEndLine();
     }
 }
