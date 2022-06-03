@@ -4,9 +4,9 @@
     android:id="@+id/rl_answer_bg"
     android:layout_width="273dp"
     android:layout_height="320dp"
+    android:orientation="vertical"
     app:shape_radius="10dp"
-    app:shape_solidColor="@color/white"
-    android:orientation="vertical">
+    app:shape_solidColor="@color/white">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -22,9 +22,10 @@
             android:textSize="12sp" />
 
         <TextView
+            android:id="@+id/tv_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="6"
+            android:text=""
             android:textColor="@color/color_6d4"
             android:textSize="12sp" />
 
@@ -60,65 +61,134 @@
         app:fontType="Pingfang_bold" />
 
 
-    <com.hjq.shape.layout.ShapeRelativeLayout
-        app:shape_endColor="@color/color_70"
-        app:shape_radius="100dp"
-        app:shape_startColor="@color/color_d6"
-        android:layout_width="228dp"
-        android:layout_height="40dp"
+    <RelativeLayout
+        android:id="@+id/rl_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="96dp">
+        android:layout_marginBottom="41dp"
+        android:visibility="gone">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="25dp"
-            android:src="@drawable/answer_select" />
+        <com.hjq.shape.layout.ShapeRelativeLayout
+            android:id="@+id/rl_a"
+            android:layout_width="228dp"
+            android:layout_height="40dp"
+            app:shape_radius="100dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="A.是的"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
+            <ImageView
+                android:id="@+id/iv_selectA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="25dp"
+                android:src="@drawable/answer_select" />
+
+            <TextView
+                android:id="@+id/tv_answerA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text=""
+                android:textColor="@color/color_6d4"
+                android:textSize="13sp" />
 
 
-    </com.hjq.shape.layout.ShapeRelativeLayout>
+        </com.hjq.shape.layout.ShapeRelativeLayout>
 
-    <com.hjq.shape.layout.ShapeRelativeLayout
-        app:shape_radius="100dp"
-        app:shape_strokeColor="@color/color_6d4"
-        app:shape_strokeWidth="1dp"
-        android:layout_width="228dp"
-        android:layout_height="40dp"
+        <com.hjq.shape.layout.ShapeRelativeLayout
+            android:id="@+id/rl_b"
+            android:layout_width="228dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/rl_a"
+            android:layout_marginTop="15dp"
+            app:shape_radius="100dp">
+
+            <ImageView
+                android:id="@+id/iv_selectB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="25dp"
+                android:src="@drawable/answer_select" />
+
+            <TextView
+                android:id="@+id/tv_answerB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text=""
+                android:textColor="@color/color_6d4"
+                android:textSize="13sp" />
+
+
+        </com.hjq.shape.layout.ShapeRelativeLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_two"
+        android:visibility="gone"
+        android:paddingStart="10dp"
+       android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="41dp">
+        android:layout_marginBottom="42dp"
+        android:gravity="center">
 
-        <ImageView
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="25dp"
-            android:src="@drawable/answer_select"
-            android:visibility="gone" />
+            android:layout_marginTop="10dp">
 
-        <TextView
+
+            <ImageView
+                android:id="@+id/iv_picA"
+                android:layout_width="106dp"
+                android:layout_height="106dp"
+                android:src="@drawable/demoa" />
+
+            <CheckBox
+                android:id="@+id/sellectA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="85dp"
+                android:layout_marginTop="82dp"
+                android:button="@null"
+                android:padding="10dp"
+                android:drawableLeft="@drawable/answer_checked"
+                android:textColor="@color/color_cc"
+                android:textSize="12sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="B.我喜欢参加聚会"
-            android:textColor="@color/color_6d4"
-            android:textSize="13sp" />
+            android:layout_marginTop="10dp">
 
+            <ImageView
+                android:id="@+id/iv_picB"
+                android:layout_width="106dp"
+                android:layout_height="106dp"
+                android:scaleType="center"
+                android:src="@drawable/demob" />
 
-    </com.hjq.shape.layout.ShapeRelativeLayout>
+            <CheckBox
+                android:id="@+id/sellectB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:padding="10dp"
+                android:layout_marginLeft="85dp"
+                android:layout_marginTop="82dp"
+                android:drawableLeft="@drawable/answer_checked"
+                android:textColor="@color/color_cc"
+                android:textSize="12sp" />
 
+        </RelativeLayout>
+    </LinearLayout>
 
 </com.hjq.shape.layout.ShapeRelativeLayout>

@@ -98,6 +98,7 @@
                 android:textSize="12sp" />
 
             <com.hjq.shape.view.ShapeTextView
+                android:id="@+id/tv_explore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"

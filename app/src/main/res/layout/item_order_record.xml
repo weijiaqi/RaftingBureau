@@ -95,15 +95,29 @@
         android:layout_marginTop="10dp">
 
         <com.hjq.shape.view.ShapeTextView
+            android:id="@+id/tv_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="已付款"
-            android:layout_centerVertical="true"
-            app:shape_textStartColor="@color/color_6c"
+            android:textSize="12sp"
             app:shape_textEndColor="@color/color_6d"
-            android:textSize="14sp" />
+            app:shape_textStartColor="@color/color_6c" />
 
         <TextView
+            android:id="@+id/tv_payment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="剩余支付时间 15:52"
+            android:textColor="@color/color_f15"
+            android:textSize="12sp"
+            android:layout_marginBottom="5dp"
+           />
+
+
+        <TextView
+            android:id="@+id/tv_write_off"
+            android:layout_below="@+id/tv_payment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -111,6 +125,7 @@
             android:textColor="@color/white"
             android:textSize="12sp"
             android:textStyle="bold" />
+
     </RelativeLayout>
 
 

@@ -1,7 +1,9 @@
 package com.drifting.bureau.mvp.ui.dialog;
 
 import android.content.Context;
+import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -20,8 +22,9 @@ import java.util.List;
  * @Author     : WeiJiaQI
  * @Time       : 2022/5/26 12:05
  */
-public class MySpaceStationDialog extends BaseDialog {
+public class MySpaceStationDialog extends BaseDialog implements View.OnClickListener {
 
+    private TextView mTvCofim;
     private ProgressBar mPrUpgrade;
     private RecyclerView mRcyInterests;
     private Context context;
@@ -34,6 +37,7 @@ public class MySpaceStationDialog extends BaseDialog {
     @Override
     protected void initDatas() {
         super.initDatas();
+        mTvCofim=findViewById(R.id.tv_cofim);
         mPrUpgrade=findViewById(R.id.pr_upgrade);
         mRcyInterests=findViewById(R.id.rcy_interests);
     }
@@ -42,6 +46,7 @@ public class MySpaceStationDialog extends BaseDialog {
     @Override
     protected void initEvents() {
         super.initEvents();
+        mTvCofim.setOnClickListener(this);
         mRcyInterests.setLayoutManager(new GridLayoutManager(context,4));
         mySpaceStationAdapter=new MySpaceStationAdapter(new ArrayList<>());
         mRcyInterests.setAdapter(mySpaceStationAdapter);
@@ -75,5 +80,14 @@ public class MySpaceStationDialog extends BaseDialog {
     @Override
     protected float getDialogWith() {
         return 0.8f;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.tv_cofim:
+                dismiss();
+                break;
+        }
     }
 }

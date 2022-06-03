@@ -56,4 +56,5 @@
         <attr name="length" format="integer" />
         <attr name="prompt_text" format="string" />
     </declare-styleable>
+
 </resources>

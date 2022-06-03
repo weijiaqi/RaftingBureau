@@ -74,7 +74,7 @@ public class QuickLocationBar extends View {
             }
             // 计算字符的绘制的位置
             float xPos = width / 2 - paint.measureText(characters[i]) / 2;
-            float yPos = (float) ((singleHeight * i + singleHeight) /1.5);
+            float yPos = singleHeight * i + singleHeight;
             // 在画布上绘制字符
             canvas.drawText(characters[i], xPos, yPos, paint);
             paint.reset();// 每次绘制完成后不要忘记重制Paint

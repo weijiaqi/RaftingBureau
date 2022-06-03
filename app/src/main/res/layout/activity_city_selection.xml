@@ -151,9 +151,9 @@
         <com.drifting.bureau.view.location.QuickLocationBar
             android:id="@+id/city_loactionbar"
             android:layout_width="25dp"
-            android:layout_marginTop="60dp"
-            android:layout_height="fill_parent"
-            android:layout_gravity="right|center" />
+            android:layout_marginTop="100dp"
+            android:layout_height="400dp"
+            android:layout_gravity="right" />
 
     </FrameLayout>
 

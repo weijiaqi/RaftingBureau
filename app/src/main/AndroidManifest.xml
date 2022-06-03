@@ -11,10 +11,18 @@ package="com.drifting.bureau">
 <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 <uses-permission android:name="android.permission.RECORD_AUDIO" />
 <uses-permission android:name="android.permission.CAMERA" />
+<uses-permission android:name="android.permission.CALL_PHONE" />
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 <uses-permission
     android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
     tools:ignore="ProtectedPermissions" />
 
+<queries>
+    <package android:name="com.autonavi.minimap" />
+    <package android:name="com.baidu.BaiduMap" />
+    <package android:name="com.tencent.map" />
+</queries>
 <application
     android:name=".app.application.RBureauApplication"
     android:allowBackup="true"
@@ -38,9 +46,9 @@ package="com.drifting.bureau">
     </activity>
 
     <!-- 只要依赖 AutoSize 就必须填写设计图尺寸, 否则报错, 不想使用 AutoSize 就不要依赖 AutoSize
-                  只要填写完设计图的尺寸, AutoSize 就会自动启动, 以下 dp 尺寸是根据公式 px / (dpi / 160) 求出, 运算时使用测试机的 dpi 即可
-                  AutoSize 的详细介绍请看这里 https://juejin.im/post/5bce688e6fb9a05cf715d1c2
-                  -->
+                      只要填写完设计图的尺寸, AutoSize 就会自动启动, 以下 dp 尺寸是根据公式 px / (dpi / 160) 求出, 运算时使用测试机的 dpi 即可
+                      AutoSize 的详细介绍请看这里 https://juejin.im/post/5bce688e6fb9a05cf715d1c2
+                      -->
     <meta-data
         android:name="design_width_in_dp"
         android:value="360" />
@@ -52,6 +60,7 @@ package="com.drifting.bureau">
     <meta-data
         android:name="com.drifting.bureau.app.GlobalConfiguration"
         android:value="ConfigModule" />
+
 
     <activity
         android:name=".mvp.ui.activity.home.DiscoveryTourActivity"
@@ -133,5 +142,11 @@ package="com.drifting.bureau">
     <activity
         android:name="com.drifting.bureau.mvp.ui.activity.index.MoveAwayPlanetaryActivity"
         android:screenOrientation="portrait" />
+
+    <activity
+        android:name="com.drifting.bureau.mvp.ui.activity.user.WithdrawalRecordActivity"
+        android:screenOrientation="portrait" />
 </application>
 </manifest>
+
+

@@ -50,7 +50,7 @@ public class IncomeRecordPresenter extends BasePresenter<IncomeRecordContract.Mo
 
 
     /**
-     * 我的盲盒
+     * 收支记录
      */
     public void spacebillogs(int page, int limit, boolean loadType) {
         if (mRootView != null) {

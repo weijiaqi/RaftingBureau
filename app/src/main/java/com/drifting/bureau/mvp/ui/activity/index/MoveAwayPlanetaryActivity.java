@@ -91,10 +91,17 @@ public class MoveAwayPlanetaryActivity extends BaseActivity<MoveAwayPlanetaryPre
 
     public List<AnswerEntity> getData() {
         list = new ArrayList<>();
-        list.add(new AnswerEntity("111", 1));
-        list.add(new AnswerEntity("222", 1));
-        list.add(new AnswerEntity("333", 1));
-        list.add(new AnswerEntity("444", 1));
+        list.add(new AnswerEntity("大多数时候，你更喜欢","随心所欲的做事","做出详细的计划", 1,1));
+        list.add(new AnswerEntity("哪一个是你更喜欢的", "","", 2,2));
+        list.add(new AnswerEntity("你做事会被情感影响", "是的","不会", 1,3));
+        list.add(new AnswerEntity("对猎奇，和最新出现的潮流事物很快掌握", "是的","不是", 1,4));
+        list.add(new AnswerEntity("很多时候你宁愿自己看一场电影也不愿意参加聚会", "是的","我喜欢参加聚会", 1,5));
+        list.add(new AnswerEntity("你喜欢远离外界的喧嚣", "是的","更喜欢热闹一点", 1,6));
+        list.add(new AnswerEntity("你经常考虑是否有外星人", "是的","不是", 1,7));
+        list.add(new AnswerEntity("解决问题时，你更喜欢熟悉的方法解决", "是的","不是", 1,8));
+        list.add(new AnswerEntity("你比较相信科学", "是的","不是", 1,9));
+        list.add(new AnswerEntity("你更喜欢传统的生活方式", "是的","不是", 1,10));
+
         return list;
     }
 

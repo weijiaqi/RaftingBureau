@@ -17,6 +17,7 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +44,7 @@ import com.drifting.bureau.mvp.ui.activity.index.SpaceCapsuleActivity;
 import com.drifting.bureau.mvp.ui.activity.index.ViewRaftingActivity;
 import com.drifting.bureau.mvp.ui.activity.user.AboutMeActivity;
 import com.drifting.bureau.mvp.ui.dialog.RaftingInforDialog;
+import com.drifting.bureau.util.MapsUtil;
 import com.drifting.bureau.util.animator.AnimatorUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.base.BaseDialog;
@@ -150,7 +152,6 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
         userGestureDetector = new UserGestureDetector();
         //实例化GestureDetector并将UserGestureDetector实例传入
         gestureDetector = new GestureDetector(this, userGestureDetector);
-
 
         list = new ArrayList<>();
         list.add(new PlanetEntity("传递漂1", R.drawable.plant3));
@@ -282,6 +283,11 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
     @Override
     public void customerSuccess(List<CustomerEntity> customerEntity) {
 
+    }
+
+    @Override
+    public void finishSuccess() {
+        finish();
     }
 
     public void setFrame() {
@@ -434,6 +440,21 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
                 setFrame();
             }
             return true;
+        }
+    }
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            killApp();
+        }
+        return false;
+    }
+
+    public void killApp() {
+        if (mPresenter != null) {
+            mPresenter.exitBy2Click();
         }
     }
 

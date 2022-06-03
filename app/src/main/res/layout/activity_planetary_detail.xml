@@ -21,8 +21,8 @@
             android:layout_below="@+id/ll_top"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
-
-            android:src="@drawable/planetary_detail" />
+            android:layout_marginTop="-25dp"
+            />
 
 
         <LinearLayout
@@ -33,7 +33,7 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="65dp"
             android:layout_marginEnd="33dp"
-            android:layout_marginBottom="-10dp"
+
             android:gravity="center"
             android:orientation="vertical">
 
@@ -70,28 +70,33 @@
         app:shape_solidColor="@color/white">
 
         <com.drifting.bureau.view.FontTextView
+            android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="15dp"
-            android:text="荒芜星球"
+            android:text=""
             android:textColor="@color/color_00"
             android:textSize="14sp"
             app:fontType="Pingfang_bold" />
 
         <TextView
+            android:id="@+id/tv_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingStart="22dp"
             android:paddingEnd="26dp"
-            android:text="元宇宙基础星球，任何进入元宇宙漂流局的用户都会短暂居住在这里，这里不含有任何基础元素"
+            android:text=""
             android:textColor="@color/color_33"
             android:textSize="12sp" />
 
         <com.hjq.shape.view.ShapeTextView
-            android:layout_width="86dp"
-            android:layout_height="29dp"
+            android:id="@+id/tv_attribute"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginVertical="20dp"
             android:gravity="center"
+            android:paddingHorizontal="18dp"
+            android:paddingVertical="8dp"
             android:text="暂无属性"
             android:textColor="@color/white"
             android:textSize="12sp"
