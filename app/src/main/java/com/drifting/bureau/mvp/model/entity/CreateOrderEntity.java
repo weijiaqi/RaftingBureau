@@ -3,8 +3,17 @@ package com.drifting.bureau.mvp.model.entity;
 public class CreateOrderEntity {
 
         private String sn;
+        private String total_amount;
 
-        public String getSn() {
+    public String getTotal_amount() {
+        return total_amount;
+    }
+
+    public void setTotal_amount(String total_amount) {
+        this.total_amount = total_amount;
+    }
+
+    public String getSn() {
             return sn;
         }
 

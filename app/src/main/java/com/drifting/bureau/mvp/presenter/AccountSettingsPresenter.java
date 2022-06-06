@@ -1,12 +1,21 @@
 package com.drifting.bureau.mvp.presenter;
 import android.app.Application;
+
+import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
+import com.jess.arms.base.BaseEntity;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
+
 import javax.inject.Inject;
 import com.drifting.bureau.mvp.contract.AccountSettingsContract;
+import com.jess.arms.utils.RxLifecycleUtils;
 
 /**
  * ================================================
@@ -35,6 +44,31 @@ public class AccountSettingsPresenter extends BasePresenter<AccountSettingsContr
     public AccountSettingsPresenter (AccountSettingsContract.Model model, AccountSettingsContract.View rootView) {
         super(model, rootView);
     }
+
+    /**
+     * 用户信息
+     */
+    public void userplayer(String user_id) {
+        mModel.userplayer(user_id).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseEntity<UserInfoEntity>>(mErrorHandler) {
+                    @Override
+                    public void onNext(BaseEntity<UserInfoEntity> baseEntity) {
+                        if (mRootView != null) {
+                            mRootView.onUserInfoSuccess(baseEntity.getData());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        if (mRootView != null) {
+                            mRootView.onNetError();
+                        }
+                    }
+                });
+    }
+
 
     @Override
     public void onDestroy() {

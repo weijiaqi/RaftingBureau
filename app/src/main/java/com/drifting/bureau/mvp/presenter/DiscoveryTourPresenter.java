@@ -2,6 +2,7 @@ package com.drifting.bureau.mvp.presenter;
 import android.app.Application;
 
 import com.drifting.bureau.mvp.model.entity.CustomerEntity;
+import com.drifting.bureau.mvp.model.entity.MessageReceiveEntity;
 import com.drifting.bureau.util.ToastUtil;
 import com.jess.arms.base.BaseEntity;
 import com.jess.arms.integration.AppManager;
@@ -75,6 +76,34 @@ public class DiscoveryTourPresenter extends BasePresenter<DiscoveryTourContract.
                     }
                 });
     }
+
+
+
+
+    /**
+     * 飘来新消息（话题）
+     */
+    public void  getMessage() {
+        mModel.messagereceive().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseEntity<MessageReceiveEntity>>(mErrorHandler) {
+                    @Override
+                    public void onNext(BaseEntity<MessageReceiveEntity> baseEntity) {
+                        if (mRootView != null) {
+                            if (baseEntity.getCode() == 200) {
+                                mRootView.onMessageReceiveSuccess(baseEntity.getData());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
+    }
+
 
     /**
      * 调用双击退出函数

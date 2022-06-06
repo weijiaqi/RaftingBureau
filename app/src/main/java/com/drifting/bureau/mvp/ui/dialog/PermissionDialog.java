@@ -17,10 +17,13 @@ import com.drifting.bureau.util.VideoUtil;
 import com.drifting.bureau.view.VoiceWave;
 import com.jess.arms.base.BaseDialog;
 import com.jess.arms.utils.PermissionUtil;
+import com.tbruyelle.rxpermissions2.Permission;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.functions.Consumer;
 
 /**
  * @description 动态权限
@@ -60,14 +63,33 @@ public class PermissionDialog {
 
             @Override
             public void onAlwaysFailure() {//禁止
-                showDialog(activity,"android.permission.RECORD_AUDIO");
+                showDialog(activity, "android.permission.RECORD_AUDIO");
             }
         });
     }
 
 
-
-
+    /**
+     * 存储权限
+     *
+     * @param activity           FragmentActivity
+     * @param permissionCallBack 状态回调
+     */
+    public static void requestPermissions(Activity activity, PermissionCallBack permissionCallBack) {
+        new RxPermissions((FragmentActivity) activity).requestEach(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .subscribe(new Consumer<Permission>() {
+                    @Override
+                    public void accept(Permission permission) throws Exception {
+                        if (permission.granted) {
+                            permissionCallBack.onSuccess();
+                        } else if (permission.shouldShowRequestPermissionRationale) {
+                            permissionCallBack.onFailure();
+                        } else {
+                            permissionCallBack.onAlwaysFailure();
+                        }
+                    }
+                });
+    }
 
     /**
      * 语音权限
@@ -134,7 +156,7 @@ public class PermissionDialog {
     /**
      * 传权限参数
      */
-    public static void  showDialog(Activity activity, String permission){
+    public static void showDialog(Activity activity, String permission) {
         list = new ArrayList<>();
         list.add(permission);
         showDialog(activity, list);
@@ -172,6 +194,10 @@ public class PermissionDialog {
                 case "android.permission.WRITE_EXTERNAL_STORAGE":
                     permissionsTitle = "存储权限管理";
                     permissionsDescribe = "请在“权限管理”中开启存储权限，开通后可正常使用相关功能";
+                    break;
+                case "android.permission.READ_EXTERNAL_STORAGE":
+                    permissionsTitle = "读取权限管理";
+                    permissionsDescribe = "请在“权限管理”中开启读取权限，开通后可正常使用相关功能";
                     break;
             }
         }

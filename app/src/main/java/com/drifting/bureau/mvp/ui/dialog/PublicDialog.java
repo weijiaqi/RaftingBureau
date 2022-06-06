@@ -77,4 +77,15 @@ public class PublicDialog extends BaseDialog  implements View.OnClickListener{
         mTvContent.setText(content);
         return this;
     }
+
+
+    /**
+     * 按钮
+     *
+     * @param content
+     */
+    public PublicDialog setButtonText(String content) {
+        mTvClick.setText(content);
+        return this;
+    }
 }

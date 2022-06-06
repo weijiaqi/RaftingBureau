@@ -1,36 +1,54 @@
 package com.drifting.bureau.mvp.model.entity;
 
+import java.util.List;
+
 public class MyTreasuryEntity {
-   private int num;
-   private String title;
-   private String content;
-    public MyTreasuryEntity(int num,String title,String content) {
-        this.num=num;
-        this.title = title;
-        this.content=content;
-    }
 
-    public int getNum() {
-        return num;
-    }
 
-    public void setNum(int num) {
-        this.num = num;
-    }
+        private Integer count;
+        private Integer object_id;
+        private String name;
+        private String desc;
+        private String image_url;
 
-    public String getTitle() {
-        return title;
-    }
+        public Integer getCount() {
+            return count;
+        }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+        public void setCount(Integer count) {
+            this.count = count;
+        }
 
-    public String getContent() {
-        return content;
-    }
+        public Integer getObject_id() {
+            return object_id;
+        }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+        public void setObject_id(Integer object_id) {
+            this.object_id = object_id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getDesc() {
+            return desc;
+        }
+
+        public void setDesc(String desc) {
+            this.desc = desc;
+        }
+
+        public String getImage_url() {
+            return image_url;
+        }
+
+        public void setImage_url(String image_url) {
+            this.image_url = image_url;
+        }
+
 }

@@ -44,14 +44,14 @@
 
 
             <com.hjq.shape.view.ShapeTextView
-                android:id="@+id/tv_verified"
+                android:id="@+id/tv_nikename"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginTop="7dp"
                 android:layout_marginEnd="10dp"
                 android:layout_toLeftOf="@+id/iv_nikename_back"
-                android:text="你的小太阳"
+                android:text=""
                 android:textSize="11sp"
                 app:shape_textEndColor="@color/color_6d"
                 app:shape_textStartColor="@color/color_6c" />
@@ -149,7 +149,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:src="@drawable/account_privacy" />
+                android:src="@drawable/feed_back" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -173,4 +173,19 @@
 
         <include layout="@layout/view_3d_color_line" />
     </com.hjq.shape.layout.ShapeLinearLayout>
+
+
+    <com.hjq.shape.view.ShapeTextView
+        android:id="@+id/tv_exit"
+        android:layout_width="156dp"
+        android:layout_height="38dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="29dp"
+        android:gravity="center"
+        android:text="退出漂流局"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:shape_radius="100dp"
+        app:shape_solidColor="@color/color_dc4" />
 </LinearLayout>

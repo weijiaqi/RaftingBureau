@@ -9,11 +9,11 @@
 
     <ImageView
         android:id="@+id/iv_pic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="47dp"
+        android:layout_height="31dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="4dp"
-        android:src="@drawable/demo_treasury" />
+        android:scaleType="fitXY" />
 
 
     <TextView
@@ -23,7 +23,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="5dp"
         android:layout_marginBottom="2dp"
-        android:text="200"
+        android:text=""
         android:textColor="@color/white"
         android:textSize="12sp" />
 

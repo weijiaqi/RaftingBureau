@@ -3,6 +3,7 @@ import android.app.Application;
 import android.text.TextUtils;
 
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
+import com.drifting.bureau.mvp.model.entity.PrizeEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceCheckEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceStationEntity;
 import com.drifting.bureau.util.ToastUtil;
@@ -50,6 +51,36 @@ public class GetSpaceStationPresenter extends BasePresenter<GetSpaceStationContr
     public GetSpaceStationPresenter (GetSpaceStationContract.Model model, GetSpaceStationContract.View rootView) {
         super(model, rootView);
     }
+
+
+    /**
+     * 盲盒列表
+     */
+    public void getAwardList() {
+        mModel.awardpreview().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseEntity<List<PrizeEntity>>>(mErrorHandler) {
+                    @Override
+                    public void onNext(BaseEntity<List<PrizeEntity>> baseEntity) {
+                        if (mRootView != null) {
+                            mRootView.hideLoading();
+                            if (baseEntity.getCode() == 200) {
+                                mRootView.onAwardPreviewSuccess(baseEntity.getData());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        if (mRootView != null) {
+                            mRootView.onNetError();
+                        }
+                    }
+                });
+
+    }
+
 
 
     /**

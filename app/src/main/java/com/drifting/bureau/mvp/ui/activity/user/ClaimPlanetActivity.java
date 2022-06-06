@@ -5,16 +5,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
+import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 
+import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
@@ -23,6 +26,9 @@ import butterknife.OnClick;
  * @Time : 2022/5/10 10:56
  */
 public class ClaimPlanetActivity extends BaseActivity {
+
+    @BindView(R.id.tv_name)
+    TextView mTvName;
 
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, ClaimPlanetActivity.class);
@@ -43,6 +49,7 @@ public class ClaimPlanetActivity extends BaseActivity {
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
+        mTvName.setText(Preferences.getUserName());
     }
 
     @OnClick({R.id.tv_enter_rb})

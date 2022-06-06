@@ -79,6 +79,78 @@ public class RequestUtil {
     }
 
 
+
+    /**
+     * 转赠盲盒
+     *
+     * @param box_id
+     * @param callBack
+     */
+    public void mysteryboxtransfer(String box_id,String mobile, BaseDataCallBack callBack) {
+        ApiProxy.getApiService().transfer(box_id,mobile)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new BaseObserver<BaseEntity>() {
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+                        mDisposables.put(mRequestCount++, disposable);
+                    }
+
+                    @Override
+                    public void onNext(BaseEntity entity) {
+                        if (callBack != null) {
+                            callBack.getData(entity);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (callBack != null) {
+                            callBack.getData(null);
+                        }
+                    }
+                });
+    }
+
+
+
+
+    /**
+     * 转赠物品（含空间站）
+     *
+     * @param object_id
+     * @param callBack
+     */
+    public void mysteryboxtransfer(int object_id,String mobile, BaseDataCallBack callBack) {
+        ApiProxy.getApiService().storagetransfer(object_id,mobile)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new BaseObserver<BaseEntity>() {
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+                        mDisposables.put(mRequestCount++, disposable);
+                    }
+
+                    @Override
+                    public void onNext(BaseEntity entity) {
+                        if (callBack != null) {
+                            callBack.getData(entity);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (callBack != null) {
+                            callBack.getData(null);
+                        }
+                    }
+                });
+    }
+
+
+
     /**
      * 取消订阅
      */

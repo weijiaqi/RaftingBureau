@@ -15,6 +15,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.KeyEvent;
@@ -35,9 +36,12 @@ import android.widget.Toast;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.data.entity.Point;
+import com.drifting.bureau.data.event.BackSpaceEvent;
+import com.drifting.bureau.data.event.MyBlindBoxRefreshEvent;
 import com.drifting.bureau.di.component.DaggerDiscoveryTourComponent;
 import com.drifting.bureau.mvp.model.entity.CustomerEntity;
 
+import com.drifting.bureau.mvp.model.entity.MessageReceiveEntity;
 import com.drifting.bureau.mvp.model.entity.PlanetEntity;
 import com.drifting.bureau.mvp.ui.activity.index.DriftingBottleActivity;
 import com.drifting.bureau.mvp.ui.activity.index.SpaceCapsuleActivity;
@@ -51,6 +55,9 @@ import com.jess.arms.base.BaseDialog;
 import com.jess.arms.di.component.AppComponent;
 import com.drifting.bureau.mvp.contract.DiscoveryTourContract;
 import com.drifting.bureau.mvp.presenter.DiscoveryTourPresenter;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -113,8 +120,19 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
     private UserGestureDetector userGestureDetector;
     private RaftingInforDialog raftingInforDialog;
 
+    private static String EXTRA_TYPE = "extra_type";
+    private Handler handler = new Handler();
+
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, DiscoveryTourActivity.class);
+        context.startActivity(intent);
+        if (closePage) ((Activity) context).finish();
+    }
+
+    public static void start(Context context, int type, boolean closePage) {
+        Intent intent = new Intent(context, DiscoveryTourActivity.class);
+        intent.putExtra(EXTRA_TYPE, type);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         context.startActivity(intent);
         if (closePage) ((Activity) context).finish();
     }
@@ -127,6 +145,14 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
                 .view(this)
                 .build()
                 .inject(this);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        if (intent.getIntExtra(EXTRA_TYPE, 0) == 2) {
+            IntoSpace();
+        }
     }
 
 
@@ -144,7 +170,6 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
     @SuppressLint("Range")
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
-        //setToolBar(toolbar, "DiscoveryTour");
         setStatusBar(true);
         mToobarBack.setVisibility(View.GONE);
         mRlInfo.setVisibility(View.VISIBLE);
@@ -154,22 +179,13 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
         gestureDetector = new GestureDetector(this, userGestureDetector);
 
         list = new ArrayList<>();
-        list.add(new PlanetEntity("传递漂1", R.drawable.plant3));
-        list.add(new PlanetEntity("传递漂2", R.drawable.plant1));
-        list.add(new PlanetEntity("传递漂3", R.drawable.plant2));
-        list.add(new PlanetEntity("传递漂4", R.drawable.plant2));
-        list.add(new PlanetEntity("传递漂5", R.drawable.guide_planet));
+        list.add(new PlanetEntity("传递漂", R.drawable.plant3));
+        list.add(new PlanetEntity("公众漂", R.drawable.plant1));
+        list.add(new PlanetEntity("随机漂", R.drawable.plant2));
         setFrame();
         mRlPlant1.setAlpha(0.5f);
         mRlPlant3.setAlpha(0.5f);
-
-        //   pointList = new ArrayList<>();
-//        pointList.add(new Point(getXy(mIvPlanet)[0], getXy(mIvPlanet)[1],mIvPlanet.getWidth(),mIvPlanet.getHeight()));
-//        pointList.add(new Point(getXy(mIvPlanet1)[0], getXy(mIvPlanet1)[1],mIvPlanet1.getWidth(),mIvPlanet1.getHeight()));
-//        pointList.add(new Point(getXy(mIvPlanet2)[0], getXy(mIvPlanet2)[1],mIvPlanet2.getWidth(),mIvPlanet2.getHeight()));
-//        pointList.add(new Point(getXy(mIvPlanet3)[0], getXy(mIvPlanet3)[1],mIvPlanet3.getWidth(),mIvPlanet3.getHeight()));
-//        pointList.add(new Point(getXy(mIvPlanet4)[0], getXy(mIvPlanet4)[1],mIvPlanet4.getWidth(),mIvPlanet4.getHeight()));
-
+        handler.postDelayed(mAdRunnable, 500);
     }
 
     public void getXy(ImageView imageView) {
@@ -190,31 +206,27 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
     }
 
 
-    @OnClick({R.id.rl_plant2, R.id.iv_planet1, R.id.iv_planet3, R.id.tv_planet2, R.id.tv_open, R.id.tv_about_me, R.id.tv_space_capsule})
+    @OnClick({R.id.rl_plant2, R.id.rl_plant1, R.id.rl_planet3, R.id.tv_open, R.id.tv_about_me, R.id.tv_space_capsule})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rl_plant2:  //星球点击
                 DriftingBottleActivity.start(this, false);
                 break;
-            case R.id.iv_planet1:
+            case R.id.rl_plant1:
                 index--;
                 setFrame();
                 break;
-            case R.id.iv_planet3:
+            case R.id.rl_planet3:
                 index++;
                 setFrame();
                 break;
-            case R.id.tv_planet2:
-                mIvRocket.setVisibility(View.VISIBLE);
-                objectAnimation(1, mIvRocket, mRlMessage, -500, 200, 0, 6, 1000);
-                break;
+
             case R.id.tv_open:
                 raftingInforDialog = new RaftingInforDialog(this);
                 raftingInforDialog.show();
                 raftingInforDialog.setOnClickCallback(type -> {
                     if (type == RaftingInforDialog.CLICK_FINISH) {
-                        mRlMessage.setVisibility(View.INVISIBLE);
-                        objectAnimation(2, mIvRocket, mRlMessage, 0, 0, 1000, -500, 250);
+                        IntoSpace();
                     } else if (type == RaftingInforDialog.CLICK_SELECT) {
                         ViewRaftingActivity.start(this, false);
                     }
@@ -229,6 +241,30 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
         }
     }
 
+
+    Runnable mAdRunnable = new Runnable() {
+        @Override
+        public void run() {
+            handler.removeCallbacks(mAdRunnable);
+            mIvRocket.setVisibility(View.VISIBLE);
+            objectAnimation(1, mIvRocket, mRlMessage, -500, 200, 0, 6, 1000);
+        }
+    };
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void BackSpaceEvent(BackSpaceEvent backSpaceEvent) {
+        if (backSpaceEvent != null) {
+            IntoSpace();
+        }
+    }
+
+
+    public void IntoSpace() {
+        mRlMessage.setVisibility(View.INVISIBLE);
+        objectAnimation(2, mIvRocket, mRlMessage, 0, 0, 1000, -500, 250);
+        handler.postDelayed(mAdRunnable, 3000);
+    }
 
     /**
      * @description 属性组合动画
@@ -282,6 +318,11 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
 
     @Override
     public void customerSuccess(List<CustomerEntity> customerEntity) {
+
+    }
+
+    @Override
+    public void onMessageReceiveSuccess(MessageReceiveEntity entity) {
 
     }
 
@@ -458,4 +499,9 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacks(mAdRunnable);
+    }
 }

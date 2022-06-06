@@ -93,6 +93,13 @@ public class RaftingDetailsActivity extends BaseActivity<RaftingDetailsPresenter
 
     public List<BarrageEntity> getData() {
         List<BarrageEntity> list = new ArrayList<>();
+        list.add(new BarrageEntity(""));
+        list.add(new BarrageEntity("     "));
+        list.add(new BarrageEntity(""));
+        list.add(new BarrageEntity("          "));
+        list.add(new BarrageEntity(" "));
+        list.add(new BarrageEntity("      "));
+        list.add(new BarrageEntity("     "));
         list.add(new BarrageEntity("你的小太阳"));
         list.add(new BarrageEntity("你太阳：故事写的真不错"));
         list.add(new BarrageEntity("太阳"));

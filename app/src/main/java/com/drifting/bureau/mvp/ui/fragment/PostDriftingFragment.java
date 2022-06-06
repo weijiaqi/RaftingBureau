@@ -6,8 +6,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,15 +21,25 @@ import android.widget.TextView;
 
 
 import com.drifting.bureau.R;
+import com.drifting.bureau.data.event.BackSpaceEvent;
+import com.drifting.bureau.data.event.PaymentEvent;
 import com.drifting.bureau.data.event.VideoEvent;
+import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
+import com.drifting.bureau.mvp.model.entity.CreatewithfileEntity;
+import com.drifting.bureau.mvp.model.entity.SkuListEntity;
+import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
+import com.drifting.bureau.mvp.ui.activity.pay.PaymentInfoActivity;
+import com.drifting.bureau.mvp.ui.dialog.PublicDialog;
 import com.drifting.bureau.mvp.ui.dialog.RaftingOrderDialog;
 import com.drifting.bureau.mvp.ui.dialog.RecordingDialog;
 import com.drifting.bureau.util.BitmapUtil;
 import com.drifting.bureau.util.ClickUtil;
+import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.VideoUtil;
 import com.drifting.bureau.util.ViewGroupUtil;
 import com.drifting.bureau.view.VoiceWave;
+import com.jess.arms.base.BaseDialog;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.drifting.bureau.di.component.DaggerPostDriftingComponent;
@@ -36,9 +48,11 @@ import com.drifting.bureau.mvp.contract.PostDriftingContract;
 import com.drifting.bureau.mvp.presenter.PostDriftingPresenter;
 import com.jess.arms.utils.ArmsUtils;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.File;
 import java.util.List;
 
 import butterknife.BindView;
@@ -94,6 +108,10 @@ public class PostDriftingFragment extends BaseFragment<PostDriftingPresenter> im
     private RaftingOrderDialog raftingOrderDialog;
     private static final String BUNDLE_TYPE = "bundle_type";
     private int type;
+    private int selectPostion = 1;
+    private Bitmap cover;
+    private PublicDialog publicDialog;
+    private CreatewithfileEntity createwithfileEntity;
 
     public static PostDriftingFragment newInstance(int type) {
         PostDriftingFragment fragment = new PostDriftingFragment();
@@ -142,26 +160,30 @@ public class PostDriftingFragment extends BaseFragment<PostDriftingPresenter> im
     private void initListener() {
         if (type == 1) {
             mRlVideoDelete.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             mTvMyInfo.setVisibility(View.VISIBLE);
-            mLlInfo.setLayoutParams(ViewGroupUtil.setMargin(ArmsUtils.dip2px(mContext,17),0,0,0));
+            mLlInfo.setLayoutParams(ViewGroupUtil.setMargin(ArmsUtils.dip2px(mContext, 17), 0, 0, 0));
         }
-        setSelected(1);
+        setSelected(selectPostion);
     }
 
 
-    @OnClick({R.id.tv_word, R.id.tv_voice, R.id.tv_video, R.id.iv_voice, R.id.iv_video, R.id.iv_play, R.id.iv_delete, R.id.rl_video_delete, R.id.rl_video_play, R.id.tv_starry_sky})
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @OnClick({R.id.tv_word, R.id.tv_voice, R.id.tv_video, R.id.iv_voice, R.id.iv_video, R.id.iv_play, R.id.iv_delete, R.id.rl_video_delete, R.id.rl_video_play, R.id.ll_starry_sky})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
                 case R.id.tv_word:  //文字
-                    setSelected(1);
+                    selectPostion = 1;
+                    setSelected(selectPostion);
                     break;
                 case R.id.tv_voice: //语音
-                    setSelected(2);
+                    selectPostion = 2;
+                    setSelected(selectPostion);
                     break;
                 case R.id.tv_video://视频
-                    setSelected(3);
+                    selectPostion = 3;
+                    setSelected(selectPostion);
                     break;
                 case R.id.iv_voice:  //语音录制
                     if (mPresenter != null) {
@@ -182,19 +204,52 @@ public class PostDriftingFragment extends BaseFragment<PostDriftingPresenter> im
                     if (objectList != null) {
                         VideoUtil.stop(mVideoView, mIvPlay, mTvTime, objectList.get(1));
                         setVoiceStatus(1);
+                        objectList = null;
                     }
                     break;
                 case R.id.rl_video_delete:  //删除视频
                     setVideoStatus(1);
+                    path = null;
                     break;
                 case R.id.rl_video_play: //播放视频
                     if (mPresenter != null) {
                         mPresenter.PlayVideo(getActivity(), path);
                     }
                     break;
-                case R.id.tv_starry_sky:  //丢入星空
-                    raftingOrderDialog = new RaftingOrderDialog(mContext);
-                    raftingOrderDialog.show();
+                case R.id.ll_starry_sky:  //丢入星空
+
+                    if (type == 1) {
+                        if (selectPostion == 1) {  //文字漂流
+                            if (StringUtil.isEmpty(mEtWord.getText().toString())) {
+                                showMessage("请输入文字内容!");
+                                return;
+                            }
+                            if (mPresenter != null) {
+                                mPresenter.createwithword(1, 1, mEtWord.getText().toString());
+                            }
+                        } else if (selectPostion == 2) { //语音漂流
+                            if (objectList == null) {
+                                showMessage("请进行语音录制!");
+                                return;
+                            }
+                            if (mPresenter != null) {
+                                mPresenter.createwithVoice(2, 1, new File(objectList.get(0).toString()));
+                            }
+                        } else if (selectPostion == 3) { //视频漂流
+                            if (path == null || TextUtils.isEmpty(path)) {
+                                showMessage("请进行视频录制!");
+                                return;
+                            }
+                            if (mPresenter != null) {
+                                mPresenter.createwithVideo(3, 1, new File(VideoUtil.getRunLog()), BitmapUtil.saveBitmapFile(mContext, cover));
+                            }
+                        }
+                    } else {  //2 是参与传递
+                        if (selectPostion==1){
+                            mEtWord.clearFocus();
+                        }
+                        sendSuccess();
+                    }
                     break;
             }
         }
@@ -204,15 +259,59 @@ public class PostDriftingFragment extends BaseFragment<PostDriftingPresenter> im
     /**
      * @description 按钮选中
      */
-    public void setSelected(int type) {
-        mTvWord.setBackgroundResource(type == 1 ? R.drawable.drifting_selected : R.drawable.drifting_unselected);
-        mTvVoice.setBackgroundResource(type == 2 ? R.drawable.drifting_selected : R.drawable.drifting_unselected);
-        mTvVideo.setBackgroundResource(type == 3 ? R.drawable.drifting_selected : R.drawable.drifting_unselected);
-        mEtWord.setVisibility(type == 1 ? View.VISIBLE : View.GONE);
-        mRlVoice.setVisibility(type == 2 ? View.VISIBLE : View.GONE);
-        mRlVideo.setVisibility(type == 3 ? View.VISIBLE : View.GONE);
+    public void setSelected(int postion) {
+        mTvWord.setBackgroundResource(postion == 1 ? R.drawable.drifting_selected : R.drawable.drifting_unselected);
+        mTvVoice.setBackgroundResource(postion == 2 ? R.drawable.drifting_selected : R.drawable.drifting_unselected);
+        mTvVideo.setBackgroundResource(postion == 3 ? R.drawable.drifting_selected : R.drawable.drifting_unselected);
+        mEtWord.setVisibility(postion == 1 ? View.VISIBLE : View.GONE);
+        mRlVoice.setVisibility(postion == 2 ? View.VISIBLE : View.GONE);
+        mRlVideo.setVisibility(postion == 3 ? View.VISIBLE : View.GONE);
     }
 
+
+    @Override
+    public void onCreatewithwordSuccess(CreatewithfileEntity entity) {
+        if (entity != null) {
+            createwithfileEntity = entity;
+            if (mPresenter != null) {
+                mPresenter.skulist(selectPostion, 1, 0);
+            }
+        }
+    }
+
+    @Override
+    public void onSkuListSuccess(SkuListEntity skuListEntity) {
+        if (skuListEntity != null) {
+            raftingOrderDialog = new RaftingOrderDialog(mContext, skuListEntity);
+            raftingOrderDialog.show();
+            raftingOrderDialog.setOnClickCallback(type -> {
+                if (type == RaftingOrderDialog.SELECT_FINISH) {
+                    StringBuilder sb = new StringBuilder();
+                    for (int i = 0; i < skuListEntity.getGoods_sku().size(); i++) {
+                        if (sb.length() > 0) {
+                            sb.append(",");
+                        }
+                        sb.append(skuListEntity.getGoods_sku().get(i).getSku_code());
+                    }
+                    if (mPresenter != null) {
+                        mPresenter.createOrder(createwithfileEntity.getMessage_id(), sb.toString());
+                    }
+                }
+            });
+        }
+    }
+
+    @Override
+    public void onCreateOrderSuccess(CreateOrderEntity entity) {
+        if (entity != null) {
+            PaymentInfoActivity.start(mContext, 1, entity.getSn(), entity.getTotal_amount(), false);
+        }
+    }
+
+    @Override
+    public void onNetError() {
+
+    }
 
     public Fragment getFragment() {
         return this;
@@ -221,7 +320,7 @@ public class PostDriftingFragment extends BaseFragment<PostDriftingPresenter> im
     @Override
     public void PermissionVoiceSuccess() {
         //语音
-        recordingDialog = new RecordingDialog((Activity)mContext);
+        recordingDialog = new RecordingDialog((Activity) mContext);
         recordingDialog.setCanceledOnTouchOutside(false);
         recordingDialog.show();
         recordingDialog.setOnMoreClickCallback((type, list) -> {
@@ -240,9 +339,41 @@ public class PostDriftingFragment extends BaseFragment<PostDriftingPresenter> im
         if (event != null) {
             setVideoStatus(2);
             path = event.getPath();
-            mIvpic.setImageBitmap(BitmapUtil.getVideoThumb(path));
+            cover = BitmapUtil.getVideoThumb(path);
+            mIvpic.setImageBitmap(cover);
             VideoUtil.compressVideo(mContext, path);
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void PaymentEvent(PaymentEvent event) {  //购买成功回调
+        if (event != null) {
+            sendSuccess();
+        }
+    }
+
+
+    /**
+     * 消息发送成功
+     */
+    public void sendSuccess() {
+        publicDialog = new PublicDialog(mContext);
+        publicDialog.show();
+        publicDialog.setCancelable(false);
+        publicDialog.setTitleText("已成功发送");
+        publicDialog.setContentText("可在“关于我-漂流轨迹”中 查看漂流记录");
+//            if (code == 200) {
+//
+//            } else {
+//                publicDialog.setTitleText("发送失败");
+//                publicDialog.setContentText("这里描写失败原因");
+//            }
+        publicDialog.setButtonText("返回首页");
+        publicDialog.setOnClickCallback(status -> {
+            if (status == PublicDialog.SELECT_FINISH) {
+                DiscoveryTourActivity.start(mContext, type, true);
+            }
+        });
     }
 
 
@@ -272,7 +403,7 @@ public class PostDriftingFragment extends BaseFragment<PostDriftingPresenter> im
     @Override
     public void onPause() {
         super.onPause();
-        if (objectList!=null){
+        if (objectList != null) {
             VideoUtil.stop(mVideoView, mIvPlay, mTvTime, objectList.get(1));
         }
     }

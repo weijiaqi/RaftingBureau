@@ -31,6 +31,7 @@ import com.drifting.bureau.R;
 import com.drifting.bureau.di.component.DaggerGetSpaceStationComponent;
 import com.drifting.bureau.mvp.model.entity.BarrageEntity;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
+import com.drifting.bureau.mvp.model.entity.PrizeEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceCheckEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceStationEntity;
 import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
@@ -95,6 +96,7 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
     private String skuCode;
     private SpannableStringBuilder passer;
     private PrizepreviewDialog prizepreviewDialog;
+
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, GetSpaceStationActivity.class);
         context.startActivity(intent);
@@ -195,7 +197,7 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
     public List<BarrageEntity> getData() {
         List<BarrageEntity> list = new ArrayList<>();
         list.add(new BarrageEntity(""));
-        list.add(new BarrageEntity("                          "));
+        list.add(new BarrageEntity("             "));
         list.add(new BarrageEntity("恭喜芭芘零食屋获得MED空间站"));
         list.add(new BarrageEntity("恭喜唇边回味奶茶浓香获得SUP空间站"));
         list.add(new BarrageEntity("恭喜无所谓的记忆获得TN空间站"));
@@ -228,7 +230,7 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
             if (index >= list.size()) {
                 index = 0;
             }
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 5; i++) {
                 int row = 0;
                 if (i == 0) {
                     row = index - 1;
@@ -247,7 +249,7 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
                         break;
                     case 1:
                         mIvbLindBox.setImageResource(R.drawable.space_blind_box);
-                        passer= SpannableUtil.getBuilder(this, "￥").setTextSize(12).append(list.get(row).getPrice()).setBold().setTextSize(17).build();
+                        passer= SpannableUtil.getBuilder(this, "￥").setTextSize(12).append(list.get(row).getPrice()+"").setBold().setTextSize(17).build();
                         mTvPrice.setText(passer);
                         mBlindBoxName.setText(list.get(row).getSku_name());
                         skuCode = list.get(row).getSku_code();
@@ -279,7 +281,10 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
                     finish();
                     break;
                 case R.id.tv_buy:
-                    createOrder(skuCode, "1");
+                    if (list!=null){
+                        createOrder(skuCode, "1");
+                    }
+
                     break;
                 case R.id.tv_buy_more:
                     createOrder(skuCode, "10");
@@ -296,8 +301,9 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
                     setFrame();
                     break;
                 case R.id.tv_prize_preview:  //奖品预览
-                    prizepreviewDialog=new PrizepreviewDialog(this);
-                    prizepreviewDialog.show();
+                    if (mPresenter!=null){
+                        mPresenter.getAwardList();
+                    }
                     break;
             }
         }
@@ -317,10 +323,19 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
 
     @Override
     public void onCreateOrderSpaceSuccess(CreateOrderEntity entity) {
-        PaymentInfoActivity.start(this, entity.getSn(), false);
+        PaymentInfoActivity.start(this,2, entity.getSn(), entity.getTotal_amount(),false);
     }
     @Override
     public void onSpaceCheck(SpaceCheckEntity entity) {
+
+    }
+
+    @Override
+    public void onAwardPreviewSuccess(List<PrizeEntity> list) {
+        if (list!=null &&list.size()>0){
+            prizepreviewDialog=new PrizepreviewDialog(this,list);
+            prizepreviewDialog.show();
+        }
 
     }
 

@@ -50,10 +50,10 @@ public class TeaShopHolder extends BaseRecyclerHolder {
         TextUtil.setText(mTvDistance,"距离"+ listBeanList.get(position).getDistance());
          if (listBeanList.get(position).getType()==1){
              TextUtil.setText(mTvStatus,"营业中");
-             mTvStatus.getTextColorBuilder().setTextGradientColors(context.getColor(R.color.color_6c),context.getColor(R.color.color_6d));
+             mTvStatus.getTextColorBuilder().setTextGradientColors(context.getColor(R.color.color_6c),context.getColor(R.color.color_6d)).intoTextColor();
          }else {
              TextUtil.setText(mTvStatus,"已关店");
-             mTvStatus.getTextColorBuilder().setTextGradientColors(context.getColor(R.color.color_ff),context.getColor(R.color.color_ff));
+             mTvStatus.getTextColorBuilder().setTextGradientColors(context.getColor(R.color.color_ff),context.getColor(R.color.color_ff)).intoTextColor();
          }
         mIvCall.setOnClickListener(v -> {
             PermissionDialog.requestPhonePermissions((Activity) context, new PermissionDialog.PermissionCallBack() {

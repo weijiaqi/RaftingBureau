@@ -1,16 +1,23 @@
 package com.drifting.bureau.app.api;
 
 
+import com.bumptech.glide.annotation.GlideType;
 import com.drifting.bureau.mvp.model.entity.BoxOpenEntity;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
+import com.drifting.bureau.mvp.model.entity.CreatewithfileEntity;
 import com.drifting.bureau.mvp.model.entity.CustomerEntity;
 import com.drifting.bureau.mvp.model.entity.IncomeRecordEntity;
 import com.drifting.bureau.mvp.model.entity.LoginEntity;
 import com.drifting.bureau.mvp.model.entity.MakingRecordEntity;
+import com.drifting.bureau.mvp.model.entity.MessageReceiveEntity;
 import com.drifting.bureau.mvp.model.entity.MyBlindBoxEntity;
+import com.drifting.bureau.mvp.model.entity.MySpaceStationEntity;
+import com.drifting.bureau.mvp.model.entity.MyTreasuryEntity;
 import com.drifting.bureau.mvp.model.entity.OrderDetailEntity;
 import com.drifting.bureau.mvp.model.entity.OrderOneEntity;
 import com.drifting.bureau.mvp.model.entity.PayOrderEntity;
+import com.drifting.bureau.mvp.model.entity.PrizeEntity;
+import com.drifting.bureau.mvp.model.entity.SkuListEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceCheckEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceInfoEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceStationEntity;
@@ -19,12 +26,18 @@ import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.jess.arms.base.BaseEntity;
 
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Observable;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 
 /**
  * @author 卫佳琪1
@@ -65,7 +78,47 @@ public interface ApiService {
 
 
     /**
+     * 飘来新消息（话题）
+     */
+
+    @GET("v/message/receive")
+    Observable<BaseEntity<MessageReceiveEntity>> messagereceive();
+
+
+    /**
+     * 创建话题 （普通文字）
+     */
+    @FormUrlEncoded
+    @POST("v/message/createwithfile")
+    Observable<BaseEntity<CreatewithfileEntity>> createwithword(@Field("type_id") int status, @Field("explore_id") int explore_id, @Field("content") String content);
+
+
+    /**
+     * 创建话题（支持文件上传，发起和参与话题共用）
+     */
+    @POST("v/message/createwithfile")
+    Observable<BaseEntity<CreatewithfileEntity>> createwithvoice(@Body MultipartBody shortVoice);
+
+
+    /**
+     * 商品列表（发起话题和参与话题）
+     */
+    @FormUrlEncoded
+    @POST("v/sku/list")
+    Observable<BaseEntity<SkuListEntity>> skulist(@Field("type_id") int type_id, @Field("explore_id") int explore_id, @Field("message_id") int message_id);
+
+
+    /**
+     * 创建订单(话题漂流)
+     */
+    @FormUrlEncoded
+    @POST("v/order/createOrder")
+    Observable<BaseEntity<CreateOrderEntity>> createOrder(@Field("message_id") int message_id, @Field("sku_codes") String sku_codes);
+
+
+    /**
      * 获取空间站（盲盒列表）
+     *
      * @return
      */
     @GET("v/sku/space")
@@ -76,7 +129,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("v/order/createOrderSpace")
-    Observable<BaseEntity<CreateOrderEntity>> createOrderSpace(@Field("sku_code") String sku_code,@Field("sku_num") String sku_num);
+    Observable<BaseEntity<CreateOrderEntity>> createOrderSpace(@Field("sku_code") String sku_code, @Field("sku_num") String sku_num);
 
     /**
      * 支付订单
@@ -86,26 +139,36 @@ public interface ApiService {
     Observable<BaseEntity<PayOrderEntity>> payOrder(@Field("sn") String sn);
 
 
-
     /**
      * 获取空间站（盲盒列表）
+     *
      * @return
      */
     @GET("v/space/check")
     Observable<BaseEntity<SpaceCheckEntity>> spacecheck();
 
+    /**
+     * 奖品预览（获取空间站）
+     *
+     * @return
+     */
+    @GET("v/space/award/preview")
+    Observable<BaseEntity<List<PrizeEntity>>> awardpreview();
+
 
     /**
-     *我的盲盒（空间站）
+     * 我的盲盒（空间站）
+     *
      * @return
      */
     @FormUrlEncoded
     @POST("v/mysterybox/mine")
-    Observable<BaseEntity<MyBlindBoxEntity>> mySteryboxList(@Field("page") int page,@Field("limit") int limit);
+    Observable<BaseEntity<MyBlindBoxEntity>> mySteryboxList(@Field("page") int page, @Field("limit") int limit);
 
 
     /**
-     *开启盲盒（我的盲盒中用）
+     * 开启盲盒（我的盲盒中用）
+     *
      * @return
      */
     @FormUrlEncoded
@@ -113,7 +176,31 @@ public interface ApiService {
     Observable<BaseEntity<BoxOpenEntity>> mysteryboxopen(@Field("box_id") String box_id);
 
     /**
-     *空间站信息（我的空间站）
+     * 转赠盲盒
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/mysterybox/transfer")
+    Observable<BaseEntity> transfer(@Field("box_id") String box_id,@Field("mobile") String mobile);
+
+
+
+    /**
+     * 转赠物品（含空间站）
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/space/storage/transfer")
+    Observable<BaseEntity> storagetransfer(@Field("object_id") int object_id,@Field("mobile") String mobile);
+
+
+
+
+    /**
+     * 空间站信息（我的空间站）
+     *
      * @return
      */
     @FormUrlEncoded
@@ -123,6 +210,7 @@ public interface ApiService {
 
     /**
      * 漂流新订单（我的空间站）
+     *
      * @return
      */
     @GET("v/space/order/one")
@@ -130,7 +218,8 @@ public interface ApiService {
 
 
     /**
-     *新订单的详情（空间站查看漂来的订单）
+     * 新订单的详情（空间站查看漂来的订单）
+     *
      * @return
      */
     @FormUrlEncoded
@@ -138,7 +227,8 @@ public interface ApiService {
     Observable<BaseEntity<OrderDetailEntity>> orderdetail(@Field("space_order_id") int space_order_id);
 
     /**
-     *查看漂流-玩家信息
+     * 查看漂流-玩家信息
+     *
      * @return
      */
     @FormUrlEncoded
@@ -147,7 +237,8 @@ public interface ApiService {
 
 
     /**
-     *空间站丢回太空（把订单丢回太空）
+     * 空间站丢回太空（把订单丢回太空）
+     *
      * @return
      */
     @FormUrlEncoded
@@ -156,7 +247,8 @@ public interface ApiService {
 
 
     /**
-     *制作订单（空间站为他制作）
+     * 制作订单（空间站为他制作）
+     *
      * @return
      */
     @FormUrlEncoded
@@ -165,7 +257,26 @@ public interface ApiService {
 
 
     /**
-     *制作记录
+     * 当前空间站级别（升级空间站）
+     *
+     * @return
+     */
+    @GET("v/space/level/current")
+    Observable<BaseEntity<MySpaceStationEntity>> levelcurrent();
+
+
+    /**
+     * 我的库藏(我的空间站)
+     *
+     * @return
+     */
+    @GET("v/space/storage/mine")
+    Observable<BaseEntity<List<MyTreasuryEntity>>> storagemine();
+
+
+    /**
+     * 制作记录
+     *
      * @return
      */
     @FormUrlEncoded
@@ -173,7 +284,8 @@ public interface ApiService {
     Observable<BaseEntity<MakingRecordEntity>> ordermadelog(@Field("page") int page, @Field("limit") int limit);
 
     /**
-     *收支记录
+     * 收支记录
+     *
      * @return
      */
     @FormUrlEncoded
@@ -181,9 +293,9 @@ public interface ApiService {
     Observable<BaseEntity<IncomeRecordEntity>> spacebillogs(@Field("page") int page, @Field("limit") int limit);
 
 
-
     /**
      * 关于我
+     *
      * @return
      */
     @GET("v/user/home")

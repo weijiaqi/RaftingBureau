@@ -1,5 +1,7 @@
 package com.drifting.bureau.mvp.ui.activity.user;
+
 import android.app.Activity;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -11,9 +13,15 @@ import android.widget.TextView;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.di.component.DaggerAccountSettingsComponent;
+import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
+import com.drifting.bureau.mvp.ui.activity.web.ShowWebViewActivity;
 import com.drifting.bureau.mvp.ui.dialog.ModifyNicknameDialog;
+import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
+import com.drifting.bureau.util.LogInOutDataUtil;
+import com.drifting.bureau.util.ToastUtil;
 import com.jess.arms.base.BaseActivity;
+import com.jess.arms.base.BaseDialog;
 import com.jess.arms.di.component.AppComponent;
 
 import com.drifting.bureau.mvp.contract.AccountSettingsContract;
@@ -25,6 +33,7 @@ import butterknife.OnClick;
 
 /**
  * Created on 2022/05/27 16:31
+ *
  * @author 账户设置
  * module name is AccountSettingsActivity
  */
@@ -32,8 +41,10 @@ public class AccountSettingsActivity extends BaseActivity<AccountSettingsPresent
 
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
-
+    @BindView(R.id.tv_nikename)
+    TextView mTvNikename;
     private ModifyNicknameDialog modifyNicknameDialog;
+
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, AccountSettingsActivity.class);
         context.startActivity(intent);
@@ -51,7 +62,7 @@ public class AccountSettingsActivity extends BaseActivity<AccountSettingsPresent
     }
 
     @Override
-    public int initView(@Nullable Bundle savedInstanceState){
+    public int initView(@Nullable Bundle savedInstanceState) {
         return R.layout.activity_account_settings; //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
     }
 
@@ -63,10 +74,12 @@ public class AccountSettingsActivity extends BaseActivity<AccountSettingsPresent
     }
 
     public void initListener() {
-
+        if (mPresenter != null) {
+            mPresenter.userplayer(Preferences.getUserId());
+        }
     }
 
-    @OnClick({R.id.toolbar_back,R.id.rl_nikename,R.id.rl_feedback})
+    @OnClick({R.id.toolbar_back, R.id.rl_nikename, R.id.rl_feedback, R.id.rl_privacy, R.id.rl_register, R.id.tv_exit})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
@@ -74,22 +87,50 @@ public class AccountSettingsActivity extends BaseActivity<AccountSettingsPresent
                     finish();
                     break;
                 case R.id.rl_nikename:
-                    modifyNicknameDialog=new ModifyNicknameDialog(this);
+                    modifyNicknameDialog = new ModifyNicknameDialog(this);
                     modifyNicknameDialog.show();
+                    modifyNicknameDialog.setOnClickCallback(new BaseDialog.OnClickCallback() {
+                        @Override
+                        public void onClickType(int type) {
+
+                        }
+                    });
                     break;
                 case R.id.rl_feedback:
-                    FeedBackActivity.start(this,false);
+                    FeedBackActivity.start(this, false);
+                    break;
+                case R.id.rl_privacy:  //用户隐私协议
+                    ShowWebViewActivity.start(this, false);
+                    break;
+                case R.id.rl_register: //注册协议
+                    ShowWebViewActivity.start(this, false);
+                    break;
+                case R.id.tv_exit:  //退出
+                    LogInOutDataUtil.successOutClearData();
+                    BuildGuideActivity.start(this, true);
                     break;
             }
         }
     }
 
-    public Activity getActivity(){
+    @Override
+    public void onUserInfoSuccess(UserInfoEntity entity) {
+        if (entity != null) {
+            mTvNikename.setText(entity.getUser().getName());
+        }
+    }
+
+    @Override
+    public void onNetError() {
+
+    }
+
+    public Activity getActivity() {
         return this;
     }
 
     @Override
     public void showMessage(@NonNull String message) {
-
+        ToastUtil.showToast(message);
     }
 }

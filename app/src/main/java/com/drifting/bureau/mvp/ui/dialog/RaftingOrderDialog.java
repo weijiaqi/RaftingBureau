@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.RaftingOrderEntity;
+import com.drifting.bureau.mvp.model.entity.SkuListEntity;
 import com.drifting.bureau.mvp.ui.activity.pay.PaymentInfoActivity;
 import com.drifting.bureau.mvp.ui.adapter.RaftingOrderAdapter;
 import com.jess.arms.base.BaseDialog;
@@ -24,14 +25,20 @@ import java.util.List;
  */
 
 public class RaftingOrderDialog extends BaseDialog implements View.OnClickListener {
+
+    public static final int SELECT_FINISH = 0x01;
+
     private RecyclerView mRecycleView;
-    private TextView mTvBuyNow;
+    private TextView mTvBuyNow,mTvSum;
     private Context context;
     private RaftingOrderAdapter raftingOrderAdapter;
 
-    public RaftingOrderDialog(@NonNull Context context) {
+    private SkuListEntity skuListEntity;
+
+    public RaftingOrderDialog(@NonNull Context context, SkuListEntity skuListEntity) {
         super(context);
         this.context = context;
+        this.skuListEntity = skuListEntity;
     }
 
     @Override
@@ -39,24 +46,20 @@ public class RaftingOrderDialog extends BaseDialog implements View.OnClickListen
         super.initView();
         mRecycleView = findViewById(R.id.rcy_order);
         mTvBuyNow = findViewById(R.id.tv_buy_now);
+        mTvSum= findViewById(R.id.tv_sum);
     }
 
     @Override
     protected void initDatas() {
         super.initDatas();
         mTvBuyNow.setOnClickListener(this);
+        mTvSum.setText("￥"+skuListEntity.getTotalAmount());
         mRecycleView.setLayoutManager(new LinearLayoutManager(context));
         raftingOrderAdapter = new RaftingOrderAdapter(new ArrayList<>());
         mRecycleView.setAdapter(raftingOrderAdapter);
-        raftingOrderAdapter.setData(setData());
+        raftingOrderAdapter.setData(skuListEntity.getGoods_sku());
     }
 
-    public List<RaftingOrderEntity> setData() {
-        List<RaftingOrderEntity> list = new ArrayList<>();
-        list.add(new RaftingOrderEntity("11"));
-        list.add(new RaftingOrderEntity("11"));
-        return list;
-    }
 
     @Override
     protected int getContentView() {
@@ -73,7 +76,9 @@ public class RaftingOrderDialog extends BaseDialog implements View.OnClickListen
         switch (view.getId()) {
             case R.id.tv_buy_now:
                 dismiss();
-                PaymentInfoActivity.start(context, "",false);
+                if (onClickCallback != null) {
+                    onClickCallback.onClickType(SELECT_FINISH);
+                }
                 break;
         }
     }

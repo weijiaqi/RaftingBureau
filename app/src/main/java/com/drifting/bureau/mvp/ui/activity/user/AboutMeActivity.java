@@ -30,12 +30,14 @@ import com.drifting.bureau.R;
 import com.drifting.bureau.di.component.DaggerAboutMeComponent;
 import com.drifting.bureau.mvp.model.entity.AoubtMeEntity;
 import com.drifting.bureau.mvp.model.entity.UserEntity;
+import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
 import com.drifting.bureau.mvp.ui.activity.index.MoveAwayPlanetaryActivity;
 import com.drifting.bureau.mvp.ui.activity.index.PlanetaryDetailActivity;
 import com.drifting.bureau.mvp.ui.activity.index.PlanetarySelectActivity;
 import com.drifting.bureau.mvp.ui.adapter.AboutMeAdapter;
 import com.drifting.bureau.mvp.ui.fragment.PlanetaryDisFragment;
+import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.TextUtil;
 import com.hjq.shape.view.ShapeTextView;
@@ -67,7 +69,18 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
     RecyclerView mRcyList;
     @BindView(R.id.pr_upload_value)
     ProgressBar mPrUpload;
-
+    @BindView(R.id.tv_place_esidence)
+    TextView mTvPlace;
+    @BindView(R.id.tv_place_esidence2)
+    TextView mTvPlace2;
+    @BindView(R.id.tv_identity)
+    TextView mTvIdentity;
+    @BindView(R.id.tv_name)
+    TextView mTvName;
+    @BindView(R.id.tv_identity2)
+    TextView mTvIdentity2;
+    @BindView(R.id.tv_schedule)
+    TextView mTvSchedule;
     private AboutMeAdapter aboutMeAdapter;
 
     public static void start(Context context, boolean closePage) {
@@ -102,9 +115,9 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
         aboutMeAdapter.setData(getData());
 
         if (mPresenter != null) {
-            mPresenter.getUser();
+            mPresenter.userplayer(Preferences.getUserId());
         }
-        mPrUpload.setProgress(50);
+
         setTopSwipe();
     }
 
@@ -112,7 +125,7 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
     public List<AoubtMeEntity> getData() {
         List<AoubtMeEntity> list = new ArrayList<>();
         list.add(new AoubtMeEntity("漂流轨迹", "我的漂流"));
-        list.add(new AoubtMeEntity("订单记录", "我的漂流"));
+        list.add(new AoubtMeEntity("订单记录", "我的订单"));
         list.add(new AoubtMeEntity("星际战队", "战队成员"));
         list.add(new AoubtMeEntity("附近门店", "漂流局茶饮店"));
         return list;
@@ -120,7 +133,20 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
 
 
     @Override
-    public void userSuccess(UserEntity userEntity) {
+    public void onUserInfoSuccess(UserInfoEntity entity) {
+         if (entity!=null){
+             mTvPlace.setText(entity.getPlanet().getName());
+             mTvPlace2.setText(entity.getPlanet().getName());
+             mTvIdentity.setText(entity.getUser().getLevel_name());
+             mTvIdentity2.setText(entity.getUser().getLevel_name());
+             mTvName.setText(entity.getUser().getName());
+             mTvSchedule.setText(entity.getPlanet().getSchedule()+"%");
+             mPrUpload.setProgress(entity.getPlanet().getSchedule());
+         }
+    }
+
+    @Override
+    public void onNetError() {
 
     }
 
@@ -129,7 +155,7 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
     }
 
 
-    @OnClick({R.id.toolbar_back, R.id.iv_right, R.id.tv_select,R.id.tv_explore})
+    @OnClick({R.id.toolbar_back, R.id.iv_right, R.id.tv_select, R.id.tv_explore})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
@@ -140,10 +166,10 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
                     AccountSettingsActivity.start(this, false);
                     break;
                 case R.id.tv_select: //查看
-                    PlanetarySelectActivity.start(this, 1,false);
+                    PlanetarySelectActivity.start(this, 1, false);
                     break;
                 case R.id.tv_explore:
-                    DiscoveryTourActivity.start(this,true);
+                    DiscoveryTourActivity.start(this, true);
                     break;
             }
         }

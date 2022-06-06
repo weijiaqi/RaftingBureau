@@ -14,6 +14,7 @@ public class Preferences {
     private static Context mContext;
     public static final String SP_NAME = "config";
 
+    private static final String KEY_USER_NAME = "user_name";
     private static final String KEY_USER_TOKEN = "user_token";
     private static final String KEY_USER_PHONE = "user_phone";
     private static final String KEY_USER_ID = "user_id";
@@ -57,6 +58,18 @@ public class Preferences {
     public static String getToken() {
         return getString(KEY_USER_TOKEN);
     }
+
+
+    //用户第一次注册昵称
+    public static void saveUserName(String name) {
+        saveString(KEY_USER_NAME, name);
+    }
+
+    public static String getUserName() {
+        return getString(KEY_USER_NAME);
+    }
+
+
 
     //用户手机号
     public static void savePhone(String phone) {

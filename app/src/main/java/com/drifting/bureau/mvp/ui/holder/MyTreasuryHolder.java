@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.MyTreasuryEntity;
 import com.drifting.bureau.mvp.ui.adapter.MyTreasuryAdapter;
+import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.TextUtil;
 import com.jess.arms.base.BaseHolder;
 
@@ -36,7 +37,8 @@ public class MyTreasuryHolder extends BaseHolder<MyTreasuryEntity> {
 
     @Override
     public void setData(@NonNull MyTreasuryEntity data, int position) {
-        TextUtil.setText(mTvQuantity, data.getNum() + "");
+        TextUtil.setText(mTvQuantity, data.getCount() + "");
+        GlideUtil.create().loadLongImage(context,data.getImage_url(),mIvPic);
         if (mAdapter.getSelectEntities() != null) {
             if (mAdapter.getSelectEntities().contains(data)) {
                 mRlBg.setBackgroundResource(R.drawable.my_treasury_selected);

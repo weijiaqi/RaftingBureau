@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:layout_marginVertical="5dp"
-        android:background="@color/color_d6" />
+        android:background="@color/color_00" />
 
     <RelativeLayout
         android:id="@+id/rl_video_delete"

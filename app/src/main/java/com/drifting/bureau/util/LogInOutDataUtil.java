@@ -13,6 +13,7 @@ import com.drifting.bureau.storageinfo.Preferences;
 public class LogInOutDataUtil {
     public static void successInSetData(LoginEntity entity) {
         Preferences.setAnony(true);
+        Preferences.saveUserName(entity == null ? "" : entity.getName());
         Preferences.saveToken(entity == null ? "" : entity.getToken());
         Preferences.saveUserId(entity == null ? "" : entity.getUser_id());
         Preferences.savePhone(entity == null ? "" : entity.getMobile());

@@ -4,15 +4,16 @@ import android.view.View;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.RaftingOrderEntity;
+import com.drifting.bureau.mvp.model.entity.SkuListEntity;
 import com.drifting.bureau.mvp.ui.holder.RaftingOrderHolder;
 import com.jess.arms.base.BaseRecyclerAdapter;
 import com.jess.arms.base.BaseRecyclerHolder;
 
 import java.util.List;
 
-public class RaftingOrderAdapter extends BaseRecyclerAdapter<RaftingOrderEntity> {
+public class RaftingOrderAdapter extends BaseRecyclerAdapter<SkuListEntity.GoodsSkuBean> {
 
-    public RaftingOrderAdapter(List<RaftingOrderEntity> infos) {
+    public RaftingOrderAdapter(List<SkuListEntity.GoodsSkuBean> infos) {
         super(infos);
     }
 

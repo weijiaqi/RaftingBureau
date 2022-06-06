@@ -39,6 +39,7 @@
         android:text="确定"
         android:textColor="@color/color_00"
         android:textStyle="bold"
+        android:textSize="14sp"
         app:shape_endColor="@color/color_6d"
         app:shape_radius="100dp"
         app:shape_startColor="@color/color_6c" />

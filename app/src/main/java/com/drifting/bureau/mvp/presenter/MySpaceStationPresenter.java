@@ -3,7 +3,10 @@ package com.drifting.bureau.mvp.presenter;
 import android.app.Application;
 import android.util.Log;
 
+import com.drifting.bureau.mvp.model.entity.CustomerEntity;
 import com.drifting.bureau.mvp.model.entity.MyBlindBoxEntity;
+import com.drifting.bureau.mvp.model.entity.MySpaceStationEntity;
+import com.drifting.bureau.mvp.model.entity.MyTreasuryEntity;
 import com.drifting.bureau.mvp.model.entity.OrderDetailEntity;
 import com.drifting.bureau.mvp.model.entity.OrderOneEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceInfoEntity;
@@ -24,6 +27,8 @@ import javax.inject.Inject;
 
 import com.drifting.bureau.mvp.contract.MySpaceStationContract;
 import com.jess.arms.utils.RxLifecycleUtils;
+
+import java.util.List;
 
 /**
  * ================================================
@@ -205,6 +210,57 @@ public class MySpaceStationPresenter extends BasePresenter<MySpaceStationContrac
                 });
     }
 
+
+
+    /**
+     * 当前空间站级别（升级空间站）
+     */
+    public void levelcurrent() {
+        mModel.levelcurrent().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseEntity<MySpaceStationEntity>>(mErrorHandler) {
+                    @Override
+                    public void onNext(BaseEntity<MySpaceStationEntity> baseEntity) {
+                        if (mRootView != null) {
+                            mRootView.onLevelCurrentSuccess(baseEntity.getData());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        if (mRootView != null) {
+                            mRootView.onNetError();
+                        }
+                    }
+                });
+    }
+
+
+
+    /**
+     * 我的库藏(我的空间站)
+     */
+    public void getStorageList() {
+        mModel.storagemine().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseEntity<List<MyTreasuryEntity>>>(mErrorHandler) {
+                    @Override
+                    public void onNext(BaseEntity<List<MyTreasuryEntity>> baseEntity) {
+                        if (mRootView != null) {
+                            if (baseEntity.getCode() == 200) {
+                                mRootView.onStorageMineSuccess(baseEntity.getData());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
+    }
 
     @Override
     public void onDestroy() {

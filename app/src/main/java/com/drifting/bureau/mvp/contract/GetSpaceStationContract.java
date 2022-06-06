@@ -2,6 +2,7 @@ package com.drifting.bureau.mvp.contract;
 import android.app.Activity;
 
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
+import com.drifting.bureau.mvp.model.entity.PrizeEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceCheckEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceStationEntity;
 import com.jess.arms.base.BaseEntity;
@@ -33,6 +34,7 @@ public interface GetSpaceStationContract {
 
         void onSpaceCheck(SpaceCheckEntity entity);
 
+        void onAwardPreviewSuccess(List<PrizeEntity>  list);
         void onNetError();
 
          Activity getActivity();
@@ -44,5 +46,7 @@ public interface GetSpaceStationContract {
         Observable<BaseEntity<CreateOrderEntity>> createOrderSpace(String sku_code,String sku_num);
 
         Observable<BaseEntity<SpaceCheckEntity>> spacecheck();
+
+        Observable<BaseEntity<List<PrizeEntity>>> awardpreview();
     }
 }
