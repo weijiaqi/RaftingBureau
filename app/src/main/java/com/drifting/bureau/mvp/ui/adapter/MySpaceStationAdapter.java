@@ -11,9 +11,9 @@ import com.jess.arms.base.BaseRecyclerHolder;
 
 import java.util.List;
 
-public class MySpaceStationAdapter extends BaseRecyclerAdapter<MySpaceStationEntity> {
+public class MySpaceStationAdapter extends BaseRecyclerAdapter<MySpaceStationEntity.OwnRightsBean> {
 
-    public MySpaceStationAdapter(List<MySpaceStationEntity> infos) {
+    public MySpaceStationAdapter(List<MySpaceStationEntity.OwnRightsBean> infos) {
         super(infos);
     }
 

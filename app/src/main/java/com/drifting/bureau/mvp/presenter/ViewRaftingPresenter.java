@@ -7,21 +7,29 @@ import android.widget.TextView;
 
 import androidx.fragment.app.FragmentActivity;
 
+import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
+import com.drifting.bureau.mvp.model.entity.SkuListEntity;
 import com.drifting.bureau.mvp.ui.activity.index.VideoActivity;
 import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
+import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.VideoUtil;
 import com.drifting.bureau.view.VoiceWave;
+import com.jess.arms.base.BaseEntity;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 
 import javax.inject.Inject;
 
 import com.drifting.bureau.mvp.contract.ViewRaftingContract;
 import com.jess.arms.utils.PermissionUtil;
+import com.jess.arms.utils.RxLifecycleUtils;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.util.List;
@@ -55,6 +63,63 @@ public class ViewRaftingPresenter extends BasePresenter<ViewRaftingContract.Mode
     }
 
 
+    /**
+     * 商品列表（发起话题和参与话题）
+     */
+    public void skulist(int type_id, int explore_id, int message_id) {
+        mModel.skulist(type_id, explore_id, message_id).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseEntity<SkuListEntity>>(mErrorHandler) {
+                    @Override
+                    public void onNext(BaseEntity<SkuListEntity> entity) {
+                        if (mRootView != null) {
+                            if (entity.getCode() == 200) {
+                                mRootView.onSkuListSuccess(entity.getData());
+                            } else {
+                                showMessage(entity.getMsg());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        if (mRootView != null) {
+                            mRootView.onNetError();
+                        }
+                    }
+                });
+    }
+
+
+    /**
+     * 创建订单(话题漂流)
+     */
+    public void createOrder(int message_id, String sku_codes) {
+        mModel.createOrder(message_id, sku_codes).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseEntity<CreateOrderEntity>>(mErrorHandler) {
+                    @Override
+                    public void onNext(BaseEntity<CreateOrderEntity> entity) {
+                        if (mRootView != null) {
+                            if (entity.getCode() == 200) {
+                                mRootView.onCreateOrderSuccess(entity.getData());
+                            } else {
+                                showMessage(entity.getMsg());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        if (mRootView != null) {
+                            mRootView.onNetError();
+                        }
+                    }
+                });
+    }
+
 
     /**
      * @description 播放视频
@@ -81,6 +146,11 @@ public class ViewRaftingPresenter extends BasePresenter<ViewRaftingContract.Mode
 
     }
 
+
+
+    public void  showMessage(String message){
+        ToastUtil.showToast(message);
+    }
     @Override
     public void onDestroy() {
         super.onDestroy();

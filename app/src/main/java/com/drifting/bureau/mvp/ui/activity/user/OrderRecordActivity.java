@@ -81,10 +81,10 @@ public class OrderRecordActivity extends BaseActivity<OrderRecordPresenter> impl
 
     public List<OrderRecordEntity> getData(){
         List<OrderRecordEntity> list=new ArrayList<>();
-        list.add(new OrderRecordEntity("传递漂-传递杯"));
-        list.add(new OrderRecordEntity("传递漂-传递杯"));
-        list.add(new OrderRecordEntity("传递漂-传递杯"));
-        list.add(new OrderRecordEntity("传递漂-传递杯"));
+        list.add(new OrderRecordEntity("传递漂-传递杯",1,"0.12"));
+        list.add(new OrderRecordEntity("传递漂-传递杯",2,"0.12"));
+        list.add(new OrderRecordEntity("传递漂-传递杯",3,"0.12"));
+        list.add(new OrderRecordEntity("传递漂-传递杯",1,"0.12"));
         return list;
     }
 

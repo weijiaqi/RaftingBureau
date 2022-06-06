@@ -9,9 +9,10 @@ import androidx.annotation.NonNull;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.data.event.MyBlindBoxRefreshEvent;
-import com.drifting.bureau.mvp.model.entity.BarrageEntity;
+
 import com.drifting.bureau.mvp.model.entity.BoxOpenEntity;
 import com.drifting.bureau.mvp.model.entity.MyBlindBoxEntity;
+import com.drifting.bureau.mvp.ui.dialog.DonationDialog;
 import com.drifting.bureau.mvp.ui.dialog.PublicDialog;
 import com.drifting.bureau.util.ColorUtil;
 import com.drifting.bureau.util.GlideUtil;
@@ -36,9 +37,12 @@ public class MyBlindBoxHolder extends BaseRecyclerHolder {
     ImageView mIvPic;
     @BindView(R.id.tv_open_blind_box)
     TextView mTvOpen;
+    @BindView(R.id.tv_give_blind_box)
+    TextView mTvGiveBlindBox;
     private Context context;
 
     private PublicDialog publicDialog;
+    private DonationDialog donationDialog;
 
     public MyBlindBoxHolder(View itemView) {
         super(itemView);
@@ -75,6 +79,21 @@ public class MyBlindBoxHolder extends BaseRecyclerHolder {
                         });
                     }
                 }
+            });
+        });
+
+        mTvGiveBlindBox.setOnClickListener(v -> {  //转赠
+            donationDialog = new DonationDialog(context);
+            donationDialog.show();
+            donationDialog.setOnContentClickCallback(content -> {
+                RequestUtil.create().mysteryboxtransfer(listBeanList.get(position).getId() + "", content, entity -> {
+                    if (entity != null) {
+                        ToastUtil.showToast(entity.getMsg());
+                        if (entity.getCode() == 200) {
+                            EventBus.getDefault().post(new MyBlindBoxRefreshEvent());
+                        }
+                    }
+                });
             });
         });
     }

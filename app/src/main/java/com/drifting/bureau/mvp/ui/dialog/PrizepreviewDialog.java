@@ -18,10 +18,12 @@ public class PrizepreviewDialog extends BaseDialog {
     private RecyclerView mRcyPrize;
     private Context context;
     private PrizeAdapter prizeAdapter;
+    private List<PrizeEntity> list;
 
-    public PrizepreviewDialog(@NonNull Context context) {
+    public PrizepreviewDialog(@NonNull Context context, List<PrizeEntity> list) {
         super(context);
-        context = context;
+        this.context = context;
+        this.list = list;
     }
 
     @Override
@@ -36,18 +38,9 @@ public class PrizepreviewDialog extends BaseDialog {
         mRcyPrize.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         prizeAdapter = new PrizeAdapter(new ArrayList<>());
         mRcyPrize.setAdapter(prizeAdapter);
-        prizeAdapter.setData(getData());
+        prizeAdapter.setData(list);
     }
 
-    public List<PrizeEntity> getData() {
-        List<PrizeEntity> list = new ArrayList<>();
-        list.add(new PrizeEntity(""));
-        list.add(new PrizeEntity(""));
-        list.add(new PrizeEntity(""));
-        list.add(new PrizeEntity(""));
-        list.add(new PrizeEntity(""));
-        return list;
-    }
 
     @Override
     protected int getContentView() {

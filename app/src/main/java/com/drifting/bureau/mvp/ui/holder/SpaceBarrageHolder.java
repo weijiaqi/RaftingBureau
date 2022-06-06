@@ -26,12 +26,12 @@ public class SpaceBarrageHolder extends BaseRecyclerHolder {
     }
 
     public void setData(@NonNull List<BarrageEntity> listBeanList, int position) {
-
-        if (position==0||position==1){
-            mTvContent.setVisibility(View.INVISIBLE);
-        }else {
+        if (!TextUtils.isEmpty(listBeanList.get(position % listBeanList.size()).getText().trim())){
             mTvContent.setVisibility(View.VISIBLE);
+        }else {
+            mTvContent.setVisibility(View.INVISIBLE);
         }
+
         TextUtil.setText(mTvContent, listBeanList.get(position % listBeanList.size()).getText());
         mTvContent.setTextColor(ColorUtil.getColorByRgb(null));
     }

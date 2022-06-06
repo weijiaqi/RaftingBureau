@@ -41,8 +41,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="12dp"
-        android:paddingEnd="15dp">
+        android:paddingEnd="15dp"
+        android:paddingBottom="12dp">
 
 
         <ImageView
@@ -84,7 +84,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="-13dp"
             android:layout_toRightOf="@+id/iv_axis"
-            android:text="你的小太阳"
+            android:text="戴纵纵"
             android:textColor="@color/white"
             android:textSize="12sp" />
 
@@ -101,10 +101,11 @@
 
 
         <TextView
+            android:id="@+id/tv_transmit_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:text="已传递5858人>"
+            android:text="已传递8人>"
             android:textColor="@color/white"
             android:textSize="11sp" />
 
@@ -113,8 +114,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/tv_to_name"
-            android:layout_marginTop="-8dp"
             android:layout_alignParentEnd="true"
+            android:layout_marginTop="-8dp"
             android:paddingHorizontal="25dp"
             android:paddingVertical="5dp"
             android:text="我参与"

@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="18dp"
                 android:layout_marginTop="2dp"
-                android:text="荒芜星球"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="12sp" />
 
@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="9dp"
                 android:layout_marginTop="2dp"
-                android:text="星际开荒者"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="12sp" />
 
@@ -176,7 +176,8 @@
                     android:id="@+id/tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="你的小太阳"
+                    android:text=""
+                    android:textSize="12sp"
                     android:textColor="@color/color_6de" />
             </LinearLayout>
 
@@ -197,7 +198,8 @@
                     android:id="@+id/tv_identity2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="星际开荒者"
+                    android:text=""
+                    android:textSize="12sp"
                     android:textColor="@color/color_6de" />
             </LinearLayout>
         </LinearLayout>
@@ -214,7 +216,8 @@
             android:id="@+id/tv_place_esidence2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="荒芜星球"
+            android:text=""
+            android:textSize="12sp"
             android:textColor="@color/color_6de" />
 
         <TextView
@@ -242,12 +245,13 @@
 
 
             <TextView
+                android:id="@+id/tv_schedule"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="2dp"
                 android:layout_toRightOf="@+id/pr_upload_value"
-                android:text="12%"
+                android:text=""
                 android:textColor="@color/color_6de"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -261,7 +265,6 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcy_mylist"
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ll_center"

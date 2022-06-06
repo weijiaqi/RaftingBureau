@@ -3,6 +3,7 @@ import android.app.Application;
 
 import com.drifting.bureau.app.api.ApiService;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
+import com.drifting.bureau.mvp.model.entity.PrizeEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceCheckEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceStationEntity;
 import com.google.gson.Gson;
@@ -61,5 +62,10 @@ public class GetSpaceStationModel extends BaseModel implements GetSpaceStationCo
     @Override
     public Observable<BaseEntity<SpaceCheckEntity>> spacecheck() {
         return mRepositoryManager.obtainRetrofitService(ApiService.class).spacecheck();
+    }
+
+    @Override
+    public Observable<BaseEntity<List<PrizeEntity>>> awardpreview() {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).awardpreview();
     }
 }

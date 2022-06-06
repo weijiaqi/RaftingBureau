@@ -54,10 +54,11 @@
                         android:textSize="8sp" />
 
                     <TextView
+                        android:id="@+id/tv_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="1.5dp"
-                        android:text="你的小太阳"
+                        android:text=""
                         android:textColor="@color/color_6d"
                         android:textSize="9sp" />
                 </LinearLayout>
@@ -78,10 +79,11 @@
                         android:textSize="8sp" />
 
                     <TextView
+                        android:id="@+id/tv_identity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="1.5dp"
-                        android:text="星际开荒者"
+                        android:text=""
                         android:textColor="@color/color_6d"
                         android:textSize="9sp" />
                 </LinearLayout>
@@ -104,10 +106,11 @@
                     android:textSize="8sp" />
 
                 <TextView
+                    android:id="@+id/tv_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="1.5dp"
-                    android:text="荒芜星球"
+                    android:text=""
                     android:textColor="@color/color_6d"
                     android:textSize="9sp" />
             </LinearLayout>
@@ -145,6 +148,7 @@
 
 
                     <TextView
+                        android:id="@+id/tv_num"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"

@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.di.component.DaggerWithdrawalComponent;
+import com.drifting.bureau.mvp.ui.dialog.PublicDialog;
 import com.drifting.bureau.util.ClickUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
@@ -29,6 +30,8 @@ import butterknife.OnClick;
  * module name is WithdrawalActivity
  */
 public class WithdrawalActivity extends BaseActivity<WithdrawalPresenter> implements WithdrawalContract.View {
+
+    private PublicDialog publicDialog;
 
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, WithdrawalActivity.class);
@@ -61,12 +64,19 @@ public class WithdrawalActivity extends BaseActivity<WithdrawalPresenter> implem
 
     }
 
-    @OnClick({R.id.toolbar_back})
+    @OnClick({R.id.toolbar_back,R.id.tv_withdrawal})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
                 case R.id.toolbar_back:
                     finish();
+                    break;
+                case R.id.tv_withdrawal:  //提现
+                    publicDialog=new PublicDialog(this);
+                    publicDialog.show();
+                    publicDialog.setCancelable(false);
+                    publicDialog.setTitleText("申请成功");
+                    publicDialog.setContentText("已成功提交提现申请 请耐心等待审核");
                     break;
             }
         }

@@ -40,15 +40,24 @@ public class AboutMeHolder extends BaseRecyclerHolder {
     public void setData(@NonNull List<AoubtMeEntity> listBeanList, int position) {
         TextUtil.setText(mTvTitle, listBeanList.get(position).getTitle());
         TextUtil.setText(mTvContent, listBeanList.get(position).getContent());
+        if (position == 0) {
+            mIvPic.setImageResource(R.drawable.drifting_track);
+        } else if (position == 1) {
+            mIvPic.setImageResource(R.drawable.order_record);
+        } else if (position == 2) {
+            mIvPic.setImageResource(R.drawable.space_marines);
+        } else if (position == 3) {
+            mIvPic.setImageResource(R.drawable.nearby_stores);
+        }
         mLlContent.setOnClickListener(v -> {
             if (position == 0) {  //漂流轨迹
-                DriftingTrackActivity.start(context,false);
-            }else if (position==1){  //订单记录
-                OrderRecordActivity.start(context,false);
-            }else if (position==2){ //星际战队
-                SpaceMarinesActivity.start(context,false);
-            }else if (position==3){ //漂流局店
-                TeaShopActivity.start(context,false);
+                DriftingTrackActivity.start(context, false);
+            } else if (position == 1) {  //订单记录
+                OrderRecordActivity.start(context, false);
+            } else if (position == 2) { //星际战队
+                SpaceMarinesActivity.start(context, false);
+            } else if (position == 3) { //漂流局店
+                TeaShopActivity.start(context, false);
             }
         });
     }

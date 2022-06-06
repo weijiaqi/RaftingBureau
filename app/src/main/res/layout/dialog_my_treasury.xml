@@ -49,10 +49,9 @@
 
             <ImageView
                 android:id="@+id/iv_picture"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:src="@drawable/demo_treasury" />
+                android:layout_width="53dp"
+                android:layout_height="53dp"
+                android:layout_centerInParent="true" />
         </com.hjq.shape.layout.ShapeRelativeLayout>
 
         <TextView
@@ -61,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/rl_pic"
-            android:text="初级空间站"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -73,7 +72,7 @@
             android:layout_below="@+id/tv_title"
             android:layout_alignLeft="@+id/tv_title"
             android:layout_marginTop="3dp"
-            android:text="数量 200"
+            android:text=""
             android:textColor="@color/color_cc"
             android:textSize="12sp" />
 
@@ -94,12 +93,12 @@
 
         <com.hjq.shape.view.ShapeTextView
             android:id="@+id/tv_give_away"
-            android:layout_alignTop="@+id/tv_use"
-            android:layout_toRightOf="@+id/tv_use"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="13dp"
+            android:layout_alignTop="@+id/tv_use"
             android:layout_marginStart="10dp"
+            android:layout_toRightOf="@+id/tv_use"
+            android:paddingHorizontal="13dp"
             android:text="转赠"
             android:textColor="@color/white"
             android:textSize="12sp"
@@ -115,7 +114,7 @@
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="10dp"
             android:padding="10dp"
-            android:text="可用来创建和升级自己的空间站"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="11sp"
             app:shape_radius="5dp"

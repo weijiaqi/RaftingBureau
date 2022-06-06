@@ -46,13 +46,18 @@ public class PaymentInfoActivity extends BaseActivity<PaymentInfoPresenter> impl
     CheckBox mCkAlipay;
     @BindView(R.id.clockview)
     ClockView mTvClockview;
-
+    @BindView(R.id.tv_price)
+    TextView mTvPrice;
+    private static final String EXRA_TYPE = "exra_type";
     private static final String EXRA_SN = "exra_sn";
-    private String sn;
+    private static final String EXRA_TOTAL = "exra_total";
+    private String sn, total;
+    private int type;
 
-    public static void start(Context context, String sn, boolean closePage) {
+    public static void start(Context context, int type, String sn, String tatal, boolean closePage) {
         Intent intent = new Intent(context, PaymentInfoActivity.class);
         intent.putExtra(EXRA_SN, sn);
+        intent.putExtra(EXRA_TOTAL, tatal);
         context.startActivity(intent);
         if (closePage) ((Activity) context).finish();
     }
@@ -77,27 +82,21 @@ public class PaymentInfoActivity extends BaseActivity<PaymentInfoPresenter> impl
         setStatusBar(true);
         mToobarTitle.setText("订单支付");
         if (getIntent() != null) {
+            type = getIntent().getIntExtra(EXRA_TYPE, 0);
             sn = getIntent().getStringExtra(EXRA_SN);
+            total = getIntent().getStringExtra(EXRA_TOTAL);
         }
         initListener();
     }
 
     public void initListener() {
+        mTvPrice.setText(total);
         mViewLine.setBackgroundColor(getColor(R.color.color_33));
         mTvClockview.setType(1);
         long curTime = System.currentTimeMillis() + 10000;
         mTvClockview.setEndTime(curTime);
     }
 
-    @Override
-    public void payOrderSuccess(PayOrderEntity entity) {
-         showMessage("购买成功");
-    }
-
-    @Override
-    public void onNetError() {
-
-    }
 
     public Activity getActivity() {
         return this;
@@ -124,14 +123,30 @@ public class PaymentInfoActivity extends BaseActivity<PaymentInfoPresenter> impl
                     setCheckStatus(2);
                     break;
                 case R.id.tv_cofim_pay: //立即购买
-//                    EventBus.getDefault().post(new PaymentEvent());
-//                    finish();
-                    if (mPresenter!=null){
-                        mPresenter.payOrder(sn);
+                    if (type == 1 || type == 2) {
+                        if (mPresenter != null) {
+                            mPresenter.payOrder(sn);
+                        }
+                    } else {
+                        finish();
+                        EventBus.getDefault().post(new PaymentEvent());
                     }
                     break;
             }
         }
+    }
+
+
+    @Override
+    public void payOrderSuccess(PayOrderEntity entity) {
+        showMessage("购买成功");
+        EventBus.getDefault().post(new PaymentEvent());
+        finish();
+    }
+
+    @Override
+    public void onNetError() {
+
     }
 
 

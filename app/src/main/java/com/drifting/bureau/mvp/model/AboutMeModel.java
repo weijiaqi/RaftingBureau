@@ -3,6 +3,7 @@ import android.app.Application;
 
 import com.drifting.bureau.app.api.ApiService;
 import com.drifting.bureau.mvp.model.entity.UserEntity;
+import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.google.gson.Gson;
 import com.jess.arms.base.BaseEntity;
 import com.jess.arms.integration.IRepositoryManager;
@@ -44,8 +45,9 @@ public class AboutMeModel extends BaseModel implements AboutMeContract.Model{
         this.mApplication = null;
     }
 
+
     @Override
-    public Observable<BaseEntity<UserEntity>> user() {
-        return mRepositoryManager.obtainRetrofitService(ApiService.class).userhome();
+    public Observable<BaseEntity<UserInfoEntity>> userplayer(String user_id) {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).userplayer(user_id);
     }
 }

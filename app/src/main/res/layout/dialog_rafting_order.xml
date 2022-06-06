@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:text="￥588"
+                android:text=""
                 android:textColor="@color/color_00"
                 android:textSize="14sp"
                 android:textStyle="bold" />

@@ -78,15 +78,15 @@
             />
 
         <TextView
-            android:layout_alignParentEnd="true"
+            android:id="@+id/tv_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="￥288"
+            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:textSize="14sp"
-            android:textStyle="bold"
+            android:text=""
             android:textColor="@color/white"
-            />
+            android:textSize="14sp"
+            android:textStyle="bold" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -108,18 +108,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:text="剩余支付时间 15:52"
-            android:textColor="@color/color_f15"
-            android:textSize="12sp"
             android:layout_marginBottom="5dp"
-           />
+            android:text="剩余支付时间 15:52"
+            android:visibility="gone"
+            android:textColor="@color/color_f15"
+            android:textSize="12sp" />
 
 
         <TextView
             android:id="@+id/tv_write_off"
-            android:layout_below="@+id/tv_payment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_payment"
             android:layout_alignParentEnd="true"
             android:text="立即核销"
             android:textColor="@color/white"

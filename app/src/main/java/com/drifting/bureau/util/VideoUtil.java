@@ -161,6 +161,9 @@ public class VideoUtil {
         return duration;
     }
 
+
+    private static String runLog = "";
+
     /**
      * 视频压缩
      *
@@ -193,9 +196,15 @@ public class VideoUtil {
             }
             if (success) {
                 Timber.e("压缩成功---" + filepath);
+                runLog=filepath;
                 double fileSize = FileUtil.getFileOrFilesSize(filepath, FileUtil.SIZETYPE_MB);
                 Timber.e("1----------" + fileSize);
+
             }
         }).start();
+    }
+
+    public static String getRunLog() {
+        return runLog;
     }
 }

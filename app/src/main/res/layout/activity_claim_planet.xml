@@ -61,10 +61,11 @@
                                     android:textSize="8sp" />
 
                                 <TextView
+                                    android:id="@+id/tv_name"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="1.5dp"
-                                    android:text="你的小太阳"
+                                    android:text=""
                                     android:textColor="@color/color_6d"
                                     android:textSize="9sp" />
                             </LinearLayout>

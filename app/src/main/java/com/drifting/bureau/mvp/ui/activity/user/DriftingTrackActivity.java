@@ -36,7 +36,7 @@ import butterknife.OnClick;
  * @author 漂流轨迹
  * module name is DriftingTrackActivity
  */
-public class DriftingTrackActivity extends BaseActivity<DriftingTrackPresenter> implements DriftingTrackContract.View {
+public class DriftingTrackActivity extends BaseActivity<DriftingTrackPresenter> implements DriftingTrackContract.View ,XRecyclerView.LoadingListener{
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
     @BindView(R.id.rcy_public)
@@ -73,6 +73,7 @@ public class DriftingTrackActivity extends BaseActivity<DriftingTrackPresenter> 
 
     public void initListener() {
         mRcyPublic.setLayoutManager(new LinearLayoutManager(this));
+        mRcyPublic.setLoadingListener(this);
         driftingTrackAdapter=new DriftingTrackAdapter(new ArrayList<>());
         mRcyPublic.setAdapter(driftingTrackAdapter);
         driftingTrackAdapter.setData(getData());
@@ -105,5 +106,15 @@ public class DriftingTrackActivity extends BaseActivity<DriftingTrackPresenter> 
     @Override
     public void showMessage(@NonNull String message) {
 
+    }
+
+    @Override
+    public void onRefresh() {
+        mRcyPublic.refreshEndComplete();
+    }
+
+    @Override
+    public void onLoadMore() {
+        mRcyPublic.loadEndLine();
     }
 }

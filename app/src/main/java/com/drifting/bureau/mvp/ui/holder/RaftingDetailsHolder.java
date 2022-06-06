@@ -1,5 +1,6 @@
 package com.drifting.bureau.mvp.ui.holder;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -23,6 +24,12 @@ public class RaftingDetailsHolder extends BaseRecyclerHolder {
     }
 
     public void setData(@NonNull List<BarrageEntity> listBeanList, int position) {
+        if (TextUtils.isEmpty(listBeanList.get(position % listBeanList.size()).getText().trim())){
+            mTvContent.setVisibility(View.INVISIBLE);
+        }else {
+            mTvContent.setVisibility(View.VISIBLE);
+        }
+
         TextUtil.setText(mTvContent,listBeanList.get(position % listBeanList.size()).getText());
         mTvContent.setTextColor(ColorUtil.getColorByRgb(null));
     }

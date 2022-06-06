@@ -3,6 +3,7 @@ import android.app.Application;
 
 import com.drifting.bureau.mvp.model.entity.CustomerEntity;
 import com.drifting.bureau.mvp.model.entity.UserEntity;
+import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.jess.arms.base.BaseEntity;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
@@ -49,25 +50,25 @@ public class AboutMePresenter extends BasePresenter<AboutMeContract.Model, About
     }
 
     /**
-     * 关于我
+     * 用户信息
      */
-    public void getUser() {
-        mModel.user().subscribeOn(Schedulers.io())
+    public void userplayer(String user_id) {
+        mModel.userplayer(user_id).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
-                .subscribe(new ErrorHandleSubscriber<BaseEntity<UserEntity>>(mErrorHandler) {
+                .subscribe(new ErrorHandleSubscriber<BaseEntity<UserInfoEntity>>(mErrorHandler) {
                     @Override
-                    public void onNext(BaseEntity<UserEntity> baseEntity) {
+                    public void onNext(BaseEntity<UserInfoEntity> baseEntity) {
                         if (mRootView != null) {
-                            if (baseEntity.getCode() == 200) {
-                                mRootView.userSuccess(baseEntity.getData());
-                            }
+                            mRootView.onUserInfoSuccess(baseEntity.getData());
                         }
                     }
 
                     @Override
                     public void onError(Throwable t) {
-                        t.printStackTrace();
+                        if (mRootView != null) {
+                            mRootView.onNetError();
+                        }
                     }
                 });
     }

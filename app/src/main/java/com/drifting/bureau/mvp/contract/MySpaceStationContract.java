@@ -2,6 +2,8 @@ package com.drifting.bureau.mvp.contract;
 
 import android.app.Activity;
 
+import com.drifting.bureau.mvp.model.entity.MySpaceStationEntity;
+import com.drifting.bureau.mvp.model.entity.MyTreasuryEntity;
 import com.drifting.bureau.mvp.model.entity.OrderDetailEntity;
 import com.drifting.bureau.mvp.model.entity.OrderOneEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceInfoEntity;
@@ -9,6 +11,8 @@ import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.jess.arms.base.BaseEntity;
 import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IView;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 
@@ -36,6 +40,9 @@ public interface MySpaceStationContract {
 
         void onUserInfoSuccess(UserInfoEntity entity);
 
+        void onLevelCurrentSuccess(MySpaceStationEntity entity);
+
+        void onStorageMineSuccess(List<MyTreasuryEntity> entity);
 
         void onOrderMakingSuccess();
 
@@ -60,5 +67,9 @@ public interface MySpaceStationContract {
         Observable<BaseEntity> orderthrow(int space_order_id);
 
         Observable<BaseEntity> ordermaking(int space_order_id);
+
+        Observable<BaseEntity<MySpaceStationEntity>> levelcurrent();
+
+        Observable<BaseEntity<List<MyTreasuryEntity>>> storagemine();
     }
 }

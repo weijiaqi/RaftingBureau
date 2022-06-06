@@ -16,7 +16,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.drifting.bureau.R;
+import com.drifting.bureau.data.event.BackSpaceEvent;
+import com.drifting.bureau.data.event.DonationEvent;
 import com.drifting.bureau.di.component.DaggerMySpaceStationComponent;
+import com.drifting.bureau.mvp.model.entity.MySpaceStationEntity;
+import com.drifting.bureau.mvp.model.entity.MyTreasuryEntity;
 import com.drifting.bureau.mvp.model.entity.OrderDetailEntity;
 import com.drifting.bureau.mvp.model.entity.OrderOneEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceInfoEntity;
@@ -30,10 +34,15 @@ import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.StringUtil;
 import com.jess.arms.base.BaseActivity;
+import com.jess.arms.base.BaseDialog;
 import com.jess.arms.di.component.AppComponent;
 import com.drifting.bureau.mvp.contract.MySpaceStationContract;
 import com.drifting.bureau.mvp.presenter.MySpaceStationPresenter;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -161,12 +170,10 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
                     }
                     break;
                 case R.id.tv_my_treasury: //我的库存
-                    myTreasuryDialog = new MyTreasuryDialog(this);
-                    myTreasuryDialog.show();
+                    getStorageList();
                     break;
                 case R.id.tv_upgrade:  //升级
-                    mySpaceStationDialog = new MySpaceStationDialog(this);
-                    mySpaceStationDialog.show();
+                    levelcurrent();
                     break;
                 case R.id.rl_total_revenue: //收支记录
                     IncomeRecordActivity.start(this, false);
@@ -181,6 +188,19 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
         }
     }
 
+    //我的库存
+    public void getStorageList() {
+        if (mPresenter != null) {
+            mPresenter.getStorageList();
+        }
+    }
+
+    //升级
+    public void levelcurrent() {
+        if (mPresenter != null) {
+            mPresenter.levelcurrent();
+        }
+    }
 
     @Override
     public void onSpcaeInfoSuccess(SpaceInfoEntity entity) {
@@ -272,6 +292,27 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
     }
 
     @Override
+    public void onLevelCurrentSuccess(MySpaceStationEntity entity) {
+        if (entity != null) {
+            mySpaceStationDialog = new MySpaceStationDialog(this, entity);
+            mySpaceStationDialog.show();
+        }
+    }
+
+    @Override
+    public void onStorageMineSuccess(List<MyTreasuryEntity> entity) {
+        if (entity != null) {
+            myTreasuryDialog = new MyTreasuryDialog(this, entity);
+            myTreasuryDialog.show();
+            myTreasuryDialog.setOnClickCallback(type -> {
+                if (type == MyTreasuryDialog.SELECT_USE) {
+                    levelcurrent();
+                }
+            });
+        }
+    }
+
+    @Override
     public void onOrderMakingSuccess() { //制作成功
         showDialog("制作完成", "已经制作完成并发往太空了\n拥有该订单带来的收益");
         getOrderOne();
@@ -305,6 +346,14 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
     @Override
     public void showMessage(@NonNull String message) {
 
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void DonationEvent(DonationEvent donationEvent) {
+        if (donationEvent != null) {
+            getStorageList();
+        }
     }
 
     @Override

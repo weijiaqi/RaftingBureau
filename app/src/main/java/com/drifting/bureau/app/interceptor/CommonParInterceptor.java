@@ -12,6 +12,7 @@ import java.io.IOException;
 
 import okhttp3.FormBody;
 import okhttp3.Interceptor;
+import okhttp3.MultipartBody;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
@@ -45,6 +46,16 @@ public class CommonParInterceptor implements Interceptor {
                         .build();
                 response = chain.proceed(originalRequest);
             }else {
+                MultipartBody multipartBody = (MultipartBody) originalRequest.body();
+                originalRequest = originalRequest.newBuilder().removeHeader("User-Agent")//移除旧的
+                        .addHeader("User-Agent", SystemUtil.getUserAgent(RBureauApplication.getContext()))//添加真正的头部
+                        .addHeader("Token", StringUtil.formatNullString(Preferences.getToken()))
+                        .addHeader("Version", StringUtil.formatNullString(AppUtil.getVerName(RBureauApplication.getContext()) + ""))
+                        .addHeader("Sign",StringUtil.formatNullString(getSign(Preferences.getPhone())))
+                        .addHeader("source","Android")
+                        .addHeader("Accept", "application/json")
+                        .post(multipartBody)
+                        .build();
                 response = chain.proceed(originalRequest);
             }
         }else {

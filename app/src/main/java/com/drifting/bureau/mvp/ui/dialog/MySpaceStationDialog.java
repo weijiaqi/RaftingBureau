@@ -1,6 +1,7 @@
 package com.drifting.bureau.mvp.ui.dialog;
 
 import android.content.Context;
+import android.text.SpannableStringBuilder;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.MySpaceStationEntity;
 import com.drifting.bureau.mvp.ui.adapter.MySpaceStationAdapter;
+import com.drifting.bureau.util.SpannableUtil;
 import com.jess.arms.base.BaseDialog;
 
 import java.util.ArrayList;
@@ -19,56 +21,54 @@ import java.util.List;
 
 /**
  * @Description: 我的空间站升级
- * @Author     : WeiJiaQI
- * @Time       : 2022/5/26 12:05
+ * @Author : WeiJiaQI
+ * @Time : 2022/5/26 12:05
  */
 public class MySpaceStationDialog extends BaseDialog implements View.OnClickListener {
 
-    private TextView mTvCofim;
+    private TextView mTvCofim, mTvLevelName, mTvTotalNum, mTvDistance;
     private ProgressBar mPrUpgrade;
     private RecyclerView mRcyInterests;
     private Context context;
     private MySpaceStationAdapter mySpaceStationAdapter;
-    public MySpaceStationDialog(@NonNull Context context) {
+    private MySpaceStationEntity mySpaceStationEntity;
+
+    public MySpaceStationDialog(@NonNull Context context, MySpaceStationEntity mySpaceStationEntity) {
         super(context);
-        this.context=context;
+        this.context = context;
+        this.mySpaceStationEntity = mySpaceStationEntity;
     }
 
     @Override
     protected void initDatas() {
         super.initDatas();
-        mTvCofim=findViewById(R.id.tv_cofim);
-        mPrUpgrade=findViewById(R.id.pr_upgrade);
-        mRcyInterests=findViewById(R.id.rcy_interests);
+        mTvCofim = findViewById(R.id.tv_cofim);
+        mTvLevelName = findViewById(R.id.tv_levle_name);
+        mTvTotalNum = findViewById(R.id.tv_total_num);
+        mPrUpgrade = findViewById(R.id.pr_upgrade);
+        mRcyInterests = findViewById(R.id.rcy_interests);
+        mTvDistance = findViewById(R.id.tv_distance_level);
     }
 
 
     @Override
     protected void initEvents() {
         super.initEvents();
+        if (mySpaceStationEntity.getScore() == mySpaceStationEntity.getTop_score()) {
+            mTvDistance.setText("已升至满级");
+        } else {
+            mTvDistance.setText("距离下一等级");
+        }
+        mPrUpgrade.setMax(mySpaceStationEntity.getTop_score());
+        mPrUpgrade.setProgress(mySpaceStationEntity.getScore());
+        mTvTotalNum.setText(mySpaceStationEntity.getScore() + "/" + mySpaceStationEntity.getTop_score());
+        SpannableStringBuilder passer = SpannableUtil.getBuilder(context, "当前空间站等级： ").append(mySpaceStationEntity.getSpace_level_name()).setBold().build();
+        mTvLevelName.setText(passer);
         mTvCofim.setOnClickListener(this);
-        mRcyInterests.setLayoutManager(new GridLayoutManager(context,4));
-        mySpaceStationAdapter=new MySpaceStationAdapter(new ArrayList<>());
+        mRcyInterests.setLayoutManager(new GridLayoutManager(context, 4));
+        mySpaceStationAdapter = new MySpaceStationAdapter(new ArrayList<>());
         mRcyInterests.setAdapter(mySpaceStationAdapter);
-        mySpaceStationAdapter.setData(getdata());
-
-        mPrUpgrade.setProgress(50);
-
-    }
-
-    public List<MySpaceStationEntity> getdata(){
-        List<MySpaceStationEntity> list=new ArrayList<>();
-        list.add(new MySpaceStationEntity("拥有玩法"));
-        list.add(new MySpaceStationEntity("拥有玩法"));
-        list.add(new MySpaceStationEntity("拥有玩法"));
-        list.add(new MySpaceStationEntity("拥有玩法"));
-        list.add(new MySpaceStationEntity("拥有玩法"));
-        list.add(new MySpaceStationEntity("拥有玩法"));
-        list.add(new MySpaceStationEntity("拥有玩法"));
-        list.add(new MySpaceStationEntity("拥有玩法"));
-        list.add(new MySpaceStationEntity("拥有玩法"));
-        list.add(new MySpaceStationEntity("拥有玩法"));
-        return list;
+        mySpaceStationAdapter.setData(mySpaceStationEntity.getOwn_rights());
     }
 
 
@@ -84,7 +84,7 @@ public class MySpaceStationDialog extends BaseDialog implements View.OnClickList
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.tv_cofim:
                 dismiss();
                 break;

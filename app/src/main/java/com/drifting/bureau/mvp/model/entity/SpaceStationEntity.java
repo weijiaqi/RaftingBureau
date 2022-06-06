@@ -6,7 +6,7 @@ public class SpaceStationEntity {
 
         private Integer business_id;
         private String goods_name;
-        private String price;
+        private double price;
         private String sku_code;
         private String sku_name;
         private String small_image;
@@ -29,11 +29,11 @@ public class SpaceStationEntity {
         }
 
 
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
