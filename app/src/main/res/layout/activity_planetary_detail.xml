@@ -22,6 +22,7 @@
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="-25dp"
+             android:src="@drawable/planetary_detail01"
             />
 
 
@@ -46,10 +47,11 @@
                 app:shape_textStartColor="@color/color_6c" />
 
             <com.hjq.shape.view.ShapeTextView
+                android:id="@+id/tv_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="345"
+                android:text=""
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:shape_textEndColor="@color/color_6d"

@@ -28,7 +28,7 @@ public class SkuListEntity {
 
     public static class GoodsSkuBean {
         @SerializedName("Id")
-        private Integer id;
+        private Integer Id;
         private String sku_code;
         private String name;
         private Integer goods_id;
@@ -51,11 +51,11 @@ public class SkuListEntity {
         }
 
         public Integer getId() {
-            return id;
+            return Id;
         }
 
         public void setId(Integer id) {
-            this.id = id;
+            Id = id;
         }
 
         public String getSku_code() {

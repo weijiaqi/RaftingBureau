@@ -32,7 +32,9 @@ import com.drifting.bureau.mvp.ui.dialog.PublicDialog;
 import com.drifting.bureau.mvp.ui.dialog.SelectOrderDialog;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
+import com.drifting.bureau.util.DateUtil;
 import com.drifting.bureau.util.StringUtil;
+import com.drifting.bureau.util.ToastUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.base.BaseDialog;
 import com.jess.arms.di.component.AppComponent;
@@ -86,7 +88,7 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
     private static final String EXTRA_SPACE_ID = "extra_space_id";
     private OrderOneEntity orderOneEntity;
     private UserInfoEntity userInfoEntity;
-    private Timer timer;
+    private Handler handler;
 
     public static void start(Context context, int space_id, boolean closePage) {
         Intent intent = new Intent(context, MySpaceStationActivity.class);
@@ -122,27 +124,25 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
 
     public void initListener() {
         getInfo();
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                // (1) 使用handler发送消息
-                Message message = new Message();
-                message.what = 0;
-                mHandler.sendMessage(message);
-            }
-        }, 0, 1000 * 30);//每隔30秒使用handler发送一下消息,也就是每隔30秒执行一次,一直重复执行
     }
 
+    Runnable mAdRunnable = () -> getOrderOne();
 
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            if (msg.what == 0) {
-                getOrderOne();
-            }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        handler = new Handler();
+        handler.postDelayed(mAdRunnable, 60);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (handler != null) {
+            handler.removeCallbacks(mAdRunnable);
         }
-    };
+    }
 
 
     public void getOrderOne() {
@@ -182,7 +182,7 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
                     MakingRecordActivity.start(this, false);
                     break;
                 case R.id.rl_withdrawal: //提现
-                    WithdrawalActivity.start(this, false);
+                    WithdrawalActivity.start(this, mTvWithdrawal.getText().toString(), false);
                     break;
             }
         }
@@ -224,9 +224,9 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
             }
 
             mTvlevelName.setText(entity.getLevel_name());
-            mTvWholeMake.setText(entity.getTotal_make());
+            mTvWholeMake.setText(entity.getTotal_make() + "");
             mTvWholeIncome.setText(StringUtil.frontValue(entity.getTotal_income()));
-            mTvTodayMake.setText(entity.getToday_make());
+            mTvTodayMake.setText(entity.getToday_make() + "");
             mTvWithdrawal.setText(StringUtil.frontValue(entity.getWithdrawable()));
         }
     }
@@ -236,24 +236,20 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
         if (entity != null) {
             orderOneEntity = entity;
             if (orderOneEntity.getTimeout() == 0) {
-                setOrderGone();
+                setOrderGone(true);
+                handler.postDelayed(mAdRunnable, 1000 * 10);
             } else {
-                mTvTimeLine.setText(orderOneEntity.getTimeout() + "秒后将消失");
-                if (orderOneEntity.getTimeout() <= 30) {
-                    new Handler().postDelayed(() -> {
-                        mHandler.removeCallbacksAndMessages(null);
-                        timer.cancel();
-                        setOrderGone();
-                    }, orderOneEntity.getTimeout());//延迟时间
-                }
+                setOrderGone(false);
+                mTvTimeLine.setText(DateUtil.TimeRemaining(orderOneEntity.getTimeout()) + "后将消失");
+                handler.postDelayed(mAdRunnable, entity.getTimeout() * 10);
             }
         }
     }
 
 
-    public void setOrderGone() {
-        mLlContent.setVisibility(View.GONE);
-        mTvNotData.setVisibility(View.VISIBLE);
+    public void setOrderGone(boolean type) {
+        mLlContent.setVisibility(type ? View.GONE : View.VISIBLE);
+        mTvNotData.setVisibility(type ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -261,13 +257,12 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
         if (entity != null) {
             selectOrderDialog = new SelectOrderDialog(this, userInfoEntity, entity);
             selectOrderDialog.show();
-            selectOrderDialog.setCancelable(false);
             selectOrderDialog.setOnClickCallback(type -> {
                 if (type == SelectOrderDialog.SELECT_CANCEL) { //丢回太空
                     if (mPresenter != null) {
                         mPresenter.orderthrow(entity.getSpace_order_id());
                     }
-                } else if (type == SelectOrderDialog.SELECT_FINISH) {
+                } else if (type == SelectOrderDialog.SELECT_FINISH) { //为他制作
                     makeScheduleDialog = new MakeScheduleDialog(this);
                     makeScheduleDialog.show();
                     makeScheduleDialog.setCancelable(false);
@@ -314,23 +309,30 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
 
     @Override
     public void onOrderMakingSuccess() { //制作成功
-        showDialog("制作完成", "已经制作完成并发往太空了\n拥有该订单带来的收益");
-        getOrderOne();
+        showDialog(1, "制作完成", "已经制作完成并发往太空了\n拥有该订单带来的收益");
     }
 
     @Override
     public void onOrderThrowSuccess() { //丢回太空
         selectOrderDialog.dismiss();
-        showDialog("订单已丢回太空", "已经把该订单丢回太空\n该订单的收益将无法拥有");
-        getOrderOne();
+        showDialog(2, "订单已丢回太空", "已经把该订单丢回太空\n该订单的收益将无法拥有");
     }
 
 
-    public void showDialog(String title, String content) {
+    public void showDialog(int status, String title, String content) {
         publicDialog = new PublicDialog(this);
         publicDialog.show();
+        publicDialog.setCancelable(false);
         publicDialog.setTitleText(title);
         publicDialog.setContentText(content);
+        publicDialog.setOnClickCallback(type -> {
+            if (type == PublicDialog.SELECT_FINISH) {
+                if (status == 1) {
+                    getInfo();
+                }
+                handler.postDelayed(mAdRunnable, 60);
+            }
+        });
     }
 
 
@@ -345,7 +347,7 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
 
     @Override
     public void showMessage(@NonNull String message) {
-
+        ToastUtil.showToast(message);
     }
 
 
@@ -359,7 +361,9 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mHandler.removeCallbacksAndMessages(null);
+        if (handler!=null){
+            handler.removeCallbacks(mAdRunnable);
+        }
     }
 
 }

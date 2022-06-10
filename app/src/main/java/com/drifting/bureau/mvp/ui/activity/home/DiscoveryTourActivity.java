@@ -1,5 +1,7 @@
 package com.drifting.bureau.mvp.ui.activity.home;
 
+import static android.view.View.TRANSLATION_X;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
@@ -43,15 +45,22 @@ import com.drifting.bureau.mvp.model.entity.CustomerEntity;
 
 import com.drifting.bureau.mvp.model.entity.MessageReceiveEntity;
 import com.drifting.bureau.mvp.model.entity.PlanetEntity;
+import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.ui.activity.index.DriftingBottleActivity;
 import com.drifting.bureau.mvp.ui.activity.index.SpaceCapsuleActivity;
 import com.drifting.bureau.mvp.ui.activity.index.ViewRaftingActivity;
 import com.drifting.bureau.mvp.ui.activity.user.AboutMeActivity;
 import com.drifting.bureau.mvp.ui.dialog.RaftingInforDialog;
+import com.drifting.bureau.storageinfo.Preferences;
+import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.MapsUtil;
+import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.animator.AnimatorUtil;
+import com.drifting.bureau.util.callback.BaseDataCallBack;
+import com.drifting.bureau.util.request.RequestUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.base.BaseDialog;
+import com.jess.arms.base.BaseEntity;
 import com.jess.arms.di.component.AppComponent;
 import com.drifting.bureau.mvp.contract.DiscoveryTourContract;
 import com.drifting.bureau.mvp.presenter.DiscoveryTourPresenter;
@@ -107,21 +116,18 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
     RelativeLayout mRlMessage;
 
     private List<PlanetEntity> list;
-    private int index = 0;
-    private List<Point> pointList;
-    private int rows;
-    private Animation animation;
-    private ScaleAnimation scaleAnimation;
-    private AlphaAnimation alphaAnimation;
-    private AnimationSet animationSet;
+    private int index = -1;
+
     //定义滑动的最小距离
     private static final int MIN_DISTANCE = 100;
     private GestureDetector gestureDetector;
     private UserGestureDetector userGestureDetector;
     private RaftingInforDialog raftingInforDialog;
-
+    private AnimatorSet animatorSet;
     private static String EXTRA_TYPE = "extra_type";
-    private Handler handler = new Handler();
+    private Handler handler;
+    private boolean isAnmiation = true;
+    private int id, user_id, explore_id;
 
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, DiscoveryTourActivity.class);
@@ -177,15 +183,9 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
         userGestureDetector = new UserGestureDetector();
         //实例化GestureDetector并将UserGestureDetector实例传入
         gestureDetector = new GestureDetector(this, userGestureDetector);
-
-        list = new ArrayList<>();
-        list.add(new PlanetEntity("传递漂", R.drawable.plant3));
-        list.add(new PlanetEntity("公众漂", R.drawable.plant1));
-        list.add(new PlanetEntity("随机漂", R.drawable.plant2));
-        setFrame();
-        mRlPlant1.setAlpha(0.5f);
-        mRlPlant3.setAlpha(0.5f);
-        handler.postDelayed(mAdRunnable, 500);
+        if (mPresenter != null) {
+            mPresenter.getExploreList();
+        }
     }
 
     public void getXy(ImageView imageView) {
@@ -202,38 +202,51 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
 
     @Override
     public void showMessage(@NonNull String message) {
-
+        ToastUtil.showToast(message);
     }
 
 
-    @OnClick({R.id.rl_plant2, R.id.rl_plant1, R.id.rl_planet3, R.id.tv_open, R.id.tv_about_me, R.id.tv_space_capsule})
+    @OnClick({R.id.rl_plant2, R.id.rl_plant1, R.id.rl_planet3, R.id.rl_message, R.id.tv_about_me, R.id.tv_space_capsule})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.rl_plant2:  //星球点击
-                DriftingBottleActivity.start(this, false);
-                break;
             case R.id.rl_plant1:
-                index--;
-                setFrame();
+                startDriftingBottle(mTvPlanet1);
+                break;
+            case R.id.rl_plant2:  //星球点击
+                startDriftingBottle(mTvPlanet2);
                 break;
             case R.id.rl_planet3:
-                index++;
-                setFrame();
+                startDriftingBottle(mTvPlanet3);
                 break;
-
-            case R.id.tv_open:
-                raftingInforDialog = new RaftingInforDialog(this);
-                raftingInforDialog.show();
-                raftingInforDialog.setOnClickCallback(type -> {
-                    if (type == RaftingInforDialog.CLICK_FINISH) {
-                        IntoSpace();
-                    } else if (type == RaftingInforDialog.CLICK_SELECT) {
-                        ViewRaftingActivity.start(this, false);
+            case R.id.rl_message: //开启新消息
+                RequestUtil.create().userplayer(user_id + "", entity -> {
+                    if (entity != null && entity.getCode() == 200) {
+                        raftingInforDialog = new RaftingInforDialog(DiscoveryTourActivity.this, entity.getData(), explore_id);
+                        raftingInforDialog.show();
+                        raftingInforDialog.setOnClickCallback(type -> {
+                            if (type == RaftingInforDialog.CLICK_FINISH) {
+                                RequestUtil.create().messagethrow(id, entity1 -> {
+                                    if (entity1.getCode() == 200) {
+                                        IntoSpace();
+                                    } else {
+                                        showMessage(entity1.getMsg());
+                                    }
+                                });
+                            } else if (type == RaftingInforDialog.CLICK_SELECT) {
+                                ViewRaftingActivity.start(DiscoveryTourActivity.this, user_id, id, explore_id, entity.getData(), false);
+                            }
+                        });
                     }
                 });
+
+
                 break;
             case R.id.tv_about_me: //关于我
-                AboutMeActivity.start(this, false);
+                RequestUtil.create().userplayer(Preferences.getUserId(), entity -> {
+                    if (entity != null && entity.getCode() == 200) {
+                        AboutMeActivity.start(this, entity.getData(), false);
+                    }
+                });
                 break;
             case R.id.tv_space_capsule: //太空舱
                 SpaceCapsuleActivity.start(this, false);
@@ -242,14 +255,44 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
     }
 
 
-    Runnable mAdRunnable = new Runnable() {
-        @Override
-        public void run() {
-            handler.removeCallbacks(mAdRunnable);
-            mIvRocket.setVisibility(View.VISIBLE);
-            objectAnimation(1, mIvRocket, mRlMessage, -500, 200, 0, 6, 1000);
+    public void startDriftingBottle(TextView textView) {
+        if (!textView.getText().toString().equals("传递漂")) {
+            showMessage("暂未开放");
+        } else {
+            DriftingBottleActivity.start(this, textView.getText().toString(), false);
         }
-    };
+    }
+
+
+    Runnable mAdRunnable = () -> getMessage();
+
+
+    //获取新消息
+    public void getMessage() {
+        if (mPresenter != null) {
+            mPresenter.getMessage();
+        }
+    }
+
+    @Override
+    public void onMessageReceiveSuccess(MessageReceiveEntity entity) {
+        if (entity != null && entity.getId() != null) {
+            if (entity.getId() != 0) {
+                id = entity.getId();
+                user_id = entity.getUser_id();
+                explore_id = entity.getExplore_id();
+                if (isAnmiation) {
+                    isAnmiation = false;
+                    handler.postDelayed(mAdRunnable, entity.getDrift_rest() * 10);
+                    objectAnimation(1, mIvRocket, mRlMessage, -500, 200, 0, 6, 1000);
+                }
+            } else {
+                mIvRocket.setVisibility(View.GONE);
+                mRlMessage.setVisibility(View.INVISIBLE);
+                handler.postDelayed(mAdRunnable, 1000 * 10);
+            }
+        }
+    }
 
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -261,18 +304,27 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
 
 
     public void IntoSpace() {
-        mRlMessage.setVisibility(View.INVISIBLE);
-        objectAnimation(2, mIvRocket, mRlMessage, 0, 0, 1000, -500, 250);
-        handler.postDelayed(mAdRunnable, 3000);
+        isAnmiation = true;
+        objectAnimation(2, mIvRocket, mRlMessage, 0, 0, 1500, -500, 500);
     }
 
     /**
      * @description 属性组合动画
      */
     public void objectAnimation(int type, View view, View tagetview, int values1, int values2, int x, int y, long duration) {
-        ObjectAnimator translationX = ObjectAnimator.ofFloat(view, "translationX", values1, x);
-        ObjectAnimator translationY = ObjectAnimator.ofFloat(view, "translationY", values2, y);
-        AnimatorSet animatorSet = new AnimatorSet();
+        if (animatorSet != null) {
+            animatorSet.cancel();
+            view.animate().rotation(0).setDuration(60).start();
+            tagetview.animate().rotation(0).setDuration(60).start();
+        }
+        if (type == 1) {
+            view.setVisibility(View.VISIBLE);
+        }
+        tagetview.setVisibility(View.INVISIBLE);
+
+        ObjectAnimator translationX = ObjectAnimator.ofFloat(view, TRANSLATION_X, values1, x);
+        ObjectAnimator translationY = ObjectAnimator.ofFloat(view, View.TRANSLATION_Y, values2, y);
+        animatorSet = new AnimatorSet();
         animatorSet.play(translationY).with(translationX);
         animatorSet.setDuration(duration);
         animatorSet.start();
@@ -284,46 +336,38 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
                     tagetview.setVisibility(View.VISIBLE);
                     AnimatorUtil.floatAnim(view, 2000);
                     AnimatorUtil.floatAnim(tagetview, 2000);
+                } else {
+                    tagetview.setVisibility(View.INVISIBLE);
+                    handler.postDelayed(mAdRunnable, 60);
                 }
             }
         });
     }
 
 
-    /**
-     * @description 从另一个view移动到当前view位置的动画
-     */
-    public void startTranslate(View view, View targetView) {
-        animation = new TranslateAnimation(targetView.getX() - view.getX(), 0, targetView.getY() - view.getY(), 0);
-        animation.setDuration(500);
-        animation.setFillAfter(true);
-        view.startAnimation(animation);
-    }
-
-
-    private void moveViewToTargetView(View view, View targetView) {
-        final float x = view.getX();
-        final float y = view.getY();
-        final float targetX = targetView.getX();
-        final float targetY = targetView.getY();
-        view.animate()
-                .translationX(-(x - targetX))
-                .translationY(-(y - targetY))
-                .setDuration(800)
-                .setInterpolator(new DecelerateInterpolator())
-                .withLayer()
-                .start();
-    }
-
-
     @Override
-    public void customerSuccess(List<CustomerEntity> customerEntity) {
-
+    public void onExploretypeSuccess(List<PlanetEntity> entityList) {
+        if (entityList != null && entityList.size() > 0) {
+            list = entityList;
+            setFrame();
+            mRlPlant1.setAlpha(0.5f);
+            mRlPlant3.setAlpha(0.5f);
+        }
     }
 
     @Override
-    public void onMessageReceiveSuccess(MessageReceiveEntity entity) {
+    protected void onResume() {
+        super.onResume();
+        handler= new Handler();
+        handler.postDelayed(mAdRunnable, 60);
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (handler!=null){
+            handler.removeCallbacks(mAdRunnable);
+        }
     }
 
     @Override
@@ -353,108 +397,25 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
             }
             switch (i) {
                 case 0:
-                    mIvPlanet.setImageResource(list.get(row).getDrawable());
+                    GlideUtil.create().loadLongImage(this, list.get(row).getImageUrl(), mIvPlanet);
                     break;
                 case 1:
-                    mIvPlanet1.setImageResource(list.get(row).getDrawable());
-                    mTvPlanet1.setText(list.get(row).getTitle());
+                    GlideUtil.create().loadLongImage(this, list.get(row).getImageUrl(), mIvPlanet1);
+                    mTvPlanet1.setText(list.get(row).getName());
                     break;
                 case 2:
-                    mIvPlanet2.setImageResource(list.get(row).getDrawable());
-                    mTvPlanet2.setText(list.get(row).getTitle());
+                    GlideUtil.create().loadLongImage(this, list.get(row).getImageUrl(), mIvPlanet2);
+                    mTvPlanet2.setText(list.get(row).getName());
                     break;
                 case 3:
-                    mIvPlanet3.setImageResource(list.get(row).getDrawable());
-                    mTvPlanet3.setText(list.get(row).getTitle());
+                    GlideUtil.create().loadLongImage(this, list.get(row).getImageUrl(), mIvPlanet3);
+                    mTvPlanet3.setText(list.get(row).getName());
                     break;
                 case 4:
-                    mIvPlanet4.setImageResource(list.get(row).getDrawable());
+                    GlideUtil.create().loadLongImage(this, list.get(row).getImageUrl(), mIvPlanet4);
                     break;
             }
         }
-    }
-
-//    public void setPointFrame() {
-//        if (index < 0) {
-//            index = pointList.size() - 1;
-//        }
-//        if (index >= pointList.size()) {
-//            index = 0;
-//        }
-//        for (int i = 0; i < 5; i++) {
-//            int row = 0;
-//            if (i == 0) {
-//                row = index - 1;
-//                if (row < 0) {
-//                    row = pointList.size() - 1;
-//                }
-//            } else {
-//                row = index + i - 1;
-//                if (row >= pointList.size()) {
-//                    row = row - pointList.size();
-//                }
-//            }
-//            switch (i) {
-//                case 0:
-//
-//                    mIvPlanet.setImageResource(list.get(row));
-//                    break;
-//                case 1:
-//                    mIvPlanet1.setImageResource(list.get(row));
-//                    break;
-//                case 2:
-//                    mIvPlanet2.setImageResource(list.get(row));
-//                    break;
-//                case 3:
-//                    mIvPlanet3.setImageResource(list.get(row));
-//                    break;
-//                case 4:
-//                    mIvPlanet4.setImageResource(list.get(row));
-//                    break;
-//            }
-//        }
-//    }
-
-    public void StartAnimation() {
-        for (int i = 0; i < 2; i++) {
-            switch (i) {
-                case 0:
-                    animation = new TranslateAnimation(0, 228, 0, -400);
-                    animation.setDuration(250);
-                    animation.setFillAfter(true);
-                    scaleAnimation = new ScaleAnimation(1, 1.5f, 1, 1.5f, Animation.RELATIVE_TO_SELF, 1.5f, Animation.RELATIVE_TO_SELF, 1.5f);
-                    scaleAnimation.setDuration(250);
-                    scaleAnimation.setFillAfter(true);
-                    //透明度动画
-                    alphaAnimation = new AlphaAnimation(1, 0.1f);
-                    alphaAnimation.setDuration(250);
-                    alphaAnimation.setFillAfter(true);
-                    AnimationSet set = new AnimationSet(true);
-                    set.addAnimation(animation);
-                    set.addAnimation(scaleAnimation);
-                    set.addAnimation(alphaAnimation);
-                    mIvPlanet3.startAnimation(animation);
-                    break;
-                case 1:
-                    animation = new TranslateAnimation(0, 318 * 2, 0, -318 * 2);
-                    animation.setDuration(250);
-                    animation.setFillAfter(true);
-                    scaleAnimation = new ScaleAnimation(1, 0.5f, 1, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-                    scaleAnimation.setDuration(250);
-                    scaleAnimation.setFillAfter(true);
-                    //透明度动画
-                    alphaAnimation = new AlphaAnimation(1, 0.1f);
-                    alphaAnimation.setDuration(250);
-                    alphaAnimation.setFillAfter(true);
-                    animationSet = new AnimationSet(true);
-                    animationSet.addAnimation(animation);
-                    animationSet.addAnimation(scaleAnimation);
-                    animationSet.addAnimation(alphaAnimation);
-                    mIvPlanet2.startAnimation(animationSet);
-                    break;
-            }
-        }
-
     }
 
 
@@ -503,5 +464,6 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
     protected void onDestroy() {
         super.onDestroy();
         handler.removeCallbacks(mAdRunnable);
+        RequestUtil.create().disDispose();
     }
 }

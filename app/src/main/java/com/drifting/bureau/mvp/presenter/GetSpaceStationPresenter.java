@@ -3,6 +3,7 @@ import android.app.Application;
 import android.text.TextUtils;
 
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
+import com.drifting.bureau.mvp.model.entity.MysteryboxEntity;
 import com.drifting.bureau.mvp.model.entity.PrizeEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceCheckEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceStationEntity;
@@ -54,7 +55,7 @@ public class GetSpaceStationPresenter extends BasePresenter<GetSpaceStationContr
 
 
     /**
-     * 盲盒列表
+     * 奖品预览（获取空间站）
      */
     public void getAwardList() {
         mModel.awardpreview().subscribeOn(Schedulers.io())
@@ -64,9 +65,39 @@ public class GetSpaceStationPresenter extends BasePresenter<GetSpaceStationContr
                     @Override
                     public void onNext(BaseEntity<List<PrizeEntity>> baseEntity) {
                         if (mRootView != null) {
-                            mRootView.hideLoading();
                             if (baseEntity.getCode() == 200) {
                                 mRootView.onAwardPreviewSuccess(baseEntity.getData());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        if (mRootView != null) {
+                            mRootView.onNetError();
+                        }
+                    }
+                });
+
+    }
+
+
+
+
+    /**
+     * 弹幕日志（获取空间站）
+     */
+    public void mysterybox(int limit) {
+        mModel.mysterybox(limit).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseEntity<MysteryboxEntity>>(mErrorHandler) {
+                    @Override
+                    public void onNext(BaseEntity<MysteryboxEntity> baseEntity) {
+                        if (mRootView != null) {
+                            mRootView.hideLoading();
+                            if (baseEntity.getCode() == 200) {
+                                mRootView.onGetMysterybox(baseEntity.getData());
                             }
                         }
                     }
@@ -94,7 +125,6 @@ public class GetSpaceStationPresenter extends BasePresenter<GetSpaceStationContr
                     @Override
                     public void onNext(BaseEntity<List<SpaceStationEntity>> baseEntity) {
                         if (mRootView != null) {
-                            mRootView.hideLoading();
                             if (baseEntity.getCode() == 200) {
                                 mRootView.onGetSpaceList(baseEntity.getData());
                             }
@@ -123,7 +153,6 @@ public class GetSpaceStationPresenter extends BasePresenter<GetSpaceStationContr
                     @Override
                     public void onNext(BaseEntity<CreateOrderEntity> baseEntity) {
                         if (mRootView != null) {
-                            mRootView.hideLoading();
                             if (baseEntity.getCode() == 200) {
                                 mRootView.onCreateOrderSpaceSuccess(baseEntity.getData());
                             } else {

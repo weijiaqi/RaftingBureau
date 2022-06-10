@@ -48,7 +48,7 @@ public interface PostDriftingContract {
 
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存
     interface Model extends IModel {
-        Observable<BaseEntity<CreatewithfileEntity>> createwithword(int type_id, int explore_id, String content);
+        Observable<BaseEntity<CreatewithfileEntity>> createwithword(int type_id, int explore_id, String content,int message_id);
 
         Observable<BaseEntity<CreatewithfileEntity>> createwithvoice(MultipartBody shortVoice);
 

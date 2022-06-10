@@ -72,14 +72,14 @@ public class GlideUtil {
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)//关键代码，加载原始大小
                     .format(DecodeFormat.PREFER_RGB_565)//设置为这种格式去掉透明度通道，可以减少内存占有
-                    .placeholder(R.drawable.icon_home_page)
-                    .error(R.drawable.icon_home_page);
+                    .placeholder(R.color.transparent)
+                    .error(R.color.transparent);
             Glide.with(context)
                     .load(url)
                     .apply(options)
                     .into(imageView);
         } else {
-            imageView.setImageResource(R.drawable.icon_home_page);
+            imageView.setImageResource(R.color.transparent);
         }
     }
 

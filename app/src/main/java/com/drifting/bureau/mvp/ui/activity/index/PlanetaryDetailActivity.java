@@ -14,7 +14,9 @@ import android.widget.TextView;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.di.component.DaggerPlanetaryDetailComponent;
+import com.drifting.bureau.mvp.model.entity.PlanetaryDetailEntity;
 import com.drifting.bureau.util.ClickUtil;
+import com.drifting.bureau.util.ToastUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 
@@ -43,6 +45,8 @@ public class PlanetaryDetailActivity extends BaseActivity<PlanetaryDetailPresent
     TextView mTvDesc;
     @BindView(R.id.tv_attribute)
     TextView mTvAttribute;
+    @BindView(R.id.tv_num)
+    TextView mTvNum;
     private static String EXTRA_TYPE = "extra_type";
 
     private int type;
@@ -77,6 +81,12 @@ public class PlanetaryDetailActivity extends BaseActivity<PlanetaryDetailPresent
         if (getIntent() != null) {
             type = getIntent().getIntExtra(EXTRA_TYPE, 0);
         }
+
+        if (mPresenter != null) {
+            mPresenter.planetdetails(type);
+        }
+
+
         initListener();
     }
 
@@ -183,6 +193,18 @@ public class PlanetaryDetailActivity extends BaseActivity<PlanetaryDetailPresent
         }
     }
 
+    @Override
+    public void onPlanetaryDetailSuccess(PlanetaryDetailEntity entity) {
+        if (entity != null) {
+            mTvNum.setText(entity.getPeople()+"");
+        }
+    }
+
+    @Override
+    public void onNetError() {
+
+    }
+
     public Activity getActivity() {
         return this;
     }
@@ -201,6 +223,6 @@ public class PlanetaryDetailActivity extends BaseActivity<PlanetaryDetailPresent
 
     @Override
     public void showMessage(@NonNull String message) {
-
+        ToastUtil.showToast(message);
     }
 }

@@ -55,8 +55,8 @@ public class PostDriftingModel extends BaseModel implements PostDriftingContract
     }
 
     @Override
-    public Observable<BaseEntity<CreatewithfileEntity>> createwithword(int type_id, int explore_id, String content) {
-        return mRepositoryManager.obtainRetrofitService(ApiService.class).createwithword(type_id,explore_id,content);
+    public Observable<BaseEntity<CreatewithfileEntity>> createwithword(int type_id, int explore_id, String content,int message_id) {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).createwithword(type_id,explore_id,content,message_id);
     }
 
     @Override

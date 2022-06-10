@@ -10,13 +10,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.di.component.DaggerDriftingTrackComponent;
 import com.drifting.bureau.mvp.model.entity.DriftingTrackEntity;
+import com.drifting.bureau.mvp.model.entity.MyBlindBoxEntity;
 import com.drifting.bureau.mvp.ui.adapter.DriftingTrackAdapter;
 import com.drifting.bureau.util.ClickUtil;
+import com.drifting.bureau.util.ViewUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.drifting.bureau.mvp.contract.DriftingTrackContract;
@@ -36,12 +39,19 @@ import butterknife.OnClick;
  * @author 漂流轨迹
  * module name is DriftingTrackActivity
  */
-public class DriftingTrackActivity extends BaseActivity<DriftingTrackPresenter> implements DriftingTrackContract.View ,XRecyclerView.LoadingListener{
+public class DriftingTrackActivity extends BaseActivity<DriftingTrackPresenter> implements DriftingTrackContract.View, XRecyclerView.LoadingListener {
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
     @BindView(R.id.rcy_public)
     XRecyclerView mRcyPublic;
+    @BindView(R.id.fl_container)
+    FrameLayout mFlState;
     private DriftingTrackAdapter driftingTrackAdapter;
+
+
+    private int mPage = 1;
+    private int limit = 10;
+
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, DriftingTrackActivity.class);
         context.startActivity(intent);
@@ -74,19 +84,85 @@ public class DriftingTrackActivity extends BaseActivity<DriftingTrackPresenter> 
     public void initListener() {
         mRcyPublic.setLayoutManager(new LinearLayoutManager(this));
         mRcyPublic.setLoadingListener(this);
-        driftingTrackAdapter=new DriftingTrackAdapter(new ArrayList<>());
+        driftingTrackAdapter = new DriftingTrackAdapter(new ArrayList<>());
         mRcyPublic.setAdapter(driftingTrackAdapter);
-        driftingTrackAdapter.setData(getData());
+        getData(mPage, true);
     }
 
-    public List<DriftingTrackEntity> getData(){
-        List<DriftingTrackEntity> list=new ArrayList<>();
-        list.add(new DriftingTrackEntity("传递漂"));
-        list.add(new DriftingTrackEntity("传递漂"));
-        list.add(new DriftingTrackEntity("传递漂"));
-        list.add(new DriftingTrackEntity("传递漂"));
-        return list;
+    public void getData(int mPage, boolean loadType) {
+        if (mPresenter != null) {
+            mPresenter.messagemine(mPage, limit, loadType);
+        }
     }
+
+    @Override
+    public void onRefresh() {
+        mPage = 1;
+        getData(mPage, true);
+    }
+
+    @Override
+    public void onLoadMore() {
+        getData(mPage, false);
+    }
+
+    @Override
+    public void onloadStart() {
+        if (driftingTrackAdapter.getDatas() == null || driftingTrackAdapter.getDatas().size() == 0) {
+            ViewUtil.create().setAnimation(this, mFlState);
+        }
+    }
+
+    @Override
+    public void myMessageMineSuccess(DriftingTrackEntity entity, boolean isNotData) {
+        if (mPage == 1 && driftingTrackAdapter.getItemCount() != 0) {
+            driftingTrackAdapter.clearData();
+        }
+        List<DriftingTrackEntity.ListBean> list = entity.getList();
+        if (list != null && list.size() > 0) {
+            if (isNotData) {
+                mPage = 2;
+                driftingTrackAdapter.setData(list);
+            } else {
+                mPage++;
+                driftingTrackAdapter.addData(list);
+            }
+        }
+    }
+
+    @Override
+    public void loadFinish(boolean loadType, boolean isNotData) {
+        if (mRcyPublic == null) {
+            return;
+        }
+        if (!loadType && isNotData) {
+            mRcyPublic.loadEndLine();
+        } else {
+            mRcyPublic.refreshEndComplete();
+        }
+    }
+
+    @Override
+    public void loadState(int dataState) {
+        if (mPage == 1) {
+            if (dataState == ViewUtil.NOT_DATA) {
+                ViewUtil.create().setView(this, mFlState, ViewUtil.NOT_DATA);
+            } else if (dataState == ViewUtil.NOT_SERVER) {
+                ViewUtil.create().setView(this, mFlState, ViewUtil.NOT_SERVER);
+            } else if (dataState == ViewUtil.NOT_NETWORK) {
+                ViewUtil.create().setView(this, mFlState, ViewUtil.NOT_NETWORK);
+            } else {
+                ViewUtil.create().setView(mFlState);
+            }
+        } else {
+            ViewUtil.create().setView(mFlState);
+        }
+    }
+
+    public Activity getActivity() {
+        return this;
+    }
+
 
     @OnClick({R.id.toolbar_back})
     public void onClick(View view) {
@@ -99,22 +175,10 @@ public class DriftingTrackActivity extends BaseActivity<DriftingTrackPresenter> 
         }
     }
 
-    public Activity getActivity() {
-        return this;
-    }
-
     @Override
     public void showMessage(@NonNull String message) {
 
     }
 
-    @Override
-    public void onRefresh() {
-        mRcyPublic.refreshEndComplete();
-    }
 
-    @Override
-    public void onLoadMore() {
-        mRcyPublic.loadEndLine();
-    }
 }

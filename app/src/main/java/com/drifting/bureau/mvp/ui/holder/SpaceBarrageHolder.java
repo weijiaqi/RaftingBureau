@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.BarrageEntity;
+import com.drifting.bureau.mvp.model.entity.MysteryboxEntity;
 import com.drifting.bureau.util.ColorUtil;
 import com.drifting.bureau.util.TextUtil;
 import com.jess.arms.base.BaseRecyclerHolder;
@@ -25,14 +26,12 @@ public class SpaceBarrageHolder extends BaseRecyclerHolder {
         super(itemView);
     }
 
-    public void setData(@NonNull List<BarrageEntity> listBeanList, int position) {
-        if (!TextUtils.isEmpty(listBeanList.get(position % listBeanList.size()).getText().trim())){
-            mTvContent.setVisibility(View.VISIBLE);
-        }else {
+    public void setData(@NonNull List<MysteryboxEntity.ListBean> listBeanList, int position) {
+        if( listBeanList.get(position % listBeanList.size()).getEvent().contains("\u3000")){
             mTvContent.setVisibility(View.INVISIBLE);
+        }else {
+            mTvContent.setVisibility(View.VISIBLE);
         }
-
-        TextUtil.setText(mTvContent, listBeanList.get(position % listBeanList.size()).getText());
-        mTvContent.setTextColor(ColorUtil.getColorByRgb(null));
+        TextUtil.setText(mTvContent, listBeanList.get(position % listBeanList.size()).getEvent());
     }
 }

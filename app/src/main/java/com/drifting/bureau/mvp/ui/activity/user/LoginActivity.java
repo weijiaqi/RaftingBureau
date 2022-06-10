@@ -188,7 +188,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
                 @Override
                 public void onFinish() {
                     mTvSubmit.setEnabled(true);
-                    mTvSubmit.setText("");
+                    mTvSubmit.setText("获取验证码");
                     cleanCountDown();
                 }
             }.start();

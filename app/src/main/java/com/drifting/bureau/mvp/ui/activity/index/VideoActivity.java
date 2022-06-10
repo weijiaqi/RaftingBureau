@@ -34,7 +34,8 @@ import butterknife.OnClick;
  * @Time : 2022/5/17 16:04
  */
 public class VideoActivity extends BaseActivity {
-
+    @BindView(R.id.toolbar_title)
+    TextView mToobarTitle;
     @BindView(R.id.videoView)
     VideoView mVideoView;
     @BindView(R.id.total)
@@ -77,6 +78,7 @@ public class VideoActivity extends BaseActivity {
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
+        mToobarTitle.setText("查看视频");
         if (getIntent() != null) {
             uri = getIntent().getStringExtra(EXTRA_URI);
         }

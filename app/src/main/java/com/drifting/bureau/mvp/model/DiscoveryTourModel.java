@@ -4,6 +4,7 @@ import android.app.Application;
 import com.drifting.bureau.app.api.ApiService;
 import com.drifting.bureau.mvp.model.entity.CustomerEntity;
 import com.drifting.bureau.mvp.model.entity.MessageReceiveEntity;
+import com.drifting.bureau.mvp.model.entity.PlanetEntity;
 import com.google.gson.Gson;
 import com.jess.arms.base.BaseEntity;
 import com.jess.arms.integration.IRepositoryManager;
@@ -48,8 +49,8 @@ public class DiscoveryTourModel extends BaseModel implements DiscoveryTourContra
     }
 
     @Override
-    public Observable<BaseEntity<List<CustomerEntity>>> customerlist() {
-        return mRepositoryManager.obtainRetrofitService(ApiService.class).customerlist();
+    public Observable<BaseEntity<List<PlanetEntity>>> exploretypelist() {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).exploretypelist();
     }
 
     @Override

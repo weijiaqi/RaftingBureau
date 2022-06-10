@@ -1,12 +1,24 @@
 package com.drifting.bureau.mvp.presenter;
+
 import android.app.Application;
+
+import com.drifting.bureau.mvp.model.entity.MysteryboxEntity;
+import com.drifting.bureau.util.ToastUtil;
+import com.jess.arms.base.BaseEntity;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
+
 import javax.inject.Inject;
+
 import com.drifting.bureau.mvp.contract.FeedBackContract;
+import com.jess.arms.utils.RxLifecycleUtils;
 
 /**
  * ================================================
@@ -21,7 +33,7 @@ import com.drifting.bureau.mvp.contract.FeedBackContract;
  * ================================================
  */
 @ActivityScope
-public class FeedBackPresenter extends BasePresenter<FeedBackContract.Model, FeedBackContract.View>{
+public class FeedBackPresenter extends BasePresenter<FeedBackContract.Model, FeedBackContract.View> {
     @Inject
     RxErrorHandler mErrorHandler;
     @Inject
@@ -32,9 +44,40 @@ public class FeedBackPresenter extends BasePresenter<FeedBackContract.Model, Fee
     AppManager mAppManager;
 
     @Inject
-    public FeedBackPresenter (FeedBackContract.Model model, FeedBackContract.View rootView) {
+    public FeedBackPresenter(FeedBackContract.Model model, FeedBackContract.View rootView) {
         super(model, rootView);
     }
+
+
+    /**
+     * 意见反馈
+     */
+    public void feedback(String content, String phone) {
+        mModel.feedback(content, phone).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseEntity>(mErrorHandler) {
+                    @Override
+                    public void onNext(BaseEntity baseEntity) {
+                        if (mRootView != null) {
+                            if (baseEntity.getCode() == 200) {
+                                mRootView.onFeedBackAddSuccess();
+                            }else {
+                                mRootView.showMessage(baseEntity.getMsg());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        if (mRootView != null) {
+                            mRootView.onNetError();
+                        }
+                    }
+                });
+
+    }
+
 
     @Override
     public void onDestroy() {

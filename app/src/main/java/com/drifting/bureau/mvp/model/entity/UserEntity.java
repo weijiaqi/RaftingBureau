@@ -22,7 +22,7 @@ public class UserEntity {
     }
 
     public static class PlanetBean {
-        private Integer id;
+        private Integer Id;
         private String name;
         private Integer temp_id;
         private Long user_id;
@@ -39,11 +39,11 @@ public class UserEntity {
         private String updated_at;
 
         public Integer getId() {
-            return id;
+            return Id;
         }
 
         public void setId(Integer id) {
-            this.id = id;
+            Id = id;
         }
 
         public String getName() {

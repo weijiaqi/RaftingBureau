@@ -27,12 +27,14 @@
 
 
         <com.hjq.shape.view.ShapeEditText
+            android:id="@+id/et_content"
             android:layout_width="match_parent"
             android:layout_height="197dp"
             android:layout_marginTop="14dp"
             android:gravity="top"
             android:hint="请留下你的反馈意见，我们会认真查阅"
             android:padding="9dp"
+            android:maxLength="200"
             android:textColor="@color/white"
             android:textColorHint="@color/color_9a"
             android:textSize="12sp"
@@ -49,6 +51,7 @@
             android:textStyle="bold" />
 
         <com.hjq.shape.view.ShapeEditText
+            android:id="@+id/et_contact"
             android:layout_width="match_parent"
             android:layout_height="38dp"
             android:gravity="center_vertical"

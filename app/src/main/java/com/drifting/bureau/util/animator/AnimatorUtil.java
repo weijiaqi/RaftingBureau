@@ -17,7 +17,6 @@ public class AnimatorUtil {
         btnSexAnimatorSet.playTogether(translationYAnim);
         btnSexAnimatorSet.setStartDelay(delay);
         btnSexAnimatorSet.start();
-
     }
 
 }

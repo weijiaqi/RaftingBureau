@@ -108,6 +108,9 @@ dependencies {
     //抽屉
     implementation 'com.billy.android:smart-swipe:1.1.2'
 
+    //轮播图
+    implementation 'cn.bingoogolapple:bga-banner:2.1.7@aar'
+
     //test
     debugImplementation rootProject.ext.dependencies["canary-debug"]
 

@@ -45,7 +45,7 @@ public class AccountSettingsModel extends BaseModel implements AccountSettingsCo
     }
 
     @Override
-    public Observable<BaseEntity<UserInfoEntity>> userplayer(String user_id) {
-        return mRepositoryManager.obtainRetrofitService(ApiService.class).userplayer(user_id);
+    public Observable<BaseEntity> setname(String name) {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).setname(name);
     }
 }

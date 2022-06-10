@@ -3,12 +3,15 @@ package com.drifting.bureau.mvp.contract;
 import android.app.Activity;
 
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
+import com.drifting.bureau.mvp.model.entity.CreatewithfileEntity;
+import com.drifting.bureau.mvp.model.entity.MessageContentEntity;
 import com.drifting.bureau.mvp.model.entity.SkuListEntity;
 import com.jess.arms.base.BaseEntity;
 import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IView;
 
 import io.reactivex.Observable;
+import okhttp3.MultipartBody;
 
 /**
  * ================================================
@@ -29,6 +32,9 @@ public interface ViewRaftingContract {
 
         void onCreateOrderSuccess(CreateOrderEntity entity);
 
+        void onMessageContent(MessageContentEntity entity);
+
+
         void onNetError();
 
         Activity getActivity();
@@ -40,5 +46,8 @@ public interface ViewRaftingContract {
         Observable<BaseEntity<SkuListEntity>> skulist(int type_id, int explore_id, int message_id);
 
         Observable<BaseEntity<CreateOrderEntity>> createOrder(int type_id, String sku_codes);
+
+        Observable<BaseEntity<MessageContentEntity>> messagecontent(int message_id);
+
     }
 }

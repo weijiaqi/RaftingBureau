@@ -3,6 +3,7 @@ import android.app.Application;
 
 import com.drifting.bureau.mvp.model.entity.CustomerEntity;
 import com.drifting.bureau.mvp.model.entity.MessageReceiveEntity;
+import com.drifting.bureau.mvp.model.entity.PlanetEntity;
 import com.drifting.bureau.util.ToastUtil;
 import com.jess.arms.base.BaseEntity;
 import com.jess.arms.integration.AppManager;
@@ -54,18 +55,18 @@ public class DiscoveryTourPresenter extends BasePresenter<DiscoveryTourContract.
     }
 
     /**
-     * 联系客服
+     * 探索方式列表
      */
-    public void getCustomerList() {
-        mModel.customerlist().subscribeOn(Schedulers.io())
+    public void getExploreList() {
+        mModel.exploretypelist().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
-                .subscribe(new ErrorHandleSubscriber<BaseEntity<List<CustomerEntity>>>(mErrorHandler) {
+                .subscribe(new ErrorHandleSubscriber<BaseEntity<List<PlanetEntity>>>(mErrorHandler) {
                     @Override
-                    public void onNext(BaseEntity<List<CustomerEntity>> baseEntity) {
+                    public void onNext(BaseEntity<List<PlanetEntity>> baseEntity) {
                         if (mRootView != null) {
                             if (baseEntity.getCode() == 200) {
-                                mRootView.customerSuccess(baseEntity.getData());
+                                mRootView.onExploretypeSuccess(baseEntity.getData());
                             }
                         }
                     }

@@ -55,7 +55,7 @@ public class SignLoginPresenter extends BasePresenter<SignLoginContract.Model, S
                                 mRootView.loginSuccess(entity.getData());
                             } else {
                                 if (!TextUtils.isEmpty(entity.getMsg())) {
-                                    ToastUtil.showToast(entity.getMsg());
+                                    mRootView.showMessage(entity.getMsg());
                                 }
                             }
                         }

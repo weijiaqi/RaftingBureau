@@ -3,6 +3,8 @@ import android.app.Application;
 
 import com.drifting.bureau.app.api.ApiService;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
+import com.drifting.bureau.mvp.model.entity.CreatewithfileEntity;
+import com.drifting.bureau.mvp.model.entity.MessageContentEntity;
 import com.drifting.bureau.mvp.model.entity.SkuListEntity;
 import com.google.gson.Gson;
 import com.jess.arms.base.BaseEntity;
@@ -13,6 +15,7 @@ import javax.inject.Inject;
 import com.drifting.bureau.mvp.contract.ViewRaftingContract;
 
 import io.reactivex.Observable;
+import okhttp3.MultipartBody;
 
 /**
  * ================================================
@@ -54,4 +57,10 @@ public class ViewRaftingModel extends BaseModel implements ViewRaftingContract.M
     public Observable<BaseEntity<CreateOrderEntity>> createOrder(int type_id, String sku_codes) {
         return mRepositoryManager.obtainRetrofitService(ApiService.class).createOrder(type_id,sku_codes);
     }
+
+    @Override
+    public Observable<BaseEntity<MessageContentEntity>> messagecontent(int message_id) {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).messagecontent(message_id);
+    }
+
 }

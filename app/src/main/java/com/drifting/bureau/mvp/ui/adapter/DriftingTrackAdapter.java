@@ -11,9 +11,9 @@ import com.jess.arms.base.BaseRecyclerHolder;
 
 import java.util.List;
 
-public class DriftingTrackAdapter  extends BaseRecyclerAdapter<DriftingTrackEntity> {
+public class DriftingTrackAdapter  extends BaseRecyclerAdapter<DriftingTrackEntity.ListBean> {
 
-    public DriftingTrackAdapter(List<DriftingTrackEntity> infos) {
+    public DriftingTrackAdapter(List<DriftingTrackEntity.ListBean> infos) {
         super(infos);
     }
 

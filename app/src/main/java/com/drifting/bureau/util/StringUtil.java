@@ -40,6 +40,19 @@ public class StringUtil {
         return result;
     }
 
+
+    /**
+     * @description 提现金额比较
+     */
+    public static String CompareMoney(String money,String money2) {
+        String result = null;
+       if (Double.parseDouble(money)>Double.parseDouble(money2)){
+           result="可提现金额不足!";
+       }
+        return result;
+    }
+
+
     /**
      * 判断字符串非空判断
      *

@@ -1,27 +1,45 @@
 package com.drifting.bureau.mvp.model.entity;
 
+import java.util.List;
+
 public class PlanetEntity {
-    private String title;
-    private int drawable;
 
-    public PlanetEntity(String title, int drawable) {
-        this.title = title;
-        this.drawable = drawable;
+
+        private Integer Id;
+        private String name;
+        private String imageUrl;
+        private String desc;
+
+    public Integer getId() {
+        return Id;
     }
 
-    public String getTitle() {
-        return title;
+    public void setId(Integer id) {
+        Id = id;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    public String getName() {
+            return name;
+        }
 
-    public int getDrawable() {
-        return drawable;
-    }
+        public void setName(String name) {
+            this.name = name;
+        }
 
-    public void setDrawable(int drawable) {
-        this.drawable = drawable;
-    }
+        public String getImageUrl() {
+            return imageUrl;
+        }
+
+        public void setImageUrl(String imageUrl) {
+            this.imageUrl = imageUrl;
+        }
+
+        public String getDesc() {
+            return desc;
+        }
+
+        public void setDesc(String desc) {
+            this.desc = desc;
+        }
+
 }

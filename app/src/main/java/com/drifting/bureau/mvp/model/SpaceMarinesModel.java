@@ -44,8 +44,5 @@ public class SpaceMarinesModel extends BaseModel implements SpaceMarinesContract
         this.mApplication = null;
     }
 
-    @Override
-    public Observable<BaseEntity<UserInfoEntity>> userplayer(String user_id) {
-        return mRepositoryManager.obtainRetrofitService(ApiService.class).userplayer(user_id);
-    }
+
 }

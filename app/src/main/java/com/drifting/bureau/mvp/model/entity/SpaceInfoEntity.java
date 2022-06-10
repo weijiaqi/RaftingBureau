@@ -1,14 +1,15 @@
 package com.drifting.bureau.mvp.model.entity;
 
 public class SpaceInfoEntity {
-    private Integer id;
+
+    private Integer Id;
     private String space_name;
     private Integer user_id;
     private Integer level;
     private String level_name;
     private Integer explore_num;
-    private String total_make;
-    private String today_make;
+    private Integer total_make;
+    private Integer today_make;
     private double total_income;
     private double withdrawable;
     private Integer status;
@@ -16,11 +17,11 @@ public class SpaceInfoEntity {
     private Integer updated_at_int;
 
     public Integer getId() {
-        return id;
+        return Id;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        Id = id;
     }
 
     public String getSpace_name() {
@@ -63,22 +64,21 @@ public class SpaceInfoEntity {
         this.explore_num = explore_num;
     }
 
-    public String getTotal_make() {
+    public Integer getTotal_make() {
         return total_make;
     }
 
-    public void setTotal_make(String total_make) {
+    public void setTotal_make(Integer total_make) {
         this.total_make = total_make;
     }
 
-    public String getToday_make() {
+    public Integer getToday_make() {
         return today_make;
     }
 
-    public void setToday_make(String today_make) {
+    public void setToday_make(Integer today_make) {
         this.today_make = today_make;
     }
-
 
     public double getTotal_income() {
         return total_income;
@@ -119,5 +119,6 @@ public class SpaceInfoEntity {
     public void setUpdated_at_int(Integer updated_at_int) {
         this.updated_at_int = updated_at_int;
     }
+
 }
 

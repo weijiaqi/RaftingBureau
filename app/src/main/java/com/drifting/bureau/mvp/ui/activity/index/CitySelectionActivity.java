@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.data.entity.CityEntity;
@@ -22,6 +24,7 @@ import com.drifting.bureau.mvp.ui.adapter.HotListAdapter;
 import com.drifting.bureau.util.AssessUtil;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.GsonUtil;
+import com.drifting.bureau.util.ViewUtil;
 import com.drifting.bureau.view.location.QuickLocationBar;
 import com.google.gson.Gson;
 import com.jess.arms.base.BaseActivity;
@@ -54,12 +57,14 @@ public class CitySelectionActivity extends BaseActivity<CitySelectionPresenter> 
     RecyclerView mCityLit;
     @BindView(R.id.city_loactionbar)
     QuickLocationBar mQuicLocationBar;
-
+    @BindView(R.id.frame)
+    FrameLayout frame;
     private List<CityEntity> mCityEntity;
 
 
     private CityListAdapter cityListAdapter;
     private HotListAdapter hotListAdapter;
+    private Handler mHandler = new Handler();
 
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, CitySelectionActivity.class);
@@ -85,25 +90,31 @@ public class CitySelectionActivity extends BaseActivity<CitySelectionPresenter> 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
-
         initListener();
     }
 
     public void initListener() {
-        mHotList.setLayoutManager(new GridLayoutManager(this, 4));
-        hotListAdapter = new HotListAdapter(new ArrayList<>());
-        mHotList.setAdapter(hotListAdapter);
-        hotListAdapter.setData(getData());
-        mQuicLocationBar.setOnTouchLitterChangedListener(new LetterListViewListener());
-        mCityLit.setLayoutManager(new LinearLayoutManager(this));
-        cityListAdapter = new CityListAdapter(new ArrayList<>());
-        mCityLit.setAdapter(cityListAdapter);
-        String cityjson = AssessUtil.getJson("city.json", this);
-        mCityEntity = GsonUtil.getObjectList(cityjson,CityEntity.class);
-       Collections.sort(mCityEntity);
-        cityListAdapter.setData(mCityEntity);
+        mHandler.postDelayed(mRunnable, 1000);
     }
 
+
+    private Runnable mRunnable = new Runnable() {
+        @Override
+        public void run() {
+            mHotList.setLayoutManager(new GridLayoutManager(CitySelectionActivity.this, 4));
+            hotListAdapter = new HotListAdapter(new ArrayList<>());
+            mHotList.setAdapter(hotListAdapter);
+            hotListAdapter.setData(getData());
+            mQuicLocationBar.setOnTouchLitterChangedListener(new LetterListViewListener());
+            mCityLit.setLayoutManager(new LinearLayoutManager(CitySelectionActivity.this));
+            cityListAdapter = new CityListAdapter(new ArrayList<>());
+            mCityLit.setAdapter(cityListAdapter);
+            String cityjson = AssessUtil.getJson("city.json", CitySelectionActivity.this);
+            mCityEntity = GsonUtil.getObjectList(cityjson, CityEntity.class);
+            Collections.sort(mCityEntity);
+            cityListAdapter.setData(mCityEntity);
+        }
+    };
 
     public List<HotCityEntity> getData() {
         List<HotCityEntity> list = new ArrayList<>();
@@ -117,6 +128,15 @@ public class CitySelectionActivity extends BaseActivity<CitySelectionPresenter> 
 
     public Activity getActivity() {
         return this;
+    }
+
+
+    public void showLoading() {
+        ViewUtil.create().show(this);
+    }
+
+    public void hideLoading() {
+        ViewUtil.create().dismiss();
     }
 
 
@@ -174,5 +194,11 @@ public class CitySelectionActivity extends BaseActivity<CitySelectionPresenter> 
     @Override
     public void showMessage(@NonNull String message) {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacks(mRunnable);
     }
 }

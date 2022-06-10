@@ -8,6 +8,8 @@ import android.widget.TextView;
 import androidx.fragment.app.FragmentActivity;
 
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
+import com.drifting.bureau.mvp.model.entity.CreatewithfileEntity;
+import com.drifting.bureau.mvp.model.entity.MessageContentEntity;
 import com.drifting.bureau.mvp.model.entity.SkuListEntity;
 import com.drifting.bureau.mvp.ui.activity.index.VideoActivity;
 import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
@@ -24,6 +26,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 import javax.inject.Inject;
 
@@ -32,6 +37,7 @@ import com.jess.arms.utils.PermissionUtil;
 import com.jess.arms.utils.RxLifecycleUtils;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -77,7 +83,7 @@ public class ViewRaftingPresenter extends BasePresenter<ViewRaftingContract.Mode
                             if (entity.getCode() == 200) {
                                 mRootView.onSkuListSuccess(entity.getData());
                             } else {
-                                showMessage(entity.getMsg());
+                                mRootView.showMessage(entity.getMsg());
                             }
                         }
                     }
@@ -106,7 +112,7 @@ public class ViewRaftingPresenter extends BasePresenter<ViewRaftingContract.Mode
                             if (entity.getCode() == 200) {
                                 mRootView.onCreateOrderSuccess(entity.getData());
                             } else {
-                                showMessage(entity.getMsg());
+                                mRootView.showMessage(entity.getMsg());
                             }
                         }
                     }
@@ -119,6 +125,37 @@ public class ViewRaftingPresenter extends BasePresenter<ViewRaftingContract.Mode
                     }
                 });
     }
+
+
+
+    /**
+     * 查看漂流（话题详请）
+     */
+    public void messageContent(int message_id) {
+        mModel.messagecontent(message_id).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseEntity<MessageContentEntity>>(mErrorHandler) {
+                    @Override
+                    public void onNext(BaseEntity<MessageContentEntity> entity) {
+                        if (mRootView != null) {
+                            if (entity.getCode() == 200) {
+                                mRootView.onMessageContent(entity.getData());
+                            } else {
+                                mRootView.showMessage(entity.getMsg());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        if (mRootView != null) {
+                            mRootView.onNetError();
+                        }
+                    }
+                });
+    }
+
 
 
     /**
@@ -146,11 +183,6 @@ public class ViewRaftingPresenter extends BasePresenter<ViewRaftingContract.Mode
 
     }
 
-
-
-    public void  showMessage(String message){
-        ToastUtil.showToast(message);
-    }
     @Override
     public void onDestroy() {
         super.onDestroy();

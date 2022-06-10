@@ -1,7 +1,9 @@
 package com.drifting.bureau.mvp.contract;
+
 import android.app.Activity;
 
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
+import com.drifting.bureau.mvp.model.entity.MysteryboxEntity;
 import com.drifting.bureau.mvp.model.entity.PrizeEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceCheckEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceStationEntity;
@@ -28,25 +30,32 @@ import io.reactivex.Observable;
 public interface GetSpaceStationContract {
     //对于经常使用的关于UI的方法可以定义到IView中,如显示隐藏进度条,和显示文字消息
     interface View extends IView {
+
+        void onGetMysterybox(MysteryboxEntity list);
+
         void onGetSpaceList(List<SpaceStationEntity> list);
 
         void onCreateOrderSpaceSuccess(CreateOrderEntity entity);
 
         void onSpaceCheck(SpaceCheckEntity entity);
 
-        void onAwardPreviewSuccess(List<PrizeEntity>  list);
+        void onAwardPreviewSuccess(List<PrizeEntity> list);
+
         void onNetError();
 
-         Activity getActivity();
+        Activity getActivity();
     }
+
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存
-    interface Model extends IModel{
+    interface Model extends IModel {
         Observable<BaseEntity<List<SpaceStationEntity>>> space();
 
-        Observable<BaseEntity<CreateOrderEntity>> createOrderSpace(String sku_code,String sku_num);
+        Observable<BaseEntity<CreateOrderEntity>> createOrderSpace(String sku_code, String sku_num);
 
         Observable<BaseEntity<SpaceCheckEntity>> spacecheck();
 
         Observable<BaseEntity<List<PrizeEntity>>> awardpreview();
+
+        Observable<BaseEntity<MysteryboxEntity>> mysterybox(int limit);
     }
 }

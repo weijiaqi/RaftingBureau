@@ -179,4 +179,9 @@ public class WithdrawalRecordActivity extends BaseActivity<WithdrawalRecordPrese
     }
 
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ViewUtil.create().setView(mFlState);
+    }
 }

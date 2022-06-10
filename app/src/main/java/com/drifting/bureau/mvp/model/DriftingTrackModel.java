@@ -1,11 +1,17 @@
 package com.drifting.bureau.mvp.model;
 import android.app.Application;
+
+import com.drifting.bureau.app.api.ApiService;
+import com.drifting.bureau.mvp.model.entity.DriftingTrackEntity;
 import com.google.gson.Gson;
+import com.jess.arms.base.BaseEntity;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
 import com.jess.arms.di.scope.ActivityScope;
 import javax.inject.Inject;
 import com.drifting.bureau.mvp.contract.DriftingTrackContract;
+
+import io.reactivex.Observable;
 
 /**
  * ================================================
@@ -36,5 +42,10 @@ public class DriftingTrackModel extends BaseModel implements DriftingTrackContra
         super.onDestroy();
         this.mGson = null;
         this.mApplication = null;
+    }
+
+    @Override
+    public Observable<BaseEntity<DriftingTrackEntity>> messagemine(int page, int limit) {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).messagemine(page,limit);
     }
 }

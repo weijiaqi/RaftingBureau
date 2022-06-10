@@ -1,11 +1,16 @@
 package com.drifting.bureau.mvp.model;
 import android.app.Application;
+
+import com.drifting.bureau.app.api.ApiService;
 import com.google.gson.Gson;
+import com.jess.arms.base.BaseEntity;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
 import com.jess.arms.di.scope.ActivityScope;
 import javax.inject.Inject;
 import com.drifting.bureau.mvp.contract.FeedBackContract;
+
+import io.reactivex.Observable;
 
 /**
  * ================================================
@@ -36,5 +41,10 @@ public class FeedBackModel extends BaseModel implements FeedBackContract.Model{
         super.onDestroy();
         this.mGson = null;
         this.mApplication = null;
+    }
+
+    @Override
+    public Observable<BaseEntity> feedback(String content,String phone) {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).feedbackadd(content,phone);
     }
 }
