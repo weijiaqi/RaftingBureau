@@ -6,6 +6,7 @@ import android.util.SparseArray;
 
 import com.drifting.bureau.app.api.ApiProxy;
 import com.drifting.bureau.mvp.model.entity.BoxOpenEntity;
+import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.util.callback.BaseDataCallBack;
 import com.jess.arms.base.BaseEntity;
 import com.jess.arms.base.BaseObserver;
@@ -44,6 +45,43 @@ public class RequestUtil {
         }
         return mRequestUtil;
     }
+
+
+
+    /**
+     * 查看漂流-玩家信息
+     *
+     * @param user_id
+     * @param callBack
+     */
+    public void userplayer(String user_id, BaseDataCallBack<UserInfoEntity> callBack) {
+        ApiProxy.getApiService().userplayer(user_id)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new BaseObserver<BaseEntity<UserInfoEntity>>() {
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+                        mDisposables.put(mRequestCount++, disposable);
+                    }
+
+                    @Override
+                    public void onNext(BaseEntity<UserInfoEntity> entity) {
+                        if (callBack != null) {
+                            callBack.getData(entity);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (callBack != null) {
+                            callBack.getData(null);
+                        }
+                    }
+                });
+    }
+
+
 
     /**
      * 开启盲盒（我的盲盒中用）
@@ -148,6 +186,78 @@ public class RequestUtil {
                     }
                 });
     }
+
+
+
+
+    /**
+     * 丢入星空（首页弹窗、查看漂流页面可用）
+     *
+     * @param callBack
+     */
+    public void messagethrow(int message_id, BaseDataCallBack callBack) {
+        ApiProxy.getApiService().messagethrow(message_id)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new BaseObserver<BaseEntity>() {
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+                        mDisposables.put(mRequestCount++, disposable);
+                    }
+
+                    @Override
+                    public void onNext(BaseEntity entity) {
+                        if (callBack != null) {
+                            callBack.getData(entity);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (callBack != null) {
+                            callBack.getData(null);
+                        }
+                    }
+                });
+    }
+
+
+
+
+
+    /**
+     * 添加好友（查看漂流）
+     *
+     * @param callBack
+     */
+    public void friendapply(String user_id, BaseDataCallBack callBack) {
+        ApiProxy.getApiService().friendapply(user_id)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new BaseObserver<BaseEntity>() {
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+                        mDisposables.put(mRequestCount++, disposable);
+                    }
+
+                    @Override
+                    public void onNext(BaseEntity entity) {
+                        if (callBack != null) {
+                            callBack.getData(entity);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (callBack != null) {
+                            callBack.getData(null);
+                        }
+                    }
+                });
+    }
+
 
 
 

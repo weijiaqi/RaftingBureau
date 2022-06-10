@@ -4,6 +4,7 @@ import android.view.View;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.BarrageEntity;
+import com.drifting.bureau.mvp.model.entity.MysteryboxEntity;
 import com.drifting.bureau.mvp.ui.holder.RaftingDetailsHolder;
 import com.drifting.bureau.mvp.ui.holder.SpaceBarrageHolder;
 import com.jess.arms.base.BaseRecyclerAdapter;
@@ -11,9 +12,9 @@ import com.jess.arms.base.BaseRecyclerHolder;
 
 import java.util.List;
 
-public class SpaceBarrageAdapter  extends BaseRecyclerAdapter<BarrageEntity> {
+public class SpaceBarrageAdapter  extends BaseRecyclerAdapter<MysteryboxEntity.ListBean> {
 
-    public SpaceBarrageAdapter(List<BarrageEntity> infos) {
+    public SpaceBarrageAdapter(List<MysteryboxEntity.ListBean> infos) {
         super(infos);
     }
 

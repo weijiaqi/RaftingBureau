@@ -3,6 +3,7 @@ import android.app.Application;
 
 import com.drifting.bureau.app.api.ApiService;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
+import com.drifting.bureau.mvp.model.entity.MysteryboxEntity;
 import com.drifting.bureau.mvp.model.entity.PrizeEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceCheckEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceStationEntity;
@@ -17,6 +18,7 @@ import com.drifting.bureau.mvp.contract.GetSpaceStationContract;
 import java.util.List;
 
 import io.reactivex.Observable;
+import retrofit2.http.Field;
 
 /**
  * ================================================
@@ -67,5 +69,10 @@ public class GetSpaceStationModel extends BaseModel implements GetSpaceStationCo
     @Override
     public Observable<BaseEntity<List<PrizeEntity>>> awardpreview() {
         return mRepositoryManager.obtainRetrofitService(ApiService.class).awardpreview();
+    }
+
+    @Override
+    public Observable<BaseEntity<MysteryboxEntity>> mysterybox(int limit) {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).mysterybox(limit);
     }
 }

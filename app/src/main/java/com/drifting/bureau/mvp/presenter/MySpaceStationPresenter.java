@@ -11,6 +11,7 @@ import com.drifting.bureau.mvp.model.entity.OrderDetailEntity;
 import com.drifting.bureau.mvp.model.entity.OrderOneEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceInfoEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
+import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.ViewUtil;
 import com.jess.arms.base.BaseEntity;
 import com.jess.arms.integration.AppManager;
@@ -71,7 +72,11 @@ public class MySpaceStationPresenter extends BasePresenter<MySpaceStationContrac
                     @Override
                     public void onNext(BaseEntity<SpaceInfoEntity> baseEntity) {
                         if (mRootView != null) {
-                            mRootView.onSpcaeInfoSuccess(baseEntity.getData());
+                            if (baseEntity.getCode() == 200) {
+                                mRootView.onSpcaeInfoSuccess(baseEntity.getData());
+                            } else {
+                                mRootView.showMessage(baseEntity.getMsg());
+                            }
                         }
                     }
 
@@ -97,7 +102,11 @@ public class MySpaceStationPresenter extends BasePresenter<MySpaceStationContrac
                     @Override
                     public void onNext(BaseEntity<OrderOneEntity> baseEntity) {
                         if (mRootView != null) {
-                            mRootView.onOrderOneSuccess(baseEntity.getData());
+                            if (baseEntity.getCode() == 200) {
+                                mRootView.onOrderOneSuccess(baseEntity.getData());
+                            } else {
+                                mRootView.showMessage(baseEntity.getMsg());
+                            }
                         }
                     }
 
@@ -123,7 +132,11 @@ public class MySpaceStationPresenter extends BasePresenter<MySpaceStationContrac
                     @Override
                     public void onNext(BaseEntity<OrderDetailEntity> baseEntity) {
                         if (mRootView != null) {
-                            mRootView.onOrderDetailSuccess(baseEntity.getData());
+                            if (baseEntity.getCode() == 200) {
+                                mRootView.onOrderDetailSuccess(baseEntity.getData());
+                            } else {
+                                mRootView.showMessage(baseEntity.getMsg());
+                            }
                         }
                     }
 
@@ -148,7 +161,11 @@ public class MySpaceStationPresenter extends BasePresenter<MySpaceStationContrac
                     @Override
                     public void onNext(BaseEntity<UserInfoEntity> baseEntity) {
                         if (mRootView != null) {
-                            mRootView.onUserInfoSuccess(baseEntity.getData());
+                            if (baseEntity.getCode() == 200) {
+                                mRootView.onUserInfoSuccess(baseEntity.getData());
+                            } else {
+                                mRootView.showMessage(baseEntity.getMsg());
+                            }
                         }
                     }
 
@@ -172,7 +189,11 @@ public class MySpaceStationPresenter extends BasePresenter<MySpaceStationContrac
                     @Override
                     public void onNext(BaseEntity baseEntity) {
                         if (mRootView != null) {
-                            mRootView.onOrderThrowSuccess();
+                            if (baseEntity.getCode() == 200) {
+                                mRootView.onOrderThrowSuccess();
+                            } else {
+                                mRootView.showMessage(baseEntity.getMsg());
+                            }
                         }
                     }
 
@@ -197,7 +218,11 @@ public class MySpaceStationPresenter extends BasePresenter<MySpaceStationContrac
                     @Override
                     public void onNext(BaseEntity baseEntity) {
                         if (mRootView != null) {
-                            mRootView.onOrderMakingSuccess();
+                            if (baseEntity.getCode() == 200) {
+                                mRootView.onOrderMakingSuccess();
+                            } else {
+                                mRootView.showMessage(baseEntity.getMsg());
+                            }
                         }
                     }
 
@@ -209,7 +234,6 @@ public class MySpaceStationPresenter extends BasePresenter<MySpaceStationContrac
                     }
                 });
     }
-
 
 
     /**
@@ -223,7 +247,11 @@ public class MySpaceStationPresenter extends BasePresenter<MySpaceStationContrac
                     @Override
                     public void onNext(BaseEntity<MySpaceStationEntity> baseEntity) {
                         if (mRootView != null) {
-                            mRootView.onLevelCurrentSuccess(baseEntity.getData());
+                            if (baseEntity.getCode() == 200) {
+                                mRootView.onLevelCurrentSuccess(baseEntity.getData());
+                            } else {
+                                mRootView.showMessage(baseEntity.getMsg());
+                            }
                         }
                     }
 
@@ -235,7 +263,6 @@ public class MySpaceStationPresenter extends BasePresenter<MySpaceStationContrac
                     }
                 });
     }
-
 
 
     /**
@@ -251,6 +278,8 @@ public class MySpaceStationPresenter extends BasePresenter<MySpaceStationContrac
                         if (mRootView != null) {
                             if (baseEntity.getCode() == 200) {
                                 mRootView.onStorageMineSuccess(baseEntity.getData());
+                            } else {
+                                mRootView.showMessage(baseEntity.getMsg());
                             }
                         }
                     }
@@ -261,6 +290,8 @@ public class MySpaceStationPresenter extends BasePresenter<MySpaceStationContrac
                     }
                 });
     }
+
+
 
     @Override
     public void onDestroy() {

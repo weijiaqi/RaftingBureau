@@ -56,6 +56,7 @@ public class PaymentInfoActivity extends BaseActivity<PaymentInfoPresenter> impl
 
     public static void start(Context context, int type, String sn, String tatal, boolean closePage) {
         Intent intent = new Intent(context, PaymentInfoActivity.class);
+        intent.putExtra(EXRA_TYPE, type);
         intent.putExtra(EXRA_SN, sn);
         intent.putExtra(EXRA_TOTAL, tatal);
         context.startActivity(intent);
@@ -123,13 +124,8 @@ public class PaymentInfoActivity extends BaseActivity<PaymentInfoPresenter> impl
                     setCheckStatus(2);
                     break;
                 case R.id.tv_cofim_pay: //立即购买
-                    if (type == 1 || type == 2) {
-                        if (mPresenter != null) {
-                            mPresenter.payOrder(sn);
-                        }
-                    } else {
-                        finish();
-                        EventBus.getDefault().post(new PaymentEvent());
+                    if (mPresenter != null) {
+                        mPresenter.payOrder(sn);
                     }
                     break;
             }

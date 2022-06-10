@@ -1,6 +1,8 @@
 package com.drifting.bureau.mvp.model.entity;
 
-public class UserInfoEntity {
+import java.io.Serializable;
+
+public class UserInfoEntity implements Serializable {
 
         private PlanetBean planet;
         private UserBean user;
@@ -21,8 +23,8 @@ public class UserInfoEntity {
             this.user = user;
         }
 
-        public static class PlanetBean {
-            private Integer id;
+        public static class PlanetBean  implements Serializable  {
+            private Integer Id;
             private String name;
             private Integer temp_id;
             private Integer user_id;
@@ -41,11 +43,11 @@ public class UserInfoEntity {
             private Integer updated_at_int;
 
             public Integer getId() {
-                return id;
+                return Id;
             }
 
             public void setId(Integer id) {
-                this.id = id;
+                Id = id;
             }
 
             public String getName() {
@@ -177,8 +179,8 @@ public class UserInfoEntity {
             }
         }
 
-        public static class UserBean {
-            private Integer id;
+        public static class UserBean   implements Serializable{
+            private Integer Id;
             private String name;
             private String mobile;
             private Integer level;
@@ -188,11 +190,11 @@ public class UserInfoEntity {
             private Integer updated_at_int;
 
             public Integer getId() {
-                return id;
+                return Id;
             }
 
             public void setId(Integer id) {
-                this.id = id;
+                Id = id;
             }
 
             public String getName() {

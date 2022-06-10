@@ -2,20 +2,27 @@ package com.drifting.bureau.app.api;
 
 
 import com.bumptech.glide.annotation.GlideType;
+import com.drifting.bureau.mvp.model.entity.BarrageEntity;
 import com.drifting.bureau.mvp.model.entity.BoxOpenEntity;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
 import com.drifting.bureau.mvp.model.entity.CreatewithfileEntity;
 import com.drifting.bureau.mvp.model.entity.CustomerEntity;
+import com.drifting.bureau.mvp.model.entity.DeliveryDetailsEntity;
+import com.drifting.bureau.mvp.model.entity.DriftingTrackEntity;
 import com.drifting.bureau.mvp.model.entity.IncomeRecordEntity;
 import com.drifting.bureau.mvp.model.entity.LoginEntity;
 import com.drifting.bureau.mvp.model.entity.MakingRecordEntity;
+import com.drifting.bureau.mvp.model.entity.MessageContentEntity;
 import com.drifting.bureau.mvp.model.entity.MessageReceiveEntity;
 import com.drifting.bureau.mvp.model.entity.MyBlindBoxEntity;
 import com.drifting.bureau.mvp.model.entity.MySpaceStationEntity;
 import com.drifting.bureau.mvp.model.entity.MyTreasuryEntity;
+import com.drifting.bureau.mvp.model.entity.MysteryboxEntity;
 import com.drifting.bureau.mvp.model.entity.OrderDetailEntity;
 import com.drifting.bureau.mvp.model.entity.OrderOneEntity;
 import com.drifting.bureau.mvp.model.entity.PayOrderEntity;
+import com.drifting.bureau.mvp.model.entity.PlanetEntity;
+import com.drifting.bureau.mvp.model.entity.PlanetaryDetailEntity;
 import com.drifting.bureau.mvp.model.entity.PrizeEntity;
 import com.drifting.bureau.mvp.model.entity.SkuListEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceCheckEntity;
@@ -90,7 +97,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("v/message/createwithfile")
-    Observable<BaseEntity<CreatewithfileEntity>> createwithword(@Field("type_id") int status, @Field("explore_id") int explore_id, @Field("content") String content);
+    Observable<BaseEntity<CreatewithfileEntity>> createwithword(@Field("type_id") int status, @Field("explore_id") int explore_id, @Field("content") String content,@Field("message_id") int message_id);
 
 
     /**
@@ -114,6 +121,23 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("v/order/createOrder")
     Observable<BaseEntity<CreateOrderEntity>> createOrder(@Field("message_id") int message_id, @Field("sku_codes") String sku_codes);
+
+
+    /**
+     * 查看漂流（话题详请）
+     */
+    @FormUrlEncoded
+    @POST("v/message/content")
+    Observable<BaseEntity<MessageContentEntity>> messagecontent(@Field("message_id") int message_id);
+
+
+
+    /**
+     * 丢入星空（首页弹窗、查看漂流页面可用）
+     */
+    @FormUrlEncoded
+    @POST("v/message/throw")
+    Observable<BaseEntity> messagethrow(@Field("message_id") int message_id);
 
 
     /**
@@ -157,6 +181,16 @@ public interface ApiService {
 
 
     /**
+     * 弹幕日志（获取空间站）
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/mysterybox/logs")
+    Observable<BaseEntity<MysteryboxEntity>> mysterybox( @Field("limit") int limit);
+
+
+    /**
      * 我的盲盒（空间站）
      *
      * @return
@@ -183,6 +217,17 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("v/mysterybox/transfer")
     Observable<BaseEntity> transfer(@Field("box_id") String box_id,@Field("mobile") String mobile);
+
+
+
+    /**
+     *申请提现
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/withdraw/apply")
+    Observable<BaseEntity> withdrawapply(@Field("name") String name,@Field("account") String account,@Field("money") String money);
 
 
 
@@ -237,6 +282,16 @@ public interface ApiService {
 
 
     /**
+     * 添加好友（查看漂流）
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/friend/apply")
+    Observable<BaseEntity> friendapply(@Field("user_id") String user_id);
+
+
+    /**
      * 空间站丢回太空（把订单丢回太空）
      *
      * @return
@@ -252,7 +307,7 @@ public interface ApiService {
      * @return
      */
     @FormUrlEncoded
-    @POST("v/space/order/throw")
+    @POST("v/space/order/making")
     Observable<BaseEntity> ordermaking(@Field("space_order_id") int space_order_id);
 
 
@@ -272,6 +327,29 @@ public interface ApiService {
      */
     @GET("v/space/storage/mine")
     Observable<BaseEntity<List<MyTreasuryEntity>>> storagemine();
+
+
+
+    /**
+     * 漂流轨迹
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/message/mine")
+    Observable<BaseEntity<DriftingTrackEntity>> messagemine(@Field("page") int page, @Field("limit") int limit);
+
+
+
+    /**
+     * 漂流详情（探寻轨迹）
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/message/details")
+    Observable<BaseEntity<BarrageEntity>> messagedetails(@Field("message_id") int message_id);
+
 
 
     /**
@@ -294,6 +372,26 @@ public interface ApiService {
 
 
     /**
+     * 星球详情
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/planet/level/details")
+    Observable<BaseEntity<PlanetaryDetailEntity>> plannetdetails(@Field("pl_id") int pl_id);
+
+
+    /**
+     * 传递详情（增加分页）
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/message/path/details")
+    Observable<BaseEntity<DeliveryDetailsEntity>> pathdetails(@Field("message_id") int message_id,@Field("page") int page, @Field("limit") int limit);
+
+
+    /**
      * 关于我
      *
      * @return
@@ -302,12 +400,30 @@ public interface ApiService {
     Observable<BaseEntity<UserEntity>> userhome();
 
     /**
-     * 联系客服
+     * 探索方式列表
      *
      * @return
      */
-    @GET("n/customer/list")
-    Observable<BaseEntity<List<CustomerEntity>>> customerlist();
+    @GET("v/exploretype/list")
+    Observable<BaseEntity<List<PlanetEntity>>>exploretypelist();
 
+
+    /**
+     *设置昵称
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/user/setname")
+    Observable<BaseEntity> setname(@Field("name") String name);
+
+    /**
+     *意见反馈
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/feedback/add")
+    Observable<BaseEntity> feedbackadd(@Field("content") String content,@Field("phone") String phone);
 
 }

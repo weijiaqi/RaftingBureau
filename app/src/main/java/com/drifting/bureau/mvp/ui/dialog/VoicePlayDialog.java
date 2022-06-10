@@ -18,8 +18,13 @@ public class VoicePlayDialog extends BaseDialog implements View.OnClickListener{
     private VoiceWave videoView;
     private ImageView mIvPlay;
     private TextView mTvTime;
-    public VoicePlayDialog(@NonNull Context context) {
+    private String content;
+    private int time;
+
+    public VoicePlayDialog(@NonNull Context context,String content,int time) {
         super(context);
+        this.content=content;
+        this.time=time;
         init();
     }
 
@@ -35,7 +40,7 @@ public class VoicePlayDialog extends BaseDialog implements View.OnClickListener{
         setOnDismissListener(new OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
-                VideoUtil.stop(videoView,mIvPlay,mTvTime,7);
+                VideoUtil.stop(videoView,mIvPlay,mTvTime,time);
             }
         });
     }
@@ -74,6 +79,6 @@ public class VoicePlayDialog extends BaseDialog implements View.OnClickListener{
     }
 
     public void startPlay(){
-        VideoUtil.startVoicePlay("/data/user/0/com.drifting.bureau/files/voice_20220520_093022.amr", 7, mIvPlay, videoView, mTvTime);
+        VideoUtil.startVoicePlay(content, time, mIvPlay, videoView, mTvTime);
     }
 }

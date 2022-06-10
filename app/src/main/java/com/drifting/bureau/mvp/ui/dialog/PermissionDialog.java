@@ -50,11 +50,11 @@ public class PermissionDialog {
     /**
      * 判断是否开启语音权限
      */
-    public static void startVoicePlay(Activity activity, String uri, ImageView mIvPlay, VoiceWave mVideoView, TextView mTvTime) {
+    public static void startVoicePlay(Activity activity, String uri, int totaltime, ImageView mIvPlay, VoiceWave mVideoView, TextView mTvTime) {
         requestAudioPermissions(activity, new PermissionCallBack() {
             @Override
             public void onSuccess() {//允许
-                VideoUtil.startVoicePlay(uri, 4, mIvPlay, mVideoView, mTvTime);
+                VideoUtil.startVoicePlay(uri, totaltime, mIvPlay, mVideoView, mTvTime);
             }
 
             @Override

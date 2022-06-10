@@ -13,20 +13,17 @@ import android.widget.TextView;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.di.component.DaggerAccountSettingsComponent;
-import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.ui.activity.web.ShowWebViewActivity;
 import com.drifting.bureau.mvp.ui.dialog.ModifyNicknameDialog;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.LogInOutDataUtil;
 import com.drifting.bureau.util.ToastUtil;
+import com.drifting.bureau.util.request.RequestUtil;
 import com.jess.arms.base.BaseActivity;
-import com.jess.arms.base.BaseDialog;
 import com.jess.arms.di.component.AppComponent;
-
 import com.drifting.bureau.mvp.contract.AccountSettingsContract;
 import com.drifting.bureau.mvp.presenter.AccountSettingsPresenter;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -74,9 +71,15 @@ public class AccountSettingsActivity extends BaseActivity<AccountSettingsPresent
     }
 
     public void initListener() {
-        if (mPresenter != null) {
-            mPresenter.userplayer(Preferences.getUserId());
-        }
+        getUserInfo();
+    }
+
+    public void getUserInfo() {
+        RequestUtil.create().userplayer(Preferences.getUserId(), entity -> {
+            if (entity != null && entity.getCode() == 200) {
+                mTvNikename.setText(entity.getData().getUser().getName());
+            }
+        });
     }
 
     @OnClick({R.id.toolbar_back, R.id.rl_nikename, R.id.rl_feedback, R.id.rl_privacy, R.id.rl_register, R.id.tv_exit})
@@ -89,12 +92,12 @@ public class AccountSettingsActivity extends BaseActivity<AccountSettingsPresent
                 case R.id.rl_nikename:
                     modifyNicknameDialog = new ModifyNicknameDialog(this);
                     modifyNicknameDialog.show();
-                    modifyNicknameDialog.setOnClickCallback(new BaseDialog.OnClickCallback() {
-                        @Override
-                        public void onClickType(int type) {
-
+                    modifyNicknameDialog.setOnContentClickCallback(content -> {
+                        if (mPresenter != null) {
+                            mPresenter.setName(content);
                         }
                     });
+
                     break;
                 case R.id.rl_feedback:
                     FeedBackActivity.start(this, false);
@@ -113,11 +116,10 @@ public class AccountSettingsActivity extends BaseActivity<AccountSettingsPresent
         }
     }
 
+
     @Override
-    public void onUserInfoSuccess(UserInfoEntity entity) {
-        if (entity != null) {
-            mTvNikename.setText(entity.getUser().getName());
-        }
+    public void onSetNameSuccess() {
+        getUserInfo();
     }
 
     @Override
@@ -132,5 +134,11 @@ public class AccountSettingsActivity extends BaseActivity<AccountSettingsPresent
     @Override
     public void showMessage(@NonNull String message) {
         ToastUtil.showToast(message);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RequestUtil.create().disDispose();
     }
 }

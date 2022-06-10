@@ -45,6 +45,7 @@ public class BuildGuideActivity extends BaseActivity {
     CheckBox mCkProtocol;
     @BindView(R.id.rl_check)
     RelativeLayout mRlCheck;
+
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, BuildGuideActivity.class);
         context.startActivity(intent);
@@ -66,7 +67,7 @@ public class BuildGuideActivity extends BaseActivity {
         setStatusBar(true);
         setUserComment();
         mCkProtocol.setOnCheckedChangeListener((compoundButton, ischecked) -> {
-            mRlCheck.setVisibility(ischecked ?View.GONE:View.VISIBLE);
+            mRlCheck.setVisibility(ischecked ? View.GONE : View.VISIBLE);
         });
     }
 
@@ -127,7 +128,7 @@ public class BuildGuideActivity extends BaseActivity {
         return userSpannable;
     }
 
-    @OnClick({R.id.tv_create_planet,R.id.ck_protocol, R.id.rl_agree})
+    @OnClick({R.id.tv_create_planet})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
@@ -138,10 +139,7 @@ public class BuildGuideActivity extends BaseActivity {
                         mRlCheck.startAnimation(shake);
                         return;
                     }
-                    SignLoginHintActivity.start(this,true);
-                    break;
-                case R.id.rl_agree: //协议同意
-                    mCkProtocol.setChecked(mCkProtocol.isChecked() ? false : true);
+                    SignLoginHintActivity.start(this, true);
                     break;
             }
         }

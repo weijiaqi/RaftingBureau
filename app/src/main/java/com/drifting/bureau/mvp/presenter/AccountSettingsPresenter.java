@@ -1,7 +1,11 @@
 package com.drifting.bureau.mvp.presenter;
+
 import android.app.Application;
 
+import com.drifting.bureau.mvp.model.entity.PlanetEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
+import com.drifting.bureau.storageinfo.Preferences;
+import com.drifting.bureau.util.ToastUtil;
 import com.jess.arms.base.BaseEntity;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
@@ -14,8 +18,11 @@ import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 
 import javax.inject.Inject;
+
 import com.drifting.bureau.mvp.contract.AccountSettingsContract;
 import com.jess.arms.utils.RxLifecycleUtils;
+
+import java.util.List;
 
 /**
  * ================================================
@@ -30,7 +37,7 @@ import com.jess.arms.utils.RxLifecycleUtils;
  * ================================================
  */
 @ActivityScope
-public class AccountSettingsPresenter extends BasePresenter<AccountSettingsContract.Model, AccountSettingsContract.View>{
+public class AccountSettingsPresenter extends BasePresenter<AccountSettingsContract.Model, AccountSettingsContract.View> {
     @Inject
     RxErrorHandler mErrorHandler;
     @Inject
@@ -41,30 +48,34 @@ public class AccountSettingsPresenter extends BasePresenter<AccountSettingsContr
     AppManager mAppManager;
 
     @Inject
-    public AccountSettingsPresenter (AccountSettingsContract.Model model, AccountSettingsContract.View rootView) {
+    public AccountSettingsPresenter(AccountSettingsContract.Model model, AccountSettingsContract.View rootView) {
         super(model, rootView);
     }
 
     /**
-     * 用户信息
+     * 设置昵称
      */
-    public void userplayer(String user_id) {
-        mModel.userplayer(user_id).subscribeOn(Schedulers.io())
+    public void setName(String name) {
+        mModel.setname(name).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
-                .subscribe(new ErrorHandleSubscriber<BaseEntity<UserInfoEntity>>(mErrorHandler) {
+                .subscribe(new ErrorHandleSubscriber<BaseEntity>(mErrorHandler) {
                     @Override
-                    public void onNext(BaseEntity<UserInfoEntity> baseEntity) {
+                    public void onNext(BaseEntity baseEntity) {
                         if (mRootView != null) {
-                            mRootView.onUserInfoSuccess(baseEntity.getData());
+                            if (baseEntity != null) {
+                                 mRootView.showMessage(baseEntity.getMsg());
+                                if (baseEntity.getCode() == 200) {
+                                    Preferences.saveUserName(name);
+                                    mRootView.onSetNameSuccess();
+                                }
+                            }
                         }
                     }
 
                     @Override
                     public void onError(Throwable t) {
-                        if (mRootView != null) {
-                            mRootView.onNetError();
-                        }
+                        t.printStackTrace();
                     }
                 });
     }

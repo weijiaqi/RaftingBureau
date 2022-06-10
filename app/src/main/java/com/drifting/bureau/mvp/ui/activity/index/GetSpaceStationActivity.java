@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,13 +19,17 @@ import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -31,6 +37,7 @@ import com.drifting.bureau.R;
 import com.drifting.bureau.di.component.DaggerGetSpaceStationComponent;
 import com.drifting.bureau.mvp.model.entity.BarrageEntity;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
+import com.drifting.bureau.mvp.model.entity.MysteryboxEntity;
 import com.drifting.bureau.mvp.model.entity.PrizeEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceCheckEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceStationEntity;
@@ -46,14 +53,18 @@ import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.animator.AnimatorUtil;
 import com.drifting.bureau.view.AutoPollRecyclerView;
+import com.drifting.bureau.view.ScaleInTransformer;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 
 import com.drifting.bureau.mvp.contract.GetSpaceStationContract;
 import com.drifting.bureau.mvp.presenter.GetSpaceStationPresenter;
+import com.jess.arms.utils.ArmsUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -74,29 +85,25 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
     TextView mTvPrice;
     @BindView(R.id.tv_protocol)
     TextView mTvProtocol;
-    @BindView(R.id.iv_blind_box)
-    ImageView mIvbLindBox;
-    @BindView(R.id.iv_blind_box2)
-    ImageView mIvbLindBox2;
-    @BindView(R.id.iv_blind_box3)
-    ImageView mIvbLindBox3;
     @BindView(R.id.rl_check)
     RelativeLayout mRlCheck;
     @BindView(R.id.ck_protocol)
     CheckBox mCkProtocol;
     @BindView(R.id.tv_blind_box_name)
     TextView mBlindBoxName;
+    @BindView(R.id.vp_img)
+    ViewPager mViewPager;
+    @BindView(R.id.frame)
+    FrameLayout frame;
     private SpaceBarrageAdapter spaceBarrageAdapter;
-    private int index = 0;
-    private GestureDetector gestureDetector;
-    private SpaceGestureDetector spaceGestureDetector;
-    //定义滑动的最小距离
-    private static final int MIN_DISTANCE = 100;
+
+    private List<ImageView> imageViewList;
     private List<SpaceStationEntity> list;
+    private ImageView iv;
     private String skuCode;
     private SpannableStringBuilder passer;
     private PrizepreviewDialog prizepreviewDialog;
-
+    private int limit=50;
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, GetSpaceStationActivity.class);
         context.startActivity(intent);
@@ -131,33 +138,18 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
             mRlCheck.setVisibility(ischecked ? View.GONE : View.VISIBLE);
         });
 
-        //实例化滑动监听
-        spaceGestureDetector = new SpaceGestureDetector();
-        //实例化GestureDetector并将UserGestureDetector实例传入
-        gestureDetector = new GestureDetector(this, spaceGestureDetector);
-        mIvbLindBox2.setAlpha(0.4f);
-        mIvbLindBox3.setAlpha(0.4f);
-        statFloatAnim();
+        mRcyBarrage.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.HORIZONTAL));
+        spaceBarrageAdapter = new SpaceBarrageAdapter(new ArrayList<>());
+
 
         if (mPresenter != null) {
             mPresenter.getSpaceList();
+            mPresenter.mysterybox(limit);
         }
-
         setUserComment();
-        mRcyBarrage.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.HORIZONTAL));
-        spaceBarrageAdapter = new SpaceBarrageAdapter(new ArrayList<>());
-        mRcyBarrage.setAdapter(spaceBarrageAdapter);
-        spaceBarrageAdapter.setData(getData());
-        mRcyBarrage.start();
+        frame.setOnTouchListener((view, motionEvent) -> mViewPager.onTouchEvent(motionEvent));
     }
 
-    public void statFloatAnim() {
-        AnimatorUtil.floatAnim(mIvbLindBox, 2000);
-        new Handler().postDelayed(() -> {
-            AnimatorUtil.floatAnim(mIvbLindBox2, 2000);
-            AnimatorUtil.floatAnim(mIvbLindBox3, 2000);
-        }, 500);
-    }
 
     /**
      * @description 给隐私设置颜色
@@ -194,72 +186,98 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
     }
 
 
-    public List<BarrageEntity> getData() {
-        List<BarrageEntity> list = new ArrayList<>();
-        list.add(new BarrageEntity(""));
-        list.add(new BarrageEntity("             "));
-        list.add(new BarrageEntity("恭喜芭芘零食屋获得MED空间站"));
-        list.add(new BarrageEntity("恭喜唇边回味奶茶浓香获得SUP空间站"));
-        list.add(new BarrageEntity("恭喜无所谓的记忆获得TN空间站"));
-        list.add(new BarrageEntity("恭喜陽咣丅啲憂喐获得HIGH空间站"));
-        list.add(new BarrageEntity("恭喜数学不好有错么获得TN空间站"));
-        list.add(new BarrageEntity("恭喜嘴角残留的余香获得SUP空间站"));
-        list.add(new BarrageEntity("恭喜我就说是巧克力获得TN空间站"));
-        list.add(new BarrageEntity("恭喜纯净的眸子获得HIGH空间站"));
-        return list;
+    @Override
+    public void onGetMysterybox(MysteryboxEntity entity) {
+        if (entity != null && entity.getList().size() > 0) {
+            List<MysteryboxEntity.ListBean> list = entity.getList();
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < 2; i++) {
+                sb.append("\u3000");
+                MysteryboxEntity.ListBean map = new MysteryboxEntity.ListBean();
+                map.setEvent(sb.toString());
+                //向List最前面插入元素
+                list.add(0, map);
+            }
+            mRcyBarrage.setAdapter(spaceBarrageAdapter);
+            spaceBarrageAdapter.setData(list);
+            mRcyBarrage.start();
+        } else {
+            mRcyBarrage.setVisibility(View.INVISIBLE);
+        }
     }
-
 
     @Override
     public void onGetSpaceList(List<SpaceStationEntity> data) {
         list = data;
-        setFrame();
+        imageViewList = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            iv = new ImageView(this);
+            iv.setImageResource(R.drawable.space_blind_box);
+            imageViewList.add(iv);
+        }
+        setText(0);
+        MyAdapter myAdapter = new MyAdapter();
+        mViewPager.setOffscreenPageLimit(list.size());
+        mViewPager.setClipChildren(false);
+        mViewPager.setAdapter(myAdapter);
+        mViewPager.setCurrentItem(list.size() * 100);
+        mViewPager.setPageTransformer(true, new ScaleInTransformer());
+        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                  setText(position % list.size());
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
+    }
+
+    public void setText(int postion) {
+        passer = SpannableUtil.getBuilder(this, "￥").setTextSize(12).append(list.get(postion).getPrice() + "").setBold().setTextSize(17).build();
+        mTvPrice.setText(passer);
+        mBlindBoxName.setText(list.get(postion).getSku_name());
+        skuCode = list.get(postion).getSku_code();
+    }
+
+
+    private class MyAdapter extends PagerAdapter {
+
+        @Override
+        public int getCount() {
+            return Integer.MAX_VALUE;
+        }
+
+        @Override
+        public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
+            return view == object;
+        }
+
+        @NonNull
+        @Override
+        public Object instantiateItem(@NonNull ViewGroup container, int position) {
+            ImageView iv = new ImageView(getApplication());
+            iv.setImageResource(R.drawable.space_blind_box);
+            container.addView(iv);
+            return iv;
+        }
+
+        @Override
+        public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+            container.removeView((View) object);
+        }
     }
 
 
     @Override
     public void onNetError() {
 
-    }
-
-    public void setFrame() {
-        if (list != null) {
-            if (index < 0) {
-                index = list.size() - 1;
-            }
-            if (index >= list.size()) {
-                index = 0;
-            }
-            for (int i = 0; i < 5; i++) {
-                int row = 0;
-                if (i == 0) {
-                    row = index - 1;
-                    if (row < 0) {
-                        row = list.size() - 1;
-                    }
-                } else {
-                    row = index + i - 1;
-                    if (row >= list.size()) {
-                        row = row - list.size();
-                    }
-                }
-                switch (i) {
-                    case 0:
-                        mIvbLindBox3.setImageResource(R.drawable.space_blind_box);
-                        break;
-                    case 1:
-                        mIvbLindBox.setImageResource(R.drawable.space_blind_box);
-                        passer= SpannableUtil.getBuilder(this, "￥").setTextSize(12).append(list.get(row).getPrice()+"").setBold().setTextSize(17).build();
-                        mTvPrice.setText(passer);
-                        mBlindBoxName.setText(list.get(row).getSku_name());
-                        skuCode = list.get(row).getSku_code();
-                        break;
-                    case 2:
-                        mIvbLindBox2.setImageResource(R.drawable.space_blind_box);
-                        break;
-                }
-            }
-        }
     }
 
 
@@ -273,7 +291,7 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
     }
 
 
-    @OnClick({R.id.toolbar_back, R.id.tv_buy, R.id.tv_buy_more, R.id.tv_my_blind_box, R.id.iv_blind_box2, R.id.iv_blind_box3,R.id.tv_prize_preview})
+    @OnClick({R.id.toolbar_back, R.id.tv_buy, R.id.tv_buy_more, R.id.tv_my_blind_box, R.id.tv_prize_preview})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
@@ -281,7 +299,7 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
                     finish();
                     break;
                 case R.id.tv_buy:
-                    if (list!=null){
+                    if (list != null) {
                         createOrder(skuCode, "1");
                     }
 
@@ -292,16 +310,9 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
                 case R.id.tv_my_blind_box:  //我的盲盒
                     MyBlindBoxActivity.start(this, false);
                     break;
-                case R.id.iv_blind_box2:
-                    index--;
-                    setFrame();
-                    break;
-                case R.id.iv_blind_box3:
-                    index++;
-                    setFrame();
-                    break;
+
                 case R.id.tv_prize_preview:  //奖品预览
-                    if (mPresenter!=null){
+                    if (mPresenter != null) {
                         mPresenter.getAwardList();
                     }
                     break;
@@ -323,8 +334,9 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
 
     @Override
     public void onCreateOrderSpaceSuccess(CreateOrderEntity entity) {
-        PaymentInfoActivity.start(this,2, entity.getSn(), entity.getTotal_amount(),false);
+        PaymentInfoActivity.start(this, 2, entity.getSn(), entity.getTotal_amount(), false);
     }
+
     @Override
     public void onSpaceCheck(SpaceCheckEntity entity) {
 
@@ -332,36 +344,11 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
 
     @Override
     public void onAwardPreviewSuccess(List<PrizeEntity> list) {
-        if (list!=null &&list.size()>0){
-            prizepreviewDialog=new PrizepreviewDialog(this,list);
+        if (list != null && list.size() > 0) {
+            prizepreviewDialog = new PrizepreviewDialog(this, list);
             prizepreviewDialog.show();
         }
 
     }
 
-    /**
-     * 重写onTouchEvent返回一个gestureDetector的屏幕触摸事件
-     */
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        return gestureDetector.onTouchEvent(event);
-    }
-
-    /**
-     * 自定义SpaceGestureDetector类继承SimpleOnGestureListener
-     */
-    class SpaceGestureDetector extends GestureDetector.SimpleOnGestureListener {
-
-        @Override
-        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            if (e1.getX() - e2.getX() > MIN_DISTANCE || e2.getY() - e1.getY() > MIN_DISTANCE) { //下滑或者左滑动
-                index--;
-                setFrame();
-            } else { //上滑或者右滑
-                index++;
-                setFrame();
-            }
-            return true;
-        }
-    }
 }

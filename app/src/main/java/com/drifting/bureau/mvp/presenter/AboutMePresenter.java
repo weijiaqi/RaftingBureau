@@ -2,6 +2,7 @@ package com.drifting.bureau.mvp.presenter;
 import android.app.Application;
 
 import com.drifting.bureau.mvp.model.entity.CustomerEntity;
+import com.drifting.bureau.mvp.model.entity.PlanetEntity;
 import com.drifting.bureau.mvp.model.entity.UserEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.jess.arms.base.BaseEntity;
@@ -49,29 +50,9 @@ public class AboutMePresenter extends BasePresenter<AboutMeContract.Model, About
         super(model, rootView);
     }
 
-    /**
-     * 用户信息
-     */
-    public void userplayer(String user_id) {
-        mModel.userplayer(user_id).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
-                .subscribe(new ErrorHandleSubscriber<BaseEntity<UserInfoEntity>>(mErrorHandler) {
-                    @Override
-                    public void onNext(BaseEntity<UserInfoEntity> baseEntity) {
-                        if (mRootView != null) {
-                            mRootView.onUserInfoSuccess(baseEntity.getData());
-                        }
-                    }
 
-                    @Override
-                    public void onError(Throwable t) {
-                        if (mRootView != null) {
-                            mRootView.onNetError();
-                        }
-                    }
-                });
-    }
+
+
 
     @Override
     public void onDestroy() {

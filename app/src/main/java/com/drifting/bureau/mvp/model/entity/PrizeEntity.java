@@ -7,19 +7,19 @@ import java.util.List;
 public class PrizeEntity {
 
         @SerializedName("Id")
-        private Integer id;
+        private Integer Id;
         private String award_name;
         private String image_url;
 
-        public Integer getId() {
-            return id;
-        }
+    public Integer getId() {
+        return Id;
+    }
 
-        public void setId(Integer id) {
-            this.id = id;
-        }
+    public void setId(Integer id) {
+        Id = id;
+    }
 
-        public String getAward_name() {
+    public String getAward_name() {
             return award_name;
         }
 

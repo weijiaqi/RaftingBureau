@@ -16,6 +16,7 @@ import com.drifting.bureau.di.component.DaggerSpaceCapsuleComponent;
 import com.drifting.bureau.mvp.contract.GetSpaceStationContract;
 import com.drifting.bureau.mvp.contract.MySpaceStationContract;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
+import com.drifting.bureau.mvp.model.entity.MysteryboxEntity;
 import com.drifting.bureau.mvp.model.entity.PrizeEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceCheckEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceStationEntity;
@@ -94,6 +95,11 @@ public class SpaceCapsuleActivity  extends BaseActivity<GetSpaceStationPresenter
                     break;
             }
         }
+    }
+
+    @Override
+    public void onGetMysterybox(MysteryboxEntity list) {
+
     }
 
     @Override

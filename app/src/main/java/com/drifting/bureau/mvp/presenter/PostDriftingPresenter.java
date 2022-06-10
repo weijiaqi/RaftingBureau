@@ -72,8 +72,8 @@ public class PostDriftingPresenter extends BasePresenter<PostDriftingContract.Mo
     /**
      * 文字漂
      */
-    public void createwithword(int type_id, int explore_id, String content) {
-        mModel.createwithword(type_id, explore_id, content).subscribeOn(Schedulers.io())
+    public void createwithword(int type_id, int explore_id, String content, int message_id) {
+        mModel.createwithword(type_id, explore_id, content, message_id).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
                 .subscribe(new ErrorHandleSubscriber<BaseEntity<CreatewithfileEntity>>(mErrorHandler) {
@@ -83,7 +83,7 @@ public class PostDriftingPresenter extends BasePresenter<PostDriftingContract.Mo
                             if (entity.getCode() == 200) {
                                 mRootView.onCreatewithwordSuccess(entity.getData());
                             } else {
-                                showMessage(entity.getMsg());
+                               mRootView.showMessage(entity.getMsg());
                             }
                         }
                     }
@@ -101,13 +101,14 @@ public class PostDriftingPresenter extends BasePresenter<PostDriftingContract.Mo
     /**
      * 语音漂
      */
-    public void createwithVoice(int type_id, int explore_id, File file) {
+    public void createwithVoice(int type_id, int explore_id, File file, int message_id) {
         RequestBody requestBody = RequestBody.create(MediaType.parse("voice/*"), file);
         MultipartBody multipartBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("type_id", type_id + "")
                 .addFormDataPart("explore_id", explore_id + "")
                 .addFormDataPart("content", file.getName(), requestBody)
+                .addFormDataPart("message_id", message_id+"")
                 .build();
 
         mModel.createwithvoice(multipartBody).subscribeOn(Schedulers.io())
@@ -120,7 +121,7 @@ public class PostDriftingPresenter extends BasePresenter<PostDriftingContract.Mo
                             if (entity.getCode() == 200) {
                                 mRootView.onCreatewithwordSuccess(entity.getData());
                             } else {
-                                showMessage(entity.getMsg());
+                                mRootView.showMessage(entity.getMsg());
                             }
                         }
                     }
@@ -138,15 +139,18 @@ public class PostDriftingPresenter extends BasePresenter<PostDriftingContract.Mo
     /**
      * 视频漂
      */
-    public void createwithVideo(int type_id, int explore_id, File video, File image) {
+    public void createwithVideo( int type_id, int explore_id, File video, File image, int message_id) {
         RequestBody requestBody = RequestBody.create(MediaType.parse("voice/*"), video);
         RequestBody requestBody2 = RequestBody.create(MediaType.parse("image/*"), image);
+
+
         MultipartBody multipartBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("type_id", type_id + "")
                 .addFormDataPart("explore_id", explore_id + "")
                 .addFormDataPart("content", video.getName(), requestBody)
                 .addFormDataPart("image", image.getName(), requestBody2)
+                .addFormDataPart("message_id", message_id + "")
                 .build();
 
         mModel.createwithvoice(multipartBody).subscribeOn(Schedulers.io())
@@ -159,7 +163,7 @@ public class PostDriftingPresenter extends BasePresenter<PostDriftingContract.Mo
                             if (entity.getCode() == 200) {
                                 mRootView.onCreatewithwordSuccess(entity.getData());
                             } else {
-                                showMessage(entity.getMsg());
+                                mRootView.showMessage(entity.getMsg());
                             }
                         }
                     }
@@ -188,7 +192,7 @@ public class PostDriftingPresenter extends BasePresenter<PostDriftingContract.Mo
                             if (entity.getCode() == 200) {
                                 mRootView.onSkuListSuccess(entity.getData());
                             } else {
-                                showMessage(entity.getMsg());
+                                mRootView.showMessage(entity.getMsg());
                             }
                         }
                     }
@@ -201,7 +205,6 @@ public class PostDriftingPresenter extends BasePresenter<PostDriftingContract.Mo
                     }
                 });
     }
-
 
 
     /**
@@ -218,7 +221,7 @@ public class PostDriftingPresenter extends BasePresenter<PostDriftingContract.Mo
                             if (entity.getCode() == 200) {
                                 mRootView.onCreateOrderSuccess(entity.getData());
                             } else {
-                                showMessage(entity.getMsg());
+                                mRootView.showMessage(entity.getMsg());
                             }
                         }
                     }
@@ -303,7 +306,7 @@ public class PostDriftingPresenter extends BasePresenter<PostDriftingContract.Mo
 
     }
 
-    public void  showMessage(String message){
+    public void showMessage(String message) {
         ToastUtil.showToast(message);
     }
 

@@ -9,18 +9,16 @@
 
     <include layout="@layout/include_title" />
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar">
 
         <LinearLayout
+            android:layout_below="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <RelativeLayout
                 android:id="@+id/rl_top"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -58,7 +56,7 @@
                     android:layout_below="@+id/tv_drifting_name"
                     android:layout_alignLeft="@+id/tv_drifting_name"
                     android:layout_marginTop="10dp"
-                    android:text="昵称：你的小太阳"
+                    android:text=""
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -70,21 +68,22 @@
                     android:layout_below="@+id/tv_name"
                     android:layout_alignLeft="@+id/tv_name"
                     android:layout_marginTop="6dp"
-                    android:text="荒芜星球人     星际开荒者"
+                    android:text=""
                     android:textColor="@color/color_6ce"
                     android:textSize="11sp" />
             </RelativeLayout>
 
             <View
                 android:id="@+id/line1"
+                android:visibility="gone"
                 android:layout_width="0.4dp"
                 android:layout_height="31dp"
                 android:layout_below="@+id/rl_top"
-                android:layout_marginStart="108.5dp"
+                android:layout_marginStart="97.5dp"
                 android:layout_marginTop="-15dp"
                 android:background="@color/color_82_6d" />
 
-            <androidx.recyclerview.widget.RecyclerView
+            <com.rb.core.xrecycleview.XRecyclerView
                 android:id="@+id/rcy_delivery"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -93,7 +92,7 @@
                 android:layout_marginEnd="26dp" />
         </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
+    <include layout="@layout/layout_show_state" />
 
 
 </RelativeLayout>

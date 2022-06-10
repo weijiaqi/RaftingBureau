@@ -10,7 +10,7 @@ import com.drifting.bureau.mvp.ui.holder.DeliveryWordHolder;
 import com.jess.arms.base.BaseRecyclerAdapter;
 import com.jess.arms.base.BaseRecyclerHolder;
 
-public class DeliveryDetailsAdapter extends BaseRecyclerAdapter<DeliveryDetailsEntity> {
+public class DeliveryDetailsAdapter extends BaseRecyclerAdapter<DeliveryDetailsEntity.MessagePathBean> {
 
     private int ITEM_WORD = 1;
     private int ITEM_VOICE = 2;

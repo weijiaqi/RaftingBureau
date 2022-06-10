@@ -19,6 +19,7 @@
 
 
     <com.hjq.shape.view.ShapeEditText
+        android:id="@+id/et_name"
         android:layout_width="182dp"
         android:layout_height="34dp"
         android:layout_marginTop="16dp"

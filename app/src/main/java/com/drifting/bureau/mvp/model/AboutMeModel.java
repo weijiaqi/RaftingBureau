@@ -46,8 +46,4 @@ public class AboutMeModel extends BaseModel implements AboutMeContract.Model{
     }
 
 
-    @Override
-    public Observable<BaseEntity<UserInfoEntity>> userplayer(String user_id) {
-        return mRepositoryManager.obtainRetrofitService(ApiService.class).userplayer(user_id);
-    }
 }

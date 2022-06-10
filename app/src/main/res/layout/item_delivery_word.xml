@@ -20,6 +20,7 @@
             android:text="荒芜星球人"
             android:textColor="@color/color_6ce"
             android:textSize="11sp" />
+
         <LinearLayout
             android:id="@+id/ll_center"
             android:layout_width="wrap_content"
@@ -72,24 +73,38 @@
             android:layout_marginEnd="26dp"
             android:orientation="vertical">
 
-            <TextView
+            <LinearLayout
+                android:gravity="center"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableRight="@drawable/delivery_add"
-                android:drawablePadding="10dp"
-                android:text="你的小太阳太阳"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/iv_add_friend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="10dp"
+                    android:src="@drawable/delivery_add" />
+
+            </LinearLayout>
 
             <com.drifting.bureau.view.ExpandableSpanTextView.ExpandableTextView
+                android:id="@+id/tv_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="19dp"
                 android:breakStrategy="simple"
                 android:ellipsize="end"
-                android:text="宋代盛行的一种中国文学宋代盛行的一种中国文学体裁宋代盛行的一种中国文学体裁宋代盛行的一种中国文学体裁宋代盛行的一种中国文学体裁宋代盛行的一种中国文学体裁宋代盛行的一种中国文学体裁体裁，宋词是一种相对于古体诗的新体诗歌之一..."
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="11sp"
                 app:etv_MaxLinesOnShrink="2"

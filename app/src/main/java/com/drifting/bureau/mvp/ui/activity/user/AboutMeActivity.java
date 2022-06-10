@@ -40,8 +40,11 @@ import com.drifting.bureau.mvp.ui.fragment.PlanetaryDisFragment;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.TextUtil;
+import com.drifting.bureau.util.callback.BaseDataCallBack;
+import com.drifting.bureau.util.request.RequestUtil;
 import com.hjq.shape.view.ShapeTextView;
 import com.jess.arms.base.BaseActivity;
+import com.jess.arms.base.BaseEntity;
 import com.jess.arms.di.component.AppComponent;
 
 import com.drifting.bureau.mvp.contract.AboutMeContract;
@@ -82,9 +85,12 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
     @BindView(R.id.tv_schedule)
     TextView mTvSchedule;
     private AboutMeAdapter aboutMeAdapter;
+    private UserInfoEntity userInfoEntity;
+    private static final String EXTRA_USERINFOENTITY = "userinfo_entity";
 
-    public static void start(Context context, boolean closePage) {
+    public static void start(Context context, UserInfoEntity entity, boolean closePage) {
         Intent intent = new Intent(context, AboutMeActivity.class);
+        intent.putExtra(EXTRA_USERINFOENTITY, entity);
         context.startActivity(intent);
         if (closePage) ((Activity) context).finish();
     }
@@ -109,17 +115,27 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
         setStatusBar(true);
         setStatusBarHeight(mTvBar);
         TextUtil.setRightImage(mIvRight, R.drawable.setting);
+        if (getIntent() != null) {
+            userInfoEntity = (UserInfoEntity) getIntent().getSerializableExtra(EXTRA_USERINFOENTITY);
+        }
+        initListener();
+    }
+
+    public void initListener() {
         mRcyList.setLayoutManager(new GridLayoutManager(this, 3));
         aboutMeAdapter = new AboutMeAdapter(new ArrayList<>());
         mRcyList.setAdapter(aboutMeAdapter);
         aboutMeAdapter.setData(getData());
-
-        if (mPresenter != null) {
-            mPresenter.userplayer(Preferences.getUserId());
-        }
-
+        mTvPlace.setText(userInfoEntity.getPlanet().getName());
+        mTvPlace2.setText(userInfoEntity.getPlanet().getName());
+        mTvIdentity.setText(userInfoEntity.getUser().getLevel_name());
+        mTvIdentity2.setText(userInfoEntity.getUser().getLevel_name());
+        mTvName.setText(userInfoEntity.getUser().getName());
+        mTvSchedule.setText(userInfoEntity.getPlanet().getSchedule() + "%");
+        mPrUpload.setProgress(userInfoEntity.getPlanet().getSchedule());
         setTopSwipe();
     }
+
 
 
     public List<AoubtMeEntity> getData() {
@@ -131,19 +147,6 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
         return list;
     }
 
-
-    @Override
-    public void onUserInfoSuccess(UserInfoEntity entity) {
-         if (entity!=null){
-             mTvPlace.setText(entity.getPlanet().getName());
-             mTvPlace2.setText(entity.getPlanet().getName());
-             mTvIdentity.setText(entity.getUser().getLevel_name());
-             mTvIdentity2.setText(entity.getUser().getLevel_name());
-             mTvName.setText(entity.getUser().getName());
-             mTvSchedule.setText(entity.getPlanet().getSchedule()+"%");
-             mPrUpload.setProgress(entity.getPlanet().getSchedule());
-         }
-    }
 
     @Override
     public void onNetError() {
@@ -166,7 +169,7 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
                     AccountSettingsActivity.start(this, false);
                     break;
                 case R.id.tv_select: //查看
-                    PlanetarySelectActivity.start(this, 1, false);
+                    PlanetarySelectActivity.start(this, userInfoEntity.getPlanet().getLevel(), false);
                     break;
                 case R.id.tv_explore:
                     DiscoveryTourActivity.start(this, true);
@@ -183,7 +186,7 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
 
     public void setTopSwipe() {
         View topMenu = LayoutInflater.from(this).inflate(R.layout.activity_planetary_select, null);
-        Fragment fragment = PlanetaryDisFragment.newInstance(1);
+        Fragment fragment = PlanetaryDisFragment.newInstance(userInfoEntity.getPlanet().getLevel());
         getSupportFragmentManager().beginTransaction().replace(R.id.main_fame, fragment).commitAllowingStateLoss();
         RelativeLayout toolbar_back = topMenu.findViewById(R.id.toolbar_back);
         TextView toolbar_title = topMenu.findViewById(R.id.toolbar_title);
@@ -218,4 +221,10 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
         PlanetaryDetailActivity.start(this, type, false);
     }
 
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RequestUtil.create().disDispose();
+    }
 }

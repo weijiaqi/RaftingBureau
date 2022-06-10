@@ -61,8 +61,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="26dp"
-        android:layout_marginBottom="45dp">
+        android:layout_marginStart="35dp"
+        android:layout_marginBottom="40dp">
 
         <com.hjq.shape.view.ShapeTextView
             android:id="@+id/tv_check"
@@ -96,7 +96,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="33dp"
-        android:layout_marginBottom="26dp">
+        android:layout_marginBottom="12dp">
 
         <CheckBox
             android:id="@+id/ck_protocol"
@@ -104,7 +104,6 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:button="@drawable/selector_protocol"
-            android:paddingEnd="10dp"
             android:textColor="@color/white"
             android:textSize="11sp" />
 
@@ -115,6 +114,7 @@
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/ck_protocol"
             android:ellipsize="end"
+            android:paddingVertical="10dp"
             android:singleLine="true"
             android:text=""
             android:textColor="@color/color_99"

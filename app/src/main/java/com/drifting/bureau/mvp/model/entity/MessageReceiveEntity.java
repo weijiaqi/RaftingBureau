@@ -3,7 +3,7 @@ package com.drifting.bureau.mvp.model.entity;
 public class MessageReceiveEntity {
 
 
-        private Integer id;
+        private Integer Id;
         private Integer user_id;
         private String user_name;
         private Integer type_id;
@@ -11,16 +11,34 @@ public class MessageReceiveEntity {
         private Integer is_throw;
         private Integer created_at_int;
         private Integer updated_at_int;
+        private Integer explore_id;
+        private Integer drift_rest;
 
-        public Integer getId() {
-            return id;
-        }
+    public Integer getDrift_rest() {
+        return drift_rest;
+    }
 
-        public void setId(Integer id) {
-            this.id = id;
-        }
+    public void setDrift_rest(Integer drift_rest) {
+        this.drift_rest = drift_rest;
+    }
 
-        public Integer getUser_id() {
+    public Integer getExplore_id() {
+        return explore_id;
+    }
+
+    public void setExplore_id(Integer explore_id) {
+        this.explore_id = explore_id;
+    }
+
+    public Integer getId() {
+        return Id;
+    }
+
+    public void setId(Integer id) {
+        Id = id;
+    }
+
+    public Integer getUser_id() {
             return user_id;
         }
 

@@ -45,8 +45,8 @@ public class MyBlindBoxEntity {
         }
 
         public static class ListBean {
-            @SerializedName("Id")
-            private Integer id;
+
+            private Integer Id;
             private Integer user_id;
             private String sku_code;
             private String sku_name;
@@ -57,11 +57,11 @@ public class MyBlindBoxEntity {
             private String image;
 
             public Integer getId() {
-                return id;
+                return Id;
             }
 
             public void setId(Integer id) {
-                this.id = id;
+                Id = id;
             }
 
             public Integer getUser_id() {

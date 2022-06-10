@@ -17,6 +17,7 @@ import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.ui.dialog.ShareDialog;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
+import com.drifting.bureau.util.request.RequestUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.drifting.bureau.mvp.contract.SpaceMarinesContract;
@@ -35,6 +36,8 @@ import butterknife.OnClick;
 public class SpaceMarinesActivity extends BaseActivity<SpaceMarinesPresenter> implements SpaceMarinesContract.View {
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
+    @BindView(R.id.tv_name)
+    TextView mTvName;
     private ShareDialog shareDialog;
     private UserInfoEntity userInfoEntity;
 
@@ -67,10 +70,18 @@ public class SpaceMarinesActivity extends BaseActivity<SpaceMarinesPresenter> im
     }
 
     public void initListener() {
-          if (mPresenter!=null){
-              mPresenter.userplayer(Preferences.getUserId());
-          }
+        getUserInfo();
     }
+
+    public void getUserInfo() {
+        RequestUtil.create().userplayer(Preferences.getUserId(), entity -> {
+            if (entity != null && entity.getCode() == 200) {
+                userInfoEntity = entity.getData();
+                mTvName.setText(userInfoEntity.getUser().getName());
+            }
+        });
+    }
+
 
     @OnClick({R.id.toolbar_back, R.id.tv_withdrawal, R.id.tv_withdrawal_record, R.id.tv_share})
     public void onClick(View view) {
@@ -80,7 +91,7 @@ public class SpaceMarinesActivity extends BaseActivity<SpaceMarinesPresenter> im
                     finish();
                     break;
                 case R.id.tv_withdrawal: //提现
-                    WithdrawalActivity.start(this, false);
+                    WithdrawalActivity.start(this, "0",false);
                     break;
                 case R.id.tv_withdrawal_record://提现记录
                     WithdrawalRecordActivity.start(this, false);
@@ -96,12 +107,6 @@ public class SpaceMarinesActivity extends BaseActivity<SpaceMarinesPresenter> im
         }
     }
 
-    @Override
-    public void onUserInfoSuccess(UserInfoEntity entity) {
-        if (entity != null) {
-            userInfoEntity = entity;
-        }
-    }
 
     @Override
     public void onNetError() {
@@ -115,5 +120,11 @@ public class SpaceMarinesActivity extends BaseActivity<SpaceMarinesPresenter> im
     @Override
     public void showMessage(@NonNull String message) {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RequestUtil.create().disDispose();
     }
 }

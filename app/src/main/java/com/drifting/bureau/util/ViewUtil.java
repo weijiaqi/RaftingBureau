@@ -93,10 +93,9 @@ public class ViewUtil {
         if (mStack.size() > 0) {
             frameLayout.removeAllViews();
         }
-        View inflate = LayoutInflater.from(context).inflate(R.layout.dialog_loading, null);
+        View inflate = LayoutInflater.from(context).inflate(R.layout.layout_loading, null);
         RelativeLayout relativeLayout = inflate.findViewById(R.id.rl_totle);
         frameLayout.addView(relativeLayout);
-        frameLayout.setVisibility(View.VISIBLE);
         mStack.push(relativeLayout);
     }
 

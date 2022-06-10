@@ -3,11 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/color_1c"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
+
     <FrameLayout
+        android:id="@+id/frame"
+
+        tools:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -67,8 +72,7 @@
                 android:id="@+id/ll_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:layout_marginTop="23dp"
+                android:layout_marginTop="15dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -83,7 +87,7 @@
                     android:layout_marginHorizontal="15dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp">
+                    android:layout_marginTop="10dp">
 
                     <TextView
                         android:id="@+id/tv_location_name"
@@ -104,7 +108,7 @@
                         android:paddingStart="23dp"
                         android:paddingEnd="15dp"
                         android:text="重新定位"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         app:shape_solidColor="@color/transparent"
                         app:shape_textEndColor="@color/color_6d"
                         app:shape_textStartColor="@color/color_6c" />
@@ -116,7 +120,7 @@
                     android:layout_marginHorizontal="15dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="39dp"
+                    android:layout_marginTop="15dp"
                     android:text="热门城市"
                     android:textColor="@color/color_99"
                     android:textSize="12sp" />
@@ -127,7 +131,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
-                    android:layout_marginBottom="22dp" />
+                    android:layout_marginBottom="5dp" />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -156,5 +160,6 @@
             android:layout_gravity="right" />
 
     </FrameLayout>
+
 
 </LinearLayout>

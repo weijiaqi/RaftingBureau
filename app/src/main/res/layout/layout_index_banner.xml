@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_retry"
+    android:layout_width="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:layout_height="155dp">
+    <!-- android:id="@+id/banner_frame"-->
+
+
+    <ImageView
+        android:id="@+id/iv_show"
+        android:layout_width="129dp"
+        android:layout_height="114dp"
+        android:layout_centerHorizontal="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/space_blind_box" />
+
+
+</RelativeLayout>

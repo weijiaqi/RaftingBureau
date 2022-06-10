@@ -7,21 +7,28 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.drifting.bureau.R;
+import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.ui.activity.index.ViewRaftingActivity;
 import com.jess.arms.base.BaseDialog;
+
 /**
- * @Description:  收到的漂流瓶消息
- * @Author     : WeiJiaQI
- * @Time       : 2022/5/18 9:39
+ * @Description: 收到的漂流瓶消息
+ * @Author : WeiJiaQI
+ * @Time : 2022/5/18 9:39
  */
-public class RaftingInforDialog  extends BaseDialog implements View.OnClickListener {
-   private TextView mTvThrowSpce,mTvSelect;
+public class RaftingInforDialog extends BaseDialog implements View.OnClickListener {
+    private TextView mTvThrowSpce, mTvSelect, mTvName, mTvPlanet, mTvIdentity, mTvRaftingType;
     public static final int CLICK_SELECT = 0x01;
     public static final int CLICK_FINISH = 0x02;
     private Context mContext;
-    public RaftingInforDialog(@NonNull Context context) {
+    private UserInfoEntity userInfoEntity;
+    private int explore_id;
+
+    public RaftingInforDialog(@NonNull Context context, UserInfoEntity userInfoEntity, int explore_id) {
         super(context);
-        mContext=context;
+        this.mContext = context;
+        this.userInfoEntity = userInfoEntity;
+        this.explore_id = explore_id;
     }
 
     @Override
@@ -37,8 +44,12 @@ public class RaftingInforDialog  extends BaseDialog implements View.OnClickListe
     @Override
     protected void initView() {
         super.initView();
-        mTvThrowSpce= findViewById(R.id.tv_throw_space);
-        mTvSelect= findViewById(R.id.tv_select);
+        mTvThrowSpce = findViewById(R.id.tv_throw_space);
+        mTvSelect = findViewById(R.id.tv_select);
+        mTvName = findViewById(R.id.tv_name);
+        mTvPlanet = findViewById(R.id.tv_planet);
+        mTvIdentity = findViewById(R.id.tv_identity);
+        mTvRaftingType = findViewById(R.id.tv_rafting_type);
     }
 
     @Override
@@ -46,6 +57,12 @@ public class RaftingInforDialog  extends BaseDialog implements View.OnClickListe
         super.initEvents();
         mTvThrowSpce.setOnClickListener(this);
         mTvSelect.setOnClickListener(this);
+        mTvName.setText("昵称：" + userInfoEntity.getUser().getName());
+        mTvPlanet.setText(userInfoEntity.getPlanet().getName());
+        mTvIdentity.setText(userInfoEntity.getUser().getLevel_name());
+        if (explore_id == 1) {
+            mTvRaftingType.setText("传递漂");
+        }
     }
 
     @Override

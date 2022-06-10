@@ -2,6 +2,7 @@ package com.drifting.bureau.mvp.ui.dialog;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -14,6 +15,7 @@ import com.drifting.bureau.mvp.model.entity.OrderDetailEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.ui.activity.index.VideoActivity;
 import com.drifting.bureau.util.GlideUtil;
+import com.drifting.bureau.util.VideoUtil;
 import com.drifting.bureau.view.VoiceWave;
 import com.jess.arms.base.BaseDialog;
 
@@ -35,7 +37,7 @@ public class SelectOrderDialog extends BaseDialog implements View.OnClickListene
 
     private UserInfoEntity userInfoEntity;
     private OrderDetailEntity orderDetailEntity;
-
+    private int totaltime;
     private Context context;
 
     public SelectOrderDialog(@NonNull Context context, UserInfoEntity userInfoEntity, OrderDetailEntity orderDetailEntity) {
@@ -71,13 +73,16 @@ public class SelectOrderDialog extends BaseDialog implements View.OnClickListene
         mRlVideoPlay.setOnClickListener(this);
         mTvname.setText("昵称：" + userInfoEntity.getUser().getName());
         mTvPlanet.setText(userInfoEntity.getPlanet().getName());
-        mTvIdentity.setText(userInfoEntity.getUser().getName());
+        mTvIdentity.setText(userInfoEntity.getUser().getLevel_name());
         switch (orderDetailEntity.getType_id()) {
             case 1:
                 mTvWord.setVisibility(View.VISIBLE);
                 mTvWord.setText(orderDetailEntity.getContent());
                 break;
             case 2:
+                mVideoView.setDecibel(0);
+                totaltime=VideoUtil.getLocalVideoDuration(orderDetailEntity.getContent()) + 1;
+                mTvTime.setText(totaltime + "S");
                 mRlVoicePlay.setVisibility(View.VISIBLE);
                 break;
             case 3:
@@ -112,7 +117,7 @@ public class SelectOrderDialog extends BaseDialog implements View.OnClickListene
                 }
                 break;
             case R.id.iv_play: //语音播放
-                PermissionDialog.startVoicePlay((Activity) context, orderDetailEntity.getContent(), mIvPlay, mVideoView, mTvTime);
+                PermissionDialog.startVoicePlay((Activity) context, orderDetailEntity.getContent(),totaltime, mIvPlay, mVideoView, mTvTime);
                 break;
             case R.id.rl_video_play://播放视频
                 VideoActivity.start(context, orderDetailEntity.getContent(), false);

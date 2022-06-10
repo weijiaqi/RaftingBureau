@@ -11,8 +11,17 @@ public class SpaceStationEntity {
         private String sku_name;
         private String small_image;
         private String large_image;
+        private int image;
 
-        public Integer getBusiness_id() {
+    public int getImage() {
+        return image;
+    }
+
+    public void setImage(int image) {
+        this.image = image;
+    }
+
+    public Integer getBusiness_id() {
             return business_id;
         }
 

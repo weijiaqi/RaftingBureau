@@ -104,6 +104,32 @@ public class DateUtil {
         }
     }
 
+
+
+    /**
+     * unix时间戳转换成yyyy-MM-dd HH:mm
+     *
+     * @param unixTime
+     * @return
+     */
+    public static String unxiToDateYMDHM(String unixTime) {
+        try {
+            String s = Long.parseLong(unixTime) * 1000 + "";
+            String res;
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            long lt = new Long(s);
+            Date date = new Date(lt);
+            res = simpleDateFormat.format(date);
+            return res;
+        } catch (Exception e) {
+            if (TextUtils.isEmpty(unixTime)) {
+                unixTime = "";
+            }
+            return unixTime;
+        }
+    }
+
+
     /**
      * unix时间戳转换成HH:mm
      *
@@ -114,7 +140,7 @@ public class DateUtil {
         try {
             String s = Long.parseLong(unixTime) * 1000 + "";
             String res;
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
             long lt = new Long(s);
             Date date = new Date(lt);
             res = simpleDateFormat.format(date);
@@ -228,5 +254,69 @@ public class DateUtil {
             }
             return time;
         }
+    }
+
+
+    //根据秒数转化为时分秒   00:00:00
+    public static String getTime(int second) {
+        if (second < 10) {
+            return "00:0" + second;
+        }
+        if (second < 60) {
+            return "00:" + second;
+        }
+        if (second < 3600) {
+            int minute = second / 60;
+            second = second - minute * 60;
+            if (minute < 10) {
+                if (second < 10) {
+                    return "0" + minute + ":0" + second;
+                }
+                return "0" + minute + ":" + second;
+            }
+            if (second < 10) {
+                return minute + ":0" + second;
+            }
+            return minute + ":" + second;
+        }
+        int hour = second / 3600;
+        int minute = (second - hour * 3600) / 60;
+        second = second - hour * 3600 - minute * 60;
+        if (hour < 10) {
+            if (minute < 10) {
+                if (second < 10) {
+                    return "0" + hour + ":0" + minute + ":0" + second;
+                }
+                return "0" + hour + ":0" + minute + ":" + second;
+            }
+            if (second < 10) {
+                return "0" + hour + minute + ":0" + second;
+            }
+            return "0" + hour + minute + ":" + second;
+        }
+        if (minute < 10) {
+            if (second < 10) {
+                return hour + ":0" + minute + ":0" + second;
+            }
+            return hour + ":0" + minute + ":" + second;
+        }
+        if (second < 10) {
+            return hour + minute + ":0" + second;
+        }
+        return hour + minute + ":" + second;
+    }
+
+
+    //秒数转换成小时分钟
+    public static String TimeRemaining(int second) {
+        if (second < 60) {
+            return "1分钟";
+        }
+        if (second<3600){
+            int minute = second / 60;
+            return minute+"分钟";
+        }
+        int hour = second / 3600;
+        return hour+"小时";
     }
 }

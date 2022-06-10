@@ -16,5 +16,5 @@
         app:shape_solidColor="@color/color_313"
         app:shape_radius="5dp"
         android:textColor="@color/white"
-        android:textSize="14sp" />
+        android:textSize="12sp" />
 </FrameLayout>

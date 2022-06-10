@@ -107,16 +107,24 @@ public class PostDriftingFragment extends BaseFragment<PostDriftingPresenter> im
     private String path;
     private RaftingOrderDialog raftingOrderDialog;
     private static final String BUNDLE_TYPE = "bundle_type";
-    private int type;
+
+    private static final String BUNDLE_EXPLORE_ID = "bundle_explore_id";
+
+
+    private static final String BUNDLE_MESSAGE_ID = "bundle_message_id";
+
+    private int type, explore_id, message_id;
     private int selectPostion = 1;
     private Bitmap cover;
     private PublicDialog publicDialog;
     private CreatewithfileEntity createwithfileEntity;
 
-    public static PostDriftingFragment newInstance(int type) {
+    public static PostDriftingFragment newInstance(int type, int explore_id, int message_id) {
         PostDriftingFragment fragment = new PostDriftingFragment();
         Bundle bundle = new Bundle();
         bundle.putInt(BUNDLE_TYPE, type);
+        bundle.putInt(BUNDLE_MESSAGE_ID, message_id);
+        bundle.putInt(BUNDLE_EXPLORE_ID, explore_id);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -141,6 +149,8 @@ public class PostDriftingFragment extends BaseFragment<PostDriftingPresenter> im
         super.onCreate(savedInstanceState);
         Bundle args = getArguments();
         type = (args != null) ? args.getInt(BUNDLE_TYPE) : 1;
+        explore_id = args.getInt(BUNDLE_EXPLORE_ID);
+        message_id = args.getInt(BUNDLE_MESSAGE_ID);
     }
 
     /**
@@ -218,37 +228,43 @@ public class PostDriftingFragment extends BaseFragment<PostDriftingPresenter> im
                     break;
                 case R.id.ll_starry_sky:  //丢入星空
 
-                    if (type == 1) {
-                        if (selectPostion == 1) {  //文字漂流
-                            if (StringUtil.isEmpty(mEtWord.getText().toString())) {
-                                showMessage("请输入文字内容!");
-                                return;
-                            }
-                            if (mPresenter != null) {
-                                mPresenter.createwithword(1, 1, mEtWord.getText().toString());
-                            }
-                        } else if (selectPostion == 2) { //语音漂流
-                            if (objectList == null) {
-                                showMessage("请进行语音录制!");
-                                return;
-                            }
-                            if (mPresenter != null) {
-                                mPresenter.createwithVoice(2, 1, new File(objectList.get(0).toString()));
-                            }
-                        } else if (selectPostion == 3) { //视频漂流
-                            if (path == null || TextUtils.isEmpty(path)) {
-                                showMessage("请进行视频录制!");
-                                return;
-                            }
-                            if (mPresenter != null) {
-                                mPresenter.createwithVideo(3, 1, new File(VideoUtil.getRunLog()), BitmapUtil.saveBitmapFile(mContext, cover));
+                    if (selectPostion == 1) {  //文字漂流
+                        if (StringUtil.isEmpty(mEtWord.getText().toString())) {
+                            showMessage("请输入文字内容!");
+                            return;
+                        }
+                        mEtWord.clearFocus();
+                        if (mPresenter != null) {
+                            if (type == 1) {
+                                mPresenter.createwithword(1, 1, mEtWord.getText().toString(), 0);
+                            } else {
+                                mPresenter.createwithword(1, explore_id, mEtWord.getText().toString(), message_id);
                             }
                         }
-                    } else {  //2 是参与传递
-                        if (selectPostion==1){
-                            mEtWord.clearFocus();
+                    } else if (selectPostion == 2) { //语音漂流
+                        if (objectList == null) {
+                            showMessage("请进行语音录制!");
+                            return;
                         }
-                        sendSuccess();
+                        if (mPresenter != null) {
+                            if (type == 1) {
+                                mPresenter.createwithVoice(2, 1, new File(objectList.get(0).toString()), 0);
+                            } else {
+                                mPresenter.createwithVoice(2, explore_id, new File(objectList.get(0).toString()), message_id);
+                            }
+                        }
+                    } else if (selectPostion == 3) { //视频漂流
+                        if (path == null || TextUtils.isEmpty(path)) {
+                            showMessage("请进行视频录制!");
+                            return;
+                        }
+                        if (mPresenter != null) {
+                            if (type == 1) {
+                                mPresenter.createwithVideo(3, 1, new File(VideoUtil.getRunLog()), BitmapUtil.saveBitmapFile(mContext, cover), 0);
+                            } else {
+                                mPresenter.createwithVideo(3, explore_id, new File(VideoUtil.getRunLog()), BitmapUtil.saveBitmapFile(mContext, cover), message_id);
+                            }
+                        }
                     }
                     break;
             }
@@ -272,9 +288,13 @@ public class PostDriftingFragment extends BaseFragment<PostDriftingPresenter> im
     @Override
     public void onCreatewithwordSuccess(CreatewithfileEntity entity) {
         if (entity != null) {
-            createwithfileEntity = entity;
-            if (mPresenter != null) {
-                mPresenter.skulist(selectPostion, 1, 0);
+            if (type == 1) {
+                createwithfileEntity = entity;
+                if (mPresenter != null) {
+                    mPresenter.skulist(selectPostion, 1, 0);
+                }
+            } else {
+                sendSuccess();
             }
         }
     }
