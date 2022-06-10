@@ -91,7 +91,7 @@ public class SpaceMarinesActivity extends BaseActivity<SpaceMarinesPresenter> im
                     finish();
                     break;
                 case R.id.tv_withdrawal: //提现
-                    WithdrawalActivity.start(this, "0",false);
+                    WithdrawalActivity.start(this, 1,"0",false);
                     break;
                 case R.id.tv_withdrawal_record://提现记录
                     WithdrawalRecordActivity.start(this, false);

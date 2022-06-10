@@ -20,6 +20,7 @@ import com.drifting.bureau.mvp.model.entity.MyTreasuryEntity;
 import com.drifting.bureau.mvp.model.entity.MysteryboxEntity;
 import com.drifting.bureau.mvp.model.entity.OrderDetailEntity;
 import com.drifting.bureau.mvp.model.entity.OrderOneEntity;
+import com.drifting.bureau.mvp.model.entity.OrderRecordEntity;
 import com.drifting.bureau.mvp.model.entity.PayOrderEntity;
 import com.drifting.bureau.mvp.model.entity.PlanetEntity;
 import com.drifting.bureau.mvp.model.entity.PlanetaryDetailEntity;
@@ -30,6 +31,7 @@ import com.drifting.bureau.mvp.model.entity.SpaceInfoEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceStationEntity;
 import com.drifting.bureau.mvp.model.entity.UserEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
+import com.drifting.bureau.mvp.model.entity.WriteOffInfoEntity;
 import com.jess.arms.base.BaseEntity;
 
 import java.util.List;
@@ -372,6 +374,17 @@ public interface ApiService {
 
 
     /**
+     * 订单记录（关于我）
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/order/mine")
+    Observable<BaseEntity<OrderRecordEntity>> ordermine(@Field("page") int page, @Field("limit") int limit);
+
+
+
+    /**
      * 星球详情
      *
      * @return
@@ -425,5 +438,17 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("v/feedback/add")
     Observable<BaseEntity> feedbackadd(@Field("content") String content,@Field("phone") String phone);
+
+
+    /**
+     *核销码信息（订单记录-核销）
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/withdraw/apply")
+    Observable<BaseEntity<WriteOffInfoEntity>> writeOffInfo(@Field("order_sub_id") String order_sub_id);
+
+
 
 }

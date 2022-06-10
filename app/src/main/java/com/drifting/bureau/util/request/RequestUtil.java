@@ -7,6 +7,7 @@ import android.util.SparseArray;
 import com.drifting.bureau.app.api.ApiProxy;
 import com.drifting.bureau.mvp.model.entity.BoxOpenEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
+import com.drifting.bureau.mvp.model.entity.WriteOffInfoEntity;
 import com.drifting.bureau.util.callback.BaseDataCallBack;
 import com.jess.arms.base.BaseEntity;
 import com.jess.arms.base.BaseObserver;
@@ -89,7 +90,7 @@ public class RequestUtil {
      * @param box_id
      * @param callBack
      */
-    public void mysteryboxopen(String box_id, BaseDataCallBack callBack) {
+    public void mysteryboxopen(String box_id, BaseDataCallBack<BoxOpenEntity> callBack) {
         ApiProxy.getApiService().mysteryboxopen(box_id)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -259,6 +260,39 @@ public class RequestUtil {
     }
 
 
+
+
+    /**
+     * 核销码信息（订单记录-核销）
+     *
+     * @param callBack
+     */
+    public void writeOffInfo(int order_sub_id, BaseDataCallBack<WriteOffInfoEntity> callBack) {
+        ApiProxy.getApiService().writeOffInfo(order_sub_id+"")
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new BaseObserver<BaseEntity<WriteOffInfoEntity>>() {
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+                        mDisposables.put(mRequestCount++, disposable);
+                    }
+
+                    @Override
+                    public void onNext(BaseEntity<WriteOffInfoEntity> entity) {
+                        if (callBack != null) {
+                            callBack.getData(entity);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (callBack != null) {
+                            callBack.getData(null);
+                        }
+                    }
+                });
+    }
 
 
     /**

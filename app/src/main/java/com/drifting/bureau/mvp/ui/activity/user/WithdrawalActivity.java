@@ -48,10 +48,13 @@ public class WithdrawalActivity extends BaseActivity<WithdrawalPresenter> implem
     private PublicDialog publicDialog;
 
     private static String EXTRA_MONEY = "extra_money";
+    private static String  EXTRA_TYPE= "extra_type";
     private String money;
+    private int type;
 
-    public static void start(Context context, String money, boolean closePage) {
+    public static void start(Context context, int type, String money, boolean closePage) {
         Intent intent = new Intent(context, WithdrawalActivity.class);
+        intent.putExtra(EXTRA_TYPE, type);
         intent.putExtra(EXTRA_MONEY, money);
         context.startActivity(intent);
         if (closePage) ((Activity) context).finish();
@@ -75,7 +78,8 @@ public class WithdrawalActivity extends BaseActivity<WithdrawalPresenter> implem
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
-        if (getIntent() != null) {
+        if (getIntent() != null) {  //1，空间站提现 2，分销提现
+            type=getIntent().getExtras().getInt(EXTRA_TYPE);
             money = getIntent().getExtras().getString(EXTRA_MONEY);
         }
         initListener();

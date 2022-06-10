@@ -48,6 +48,7 @@ import com.drifting.bureau.mvp.ui.activity.web.ShowWebViewActivity;
 import com.drifting.bureau.mvp.ui.adapter.SpaceBarrageAdapter;
 import com.drifting.bureau.mvp.ui.dialog.PrizepreviewDialog;
 import com.drifting.bureau.util.ClickUtil;
+import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.SpannableUtil;
 import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.ToastUtil;
@@ -263,7 +264,7 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
         @Override
         public Object instantiateItem(@NonNull ViewGroup container, int position) {
             ImageView iv = new ImageView(getApplication());
-            iv.setImageResource(R.drawable.space_blind_box);
+            GlideUtil.create().loadLongImage(GetSpaceStationActivity.this,list.get(position%list.size()).getSmall_image(),iv);
             container.addView(iv);
             return iv;
         }

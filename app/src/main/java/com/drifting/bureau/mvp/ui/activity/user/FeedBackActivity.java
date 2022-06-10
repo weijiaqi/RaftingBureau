@@ -86,10 +86,7 @@ public class FeedBackActivity extends BaseActivity<FeedBackPresenter> implements
                         showMessage("请留下你的反馈意见，我们会认真查阅");
                         return;
                     }
-                    if (StringUtil.isEmpty(mEtContact.getText().toString())) {
-                        showMessage("请输入你的联系方式");
-                        return;
-                    }
+
                     if (mPresenter != null) {
                         mPresenter.feedback(mEtContent.getText().toString(), mEtContact.getText().toString());
                     }
