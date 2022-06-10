@@ -13,6 +13,7 @@
     app:shape_solidColor="@color/color_1c">
 
     <TextView
+        android:id="@+id/tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
@@ -20,7 +21,7 @@
         android:drawableLeft="@drawable/making_drink"
         android:drawablePadding="9dp"
 
-        android:text="接收时间：2022-10-15 14：00"
+        android:text=""
         android:textColor="@color/color_cc"
         android:textSize="12sp" />
 
@@ -40,16 +41,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="传递漂-传递杯"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="14sp" />
 
         <TextView
+            android:id="@+id/tv_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_title"
             android:layout_marginTop="9dp"
-            android:text="传递漂玩法必备奶茶饮品"
+            android:text=""
             android:textColor="@color/color_cc"
             android:textSize="12sp" />
 
@@ -69,13 +71,13 @@
         android:layout_marginTop="12dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="价格"
-            android:textSize="12sp"
             android:textColor="@color/color_99"
-            />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/tv_price"
@@ -98,30 +100,46 @@
             android:id="@+id/tv_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="已付款"
+            android:text=""
             android:textSize="12sp"
             app:shape_textEndColor="@color/color_6d"
             app:shape_textStartColor="@color/color_6c" />
 
-        <TextView
-            android:id="@+id/tv_payment"
+        <LinearLayout
+            android:id="@+id/ll_payment"
+            android:layout_alignParentEnd="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginBottom="5dp"
-            android:text="剩余支付时间 15:52"
-            android:visibility="gone"
-            android:textColor="@color/color_f15"
-            android:textSize="12sp" />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="剩余支付时间"
+                android:textColor="@color/color_cc"
+                android:textSize="12sp" />
+
+            <com.drifting.bureau.view.ClockView
+                android:id="@+id/clockview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="1111111"
+                android:textColor="@color/color_f15"
+                android:textSize="12sp" />
+
+        </LinearLayout>
 
 
         <TextView
             android:id="@+id/tv_write_off"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_payment"
+            android:layout_below="@+id/ll_payment"
             android:layout_alignParentEnd="true"
-            android:text="立即核销"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="12sp"
             android:textStyle="bold" />

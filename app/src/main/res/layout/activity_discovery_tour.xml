@@ -28,59 +28,47 @@
         android:layout_marginTop="14dp"
         android:src="@drawable/way_to_explore" />
 
-    <ImageView
-        android:id="@+id/iv_planet"
-        android:layout_width="148dp"
-        android:layout_height="91dp"
-        android:layout_alignParentEnd="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="101dp"
-        android:layout_toRightOf="@+id/rl_plant1"
-        android:src="@drawable/plant1" />
 
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_below="@+id/tv_way_to_explore"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false">
 
-    <RelativeLayout
-        android:id="@+id/rl_plant1"
-        android:layout_width="148dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/iv_planet"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="-35dp">
-
-        <ImageView
-            android:id="@+id/iv_planet1"
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/vp_img"
+            android:layout_marginTop="150dp"
             android:layout_width="match_parent"
-            android:layout_height="91dp" />
+            android:layout_height="match_parent"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="95dp">
 
-        <com.hjq.shape.view.ShapeTextView
-            android:id="@+id/tv_planet1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/iv_planet1"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:paddingHorizontal="12dp"
-            android:paddingVertical="3dp"
-            android:text="传递漂"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            app:shape_radius="100dp"
-            app:shape_strokeColor="@color/color_99"
-            app:shape_strokeWidth="1dp" />
+        </androidx.viewpager.widget.ViewPager>
 
-    </RelativeLayout>
+    </FrameLayout>
 
-
+    <ImageView
+        android:id="@+id/iv_rocket"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_message"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/rocket"
+        />
     <RelativeLayout
+        android:visibility="gone"
         android:id="@+id/rl_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/iv_rocket"
         android:layout_below="@+id/tv_way_to_explore"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="80dp"
         android:layout_marginEnd="40dp"
-        android:layout_toLeftOf="@+id/rl_plant1"
         android:background="@drawable/message_box"
-        android:visibility="invisible">
+        >
 
 
         <TextView
@@ -109,89 +97,7 @@
             app:shape_startColor="@color/color_6d" />
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/iv_rocket"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/rl_message"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/rocket"
-        android:visibility="gone" />
 
-
-    <RelativeLayout
-        android:id="@+id/rl_plant2"
-        android:layout_width="208dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/rl_plant1"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="-38dp">
-
-        <ImageView
-            android:id="@+id/iv_planet2"
-            android:layout_width="match_parent"
-            android:layout_height="124dp" />
-
-        <com.hjq.shape.view.ShapeTextView
-            android:id="@+id/tv_planet2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/iv_planet2"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:paddingHorizontal="12dp"
-            android:paddingVertical="3dp"
-            android:text="传递漂"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            app:shape_radius="100dp"
-            app:shape_strokeColor="@color/color_99"
-            app:shape_strokeWidth="1dp" />
-
-    </RelativeLayout>
-
-
-    <RelativeLayout
-        android:id="@+id/rl_planet3"
-        android:layout_width="148dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/rl_plant2"
-        android:layout_marginLeft="-10dp"
-        android:layout_marginTop="30dp">
-
-        <ImageView
-            android:id="@+id/iv_planet3"
-            android:layout_width="match_parent"
-            android:layout_height="91dp" />
-
-        <com.hjq.shape.view.ShapeTextView
-            android:id="@+id/tv_planet3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/iv_planet3"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="-10dp"
-            android:layout_marginTop="10dp"
-            android:paddingHorizontal="12dp"
-            android:paddingVertical="3dp"
-            android:text="传递漂"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            app:shape_radius="100dp"
-            app:shape_strokeColor="@color/color_99"
-            app:shape_strokeWidth="1dp" />
-
-    </RelativeLayout>
-
-    <ImageView
-        android:id="@+id/iv_planet4"
-        android:layout_width="148dp"
-        android:layout_height="91dp"
-        android:layout_below="@+id/rl_planet3"
-        android:layout_marginTop="45dp"
-        android:layout_marginRight="20dp"
-        android:layout_toLeftOf="@+id/rl_planet3" />
 
 
     <TextView

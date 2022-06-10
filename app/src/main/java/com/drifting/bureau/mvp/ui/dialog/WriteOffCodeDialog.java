@@ -1,11 +1,15 @@
 package com.drifting.bureau.mvp.ui.dialog;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 
 import com.drifting.bureau.R;
+import com.drifting.bureau.util.EncodingHandler;
 import com.jess.arms.base.BaseDialog;
+import com.jess.arms.utils.ArmsUtils;
 
 /**
  * @Description: 我得核销码
@@ -13,8 +17,29 @@ import com.jess.arms.base.BaseDialog;
  * @Time : 2022/5/28 11:50
  */
 public class WriteOffCodeDialog extends BaseDialog {
-    public WriteOffCodeDialog(@NonNull Context context) {
+
+    private Context context;
+    private String token;
+
+    private ImageView mIvcode;
+
+    public WriteOffCodeDialog(@NonNull Context context, String token) {
         super(context);
+        this.context = context;
+        this.token = token;
+    }
+
+    @Override
+    protected void initDatas() {
+        super.initDatas();
+        mIvcode=findViewById(R.id.iv_code);
+
+    }
+
+    @Override
+    protected void initEvents() {
+        super.initEvents();
+     //   mIvcode.setImageBitmap(EncodingHandler.createQRCode(token, ArmsUtils.dip2px(context,187), ArmsUtils.dip2px(context,187), BitmapFactory.decodeResource(context.getResources(), R.mipmap.icon_logo)));
     }
 
     @Override

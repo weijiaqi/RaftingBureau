@@ -54,7 +54,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="-5dp"
-                    android:text="燧人星球"
+                    android:text="燧人星"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -99,7 +99,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="-5dp"
-                    android:text="黄帝星球"
+                    android:text="黄帝星"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -146,7 +146,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="-5dp"
-                    android:text="大禹星球"
+                    android:text="大禹星"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -191,7 +191,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="-5dp"
-                    android:text="吕尚星球"
+                    android:text="吕尚星"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -250,7 +250,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="-5dp"
-                    android:text="姮娥星球"
+                    android:text="姮娥星"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -294,7 +294,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="-5dp"
-                    android:text="夸父星球"
+                    android:text="夸父星"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -340,7 +340,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="-5dp"
-                    android:text="嫘祖星球"
+                    android:text="嫘祖星"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -385,7 +385,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="-5dp"
-                    android:text="玄女星球"
+                    android:text="玄女星"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -430,7 +430,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="-5dp"
-                    android:text="伏羲星球"
+                    android:text="伏羲星"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -475,7 +475,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="-5dp"
-                    android:text="后裔星球"
+                    android:text="后裔星"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -535,7 +535,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/iv_planet1"
-                    android:text="荒芜星球"
+                    android:text="荒芜星"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -583,7 +583,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="-5dp"
-                    android:text="神农星球"
+                    android:text="神农星"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -629,7 +629,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="-5dp"
-                    android:text="女娲星球"
+                    android:text="女娲星"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -674,7 +674,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="-5dp"
-                    android:text="炎帝星球"
+                    android:text="炎帝星"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -719,7 +719,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="-5dp"
-                    android:text="盘古星球"
+                    android:text="盘古星"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -765,7 +765,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="-7dp"
-                    android:text="仓颉星球"
+                    android:text="仓颉星"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
             </LinearLayout>

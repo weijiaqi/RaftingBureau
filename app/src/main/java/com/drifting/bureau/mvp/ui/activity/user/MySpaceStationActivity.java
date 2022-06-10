@@ -182,7 +182,7 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
                     MakingRecordActivity.start(this, false);
                     break;
                 case R.id.rl_withdrawal: //提现
-                    WithdrawalActivity.start(this, mTvWithdrawal.getText().toString(), false);
+                    WithdrawalActivity.start(this, 1, mTvWithdrawal.getText().toString(), false);
                     break;
             }
         }

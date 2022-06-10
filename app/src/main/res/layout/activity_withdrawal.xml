@@ -20,7 +20,7 @@
         <com.drifting.bureau.view.FontTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="空间站提现"
+            android:text="申请提现"
             android:textColor="@color/white"
             android:textSize="17sp"
             app:fontType="Pingfang_bold" />

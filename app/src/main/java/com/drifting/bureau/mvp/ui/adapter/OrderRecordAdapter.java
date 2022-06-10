@@ -13,9 +13,9 @@ import com.jess.arms.base.BaseRecyclerHolder;
 
 import java.util.List;
 
-public class OrderRecordAdapter  extends BaseRecyclerAdapter<OrderRecordEntity> {
+public class OrderRecordAdapter  extends BaseRecyclerAdapter<OrderRecordEntity.ListBean> {
 
-    public OrderRecordAdapter(List<OrderRecordEntity> infos) {
+    public OrderRecordAdapter(List<OrderRecordEntity.ListBean> infos) {
         super(infos);
     }
 

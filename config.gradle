@@ -18,7 +18,8 @@ ext {
             rxlifecycleSdkVersion   : "1.0",
             rxlifecycle2SdkVersion  : "2.2.2",
             espressoSdkVersion      : "3.0.1",
-            canarySdkVersion        : "2.7"
+            canarySdkVersion        : "2.7",
+            zxing_version           :"3.3.0"
     ]
 
     dependencies = [
@@ -118,6 +119,7 @@ ext {
             "logger"                   : "com.orhanobut:logger:2.2.0",
             "canary-debug"             : "com.squareup.leakcanary:leakcanary-android:${version["canarySdkVersion"]}",
             "canary-release"           : "com.squareup.leakcanary:leakcanary-android-no-op:1.6.3",
-            "umeng-analytics"          : "com.umeng.analytics:analytics:6.0.1"
+            "umeng-analytics"          : "com.umeng.analytics:analytics:6.0.1",
+            "zxing"                    :"com.google.zxing:core:${version["zxing_version"]}",
     ]
 }

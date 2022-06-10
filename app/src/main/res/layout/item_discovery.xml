@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_planet"
+    android:layout_width="208dp"
+    android:layout_gravity="center"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iv_planet"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:src="@drawable/demo_s" />
+
+    <com.hjq.shape.view.ShapeTextView
+        android:id="@+id/tv_planet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_planet"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="3dp"
+        android:text="传递漂"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:shape_radius="100dp"
+        app:shape_strokeColor="@color/color_99"
+        app:shape_strokeWidth="1dp" />
+
+</RelativeLayout>
