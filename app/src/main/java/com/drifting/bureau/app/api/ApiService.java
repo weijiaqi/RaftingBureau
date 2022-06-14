@@ -2,6 +2,7 @@ package com.drifting.bureau.app.api;
 
 
 import com.bumptech.glide.annotation.GlideType;
+import com.drifting.bureau.mvp.model.entity.AnswerEntity;
 import com.drifting.bureau.mvp.model.entity.BarrageEntity;
 import com.drifting.bureau.mvp.model.entity.BoxOpenEntity;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
@@ -25,10 +26,13 @@ import com.drifting.bureau.mvp.model.entity.PayOrderEntity;
 import com.drifting.bureau.mvp.model.entity.PlanetEntity;
 import com.drifting.bureau.mvp.model.entity.PlanetaryDetailEntity;
 import com.drifting.bureau.mvp.model.entity.PrizeEntity;
+import com.drifting.bureau.mvp.model.entity.QuestionAssessEntity;
+import com.drifting.bureau.mvp.model.entity.QuestionEntity;
 import com.drifting.bureau.mvp.model.entity.SkuListEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceCheckEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceInfoEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceStationEntity;
+import com.drifting.bureau.mvp.model.entity.TeaShopEntity;
 import com.drifting.bureau.mvp.model.entity.UserEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.model.entity.WriteOffInfoEntity;
@@ -446,9 +450,56 @@ public interface ApiService {
      * @return
      */
     @FormUrlEncoded
-    @POST("v/withdraw/apply")
-    Observable<BaseEntity<WriteOffInfoEntity>> writeOffInfo(@Field("order_sub_id") String order_sub_id);
+    @POST("v/order/writeOffInfo")
+    Observable<BaseEntity<WriteOffInfoEntity>> writeOffInfo(@Field("order_id") String order_id);
 
 
+    /**
+     *附近门店
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/business/nearby")
+    Observable<BaseEntity<TeaShopEntity>> nearby(@Field("name") String name, @Field("page") int page, @Field("limit") int limit);
+
+
+    /**
+     *问题列表（搬离星球）
+     *
+     * @return
+     */
+    @GET("v/question/list")
+    Observable<BaseEntity<List<QuestionEntity>>>questionlist();
+
+
+    /**
+     *问题列表（搬离星球）
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/question/assess")
+    Observable<BaseEntity<QuestionAssessEntity>>questionassess(@Field("questions") String questions, @Field("anwsers") String anwsers);
+
+
+    /**
+     *添加位置信息
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/position/information")
+    Observable<BaseEntity>information(@Field("lng") String lng, @Field("lat") String lat);
+
+
+    /**
+     *使用物品（空间站）
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/space/storage/using")
+    Observable<BaseEntity>storageusing(@Field("object_id") int object_id, @Field("object_num") int object_num);
 
 }

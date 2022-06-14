@@ -236,61 +236,6 @@ public class MySpaceStationPresenter extends BasePresenter<MySpaceStationContrac
     }
 
 
-    /**
-     * 当前空间站级别（升级空间站）
-     */
-    public void levelcurrent() {
-        mModel.levelcurrent().subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
-                .subscribe(new ErrorHandleSubscriber<BaseEntity<MySpaceStationEntity>>(mErrorHandler) {
-                    @Override
-                    public void onNext(BaseEntity<MySpaceStationEntity> baseEntity) {
-                        if (mRootView != null) {
-                            if (baseEntity.getCode() == 200) {
-                                mRootView.onLevelCurrentSuccess(baseEntity.getData());
-                            } else {
-                                mRootView.showMessage(baseEntity.getMsg());
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable t) {
-                        if (mRootView != null) {
-                            mRootView.onNetError();
-                        }
-                    }
-                });
-    }
-
-
-    /**
-     * 我的库藏(我的空间站)
-     */
-    public void getStorageList() {
-        mModel.storagemine().subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
-                .subscribe(new ErrorHandleSubscriber<BaseEntity<List<MyTreasuryEntity>>>(mErrorHandler) {
-                    @Override
-                    public void onNext(BaseEntity<List<MyTreasuryEntity>> baseEntity) {
-                        if (mRootView != null) {
-                            if (baseEntity.getCode() == 200) {
-                                mRootView.onStorageMineSuccess(baseEntity.getData());
-                            } else {
-                                mRootView.showMessage(baseEntity.getMsg());
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable t) {
-                        t.printStackTrace();
-                    }
-                });
-    }
-
 
 
     @Override

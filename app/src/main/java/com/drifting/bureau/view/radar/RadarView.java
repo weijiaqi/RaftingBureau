@@ -288,7 +288,7 @@ public class RadarView extends View {
                     if (i == 0) {
                         strokePath.moveTo(dotCenterX, dotCenterY);
                     } else {
-                        if  (! radarItemList.get(i).value.equals("0")  ) {
+                        if  (radarItemList.get(i).value!=0 ) {
                             strokePath.lineTo(dotCenterX, dotCenterY);
                         }
                     }
@@ -344,7 +344,7 @@ public class RadarView extends View {
             paint.setColor(dotColor);
             Point point = dotList.get(i);
 
-            if  (! radarItemList.get(i).value.equals("0")  ) {
+            if  (radarItemList.get(i).value!=0 ) {
                 canvas.drawCircle(point.x, point.y, dotRadius, paint);
             }
 

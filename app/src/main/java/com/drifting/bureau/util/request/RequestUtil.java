@@ -6,11 +6,14 @@ import android.util.SparseArray;
 
 import com.drifting.bureau.app.api.ApiProxy;
 import com.drifting.bureau.mvp.model.entity.BoxOpenEntity;
+import com.drifting.bureau.mvp.model.entity.MySpaceStationEntity;
+import com.drifting.bureau.mvp.model.entity.MyTreasuryEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.model.entity.WriteOffInfoEntity;
 import com.drifting.bureau.util.callback.BaseDataCallBack;
 import com.jess.arms.base.BaseEntity;
 import com.jess.arms.base.BaseObserver;
+import com.jess.arms.utils.RxLifecycleUtils;
 
 import java.io.IOException;
 import java.util.List;
@@ -18,6 +21,7 @@ import java.util.List;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
@@ -280,6 +284,103 @@ public class RequestUtil {
 
                     @Override
                     public void onNext(BaseEntity<WriteOffInfoEntity> entity) {
+                        if (callBack != null) {
+                            callBack.getData(entity);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (callBack != null) {
+                            callBack.getData(null);
+                        }
+                    }
+                });
+    }
+
+
+
+    /**
+     * 使用物品（空间站）
+     *
+     * @param callBack
+     */
+    public void storageusing(int object_id,int object_num , BaseDataCallBack callBack) {
+        ApiProxy.getApiService().storageusing(object_id,object_num)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new BaseObserver<BaseEntity>() {
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+                        mDisposables.put(mRequestCount++, disposable);
+                    }
+
+                    @Override
+                    public void onNext(BaseEntity entity) {
+                        if (callBack != null) {
+                            callBack.getData(entity);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (callBack != null) {
+                            callBack.getData(null);
+                        }
+                    }
+                });
+    }
+
+
+    /**
+     * 我的库藏(我的空间站)
+     */
+    public void storagemine(BaseDataCallBack<List<MyTreasuryEntity>> callBack) {
+        ApiProxy.getApiService().storagemine()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new BaseObserver<BaseEntity<List<MyTreasuryEntity>>>() {
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+                        mDisposables.put(mRequestCount++, disposable);
+                    }
+
+                    @Override
+                    public void onNext(BaseEntity<List<MyTreasuryEntity>> entity) {
+                        if (callBack != null) {
+                            callBack.getData(entity);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (callBack != null) {
+                            callBack.getData(null);
+                        }
+                    }
+                });
+    }
+
+
+
+    /**
+     * 我的库藏(我的空间站)
+     */
+    public void levelcurrent(BaseDataCallBack<MySpaceStationEntity> callBack) {
+        ApiProxy.getApiService().levelcurrent()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new BaseObserver<BaseEntity<MySpaceStationEntity>>() {
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+                        mDisposables.put(mRequestCount++, disposable);
+                    }
+
+                    @Override
+                    public void onNext(BaseEntity<MySpaceStationEntity> entity) {
                         if (callBack != null) {
                             callBack.getData(entity);
                         }

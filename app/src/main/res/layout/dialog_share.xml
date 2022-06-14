@@ -175,7 +175,7 @@
                 android:id="@+id/tv_code"
                 android:layout_width="67dp"
                 android:layout_height="67dp"
-                android:src="@drawable/demo_code" />
+                />
 
             <LinearLayout
                 android:layout_width="wrap_content"

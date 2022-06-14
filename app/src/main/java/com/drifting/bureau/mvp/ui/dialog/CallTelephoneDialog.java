@@ -18,12 +18,13 @@ public class CallTelephoneDialog extends BaseDialog implements View.OnClickListe
     private TextView mTvTelePhone, mTvCall, mTvCancel;
 
 
-
+    private String tel;
     private Context context;
 
-    public CallTelephoneDialog(@NonNull Context context) {
+    public CallTelephoneDialog(@NonNull Context context, String tel) {
         super(context);
-        this.context=context;
+        this.context = context;
+        this.tel=tel;
     }
 
     @Override
@@ -34,14 +35,15 @@ public class CallTelephoneDialog extends BaseDialog implements View.OnClickListe
     @Override
     protected void initDatas() {
         super.initDatas();
-        mTvTelePhone=findViewById(R.id.tv_telephone);
-        mTvCall=findViewById(R.id.tv_call);
-        mTvCancel=findViewById(R.id.tv_cancel);
+        mTvTelePhone = findViewById(R.id.tv_telephone);
+        mTvCall = findViewById(R.id.tv_call);
+        mTvCancel = findViewById(R.id.tv_cancel);
     }
 
     @Override
     protected void initEvents() {
         super.initEvents();
+        mTvTelePhone.setText(tel);
         mTvCall.setOnClickListener(this);
         mTvCancel.setOnClickListener(this);
     }
@@ -62,10 +64,10 @@ public class CallTelephoneDialog extends BaseDialog implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.tv_call:
                 dismiss();
-                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "18510507182"));
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + tel));
                 context.startActivity(intent);
                 break;
             case R.id.tv_cancel:

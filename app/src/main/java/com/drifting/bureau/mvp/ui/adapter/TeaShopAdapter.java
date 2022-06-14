@@ -11,9 +11,9 @@ import com.jess.arms.base.BaseRecyclerHolder;
 
 import java.util.List;
 
-public class TeaShopAdapter  extends BaseRecyclerAdapter<TeaShopEntity> {
+public class TeaShopAdapter  extends BaseRecyclerAdapter<TeaShopEntity.ListBean> {
 
-    public TeaShopAdapter(List<TeaShopEntity> infos) {
+    public TeaShopAdapter(List<TeaShopEntity.ListBean> infos) {
         super(infos);
     }
 

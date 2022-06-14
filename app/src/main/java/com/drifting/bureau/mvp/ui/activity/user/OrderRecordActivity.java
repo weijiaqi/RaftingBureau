@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.drifting.bureau.R;
 import com.drifting.bureau.data.event.MyBlindBoxRefreshEvent;
 import com.drifting.bureau.data.event.OrderRecordEvent;
+import com.drifting.bureau.data.event.PaymentEvent;
 import com.drifting.bureau.di.component.DaggerOrderRecordComponent;
 import com.drifting.bureau.mvp.model.entity.DriftingTrackEntity;
 
@@ -170,6 +171,12 @@ public class OrderRecordActivity extends BaseActivity<OrderRecordPresenter> impl
         }
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void PaymentEvent(PaymentEvent event) {  //购买成功回调
+        if (event != null) {
+            onRefresh();
+        }
+    }
 
     @Override
     public void loadState(int type) {

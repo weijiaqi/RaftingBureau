@@ -64,6 +64,7 @@ dependencies {
     implementation rootProject.ext.dependencies["material"]
     implementation rootProject.ext.dependencies["constraintlayout"]
     implementation files('libs\\pinyin4j-2.5.0.jar')
+    implementation files('libs\\AMap_Location_V6.1.0_20220414.jar')
     testImplementation rootProject.ext.dependencies["junit"]
     androidTestImplementation rootProject.ext.dependencies["junit-test"]
     //androidx
@@ -124,4 +125,6 @@ dependencies {
     implementation  'io.github.scwang90:refresh-layout-kernel:2.0.5'      //核心必须依赖
     implementation  'io.github.scwang90:refresh-header-classics:2.0.5'    //经典刷新头
     implementation  'io.github.scwang90:refresh-footer-classics:2.0.5'    //经典加载
+
+    implementation 'com.github.zhang-hai:Mp3Recorder:1.1.3'
 }

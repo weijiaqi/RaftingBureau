@@ -11,69 +11,58 @@ import android.app.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
+
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Rect;
+
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
-import android.view.GestureDetector;
+
 import android.view.KeyEvent;
-import android.view.MotionEvent;
+
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.DecelerateInterpolator;
-import android.view.animation.ScaleAnimation;
-import android.view.animation.TranslateAnimation;
+
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+
 
 import com.drifting.bureau.R;
-import com.drifting.bureau.data.entity.Point;
+
 import com.drifting.bureau.data.event.BackSpaceEvent;
-import com.drifting.bureau.data.event.MyBlindBoxRefreshEvent;
+
 import com.drifting.bureau.di.component.DaggerDiscoveryTourComponent;
-import com.drifting.bureau.mvp.model.entity.CustomerEntity;
+
 
 import com.drifting.bureau.mvp.model.entity.MessageReceiveEntity;
 import com.drifting.bureau.mvp.model.entity.PlanetEntity;
-import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
-import com.drifting.bureau.mvp.ui.activity.index.DriftingBottleActivity;
+
 import com.drifting.bureau.mvp.ui.activity.index.SpaceCapsuleActivity;
 import com.drifting.bureau.mvp.ui.activity.index.ViewRaftingActivity;
 import com.drifting.bureau.mvp.ui.activity.user.AboutMeActivity;
 import com.drifting.bureau.mvp.ui.adapter.DiscoveryViewpagerAdapter;
 import com.drifting.bureau.mvp.ui.dialog.RaftingInforDialog;
 import com.drifting.bureau.storageinfo.Preferences;
-import com.drifting.bureau.util.GlideUtil;
-import com.drifting.bureau.util.MapsUtil;
+
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.animator.AnimatorUtil;
-import com.drifting.bureau.util.callback.BaseDataCallBack;
+
 import com.drifting.bureau.util.request.RequestUtil;
 import com.drifting.bureau.view.DiscoveryTransformer;
-import com.drifting.bureau.view.ScaleInTransformer;
+
 import com.jess.arms.base.BaseActivity;
-import com.jess.arms.base.BaseDialog;
-import com.jess.arms.base.BaseEntity;
+
 import com.jess.arms.di.component.AppComponent;
 import com.drifting.bureau.mvp.contract.DiscoveryTourContract;
 import com.drifting.bureau.mvp.presenter.DiscoveryTourPresenter;
 
+
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -156,8 +145,11 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
         mRlInfo.setVisibility(View.VISIBLE);
         if (mPresenter != null) {
             mPresenter.getExploreList();
+            mPresenter.getLocation(this);
         }
         frame.setOnTouchListener((view, motionEvent) -> viewPager.onTouchEvent(motionEvent));
+
+
     }
 
 
@@ -242,6 +234,11 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
         }
     }
 
+    @Override
+    public void onLocationSuccess() {
+
+    }
+
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void BackSpaceEvent(BackSpaceEvent backSpaceEvent) {
@@ -273,7 +270,7 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
         ObjectAnimator translationX = ObjectAnimator.ofFloat(view, TRANSLATION_X, values1, x);
         ObjectAnimator translationY = ObjectAnimator.ofFloat(view, View.TRANSLATION_Y, values2, y);
         animatorSet = new AnimatorSet();
-        animatorSet.play(translationY).with(translationX);
+        animatorSet.play(translationX).with(translationY);
         animatorSet.setDuration(duration);
         animatorSet.start();
         animatorSet.addListener(new AnimatorListenerAdapter() {

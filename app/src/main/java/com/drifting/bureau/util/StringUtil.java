@@ -44,11 +44,11 @@ public class StringUtil {
     /**
      * @description 提现金额比较
      */
-    public static String CompareMoney(String money,String money2) {
+    public static String CompareMoney(String money, String money2) {
         String result = null;
-       if (Double.parseDouble(money)>Double.parseDouble(money2)){
-           result="可提现金额不足!";
-       }
+        if (Double.parseDouble(money) > Double.parseDouble(money2)) {
+            result = "可提现金额不足!";
+        }
         return result;
     }
 
@@ -122,6 +122,7 @@ public class StringUtil {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return sdf.format(new Date());
     }
+
     /**
      * MD5加密
      */
@@ -155,6 +156,7 @@ public class StringUtil {
 
     /**
      * 保留两位小数点
+     *
      * @param frontValue
      * @return
      */
@@ -162,5 +164,28 @@ public class StringUtil {
         java.text.DecimalFormat myformat = new java.text.DecimalFormat("0.00");
         String str = myformat.format(frontValue);
         return str;
+    }
+
+
+    //漂流类型拼接
+    public static String getCupNama(int explore_id, String sku_name,int num) {
+        String name = null;
+        switch (explore_id) {
+            case 0:
+                if (num>1){
+                    name=sku_name+"*"+num;
+                }else {
+                    name=sku_name;
+                }
+                break;
+            case 1:
+                name = "传递漂-";
+                break;
+        }
+        if (explore_id==0){
+            return name;
+        }else {
+            return name + sku_name;
+        }
     }
 }

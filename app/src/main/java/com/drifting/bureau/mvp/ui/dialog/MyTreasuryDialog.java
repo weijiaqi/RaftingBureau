@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.drifting.bureau.R;
-import com.drifting.bureau.data.event.DonationEvent;
 import com.drifting.bureau.mvp.model.entity.MyTreasuryEntity;
 import com.drifting.bureau.mvp.ui.adapter.MyTreasuryAdapter;
 import com.drifting.bureau.util.GlideUtil;
@@ -33,23 +32,22 @@ import java.util.List;
 
 public class MyTreasuryDialog extends BaseDialog implements View.OnClickListener {
 
-    public static final int SELECT_USE = 0x01;
-
     private Context context;
     private RecyclerView mRcyMyTrea;
     private ImageView mIvPicture;
     private TextView mTvTitle, mTvNum, mTvUse, mTvGiveAway, mTvContent;
 
-    private int object_id;
+    private int object_id, count;
     private DonationDialog donationDialog;
-
+    private SpaceStationUpgradeDialog spaceStationUpgradeDialog;
+    private MySpaceStationDialog mySpaceStationDialog;
     private MyTreasuryAdapter myTreasuryAdapter;
     private List<MyTreasuryEntity> list;
 
-    public MyTreasuryDialog(@NonNull Context context, List<MyTreasuryEntity> entities) {
+    public MyTreasuryDialog(@NonNull Context context) {
         super(context);
         this.context = context;
-        this.list = entities;
+
     }
 
     @Override
@@ -77,15 +75,24 @@ public class MyTreasuryDialog extends BaseDialog implements View.OnClickListener
             object_id = entity.getObject_id();
             GlideUtil.create().loadNormalPic(context, entity.getImage_url(), mIvPicture);
             mTvTitle.setText(entity.getName());
-            mTvNum.setText("数量  " + entity.getCount());
+            count = entity.getCount();
+            mTvNum.setText("数量  " + count);
             mTvContent.setText(entity.getDesc());
         });
         mRcyMyTrea.setAdapter(myTreasuryAdapter);
-        myTreasuryAdapter.setData(list);
-        myTreasuryAdapter.onItemCheckChange(list.get(0));
-
+        getData();
         mTvGiveAway.setOnClickListener(this);
         mTvUse.setOnClickListener(this);
+    }
+
+    public void getData() {
+        RequestUtil.create().storagemine(entity -> {
+            if (entity != null && entity.getCode() == 200) {
+                list = entity.getData();
+                myTreasuryAdapter.setData(list);
+                myTreasuryAdapter.onItemCheckChange(list.get(0));
+            }
+        });
     }
 
 
@@ -98,9 +105,17 @@ public class MyTreasuryDialog extends BaseDialog implements View.OnClickListener
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_use: //使用
-                if (onClickCallback != null) {
-                    onClickCallback.onClickType(SELECT_USE);
-                }
+                spaceStationUpgradeDialog = new SpaceStationUpgradeDialog(context, count, object_id);
+                spaceStationUpgradeDialog.show();
+                spaceStationUpgradeDialog.setOnClickCallback(type -> {
+                    if (type == SpaceStationUpgradeDialog.SELECT_FINISH) {
+                        spaceStationUpgradeDialog.dismiss();
+                        mySpaceStationDialog = new MySpaceStationDialog(context);
+                        mySpaceStationDialog.show();
+                        getData();
+                    }
+                });
+
                 break;
             case R.id.tv_give_away: //转赠
                 donationDialog = new DonationDialog(context);
@@ -110,8 +125,8 @@ public class MyTreasuryDialog extends BaseDialog implements View.OnClickListener
                         if (entity != null) {
                             ToastUtil.showToast(entity.getMsg());
                             if (entity.getCode() == 200) {
-                                dismiss();
-                                EventBus.getDefault().post(new DonationEvent());
+                                donationDialog.dismiss();
+                                getData();
                             }
                         }
                     });

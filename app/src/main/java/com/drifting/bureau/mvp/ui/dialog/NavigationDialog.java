@@ -54,7 +54,7 @@ public class NavigationDialog extends BaseDialog implements View.OnClickListener
             case R.id.tv_baidu:
                 dismiss();
                 //跳转到百度地图
-                MapsUtil.goToBaiduActivity(context, null, Double.valueOf("116.396794"), Double.valueOf("39.908572"));
+                MapsUtil.goToBaiduActivity(context, null, Double.valueOf("116.397441"), Double.valueOf("39.909166"));
                 break;
         }
     }

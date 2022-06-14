@@ -55,7 +55,6 @@ public class DonationDialog extends BaseDialog implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_click:
-                dismiss();
                 if (!StringUtil.isEmpty(StringUtil.checkMobile(mEtPhone.getText().toString()))) {
                     showMessage(StringUtil.checkMobile(mEtPhone.getText().toString()));
                     return;

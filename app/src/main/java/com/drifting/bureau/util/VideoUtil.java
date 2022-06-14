@@ -33,10 +33,6 @@ public class VideoUtil {
 
     private static int isPlaying = 0;
 
-
-
-    
-
     /**
      * @description 语音播放
      */

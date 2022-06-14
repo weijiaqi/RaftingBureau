@@ -83,6 +83,7 @@ public class OrderRecordPresenter extends BasePresenter<OrderRecordContract.Mode
                     @Override
                     public void onError(Throwable t) {
                         Log.e("错误信息", t.getMessage().toString() + "");
+                        mRootView.loadState(ViewUtil.NOT_SERVER);
                         t.printStackTrace();
                     }
                 });

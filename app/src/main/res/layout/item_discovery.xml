@@ -10,7 +10,7 @@
         android:id="@+id/iv_planet"
         android:layout_width="match_parent"
         android:layout_height="130dp"
-        android:src="@drawable/demo_s" />
+      />
 
     <com.hjq.shape.view.ShapeTextView
         android:id="@+id/tv_planet"

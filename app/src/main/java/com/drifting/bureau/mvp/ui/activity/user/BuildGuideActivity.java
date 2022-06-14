@@ -93,7 +93,7 @@ public class BuildGuideActivity extends BaseActivity {
             @Override
             public void onClick(View widget) {
                 if (!ClickUtil.isFastClick(widget.getId())) {
-                    ShowWebViewActivity.start(BuildGuideActivity.this, false);
+                    ShowWebViewActivity.start(BuildGuideActivity.this, 1,false);
                 }
             }
 
@@ -115,7 +115,7 @@ public class BuildGuideActivity extends BaseActivity {
             @Override
             public void onClick(View widget) {
                 if (!ClickUtil.isFastClick(widget.getId())) {
-                    ShowWebViewActivity.start(BuildGuideActivity.this, false);
+                    ShowWebViewActivity.start(BuildGuideActivity.this,2, false);
                 }
             }
 

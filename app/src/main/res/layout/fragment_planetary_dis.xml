@@ -25,38 +25,38 @@
             android:layout_marginStart="48dp"
             android:layout_marginTop="15dp"
             android:gravity="bottom"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+
 
             <ImageView
-                android:id="@+id/iv_location13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="1dp"
-
-                android:src="@drawable/planetary_select_location"
-                android:visibility="invisible" />
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/planetary13" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_marginTop="-5dp">
 
                 <ImageView
+                    android:id="@+id/iv_location13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:src="@drawable/planetary13" />
+                    android:layout_gravity="bottom"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginBottom="1dp"
+                    android:visibility="invisible"
+                    android:src="@drawable/planetary_select_location" />
 
                 <com.hjq.shape.view.ShapeTextView
                     android:id="@+id/tv_planet13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="-5dp"
                     android:text="燧人星"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
+
             </LinearLayout>
         </LinearLayout>
 
@@ -66,45 +66,44 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/ll_planet13"
-            android:layout_marginStart="-20dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="-10dp"
             android:layout_toRightOf="@+id/ll_planet13"
             android:gravity="bottom"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+
 
             <ImageView
-                android:id="@+id/iv_location14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="1dp"
-
-                android:src="@drawable/planetary_select_location"
-                android:visibility="invisible" />
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/planetary14" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_marginTop="-5dp">
 
                 <ImageView
+                    android:id="@+id/iv_location14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:src="@drawable/planetary14" />
+                    android:layout_gravity="bottom"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginBottom="1dp"
+                    android:visibility="invisible"
+                    android:src="@drawable/planetary_select_location" />
 
                 <com.hjq.shape.view.ShapeTextView
                     android:id="@+id/tv_planet14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="-5dp"
+
                     android:text="黄帝星"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
+
             </LinearLayout>
-
-
         </LinearLayout>
 
 
@@ -114,44 +113,42 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/ll_planet14"
             android:layout_alignLeft="@+id/ll_planet14"
-
+            android:layout_marginStart="-10dp"
             android:layout_marginTop="20dp"
             android:gravity="bottom"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+
 
             <ImageView
-                android:id="@+id/iv_location15"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="1dp"
-
-                android:src="@drawable/planetary_select_location"
-                android:visibility="invisible" />
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/planetary15" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_marginTop="-5dp">
 
                 <ImageView
+                    android:id="@+id/iv_location15"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:src="@drawable/planetary15" />
+                    android:layout_gravity="bottom"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginBottom="1dp"
+                    android:visibility="invisible"
+                    android:src="@drawable/planetary_select_location" />
 
                 <com.hjq.shape.view.ShapeTextView
                     android:id="@+id/tv_planet15"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="-5dp"
                     android:text="大禹星"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
+
             </LinearLayout>
-
-
         </LinearLayout>
 
 
@@ -162,40 +159,40 @@
             android:layout_marginStart="26dp"
             android:layout_marginTop="210dp"
             android:gravity="bottom"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+
 
             <ImageView
-                android:id="@+id/iv_location16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="1dp"
-
-                android:src="@drawable/planetary_select_location"
-                android:visibility="invisible" />
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/planetary16" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_marginTop="-5dp">
 
                 <ImageView
+                    android:id="@+id/iv_location16"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:src="@drawable/planetary16" />
+                    android:layout_gravity="bottom"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginBottom="1dp"
+                    android:visibility="invisible"
+                    android:src="@drawable/planetary_select_location" />
 
                 <com.hjq.shape.view.ShapeTextView
                     android:id="@+id/tv_planet16"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="-5dp"
+
                     android:text="吕尚星"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
-            </LinearLayout>
 
+            </LinearLayout>
         </LinearLayout>
 
 
@@ -221,38 +218,38 @@
             android:layout_marginStart="18dp"
             android:layout_marginTop="15dp"
             android:gravity="bottom"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+
 
             <ImageView
-                android:id="@+id/iv_location7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="1dp"
-
-                android:src="@drawable/planetary_select_location"
-                android:visibility="invisible" />
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/planetary07" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_marginTop="-5dp">
 
                 <ImageView
+                    android:id="@+id/iv_location7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:src="@drawable/planetary07" />
+                    android:layout_gravity="bottom"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginBottom="1dp"
+                    android:visibility="invisible"
+                    android:src="@drawable/planetary_select_location" />
 
                 <com.hjq.shape.view.ShapeTextView
                     android:id="@+id/tv_planet7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="-5dp"
                     android:text="姮娥星"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
+
             </LinearLayout>
         </LinearLayout>
 
@@ -262,43 +259,42 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="42dp"
+            android:layout_marginTop="32dp"
             android:layout_toRightOf="@+id/ll_planet7"
             android:gravity="bottom"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+
 
             <ImageView
-                android:id="@+id/iv_location8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="1dp"
-
-                android:src="@drawable/planetary_select_location"
-                android:visibility="invisible" />
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/planetary08" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_marginTop="-7dp">
 
                 <ImageView
+                    android:id="@+id/iv_location8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:src="@drawable/planetary08" />
+                    android:layout_gravity="bottom"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginBottom="1dp"
+                    android:visibility="invisible"
+                    android:src="@drawable/planetary_select_location" />
 
                 <com.hjq.shape.view.ShapeTextView
                     android:id="@+id/tv_planet8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="-5dp"
                     android:text="夸父星"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
-            </LinearLayout>
 
+            </LinearLayout>
         </LinearLayout>
 
 
@@ -307,45 +303,46 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/ll_planet8"
-            android:layout_marginStart="-10dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="25dp"
             android:layout_toRightOf="@+id/ll_planet8"
             android:gravity="bottom"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+
 
             <ImageView
-                android:id="@+id/iv_location9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="1dp"
-
-                android:src="@drawable/planetary_select_location"
-                android:visibility="invisible" />
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/planetary09" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_marginTop="-5dp">
 
                 <ImageView
+                    android:id="@+id/iv_location9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:src="@drawable/planetary09" />
+                    android:layout_gravity="bottom"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginBottom="1dp"
+                    android:visibility="invisible"
+                    android:src="@drawable/planetary_select_location" />
 
                 <com.hjq.shape.view.ShapeTextView
                     android:id="@+id/tv_planet9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="-5dp"
+
                     android:text="嫘祖星"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
-            </LinearLayout>
 
+            </LinearLayout>
         </LinearLayout>
+
 
         <LinearLayout
             android:id="@+id/ll_planet10"
@@ -353,42 +350,44 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/ll_planet9"
             android:layout_alignLeft="@+id/ll_planet9"
-            android:layout_marginTop="35dp"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="35dp"
             android:gravity="bottom"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+
 
             <ImageView
-                android:id="@+id/iv_location10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="1dp"
-
-                android:src="@drawable/planetary_select_location"
-                android:visibility="invisible" />
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/planetary10" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_marginTop="-5dp">
 
                 <ImageView
+                    android:id="@+id/iv_location10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:src="@drawable/planetary10" />
+                    android:layout_gravity="bottom"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginBottom="1dp"
+                    android:visibility="invisible"
+                    android:src="@drawable/planetary_select_location" />
 
                 <com.hjq.shape.view.ShapeTextView
                     android:id="@+id/tv_planet10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="-5dp"
+
                     android:text="玄女星"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
+
             </LinearLayout>
+
 
         </LinearLayout>
 
@@ -401,41 +400,39 @@
             android:layout_marginEnd="-20dp"
             android:layout_toLeftOf="@+id/ll_planet10"
             android:gravity="bottom"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+
 
             <ImageView
-                android:id="@+id/iv_location11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="1dp"
-
-                android:src="@drawable/planetary_select_location"
-                android:visibility="invisible" />
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/planetary11" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_marginTop="-5dp">
 
                 <ImageView
+                    android:id="@+id/iv_location11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:src="@drawable/planetary11" />
+                    android:layout_gravity="bottom"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginBottom="1dp"
+                    android:visibility="invisible"
+                    android:src="@drawable/planetary_select_location" />
 
                 <com.hjq.shape.view.ShapeTextView
                     android:id="@+id/tv_planet11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="-5dp"
                     android:text="伏羲星"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
+
             </LinearLayout>
-
-
         </LinearLayout>
 
 
@@ -446,38 +443,39 @@
             android:layout_alignParentBottom="true"
             android:layout_marginStart="48dp"
             android:gravity="bottom"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+
 
             <ImageView
-                android:id="@+id/iv_location12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="1dp"
-
-                android:src="@drawable/planetary_select_location"
-                android:visibility="invisible" />
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/planetary12" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_marginTop="-5dp">
+
 
                 <ImageView
+                    android:id="@+id/iv_location12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:src="@drawable/planetary12" />
+                    android:layout_gravity="bottom"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginBottom="1dp"
+                    android:visibility="invisible"
+                    android:src="@drawable/planetary_select_location" />
 
                 <com.hjq.shape.view.ShapeTextView
                     android:id="@+id/tv_planet12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="-5dp"
                     android:text="后裔星"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
+
             </LinearLayout>
         </LinearLayout>
 
@@ -486,14 +484,13 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="567dp"
-        android:layout_centerVertical="true">
+        android:layout_height="600dp">
 
         <View
             android:layout_width="537dp"
             android:layout_height="537dp"
-            android:layout_alignParentBottom="true"
             android:layout_marginStart="-213dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/shape_stroke_circle" />
 
 
@@ -502,42 +499,40 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="64dp"
-            android:layout_marginTop="8dp"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/iv_location1"
+                android:id="@+id/iv_planet1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginEnd="2dp"
-                android:layout_marginBottom="1dp"
-
-                android:src="@drawable/planetary_select_location"
-                android:visibility="invisible" />
+                android:layout_centerHorizontal="true"
+                android:layout_margin="5dp"
+                android:src="@drawable/planetary01" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_marginTop="-4dp">
 
                 <ImageView
-                    android:id="@+id/iv_planet1"
+                    android:id="@+id/iv_location1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:src="@drawable/planetary01" />
+                    android:layout_gravity="bottom"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginBottom="1dp"
+                    android:visibility="invisible"
+                    android:src="@drawable/planetary_select_location" />
 
                 <com.hjq.shape.view.ShapeTextView
                     android:id="@+id/tv_planet1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/iv_planet1"
                     android:text="荒芜星"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
+
             </LinearLayout>
 
 
@@ -550,42 +545,42 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/ll_planet1"
             android:layout_marginStart="65dp"
-            android:layout_marginTop="-10dp"
+            android:layout_marginTop="-20dp"
             android:layout_toRightOf="@+id/ll_planet1"
             android:gravity="bottom"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+
 
             <ImageView
-                android:id="@+id/iv_location2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="1dp"
-
-                android:src="@drawable/planetary_select_location"
-                android:visibility="invisible" />
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/planetary02" />
 
             <LinearLayout
-
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_marginTop="-5dp">
 
                 <ImageView
+                    android:id="@+id/iv_location2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:src="@drawable/planetary02" />
+                    android:layout_gravity="bottom"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginBottom="1dp"
+                    android:visibility="invisible"
+                    android:src="@drawable/planetary_select_location" />
 
                 <com.hjq.shape.view.ShapeTextView
                     android:id="@+id/tv_planet2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="-5dp"
+
                     android:text="神农星"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
+
             </LinearLayout>
 
         </LinearLayout>
@@ -596,43 +591,44 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/ll_planet2"
-
+            android:layout_marginStart="20dp"
             android:layout_marginTop="41dp"
             android:layout_toRightOf="@+id/ll_planet2"
             android:gravity="bottom"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+
 
             <ImageView
-                android:id="@+id/iv_location3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="1dp"
-
-                android:src="@drawable/planetary_select_location"
-                android:visibility="invisible" />
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/planetary03" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_marginTop="-5dp">
 
                 <ImageView
+                    android:id="@+id/iv_location3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:src="@drawable/planetary03" />
+                    android:layout_gravity="bottom"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginBottom="1dp"
+                    android:visibility="invisible"
+                    android:src="@drawable/planetary_select_location" />
 
                 <com.hjq.shape.view.ShapeTextView
                     android:id="@+id/tv_planet3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="-5dp"
                     android:text="女娲星"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
+
             </LinearLayout>
+
         </LinearLayout>
 
 
@@ -642,44 +638,45 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/ll_planet3"
             android:layout_alignLeft="@+id/ll_planet3"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="25dp"
             android:layout_marginTop="50dp"
             android:gravity="bottom"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+
 
             <ImageView
-                android:id="@+id/iv_location4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="1dp"
-
-                android:src="@drawable/planetary_select_location"
-                android:visibility="invisible" />
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/planetary04" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_marginTop="-5dp">
 
                 <ImageView
+                    android:id="@+id/iv_location4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:src="@drawable/planetary04" />
+                    android:layout_gravity="bottom"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginBottom="1dp"
+                    android:visibility="invisible"
+                    android:src="@drawable/planetary_select_location" />
 
                 <com.hjq.shape.view.ShapeTextView
                     android:id="@+id/tv_planet4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="-5dp"
+
                     android:text="炎帝星"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
-            </LinearLayout>
 
+            </LinearLayout>
         </LinearLayout>
+
 
         <LinearLayout
             android:id="@+id/ll_planet5"
@@ -687,44 +684,42 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/ll_planet4"
             android:layout_marginTop="35dp"
-            android:layout_marginEnd="-45dp"
+            android:layout_marginEnd="-50dp"
             android:layout_toLeftOf="@+id/ll_planet4"
             android:gravity="bottom"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+
 
             <ImageView
-                android:id="@+id/iv_location5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="1dp"
-
-                android:src="@drawable/planetary_select_location"
-                android:visibility="invisible" />
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/planetary05" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_marginTop="-5dp">
 
                 <ImageView
+                    android:id="@+id/iv_location5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:src="@drawable/planetary05" />
+                    android:layout_gravity="bottom"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginBottom="1dp"
+                    android:visibility="invisible"
+                    android:src="@drawable/planetary_select_location" />
 
                 <com.hjq.shape.view.ShapeTextView
                     android:id="@+id/tv_planet5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="-5dp"
                     android:text="盘古星"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
+
             </LinearLayout>
-
-
         </LinearLayout>
 
 
@@ -734,40 +729,84 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="160dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="30dp"
             android:gravity="bottom"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+
 
             <ImageView
-                android:id="@+id/iv_location6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="1dp"
-
-                android:src="@drawable/planetary_select_location"
-                android:visibility="invisible" />
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/planetary06" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_marginTop="-7dp">
 
                 <ImageView
+                    android:id="@+id/iv_location6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:src="@drawable/planetary06" />
+                    android:layout_gravity="bottom"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginBottom="1dp"
+                    android:visibility="invisible"
+                    android:src="@drawable/planetary_select_location" />
 
                 <com.hjq.shape.view.ShapeTextView
                     android:id="@+id/tv_planet6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="-7dp"
                     android:text="仓颉星"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_planet17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="50dp"
+            android:gravity="bottom"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/planetary17" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-7dp">
+
+                <ImageView
+                    android:id="@+id/iv_location17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginBottom="1dp"
+                    android:visibility="invisible"
+                    android:src="@drawable/planetary_select_location" />
+
+                <com.hjq.shape.view.ShapeTextView
+                    android:id="@+id/tv_planet17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:text="尧星"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
             </LinearLayout>
         </LinearLayout>
 

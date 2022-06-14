@@ -51,7 +51,7 @@ public class MyBlindBoxHolder extends BaseRecyclerHolder {
 
     public void setData(@NonNull List<MyBlindBoxEntity.ListBean> listBeanList, int position) {
         TextUtil.setText(mTvTitle, listBeanList.get(position).getSku_name());
-        GlideUtil.create().loadNormalPic(context, listBeanList.get(position).getImage(), mIvPic);
+//        GlideUtil.create().loadNormalPic(context, listBeanList.get(position).getImage(), mIvPic);
         mTvOpen.setOnClickListener(v -> { //开启盲盒
             RequestUtil.create().mysteryboxopen(listBeanList.get(position).getId() + "", (BaseDataCallBack<BoxOpenEntity>) entity -> {
                 if (entity.getCode() == 200) {

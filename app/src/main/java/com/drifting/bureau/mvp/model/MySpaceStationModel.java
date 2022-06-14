@@ -80,15 +80,4 @@ public class MySpaceStationModel extends BaseModel implements MySpaceStationCont
     public Observable<BaseEntity> ordermaking(int space_order_id) {
         return mRepositoryManager.obtainRetrofitService(ApiService.class).ordermaking(space_order_id);
     }
-
-    @Override
-    public Observable<BaseEntity<MySpaceStationEntity>> levelcurrent() {
-        return mRepositoryManager.obtainRetrofitService(ApiService.class).levelcurrent();
-    }
-
-    @Override
-    public Observable<BaseEntity<List<MyTreasuryEntity>>> storagemine() {
-        return mRepositoryManager.obtainRetrofitService(ApiService.class).storagemine();
-    }
-
 }

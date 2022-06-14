@@ -58,4 +58,9 @@ public class DiscoveryTourModel extends BaseModel implements DiscoveryTourContra
         return mRepositoryManager.obtainRetrofitService(ApiService.class).messagereceive();
     }
 
+    @Override
+    public Observable<BaseEntity> information(String lng,String lat) {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).information(lng,lat);
+    }
+
 }

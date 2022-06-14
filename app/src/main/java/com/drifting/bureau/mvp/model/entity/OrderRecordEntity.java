@@ -5,109 +5,178 @@ import java.util.List;
 public class OrderRecordEntity {
 
 
-        private Integer limit;
-        private Integer page;
-        private Integer count;
-        private List<ListBean> list;
+    private Integer limit;
+    private Integer page;
+    private Integer count;
+    private List<ListBean> list;
 
-        public Integer getLimit() {
-            return limit;
+    public Integer getLimit() {
+        return limit;
+    }
+
+    public void setLimit(Integer limit) {
+        this.limit = limit;
+    }
+
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+    public List<ListBean> getList() {
+        return list;
+    }
+
+    public void setList(List<ListBean> list) {
+        this.list = list;
+    }
+
+    public static class ListBean {
+        private Integer order_id;
+        private Integer user_id;
+        private String sn;
+        private Integer status;
+        private Integer explore_id;
+        private String money;
+        private Integer pay_time;
+        private Integer created_at_int;
+        private Integer timeout;
+        private List<OrderSubBean> order_sub;
+        private Integer platform_gift;
+        private Integer write_off;
+
+
+        public String getMoney() {
+            return money;
         }
 
-        public void setLimit(Integer limit) {
-            this.limit = limit;
+        public void setMoney(String money) {
+            this.money = money;
         }
 
-        public Integer getPage() {
-            return page;
+        public Integer getPlatform_gift() {
+            return platform_gift;
         }
 
-        public void setPage(Integer page) {
-            this.page = page;
+        public void setPlatform_gift(Integer platform_gift) {
+            this.platform_gift = platform_gift;
         }
 
-        public Integer getCount() {
-            return count;
+        public Integer getWrite_off() {
+            return write_off;
         }
 
-        public void setCount(Integer count) {
-            this.count = count;
+        public void setWrite_off(Integer write_off) {
+            this.write_off = write_off;
         }
 
-        public List<ListBean> getList() {
-            return list;
+        public Integer getOrder_id() {
+            return order_id;
         }
 
-        public void setList(List<ListBean> list) {
-            this.list = list;
+        public void setOrder_id(Integer order_id) {
+            this.order_id = order_id;
         }
 
-        public static class ListBean {
-            private Integer user_id;
-            private Integer order_id;
-            private Integer order_sub_id;
-            private Integer goods_id;
+        public Integer getUser_id() {
+            return user_id;
+        }
+
+        public void setUser_id(Integer user_id) {
+            this.user_id = user_id;
+        }
+
+        public String getSn() {
+            return sn;
+        }
+
+        public void setSn(String sn) {
+            this.sn = sn;
+        }
+
+        public Integer getStatus() {
+            return status;
+        }
+
+        public void setStatus(Integer status) {
+            this.status = status;
+        }
+
+        public Integer getExplore_id() {
+            return explore_id;
+        }
+
+        public void setExplore_id(Integer explore_id) {
+            this.explore_id = explore_id;
+        }
+
+
+        public Integer getPay_time() {
+            return pay_time;
+        }
+
+        public void setPay_time(Integer pay_time) {
+            this.pay_time = pay_time;
+        }
+
+        public Integer getCreated_at_int() {
+            return created_at_int;
+        }
+
+        public void setCreated_at_int(Integer created_at_int) {
+            this.created_at_int = created_at_int;
+        }
+
+        public Integer getTimeout() {
+            return timeout;
+        }
+
+        public void setTimeout(Integer timeout) {
+            this.timeout = timeout;
+        }
+
+        public List<OrderSubBean> getOrder_sub() {
+            return order_sub;
+        }
+
+        public void setOrder_sub(List<OrderSubBean> order_sub) {
+            this.order_sub = order_sub;
+        }
+
+        public static class OrderSubBean {
             private Integer business_id;
-            private Integer sku_id;
+            private String sku_code;
+            private Integer money;
+            private Integer order_sub_id;
             private String sku_name;
-            private Integer explore_id;
-            private Integer is_drifting;
-            private Double money;
-            private Integer sku_num;
-            private Integer pay_time_int;
-            private Integer created_at_int;
+            private Integer goods_num;
+            private String small_image;
             private Integer status;
-            private Integer timeout;
+            private Integer is_drifting;
             private String desc;
-            private Integer platform_gift;
             private Integer write_off;
+            private Integer pay_time;
+            private Integer created_at_int;
+            private Integer platform_gift;
+            private Integer explore_id;
 
-            public Integer getPlatform_gift() {
-                return platform_gift;
+            public Integer getExplore_id() {
+                return explore_id;
             }
 
-            public void setPlatform_gift(Integer platform_gift) {
-                this.platform_gift = platform_gift;
-            }
-
-            public Integer getWrite_off() {
-                return write_off;
-            }
-
-            public void setWrite_off(Integer write_off) {
-                this.write_off = write_off;
-            }
-
-            public Integer getUser_id() {
-                return user_id;
-            }
-
-            public void setUser_id(Integer user_id) {
-                this.user_id = user_id;
-            }
-
-            public Integer getOrder_id() {
-                return order_id;
-            }
-
-            public void setOrder_id(Integer order_id) {
-                this.order_id = order_id;
-            }
-
-            public Integer getOrder_sub_id() {
-                return order_sub_id;
-            }
-
-            public void setOrder_sub_id(Integer order_sub_id) {
-                this.order_sub_id = order_sub_id;
-            }
-
-            public Integer getGoods_id() {
-                return goods_id;
-            }
-
-            public void setGoods_id(Integer goods_id) {
-                this.goods_id = goods_id;
+            public void setExplore_id(Integer explore_id) {
+                this.explore_id = explore_id;
             }
 
             public Integer getBusiness_id() {
@@ -118,12 +187,28 @@ public class OrderRecordEntity {
                 this.business_id = business_id;
             }
 
-            public Integer getSku_id() {
-                return sku_id;
+            public String getSku_code() {
+                return sku_code;
             }
 
-            public void setSku_id(Integer sku_id) {
-                this.sku_id = sku_id;
+            public void setSku_code(String sku_code) {
+                this.sku_code = sku_code;
+            }
+
+            public Integer getMoney() {
+                return money;
+            }
+
+            public void setMoney(Integer money) {
+                this.money = money;
+            }
+
+            public Integer getOrder_sub_id() {
+                return order_sub_id;
+            }
+
+            public void setOrder_sub_id(Integer order_sub_id) {
+                this.order_sub_id = order_sub_id;
             }
 
             public String getSku_name() {
@@ -134,52 +219,20 @@ public class OrderRecordEntity {
                 this.sku_name = sku_name;
             }
 
-            public Integer getExplore_id() {
-                return explore_id;
+            public Integer getGoods_num() {
+                return goods_num;
             }
 
-            public void setExplore_id(Integer explore_id) {
-                this.explore_id = explore_id;
+            public void setGoods_num(Integer goods_num) {
+                this.goods_num = goods_num;
             }
 
-            public Integer getIs_drifting() {
-                return is_drifting;
+            public String getSmall_image() {
+                return small_image;
             }
 
-            public void setIs_drifting(Integer is_drifting) {
-                this.is_drifting = is_drifting;
-            }
-
-            public Double getMoney() {
-                return money;
-            }
-
-            public void setMoney(Double money) {
-                this.money = money;
-            }
-
-            public Integer getSku_num() {
-                return sku_num;
-            }
-
-            public void setSku_num(Integer sku_num) {
-                this.sku_num = sku_num;
-            }
-
-            public Integer getPay_time_int() {
-                return pay_time_int;
-            }
-
-            public void setPay_time_int(Integer pay_time_int) {
-                this.pay_time_int = pay_time_int;
-            }
-
-            public Integer getCreated_at_int() {
-                return created_at_int;
-            }
-
-            public void setCreated_at_int(Integer created_at_int) {
-                this.created_at_int = created_at_int;
+            public void setSmall_image(String small_image) {
+                this.small_image = small_image;
             }
 
             public Integer getStatus() {
@@ -190,12 +243,12 @@ public class OrderRecordEntity {
                 this.status = status;
             }
 
-            public Integer getTimeout() {
-                return timeout;
+            public Integer getIs_drifting() {
+                return is_drifting;
             }
 
-            public void setTimeout(Integer timeout) {
-                this.timeout = timeout;
+            public void setIs_drifting(Integer is_drifting) {
+                this.is_drifting = is_drifting;
             }
 
             public String getDesc() {
@@ -205,6 +258,39 @@ public class OrderRecordEntity {
             public void setDesc(String desc) {
                 this.desc = desc;
             }
+
+            public Integer getWrite_off() {
+                return write_off;
+            }
+
+            public void setWrite_off(Integer write_off) {
+                this.write_off = write_off;
+            }
+
+            public Integer getPay_time() {
+                return pay_time;
+            }
+
+            public void setPay_time(Integer pay_time) {
+                this.pay_time = pay_time;
+            }
+
+            public Integer getCreated_at_int() {
+                return created_at_int;
+            }
+
+            public void setCreated_at_int(Integer created_at_int) {
+                this.created_at_int = created_at_int;
+            }
+
+            public Integer getPlatform_gift() {
+                return platform_gift;
+            }
+
+            public void setPlatform_gift(Integer platform_gift) {
+                this.platform_gift = platform_gift;
+            }
         }
+    }
 
 }

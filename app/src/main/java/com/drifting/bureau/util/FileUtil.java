@@ -21,25 +21,14 @@ public class FileUtil {
 
     /**
      * 语音存储路径
-     * @param context
+     * @param
      * @return
      */
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public static String saveVoicePath(Context context) {
+    public static String getVoicName() {
         String fileName = "voice_" + new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date()) + ".mp3";
-        File appDir = StorageUtils.getCacheDirectory(context);
-        if (!appDir.exists()) {
-            appDir.mkdir();
-        }
-        File file = new File(appDir, fileName);
-        if (!appDir.exists()) {
-            appDir.mkdir();
-        } else {
-            if (file.exists()) {
-                file.delete();
-            }
-        }
-        return appDir.getPath() + "/" + fileName;
+
+        return fileName;
     }
 
 

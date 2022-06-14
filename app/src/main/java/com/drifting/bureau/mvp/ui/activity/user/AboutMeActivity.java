@@ -196,7 +196,7 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
         });
         toolbar_title.setText("星球分布");
         tv_move_away.setOnClickListener(v -> {
-            MoveAwayPlanetaryActivity.start(this, false);
+            MoveAwayPlanetaryActivity.start(this, 1,false);
         });
         topMenu.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         SmartSwipeWrapper topMenuWrapper = SmartSwipe.wrap(topMenu);
@@ -217,9 +217,6 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
     }
 
 
-    public void startActivity(int type) {
-        PlanetaryDetailActivity.start(this, type, false);
-    }
 
 
     @Override

@@ -107,7 +107,7 @@ public class PlanetarySelectActivity extends BaseActivity<PlanetarySelectPresent
                     finish();
                     break;
                 case R.id.tv_move_away:
-                    MoveAwayPlanetaryActivity.start(this, false);
+                    MoveAwayPlanetaryActivity.start(this, 1,false);
                     break;
             }
         }

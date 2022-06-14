@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.hjq.shape.layout.ShapeLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    app:shape_radius="10dp"
+    app:shape_solidColor="@color/white">
+
+
+    <com.drifting.bureau.view.FontTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="29dp"
+        android:text="使用数量"
+        android:textColor="@color/color_00"
+        android:textSize="14sp"
+        app:fontType="Pingfang_bold" />
+
+
+    <LinearLayout
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="21dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/iv_reduce"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/reduce" />
+
+
+        <com.hjq.shape.view.ShapeEditText
+            android:id="@+id/et_num"
+            android:layout_width="38dp"
+            android:layout_height="24dp"
+            android:background="@null"
+            android:text=""
+            android:gravity="center"
+            android:layout_marginHorizontal="19dp"
+            android:textColor="@color/color_00"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:inputType="number"
+            app:shape_radius="5dp"
+            app:shape_solidColor="@color/color_e6"
+            />
+
+        <ImageView
+            android:id="@+id/iv_plus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/plus" />
+    </LinearLayout>
+
+
+    <com.hjq.shape.view.ShapeTextView
+        android:id="@+id/tv_click"
+        android:layout_width="156dp"
+        android:layout_height="38dp"
+        android:gravity="center"
+        android:layout_marginBottom="24dp"
+        android:text="确定"
+        android:textColor="@color/color_00"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        app:shape_endColor="@color/color_6d"
+        app:shape_radius="100dp"
+        app:shape_startColor="@color/color_6c" />
+
+
+</com.hjq.shape.layout.ShapeLinearLayout>

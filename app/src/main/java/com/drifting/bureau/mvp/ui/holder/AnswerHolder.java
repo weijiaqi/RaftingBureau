@@ -13,7 +13,8 @@ import androidx.annotation.NonNull;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.AnswerEntity;
-import com.drifting.bureau.mvp.model.entity.HotCityEntity;
+import com.drifting.bureau.mvp.model.entity.QuestionEntity;
+import com.drifting.bureau.mvp.ui.adapter.AnswerAdapter;
 import com.drifting.bureau.util.TextUtil;
 import com.hjq.shape.layout.ShapeRelativeLayout;
 import com.jess.arms.base.BaseRecyclerHolder;
@@ -22,6 +23,7 @@ import com.jess.arms.utils.ArmsUtils;
 import java.util.List;
 
 import butterknife.BindView;
+import retrofit2.http.PUT;
 
 public class AnswerHolder extends BaseRecyclerHolder {
     @BindView(R.id.rl_a)
@@ -50,27 +52,37 @@ public class AnswerHolder extends BaseRecyclerHolder {
     LinearLayout mLlTwo;
 
     private Context context;
+    private AnswerAdapter answerAdapter;
 
-    public AnswerHolder(View itemView) {
+    public AnswerHolder(View itemView, AnswerAdapter answerAdapter) {
         super(itemView);
         context = itemView.getContext();
+        this.answerAdapter = answerAdapter;
     }
 
-    public void setData(@NonNull List<AnswerEntity> data, int position) {
-        initial(data.get(position).getType());
-        TextUtil.setText(mTvTitle, data.get(position).getTitle());
+    public void setData(@NonNull List<QuestionEntity> data, int position) {
+        initial(data.get(position).getQ_type());
+        TextUtil.setText(mTvTitle, data.get(position).getQuestion());
         TextUtil.setText(mTvnum, data.get(position).getPostion() + "");
-        TextUtil.setText(mTvAnswerA, "A." + data.get(position).getAnswerA());
-        TextUtil.setText(mTvAnswerB, "B." + data.get(position).getAnswerB());
+        TextUtil.setText(mTvAnswerA, "A." + data.get(position).getA());
+        TextUtil.setText(mTvAnswerB, "B." + data.get(position).getB());
 
         mRla.setOnClickListener(v -> {
             setRlStatus(true);
+            setAnswer(data.get(0).getQuestion_id(),"A");
         });
         mRlb.setOnClickListener(v -> {
             setRlStatus(false);
+            setAnswer(data.get(0).getQuestion_id(),"B");
         });
-        mSelectA.setOnClickListener(v->{setCheckStatus(1);});
-        mSelectB.setOnClickListener(v->{setCheckStatus(2);});
+        mSelectA.setOnClickListener(v -> {
+            setCheckStatus(1);
+            setAnswer(data.get(0).getQuestion_id(),"A");
+        });
+        mSelectB.setOnClickListener(v -> {
+            setCheckStatus(2);
+            setAnswer(data.get(0).getQuestion_id(),"B");
+        });
     }
 
     public void initial(int type) {
@@ -80,12 +92,14 @@ public class AnswerHolder extends BaseRecyclerHolder {
         mIvSelectB.setVisibility(View.GONE);
         mTvAnswerA.setTextColor(context.getColor(R.color.color_6d4));
         mTvAnswerB.setTextColor(context.getColor(R.color.color_6d4));
-        if (type == 1) {
+        if (type == 0) {
             mRlOne.setVisibility(View.VISIBLE);
             mLlTwo.setVisibility(View.GONE);
         } else {
             mRlOne.setVisibility(View.GONE);
             mLlTwo.setVisibility(View.VISIBLE);
+            mSelectA.setChecked(false);
+            mSelectB.setChecked(false);
         }
     }
 
@@ -111,5 +125,12 @@ public class AnswerHolder extends BaseRecyclerHolder {
             mIvSelectA.setVisibility(View.GONE);
             mIvSelectB.setVisibility(View.VISIBLE);
         }
+    }
+
+    public void setAnswer(int questionid,String value) {
+        AnswerEntity answerEntity = new AnswerEntity();
+        answerEntity.setQuestionid(questionid);
+        answerEntity.setValue(value);
+        answerAdapter.onItemCheckChange(answerEntity);
     }
 }

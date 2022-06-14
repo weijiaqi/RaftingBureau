@@ -14,7 +14,10 @@ import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.MySpaceStationEntity;
 import com.drifting.bureau.mvp.ui.adapter.MySpaceStationAdapter;
 import com.drifting.bureau.util.SpannableUtil;
+import com.drifting.bureau.util.callback.BaseDataCallBack;
+import com.drifting.bureau.util.request.RequestUtil;
 import com.jess.arms.base.BaseDialog;
+import com.jess.arms.base.BaseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,12 +34,11 @@ public class MySpaceStationDialog extends BaseDialog implements View.OnClickList
     private RecyclerView mRcyInterests;
     private Context context;
     private MySpaceStationAdapter mySpaceStationAdapter;
-    private MySpaceStationEntity mySpaceStationEntity;
 
-    public MySpaceStationDialog(@NonNull Context context, MySpaceStationEntity mySpaceStationEntity) {
+    private MySpaceStationEntity mySpaceStationEntity;
+    public MySpaceStationDialog(@NonNull Context context) {
         super(context);
         this.context = context;
-        this.mySpaceStationEntity = mySpaceStationEntity;
     }
 
     @Override
@@ -54,21 +56,31 @@ public class MySpaceStationDialog extends BaseDialog implements View.OnClickList
     @Override
     protected void initEvents() {
         super.initEvents();
-        if (mySpaceStationEntity.getScore() == mySpaceStationEntity.getTop_score()) {
-            mTvDistance.setText("已升至满级");
-        } else {
-            mTvDistance.setText("距离下一等级");
-        }
-        mPrUpgrade.setMax(mySpaceStationEntity.getTop_score());
-        mPrUpgrade.setProgress(mySpaceStationEntity.getScore());
-        mTvTotalNum.setText(mySpaceStationEntity.getScore() + "/" + mySpaceStationEntity.getTop_score());
-        SpannableStringBuilder passer = SpannableUtil.getBuilder(context, "当前空间站等级： ").append(mySpaceStationEntity.getSpace_level_name()).setBold().build();
-        mTvLevelName.setText(passer);
-        mTvCofim.setOnClickListener(this);
         mRcyInterests.setLayoutManager(new GridLayoutManager(context, 4));
+
         mySpaceStationAdapter = new MySpaceStationAdapter(new ArrayList<>());
         mRcyInterests.setAdapter(mySpaceStationAdapter);
-        mySpaceStationAdapter.setData(mySpaceStationEntity.getOwn_rights());
+        getInfo();
+        mTvCofim.setOnClickListener(this);
+    }
+
+    public void getInfo() {
+        RequestUtil.create().levelcurrent(entity -> {
+            if (entity != null && entity.getCode() == 200) {
+                mySpaceStationEntity=entity.getData();
+                if (mySpaceStationEntity.getScore() == mySpaceStationEntity.getTop_score()) {
+                    mTvDistance.setText("已升至满级");
+                } else {
+                    mTvDistance.setText("距离下一等级");
+                }
+                mPrUpgrade.setMax(mySpaceStationEntity.getTop_score());
+                mPrUpgrade.setProgress(mySpaceStationEntity.getScore());
+                mTvTotalNum.setText(mySpaceStationEntity.getScore() + "/" + mySpaceStationEntity.getTop_score());
+                SpannableStringBuilder passer = SpannableUtil.getBuilder(context, "当前空间站等级： ").append(mySpaceStationEntity.getSpace_level_name()).setBold().build();
+                mTvLevelName.setText(passer);
+                mySpaceStationAdapter.setData(mySpaceStationEntity.getOwn_rights());
+            }
+        });
     }
 
 

@@ -1,17 +1,28 @@
 package com.drifting.bureau.util;
 
+import static android.content.Context.LOCATION_SERVICE;
+
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
+import android.text.TextUtils;
 
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.drifting.bureau.app.application.RBureauApplication;
 
 import java.util.List;
+
 /**
- * @description  工具类
  * @author 卫佳琪1
+ * @description 工具类
  * @time 15:23 15:23
  */
 
@@ -35,7 +46,6 @@ public class AppUtil {
             }
         return VERNAME;
     }
-
 
 
     /**
@@ -65,4 +75,5 @@ public class AppUtil {
 
         return false;
     }
+
 }

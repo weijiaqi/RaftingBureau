@@ -26,6 +26,15 @@ public class ToastUtil {
     }
 
     /**
+     * 普通中间Toast
+     */
+    public static void showBottomToast(String content) {
+        ToastUtils.setView(R.layout.toast_layout_center);
+        ToastUtils.setGravity(Gravity.BOTTOM);
+        ToastUtils.show(content);
+    }
+
+    /**
      * 添加好友dialog
      * @param context
      */

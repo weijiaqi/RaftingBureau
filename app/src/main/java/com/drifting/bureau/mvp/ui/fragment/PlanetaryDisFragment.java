@@ -58,6 +58,8 @@ public class PlanetaryDisFragment extends BaseFragment {
     ShapeTextView mTvPlanet15;
     @BindView(R.id.tv_planet16)
     ShapeTextView mTvPlanet16;
+    @BindView(R.id.tv_planet17)
+    ShapeTextView mTvPlanet17;
     @BindView(R.id.iv_location1)
     ImageView mIvLocation1;
     @BindView(R.id.iv_location2)
@@ -90,6 +92,8 @@ public class PlanetaryDisFragment extends BaseFragment {
     ImageView mIvLocation15;
     @BindView(R.id.iv_location16)
     ImageView mIvLocation16;
+    @BindView(R.id.iv_location17)
+    ImageView mIvLocation17;
     private static final String BUNDLE_TYPE = "bundle_type";
     private int type;
 
@@ -130,7 +134,7 @@ public class PlanetaryDisFragment extends BaseFragment {
     }
 
 
-    @OnClick({R.id.ll_planet1, R.id.ll_planet2, R.id.ll_planet3, R.id.ll_planet4,R.id.ll_planet5, R.id.ll_planet6, R.id.ll_planet7, R.id.ll_planet8, R.id.ll_planet9, R.id.ll_planet10,R.id.ll_planet11, R.id.ll_planet12, R.id.ll_planet13, R.id.ll_planet14, R.id.ll_planet15, R.id.ll_planet16})
+    @OnClick({R.id.ll_planet1, R.id.ll_planet2, R.id.ll_planet3, R.id.ll_planet4,R.id.ll_planet5, R.id.ll_planet6, R.id.ll_planet7, R.id.ll_planet8, R.id.ll_planet9, R.id.ll_planet10,R.id.ll_planet11, R.id.ll_planet12, R.id.ll_planet13, R.id.ll_planet14, R.id.ll_planet15, R.id.ll_planet16, R.id.ll_planet17})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
@@ -138,49 +142,52 @@ public class PlanetaryDisFragment extends BaseFragment {
                     startActivity(1);
                     break;
                 case R.id.ll_planet2:
-                    startActivity(2);
-                    break;
-                case R.id.ll_planet3:
                     startActivity(3);
                     break;
+                case R.id.ll_planet3:
+                    startActivity(2);
+                    break;
                 case R.id.ll_planet4:
-                    startActivity(4);
+                    startActivity(17);
                     break;
                 case R.id.ll_planet5:
-                    startActivity(5);
+                    startActivity(4);
                     break;
                 case R.id.ll_planet6:
-                    startActivity(6);
+                    startActivity(5);
                     break;
                 case R.id.ll_planet7:
-                    startActivity(7);
+                    startActivity(6);
                     break;
                 case R.id.ll_planet8:
-                    startActivity(8);
+                    startActivity(7);
                     break;
                 case R.id.ll_planet9:
-                    startActivity(9);
+                    startActivity(8);
                     break;
                 case R.id.ll_planet10:
-                    startActivity(10);
+                    startActivity(9);
                     break;
                 case R.id.ll_planet11:
-                    startActivity(11);
+                    startActivity(10);
                     break;
                 case R.id.ll_planet12:
-                    startActivity(12);
+                    startActivity(11);
                     break;
                 case R.id.ll_planet13:
-                    startActivity(13);
+                    startActivity(16);
                     break;
                 case R.id.ll_planet14:
-                    startActivity(14);
-                    break;
-                case R.id.ll_planet15:
                     startActivity(15);
                     break;
+                case R.id.ll_planet15:
+                    startActivity(14);
+                    break;
                 case R.id.ll_planet16:
-                    startActivity(16);
+                    startActivity(13);
+                    break;
+                case R.id.ll_planet17:
+                    startActivity(12);
                     break;
             }
         }
@@ -199,64 +206,69 @@ public class PlanetaryDisFragment extends BaseFragment {
                 mTvPlanet1.getTextColorBuilder().setTextGradientColors(mContext. getColor(R.color.color_6c), mContext. getColor(R.color.color_6d)).intoTextColor();
                 break;
             case 2:
+                mIvLocation3.setVisibility(View.VISIBLE);
+                mTvPlanet3.getTextColorBuilder().setTextGradientColors(mContext. getColor(R.color.color_6c), mContext. getColor(R.color.color_6d)).intoTextColor();
+
+                break;
+            case 3:
                 mIvLocation2.setVisibility(View.VISIBLE);
                 mTvPlanet2.getTextColorBuilder().setTextGradientColors(mContext. getColor(R.color.color_6c), mContext. getColor(R.color.color_6d)).intoTextColor();
                 break;
-            case 3:
-                mIvLocation3.setVisibility(View.VISIBLE);
-                mTvPlanet3.getTextColorBuilder().setTextGradientColors(mContext. getColor(R.color.color_6c), mContext. getColor(R.color.color_6d)).intoTextColor();
-                break;
             case 4:
-                mIvLocation4.setVisibility(View.VISIBLE);
-                mTvPlanet4.getTextColorBuilder().setTextGradientColors(mContext. getColor(R.color.color_6c), mContext. getColor(R.color.color_6d)).intoTextColor();
-                break;
-            case 5:
                 mIvLocation5.setVisibility(View.VISIBLE);
                 mTvPlanet5.getTextColorBuilder().setTextGradientColors(mContext. getColor(R.color.color_6c), mContext. getColor(R.color.color_6d)).intoTextColor();
                 break;
-            case 6:
+            case 5:
                 mIvLocation6.setVisibility(View.VISIBLE);
                 mTvPlanet6.getTextColorBuilder().setTextGradientColors(mContext. getColor(R.color.color_6c), mContext. getColor(R.color.color_6d)).intoTextColor();
-                break;
-            case 7:
+                 break;
+            case 6:
                 mIvLocation7.setVisibility(View.VISIBLE);
                 mTvPlanet7.getTextColorBuilder().setTextGradientColors(mContext. getColor(R.color.color_6c), mContext. getColor(R.color.color_6d)).intoTextColor();
                 break;
-            case 8:
+            case 7:
                 mIvLocation8.setVisibility(View.VISIBLE);
                 mTvPlanet8.getTextColorBuilder().setTextGradientColors(mContext. getColor(R.color.color_6c), mContext. getColor(R.color.color_6d)).intoTextColor();
                 break;
-            case 9:
+            case 8:
                 mIvLocation9.setVisibility(View.VISIBLE);
                 mTvPlanet9.getTextColorBuilder().setTextGradientColors(mContext. getColor(R.color.color_6c), mContext. getColor(R.color.color_6d)).intoTextColor();
                 break;
-            case 10:
+            case 9:
                 mIvLocation10.setVisibility(View.VISIBLE);
                 mTvPlanet10.getTextColorBuilder().setTextGradientColors(mContext. getColor(R.color.color_6c), mContext. getColor(R.color.color_6d)).intoTextColor();
                 break;
-            case 11:
+            case 10:
                 mIvLocation11.setVisibility(View.VISIBLE);
                 mTvPlanet11.getTextColorBuilder().setTextGradientColors(mContext. getColor(R.color.color_6c), mContext. getColor(R.color.color_6d)).intoTextColor();
                 break;
-            case 12:
+            case 11:
                 mIvLocation12.setVisibility(View.VISIBLE);
                 mTvPlanet12.getTextColorBuilder().setTextGradientColors(mContext. getColor(R.color.color_6c), mContext. getColor(R.color.color_6d)).intoTextColor();
                 break;
+            case 12:
+                mIvLocation17.setVisibility(View.VISIBLE);
+                mTvPlanet17.getTextColorBuilder().setTextGradientColors(mContext. getColor(R.color.color_6c), mContext. getColor(R.color.color_6d)).intoTextColor();
+                break;
             case 13:
-                mIvLocation13.setVisibility(View.VISIBLE);
-                mTvPlanet13.getTextColorBuilder().setTextGradientColors(mContext. getColor(R.color.color_6c), mContext. getColor(R.color.color_6d)).intoTextColor();
+                mIvLocation16.setVisibility(View.VISIBLE);
+                mTvPlanet16.getTextColorBuilder().setTextGradientColors(mContext. getColor(R.color.color_6c), mContext. getColor(R.color.color_6d)).intoTextColor();
                 break;
             case 14:
-                mIvLocation14.setVisibility(View.VISIBLE);
-                mTvPlanet14.getTextColorBuilder().setTextGradientColors(mContext. getColor(R.color.color_6c),mContext.  getColor(R.color.color_6d)).intoTextColor();
-                break;
-            case 15:
                 mIvLocation15.setVisibility(View.VISIBLE);
                 mTvPlanet15.getTextColorBuilder().setTextGradientColors(mContext. getColor(R.color.color_6c), mContext. getColor(R.color.color_6d)).intoTextColor();
                 break;
+            case 15:
+                mIvLocation14.setVisibility(View.VISIBLE);
+                mTvPlanet14.getTextColorBuilder().setTextGradientColors(mContext. getColor(R.color.color_6c), mContext. getColor(R.color.color_6d)).intoTextColor();
+                break;
             case 16:
-                mIvLocation16.setVisibility(View.VISIBLE);
-                mTvPlanet16.getTextColorBuilder().setTextGradientColors(mContext. getColor(R.color.color_6c), mContext. getColor(R.color.color_6d)).intoTextColor();
+                mIvLocation13.setVisibility(View.VISIBLE);
+                mTvPlanet13.getTextColorBuilder().setTextGradientColors(mContext. getColor(R.color.color_6c), mContext. getColor(R.color.color_6d)).intoTextColor();
+                break;
+            case 17:
+                mIvLocation4.setVisibility(View.VISIBLE);
+                mTvPlanet4.getTextColorBuilder().setTextGradientColors(mContext. getColor(R.color.color_6c), mContext. getColor(R.color.color_6d)).intoTextColor();
                 break;
         }
     }

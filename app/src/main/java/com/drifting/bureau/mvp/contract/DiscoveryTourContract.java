@@ -31,6 +31,8 @@ public interface DiscoveryTourContract {
 
         void onMessageReceiveSuccess(MessageReceiveEntity entity);
 
+        void onLocationSuccess();
+
         void finishSuccess();
     }
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存
@@ -38,5 +40,7 @@ public interface DiscoveryTourContract {
         Observable<BaseEntity<List<PlanetEntity>>> exploretypelist();
 
         Observable<BaseEntity<MessageReceiveEntity>> messagereceive();
+
+        Observable<BaseEntity> information(String lng,String lat);
     }
 }
