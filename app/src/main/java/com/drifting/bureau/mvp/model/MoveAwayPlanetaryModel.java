@@ -1,11 +1,20 @@
 package com.drifting.bureau.mvp.model;
 import android.app.Application;
+
+import com.drifting.bureau.app.api.ApiService;
+import com.drifting.bureau.mvp.model.entity.QuestionAssessEntity;
+import com.drifting.bureau.mvp.model.entity.QuestionEntity;
 import com.google.gson.Gson;
+import com.jess.arms.base.BaseEntity;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
 import com.jess.arms.di.scope.ActivityScope;
 import javax.inject.Inject;
 import com.drifting.bureau.mvp.contract.MoveAwayPlanetaryContract;
+
+import java.util.List;
+
+import io.reactivex.Observable;
 
 /**
  * ================================================
@@ -36,5 +45,15 @@ public class MoveAwayPlanetaryModel extends BaseModel implements MoveAwayPlaneta
         super.onDestroy();
         this.mGson = null;
         this.mApplication = null;
+    }
+
+    @Override
+    public Observable<BaseEntity<List<QuestionEntity>>> questionlist() {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).questionlist();
+    }
+
+    @Override
+    public Observable<BaseEntity<QuestionAssessEntity>> questionassess(String questions,String anwsers) {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).questionassess(questions,anwsers);
     }
 }

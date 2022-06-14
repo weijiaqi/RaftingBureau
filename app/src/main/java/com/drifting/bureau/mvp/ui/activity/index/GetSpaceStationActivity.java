@@ -173,7 +173,7 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
             @Override
             public void onClick(View widget) {
                 if (!ClickUtil.isFastClick(widget.getId())) {
-                    ShowWebViewActivity.start(GetSpaceStationActivity.this, false);
+                    ShowWebViewActivity.start(GetSpaceStationActivity.this, 1,false);
                 }
             }
 

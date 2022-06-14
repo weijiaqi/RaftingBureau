@@ -40,9 +40,6 @@ public interface MySpaceStationContract {
 
         void onUserInfoSuccess(UserInfoEntity entity);
 
-        void onLevelCurrentSuccess(MySpaceStationEntity entity);
-
-        void onStorageMineSuccess(List<MyTreasuryEntity> entity);
 
         void onOrderMakingSuccess();
 
@@ -68,8 +65,5 @@ public interface MySpaceStationContract {
 
         Observable<BaseEntity> ordermaking(int space_order_id);
 
-        Observable<BaseEntity<MySpaceStationEntity>> levelcurrent();
-
-        Observable<BaseEntity<List<MyTreasuryEntity>>> storagemine();
     }
 }

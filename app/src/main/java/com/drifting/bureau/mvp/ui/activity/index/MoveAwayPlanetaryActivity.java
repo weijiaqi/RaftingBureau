@@ -16,10 +16,13 @@ import android.widget.TextView;
 import com.drifting.bureau.R;
 import com.drifting.bureau.di.component.DaggerMoveAwayPlanetaryComponent;
 import com.drifting.bureau.mvp.model.entity.AnswerEntity;
+import com.drifting.bureau.mvp.model.entity.QuestionAssessEntity;
+import com.drifting.bureau.mvp.model.entity.QuestionEntity;
 import com.drifting.bureau.mvp.ui.adapter.AnswerAdapter;
 import com.drifting.bureau.mvp.ui.adapter.manager.CardSwipeLayoutManager;
 import com.drifting.bureau.mvp.ui.dialog.AttributeResultsDialog;
 import com.drifting.bureau.util.ClickUtil;
+import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.animator.SwipeItemAnimator;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
@@ -44,14 +47,15 @@ public class MoveAwayPlanetaryActivity extends BaseActivity<MoveAwayPlanetaryPre
     TextView mToolbarTitle;
     @BindView(R.id.rcy_answer)
     RecyclerView mRcyAnswer;
-
     private AnswerAdapter answerAdapter;
-    private List<AnswerEntity> list;
-
     private AttributeResultsDialog attributeResultsDialog;
-
-    public static void start(Context context, boolean closePage) {
+    private StringBuilder builder1, builder2;
+    private List<AnswerEntity> infos;
+    private static String EXTRA_TYPE="extra_type";
+    private int type;
+    public static void start(Context context,int type, boolean closePage) {
         Intent intent = new Intent(context, MoveAwayPlanetaryActivity.class);
+        intent.putExtra(EXTRA_TYPE,type);
         context.startActivity(intent);
         if (closePage) ((Activity) context).finish();
     }
@@ -74,7 +78,10 @@ public class MoveAwayPlanetaryActivity extends BaseActivity<MoveAwayPlanetaryPre
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
-        mToolbarTitle.setText("搬离星球");
+        if (getIntent()!=null){
+            type=getIntent().getIntExtra(EXTRA_TYPE,0);
+        }
+        mToolbarTitle.setText( type==1?"搬离星球":"完善星球属性");
         initListener();
     }
 
@@ -83,26 +90,46 @@ public class MoveAwayPlanetaryActivity extends BaseActivity<MoveAwayPlanetaryPre
         cardSwipeLayoutManager.initCardConfig(getApplicationContext());
         mRcyAnswer.setLayoutManager(cardSwipeLayoutManager);
         mRcyAnswer.setItemAnimator(new SwipeItemAnimator());
-        answerAdapter = new AnswerAdapter(new ArrayList<>());
+        answerAdapter = new AnswerAdapter(new ArrayList<>(), list -> {
+            infos = list;
+            builder1 = new StringBuilder();
+            builder2 = new StringBuilder();
+            if (!list.isEmpty()) {
+                builder1.append(list.get(0).getQuestionid());
+                builder2.append(list.get(0).getValue());
+                for (int i = 1, n = list.size(); i < n; i++) {
+                    builder1.append(",").append(list.get(i).getQuestionid());
+                    builder2.append(",").append(list.get(i).getValue());
+                }
+            }
+        });
         mRcyAnswer.setAdapter(answerAdapter);
-        answerAdapter.setData(getData());
+        if (mPresenter != null) {
+            mPresenter.questionlist();
+        }
     }
 
+    @Override
+    public void onQuestionListSuccess(List<QuestionEntity> list) {
+        if (list != null && list.size() > 0) {
+            for (int i = 0; i < list.size(); i++) {
+                list.get(i).setPostion(i + 1);
+            }
+            answerAdapter.setData(list);
+        }
+    }
 
-    public List<AnswerEntity> getData() {
-        list = new ArrayList<>();
-        list.add(new AnswerEntity("大多数时候，你更喜欢","随心所欲的做事","做出详细的计划", 1,1));
-        list.add(new AnswerEntity("哪一个是你更喜欢的", "","", 2,2));
-        list.add(new AnswerEntity("你做事会被情感影响", "是的","不会", 1,3));
-        list.add(new AnswerEntity("对猎奇，和最新出现的潮流事物很快掌握", "是的","不是", 1,4));
-        list.add(new AnswerEntity("很多时候你宁愿自己看一场电影也不愿意参加聚会", "是的","我喜欢参加聚会", 1,5));
-        list.add(new AnswerEntity("你喜欢远离外界的喧嚣", "是的","更喜欢热闹一点", 1,6));
-        list.add(new AnswerEntity("你经常考虑是否有外星人", "是的","不是", 1,7));
-        list.add(new AnswerEntity("解决问题时，你更喜欢熟悉的方法解决", "是的","不是", 1,8));
-        list.add(new AnswerEntity("你比较相信科学", "是的","不是", 1,9));
-        list.add(new AnswerEntity("你更喜欢传统的生活方式", "是的","不是", 1,10));
+    @Override
+    public void onQuestionAssessSuccess(QuestionAssessEntity entity) {
+           if (entity!=null){
+               attributeResultsDialog = new AttributeResultsDialog(this,entity);
+               attributeResultsDialog.show();
+           }
+    }
 
-        return list;
+    @Override
+    public void onNetError() {
+
     }
 
     public Activity getActivity() {
@@ -119,13 +146,20 @@ public class MoveAwayPlanetaryActivity extends BaseActivity<MoveAwayPlanetaryPre
                 case R.id.tv_next:
                     if (mRcyAnswer != null && mRcyAnswer.getChildCount() > 0) {
                         if (mRcyAnswer.getChildCount() != 1) {
-                            int currentPosition = 0;
-                            View itemView = mRcyAnswer.getLayoutManager().findViewByPosition(currentPosition);
-                            itemView.setTag(SwipeItemAnimator.SWIPE_REMOVE_LEFT);
-                            answerAdapter.remove(currentPosition);
+                            if (infos != null && infos.size() == 10 - answerAdapter.getItemCount() + 1) {
+                                int currentPosition = 0;
+                                View itemView = mRcyAnswer.getLayoutManager().findViewByPosition(currentPosition);
+                                itemView.setTag(SwipeItemAnimator.SWIPE_REMOVE_LEFT);
+                                answerAdapter.remove(currentPosition);
+                            } else {
+                                showMessage("请进行选择!");
+                            }
                         } else {
-                            attributeResultsDialog = new AttributeResultsDialog(this);
-                            attributeResultsDialog.show();
+                            if (builder1 != null && builder2 != null) {
+                                if (mPresenter != null) {
+                                    mPresenter.questionassess(builder1.toString(),builder2.toString());
+                                }
+                            }
                         }
                     }
                     break;
@@ -135,7 +169,7 @@ public class MoveAwayPlanetaryActivity extends BaseActivity<MoveAwayPlanetaryPre
 
     @Override
     public void showMessage(@NonNull String message) {
-
+        ToastUtil.showToast(message);
     }
 
 

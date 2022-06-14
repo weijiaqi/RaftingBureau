@@ -25,6 +25,7 @@
             android:id="@+id/ll_location"
             android:layout_width="77dp"
             android:layout_height="24dp"
+            android:visibility="gone"
             android:layout_gravity="center_vertical"
             android:gravity="center"
             android:orientation="horizontal"
@@ -33,7 +34,6 @@
             app:shape_strokeWidth="1dp">
 
             <ImageView
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/shop_location" />
@@ -55,11 +55,11 @@
         </com.hjq.shape.layout.ShapeLinearLayout>
 
 
+
         <com.hjq.shape.layout.ShapeLinearLayout
             android:layout_width="match_parent"
             android:layout_height="24dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="24dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             app:shape_radius="100dp"
@@ -71,12 +71,19 @@
                 android:layout_marginStart="10dp"
                 android:src="@drawable/shop_search" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <EditText
+                android:id="@+id/et_shop_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginStart="6dp"
-                android:text="输入门店名称"
-                android:textColor="@color/color_99"
+                android:textColorHint="@color/color_99"
+                android:hint="输入门店名称"
+                android:imeOptions="actionSearch"
+                android:gravity="center_vertical"
+                android:background="@null"
+                android:layout_marginEnd="20dp"
+                android:singleLine="true"
+                android:textColor="@color/white"
                 android:textSize="11sp" />
         </com.hjq.shape.layout.ShapeLinearLayout>
 
@@ -89,4 +96,5 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/ll_top"/>
 
+    <include layout="@layout/layout_show_state" />
 </RelativeLayout>

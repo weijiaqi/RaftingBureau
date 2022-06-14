@@ -4,17 +4,24 @@ import android.view.View;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.AnswerEntity;
+import com.drifting.bureau.mvp.model.entity.QuestionEntity;
 import com.drifting.bureau.mvp.ui.holder.AnswerHolder;
-import com.drifting.bureau.mvp.ui.holder.HotListHolder;
 import com.jess.arms.base.BaseRecyclerAdapter;
 import com.jess.arms.base.BaseRecyclerHolder;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class AnswerAdapter extends BaseRecyclerAdapter<AnswerEntity> {
+public class AnswerAdapter extends BaseRecyclerAdapter<QuestionEntity> {
 
-    public AnswerAdapter(List<AnswerEntity> infos) {
+    private List<AnswerEntity> entityList = new ArrayList<>();
+
+
+    private SeletChangeListener mSeletChangeListener;
+
+    public AnswerAdapter(List<QuestionEntity> infos, SeletChangeListener seletChangeListener) {
         super(infos);
+        this.mSeletChangeListener = seletChangeListener;
     }
 
     @Override
@@ -30,15 +37,46 @@ public class AnswerAdapter extends BaseRecyclerAdapter<AnswerEntity> {
 
     @Override
     public BaseRecyclerHolder getCreateViewHolder(View view, int viewType) {
-        return new AnswerHolder(view);
+        return new AnswerHolder(view, this);
     }
 
 
     public void remove(int position) {
-        if (mDatas != null &&mDatas.size()>position) {
+        if (mDatas != null && mDatas.size() > position) {
             mDatas.remove(position);
             notifyItemRemoved(position);
         }
     }
 
+
+    public void setData(List data) {
+        if (data != null) {
+            this.mDatas = data;
+            notifyDataSetChanged();
+        }
+    }
+
+
+    /**
+     * 选中状态更改
+     */
+    public void onItemCheckChange(AnswerEntity answerEntity) {
+        if (answerEntity != null) {
+            for (int i = 0; i < entityList.size(); i++) {
+                if (entityList.get(i).getQuestionid() == answerEntity.getQuestionid()) {
+                    entityList.remove(i);
+                }
+            }
+            entityList.add(answerEntity);
+            mSeletChangeListener.onSeletChange(entityList);
+        }
+    }
+
+
+    /**
+     * 选中监听
+     */
+    public interface SeletChangeListener {
+        void onSeletChange(List<AnswerEntity> value);
+    }
 }

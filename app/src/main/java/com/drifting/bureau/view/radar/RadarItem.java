@@ -5,10 +5,10 @@ package com.drifting.bureau.view.radar;
  */
 public class RadarItem {
     String labelName;//标签名称
-    String value;//数值
+    int value;//数值
     float progress;//0-1;
 
-    public RadarItem(String labelName, String value, float progress) {
+    public RadarItem(String labelName, int value, float progress) {
         this.labelName = labelName;
         this.value = value;
         this.progress = progress;

@@ -10,11 +10,21 @@ public class SpaceInfoEntity {
     private Integer explore_num;
     private Integer total_make;
     private Integer today_make;
+    private String background;
     private double total_income;
     private double withdrawable;
     private Integer status;
     private Integer created_at_int;
     private Integer updated_at_int;
+
+
+    public String getBackground() {
+        return background;
+    }
+
+    public void setBackground(String background) {
+        this.background = background;
+    }
 
     public Integer getId() {
         return Id;

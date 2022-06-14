@@ -175,10 +175,8 @@ public class CircleProgressView extends View {
             timer = new CountDownTimer(animTime, 1000) {
                 @Override
                 public void onTick(long millisUntilFinished) {
-                    Log.e("2----====",millisUntilFinished+"");
                     //剩余秒数
                     int surplusSeconds = (int) (Math.round((double) millisUntilFinished / 1000) - 1);
-                    Log.e("1----====",surplusSeconds+"");
                     if (mListener != null) {
                         mListener.countDown(surplusSeconds);
                     }

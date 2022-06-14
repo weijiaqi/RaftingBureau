@@ -8,23 +8,26 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/tv_user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:layout_marginTop="105dp"
         android:layout_marginEnd="38dp"
-        android:text="昵称：你的小太阳"
+        android:text=""
         android:textColor="@color/color_00"
         android:textSize="12sp" />
 
     <com.hjq.shape.view.ShapeTextView
+        android:id="@+id/tv_planet_name"
         android:layout_width="239dp"
         android:layout_height="37dp"
         android:layout_gravity="end"
         android:layout_marginTop="125dp"
         android:layout_marginEnd="30dp"
         android:gravity="center"
-        android:text="适宜居住星球：神农星球"
+        android:text=""
+        android:textSize="11sp"
         android:textColor="@color/white"
         app:shape_endColor="@color/color_70"
         app:shape_radius="5dp"
@@ -51,12 +54,13 @@
         app:strokeWidth="1dp" />
 
     <com.hjq.shape.view.ShapeTextView
+        android:id="@+id/tv_desc"
         android:layout_width="263dp"
         android:layout_height="29dp"
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginBottom="23dp"
         android:gravity="center"
-        android:text="神农星球⼈是伟⼤的领导者和决策⼈"
+        android:text=""
         android:textColor="@color/white"
         android:textSize="12sp"
         android:textStyle="bold"

@@ -32,45 +32,15 @@
         android:background="@color/color_35" />
 
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/order_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text=""
-            android:textColor="@color/white"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/tv_desc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_title"
-            android:layout_marginTop="9dp"
-            android:text=""
-            android:textColor="@color/color_cc"
-            android:textSize="12sp" />
-
-
-        <ImageView
-            android:layout_width="51dp"
-            android:layout_height="51dp"
-            android:src="@drawable/aa"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="15dp"
-            />
-
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_marginTop="12dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -107,13 +77,14 @@
 
         <LinearLayout
             android:id="@+id/ll_payment"
-            android:layout_alignParentEnd="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="5dp">
 
             <TextView
+                android:id="@+id/tv_time_remaining"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
@@ -126,7 +97,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="1111111"
+                android:text=""
                 android:textColor="@color/color_f15"
                 android:textSize="12sp" />
 

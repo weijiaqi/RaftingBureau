@@ -2,6 +2,7 @@ package com.drifting.bureau.mvp.ui.dialog;
 
 import android.app.Activity;
 import android.content.Context;
+import android.media.AudioFormat;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.media.audiofx.Visualizer;
@@ -20,8 +21,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
+import com.buihha.audiorecorder.Mp3Recorder;
+import com.buihha.audiorecorder.other.RecordConfig;
 import com.drifting.bureau.R;
 import com.drifting.bureau.util.FileUtil;
+import com.drifting.bureau.util.StorageUtils;
 import com.drifting.bureau.view.CircleProgressView;
 import com.drifting.bureau.view.VoiceWave;
 import com.jess.arms.base.BottomDialog;
@@ -48,13 +52,14 @@ public class RecordingDialog extends BottomDialog implements View.OnClickListene
     private int time;
     private int isRecording = 0;
     private int isPlaying = 0;
-    //语音保存路径
-    private String FilePath = null;
+    private String mMp3Path = null;
     private Activity activity;
-    private MediaRecorder mRecorder = null;
+
+    private Mp3Recorder mRecorder;
     //语音操作对象
     private MediaPlayer mPlayer = null;
     private int totaltime;
+
 
 
     public RecordingDialog(@NonNull Activity activity) {
@@ -96,6 +101,7 @@ public class RecordingDialog extends BottomDialog implements View.OnClickListene
         mTvEnd.setOnClickListener(this);
         mLlplay.setOnClickListener(this);
         voiceWave.setDecibel(0);
+
     }
 
     @Override
@@ -126,9 +132,6 @@ public class RecordingDialog extends BottomDialog implements View.OnClickListene
                 if (handler != null) {
                     handler.removeCallbacksAndMessages(null);
                 }
-                if (mHandler != null) {
-                    mHandler.removeCallbacksAndMessages(null);
-                }
                 dismiss();
                 break;
             case R.id.ll_start:
@@ -148,12 +151,12 @@ public class RecordingDialog extends BottomDialog implements View.OnClickListene
                 mLlPrepare.setVisibility(View.VISIBLE);
                 break;
             case R.id.tv_end:  //完成
-                if (FilePath != null) {
+                if (mMp3Path != null) {
                     dismiss();
                     InVoiceStatus();
                     close();
                     List<Object> list = new ArrayList<>();
-                    list.add(FilePath);
+                    list.add(mMp3Path);
                     list.add(totaltime);
                     if (onMoreClickCallback != null) {
                         onMoreClickCallback.onMoreClick(1, list);
@@ -171,7 +174,6 @@ public class RecordingDialog extends BottomDialog implements View.OnClickListene
         }
     }
 
-
     /**
      * @description 开始录音
      */
@@ -179,31 +181,53 @@ public class RecordingDialog extends BottomDialog implements View.OnClickListene
     public void startRecording() {
         try {
             if (isRecording == 0) {
-                deleteFile();
-                FilePath = FileUtil.saveVoicePath(activity);
                 mLlPrepare.setVisibility(View.GONE);
                 mLlStartRecord.setVisibility(View.VISIBLE);
                 //将按钮换成停止录音
                 isRecording = 1;
-                mRecorder = new MediaRecorder();
-                mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-                mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-                mRecorder.setOutputFile(FilePath);
-                mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-                try {
-                    mRecorder.prepare();
-                } catch (IllegalStateException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                mRecorder = new Mp3Recorder();
+                mRecorder.setOnRecordListener(new Mp3Recorder.OnRecordListener() {
+                    @Override
+                    public void onStart() {
+                        //开始录音
+                        totaltime = 15;
+                        Message message = new Message();
+                        message.what = 1;
+                        handler.sendMessage(message);
+                    }
+
+                    @Override
+                    public void onError() {
+                        totaltime = 15;
+                        Message message = new Message();
+                        message.what = 1;
+                        handler.sendMessage(message);
+                    }
+
+                    @Override
+                    public void onStop() {
+                        //停止录音
+                        mMp3Path = mRecorder.mp3File.getAbsolutePath();
+                        InVoiceStatus();
+                    }
+
+                    @Override
+                    public void onRecording(int i, double v) {
+                        Log.e("MainActivity", "采样:" + i + "Hz   音量:" + v + "分贝");
+                        //播放动画
+                        if (mRecorder != null) {
+                            int finalDb = (int) v;
+                            activity.runOnUiThread(() -> voiceWave.setDecibel(finalDb));
+                        }
+                    }
+                });
+                if (!mRecorder.isRecording()) {
+                    try {
+                        mRecorder.startRecording(StorageUtils.getCacheDirectory(activity).getAbsolutePath(), FileUtil.getVoicName());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
-                mRecorder.start();
-                totaltime = 15;
-                Message message = new Message();
-                message.what = 1;
-                handler.sendMessage(message);
-                //播放动画
-                updateMicStatus();
             } else { //停止录音
                 if (time != 0) {
                     stopRecording();
@@ -220,16 +244,22 @@ public class RecordingDialog extends BottomDialog implements View.OnClickListene
     public void stopRecording() {
         isRecording = 0;
         mProgress.reset();
+        stopRecord();
         mProgress.cleanCountDown();
-        mRecorder.stop();
-        mRecorder.release();
-        mRecorder = null;
         mLlStartRecord.setVisibility(View.GONE);
         mRlplay.setVisibility(View.VISIBLE);
         totaltime = time;
         mTvPlayTime.setText(totaltime + "S");
-        voiceWave.setDecibel(0);
+
     }
+
+    //停止录音
+    private void stopRecord() {
+        if (mRecorder != null && mRecorder.isRecording()) {
+            mRecorder.stopRecording();
+        }
+    }
+
 
     /**
      * @description 开始播放
@@ -241,7 +271,7 @@ public class RecordingDialog extends BottomDialog implements View.OnClickListene
             isPlaying = 1;
             mPlayer = new MediaPlayer();
             try {
-                mPlayer.setDataSource(FilePath);
+                mPlayer.setDataSource(mMp3Path);
                 mPlayer.prepare();
                 mPlayer.start();
                 //动画
@@ -281,10 +311,12 @@ public class RecordingDialog extends BottomDialog implements View.OnClickListene
     }
 
     public void deleteFile() {
-        if (FilePath != null) {
+        if (mMp3Path != null) {
             //每一次调用录音，可以录音多次，至多满意为至，最后只将最后一次的录音文件保存，其他的删除
-            File oldFile = new File(FilePath);
+            File oldFile = new File(mMp3Path);
             oldFile.delete();
+            mMp3Path = null;
+            mRecorder = null;
         }
     }
 
@@ -332,33 +364,5 @@ public class RecordingDialog extends BottomDialog implements View.OnClickListene
         mStyle.setBackgroundResource(R.drawable.drifting_play);
         mTvPlay.setText("点击播放");
     }
-
-
-    private int BASE = 1;
-    private int SPACE = 100;// 间隔取样时间
-
-
-    private void updateMicStatus() {
-        if (mRecorder != null) {
-            int ratio = mRecorder.getMaxAmplitude() / BASE;
-            int db = 0;// 分贝
-            if (ratio > 1)
-                db = (int) (20 * Math.log10(ratio));
-
-            Log.e("1---------", ratio + "");
-            int finalDb = db;
-
-            activity .runOnUiThread(() -> voiceWave.setDecibel(finalDb));
-            mHandler.postDelayed(mUpdateMicStatusTimer, SPACE);
-        }
-    }
-
-    private final Handler mHandler = new Handler();
-    private Runnable mUpdateMicStatusTimer = new Runnable() {
-        public void run() {
-            updateMicStatus();
-        }
-    };
-
 
 }

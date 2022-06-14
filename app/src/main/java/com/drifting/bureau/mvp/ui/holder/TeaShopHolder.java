@@ -44,22 +44,22 @@ public class TeaShopHolder extends BaseRecyclerHolder {
         context = itemView.getContext();
     }
 
-    public void setData(@NonNull List<TeaShopEntity> listBeanList, int position) {
-        TextUtil.setText(mTvShop,listBeanList.get(position).getTitle());
+    public void setData(@NonNull List<TeaShopEntity.ListBean> listBeanList, int position) {
+        TextUtil.setText(mTvShop,listBeanList.get(position).getBusiness_name());
         TextUtil.setText(mTvAddress,listBeanList.get(position).getAddress());
-        TextUtil.setText(mTvDistance,"距离"+ listBeanList.get(position).getDistance());
-         if (listBeanList.get(position).getType()==1){
+        TextUtil.setText(mTvDistance,"距离"+ listBeanList.get(position).getDistance()+"km");
+         if (listBeanList.get(position).getOpen_status()==1){
              TextUtil.setText(mTvStatus,"营业中");
              mTvStatus.getTextColorBuilder().setTextGradientColors(context.getColor(R.color.color_6c),context.getColor(R.color.color_6d)).intoTextColor();
          }else {
-             TextUtil.setText(mTvStatus,"已关店");
+             TextUtil.setText(mTvStatus,"未营业");
              mTvStatus.getTextColorBuilder().setTextGradientColors(context.getColor(R.color.color_ff),context.getColor(R.color.color_ff)).intoTextColor();
          }
         mIvCall.setOnClickListener(v -> {
             PermissionDialog.requestPhonePermissions((Activity) context, new PermissionDialog.PermissionCallBack() {
                 @Override
                 public void onSuccess() {
-                    callTelephoneDialog = new CallTelephoneDialog(context);
+                    callTelephoneDialog = new CallTelephoneDialog(context,listBeanList.get(position).getTel());
                     callTelephoneDialog.show();
                 }
                 @Override

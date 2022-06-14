@@ -1,22 +1,32 @@
 package com.drifting.bureau.mvp.ui.activity.index;
+
 import android.app.Activity;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.TextView;
+
 import com.drifting.bureau.R;
 import com.drifting.bureau.di.component.DaggerTeaShopComponent;
+import com.drifting.bureau.mvp.model.entity.OrderRecordEntity;
 import com.drifting.bureau.mvp.model.entity.TeaShopEntity;
 import com.drifting.bureau.mvp.ui.adapter.TeaShopAdapter;
 import com.drifting.bureau.util.ClickUtil;
+import com.drifting.bureau.util.ViewUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.drifting.bureau.mvp.contract.TeaShopContract;
 import com.drifting.bureau.mvp.presenter.TeaShopPresenter;
+import com.jess.arms.utils.DeviceUtils;
 import com.rb.core.xrecycleview.XRecyclerView;
 
 import java.util.ArrayList;
@@ -28,15 +38,24 @@ import butterknife.OnClick;
 
 /**
  * Created on 2022/05/30 09:46
+ *
  * @author 附近门店
  * module name is TeaShopActivity
  */
-public class TeaShopActivity extends BaseActivity<TeaShopPresenter> implements TeaShopContract.View,XRecyclerView.LoadingListener {
+public class TeaShopActivity extends BaseActivity<TeaShopPresenter> implements TeaShopContract.View, XRecyclerView.LoadingListener {
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
     @BindView(R.id.rcy_public)
     XRecyclerView mRcyPublic;
+    @BindView(R.id.fl_container)
+    FrameLayout mFlState;
+    @BindView(R.id.et_shop_name)
+    EditText mEtShaopName;
     private TeaShopAdapter teaShopAdapter;
+
+    private int mPage = 1;
+    private int limit = 10;
+
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, TeaShopActivity.class);
         context.startActivity(intent);
@@ -54,7 +73,7 @@ public class TeaShopActivity extends BaseActivity<TeaShopPresenter> implements T
     }
 
     @Override
-    public int initView(@Nullable Bundle savedInstanceState){
+    public int initView(@Nullable Bundle savedInstanceState) {
         return R.layout.activity_tea_shop; //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
     }
 
@@ -67,22 +86,100 @@ public class TeaShopActivity extends BaseActivity<TeaShopPresenter> implements T
 
     public void initListener() {
         mRcyPublic.setLayoutManager(new LinearLayoutManager(this));
-        teaShopAdapter=new TeaShopAdapter(new ArrayList<>());
-        mRcyPublic.setAdapter(teaShopAdapter);
         mRcyPublic.setLoadingListener(this);
-        teaShopAdapter.setData(getData());
+        teaShopAdapter = new TeaShopAdapter(new ArrayList<>());
+        mRcyPublic.setAdapter(teaShopAdapter);
+
+        getData(mPage, true);
+
+        mEtShaopName.setOnEditorActionListener((v, actionId, event) -> {
+            if ((actionId == 0 || actionId == 3) && event != null) {
+                //点击搜索要做的操作
+                DeviceUtils.hideSoftKeyboard(this,mEtShaopName);
+
+                mPage = 1;
+                getData(mPage, true);
+            }
+            return false;
+        });
+
     }
 
-    public List<TeaShopEntity> getData(){
-        List<TeaShopEntity> list=new ArrayList<>();
-        list.add(new TeaShopEntity("北京丰台茶饮店","北京市丰台区金泽西路8号院","15.2km",1));
-        list.add(new TeaShopEntity("北京石景山茶饮店","北京市石景山区石景山路2号(地铁玉泉路A出口西侧)","25km",1));
-        list.add(new TeaShopEntity("北京通州奶茶店","北京市通州区梨园镇东六环与G1京哈高速交叉口西北角","32km",1));
-        list.add(new TeaShopEntity("北京海淀奶茶店","北京市海淀区新建宫门路19号","12km",2));
-        return list;
+
+    public void getData(int mPage, boolean loadType) {
+        if (mPresenter != null) {
+            mPresenter.nearby(mEtShaopName.getText().toString(), mPage, limit, loadType);
+        }
     }
 
-    @OnClick({R.id.toolbar_back,R.id.ll_location})
+
+    @Override
+    public void onRefresh() {
+        mPage = 1;
+        getData(mPage, true);
+    }
+
+    @Override
+    public void onLoadMore() {
+        getData(mPage, false);
+    }
+
+
+    @Override
+    public void onloadStart() {
+        if (teaShopAdapter.getDatas() == null || teaShopAdapter.getDatas().size() == 0) {
+            ViewUtil.create().setAnimation(this, mFlState);
+        }
+    }
+
+    @Override
+    public void onBusinessSuccess(TeaShopEntity entity, boolean isNotData) {
+        if (mPage == 1 && teaShopAdapter.getItemCount() != 0) {
+            teaShopAdapter.clearData();
+        }
+        List<TeaShopEntity.ListBean> list = entity.getList();
+        if (list != null && list.size() > 0) {
+            if (isNotData) {
+                mPage = 2;
+                teaShopAdapter.setData(list);
+            } else {
+                mPage++;
+                teaShopAdapter.addData(list);
+            }
+        }
+    }
+
+    @Override
+    public void loadFinish(boolean loadType, boolean isNotData) {
+        if (mRcyPublic == null) {
+            return;
+        }
+        if (!loadType && isNotData) {
+            mRcyPublic.loadEndLine();
+        } else {
+            mRcyPublic.refreshEndComplete();
+        }
+    }
+
+    @Override
+    public void loadState(int type) {
+        if (teaShopAdapter.getDatas() == null || teaShopAdapter.getDatas().size() == 0) {
+            if (type == ViewUtil.NOT_DATA) {
+                ViewUtil.create().setView(this, mFlState, ViewUtil.NOT_DATA);
+            } else if (type == ViewUtil.NOT_SERVER) {
+                ViewUtil.create().setView(this, mFlState, ViewUtil.NOT_SERVER);
+            } else if (type == ViewUtil.NOT_NETWORK) {
+                ViewUtil.create().setView(this, mFlState, ViewUtil.NOT_NETWORK);
+            } else {
+                ViewUtil.create().setView(mFlState);
+            }
+        } else {
+            ViewUtil.create().setView(mFlState);
+        }
+    }
+
+
+    @OnClick({R.id.toolbar_back, R.id.ll_location})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
@@ -90,14 +187,14 @@ public class TeaShopActivity extends BaseActivity<TeaShopPresenter> implements T
                     finish();
                     break;
                 case R.id.ll_location: //城市选择
-                    CitySelectionActivity.start(this,false);
+                    CitySelectionActivity.start(this, false);
                     break;
             }
         }
     }
 
 
-    public Activity getActivity(){
+    public Activity getActivity() {
         return this;
     }
 
@@ -106,13 +203,4 @@ public class TeaShopActivity extends BaseActivity<TeaShopPresenter> implements T
 
     }
 
-    @Override
-    public void onRefresh() {
-        mRcyPublic.refreshEndComplete();
-    }
-
-    @Override
-    public void onLoadMore() {
-        mRcyPublic.loadEndLine();
-    }
 }

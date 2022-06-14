@@ -195,16 +195,31 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="13dp"
-                android:text="可通过探索、填写资料等方式完善你的星球！"
+                android:text="请尽快完善性格信息，找到适合自己的星球居住"
                 android:textColor="@color/color_53"
                 android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_perfect"
+                android:layout_width="163dp"
+                android:layout_height="34dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/solid_purple_block_button"
+                android:gravity="center"
+                android:text="完善星球属性"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+
 
             <TextView
                 android:id="@+id/tv_enter_rb"
                 android:layout_width="163dp"
                 android:layout_height="34dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="48dp"
+                android:layout_marginTop="19dp"
                 android:background="@drawable/solid_blue_block_button"
                 android:gravity="center"
                 android:text="进入漂流局"

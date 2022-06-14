@@ -9,15 +9,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.drifting.bureau.R;
-import com.drifting.bureau.data.event.BackSpaceEvent;
-import com.drifting.bureau.data.event.DonationEvent;
 import com.drifting.bureau.di.component.DaggerMySpaceStationComponent;
 import com.drifting.bureau.mvp.model.entity.MySpaceStationEntity;
 import com.drifting.bureau.mvp.model.entity.MyTreasuryEntity;
@@ -33,10 +30,10 @@ import com.drifting.bureau.mvp.ui.dialog.SelectOrderDialog;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.DateUtil;
+import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.jess.arms.base.BaseActivity;
-import com.jess.arms.base.BaseDialog;
 import com.jess.arms.di.component.AppComponent;
 import com.drifting.bureau.mvp.contract.MySpaceStationContract;
 import com.drifting.bureau.mvp.presenter.MySpaceStationPresenter;
@@ -45,8 +42,6 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -61,8 +56,9 @@ import butterknife.OnClick;
 public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter> implements MySpaceStationContract.View {
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
-    @BindView(R.id.rl_top)
-    RelativeLayout mRlTop;
+
+    @BindView(R.id.iv_pic)
+    ImageView mIvPic;
     @BindView(R.id.tv_levle_name)
     TextView mTvlevelName;
     @BindView(R.id.tv_whole_make)
@@ -84,6 +80,7 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
     private PublicDialog publicDialog;
     private MyTreasuryDialog myTreasuryDialog;
     private MySpaceStationDialog mySpaceStationDialog;
+
     private int SpaceId;
     private static final String EXTRA_SPACE_ID = "extra_space_id";
     private OrderOneEntity orderOneEntity;
@@ -170,10 +167,12 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
                     }
                     break;
                 case R.id.tv_my_treasury: //我的库存
-                    getStorageList();
+                    myTreasuryDialog = new MyTreasuryDialog(this);
+                    myTreasuryDialog.show();
                     break;
                 case R.id.tv_upgrade:  //升级
-                    levelcurrent();
+                    mySpaceStationDialog = new MySpaceStationDialog(this);
+                    mySpaceStationDialog.show();
                     break;
                 case R.id.rl_total_revenue: //收支记录
                     IncomeRecordActivity.start(this, false);
@@ -188,41 +187,12 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
         }
     }
 
-    //我的库存
-    public void getStorageList() {
-        if (mPresenter != null) {
-            mPresenter.getStorageList();
-        }
-    }
 
-    //升级
-    public void levelcurrent() {
-        if (mPresenter != null) {
-            mPresenter.levelcurrent();
-        }
-    }
 
     @Override
     public void onSpcaeInfoSuccess(SpaceInfoEntity entity) {
         if (entity != null) {
-            switch (entity.getLevel()) {
-                case 1:
-                    mRlTop.setBackgroundResource(R.drawable.my_space_station_top1);
-                    break;
-                case 2:
-                    mRlTop.setBackgroundResource(R.drawable.my_space_station_top2);
-                    break;
-                case 3:
-                    mRlTop.setBackgroundResource(R.drawable.my_space_station_top3);
-                    break;
-                case 4:
-                    mRlTop.setBackgroundResource(R.drawable.my_space_station_top4);
-                    break;
-                case 5:
-                    mRlTop.setBackgroundResource(R.drawable.my_space_station_top5);
-                    break;
-            }
-
+            GlideUtil.create().loadLongImage(this, entity.getBackground(), mIvPic);
             mTvlevelName.setText(entity.getLevel_name());
             mTvWholeMake.setText(entity.getTotal_make() + "");
             mTvWholeIncome.setText(StringUtil.frontValue(entity.getTotal_income()));
@@ -286,26 +256,6 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
         }
     }
 
-    @Override
-    public void onLevelCurrentSuccess(MySpaceStationEntity entity) {
-        if (entity != null) {
-            mySpaceStationDialog = new MySpaceStationDialog(this, entity);
-            mySpaceStationDialog.show();
-        }
-    }
-
-    @Override
-    public void onStorageMineSuccess(List<MyTreasuryEntity> entity) {
-        if (entity != null) {
-            myTreasuryDialog = new MyTreasuryDialog(this, entity);
-            myTreasuryDialog.show();
-            myTreasuryDialog.setOnClickCallback(type -> {
-                if (type == MyTreasuryDialog.SELECT_USE) {
-                    levelcurrent();
-                }
-            });
-        }
-    }
 
     @Override
     public void onOrderMakingSuccess() { //制作成功
@@ -351,17 +301,11 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
     }
 
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void DonationEvent(DonationEvent donationEvent) {
-        if (donationEvent != null) {
-            getStorageList();
-        }
-    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (handler!=null){
+        if (handler != null) {
             handler.removeCallbacks(mAdRunnable);
         }
     }

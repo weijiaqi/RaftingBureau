@@ -103,10 +103,10 @@ public class AccountSettingsActivity extends BaseActivity<AccountSettingsPresent
                     FeedBackActivity.start(this, false);
                     break;
                 case R.id.rl_privacy:  //用户隐私协议
-                    ShowWebViewActivity.start(this, false);
+                    ShowWebViewActivity.start(this, 1,false);
                     break;
                 case R.id.rl_register: //注册协议
-                    ShowWebViewActivity.start(this, false);
+                    ShowWebViewActivity.start(this, 2,false);
                     break;
                 case R.id.tv_exit:  //退出
                     LogInOutDataUtil.successOutClearData();
