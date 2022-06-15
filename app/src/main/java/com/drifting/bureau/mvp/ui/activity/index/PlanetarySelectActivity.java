@@ -24,13 +24,18 @@ import com.billy.android.swipe.consumer.SlidingConsumer;
 import com.billy.android.swipe.listener.SimpleSwipeListener;
 import com.drifting.bureau.R;
 import com.drifting.bureau.di.component.DaggerPlanetarySelectComponent;
+import com.drifting.bureau.mvp.model.entity.PlanetLocationEntity;
 import com.drifting.bureau.mvp.ui.activity.user.AboutMeActivity;
 import com.drifting.bureau.mvp.ui.activity.user.AccountSettingsActivity;
 import com.drifting.bureau.mvp.ui.fragment.PlanetaryDisFragment;
 import com.drifting.bureau.mvp.ui.fragment.PostDriftingFragment;
 import com.drifting.bureau.util.ClickUtil;
+import com.drifting.bureau.util.ToastUtil;
+import com.drifting.bureau.util.callback.BaseDataCallBack;
+import com.drifting.bureau.util.request.RequestUtil;
 import com.hjq.shape.view.ShapeTextView;
 import com.jess.arms.base.BaseActivity;
+import com.jess.arms.base.BaseEntity;
 import com.jess.arms.di.component.AppComponent;
 
 import com.drifting.bureau.mvp.contract.PlanetarySelectContract;
@@ -107,18 +112,29 @@ public class PlanetarySelectActivity extends BaseActivity<PlanetarySelectPresent
                     finish();
                     break;
                 case R.id.tv_move_away:
-                    MoveAwayPlanetaryActivity.start(this, 1,false);
+                    RequestUtil.create().planetlocation(entity -> {
+                        if (entity != null && entity.getCode() == 200) {
+                            if (entity.getData().getAssess_status() == 0) {
+                                showMessage(" 您还不能搬离所在星球");
+                            } else {
+                                MoveAwayPlanetaryActivity.start(PlanetarySelectActivity.this, 1, false);
+                            }
+                        }
+                    });
                     break;
             }
         }
     }
 
 
-
     @Override
     public void showMessage(@NonNull String message) {
-
+        ToastUtil.showToast(message);
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RequestUtil.create().disDispose();
+    }
 }

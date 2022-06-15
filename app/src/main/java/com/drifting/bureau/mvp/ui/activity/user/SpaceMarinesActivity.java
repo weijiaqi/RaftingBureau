@@ -13,10 +13,13 @@ import android.widget.TextView;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.di.component.DaggerSpaceMarinesComponent;
+import com.drifting.bureau.mvp.model.entity.InfoForShareEntity;
+import com.drifting.bureau.mvp.model.entity.TeamStatisticEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.ui.dialog.ShareDialog;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
+import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
@@ -38,7 +41,24 @@ public class SpaceMarinesActivity extends BaseActivity<SpaceMarinesPresenter> im
     TextView mToolbarTitle;
     @BindView(R.id.tv_name)
     TextView mTvName;
+    @BindView(R.id.tv_income)
+    TextView mTvIncome;
+    @BindView(R.id.tv_persons)
+    TextView mTvPersons;
+    @BindView(R.id.tv_sure_withdrawal)
+    TextView mTvWithdrawal;
+    @BindView(R.id.tv_under_review)
+    TextView mTvUnderReview;
+    @BindView(R.id.withdrawn_cash)
+    TextView mTvWithdrawalCash;
+    @BindView(R.id.tv_order_num)
+    TextView mTvOrderNum;
+    @BindView(R.id.tv_ranking)
+    TextView mTvRanking;
+
+    private String code;
     private ShareDialog shareDialog;
+
     private UserInfoEntity userInfoEntity;
 
     public static void start(Context context, boolean closePage) {
@@ -70,6 +90,9 @@ public class SpaceMarinesActivity extends BaseActivity<SpaceMarinesPresenter> im
     }
 
     public void initListener() {
+        if (mPresenter != null) {
+            mPresenter.team();
+        }
         getUserInfo();
     }
 
@@ -82,7 +105,6 @@ public class SpaceMarinesActivity extends BaseActivity<SpaceMarinesPresenter> im
         });
     }
 
-
     @OnClick({R.id.toolbar_back, R.id.tv_withdrawal, R.id.tv_withdrawal_record, R.id.tv_share})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
@@ -91,19 +113,33 @@ public class SpaceMarinesActivity extends BaseActivity<SpaceMarinesPresenter> im
                     finish();
                     break;
                 case R.id.tv_withdrawal: //提现
-                    WithdrawalActivity.start(this, 1,"0",false);
+                    WithdrawalActivity.start(this, 2, mTvWithdrawalCash.getText().toString(), false);
                     break;
                 case R.id.tv_withdrawal_record://提现记录
                     WithdrawalRecordActivity.start(this, false);
                     break;
                 case R.id.tv_share: //分享
-                    if (userInfoEntity!=null){
-                        shareDialog = new ShareDialog(this,userInfoEntity);
+                    if (userInfoEntity != null &&code!=null) {
+                        shareDialog = new ShareDialog(this, userInfoEntity,code);
                         shareDialog.show();
                     }
-
                     break;
             }
+        }
+    }
+
+
+    @Override
+    public void OnTeamSuccess(TeamStatisticEntity entity) {
+        if (entity != null) {
+            mTvIncome.setText(entity.getTotal_income());
+            mTvPersons.setText(entity.getPeople() + "");
+            mTvWithdrawal.setText(entity.getWithdrawable());
+            mTvUnderReview.setText(entity.getAuditing());
+            mTvWithdrawalCash.setText(entity.getWithdrawn());
+            mTvOrderNum.setText(entity.getOrder_num() + "");
+            mTvRanking.setText(entity.getRanking() + "");
+            code=entity.getShare_code();
         }
     }
 
@@ -119,7 +155,7 @@ public class SpaceMarinesActivity extends BaseActivity<SpaceMarinesPresenter> im
 
     @Override
     public void showMessage(@NonNull String message) {
-
+        ToastUtil.showToast(message);
     }
 
     @Override

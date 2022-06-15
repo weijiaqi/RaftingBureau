@@ -2,6 +2,8 @@ package com.drifting.bureau.mvp.model;
 import android.app.Application;
 
 import com.drifting.bureau.app.api.ApiService;
+import com.drifting.bureau.mvp.model.entity.InfoForShareEntity;
+import com.drifting.bureau.mvp.model.entity.TeamStatisticEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.google.gson.Gson;
 import com.jess.arms.base.BaseEntity;
@@ -44,5 +46,10 @@ public class SpaceMarinesModel extends BaseModel implements SpaceMarinesContract
         this.mApplication = null;
     }
 
+
+    @Override
+    public Observable<BaseEntity<TeamStatisticEntity>> team() {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).team();
+    }
 
 }

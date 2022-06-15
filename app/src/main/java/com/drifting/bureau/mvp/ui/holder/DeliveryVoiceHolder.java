@@ -63,7 +63,7 @@ public class DeliveryVoiceHolder extends BaseRecyclerHolder {
 
         TextUtil.setText(mTvPlanet, mDatas.get(position).getPlanet_level_name());
         TextUtil.setText(mTvName, mDatas.get(position).getUser_name());
-        int totaltime=VideoUtil.getLocalVideoDuration(mDatas.get(position).getContent())+1;
+        int totaltime=VideoUtil.getLocalVideoDuration(mDatas.get(position).getContent());
         TextUtil.setText(mTvTime,totaltime +"");
         voiceWave.setDecibel(0);
 

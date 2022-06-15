@@ -27,6 +27,7 @@ import com.drifting.bureau.mvp.ui.holder.OrderRecordHolder;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.ViewUtil;
+import com.drifting.bureau.util.request.RequestUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.drifting.bureau.mvp.contract.OrderRecordContract;
@@ -49,7 +50,7 @@ import butterknife.OnClick;
  * @author 订单记录
  * module name is OrderRecordActivity
  */
-public class OrderRecordActivity extends BaseActivity<OrderRecordPresenter> implements OrderRecordContract.View,XRecyclerView.LoadingListener {
+public class OrderRecordActivity extends BaseActivity<OrderRecordPresenter> implements OrderRecordContract.View, XRecyclerView.LoadingListener {
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
     @BindView(R.id.rcy_public)
@@ -113,7 +114,6 @@ public class OrderRecordActivity extends BaseActivity<OrderRecordPresenter> impl
     public void onLoadMore() {
         getData(mPage, false);
     }
-
 
 
     @OnClick({R.id.toolbar_back})
@@ -204,5 +204,9 @@ public class OrderRecordActivity extends BaseActivity<OrderRecordPresenter> impl
         ToastUtil.showToast(message);
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RequestUtil.create().disDispose();
+    }
 }

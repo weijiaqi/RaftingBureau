@@ -11,11 +11,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.drifting.bureau.R;
+import com.drifting.bureau.mvp.model.entity.PlanetLocationEntity;
 import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
 import com.drifting.bureau.mvp.ui.activity.index.MoveAwayPlanetaryActivity;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
+import com.drifting.bureau.util.callback.BaseDataCallBack;
+import com.drifting.bureau.util.request.RequestUtil;
 import com.jess.arms.base.BaseActivity;
+import com.jess.arms.base.BaseEntity;
 import com.jess.arms.di.component.AppComponent;
 
 import butterknife.BindView;
@@ -53,7 +57,7 @@ public class ClaimPlanetActivity extends BaseActivity {
         mTvName.setText(Preferences.getUserName());
     }
 
-    @OnClick({R.id.tv_enter_rb,R.id.tv_perfect})
+    @OnClick({R.id.tv_enter_rb, R.id.tv_perfect})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
@@ -61,10 +65,12 @@ public class ClaimPlanetActivity extends BaseActivity {
                     DiscoveryTourActivity.start(this, true);
                     break;
                 case R.id.tv_perfect:
-                    MoveAwayPlanetaryActivity.start(this, 2,false);
+                    MoveAwayPlanetaryActivity.start(ClaimPlanetActivity.this, 2, false);
                     break;
             }
         }
     }
+
+
 
 }

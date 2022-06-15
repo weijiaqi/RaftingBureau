@@ -89,7 +89,7 @@ public class WithdrawalRecordActivity extends BaseActivity<WithdrawalRecordPrese
 
     public void getData(int mPage, boolean loadType) {
         if (mPresenter != null) {
-            mPresenter.spacebillogs(mPage, limit, loadType);
+            mPresenter.withdrawnLogs(mPage, limit, loadType);
         }
     }
 

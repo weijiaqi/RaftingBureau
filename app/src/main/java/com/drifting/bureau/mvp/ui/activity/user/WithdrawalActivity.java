@@ -117,7 +117,7 @@ public class WithdrawalActivity extends BaseActivity<WithdrawalPresenter> implem
                         return;
                     }
                     if (mPresenter != null) {
-                        mPresenter.withdrawapply(mEtAccount.getText().toString(), mEtName.getText().toString(), mEtMoney.getText().toString());
+                        mPresenter.withdrawapply(mEtAccount.getText().toString(), mEtName.getText().toString(), mEtMoney.getText().toString(),type);
                     }
 
                     break;

@@ -28,6 +28,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 
 import com.drifting.bureau.R;
@@ -40,6 +41,7 @@ import com.drifting.bureau.di.component.DaggerDiscoveryTourComponent;
 import com.drifting.bureau.mvp.model.entity.MessageReceiveEntity;
 import com.drifting.bureau.mvp.model.entity.PlanetEntity;
 
+import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.ui.activity.index.SpaceCapsuleActivity;
 import com.drifting.bureau.mvp.ui.activity.index.ViewRaftingActivity;
 import com.drifting.bureau.mvp.ui.activity.user.AboutMeActivity;
@@ -90,6 +92,8 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
     ViewPager viewPager;
     @BindView(R.id.frame)
     FrameLayout frame;
+    @BindView(R.id.tv_about_me)
+    TextView mTvAboutMe;
     private List<PlanetEntity> list;
     private RaftingInforDialog raftingInforDialog;
     private AnimatorSet animatorSet;
@@ -98,7 +102,7 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
     private boolean isAnmiation = true;
     private int id, user_id, explore_id;
     private DiscoveryViewpagerAdapter discoveryViewpagerAdapter;
-
+    private UserInfoEntity userInfoEntity;
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, DiscoveryTourActivity.class);
         context.startActivity(intent);
@@ -148,7 +152,16 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
             mPresenter.getLocation(this);
         }
         frame.setOnTouchListener((view, motionEvent) -> viewPager.onTouchEvent(motionEvent));
+        getUserInfo();
+    }
 
+    public void getUserInfo(){
+        RequestUtil.create().userplayer(Preferences.getUserId(), entity -> {
+            if (entity != null && entity.getCode() == 200) {
+                userInfoEntity=entity.getData();
+                mTvAboutMe.setText(userInfoEntity.getPlanet().getName());
+            }
+        });
 
     }
 
@@ -188,11 +201,9 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
                 });
                 break;
             case R.id.tv_about_me: //关于我
-                RequestUtil.create().userplayer(Preferences.getUserId(), entity -> {
-                    if (entity != null && entity.getCode() == 200) {
-                        AboutMeActivity.start(this, entity.getData(), false);
-                    }
-                });
+                if (userInfoEntity!=null){
+                    AboutMeActivity.start(this, userInfoEntity, false);
+                }
                 break;
             case R.id.tv_space_capsule: //太空舱
                 SpaceCapsuleActivity.start(this, false);
@@ -200,12 +211,7 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
         }
     }
 
-
-
-
-
     Runnable mAdRunnable = () -> getMessage();
-
 
     //获取新消息
     public void getMessage() {
@@ -342,7 +348,9 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        handler.removeCallbacks(mAdRunnable);
+        if (handler != null) {
+            handler.removeCallbacks(mAdRunnable);
+        }
         RequestUtil.create().disDispose();
     }
 }

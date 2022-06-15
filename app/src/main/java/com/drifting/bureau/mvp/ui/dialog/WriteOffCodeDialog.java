@@ -39,7 +39,7 @@ public class WriteOffCodeDialog extends BaseDialog {
     @Override
     protected void initEvents() {
         super.initEvents();
-        mIvcode.setImageBitmap(EncodingHandler.createQRCode(token, ArmsUtils.dip2px(context, 187), ArmsUtils.dip2px(context, 187), BitmapFactory.decodeResource(context.getResources(), R.mipmap.leak_canary_icon)));
+        mIvcode.setImageBitmap(EncodingHandler.createQRCode(token, ArmsUtils.dip2px(context, 187), ArmsUtils.dip2px(context, 187), BitmapFactory.decodeResource(context.getResources(), R.drawable.plus)));
     }
 
     @Override

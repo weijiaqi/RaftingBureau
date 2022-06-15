@@ -41,7 +41,7 @@ import java.util.List;
  */
 public class RecordingDialog extends BottomDialog implements View.OnClickListener {
 
-    private ImageView mIvNext, mIvHorizontalLine;
+    private ImageView mIvNext;
 
     private TextView mTvTime, mTvPlayTime, mTvPlay, mTvdelete, mTvEnd;
     private LinearLayout mLlPrepare, mLlStartRecord, mLlplay;
@@ -83,7 +83,7 @@ public class RecordingDialog extends BottomDialog implements View.OnClickListene
         mTvdelete = findViewById(R.id.tv_delete);
         mTvEnd = findViewById(R.id.tv_end);
         voiceWave = findViewById(R.id.videoView);
-        mIvHorizontalLine = findViewById(R.id.iv_horizontal_line);
+
         mLlplay = findViewById(R.id.ll_play);
     }
 
@@ -294,10 +294,10 @@ public class RecordingDialog extends BottomDialog implements View.OnClickListene
             handler.sendMessage(message);
         } else {
             //结束试听
-            InVoiceStatus();
             cPlay.reset();
             endAudition();
             close();
+            InVoiceStatus();
         }
     }
 

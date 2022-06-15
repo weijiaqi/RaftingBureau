@@ -1,6 +1,10 @@
 package com.drifting.bureau.mvp.presenter;
+
 import android.app.Application;
 
+import com.drifting.bureau.mvp.model.entity.InfoForShareEntity;
+import com.drifting.bureau.mvp.model.entity.SpaceInfoEntity;
+import com.drifting.bureau.mvp.model.entity.TeamStatisticEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.jess.arms.base.BaseEntity;
 import com.jess.arms.integration.AppManager;
@@ -14,6 +18,7 @@ import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 
 import javax.inject.Inject;
+
 import com.drifting.bureau.mvp.contract.SpaceMarinesContract;
 import com.jess.arms.utils.RxLifecycleUtils;
 
@@ -30,7 +35,7 @@ import com.jess.arms.utils.RxLifecycleUtils;
  * ================================================
  */
 @ActivityScope
-public class SpaceMarinesPresenter extends BasePresenter<SpaceMarinesContract.Model, SpaceMarinesContract.View>{
+public class SpaceMarinesPresenter extends BasePresenter<SpaceMarinesContract.Model, SpaceMarinesContract.View> {
     @Inject
     RxErrorHandler mErrorHandler;
     @Inject
@@ -41,8 +46,38 @@ public class SpaceMarinesPresenter extends BasePresenter<SpaceMarinesContract.Mo
     AppManager mAppManager;
 
     @Inject
-    public SpaceMarinesPresenter (SpaceMarinesContract.Model model, SpaceMarinesContract.View rootView) {
+    public SpaceMarinesPresenter(SpaceMarinesContract.Model model, SpaceMarinesContract.View rootView) {
         super(model, rootView);
+    }
+
+
+    /**
+     * 星际团队信息
+     */
+
+    public void team() {
+        mModel.team().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseEntity<TeamStatisticEntity>>(mErrorHandler) {
+                    @Override
+                    public void onNext(BaseEntity<TeamStatisticEntity> baseEntity) {
+                        if (mRootView != null) {
+                            if (baseEntity.getCode() == 200) {
+                                mRootView.OnTeamSuccess(baseEntity.getData());
+                            } else {
+                                mRootView.showMessage(baseEntity.getMsg());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        if (mRootView != null) {
+                            mRootView.onNetError();
+                        }
+                    }
+                });
     }
 
 

@@ -50,8 +50,8 @@ public class WithdrawalPresenter extends BasePresenter<WithdrawalContract.Model,
     /**
      * 申请提现
      */
-    public void withdrawapply(String name, String account, String money) {
-        mModel.withdrawapply(name, account, money).subscribeOn(Schedulers.io())
+    public void withdrawapply(String name, String account, String money,int op_type) {
+        mModel.withdrawapply(name, account, money,op_type).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
                 .subscribe(new ErrorHandleSubscriber<BaseEntity>(mErrorHandler) {

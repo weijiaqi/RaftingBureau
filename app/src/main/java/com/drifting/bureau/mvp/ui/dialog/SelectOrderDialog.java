@@ -81,7 +81,7 @@ public class SelectOrderDialog extends BaseDialog implements View.OnClickListene
                 break;
             case 2:
                 mVideoView.setDecibel(0);
-                totaltime=VideoUtil.getLocalVideoDuration(orderDetailEntity.getContent()) + 1;
+                totaltime=VideoUtil.getLocalVideoDuration(orderDetailEntity.getContent());
                 mTvTime.setText(totaltime + "S");
                 mRlVoicePlay.setVisibility(View.VISIBLE);
                 break;

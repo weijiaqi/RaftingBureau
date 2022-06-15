@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.di.component.DaggerDriftingBottleComponent;
+import com.drifting.bureau.mvp.model.entity.ExploreTimesEntity;
 import com.drifting.bureau.mvp.ui.activity.user.DriftingTrackActivity;
 import com.drifting.bureau.mvp.ui.fragment.PostDriftingFragment;
 import com.drifting.bureau.util.ClickUtil;
@@ -40,11 +41,16 @@ public class DriftingBottleActivity extends BaseActivity<DriftingBottlePresenter
     RelativeLayout mRlInfo;
     @BindView(R.id.toolbar_title)
     TextView mToobarTitle;
-
+    @BindView(R.id.tv_num)
+    TextView mTvNum;
+    private static String EXTRA_EXPLORE_ID = "extra_explore_id";
     private static String EXTRA_NAME = "extra_name";
     private String title;
-    public static void start(Context context, String name, boolean closePage) {
+    private int explore_id;
+
+    public static void start(Context context, int explore_id, String name, boolean closePage) {
         Intent intent = new Intent(context, DriftingBottleActivity.class);
+        intent.putExtra(EXTRA_EXPLORE_ID, explore_id);
         intent.putExtra(EXTRA_NAME, name);
         context.startActivity(intent);
         if (closePage) ((Activity) context).finish();
@@ -71,9 +77,15 @@ public class DriftingBottleActivity extends BaseActivity<DriftingBottlePresenter
         setStatusBar(true);
         mRlInfo.setVisibility(View.VISIBLE);
         if (getIntent() != null) {
-            title=getIntent().getExtras().getString(EXTRA_NAME);
+            explore_id = getIntent().getExtras().getInt(EXTRA_EXPLORE_ID);
+            title = getIntent().getExtras().getString(EXTRA_NAME);
         }
         mToobarTitle.setText(title);
+        if (mPresenter != null) {
+            mPresenter.exploreTimes(explore_id);
+        }
+
+
         Fragment fragment = PostDriftingFragment.newInstance(1, 0, 0);
         getSupportFragmentManager().beginTransaction().replace(R.id.main_fame, fragment).commitAllowingStateLoss();
     }
@@ -96,6 +108,18 @@ public class DriftingBottleActivity extends BaseActivity<DriftingBottlePresenter
     @Override
     public void showMessage(@NonNull String message) {
         ToastUtil.showToast(message);
+    }
+
+    @Override
+    public void onExploreTimesSuccess(ExploreTimesEntity entity) {
+        if (entity != null) {
+            mTvNum.setText(entity.getExplore_num()+"次");
+        }
+    }
+
+    @Override
+    public void onNetError() {
+
     }
 
     @Override

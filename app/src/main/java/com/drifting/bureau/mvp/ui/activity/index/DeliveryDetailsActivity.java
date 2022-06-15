@@ -23,6 +23,7 @@ import com.drifting.bureau.mvp.ui.adapter.DeliveryDetailsAdapter;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.ViewUtil;
+import com.drifting.bureau.util.request.RequestUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 
@@ -225,4 +226,9 @@ public class DeliveryDetailsActivity extends BaseActivity<DeliveryDetailsPresent
     }
 
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RequestUtil.create().disDispose();
+    }
 }

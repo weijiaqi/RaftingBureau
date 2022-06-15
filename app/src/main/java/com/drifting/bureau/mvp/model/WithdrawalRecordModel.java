@@ -45,7 +45,7 @@ public class WithdrawalRecordModel extends BaseModel implements WithdrawalRecord
     }
 
     @Override
-    public Observable<BaseEntity<IncomeRecordEntity>> spacebillogs(int page, int limit) {
-        return mRepositoryManager.obtainRetrofitService(ApiService.class).spacebillogs(page,limit);
+    public Observable<BaseEntity<IncomeRecordEntity>> withdrawnLogs(int page, int limit) {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).withdrawnLogs(page,limit);
     }
 }
