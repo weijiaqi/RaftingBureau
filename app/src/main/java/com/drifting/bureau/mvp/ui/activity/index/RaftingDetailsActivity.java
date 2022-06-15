@@ -189,7 +189,7 @@ public class RaftingDetailsActivity extends BaseActivity<RaftingDetailsPresenter
         if (bean.getType_id() == 1) {
             mTvWord.setText(bean.getContent());
         } else if (bean.getType_id() == 2) {
-            totaltime = VideoUtil.getLocalVideoDuration(bean.getContent())+1;
+            totaltime = VideoUtil.getLocalVideoDuration(bean.getContent());
             mTvTime.setText(totaltime + "S");
             mVideoView.setDecibel(0);
         } else if (bean.getType_id() == 3) {

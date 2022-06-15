@@ -206,7 +206,7 @@ public class ViewRaftingActivity extends BaseActivity<ViewRaftingPresenter> impl
                     getSupportFragmentManager().beginTransaction().replace(R.id.main_fame, fragment).commitAllowingStateLoss();
                     break;
                 case R.id.rl_explore:  //探寻过程
-                    RaftingDetailsActivity.start(this, id,false);
+                    RaftingDetailsActivity.start(this, id, false);
                     break;
                 case R.id.tv_into_space: //丢回太空
                     RequestUtil.create().messagethrow(id, entity -> {
@@ -229,11 +229,11 @@ public class ViewRaftingActivity extends BaseActivity<ViewRaftingPresenter> impl
                     });
                     break;
                 case R.id.rl_add_friends:  //添加好友
-                    RequestUtil.create().friendapply(user_id+"", entity -> {
+                    RequestUtil.create().friendapply(user_id + "", entity -> {
                         if (entity != null) {
-                            if (entity.getCode()==200){
-                               ToastUtil.showAddFriendDialog(this);
-                            }else {
+                            if (entity.getCode() == 200) {
+                                ToastUtil.showAddFriendDialog(this);
+                            } else {
                                 showMessage(entity.getMsg());
                             }
                         }
@@ -346,7 +346,7 @@ public class ViewRaftingActivity extends BaseActivity<ViewRaftingPresenter> impl
         if (type == 1) {
             mTvWord.setText(content);
         } else if (type == 2) {
-            totaltime = VideoUtil.getLocalVideoDuration(content)+1;
+            totaltime = VideoUtil.getLocalVideoDuration(content);
             mTvTime.setText(totaltime + "S");
             mVideoView.setDecibel(0);
         } else if (type == 3) {
@@ -379,10 +379,13 @@ public class ViewRaftingActivity extends BaseActivity<ViewRaftingPresenter> impl
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        handler.removeCallbacks(runnable);
+        if (handler != null) {
+            handler.removeCallbacks(runnable);
+        }
         if (type == 2) {
             VideoUtil.close();
             VideoUtil.cleanCountDown();
         }
+        RequestUtil.create().disDispose();
     }
 }

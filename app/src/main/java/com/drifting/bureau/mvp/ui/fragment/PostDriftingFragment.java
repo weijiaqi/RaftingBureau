@@ -32,12 +32,14 @@ import com.drifting.bureau.mvp.ui.activity.pay.PaymentInfoActivity;
 import com.drifting.bureau.mvp.ui.dialog.PublicDialog;
 import com.drifting.bureau.mvp.ui.dialog.RaftingOrderDialog;
 import com.drifting.bureau.mvp.ui.dialog.RecordingDialog;
+import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.BitmapUtil;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.VideoUtil;
 import com.drifting.bureau.util.ViewGroupUtil;
+import com.drifting.bureau.util.request.RequestUtil;
 import com.drifting.bureau.view.VoiceWave;
 import com.jess.arms.base.BaseDialog;
 import com.jess.arms.base.BaseFragment;
@@ -102,6 +104,10 @@ public class PostDriftingFragment extends BaseFragment<PostDriftingPresenter> im
     LinearLayout mLlInfo;
     @BindView(R.id.tv_my_info)
     TextView mTvMyInfo;
+    @BindView(R.id.tv_name)
+    TextView mTvName;
+    @BindView(R.id.tv_identity)
+    TextView mTvIdentity;
     private RecordingDialog recordingDialog;
     private List<Object> objectList;
     private String path;
@@ -175,7 +181,20 @@ public class PostDriftingFragment extends BaseFragment<PostDriftingPresenter> im
             mLlInfo.setLayoutParams(ViewGroupUtil.setMargin(ArmsUtils.dip2px(mContext, 17), 0, 0, 0));
         }
         setSelected(selectPostion);
+
+        getUserInfo();
     }
+
+    public void getUserInfo(){
+        RequestUtil.create().userplayer(Preferences.getUserId(), entity -> {
+            if (entity != null && entity.getCode() == 200) {
+                mTvName.setText(entity.getData().getUser().getName());
+                mTvIdentity.setText("("+entity.getData().getUser().getLevel_name()+")");
+            }
+        });
+
+    }
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -433,5 +452,6 @@ public class PostDriftingFragment extends BaseFragment<PostDriftingPresenter> im
         super.onDestroy();
         VideoUtil.close();
         VideoUtil.cleanCountDown();
+        RequestUtil.create().disDispose();
     }
 }

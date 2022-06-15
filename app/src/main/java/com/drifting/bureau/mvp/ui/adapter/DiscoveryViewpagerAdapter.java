@@ -44,16 +44,16 @@ public class DiscoveryViewpagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_discovery, container, false);
-
+        RelativeLayout mRlPlanet= view.findViewById(R.id.rl_planet);
         ImageView imageView = view.findViewById(R.id.iv_planet);
         TextView textView = view.findViewById(R.id.tv_planet);
         GlideUtil.create().loadLongImage(context, list.get(position % list.size()).getImageUrl(), imageView);
         textView.setText(list.get(position % list.size()).getName());
-        imageView.setOnClickListener(v->{
+        mRlPlanet.setOnClickListener(v->{
             if (!textView.getText().toString().equals("传递漂")){
                 ToastUtil.showToast("暂未开放");
             }else {
-                DriftingBottleActivity.start(context, textView.getText().toString(), false);
+                DriftingBottleActivity.start(context,list.get(position % list.size()).getId(), textView.getText().toString(), false);
             }
         });
         container.addView(view);

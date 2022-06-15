@@ -10,7 +10,9 @@ import com.drifting.bureau.mvp.model.entity.CreatewithfileEntity;
 import com.drifting.bureau.mvp.model.entity.CustomerEntity;
 import com.drifting.bureau.mvp.model.entity.DeliveryDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.DriftingTrackEntity;
+import com.drifting.bureau.mvp.model.entity.ExploreTimesEntity;
 import com.drifting.bureau.mvp.model.entity.IncomeRecordEntity;
+import com.drifting.bureau.mvp.model.entity.InfoForShareEntity;
 import com.drifting.bureau.mvp.model.entity.LoginEntity;
 import com.drifting.bureau.mvp.model.entity.MakingRecordEntity;
 import com.drifting.bureau.mvp.model.entity.MessageContentEntity;
@@ -24,6 +26,7 @@ import com.drifting.bureau.mvp.model.entity.OrderOneEntity;
 import com.drifting.bureau.mvp.model.entity.OrderRecordEntity;
 import com.drifting.bureau.mvp.model.entity.PayOrderEntity;
 import com.drifting.bureau.mvp.model.entity.PlanetEntity;
+import com.drifting.bureau.mvp.model.entity.PlanetLocationEntity;
 import com.drifting.bureau.mvp.model.entity.PlanetaryDetailEntity;
 import com.drifting.bureau.mvp.model.entity.PrizeEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionAssessEntity;
@@ -33,6 +36,7 @@ import com.drifting.bureau.mvp.model.entity.SpaceCheckEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceInfoEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceStationEntity;
 import com.drifting.bureau.mvp.model.entity.TeaShopEntity;
+import com.drifting.bureau.mvp.model.entity.TeamStatisticEntity;
 import com.drifting.bureau.mvp.model.entity.UserEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.model.entity.WriteOffInfoEntity;
@@ -233,7 +237,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("v/withdraw/apply")
-    Observable<BaseEntity> withdrawapply(@Field("name") String name,@Field("account") String account,@Field("money") String money);
+    Observable<BaseEntity> withdrawapply(@Field("name") String name,@Field("account") String account,@Field("money") String money,@Field("op_type") int op_type);
 
 
 
@@ -327,6 +331,15 @@ public interface ApiService {
 
 
     /**
+     * 当前所在星球及答题状态
+     *
+     * @return
+     */
+    @GET("v/planet/location")
+    Observable<BaseEntity<PlanetLocationEntity>> planetlocation();
+
+
+    /**
      * 我的库藏(我的空间站)
      *
      * @return
@@ -377,6 +390,18 @@ public interface ApiService {
     Observable<BaseEntity<IncomeRecordEntity>> spacebillogs(@Field("page") int page, @Field("limit") int limit);
 
 
+
+    /**
+     * 提现记录（星际团队）
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/team/withdrawnLogs")
+    Observable<BaseEntity<IncomeRecordEntity>> withdrawnLogs(@Field("page") int page, @Field("limit") int limit);
+
+
+
     /**
      * 订单记录（关于我）
      *
@@ -408,13 +433,6 @@ public interface ApiService {
     Observable<BaseEntity<DeliveryDetailsEntity>> pathdetails(@Field("message_id") int message_id,@Field("page") int page, @Field("limit") int limit);
 
 
-    /**
-     * 关于我
-     *
-     * @return
-     */
-    @GET("v/user/home")
-    Observable<BaseEntity<UserEntity>> userhome();
 
     /**
      * 探索方式列表
@@ -501,5 +519,26 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("v/space/storage/using")
     Observable<BaseEntity>storageusing(@Field("object_id") int object_id, @Field("object_num") int object_num);
+
+
+    /**
+     *星际团队信息
+     *
+     * @return
+     */
+    @GET("v/team/statistic")
+    Observable<BaseEntity<TeamStatisticEntity>>team();
+
+
+    /**
+     *开启漂流的次数
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/message/exploreTimes")
+    Observable<BaseEntity<ExploreTimesEntity>>exploreTimes(@Field("explore_id") int explore_id);
+
+
 
 }

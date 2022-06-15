@@ -36,9 +36,12 @@ public class MySpaceStationDialog extends BaseDialog implements View.OnClickList
     private MySpaceStationAdapter mySpaceStationAdapter;
 
     private MySpaceStationEntity mySpaceStationEntity;
-    public MySpaceStationDialog(@NonNull Context context) {
+
+
+    public MySpaceStationDialog(@NonNull Context context, MySpaceStationEntity mySpaceStationEntity) {
         super(context);
         this.context = context;
+        this.mySpaceStationEntity = mySpaceStationEntity;
     }
 
     @Override
@@ -57,30 +60,20 @@ public class MySpaceStationDialog extends BaseDialog implements View.OnClickList
     protected void initEvents() {
         super.initEvents();
         mRcyInterests.setLayoutManager(new GridLayoutManager(context, 4));
-
         mySpaceStationAdapter = new MySpaceStationAdapter(new ArrayList<>());
         mRcyInterests.setAdapter(mySpaceStationAdapter);
-        getInfo();
         mTvCofim.setOnClickListener(this);
-    }
-
-    public void getInfo() {
-        RequestUtil.create().levelcurrent(entity -> {
-            if (entity != null && entity.getCode() == 200) {
-                mySpaceStationEntity=entity.getData();
-                if (mySpaceStationEntity.getScore() == mySpaceStationEntity.getTop_score()) {
-                    mTvDistance.setText("已升至满级");
-                } else {
-                    mTvDistance.setText("距离下一等级");
-                }
-                mPrUpgrade.setMax(mySpaceStationEntity.getTop_score());
-                mPrUpgrade.setProgress(mySpaceStationEntity.getScore());
-                mTvTotalNum.setText(mySpaceStationEntity.getScore() + "/" + mySpaceStationEntity.getTop_score());
-                SpannableStringBuilder passer = SpannableUtil.getBuilder(context, "当前空间站等级： ").append(mySpaceStationEntity.getSpace_level_name()).setBold().build();
-                mTvLevelName.setText(passer);
-                mySpaceStationAdapter.setData(mySpaceStationEntity.getOwn_rights());
-            }
-        });
+        if (mySpaceStationEntity.getScore() == mySpaceStationEntity.getTop_score()) {
+            mTvDistance.setText("已升至满级");
+        } else {
+            mTvDistance.setText("距离下一等级");
+        }
+        mPrUpgrade.setMax(mySpaceStationEntity.getTop_score());
+        mPrUpgrade.setProgress(mySpaceStationEntity.getScore());
+        mTvTotalNum.setText(mySpaceStationEntity.getScore() + "/" + mySpaceStationEntity.getTop_score());
+        SpannableStringBuilder passer = SpannableUtil.getBuilder(context, "当前空间站等级： ").append(mySpaceStationEntity.getSpace_level_name()).setBold().build();
+        mTvLevelName.setText(passer);
+        mySpaceStationAdapter.setData(mySpaceStationEntity.getOwn_rights());
     }
 
 

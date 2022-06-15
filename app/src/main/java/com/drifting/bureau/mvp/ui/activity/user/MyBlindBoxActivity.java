@@ -22,6 +22,7 @@ import com.drifting.bureau.mvp.model.entity.MyBlindBoxEntity;
 import com.drifting.bureau.mvp.ui.adapter.MyBlindBoxAdapter;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.ViewUtil;
+import com.drifting.bureau.util.request.RequestUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 
@@ -189,5 +190,11 @@ public class MyBlindBoxActivity extends BaseActivity<MyBlindBoxPresenter> implem
     @Override
     public void showMessage(@NonNull String message) {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RequestUtil.create().disDispose();
     }
 }

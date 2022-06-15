@@ -51,11 +51,11 @@ public class WithdrawalRecordPresenter extends BasePresenter<WithdrawalRecordCon
     /**
      * 提现记录
      */
-    public void spacebillogs(int page, int limit, boolean loadType) {
+    public void withdrawnLogs(int page, int limit, boolean loadType) {
         if (mRootView != null) {
             mRootView.onloadStart();
         }
-        mModel.spacebillogs(page, limit)
+        mModel.withdrawnLogs(page, limit)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))

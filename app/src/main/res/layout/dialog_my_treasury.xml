@@ -7,6 +7,8 @@
     android:background="@drawable/my_treasury_bg"
     android:orientation="vertical">
 
+
+
     <com.hjq.shape.view.ShapeTextView
         android:id="@+id/my_trea"
         android:layout_width="wrap_content"
@@ -19,6 +21,19 @@
         app:shape_textGradientOrientation="vertical"
         app:shape_textStartColor="@color/color_96f" />
 
+
+    <TextView
+        android:id="@+id/tv_not_data"
+       android:layout_marginTop="200dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:visibility="gone"
+        android:text="暂无库藏"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcy_my_trea"
         android:layout_width="match_parent"
@@ -30,6 +45,7 @@
         android:layout_weight="1" />
 
     <RelativeLayout
+        android:id="@+id/rl_bottom"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="24dp"
@@ -120,5 +136,7 @@
             app:shape_radius="5dp"
             app:shape_solidColor="@color/color_1515" />
     </RelativeLayout>
+
+
 
 </LinearLayout>

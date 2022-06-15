@@ -8,7 +8,9 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,7 +33,15 @@ public class VideoUtil {
 
     private static CountDownTimer timer;
 
+    private static int total_duration;
+    private static int current_pos;
+
+    private static int time_remaining;
+
+    private static Runnable runnable;
     private static int isPlaying = 0;
+
+    private static Handler handler1 = new Handler();
 
     /**
      * @description 语音播放
@@ -45,8 +55,32 @@ public class VideoUtil {
                 mPlayer.setDataSource(path);
                 mPlayer.prepare();
                 mPlayer.start();
+                mPlayer.setOnPreparedListener(mediaPlayer -> {
+                    total_duration = mPlayer.getDuration() / 1000;
+                    current_pos = mPlayer.getCurrentPosition() / 1000;
+                    mTvTime.setText(total_duration + "S");
+                    runnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                current_pos = mPlayer.getCurrentPosition() / 1000;
+                                time_remaining = total_duration - current_pos;
+                                mTvTime.setText(time_remaining + "S");
+                                if (time_remaining == 0) {
+                                    handler1.removeCallbacks(runnable);
+                                    stop(mVideoView, mIvPlay, mTvTime, totaltime);
+                                } else {
+                                    handler1.postDelayed(this, 1000);
+                                }
+                            } catch (IllegalStateException ed) {
+                                ed.printStackTrace();
+                            }
+                        }
+                    };
+                    handler1.postDelayed(runnable, 1000);
+                });
                 //动画
-               mVideoView.setMediaPlayer(mPlayer);
+                mVideoView.setMediaPlayer(mPlayer);
             } catch (IllegalArgumentException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -60,30 +94,11 @@ public class VideoUtil {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-            startCountDown(mVideoView,mIvPlay, mTvTime, totaltime);
         } else {
-            stop(mVideoView,mIvPlay, mTvTime, totaltime);
-        }
-    }
-
-    /**
-     * 开始倒计时
-     */
-    private static void startCountDown( VoiceWave mVideoView, ImageView mIvPlay, TextView mTvTime, Object animTime) {
-        if (timer == null) {
-            timer = new CountDownTimer(((int) animTime) * 1000, 1000) {
-                @Override
-                public void onTick(long millisUntilFinished) {
-                    //剩余秒数
-                    mTvTime.setText((Math.round((double) millisUntilFinished / 1000) - 1) + "S");
-                }
-
-                @Override
-                public void onFinish() {
-                    //倒计时结束回调
-                    stop(mVideoView,mIvPlay, mTvTime, animTime);
-                }
-            }.start();
+            if (handler1 != null) {
+                handler1.removeCallbacks(runnable);
+            }
+            stop(mVideoView, mIvPlay, mTvTime, totaltime);
         }
     }
 
@@ -91,7 +106,7 @@ public class VideoUtil {
     /**
      * @description 语音播放停止
      */
-    public static void stop(VoiceWave mVideoView,ImageView mIvPlay, TextView mTvTime, Object animTime) {
+    public static void stop(VoiceWave mVideoView, ImageView mIvPlay, TextView mTvTime, Object animTime) {
         mVideoView.stop();
         mVideoView.setDecibel(0);
         cleanCountDown();
@@ -99,7 +114,6 @@ public class VideoUtil {
         mIvPlay.setImageResource(R.drawable.voice_play);
         close();
     }
-
 
 
     /**
@@ -192,7 +206,7 @@ public class VideoUtil {
             }
             if (success) {
                 Timber.e("压缩成功---" + filepath);
-                runLog=filepath;
+                runLog = filepath;
                 double fileSize = FileUtil.getFileOrFilesSize(filepath, FileUtil.SIZETYPE_MB);
                 Timber.e("1----------" + fileSize);
 

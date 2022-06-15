@@ -45,10 +45,11 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/tv_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text="50次"
+                    android:text=""
                     android:textColor="@color/white"
                     android:textSize="14sp" />
             </LinearLayout>

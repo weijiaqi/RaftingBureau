@@ -8,6 +8,7 @@ import com.drifting.bureau.app.api.ApiProxy;
 import com.drifting.bureau.mvp.model.entity.BoxOpenEntity;
 import com.drifting.bureau.mvp.model.entity.MySpaceStationEntity;
 import com.drifting.bureau.mvp.model.entity.MyTreasuryEntity;
+import com.drifting.bureau.mvp.model.entity.PlanetLocationEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.model.entity.WriteOffInfoEntity;
 import com.drifting.bureau.util.callback.BaseDataCallBack;
@@ -381,6 +382,39 @@ public class RequestUtil {
 
                     @Override
                     public void onNext(BaseEntity<MySpaceStationEntity> entity) {
+                        if (callBack != null) {
+                            callBack.getData(entity);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (callBack != null) {
+                            callBack.getData(null);
+                        }
+                    }
+                });
+    }
+
+
+
+
+    /**
+     * 当前所在星球及答题状态
+     */
+    public void planetlocation(BaseDataCallBack<PlanetLocationEntity> callBack) {
+        ApiProxy.getApiService().planetlocation()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new BaseObserver<BaseEntity<PlanetLocationEntity>>() {
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+                        mDisposables.put(mRequestCount++, disposable);
+                    }
+
+                    @Override
+                    public void onNext(BaseEntity<PlanetLocationEntity> entity) {
                         if (callBack != null) {
                             callBack.getData(entity);
                         }

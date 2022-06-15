@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="你的小太阳"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="14sp"
             app:fontType="Noto_bold" />
@@ -60,7 +60,7 @@
             <LinearLayout
                 android:layout_width="1dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="1.2"
                 android:orientation="vertical">
 
                 <TextView
@@ -71,10 +71,11 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/tv_income"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="10898"
+                    android:text=""
                     android:textColor="@color/color_00"
                     android:textSize="23sp"
                     android:textStyle="bold" />
@@ -95,10 +96,11 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/tv_persons"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="807"
+                    android:text=""
                     android:textColor="@color/color_00"
                     android:textSize="23sp"
                     android:textStyle="bold" />
@@ -162,7 +164,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="9998"
+                android:text=""
                 android:textColor="@color/color_00"
                 android:textSize="17sp"
                 android:textStyle="bold" />
@@ -192,7 +194,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="9998"
+                    android:text=""
                     android:textColor="@color/color_00"
                     android:textSize="17sp"
                     android:textStyle="bold" />
@@ -216,7 +218,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="0"
+                    android:text=""
                     android:textColor="@color/color_00"
                     android:textSize="17sp"
                     android:textStyle="bold" />
@@ -281,12 +283,13 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tv_order_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/iv_order"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/iv_order"
-                android:text="1879"
+                android:text=""
                 android:textColor="@color/color_66"
                 android:textSize="12sp" />
 
@@ -306,6 +309,7 @@
                 android:src="@drawable/space_marines_ranking" />
 
             <TextView
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/iv_ranking"
@@ -317,12 +321,13 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tv_ranking"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/iv_ranking"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/iv_ranking"
-                android:text="2"
+                android:text=""
                 android:textColor="@color/color_66"
                 android:textSize="12sp" />
 

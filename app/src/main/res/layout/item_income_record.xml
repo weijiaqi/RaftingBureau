@@ -48,7 +48,7 @@
             android:id="@+id/tv_income_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="订单收入"
+            android:text=""
             android:textColor="@color/color_cc"
             android:textSize="12sp" />
 

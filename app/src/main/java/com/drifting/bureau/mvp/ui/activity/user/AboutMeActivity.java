@@ -40,6 +40,7 @@ import com.drifting.bureau.mvp.ui.fragment.PlanetaryDisFragment;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.TextUtil;
+import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.callback.BaseDataCallBack;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.hjq.shape.view.ShapeTextView;
@@ -137,7 +138,6 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
     }
 
 
-
     public List<AoubtMeEntity> getData() {
         List<AoubtMeEntity> list = new ArrayList<>();
         list.add(new AoubtMeEntity("漂流轨迹", "我的漂流"));
@@ -180,7 +180,7 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
 
     @Override
     public void showMessage(@NonNull String message) {
-
+        ToastUtil.showToast(message);
     }
 
 
@@ -196,7 +196,15 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
         });
         toolbar_title.setText("星球分布");
         tv_move_away.setOnClickListener(v -> {
-            MoveAwayPlanetaryActivity.start(this, 1,false);
+            RequestUtil.create().planetlocation(entity -> {
+                if (entity != null && entity.getCode() == 200) {
+                    if (entity.getData().getAssess_status() == 0) {
+                        showMessage(" 您还不能搬离所在星球");
+                    } else {
+                        MoveAwayPlanetaryActivity.start(AboutMeActivity.this, 1, false);
+                    }
+                }
+            });
         });
         topMenu.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         SmartSwipeWrapper topMenuWrapper = SmartSwipe.wrap(topMenu);
@@ -215,8 +223,6 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
                 .as(DrawerConsumer.class);
         SmartSwipe.wrap(this).addConsumer(slidingConsumer);
     }
-
-
 
 
     @Override

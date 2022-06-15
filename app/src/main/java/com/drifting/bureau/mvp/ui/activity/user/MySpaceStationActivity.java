@@ -33,6 +33,7 @@ import com.drifting.bureau.util.DateUtil;
 import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.ToastUtil;
+import com.drifting.bureau.util.request.RequestUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.drifting.bureau.mvp.contract.MySpaceStationContract;
@@ -167,12 +168,9 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
                     }
                     break;
                 case R.id.tv_my_treasury: //我的库存
+                case R.id.tv_upgrade:  //升级
                     myTreasuryDialog = new MyTreasuryDialog(this);
                     myTreasuryDialog.show();
-                    break;
-                case R.id.tv_upgrade:  //升级
-                    mySpaceStationDialog = new MySpaceStationDialog(this);
-                    mySpaceStationDialog.show();
                     break;
                 case R.id.rl_total_revenue: //收支记录
                     IncomeRecordActivity.start(this, false);
@@ -308,6 +306,7 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
         if (handler != null) {
             handler.removeCallbacks(mAdRunnable);
         }
+        RequestUtil.create().disDispose();
     }
 
 }
