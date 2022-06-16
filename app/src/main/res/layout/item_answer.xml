@@ -46,7 +46,7 @@
     </LinearLayout>
 
 
-    <com.drifting.bureau.view.FontTextView
+    <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
         android:text="很多时候你宁愿自己看一场电影也不愿参加聚会"
         android:textColor="@color/color_22"
         android:textSize="18sp"
-        app:fontType="Pingfang_bold" />
+        android:textStyle="bold"/>
 
 
     <RelativeLayout
@@ -148,7 +148,7 @@
                 android:id="@+id/iv_picA"
                 android:layout_width="106dp"
                 android:layout_height="106dp"
-                android:src="@drawable/demoa" />
+            />
 
             <CheckBox
                 android:id="@+id/sellectA"
@@ -174,7 +174,7 @@
                 android:layout_width="106dp"
                 android:layout_height="106dp"
                 android:scaleType="center"
-                android:src="@drawable/demob" />
+          />
 
             <CheckBox
                 android:id="@+id/sellectB"

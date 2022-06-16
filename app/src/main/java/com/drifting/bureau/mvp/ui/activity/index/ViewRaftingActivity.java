@@ -32,6 +32,7 @@ import com.drifting.bureau.mvp.ui.activity.pay.PaymentInfoActivity;
 import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
 import com.drifting.bureau.mvp.ui.dialog.PublicDialog;
 import com.drifting.bureau.mvp.ui.dialog.RaftingOrderDialog;
+import com.drifting.bureau.mvp.ui.dialog.ReportDialog;
 import com.drifting.bureau.mvp.ui.fragment.PostDriftingFragment;
 import com.drifting.bureau.util.BitmapUtil;
 import com.drifting.bureau.util.ClickUtil;
@@ -106,8 +107,11 @@ public class ViewRaftingActivity extends BaseActivity<ViewRaftingPresenter> impl
     TextView mTvNum;
     @BindView(R.id.tv_by_time)
     TextView mTvByTime;
+    @BindView(R.id.iv_right)
+    ImageView mIvRight;
     private RaftingOrderDialog raftingOrderDialog;
     private PublicDialog publicDialog;
+    private ReportDialog reportDialog;
     private int type, id, user_id, explore_id, totaltime, second;
 
     private static String EXTRA_USER_ID = "extra_user_id";
@@ -147,6 +151,8 @@ public class ViewRaftingActivity extends BaseActivity<ViewRaftingPresenter> impl
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
+        mIvRight.setVisibility(View.VISIBLE);
+        mIvRight.setImageResource(R.drawable.report);
         mToobarTitle.setText("查看漂流");
         if (getIntent() != null) {
             user_id = getIntent().getIntExtra(EXTRA_USER_ID, 0);
@@ -182,10 +188,14 @@ public class ViewRaftingActivity extends BaseActivity<ViewRaftingPresenter> impl
         return this;
     }
 
-    @OnClick({R.id.toolbar_back, R.id.iv_play, R.id.rl_video_play, R.id.ll_join, R.id.ll_imprint, R.id.rl_explore, R.id.tv_into_space, R.id.rl_add_friends})
+    @OnClick({R.id.iv_right,R.id.toolbar_back, R.id.iv_play, R.id.rl_video_play, R.id.ll_join, R.id.ll_imprint, R.id.rl_explore, R.id.tv_into_space, R.id.rl_add_friends})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
+                case R.id.iv_right:   //举报
+                    reportDialog=new ReportDialog(this,id);
+                    reportDialog.show();
+                    break;
                 case R.id.toolbar_back:
                     finish();
                     break;

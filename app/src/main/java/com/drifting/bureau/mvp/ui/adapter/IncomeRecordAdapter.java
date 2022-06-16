@@ -16,7 +16,6 @@ public class IncomeRecordAdapter extends BaseRecyclerAdapter<IncomeRecordEntity.
         super(infos);
     }
 
-
     @Override
     public void getHolder(BaseRecyclerHolder holder, int position) {
         IncomeRecordHolder incomeRecordHolder=(IncomeRecordHolder) holder;

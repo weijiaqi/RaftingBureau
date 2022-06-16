@@ -149,4 +149,10 @@
     </declare-styleable>
 
 
+    <style name="cb_status">
+        <!--波纹的颜色-->
+        <item name="android:colorControlHighlight">@color/transparent</item>
+
+    </style>
+
 </resources>

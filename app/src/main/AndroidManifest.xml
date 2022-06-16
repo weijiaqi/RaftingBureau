@@ -1,152 +1,107 @@
-<?xml version="1.0" encoding="utf-8"?><manifest xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-package="com.drifting.bureau">
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.drifting.bureau">
 
-<uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-<uses-permission android:name="android.permission.READ_PHONE_STATE" />
-<uses-permission android:name="android.permission.RECORD_AUDIO" />
-<uses-permission android:name="android.permission.CAMERA" />
-<uses-permission android:name="android.permission.CALL_PHONE" />
-<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-<uses-permission
-    android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
-    tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission
+        android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+        tools:ignore="ProtectedPermissions" />
 
-<queries>
-    <package android:name="com.autonavi.minimap" />
-    <package android:name="com.baidu.BaiduMap" />
-    <package android:name="com.tencent.map" />
-</queries>
-<application
-    android:name=".app.application.RBureauApplication"
-    android:allowBackup="true"
-    android:icon="@mipmap/ic_launcher"
-    android:label="@string/app_name"
-    android:largeHeap="true"
-    android:networkSecurityConfig="@xml/network_security_config"
-    android:requestLegacyExternalStorage="true"
-    android:supportsRtl="true"
-    android:theme="@style/AppTheme"
-    android:usesCleartextTraffic="true">
-    <activity
-        android:name=".mvp.ui.activity.SplashActivity"
-        android:exported="true"
-        android:theme="@style/AppSplash"
-        tools:ignore="Instantiatable">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
+    <queries>
+        <package android:name="com.autonavi.minimap" />
+        <package android:name="com.baidu.BaiduMap" />
+        <package android:name="com.tencent.map" />
+    </queries>
+    <application
+        android:name=".app.application.RBureauApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:requestLegacyExternalStorage="true"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".mvp.ui.activity.SplashActivity"
+            android:exported="true"
+            android:theme="@style/AppSplash"
+            tools:ignore="Instantiatable">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
-    <!-- 只要依赖 AutoSize 就必须填写设计图尺寸, 否则报错, 不想使用 AutoSize 就不要依赖 AutoSize
-                      只要填写完设计图的尺寸, AutoSize 就会自动启动, 以下 dp 尺寸是根据公式 px / (dpi / 160) 求出, 运算时使用测试机的 dpi 即可
-                      AutoSize 的详细介绍请看这里 https://juejin.im/post/5bce688e6fb9a05cf715d1c2
-                      -->
-    <meta-data
-        android:name="design_width_in_dp"
-        android:value="360" />
-    <meta-data
-        android:name="design_height_in_dp"
-        android:value="640" />
+        <!-- 只要依赖 AutoSize 就必须填写设计图尺寸, 否则报错, 不想使用 AutoSize 就不要依赖 AutoSize
+                          只要填写完设计图的尺寸, AutoSize 就会自动启动, 以下 dp 尺寸是根据公式 px / (dpi / 160) 求出, 运算时使用测试机的 dpi 即可
+                          AutoSize 的详细介绍请看这里 https://juejin.im/post/5bce688e6fb9a05cf715d1c2
+                          -->
+        <meta-data
+            android:name="design_width_in_dp"
+            android:value="360" />
+        <meta-data
+            android:name="design_height_in_dp"
+            android:value="640" />
 
-    <!-- Arms 配置 -->
-    <meta-data
-        android:name="com.drifting.bureau.app.GlobalConfiguration"
-        android:value="ConfigModule" />
+        <!-- Arms 配置 -->
+        <meta-data
+            android:name="com.drifting.bureau.app.GlobalConfiguration"
+            android:value="ConfigModule" />
 
 
-    <activity
-        android:name=".mvp.ui.activity.home.DiscoveryTourActivity"
-        android:configChanges="orientation|keyboardHidden|screenSize"
-        android:launchMode="singleTask"
-        android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".mvp.ui.activity.home.DiscoveryTourActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize" />
 
-    <activity android:name=".mvp.ui.activity.user.BuildGuideActivity" />
-
-    <activity android:name=".mvp.ui.activity.user.SignLoginHintActivity" />
-    <activity android:name=".mvp.ui.activity.user.LoginActivity" />
-    <activity android:name=".mvp.ui.activity.user.ClaimPlanetActivity" />
-    <activity android:name=".mvp.ui.activity.user.AboutMeActivity" />
-    <activity android:name=".mvp.ui.activity.index.DriftingBottleActivity" />
-
-    <activity android:name=".mvp.ui.activity.index.VideoActivity" />
-
-    <activity android:name=".mvp.ui.activity.index.VideoRecordingActivity" />
-    <activity android:name=".mvp.ui.activity.web.ShowWebViewActivity" />
-
-    <activity android:name=".mvp.ui.activity.pay.PaymentInfoActivity" />
-
-    <activity android:name=".mvp.ui.activity.user.SetUpActivity" />
-    <activity android:name=".mvp.ui.activity.index.ViewRaftingActivity" />
-    <activity android:name=".mvp.ui.activity.index.RaftingDetailsActivity" />
-
-    <activity android:name=".mvp.ui.activity.index.DeliveryDetailsActivity" />
-
-    <activity android:name=".mvp.ui.activity.index.SpaceCapsuleActivity" />
-
-    <activity
-        android:name="com.drifting.bureau.mvp.ui.activity.index.GetSpaceStationActivity"
-        android:screenOrientation="portrait" />
-
-    <activity
-        android:name="com.drifting.bureau.mvp.ui.activity.user.MyBlindBoxActivity"
-        android:screenOrientation="portrait" />
-
-    <activity
-        android:name="com.drifting.bureau.mvp.ui.activity.user.MySpaceStationActivity"
-        android:screenOrientation="portrait" />
-    <activity
-        android:name="com.drifting.bureau.mvp.ui.activity.user.IncomeRecordActivity"
-        android:screenOrientation="portrait" />
-    <activity
-        android:name="com.drifting.bureau.mvp.ui.activity.user.MakingRecordActivity"
-        android:screenOrientation="portrait" />
-    <activity
-        android:name="com.drifting.bureau.mvp.ui.activity.user.WithdrawalActivity"
-        android:screenOrientation="portrait" />
-    <activity
-        android:name="com.drifting.bureau.mvp.ui.activity.user.AccountSettingsActivity"
-        android:screenOrientation="portrait" />
-    <activity
-        android:name="com.drifting.bureau.mvp.ui.activity.user.DriftingTrackActivity"
-        android:screenOrientation="portrait" />
-    <activity
-        android:name="com.drifting.bureau.mvp.ui.activity.user.OrderRecordActivity"
-        android:screenOrientation="portrait" />
-    <activity
-        android:name="com.drifting.bureau.mvp.ui.activity.user.SpaceMarinesActivity"
-        android:screenOrientation="portrait" />
-    <activity
-        android:name="com.drifting.bureau.mvp.ui.activity.index.TeaShopActivity"
-        android:screenOrientation="portrait" />
-    <activity
-        android:name="com.drifting.bureau.mvp.ui.activity.index.CitySelectionActivity"
-        android:screenOrientation="portrait" />
-    <activity
-        android:name="com.drifting.bureau.mvp.ui.activity.user.FeedBackActivity"
-        android:screenOrientation="portrait" />
-    <activity
-        android:name="com.drifting.bureau.mvp.ui.activity.index.PlanetarySelectActivity"
-        android:screenOrientation="portrait" />
-    <activity
-        android:name="com.drifting.bureau.mvp.ui.activity.index.PlanetaryDetailActivity"
-        android:screenOrientation="portrait" />
-
-    <activity
-        android:name="com.drifting.bureau.mvp.ui.activity.index.MoveAwayPlanetaryActivity"
-        android:screenOrientation="portrait" />
-
-    <activity
-        android:name="com.drifting.bureau.mvp.ui.activity.user.WithdrawalRecordActivity"
-        android:screenOrientation="portrait" />
-</application>
+        <activity android:name=".mvp.ui.activity.user.BuildGuideActivity" />
+        <activity android:name=".mvp.ui.activity.user.SignLoginHintActivity" />
+        <activity android:name=".mvp.ui.activity.user.LoginActivity" />
+        <activity android:name=".mvp.ui.activity.user.ClaimPlanetActivity" />
+        <activity android:name=".mvp.ui.activity.user.AboutMeActivity" />
+        <activity android:name=".mvp.ui.activity.index.DriftingBottleActivity" />
+        <activity android:name=".mvp.ui.activity.index.VideoActivity" />
+        <activity android:name=".mvp.ui.activity.index.VideoRecordingActivity" />
+        <activity android:name=".mvp.ui.activity.web.ShowWebViewActivity" />
+        <activity android:name=".mvp.ui.activity.pay.PaymentInfoActivity" />
+        <activity android:name=".mvp.ui.activity.user.SetUpActivity" />
+        <activity android:name=".mvp.ui.activity.index.ViewRaftingActivity" />
+        <activity android:name=".mvp.ui.activity.index.RaftingDetailsActivity" />
+        <activity android:name=".mvp.ui.activity.index.DeliveryDetailsActivity" />
+        <activity android:name=".mvp.ui.activity.index.SpaceCapsuleActivity" />
+        <activity android:name=".mvp.ui.activity.index.GetSpaceStationActivity" />
+        <activity android:name=".mvp.ui.activity.user.MyBlindBoxActivity" />
+        <activity android:name=".mvp.ui.activity.user.MySpaceStationActivity" />
+        <activity android:name=".mvp.ui.activity.user.IncomeRecordActivity" />
+        <activity android:name=".mvp.ui.activity.user.MakingRecordActivity" />
+        <activity android:name=".mvp.ui.activity.user.WithdrawalActivity" />
+        <activity android:name=".mvp.ui.activity.user.AccountSettingsActivity" />
+        <activity android:name=".mvp.ui.activity.user.DriftingTrackActivity" />
+        <activity android:name=".mvp.ui.activity.user.OrderRecordActivity" />
+        <activity android:name=".mvp.ui.activity.user.SpaceMarinesActivity" />
+        <activity android:name=".mvp.ui.activity.index.TeaShopActivity" />
+        <activity android:name=".mvp.ui.activity.index.CitySelectionActivity" />
+        <activity android:name=".mvp.ui.activity.user.FeedBackActivity" />
+        <activity android:name=".mvp.ui.activity.index.PlanetarySelectActivity" />
+        <activity android:name=".mvp.ui.activity.index.PlanetaryDetailActivity" />
+        <activity android:name=".mvp.ui.activity.index.MoveAwayPlanetaryActivity" />
+        <activity android:name=".mvp.ui.activity.user.WithdrawalRecordActivity" />
+    </application>
 </manifest>
 
 

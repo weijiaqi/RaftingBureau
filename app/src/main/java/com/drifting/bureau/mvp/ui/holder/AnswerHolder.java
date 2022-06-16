@@ -15,6 +15,7 @@ import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.AnswerEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionEntity;
 import com.drifting.bureau.mvp.ui.adapter.AnswerAdapter;
+import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.TextUtil;
 import com.hjq.shape.layout.ShapeRelativeLayout;
 import com.jess.arms.base.BaseRecyclerHolder;
@@ -50,7 +51,10 @@ public class AnswerHolder extends BaseRecyclerHolder {
     RelativeLayout mRlOne;
     @BindView(R.id.ll_two)
     LinearLayout mLlTwo;
-
+    @BindView(R.id.iv_picA)
+    ImageView mIvpicA;
+    @BindView(R.id.iv_picB)
+    ImageView mIvpicB;
     private Context context;
     private AnswerAdapter answerAdapter;
 
@@ -62,10 +66,17 @@ public class AnswerHolder extends BaseRecyclerHolder {
 
     public void setData(@NonNull List<QuestionEntity> data, int position) {
         initial(data.get(position).getQ_type());
+        if (data.get(position).getQ_type()==0){
+            TextUtil.setText(mTvAnswerA, "A." + data.get(position).getA());
+            TextUtil.setText(mTvAnswerB, "B." + data.get(position).getB());
+        }else {
+            GlideUtil.create().loadLongImage(context,data.get(position).getA(),mIvpicA);
+            GlideUtil.create().loadLongImage(context,data.get(position).getB(),mIvpicB);
+        }
+
         TextUtil.setText(mTvTitle, data.get(position).getQuestion());
         TextUtil.setText(mTvnum, data.get(position).getPostion() + "");
-        TextUtil.setText(mTvAnswerA, "A." + data.get(position).getA());
-        TextUtil.setText(mTvAnswerB, "B." + data.get(position).getB());
+
 
         mRla.setOnClickListener(v -> {
             setRlStatus(true);

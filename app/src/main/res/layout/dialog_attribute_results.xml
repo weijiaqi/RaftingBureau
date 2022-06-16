@@ -1,70 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="307dp"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:background="@drawable/attribute_results"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_user_name"
-        android:layout_width="wrap_content"
+
+    <FrameLayout
+        android:layout_width="307dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginTop="105dp"
-        android:layout_marginEnd="38dp"
-        android:text=""
-        android:textColor="@color/color_00"
-        android:textSize="12sp" />
+        android:background="@drawable/attribute_results">
 
-    <com.hjq.shape.view.ShapeTextView
-        android:id="@+id/tv_planet_name"
-        android:layout_width="239dp"
-        android:layout_height="37dp"
-        android:layout_gravity="end"
-        android:layout_marginTop="125dp"
-        android:layout_marginEnd="30dp"
-        android:gravity="center"
-        android:text=""
-        android:textSize="11sp"
-        android:textColor="@color/white"
-        app:shape_endColor="@color/color_70"
-        app:shape_radius="5dp"
-        app:shape_startColor="@color/color_d6" />
 
-    <com.drifting.bureau.view.radar.RadarView
-        android:id="@+id/radarview"
-        android:layout_width="wrap_content"
-        android:layout_height="245dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="180dp"
-        app:bgColor="@color/transparent"
-        app:dotColor="@color/color_c74"
-        app:labelColor="@color/color_00"
-        app:labelMargin="9dp"
-        app:labelSize="12sp"
-        app:netLineColor="@color/color_cc"
-        app:netLineNum="3"
-        app:netLineWidth="0.4dp"
-        app:radiantLineColor="@color/color_cc"
-        app:radiantLineWidth="0.4dp"
-        app:solidColor="@color/color_7f_c74"
-        app:strokeColor="@color/color_c74"
-        app:strokeWidth="1dp" />
+        <TextView
+            android:id="@+id/tv_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="105dp"
+            android:layout_marginEnd="38dp"
+            android:text=""
+            android:textColor="@color/color_00"
+            android:textSize="12sp" />
 
-    <com.hjq.shape.view.ShapeTextView
-        android:id="@+id/tv_desc"
-        android:layout_width="263dp"
-        android:layout_height="29dp"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="23dp"
-        android:gravity="center"
-        android:text=""
-        android:textColor="@color/white"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        app:shape_radius="100dp"
-        app:shape_solidColor="@color/color_7c4" />
+        <com.hjq.shape.view.ShapeTextView
+            android:id="@+id/tv_planet_name"
+            android:layout_width="239dp"
+            android:layout_height="37dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="125dp"
+            android:layout_marginEnd="30dp"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            app:shape_endColor="@color/color_70"
+            app:shape_radius="5dp"
+            app:shape_startColor="@color/color_d6" />
 
-</FrameLayout>
+        <com.drifting.bureau.view.radar.RadarView
+            android:id="@+id/radarview"
+            android:layout_width="wrap_content"
+            android:layout_height="245dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="180dp"
+            app:bgColor="@color/transparent"
+            app:dotColor="@color/color_c74"
+            app:labelColor="@color/color_00"
+            app:labelMargin="9dp"
+            app:labelSize="12sp"
+            app:netLineColor="@color/color_cc"
+            app:netLineNum="3"
+            app:netLineWidth="0.4dp"
+            app:radiantLineColor="@color/color_cc"
+            app:radiantLineWidth="0.4dp"
+            app:solidColor="@color/color_7f_c74"
+            app:strokeColor="@color/color_c74"
+            app:strokeWidth="1dp" />
+
+        <com.hjq.shape.view.ShapeTextView
+            android:id="@+id/tv_desc"
+            android:layout_width="263dp"
+            android:layout_height="29dp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="23dp"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:shape_radius="100dp"
+            app:shape_solidColor="@color/color_7c4" />
+    </FrameLayout>
+
+<ImageView
+    android:id="@+id/iv_close"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/error"
+    android:layout_marginTop="29dp"
+    android:layout_gravity="center_horizontal" />
+</LinearLayout>

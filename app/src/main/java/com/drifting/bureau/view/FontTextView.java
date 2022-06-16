@@ -15,12 +15,7 @@ public class FontTextView extends AppCompatTextView {
 
     private final int PangMen = 1;
 
-    private final int Noto_bold = 2;
 
-    private final int Noto_light = 3;
-
-
-    private final int Pingfang_bold = 4;
 
     public FontTextView(Context context) {
         super(context);
@@ -43,15 +38,6 @@ public class FontTextView extends AppCompatTextView {
         switch (fontType) {
             case PangMen:
                 fontPath = "fonts/PangMenZhengDao.ttf";
-                break;
-            case Noto_bold:
-                fontPath = "fonts/NotoSansHans-Bold.otf";
-                break;
-            case Noto_light:
-                fontPath = "fonts/NotoSansHans-Light.otf";
-                break;
-            case Pingfang_bold:
-                fontPath = "fonts/PingFang Bold.ttf";
                 break;
             default:
         }

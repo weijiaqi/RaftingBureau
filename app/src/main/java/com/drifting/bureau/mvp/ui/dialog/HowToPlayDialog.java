@@ -3,9 +3,16 @@ package com.drifting.bureau.mvp.ui.dialog;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.drifting.bureau.R;
+import com.drifting.bureau.mvp.model.entity.SpaceAboutEntity;
+import com.drifting.bureau.mvp.ui.adapter.HowToPlayAdapter;
 import com.jess.arms.base.BaseDialog;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author 卫佳琪1
@@ -15,8 +22,30 @@ import com.jess.arms.base.BaseDialog;
 
 public class HowToPlayDialog extends BaseDialog {
 
-    public HowToPlayDialog(@NonNull Context context) {
+    RecyclerView mRcyList;
+    private Context context;
+    private HowToPlayAdapter howToPlayAdapter;
+    private List<SpaceAboutEntity> list;
+
+    public HowToPlayDialog(@NonNull Context context, List<SpaceAboutEntity> list) {
         super(context);
+        this.context = context;
+        this.list = list;
+    }
+
+    @Override
+    protected void initDatas() {
+        super.initDatas();
+        mRcyList = findViewById(R.id.rcy_list);
+    }
+
+    @Override
+    protected void initEvents() {
+        super.initEvents();
+        mRcyList.setLayoutManager(new LinearLayoutManager(context));
+        howToPlayAdapter = new HowToPlayAdapter(new ArrayList<>());
+        mRcyList.setAdapter(howToPlayAdapter);
+        howToPlayAdapter.setData(list);
     }
 
     @Override
@@ -26,6 +55,6 @@ public class HowToPlayDialog extends BaseDialog {
 
     @Override
     protected float getDialogWith() {
-        return 0.8f;
+        return 1f;
     }
 }

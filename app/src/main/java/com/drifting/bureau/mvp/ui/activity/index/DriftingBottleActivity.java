@@ -85,8 +85,7 @@ public class DriftingBottleActivity extends BaseActivity<DriftingBottlePresenter
             mPresenter.exploreTimes(explore_id);
         }
 
-
-        Fragment fragment = PostDriftingFragment.newInstance(1, 0, 0);
+        Fragment fragment = PostDriftingFragment.newInstance(1, explore_id, 0);
         getSupportFragmentManager().beginTransaction().replace(R.id.main_fame, fragment).commitAllowingStateLoss();
     }
 

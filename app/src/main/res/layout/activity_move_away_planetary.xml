@@ -23,7 +23,7 @@
             android:layout_marginTop="8dp"
             android:src="@drawable/move_away_stars_01" />
 
-        <com.drifting.bureau.view.FontTextView
+        <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
             android:text="鉴定你的元宇宙属性"
             android:textColor="@color/white"
             android:textSize="28sp"
-            app:fontType="Pingfang_bold" />
+            android:textStyle="bold"/>
 
         <ImageView
             android:layout_width="wrap_content"

@@ -1,10 +1,12 @@
 package com.drifting.bureau.mvp.presenter;
+
 import android.app.Application;
 import android.text.TextUtils;
 
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
 import com.drifting.bureau.mvp.model.entity.MysteryboxEntity;
 import com.drifting.bureau.mvp.model.entity.PrizeEntity;
+import com.drifting.bureau.mvp.model.entity.SpaceAboutEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceCheckEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceStationEntity;
 import com.drifting.bureau.util.ToastUtil;
@@ -20,6 +22,7 @@ import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 
 import javax.inject.Inject;
+
 import com.drifting.bureau.mvp.contract.GetSpaceStationContract;
 import com.jess.arms.utils.RxLifecycleUtils;
 
@@ -38,7 +41,7 @@ import java.util.List;
  * ================================================
  */
 @ActivityScope
-public class GetSpaceStationPresenter extends BasePresenter<GetSpaceStationContract.Model, GetSpaceStationContract.View>{
+public class GetSpaceStationPresenter extends BasePresenter<GetSpaceStationContract.Model, GetSpaceStationContract.View> {
     @Inject
     RxErrorHandler mErrorHandler;
     @Inject
@@ -49,7 +52,7 @@ public class GetSpaceStationPresenter extends BasePresenter<GetSpaceStationContr
     AppManager mAppManager;
 
     @Inject
-    public GetSpaceStationPresenter (GetSpaceStationContract.Model model, GetSpaceStationContract.View rootView) {
+    public GetSpaceStationPresenter(GetSpaceStationContract.Model model, GetSpaceStationContract.View rootView) {
         super(model, rootView);
     }
 
@@ -82,8 +85,6 @@ public class GetSpaceStationPresenter extends BasePresenter<GetSpaceStationContr
     }
 
 
-
-
     /**
      * 弹幕日志（获取空间站）
      */
@@ -111,7 +112,6 @@ public class GetSpaceStationPresenter extends BasePresenter<GetSpaceStationContr
                 });
 
     }
-
 
 
     /**
@@ -146,7 +146,7 @@ public class GetSpaceStationPresenter extends BasePresenter<GetSpaceStationContr
      * 创建订单（空间站）
      */
     public void createOrderSpace(String sku_code, String sku_num) {
-        mModel.createOrderSpace(sku_code,sku_num).subscribeOn(Schedulers.io())
+        mModel.createOrderSpace(sku_code, sku_num).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
                 .subscribe(new ErrorHandleSubscriber<BaseEntity<CreateOrderEntity>>(mErrorHandler) {
@@ -173,7 +173,6 @@ public class GetSpaceStationPresenter extends BasePresenter<GetSpaceStationContr
     }
 
 
-
     /**
      * 检查是否有空间站
      */
@@ -192,6 +191,33 @@ public class GetSpaceStationPresenter extends BasePresenter<GetSpaceStationContr
                                 if (!TextUtils.isEmpty(baseEntity.getMsg())) {
                                     mRootView.showMessage((baseEntity.getMsg()));
                                 }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        if (mRootView != null) {
+                            mRootView.onNetError();
+                        }
+                    }
+                });
+    }
+
+
+    /**
+     * 空间站玩法
+     */
+    public void spaceabout() {
+        mModel.spaceabout().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseEntity<List<SpaceAboutEntity>>>(mErrorHandler) {
+                    @Override
+                    public void onNext(BaseEntity<List<SpaceAboutEntity>> baseEntity) {
+                        if (mRootView != null) {
+                            if (baseEntity.getCode() == 200) {
+                                mRootView.onSpaceAbout(baseEntity.getData());
                             }
                         }
                     }

@@ -5,6 +5,7 @@ import com.drifting.bureau.app.api.ApiService;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
 import com.drifting.bureau.mvp.model.entity.MysteryboxEntity;
 import com.drifting.bureau.mvp.model.entity.PrizeEntity;
+import com.drifting.bureau.mvp.model.entity.SpaceAboutEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceCheckEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceStationEntity;
 import com.google.gson.Gson;
@@ -74,5 +75,10 @@ public class GetSpaceStationModel extends BaseModel implements GetSpaceStationCo
     @Override
     public Observable<BaseEntity<MysteryboxEntity>> mysterybox(int limit) {
         return mRepositoryManager.obtainRetrofitService(ApiService.class).mysterybox(limit);
+    }
+
+    @Override
+    public Observable<BaseEntity<List<SpaceAboutEntity>>> spaceabout() {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).spaceabout();
     }
 }

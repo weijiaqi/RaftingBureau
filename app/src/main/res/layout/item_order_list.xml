@@ -29,10 +29,7 @@
             android:id="@+id/iv_pic"
             android:layout_width="51dp"
             android:layout_height="51dp"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/aa"
-
-            />
+            android:layout_alignParentEnd="true"/>
 
 
 

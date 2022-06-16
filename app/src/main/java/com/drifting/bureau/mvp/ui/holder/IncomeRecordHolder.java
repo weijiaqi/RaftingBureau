@@ -35,12 +35,14 @@ public class IncomeRecordHolder extends BaseRecyclerHolder {
     }
 
     public void setData(@NonNull List<IncomeRecordEntity.ListBean> listBeanList, int position) {
-        TextUtil.setText(mTvMoney, "+" + listBeanList.get(position).getMoney());
+
         TextUtil.setText(mTvTime, "创建时间：" + StringUtil.stampToDate(listBeanList.get(position).getCreated_at_int()));
         if (listBeanList.get(position).getB_type() == 0) {
             mTvIncomeStatus.setText("订单收入");
+            TextUtil.setText(mTvMoney, "+" + listBeanList.get(position).getMoney());
         } else {
             mTvIncomeStatus.setText("申请提现");
+            TextUtil.setText(mTvMoney, listBeanList.get(position).getMoney());
         }
         if (listBeanList.get(position).getStatus() == 1) {
             mTvStatus.setText("已完成");

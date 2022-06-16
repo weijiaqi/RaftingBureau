@@ -39,6 +39,7 @@ import com.drifting.bureau.mvp.model.entity.BarrageEntity;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
 import com.drifting.bureau.mvp.model.entity.MysteryboxEntity;
 import com.drifting.bureau.mvp.model.entity.PrizeEntity;
+import com.drifting.bureau.mvp.model.entity.SpaceAboutEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceCheckEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceStationEntity;
 import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
@@ -97,7 +98,6 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
     @BindView(R.id.frame)
     FrameLayout frame;
     private SpaceBarrageAdapter spaceBarrageAdapter;
-
     private List<ImageView> imageViewList;
     private List<SpaceStationEntity> list;
     private ImageView iv;
@@ -349,6 +349,11 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
             prizepreviewDialog = new PrizepreviewDialog(this, list);
             prizepreviewDialog.show();
         }
+
+    }
+
+    @Override
+    public void onSpaceAbout(List<SpaceAboutEntity> list) {
 
     }
 
