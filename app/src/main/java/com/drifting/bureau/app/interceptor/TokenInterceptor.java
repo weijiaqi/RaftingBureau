@@ -29,7 +29,7 @@ public class TokenInterceptor implements Interceptor {
         } catch (JsonSyntaxException e) {
         }
         if (baseEntity != null && baseEntity.getCode() == 1000) {
-            Preferences.clearUserLoginData();
+          //  Preferences.clearUserLoginData();
 //            EventBus.getDefault().post(new UserUnavailableEvent());
         }
         return response;

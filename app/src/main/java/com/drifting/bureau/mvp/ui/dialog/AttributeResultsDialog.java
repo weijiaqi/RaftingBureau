@@ -2,6 +2,8 @@ package com.drifting.bureau.mvp.ui.dialog;
 
 import android.content.Context;
 import android.text.SpannableStringBuilder;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,13 +20,14 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-public class AttributeResultsDialog extends BaseDialog {
-
+public class AttributeResultsDialog extends BaseDialog implements View.OnClickListener {
+    public static final int SELECT_FINISH = 0x01;
     private RadarView radarView;
     private Context context;
     private List<RadarItem> radarItemList;
     private TextView username, planetname, desc;
     private QuestionAssessEntity entity;
+    private ImageView mIvClose;
 
     public AttributeResultsDialog(@NonNull Context context, QuestionAssessEntity entity) {
         super(context);
@@ -39,6 +42,7 @@ public class AttributeResultsDialog extends BaseDialog {
         username = findViewById(R.id.tv_user_name);
         planetname = findViewById(R.id.tv_planet_name);
         desc = findViewById(R.id.tv_desc);
+        mIvClose = findViewById(R.id.iv_close);
     }
 
     @Override
@@ -68,6 +72,8 @@ public class AttributeResultsDialog extends BaseDialog {
         radarItemList.add(new RadarItem("风", entity.getJ(), entity.getJ() != 0 ? (float) entity.getJ() / (float) max : 0));
         radarItemList.add(new RadarItem("温度", entity.getP(), entity.getP() != 0 ? (float) entity.getP() / (float) max : 0));
         radarView.setRadarItemList(radarItemList);
+
+        mIvClose.setOnClickListener(this);
     }
 
     @Override
@@ -78,5 +84,17 @@ public class AttributeResultsDialog extends BaseDialog {
     @Override
     protected float getDialogWith() {
         return 1f;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.iv_close:
+                dismiss();
+                if (onClickCallback != null) {
+                    onClickCallback.onClickType(SELECT_FINISH);
+                }
+                break;
+        }
     }
 }

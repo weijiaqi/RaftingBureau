@@ -18,6 +18,7 @@ import com.drifting.bureau.di.component.DaggerMoveAwayPlanetaryComponent;
 import com.drifting.bureau.mvp.model.entity.AnswerEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionAssessEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionEntity;
+import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
 import com.drifting.bureau.mvp.ui.adapter.AnswerAdapter;
 import com.drifting.bureau.mvp.ui.adapter.manager.CardSwipeLayoutManager;
 import com.drifting.bureau.mvp.ui.dialog.AttributeResultsDialog;
@@ -25,6 +26,7 @@ import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.animator.SwipeItemAnimator;
 import com.jess.arms.base.BaseActivity;
+import com.jess.arms.base.BaseDialog;
 import com.jess.arms.di.component.AppComponent;
 import com.drifting.bureau.mvp.contract.MoveAwayPlanetaryContract;
 import com.drifting.bureau.mvp.presenter.MoveAwayPlanetaryPresenter;
@@ -51,11 +53,12 @@ public class MoveAwayPlanetaryActivity extends BaseActivity<MoveAwayPlanetaryPre
     private AttributeResultsDialog attributeResultsDialog;
     private StringBuilder builder1, builder2;
     private List<AnswerEntity> infos;
-    private static String EXTRA_TYPE="extra_type";
+    private static String EXTRA_TYPE = "extra_type";
     private int type;
-    public static void start(Context context,int type, boolean closePage) {
+
+    public static void start(Context context, int type, boolean closePage) {
         Intent intent = new Intent(context, MoveAwayPlanetaryActivity.class);
-        intent.putExtra(EXTRA_TYPE,type);
+        intent.putExtra(EXTRA_TYPE, type);
         context.startActivity(intent);
         if (closePage) ((Activity) context).finish();
     }
@@ -78,10 +81,10 @@ public class MoveAwayPlanetaryActivity extends BaseActivity<MoveAwayPlanetaryPre
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
-        if (getIntent()!=null){
-            type=getIntent().getIntExtra(EXTRA_TYPE,0);
+        if (getIntent() != null) {
+            type = getIntent().getIntExtra(EXTRA_TYPE, 0);
         }
-        mToolbarTitle.setText( type==1?"搬离星球":"完善星球属性");
+        mToolbarTitle.setText(type == 1 ? "搬离星球" : "完善星球属性");
         initListener();
     }
 
@@ -121,10 +124,19 @@ public class MoveAwayPlanetaryActivity extends BaseActivity<MoveAwayPlanetaryPre
 
     @Override
     public void onQuestionAssessSuccess(QuestionAssessEntity entity) {
-           if (entity!=null){
-               attributeResultsDialog = new AttributeResultsDialog(this,entity);
-               attributeResultsDialog.show();
-           }
+        if (entity != null) {
+            attributeResultsDialog = new AttributeResultsDialog(this, entity);
+            attributeResultsDialog.show();
+            attributeResultsDialog.setOnClickCallback(status -> {
+                if (status == AttributeResultsDialog.SELECT_FINISH) {
+                    if (type == 1) {
+                        finish();
+                    } else {
+                        DiscoveryTourActivity.start(this, true);
+                    }
+                }
+            });
+        }
     }
 
     @Override
@@ -157,7 +169,7 @@ public class MoveAwayPlanetaryActivity extends BaseActivity<MoveAwayPlanetaryPre
                         } else {
                             if (builder1 != null && builder2 != null) {
                                 if (mPresenter != null) {
-                                    mPresenter.questionassess(builder1.toString(),builder2.toString());
+                                    mPresenter.questionassess(builder1.toString(), builder2.toString());
                                 }
                             }
                         }

@@ -5,6 +5,7 @@ import android.app.Activity;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
 import com.drifting.bureau.mvp.model.entity.MysteryboxEntity;
 import com.drifting.bureau.mvp.model.entity.PrizeEntity;
+import com.drifting.bureau.mvp.model.entity.SpaceAboutEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceCheckEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceStationEntity;
 import com.jess.arms.base.BaseEntity;
@@ -41,6 +42,8 @@ public interface GetSpaceStationContract {
 
         void onAwardPreviewSuccess(List<PrizeEntity> list);
 
+        void onSpaceAbout(List<SpaceAboutEntity> list);
+
         void onNetError();
 
         Activity getActivity();
@@ -57,5 +60,7 @@ public interface GetSpaceStationContract {
         Observable<BaseEntity<List<PrizeEntity>>> awardpreview();
 
         Observable<BaseEntity<MysteryboxEntity>> mysterybox(int limit);
+
+        Observable<BaseEntity<List<SpaceAboutEntity>>> spaceabout();
     }
 }

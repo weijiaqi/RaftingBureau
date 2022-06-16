@@ -18,6 +18,7 @@ import com.drifting.bureau.mvp.contract.MySpaceStationContract;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
 import com.drifting.bureau.mvp.model.entity.MysteryboxEntity;
 import com.drifting.bureau.mvp.model.entity.PrizeEntity;
+import com.drifting.bureau.mvp.model.entity.SpaceAboutEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceCheckEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceStationEntity;
 import com.drifting.bureau.mvp.presenter.GetSpaceStationPresenter;
@@ -39,7 +40,7 @@ import butterknife.OnClick;
  * @Author : WeiJiaQI
  * @Time : 2022/5/24 9:39
  */
-public class SpaceCapsuleActivity  extends BaseActivity<GetSpaceStationPresenter> implements GetSpaceStationContract.View {
+public class SpaceCapsuleActivity extends BaseActivity<GetSpaceStationPresenter> implements GetSpaceStationContract.View {
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
 
@@ -74,7 +75,7 @@ public class SpaceCapsuleActivity  extends BaseActivity<GetSpaceStationPresenter
     }
 
 
-    @OnClick({R.id.toolbar_back, R.id.tv_how_to_play,R.id.tv_space_obtain,R.id.tv_space_enter})
+    @OnClick({R.id.toolbar_back, R.id.tv_how_to_play, R.id.tv_space_obtain, R.id.tv_space_enter})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
@@ -82,16 +83,17 @@ public class SpaceCapsuleActivity  extends BaseActivity<GetSpaceStationPresenter
                     finish();
                     break;
                 case R.id.tv_how_to_play:   //玩法说明
-                    howToPlayDialog = new HowToPlayDialog(this);
-                    howToPlayDialog.show();
+                    if (mPresenter != null) {
+                        mPresenter.spaceabout();
+                    }
                     break;
                 case R.id.tv_space_obtain:  //获取空间站
-                    GetSpaceStationActivity.start(this,false);
+                    GetSpaceStationActivity.start(this, false);
                     break;
                 case R.id.tv_space_enter:  //进入空间站
-                     if (mPresenter!=null){
-                         mPresenter.spacecheck();
-                     }
+                    if (mPresenter != null) {
+                        mPresenter.spacecheck();
+                    }
                     break;
             }
         }
@@ -114,18 +116,26 @@ public class SpaceCapsuleActivity  extends BaseActivity<GetSpaceStationPresenter
 
     @Override
     public void onSpaceCheck(SpaceCheckEntity entity) {
-          if (entity!=null){
-              if (entity.getStatus()==0){
-                  showMessage("检测到您还没拥有空间站,请去获取!");
-              }else {
-                  MySpaceStationActivity.start(this,entity.getSpace_id(),false);
-              }
-          }
+        if (entity != null) {
+            if (entity.getStatus() == 0) {
+                showMessage("检测到您还没拥有空间站,请去获取!");
+            } else {
+                MySpaceStationActivity.start(this, entity.getSpace_id(), false);
+            }
+        }
     }
 
     @Override
     public void onAwardPreviewSuccess(List<PrizeEntity> list) {
 
+    }
+
+    @Override
+    public void onSpaceAbout(List<SpaceAboutEntity> list) {
+        if (list != null && list.size() > 0) {
+            howToPlayDialog = new HowToPlayDialog(this,list);
+            howToPlayDialog.show();
+        }
     }
 
     @Override

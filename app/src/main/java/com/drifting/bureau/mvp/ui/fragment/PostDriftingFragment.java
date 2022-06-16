@@ -26,6 +26,7 @@ import com.drifting.bureau.data.event.PaymentEvent;
 import com.drifting.bureau.data.event.VideoEvent;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
 import com.drifting.bureau.mvp.model.entity.CreatewithfileEntity;
+import com.drifting.bureau.mvp.model.entity.PlatformTimesEntity;
 import com.drifting.bureau.mvp.model.entity.SkuListEntity;
 import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
 import com.drifting.bureau.mvp.ui.activity.pay.PaymentInfoActivity;
@@ -39,9 +40,11 @@ import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.VideoUtil;
 import com.drifting.bureau.util.ViewGroupUtil;
+import com.drifting.bureau.util.callback.BaseDataCallBack;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.drifting.bureau.view.VoiceWave;
 import com.jess.arms.base.BaseDialog;
+import com.jess.arms.base.BaseEntity;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.drifting.bureau.di.component.DaggerPostDriftingComponent;
@@ -108,6 +111,8 @@ public class PostDriftingFragment extends BaseFragment<PostDriftingPresenter> im
     TextView mTvName;
     @BindView(R.id.tv_identity)
     TextView mTvIdentity;
+    @BindView(R.id.tv_num)
+    TextView mTvNum;
     private RecordingDialog recordingDialog;
     private List<Object> objectList;
     private String path;
@@ -185,16 +190,20 @@ public class PostDriftingFragment extends BaseFragment<PostDriftingPresenter> im
         getUserInfo();
     }
 
-    public void getUserInfo(){
+    public void getUserInfo() {
         RequestUtil.create().userplayer(Preferences.getUserId(), entity -> {
             if (entity != null && entity.getCode() == 200) {
                 mTvName.setText(entity.getData().getUser().getName());
-                mTvIdentity.setText("("+entity.getData().getUser().getLevel_name()+")");
+                mTvIdentity.setText("(" + entity.getData().getUser().getLevel_name() + ")");
             }
         });
-
+        RequestUtil.create().platformtimes(explore_id, entity -> {
+            if (entity != null && entity.getCode() == 200) {
+                int total = entity.getData().getCreate_times() + entity.getData().getCommon_times();
+                mTvNum.setText(getString(R.string.free_times, total + ""));
+            }
+        });
     }
-
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -308,9 +317,13 @@ public class PostDriftingFragment extends BaseFragment<PostDriftingPresenter> im
     public void onCreatewithwordSuccess(CreatewithfileEntity entity) {
         if (entity != null) {
             if (type == 1) {
-                createwithfileEntity = entity;
-                if (mPresenter != null) {
-                    mPresenter.skulist(selectPostion, 1, 0);
+                if (entity.getNeed_pay() == 1) {
+                    createwithfileEntity = entity;
+                    if (mPresenter != null) {
+                        mPresenter.skulist(selectPostion, 1, 0);
+                    }
+                } else {
+                    sendSuccess();
                 }
             } else {
                 sendSuccess();

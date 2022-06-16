@@ -178,10 +178,4 @@ public class WithdrawalRecordActivity extends BaseActivity<WithdrawalRecordPrese
         ToastUtil.showToast(message);
     }
 
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        ViewUtil.create().setView(mFlState);
-    }
 }

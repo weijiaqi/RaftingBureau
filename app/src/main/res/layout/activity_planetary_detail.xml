@@ -71,7 +71,7 @@
         app:shape_radius="10dp"
         app:shape_solidColor="@color/white">
 
-        <com.drifting.bureau.view.FontTextView
+        <TextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
             android:text=""
             android:textColor="@color/color_00"
             android:textSize="14sp"
-            app:fontType="Pingfang_bold" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_desc"

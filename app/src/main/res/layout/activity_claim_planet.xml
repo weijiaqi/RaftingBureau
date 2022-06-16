@@ -180,7 +180,7 @@
             </RelativeLayout>
 
 
-            <com.drifting.bureau.view.FontTextView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -188,7 +188,7 @@
                 android:text="恭喜你获得元宇宙星球居住证!"
                 android:textColor="@color/color_6ce"
                 android:textSize="14sp"
-                app:fontType="Pingfang_bold" />
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"

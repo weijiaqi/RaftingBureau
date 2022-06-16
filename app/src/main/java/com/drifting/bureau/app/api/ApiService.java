@@ -28,10 +28,12 @@ import com.drifting.bureau.mvp.model.entity.PayOrderEntity;
 import com.drifting.bureau.mvp.model.entity.PlanetEntity;
 import com.drifting.bureau.mvp.model.entity.PlanetLocationEntity;
 import com.drifting.bureau.mvp.model.entity.PlanetaryDetailEntity;
+import com.drifting.bureau.mvp.model.entity.PlatformTimesEntity;
 import com.drifting.bureau.mvp.model.entity.PrizeEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionAssessEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionEntity;
 import com.drifting.bureau.mvp.model.entity.SkuListEntity;
+import com.drifting.bureau.mvp.model.entity.SpaceAboutEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceCheckEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceInfoEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceStationEntity;
@@ -198,6 +200,15 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("v/mysterybox/logs")
     Observable<BaseEntity<MysteryboxEntity>> mysterybox( @Field("limit") int limit);
+
+
+    /**
+     * 空间站玩法
+     *
+     * @return
+     */
+    @GET("v/space/about")
+    Observable<BaseEntity<List<SpaceAboutEntity>>> spaceabout();
 
 
     /**
@@ -540,5 +551,24 @@ public interface ApiService {
     Observable<BaseEntity<ExploreTimesEntity>>exploreTimes(@Field("explore_id") int explore_id);
 
 
+
+    /**
+     *举报
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/report/commit")
+    Observable<BaseEntity>reportcommit(@Field("message_id") int message_id,@Field("report_type") int report_type,@Field("reason") String reason);
+
+
+    /**
+     *星际团队信息
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/platform/times")
+    Observable<BaseEntity<PlatformTimesEntity>>platformtimes(@Field("explore_id") int explore_id);
 
 }

@@ -21,6 +21,7 @@
             android:layout_marginTop="62dp"
             android:text="荒芜星球居住证"
             android:textColor="@color/color_00"
+            app:fontType="PangMen"
             android:textSize="29sp" />
 
         <LinearLayout
@@ -184,22 +185,22 @@
                 android:gravity="center_vertical"
                 android:orientation="vertical">
 
-                <com.drifting.bureau.view.FontTextView
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="识别二维码"
                     android:textColor="@color/color_00"
                     android:textSize="12sp"
-                    app:fontType="Pingfang_bold" />
+                    android:textStyle="bold" />
 
-                <com.drifting.bureau.view.FontTextView
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="一起进入元宇宙世界吧！"
                     android:textColor="@color/color_00"
                     android:textSize="12sp"
-                    app:fontType="Pingfang_bold" />
+                    android:textStyle="bold" />
 
 
             </LinearLayout>

@@ -45,15 +45,6 @@ public class DiscoveryTransformer  implements ViewPager.PageTransformer{
         }
     }
 
-    public void handleInvisiblePage(View view, float position) {
-        view.setAlpha(0.5f);
-        view.setScaleX(mMinScale);
-        view.setScaleY(mMinScale);
-
-        view.setPivotX(pageWidth * (DEFAULT_CENTER + (DEFAULT_CENTER * -position)));
-        view.setPivotY((float) (pageHeight*1.4));
-    }
-
     public void handleLeftPage(View view, float position) {
         view.setAlpha(0.5f);
         float scaleFactor = (1 + position) * (1 - mMinScale) + mMinScale;
@@ -61,8 +52,20 @@ public class DiscoveryTransformer  implements ViewPager.PageTransformer{
         view.setScaleY(scaleFactor);
 
         view.setPivotX(pageWidth * (DEFAULT_CENTER + (DEFAULT_CENTER * -position)));
-        view.setPivotY((float) (pageHeight*1.4));
+        view.setPivotY(ArmsUtils.dip2px(RBureauApplication.getContext(),600));
     }
+
+
+    public void handleInvisiblePage(View view, float position) {
+        view.setAlpha(0.5f);
+        view.setScaleX(mMinScale);
+        view.setScaleY(mMinScale);
+
+        view.setPivotX(pageWidth * (DEFAULT_CENTER + (DEFAULT_CENTER * -position)));
+        view.setPivotY(ArmsUtils.dip2px(RBureauApplication.getContext(),600));
+    }
+
+
 
     public void handleRightPage(View view, float position) {
         view.setAlpha(0.5f);

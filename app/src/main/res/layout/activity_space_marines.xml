@@ -17,15 +17,15 @@
         android:layout_marginHorizontal="14dp">
 
 
-        <com.drifting.bureau.view.FontTextView
+        <TextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginVertical="10dp"
             android:text=""
             android:textColor="@color/white"
             android:textSize="14sp"
-            app:fontType="Noto_bold" />
+            android:textStyle="bold" />
 
         <com.hjq.shape.view.ShapeTextView
             android:id="@+id/tv_share"
