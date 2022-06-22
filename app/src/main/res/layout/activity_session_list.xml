@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_01"
+    android:fitsSystemWindows="true">
+
+
+    <include layout="@layout/include_title"/>
+
+    <fragment
+        android:id="@+id/conversationlist"
+        android:layout_below="@+id/toolbar"
+        android:name="com.drifting.bureau.mvp.ui.fragment.imkit.SessionListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</RelativeLayout>

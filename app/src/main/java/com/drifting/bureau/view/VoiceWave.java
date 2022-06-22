@@ -246,15 +246,17 @@ public class VoiceWave extends View {
         visualizer.setCaptureSize(Visualizer.getCaptureSizeRange()[1]);
         visualizer.setDataCaptureListener(new Visualizer.OnDataCaptureListener() {
             @Override
-            public void onWaveFormDataCapture(Visualizer visualizer, byte[] waveform, int samplingRate) {
-                double sum = 0;
-                for (int i = 0; i < waveform.length / 2; i++) {
-                    double y = (waveform[i * 2] | waveform[i * 2 + 1] << 8) / 2;
-                    sum += y * y;
+            public void onWaveFormDataCapture(Visualizer visualizer2, byte[] waveform, int samplingRate) {
+                if (visualizer!=null){
+                    double sum = 0;
+                    for (int i = 0; i < waveform.length / 2; i++) {
+                        double y = (waveform[i * 2] | waveform[i * 2 + 1] << 8) / 2;
+                        sum += y * y;
+                    }
+                    double rms = Math.sqrt(sum / waveform.length / 2);
+                    double dbAmp = 20.0 * Math.log10(rms);
+                    setDecibel((int) dbAmp);
                 }
-                double rms = Math.sqrt(sum / waveform.length / 2);
-                double dbAmp = 20.0 * Math.log10(rms);
-                setDecibel((int) dbAmp);
             }
 
             @Override
@@ -264,21 +266,16 @@ public class VoiceWave extends View {
         }, Visualizer.getMaxCaptureRate() / 2, true, false);
 
         visualizer.setEnabled(true);
-        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                stop();
-                setDecibel(0);
-            }
-        });
     }
 
 
-    public void stop() {
+    public synchronized void stopRecord() {
         if (visualizer != null) {
             visualizer.setEnabled(false);
             visualizer.release();
-            visualizer = null;
+            visualizer=null;
         }
+        dataList.clear();
+        setDecibel(0);
     }
 }

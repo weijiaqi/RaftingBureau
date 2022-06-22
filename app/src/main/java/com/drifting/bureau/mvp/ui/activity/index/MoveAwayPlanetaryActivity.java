@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.drifting.bureau.R;
+import com.drifting.bureau.data.event.AnswerCompletedEvent;
 import com.drifting.bureau.di.component.DaggerMoveAwayPlanetaryComponent;
 import com.drifting.bureau.mvp.model.entity.AnswerEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionAssessEntity;
@@ -30,6 +31,8 @@ import com.jess.arms.base.BaseDialog;
 import com.jess.arms.di.component.AppComponent;
 import com.drifting.bureau.mvp.contract.MoveAwayPlanetaryContract;
 import com.drifting.bureau.mvp.presenter.MoveAwayPlanetaryPresenter;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -130,6 +133,9 @@ public class MoveAwayPlanetaryActivity extends BaseActivity<MoveAwayPlanetaryPre
             attributeResultsDialog.setOnClickCallback(status -> {
                 if (status == AttributeResultsDialog.SELECT_FINISH) {
                     if (type == 1) {
+                        AnswerCompletedEvent answerCompletedEvent=new AnswerCompletedEvent();
+                        answerCompletedEvent.setPl_id(entity.getPlanet().getPl_id());
+                        EventBus.getDefault().post(answerCompletedEvent);
                         finish();
                     } else {
                         DiscoveryTourActivity.start(this, true);

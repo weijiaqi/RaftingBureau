@@ -62,7 +62,7 @@ public class DriftingTrackHolder extends BaseRecyclerHolder {
             mTvTransmitState.setText("传递中");
         }
 
-        TextUtil.setText(mTvToName, listBeanList.get(position).getWho_hold() + "--");
+        TextUtil.setText(mTvToName, listBeanList.get(position).getWho_hold());
 
         TextUtil.setText(mTvTransmitNum, context.getString(R.string.transmit, listBeanList.get(position).getTotal_attend() + ""));
         mTvTransmitNum.setOnClickListener(v -> {

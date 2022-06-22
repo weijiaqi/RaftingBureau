@@ -38,7 +38,7 @@ public interface MySpaceStationContract {
 
         void onOrderDetailSuccess(OrderDetailEntity entity);
 
-        void onUserInfoSuccess(UserInfoEntity entity);
+        void onUserInfoSuccess(int type,UserInfoEntity entity);
 
 
         void onOrderMakingSuccess();

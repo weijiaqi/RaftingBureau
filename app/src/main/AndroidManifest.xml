@@ -38,6 +38,7 @@
         <activity
             android:name=".mvp.ui.activity.SplashActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/AppSplash"
             tools:ignore="Instantiatable">
             <intent-filter>
@@ -47,9 +48,9 @@
         </activity>
 
         <!-- 只要依赖 AutoSize 就必须填写设计图尺寸, 否则报错, 不想使用 AutoSize 就不要依赖 AutoSize
-                          只要填写完设计图的尺寸, AutoSize 就会自动启动, 以下 dp 尺寸是根据公式 px / (dpi / 160) 求出, 运算时使用测试机的 dpi 即可
-                          AutoSize 的详细介绍请看这里 https://juejin.im/post/5bce688e6fb9a05cf715d1c2
-                          -->
+                              只要填写完设计图的尺寸, AutoSize 就会自动启动, 以下 dp 尺寸是根据公式 px / (dpi / 160) 求出, 运算时使用测试机的 dpi 即可
+                              AutoSize 的详细介绍请看这里 https://juejin.im/post/5bce688e6fb9a05cf715d1c2
+                              -->
         <meta-data
             android:name="design_width_in_dp"
             android:value="360" />
@@ -67,41 +68,131 @@
             android:name=".mvp.ui.activity.home.DiscoveryTourActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:launchMode="singleTask"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
 
-        <activity android:name=".mvp.ui.activity.user.BuildGuideActivity" />
-        <activity android:name=".mvp.ui.activity.user.SignLoginHintActivity" />
-        <activity android:name=".mvp.ui.activity.user.LoginActivity" />
-        <activity android:name=".mvp.ui.activity.user.ClaimPlanetActivity" />
-        <activity android:name=".mvp.ui.activity.user.AboutMeActivity" />
-        <activity android:name=".mvp.ui.activity.index.DriftingBottleActivity" />
-        <activity android:name=".mvp.ui.activity.index.VideoActivity" />
-        <activity android:name=".mvp.ui.activity.index.VideoRecordingActivity" />
-        <activity android:name=".mvp.ui.activity.web.ShowWebViewActivity" />
-        <activity android:name=".mvp.ui.activity.pay.PaymentInfoActivity" />
-        <activity android:name=".mvp.ui.activity.user.SetUpActivity" />
-        <activity android:name=".mvp.ui.activity.index.ViewRaftingActivity" />
-        <activity android:name=".mvp.ui.activity.index.RaftingDetailsActivity" />
-        <activity android:name=".mvp.ui.activity.index.DeliveryDetailsActivity" />
-        <activity android:name=".mvp.ui.activity.index.SpaceCapsuleActivity" />
-        <activity android:name=".mvp.ui.activity.index.GetSpaceStationActivity" />
-        <activity android:name=".mvp.ui.activity.user.MyBlindBoxActivity" />
-        <activity android:name=".mvp.ui.activity.user.MySpaceStationActivity" />
-        <activity android:name=".mvp.ui.activity.user.IncomeRecordActivity" />
-        <activity android:name=".mvp.ui.activity.user.MakingRecordActivity" />
-        <activity android:name=".mvp.ui.activity.user.WithdrawalActivity" />
-        <activity android:name=".mvp.ui.activity.user.AccountSettingsActivity" />
-        <activity android:name=".mvp.ui.activity.user.DriftingTrackActivity" />
-        <activity android:name=".mvp.ui.activity.user.OrderRecordActivity" />
-        <activity android:name=".mvp.ui.activity.user.SpaceMarinesActivity" />
-        <activity android:name=".mvp.ui.activity.index.TeaShopActivity" />
-        <activity android:name=".mvp.ui.activity.index.CitySelectionActivity" />
-        <activity android:name=".mvp.ui.activity.user.FeedBackActivity" />
-        <activity android:name=".mvp.ui.activity.index.PlanetarySelectActivity" />
-        <activity android:name=".mvp.ui.activity.index.PlanetaryDetailActivity" />
-        <activity android:name=".mvp.ui.activity.index.MoveAwayPlanetaryActivity" />
-        <activity android:name=".mvp.ui.activity.user.WithdrawalRecordActivity" />
+        <activity
+            android:name=".mvp.ui.activity.user.BuildGuideActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activity.user.SignLoginHintActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activity.user.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activity.user.ClaimPlanetActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activity.user.AboutMeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activity.index.DriftingBottleActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activity.index.VideoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activity.index.VideoRecordingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activity.web.ShowWebViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activity.pay.PaymentInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activity.user.SetUpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activity.index.ViewRaftingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activity.index.RaftingDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activity.index.DeliveryDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activity.index.SpaceCapsuleActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activity.index.GetSpaceStationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activity.user.MyBlindBoxActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activity.user.MySpaceStationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activity.user.IncomeRecordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activity.user.MakingRecordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activity.user.WithdrawalActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activity.user.AccountSettingsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activity.user.DriftingTrackActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activity.user.OrderRecordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activity.user.SpaceMarinesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activity.index.TeaShopActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activity.index.CitySelectionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activity.user.FeedBackActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activity.index.PlanetarySelectActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activity.index.PlanetaryDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activity.index.MoveAwayPlanetaryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.ui.activity.user.WithdrawalRecordActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".mvp.ui.activity.imkit.SessionListActivity"
+            android:screenOrientation="portrait" />
+
+
+        <activity
+            android:name=".mvp.ui.activity.user.MessageCenterActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".mvp.ui.activity.user.FriendApplicationActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".mvp.ui.activity.imkit.MyConversationActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:host="${applicationId}"
+                    android:pathPrefix="/conversation/"
+                    android:scheme="rong" />
+            </intent-filter>
+        </activity>
     </application>
 </manifest>
-
-

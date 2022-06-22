@@ -2,14 +2,20 @@ package com.drifting.bureau.mvp.ui.activity;
 
 import android.os.Bundle;
 import android.os.Handler;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
 import com.drifting.bureau.mvp.ui.activity.user.BuildGuideActivity;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
+
+import io.rong.imkit.RongIM;
+import io.rong.imkit.utils.RouteUtils;
+import io.rong.imlib.RongIMClient;
 
 public class SplashActivity extends BaseActivity {
 
@@ -31,9 +37,9 @@ public class SplashActivity extends BaseActivity {
     }
 
     Runnable mHomeRunnable = () -> {
-        if (!Preferences.isAnony()){
+        if (!Preferences.isAnony()) {
             BuildGuideActivity.start(SplashActivity.this, true);
-        }else {
+        } else {
             DiscoveryTourActivity.start(SplashActivity.this, true);
         }
     };

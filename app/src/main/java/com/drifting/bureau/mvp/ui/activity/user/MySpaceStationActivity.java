@@ -16,8 +16,7 @@ import android.widget.TextView;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.di.component.DaggerMySpaceStationComponent;
-import com.drifting.bureau.mvp.model.entity.MySpaceStationEntity;
-import com.drifting.bureau.mvp.model.entity.MyTreasuryEntity;
+
 import com.drifting.bureau.mvp.model.entity.OrderDetailEntity;
 import com.drifting.bureau.mvp.model.entity.OrderOneEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceInfoEntity;
@@ -27,6 +26,7 @@ import com.drifting.bureau.mvp.ui.dialog.MySpaceStationDialog;
 import com.drifting.bureau.mvp.ui.dialog.MyTreasuryDialog;
 import com.drifting.bureau.mvp.ui.dialog.PublicDialog;
 import com.drifting.bureau.mvp.ui.dialog.SelectOrderDialog;
+import com.drifting.bureau.mvp.ui.dialog.ShareDialog;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.DateUtil;
@@ -39,10 +39,6 @@ import com.jess.arms.di.component.AppComponent;
 import com.drifting.bureau.mvp.contract.MySpaceStationContract;
 import com.drifting.bureau.mvp.presenter.MySpaceStationPresenter;
 
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -80,9 +76,8 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
     private MakeScheduleDialog makeScheduleDialog;
     private PublicDialog publicDialog;
     private MyTreasuryDialog myTreasuryDialog;
+    private ShareDialog shareDialog;
     private MySpaceStationDialog mySpaceStationDialog;
-
-    private int SpaceId;
     private static final String EXTRA_SPACE_ID = "extra_space_id";
     private OrderOneEntity orderOneEntity;
     private UserInfoEntity userInfoEntity;
@@ -114,9 +109,7 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
         mToolbarTitle.setText("我的空间站");
-        if (getIntent() != null) {
-            SpaceId = getIntent().getIntExtra(EXTRA_SPACE_ID, 0);
-        }
+
         initListener();
     }
 
@@ -155,7 +148,7 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
         }
     }
 
-    @OnClick({R.id.toolbar_back, R.id.tv_select, R.id.tv_my_treasury, R.id.tv_upgrade, R.id.rl_total_revenue, R.id.rl_making_records, R.id.rl_withdrawal})
+    @OnClick({R.id.toolbar_back, R.id.tv_select, R.id.tv_my_treasury, R.id.tv_upgrade, R.id.rl_total_revenue, R.id.rl_making_records, R.id.rl_withdrawal, R.id.tv_not_data})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
@@ -164,13 +157,20 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
                     break;
                 case R.id.tv_select:   //查看
                     if (mPresenter != null & orderOneEntity != null) {
-                        mPresenter.userplayer(orderOneEntity.getUser_id() + "");
+                        mPresenter.userplayer(1, orderOneEntity.getUser_id() + "");
                     }
                     break;
                 case R.id.tv_my_treasury: //我的库存
-                case R.id.tv_upgrade:  //升级
                     myTreasuryDialog = new MyTreasuryDialog(this);
                     myTreasuryDialog.show();
+                    break;
+                case R.id.tv_upgrade:  //升级
+                    RequestUtil.create().levelcurrent(entity1 -> {
+                        if (entity1 != null && entity1.getCode() == 200) {
+                            mySpaceStationDialog = new MySpaceStationDialog(this, entity1.getData());
+                            mySpaceStationDialog.show();
+                        }
+                    });
                     break;
                 case R.id.rl_total_revenue: //收支记录
                     IncomeRecordActivity.start(this, false);
@@ -181,10 +181,14 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
                 case R.id.rl_withdrawal: //提现
                     WithdrawalActivity.start(this, 1, mTvWithdrawal.getText().toString(), false);
                     break;
+                case R.id.tv_not_data:  //分享
+                    if (mPresenter != null) {
+                        mPresenter.userplayer(2, Preferences.getUserId());
+                    }
+                    break;
             }
         }
     }
-
 
 
     @Override
@@ -247,10 +251,15 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
     }
 
     @Override
-    public void onUserInfoSuccess(UserInfoEntity entity) {
+    public void onUserInfoSuccess(int type, UserInfoEntity entity) {
         if (entity != null & entity.getUser() != null) {
             userInfoEntity = entity;
-            mPresenter.orderdetail(orderOneEntity.getSpace_order_id());
+            if (type == 1) {
+                mPresenter.orderdetail(orderOneEntity.getSpace_order_id());
+            } else {
+                shareDialog = new ShareDialog(this, userInfoEntity);
+                shareDialog.show();
+            }
         }
     }
 
@@ -297,7 +306,6 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
     public void showMessage(@NonNull String message) {
         ToastUtil.showToast(message);
     }
-
 
 
     @Override

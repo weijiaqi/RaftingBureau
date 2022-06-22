@@ -4,6 +4,8 @@ package com.drifting.bureau.util;
 import com.drifting.bureau.mvp.model.entity.LoginEntity;
 import com.drifting.bureau.storageinfo.Preferences;
 
+import io.rong.imkit.RongIM;
+
 
 /**
  * @Description:
@@ -15,12 +17,15 @@ public class LogInOutDataUtil {
         Preferences.setAnony(true);
         Preferences.saveUserName(entity == null ? "" : entity.getName());
         Preferences.saveToken(entity == null ? "" : entity.getToken());
+        Preferences.saveRcToken(entity == null ? "" : entity.getRc_token());
+        Preferences.saveUserPhoto(entity == null ? "" : entity.getProfile_photo());
         Preferences.saveUserId(entity == null ? "" : entity.getUser_id());
         Preferences.savePhone(entity == null ? "" : entity.getMobile());
         Preferences.savePassword(entity == null ? "" : entity.getPassword());
     }
 
     public static void successOutClearData() {
+        RongIM.getInstance().logout();
         Preferences.clearUserLoginData();
     }
 }

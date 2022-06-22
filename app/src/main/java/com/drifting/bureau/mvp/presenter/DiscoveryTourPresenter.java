@@ -3,6 +3,7 @@ package com.drifting.bureau.mvp.presenter;
 import android.app.Activity;
 import android.app.Application;
 import android.location.Location;
+import android.net.Uri;
 import android.util.Log;
 
 import androidx.fragment.app.FragmentActivity;
@@ -14,6 +15,7 @@ import com.drifting.bureau.mvp.model.entity.MessageReceiveEntity;
 import com.drifting.bureau.mvp.model.entity.PlanetEntity;
 import com.drifting.bureau.mvp.ui.activity.index.VideoActivity;
 import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
+import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.AppUtil;
 import com.drifting.bureau.util.LocationUtil;
 import com.drifting.bureau.util.MapsUtil;
@@ -26,6 +28,11 @@ import com.jess.arms.http.imageloader.ImageLoader;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import io.rong.imkit.RongIM;
+import io.rong.imkit.userinfo.RongUserInfoManager;
+import io.rong.imkit.userinfo.UserDataProvider;
+import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.UserInfo;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 
@@ -69,6 +76,32 @@ public class DiscoveryTourPresenter extends BasePresenter<DiscoveryTourContract.
     @Inject
     public DiscoveryTourPresenter(DiscoveryTourContract.Model model, DiscoveryTourContract.View rootView) {
         super(model, rootView);
+    }
+
+
+    /**
+     * 连接融云
+     */
+    public void getRongIM(String token){
+        RongIM.connect(token, new RongIMClient.ConnectCallback() {
+            @Override
+            public void onSuccess(String userId) {
+                Log.e("RongIM","融云连接成功");
+
+                UserInfo userInfo = new UserInfo(userId, Preferences.getUserName(), Uri.parse(Preferences.getUserPhoto()));
+                RongUserInfoManager.getInstance().refreshUserInfoCache(userInfo);
+
+            }
+
+            @Override
+            public void onError(RongIMClient.ConnectionErrorCode connectionErrorCode) {
+
+            }
+            @Override
+            public void onDatabaseOpened(RongIMClient.DatabaseOpenStatus databaseOpenStatus) {
+            }
+        });
+
     }
 
 

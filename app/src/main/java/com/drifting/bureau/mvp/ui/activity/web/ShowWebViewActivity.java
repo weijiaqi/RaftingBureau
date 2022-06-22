@@ -99,7 +99,7 @@ public class ShowWebViewActivity extends BaseActivity  implements WebLoadingList
                 break;
             case 1:
                 mTvTitle.setText("用户隐私协议");
-                mWebView.loadUrl(USER_PRIVACY);
+                mWebView.loadUrl("https://www.kivicube.com/ar-quick-look");
                 break;
             case 2:
                 mTvTitle.setText("用户注册协议");

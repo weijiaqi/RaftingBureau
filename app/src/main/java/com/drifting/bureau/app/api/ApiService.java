@@ -11,6 +11,8 @@ import com.drifting.bureau.mvp.model.entity.CustomerEntity;
 import com.drifting.bureau.mvp.model.entity.DeliveryDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.DriftingTrackEntity;
 import com.drifting.bureau.mvp.model.entity.ExploreTimesEntity;
+import com.drifting.bureau.mvp.model.entity.FriendApplicationEntity;
+import com.drifting.bureau.mvp.model.entity.FriendInfoEntity;
 import com.drifting.bureau.mvp.model.entity.IncomeRecordEntity;
 import com.drifting.bureau.mvp.model.entity.InfoForShareEntity;
 import com.drifting.bureau.mvp.model.entity.LoginEntity;
@@ -32,11 +34,15 @@ import com.drifting.bureau.mvp.model.entity.PlatformTimesEntity;
 import com.drifting.bureau.mvp.model.entity.PrizeEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionAssessEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionEntity;
+import com.drifting.bureau.mvp.model.entity.RaftingBureaufriendEntity;
 import com.drifting.bureau.mvp.model.entity.SkuListEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceAboutEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceCheckEntity;
+import com.drifting.bureau.mvp.model.entity.SpaceExchangeEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceInfoEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceStationEntity;
+import com.drifting.bureau.mvp.model.entity.SysmessageEntity;
+import com.drifting.bureau.mvp.model.entity.SysmessageMineEntity;
 import com.drifting.bureau.mvp.model.entity.TeaShopEntity;
 import com.drifting.bureau.mvp.model.entity.TeamStatisticEntity;
 import com.drifting.bureau.mvp.model.entity.UserEntity;
@@ -109,7 +115,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("v/message/createwithfile")
-    Observable<BaseEntity<CreatewithfileEntity>> createwithword(@Field("type_id") int status, @Field("explore_id") int explore_id, @Field("content") String content,@Field("message_id") int message_id);
+    Observable<BaseEntity<CreatewithfileEntity>> createwithword(@Field("type_id") int status, @Field("explore_id") int explore_id, @Field("content") String content, @Field("message_id") int message_id);
 
 
     /**
@@ -142,6 +148,13 @@ public interface ApiService {
     @POST("v/message/content")
     Observable<BaseEntity<MessageContentEntity>> messagecontent(@Field("message_id") int message_id);
 
+
+    /**
+     * 参与话题（有免费次数时使用）
+     */
+    @FormUrlEncoded
+    @POST("v/message/attending")
+    Observable<BaseEntity> messageattending(@Field("message_id") int message_id);
 
 
     /**
@@ -199,7 +212,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("v/mysterybox/logs")
-    Observable<BaseEntity<MysteryboxEntity>> mysterybox( @Field("limit") int limit);
+    Observable<BaseEntity<MysteryboxEntity>> mysterybox(@Field("limit") int limit);
 
 
     /**
@@ -237,19 +250,17 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("v/mysterybox/transfer")
-    Observable<BaseEntity> transfer(@Field("box_id") String box_id,@Field("mobile") String mobile);
-
+    Observable<BaseEntity> transfer(@Field("box_id") String box_id, @Field("mobile") String mobile);
 
 
     /**
-     *申请提现
+     * 申请提现
      *
      * @return
      */
     @FormUrlEncoded
     @POST("v/withdraw/apply")
-    Observable<BaseEntity> withdrawapply(@Field("name") String name,@Field("account") String account,@Field("money") String money,@Field("op_type") int op_type);
-
+    Observable<BaseEntity> withdrawapply(@Field("name") String name, @Field("account") String account, @Field("money") String money, @Field("op_type") int op_type);
 
 
     /**
@@ -259,9 +270,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("v/space/storage/transfer")
-    Observable<BaseEntity> storagetransfer(@Field("object_id") int object_id,@Field("mobile") String mobile);
-
-
+    Observable<BaseEntity> storagetransfer(@Field("object_id") int object_id, @Field("mobile") String mobile);
 
 
     /**
@@ -359,7 +368,6 @@ public interface ApiService {
     Observable<BaseEntity<List<MyTreasuryEntity>>> storagemine();
 
 
-
     /**
      * 漂流轨迹
      *
@@ -370,7 +378,6 @@ public interface ApiService {
     Observable<BaseEntity<DriftingTrackEntity>> messagemine(@Field("page") int page, @Field("limit") int limit);
 
 
-
     /**
      * 漂流详情（探寻轨迹）
      *
@@ -379,7 +386,6 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("v/message/details")
     Observable<BaseEntity<BarrageEntity>> messagedetails(@Field("message_id") int message_id);
-
 
 
     /**
@@ -401,7 +407,6 @@ public interface ApiService {
     Observable<BaseEntity<IncomeRecordEntity>> spacebillogs(@Field("page") int page, @Field("limit") int limit);
 
 
-
     /**
      * 提现记录（星际团队）
      *
@@ -412,7 +417,6 @@ public interface ApiService {
     Observable<BaseEntity<IncomeRecordEntity>> withdrawnLogs(@Field("page") int page, @Field("limit") int limit);
 
 
-
     /**
      * 订单记录（关于我）
      *
@@ -421,7 +425,6 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("v/order/mine")
     Observable<BaseEntity<OrderRecordEntity>> ordermine(@Field("page") int page, @Field("limit") int limit);
-
 
 
     /**
@@ -441,8 +444,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("v/message/path/details")
-    Observable<BaseEntity<DeliveryDetailsEntity>> pathdetails(@Field("message_id") int message_id,@Field("page") int page, @Field("limit") int limit);
-
+    Observable<BaseEntity<DeliveryDetailsEntity>> pathdetails(@Field("message_id") int message_id, @Field("page") int page, @Field("limit") int limit);
 
 
     /**
@@ -451,11 +453,11 @@ public interface ApiService {
      * @return
      */
     @GET("v/exploretype/list")
-    Observable<BaseEntity<List<PlanetEntity>>>exploretypelist();
+    Observable<BaseEntity<List<PlanetEntity>>> exploretypelist();
 
 
     /**
-     *设置昵称
+     * 设置昵称
      *
      * @return
      */
@@ -464,17 +466,17 @@ public interface ApiService {
     Observable<BaseEntity> setname(@Field("name") String name);
 
     /**
-     *意见反馈
+     * 意见反馈
      *
      * @return
      */
     @FormUrlEncoded
     @POST("v/feedback/add")
-    Observable<BaseEntity> feedbackadd(@Field("content") String content,@Field("phone") String phone);
+    Observable<BaseEntity> feedbackadd(@Field("content") String content, @Field("phone") String phone);
 
 
     /**
-     *核销码信息（订单记录-核销）
+     * 核销码信息（订单记录-核销）
      *
      * @return
      */
@@ -484,7 +486,7 @@ public interface ApiService {
 
 
     /**
-     *附近门店
+     * 实体门店
      *
      * @return
      */
@@ -494,81 +496,169 @@ public interface ApiService {
 
 
     /**
-     *问题列表（搬离星球）
+     * 问题列表（搬离星球）
      *
      * @return
      */
     @GET("v/question/list")
-    Observable<BaseEntity<List<QuestionEntity>>>questionlist();
+    Observable<BaseEntity<List<QuestionEntity>>> questionlist();
 
 
     /**
-     *问题列表（搬离星球）
+     * 问题列表（搬离星球）
      *
      * @return
      */
     @FormUrlEncoded
     @POST("v/question/assess")
-    Observable<BaseEntity<QuestionAssessEntity>>questionassess(@Field("questions") String questions, @Field("anwsers") String anwsers);
+    Observable<BaseEntity<QuestionAssessEntity>> questionassess(@Field("questions") String questions, @Field("anwsers") String anwsers);
 
 
     /**
-     *添加位置信息
+     * 添加位置信息
      *
      * @return
      */
     @FormUrlEncoded
     @POST("v/position/information")
-    Observable<BaseEntity>information(@Field("lng") String lng, @Field("lat") String lat);
+    Observable<BaseEntity> information(@Field("lng") String lng, @Field("lat") String lat);
 
 
     /**
-     *使用物品（空间站）
+     * 使用物品（空间站）
      *
      * @return
      */
     @FormUrlEncoded
     @POST("v/space/storage/using")
-    Observable<BaseEntity>storageusing(@Field("object_id") int object_id, @Field("object_num") int object_num);
+    Observable<BaseEntity> storageusing(@Field("object_id") int object_id, @Field("object_num") int object_num);
 
 
     /**
-     *星际团队信息
+     * 星际团队信息
      *
      * @return
      */
     @GET("v/team/statistic")
-    Observable<BaseEntity<TeamStatisticEntity>>team();
+    Observable<BaseEntity<TeamStatisticEntity>> team();
 
 
     /**
-     *开启漂流的次数
+     * 开启漂流的次数
      *
      * @return
      */
     @FormUrlEncoded
     @POST("v/message/exploreTimes")
-    Observable<BaseEntity<ExploreTimesEntity>>exploreTimes(@Field("explore_id") int explore_id);
-
+    Observable<BaseEntity<ExploreTimesEntity>> exploreTimes(@Field("explore_id") int explore_id);
 
 
     /**
-     *举报
+     * 举报
      *
      * @return
      */
     @FormUrlEncoded
     @POST("v/report/commit")
-    Observable<BaseEntity>reportcommit(@Field("message_id") int message_id,@Field("report_type") int report_type,@Field("reason") String reason);
+    Observable<BaseEntity> reportcommit(@Field("message_id") int message_id, @Field("report_type") int report_type, @Field("reason") String reason);
 
 
     /**
-     *星际团队信息
+     * 星际团队信息
      *
      * @return
      */
     @FormUrlEncoded
     @POST("v/platform/times")
-    Observable<BaseEntity<PlatformTimesEntity>>platformtimes(@Field("explore_id") int explore_id);
+    Observable<BaseEntity<PlatformTimesEntity>> platformtimes(@Field("explore_id") int explore_id);
+
+
+    /**
+     * 未读消息数（消息中心）
+     *
+     * @return
+     */
+    @GET("v/sysmessage/unread")
+    Observable<BaseEntity<SysmessageEntity>> unread();
+
+
+    /**
+     * 元宇宙消息（消息中心）
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/sysmessage/mine")
+    Observable<BaseEntity<SysmessageMineEntity>> sysmessage(@Field("page") int page, @Field("limit") int limit);
+
+
+    /**
+     * 标记为已读（消息中心）
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/sysmessage/markread")
+    Observable<BaseEntity> markread(@Field("sys_msg_id") int sys_msg_id);
+
+
+    /**
+     * 未读消息数（消息中心）
+     *
+     * @return
+     */
+    @GET("v/friend/mine")
+    Observable<BaseEntity<RaftingBureaufriendEntity>> friendmine();
+
+
+    /**
+     * 好友申请列表（消息中心）
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/friend/applyToMe")
+    Observable<BaseEntity<FriendApplicationEntity>> applyToMe(@Field("page") int page, @Field("limit") int limit);
+
+
+    /**
+     * 同意或拒绝好友申请（消息中心）
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/friend/agreeRefuse")
+    Observable<BaseEntity> agreeRefuse(@Field("apply_id") int apply_id,@Field("status") int status);
+
+
+    /**
+     * 删除好友（消息中心）
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/friend/delete")
+    Observable<BaseEntity> frienddelete(@Field("user_id") int user_id);
+
+
+    /**
+     * 好友相关信息（头像、昵称）
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/friend/info")
+    Observable<BaseEntity<FriendInfoEntity>> friendinfo(@Field("user_id") String user_id);
+
+    /**
+     * 兑换码兑换空间站
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/space/exchange")
+    Observable<BaseEntity<SpaceExchangeEntity>> spaceExchange(@Field("code") String code);
+
+
 
 }

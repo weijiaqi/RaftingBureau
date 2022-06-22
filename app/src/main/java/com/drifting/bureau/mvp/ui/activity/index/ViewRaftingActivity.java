@@ -44,6 +44,7 @@ import com.drifting.bureau.util.callback.BaseDataCallBack;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.drifting.bureau.view.CountDownShowView;
 import com.drifting.bureau.view.VoiceWave;
+import com.hjq.shape.layout.ShapeLinearLayout;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.base.BaseDialog;
 import com.jess.arms.base.BaseEntity;
@@ -86,7 +87,7 @@ public class ViewRaftingActivity extends BaseActivity<ViewRaftingPresenter> impl
     @BindView(R.id.rl_participate)
     RelativeLayout mRlParticipate;
     @BindView(R.id.ll_imprint)
-    LinearLayout mLlImprint;
+    ShapeLinearLayout mLlImprint;
     @BindView(R.id.rl_explore)
     RelativeLayout mRlExplore;
     @BindView(R.id.iv_explore_lock)
@@ -109,10 +110,14 @@ public class ViewRaftingActivity extends BaseActivity<ViewRaftingPresenter> impl
     TextView mTvByTime;
     @BindView(R.id.iv_right)
     ImageView mIvRight;
+    @BindView(R.id.tv_imprint)
+    TextView mTvImprint;
+    @BindView(R.id.tv_status)
+    TextView mTvStatus;
     private RaftingOrderDialog raftingOrderDialog;
     private PublicDialog publicDialog;
     private ReportDialog reportDialog;
-    private int type, id, user_id, explore_id, totaltime, second;
+    private int type, id, user_id, explore_id, totaltime, second, total;
 
     private static String EXTRA_USER_ID = "extra_user_id";
     private static String EXTRA_ID = "extra_id";
@@ -174,6 +179,17 @@ public class ViewRaftingActivity extends BaseActivity<ViewRaftingPresenter> impl
         mTvIdentity.setText(userInfoEntity.getUser().getLevel_name());
         setIsLock(false);
         getMessageContent();
+
+        RequestUtil.create().platformtimes(explore_id, entity -> {
+            if (entity != null && entity.getCode() == 200) {
+                total = entity.getData().getAttend_times() + entity.getData().getCommon_times();
+                if (total > 0) {
+                    mTvStatus.setText(getString(R.string.free_times, total + ""));
+                } else {
+                    mTvStatus.setText("可添加好友");
+                }
+            }
+        });
     }
 
 
@@ -188,12 +204,12 @@ public class ViewRaftingActivity extends BaseActivity<ViewRaftingPresenter> impl
         return this;
     }
 
-    @OnClick({R.id.iv_right,R.id.toolbar_back, R.id.iv_play, R.id.rl_video_play, R.id.ll_join, R.id.ll_imprint, R.id.rl_explore, R.id.tv_into_space, R.id.rl_add_friends})
+    @OnClick({R.id.iv_right, R.id.toolbar_back, R.id.iv_play, R.id.rl_video_play, R.id.ll_join, R.id.ll_imprint, R.id.rl_explore, R.id.tv_into_space, R.id.rl_add_friends})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
                 case R.id.iv_right:   //举报
-                    reportDialog=new ReportDialog(this,id);
+                    reportDialog = new ReportDialog(this, id);
                     reportDialog.show();
                     break;
                 case R.id.toolbar_back:
@@ -206,8 +222,14 @@ public class ViewRaftingActivity extends BaseActivity<ViewRaftingPresenter> impl
                     VideoActivity.start(this, content, false);
                     break;
                 case R.id.ll_join: //参与传递
-                    if (mPresenter != null) {
-                        mPresenter.skulist(type, explore_id, id);
+                    if (total > 0) {   //有免费次数
+                        if (mPresenter != null) {
+                            mPresenter.messageattending(id);
+                        }
+                    } else {
+                        if (mPresenter != null) {
+                            mPresenter.skulist(type, explore_id, id);
+                        }
                     }
                     break;
                 case R.id.ll_imprint:  //留下我的传递印记
@@ -226,7 +248,7 @@ public class ViewRaftingActivity extends BaseActivity<ViewRaftingPresenter> impl
                             publicDialog.setCancelable(false);
                             publicDialog.setTitleText("已丢回太空");
                             publicDialog.setContentText("丢回太空的漂流信息\n将不会再次收到");
-                            publicDialog.setButtonText("返回首页");
+                            publicDialog.setButtonText("返回星际");
                             publicDialog.setOnClickCallback(type -> {
                                 if (type == PublicDialog.SELECT_FINISH) {
                                     finish();
@@ -290,25 +312,25 @@ public class ViewRaftingActivity extends BaseActivity<ViewRaftingPresenter> impl
             mTvNum.setText(entity.getSummary().getPlayer() + "");
             type = entity.getMessage().getType_id();
             setVisibility(type, entity);
-            if (entity.getOrder().getStatus() == 1) { //已支付
+            if (entity.getAttend_info().getAttend() == 1) { // 是否参与了  1是
                 mRlParticipate.setVisibility(View.GONE);
                 mLlImprint.setVisibility(View.VISIBLE);
-                second = entity.getOrder().getFootprint_rest();
+                second = entity.getAttend_info().getFootprint_rest();
                 if (second > 0) {
                     mTvByTime.setText(DateUtil.TimeRemaining(second) + "后将会自动发送");
                 } else {
-//                    publicDialog = new PublicDialog(ViewRaftingActivity.this);
-//                    publicDialog.show();
-//                    publicDialog.setCancelable(false);
-//                    publicDialog.setTitleText("温馨提示");
-//                    publicDialog.setContentText("该信息已经飞走啦!");
-//                    publicDialog.setOnClickCallback(type -> {
-//                        finish();
-//                    });
+                    mLlImprint.getShapeDrawableBuilder().setSolidColor(getColor(R.color.color_99)).intoBackground();
+                    mTvImprint.setText("不能留下印记");
+                    mTvByTime.setText("订单已失效");
+                    mLlImprint.setClickable(false);
                 }
-//                handler.post(runnable);
             }
         }
+    }
+
+    @Override
+    public void onMessageAttendingSuccess() {   //免费参与话题成功
+        showParticipateDialog();
     }
 
 
@@ -364,21 +386,24 @@ public class ViewRaftingActivity extends BaseActivity<ViewRaftingPresenter> impl
         }
     }
 
-
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void PaymentEvent(PaymentEvent event) {
         if (event != null) {
-            publicDialog = new PublicDialog(this);
-            publicDialog.show();
-            publicDialog.setCancelable(false);
-            publicDialog.setTitleText("参与成功");
-            publicDialog.setContentText("快写下你的传递漂信息吧！");
-            publicDialog.setOnClickCallback(type -> {
-                if (type == PublicDialog.SELECT_FINISH) {
-                    getMessageContent();
-                }
-            });
+            showParticipateDialog();
         }
+    }
+
+    public void showParticipateDialog() {
+        publicDialog = new PublicDialog(this);
+        publicDialog.show();
+        publicDialog.setCancelable(false);
+        publicDialog.setTitleText("参与成功");
+        publicDialog.setContentText("快写下你的传递漂信息吧！");
+        publicDialog.setOnClickCallback(type -> {
+            if (type == PublicDialog.SELECT_FINISH) {
+                getMessageContent();
+            }
+        });
     }
 
     @Override
@@ -394,7 +419,6 @@ public class ViewRaftingActivity extends BaseActivity<ViewRaftingPresenter> impl
         }
         if (type == 2) {
             VideoUtil.close();
-            VideoUtil.cleanCountDown();
         }
         RequestUtil.create().disDispose();
     }

@@ -56,7 +56,7 @@ public class ModifyNicknameDialog extends BaseDialog implements View.OnClickList
         switch (view.getId()) {
             case R.id.tv_click:
                 if (StringUtil.isEmpty(mEtName.getText().toString())) {
-                    showMessage(mEtName.getText().toString());
+                    showMessage("请输入新的昵称");
                     return;
                 }
                 dismiss();
@@ -71,5 +71,4 @@ public class ModifyNicknameDialog extends BaseDialog implements View.OnClickList
         ToastUtil.showToast(content);
     }
 
-    ;
 }

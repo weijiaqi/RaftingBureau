@@ -56,6 +56,9 @@ public abstract class BaseFragment<P extends IPresenter> extends Fragment implem
     protected final String TAG = this.getClass().getSimpleName();
     private final BehaviorSubject<FragmentEvent> mLifecycleSubject = BehaviorSubject.create();
     protected Context mContext;
+    private boolean isViewNull;
+    private boolean isUserVisible;
+    private boolean isFirstVisible;
     @Inject
     @Nullable
     protected P mPresenter;//如果当前页面逻辑简单, Presenter 可以为 null
@@ -71,6 +74,7 @@ public abstract class BaseFragment<P extends IPresenter> extends Fragment implem
         return mCache;
     }
 
+
     @NonNull
     @Override
     public final Subject<FragmentEvent> provideLifecycleSubject() {
@@ -83,10 +87,60 @@ public abstract class BaseFragment<P extends IPresenter> extends Fragment implem
         mContext = context;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initVariable();
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return initView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (!isViewNull) {
+            return;
+        }
+        if (isVisibleToUser) {
+            isUserVisible = true;
+            if (isFirstVisible) {
+                isFirstVisible = false;
+                onFirstVisible();
+                initEvents();
+            } else {
+                onVisible();
+            }
+            return;
+        }
+        if (isUserVisible) {
+            isUserVisible = false;
+            onInVisible();
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (getUserVisibleHint()) {
+            isUserVisible = true;
+            if (isFirstVisible) {
+                isFirstVisible = false;
+                onFirstVisible();
+                initEvents();
+            } else {
+                onVisible();
+            }
+        }
+    }
+
+    private void initVariable() {
+        isFirstVisible = true;
+        isUserVisible = false;
+        isViewNull = true;
     }
 
     @Override
@@ -117,4 +171,30 @@ public abstract class BaseFragment<P extends IPresenter> extends Fragment implem
     public boolean useEventBus() {
         return true;
     }
+
+    /**
+     * Fragment第一次可见
+     */
+    protected void onFirstVisible() {
+
+    }
+
+    /**
+     * Fragment可见
+     */
+    protected void onVisible() {
+    }
+
+    /**
+     * 初始化监听事件
+     */
+    protected void initEvents() {
+    }
+
+    /**
+     * Fragment不可见
+     */
+    protected void onInVisible() {
+    }
+
 }

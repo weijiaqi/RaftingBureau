@@ -42,7 +42,7 @@ public class IncomeRecordHolder extends BaseRecyclerHolder {
             TextUtil.setText(mTvMoney, "+" + listBeanList.get(position).getMoney());
         } else {
             mTvIncomeStatus.setText("申请提现");
-            TextUtil.setText(mTvMoney, listBeanList.get(position).getMoney());
+            TextUtil.setText(mTvMoney,"-" + listBeanList.get(position).getMoney());
         }
         if (listBeanList.get(position).getStatus() == 1) {
             mTvStatus.setText("已完成");

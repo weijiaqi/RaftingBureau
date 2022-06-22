@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.drifting.bureau.R;
@@ -16,6 +17,7 @@ import com.drifting.bureau.di.component.DaggerWithdrawalComponent;
 import com.drifting.bureau.mvp.ui.dialog.PublicDialog;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.StringUtil;
+import com.drifting.bureau.util.TextUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
@@ -38,7 +40,7 @@ public class WithdrawalActivity extends BaseActivity<WithdrawalPresenter> implem
     @BindView(R.id.tv_money)
     TextView mTvMoney;
     @BindView(R.id.et_money)
-    TextView mEtMoney;
+    EditText mEtMoney;
     @BindView(R.id.et_account)
     TextView mEtAccount;
     @BindView(R.id.et_name)
@@ -48,7 +50,7 @@ public class WithdrawalActivity extends BaseActivity<WithdrawalPresenter> implem
     private PublicDialog publicDialog;
 
     private static String EXTRA_MONEY = "extra_money";
-    private static String  EXTRA_TYPE= "extra_type";
+    private static String EXTRA_TYPE = "extra_type";
     private String money;
     private int type;
 
@@ -79,13 +81,14 @@ public class WithdrawalActivity extends BaseActivity<WithdrawalPresenter> implem
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
         if (getIntent() != null) {  //1，空间站提现 2，分销提现
-            type=getIntent().getExtras().getInt(EXTRA_TYPE);
+            type = getIntent().getExtras().getInt(EXTRA_TYPE);
             money = getIntent().getExtras().getString(EXTRA_MONEY);
         }
         initListener();
     }
 
     public void initListener() {
+        TextUtil.watchEditView(mEtMoney);
         mTvMoney.setText("可提现金额：" + money);
     }
 
@@ -112,12 +115,17 @@ public class WithdrawalActivity extends BaseActivity<WithdrawalPresenter> implem
                         showMessage("请输入需要提现的金额!");
                         return;
                     }
+                    if (Double.parseDouble(mEtMoney.getText().toString()) == 0 || Double.parseDouble(mEtMoney.getText().toString()) > Double.parseDouble(money)) {
+                        showMessage("请输入正确的提现金额!");
+                        return;
+                    }
+
                     if (!StringUtil.isEmpty(StringUtil.CompareMoney(mEtMoney.getText().toString(), money))) {
                         showMessage(StringUtil.CompareMoney(mEtMoney.getText().toString(), money));
                         return;
                     }
                     if (mPresenter != null) {
-                        mPresenter.withdrawapply(mEtName.getText().toString(),mEtAccount.getText().toString(), mEtMoney.getText().toString(),type);
+                        mPresenter.withdrawapply(mEtName.getText().toString(), mEtAccount.getText().toString(), mEtMoney.getText().toString(), type);
                     }
 
                     break;

@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="暂无新订单\n请等待"
+                android:text="邀请旅行者\n获得更多订单"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:visibility="gone"

@@ -17,9 +17,11 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Context;
 import android.content.Intent;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 
+import android.util.Log;
 import android.view.KeyEvent;
 
 import android.view.View;
@@ -32,35 +34,31 @@ import android.widget.TextView;
 
 
 import com.drifting.bureau.R;
-
+import com.drifting.bureau.data.event.AnswerCompletedEvent;
 import com.drifting.bureau.data.event.BackSpaceEvent;
-
+import com.drifting.bureau.data.event.MessageRefreshEvent;
 import com.drifting.bureau.di.component.DaggerDiscoveryTourComponent;
-
-
+import com.drifting.bureau.mvp.model.entity.FriendInfoEntity;
 import com.drifting.bureau.mvp.model.entity.MessageReceiveEntity;
 import com.drifting.bureau.mvp.model.entity.PlanetEntity;
-
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.ui.activity.index.SpaceCapsuleActivity;
 import com.drifting.bureau.mvp.ui.activity.index.ViewRaftingActivity;
 import com.drifting.bureau.mvp.ui.activity.user.AboutMeActivity;
+import com.drifting.bureau.mvp.ui.activity.user.MessageCenterActivity;
 import com.drifting.bureau.mvp.ui.adapter.DiscoveryViewpagerAdapter;
 import com.drifting.bureau.mvp.ui.dialog.RaftingInforDialog;
 import com.drifting.bureau.storageinfo.Preferences;
-
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.animator.AnimatorUtil;
-
+import com.drifting.bureau.util.callback.BaseDataCallBack;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.drifting.bureau.view.DiscoveryTransformer;
-
 import com.jess.arms.base.BaseActivity;
-
+import com.jess.arms.base.BaseEntity;
 import com.jess.arms.di.component.AppComponent;
 import com.drifting.bureau.mvp.contract.DiscoveryTourContract;
 import com.drifting.bureau.mvp.presenter.DiscoveryTourPresenter;
-
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -69,6 +67,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.rong.imkit.RongIM;
+import io.rong.imlib.model.UserInfo;
 
 
 /**
@@ -94,28 +94,24 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
     FrameLayout frame;
     @BindView(R.id.tv_about_me)
     TextView mTvAboutMe;
+    @BindView(R.id.iv_hot)
+    ImageView mIvHot;
     private List<PlanetEntity> list;
     private RaftingInforDialog raftingInforDialog;
     private AnimatorSet animatorSet;
-    private static String EXTRA_TYPE = "extra_type";
+
     private Handler handler;
     private boolean isAnmiation = true;
     private int id, user_id, explore_id;
     private DiscoveryViewpagerAdapter discoveryViewpagerAdapter;
     private UserInfoEntity userInfoEntity;
+
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, DiscoveryTourActivity.class);
         context.startActivity(intent);
         if (closePage) ((Activity) context).finish();
     }
 
-    public static void start(Context context, int type, boolean closePage) {
-        Intent intent = new Intent(context, DiscoveryTourActivity.class);
-        intent.putExtra(EXTRA_TYPE, type);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        context.startActivity(intent);
-        if (closePage) ((Activity) context).finish();
-    }
 
     @Override
     public void setupActivityComponent(@NonNull AppComponent appComponent) {
@@ -130,9 +126,7 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        if (intent.getIntExtra(EXTRA_TYPE, 0) == 2) {
-            IntoSpace();
-        }
+        loadUI();
     }
 
 
@@ -147,19 +141,41 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
         setStatusBar(true);
         mToobarBack.setVisibility(View.GONE);
         mRlInfo.setVisibility(View.VISIBLE);
+        loadUI();
+    }
+
+
+
+    public void loadUI() {
         if (mPresenter != null) {
             mPresenter.getExploreList();
             mPresenter.getLocation(this);
+            mPresenter.getRongIM(Preferences.getRcToken());
         }
         frame.setOnTouchListener((view, motionEvent) -> viewPager.onTouchEvent(motionEvent));
         getUserInfo();
     }
 
-    public void getUserInfo(){
+
+    public void getUserInfo() {
         RequestUtil.create().userplayer(Preferences.getUserId(), entity -> {
             if (entity != null && entity.getCode() == 200) {
-                userInfoEntity=entity.getData();
+                userInfoEntity = entity.getData();
                 mTvAboutMe.setText(userInfoEntity.getPlanet().getName());
+                unread();
+            }
+        });
+    }
+
+
+    public void unread() {
+        RequestUtil.create().unread(entity1 -> {
+            if (entity1.getCode() == 200) {
+                if (entity1.getData().getIndex_msg() == 0) {
+                    mIvHot.setVisibility(View.GONE);
+                } else {
+                    mIvHot.setVisibility(View.VISIBLE);
+                }
             }
         });
 
@@ -176,7 +192,7 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
     }
 
 
-    @OnClick({R.id.rl_message, R.id.tv_about_me, R.id.tv_space_capsule})
+    @OnClick({R.id.rl_message, R.id.tv_about_me, R.id.tv_space_capsule, R.id.rl_info})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rl_message: //开启新消息
@@ -208,7 +224,10 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
             case R.id.tv_space_capsule: //太空舱
                 SpaceCapsuleActivity.start(this, false);
                 break;
+            case R.id.rl_info:
+                MessageCenterActivity.start(this, false);
         }
+
     }
 
     Runnable mAdRunnable = () -> getMessage();
@@ -230,10 +249,10 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
                 if (isAnmiation) {
                     isAnmiation = false;
                     handler.postDelayed(mAdRunnable, entity.getDrift_rest() * 10);
-                    objectAnimation(1, mIvRocket, mRlMessage, -500, 200, 0, 6, 1000);
+                   objectAnimation(1, mIvRocket, mRlMessage, -500, 200, 0, 6, 1000);
                 }
             } else {
-                mIvRocket.setVisibility(View.GONE);
+                mIvRocket.setVisibility(View.INVISIBLE);
                 mRlMessage.setVisibility(View.INVISIBLE);
                 handler.postDelayed(mAdRunnable, 1000 * 10);
             }
@@ -253,11 +272,11 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
         }
     }
 
-
     public void IntoSpace() {
         isAnmiation = true;
         objectAnimation(2, mIvRocket, mRlMessage, 0, 0, 1500, -500, 500);
     }
+
 
     /**
      * @description 属性组合动画
@@ -289,7 +308,6 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
                     AnimatorUtil.floatAnim(tagetview, 2000);
                 } else {
                     tagetview.setVisibility(View.INVISIBLE);
-                    handler.postDelayed(mAdRunnable, 60);
                 }
             }
         });
@@ -310,11 +328,25 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
     }
 
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void AnswerCompletedEvent(AnswerCompletedEvent answerCompletedEvent) {
+        if (answerCompletedEvent != null) {
+            getUserInfo();
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void MessageRefreshEvent(MessageRefreshEvent event) {
+        if (event != null) {
+            unread();
+        }
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
         handler = new Handler();
-        handler.postDelayed(mAdRunnable, 60);
+        handler.postDelayed(mAdRunnable, 1000);
     }
 
     @Override

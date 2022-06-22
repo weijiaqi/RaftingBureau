@@ -21,12 +21,13 @@ import android.widget.TextView;
 
 
 import com.drifting.bureau.R;
+
 import com.drifting.bureau.data.event.BackSpaceEvent;
 import com.drifting.bureau.data.event.PaymentEvent;
 import com.drifting.bureau.data.event.VideoEvent;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
 import com.drifting.bureau.mvp.model.entity.CreatewithfileEntity;
-import com.drifting.bureau.mvp.model.entity.PlatformTimesEntity;
+
 import com.drifting.bureau.mvp.model.entity.SkuListEntity;
 import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
 import com.drifting.bureau.mvp.ui.activity.pay.PaymentInfoActivity;
@@ -113,6 +114,8 @@ public class PostDriftingFragment extends BaseFragment<PostDriftingPresenter> im
     TextView mTvIdentity;
     @BindView(R.id.tv_num)
     TextView mTvNum;
+    @BindView(R.id.tv_starry_sky)
+    TextView mTvStarrySky;
     private RecordingDialog recordingDialog;
     private List<Object> objectList;
     private String path;
@@ -182,6 +185,7 @@ public class PostDriftingFragment extends BaseFragment<PostDriftingPresenter> im
         if (type == 1) {
             mRlVideoDelete.setVisibility(View.VISIBLE);
         } else {
+            mTvStarrySky.setText("传递到下个星云");
             mTvMyInfo.setVisibility(View.VISIBLE);
             mLlInfo.setLayoutParams(ViewGroupUtil.setMargin(ArmsUtils.dip2px(mContext, 17), 0, 0, 0));
         }
@@ -414,16 +418,12 @@ public class PostDriftingFragment extends BaseFragment<PostDriftingPresenter> im
         publicDialog.setCancelable(false);
         publicDialog.setTitleText("已成功发送");
         publicDialog.setContentText("可在“关于我-漂流轨迹”中 查看漂流记录");
-//            if (code == 200) {
-//
-//            } else {
-//                publicDialog.setTitleText("发送失败");
-//                publicDialog.setContentText("这里描写失败原因");
-//            }
-        publicDialog.setButtonText("返回首页");
+
+        publicDialog.setButtonText("返回星际");
         publicDialog.setOnClickCallback(status -> {
             if (status == PublicDialog.SELECT_FINISH) {
-                DiscoveryTourActivity.start(mContext, type, true);
+                getActivity().finish();
+                EventBus.getDefault().post(new BackSpaceEvent());
             }
         });
     }
@@ -464,7 +464,6 @@ public class PostDriftingFragment extends BaseFragment<PostDriftingPresenter> im
     public void onDestroy() {
         super.onDestroy();
         VideoUtil.close();
-        VideoUtil.cleanCountDown();
         RequestUtil.create().disDispose();
     }
 }

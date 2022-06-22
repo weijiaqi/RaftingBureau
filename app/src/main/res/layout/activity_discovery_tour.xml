@@ -31,17 +31,17 @@
 
     <FrameLayout
         android:id="@+id/frame"
-        android:layout_below="@+id/tv_way_to_explore"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/tv_way_to_explore"
         android:clipChildren="false">
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/vp_img"
-            android:layout_marginTop="150dp"
             android:layout_width="wrap_content"
             android:layout_height="160dp"
             android:layout_marginLeft="80dp"
+            android:layout_marginTop="150dp"
             android:layout_marginRight="95dp">
 
         </androidx.viewpager.widget.ViewPager>
@@ -50,23 +50,23 @@
 
     <ImageView
         android:id="@+id/iv_rocket"
-       android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rl_message"
         android:layout_marginStart="35dp"
         android:src="@drawable/rocket"
-        />
+        android:visibility="invisible" />
+
     <RelativeLayout
-        android:visibility="gone"
         android:id="@+id/rl_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/iv_rocket"
         android:layout_below="@+id/tv_way_to_explore"
         android:layout_marginTop="75dp"
         android:layout_marginEnd="40dp"
-        android:background="@drawable/message_box">
+        android:layout_toRightOf="@+id/iv_rocket"
+        android:background="@drawable/message_box"
+        android:visibility="invisible">
 
 
         <TextView
@@ -75,7 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="6dp"
-            android:text="漂来新信息"
+            android:text="漂来宇宙电波"
             android:textColor="@color/white"
             android:textSize="12sp" />
 
@@ -106,6 +106,7 @@
         android:layout_marginBottom="122dp"
         android:drawableTop="@drawable/about_me"
         android:drawablePadding="4dp"
+        android:gravity="center_horizontal"
         android:text=""
         android:textColor="@color/white"
         android:textSize="12sp" />

@@ -153,7 +153,7 @@ public class MySpaceStationPresenter extends BasePresenter<MySpaceStationContrac
     /**
      * 用户信息
      */
-    public void userplayer(String user_id) {
+    public void userplayer(int type, String user_id) {
         mModel.userplayer(user_id).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
@@ -162,7 +162,7 @@ public class MySpaceStationPresenter extends BasePresenter<MySpaceStationContrac
                     public void onNext(BaseEntity<UserInfoEntity> baseEntity) {
                         if (mRootView != null) {
                             if (baseEntity.getCode() == 200) {
-                                mRootView.onUserInfoSuccess(baseEntity.getData());
+                                mRootView.onUserInfoSuccess(type,baseEntity.getData());
                             } else {
                                 mRootView.showMessage(baseEntity.getMsg());
                             }

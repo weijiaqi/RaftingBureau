@@ -10,28 +10,42 @@
     <include layout="@layout/include_title" />
 
 
-    <TextView
-        android:id="@+id/tv_how_to_play"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        android:layout_marginTop="-20dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="12dp"
-        android:padding="12dp"
-        android:shadowColor="@color/color_15"
-        android:shadowDx="0"
-        android:shadowDy="0"
-        android:shadowRadius="24"
-        android:text="玩法说明"
-        android:textColor="@android:color/white"
-        android:textSize="12sp"
-        android:textStyle="bold" />
+        android:layout_below="@+id/toolbar">
+
+        <ImageView
+            android:id="@+id/iv_exchange_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/exchange_code" />
+
+
+        <com.drifting.bureau.view.StrokeTextView
+            android:id="@+id/tv_how_to_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="12dp"
+            android:padding="12dp"
+            android:text="空间站说明"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:border_color="@color/color_15"
+            app:has_boder="true" />
+
+    </RelativeLayout>
 
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_how_to_play"
+        android:layout_below="@+id/rl_top"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="52dp"

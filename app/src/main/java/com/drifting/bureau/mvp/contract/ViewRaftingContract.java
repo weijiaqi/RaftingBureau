@@ -34,6 +34,7 @@ public interface ViewRaftingContract {
 
         void onMessageContent(MessageContentEntity entity);
 
+        void onMessageAttendingSuccess();
 
         void onNetError();
 
@@ -49,5 +50,6 @@ public interface ViewRaftingContract {
 
         Observable<BaseEntity<MessageContentEntity>> messagecontent(int message_id);
 
+        Observable<BaseEntity> messageattending(int message_id);
     }
 }
