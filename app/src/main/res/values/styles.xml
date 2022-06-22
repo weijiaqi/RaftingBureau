@@ -152,7 +152,12 @@
     <style name="cb_status">
         <!--波纹的颜色-->
         <item name="android:colorControlHighlight">@color/transparent</item>
-
     </style>
 
+
+    <declare-styleable name="StrokeTextView" >
+        <attr name="has_boder" format="boolean"/>
+        <attr name="border_width" format="dimension"/>
+        <attr name="border_color" format="color"/>
+    </declare-styleable>
 </resources>

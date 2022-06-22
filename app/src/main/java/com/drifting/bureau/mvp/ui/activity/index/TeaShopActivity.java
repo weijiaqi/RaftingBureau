@@ -39,7 +39,7 @@ import butterknife.OnClick;
 /**
  * Created on 2022/05/30 09:46
  *
- * @author 附近门店
+ * @author 实体门店
  * module name is TeaShopActivity
  */
 public class TeaShopActivity extends BaseActivity<TeaShopPresenter> implements TeaShopContract.View, XRecyclerView.LoadingListener {
@@ -80,7 +80,7 @@ public class TeaShopActivity extends BaseActivity<TeaShopPresenter> implements T
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
-        mToolbarTitle.setText("附近门店");
+        mToolbarTitle.setText("实体门店");
         initListener();
     }
 

@@ -11,6 +11,7 @@ import com.drifting.bureau.R;
 import com.drifting.bureau.app.api.Api;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.FileGenerator;
+import com.drifting.bureau.util.RongIMUtil;
 import com.hjq.toast.ToastUtils;
 import com.jess.arms.base.App;
 import com.jess.arms.base.BaseApplication;
@@ -29,6 +30,8 @@ import com.scwang.smart.refresh.layout.listener.DefaultRefreshHeaderCreator;
 
 import java.util.Locale;
 
+import io.rong.imkit.RongIM;
+import io.rong.imlib.RongIMClient;
 import me.jessyan.autosize.AutoSize;
 import me.jessyan.autosize.AutoSizeConfig;
 import me.jessyan.autosize.onAdaptListener;
@@ -40,6 +43,7 @@ public class RBureauApplication extends Application implements App {
     private AppLifecycles mAppDelegate;
     private static Context mContext;
     private HttpProxyCacheServer proxy;
+
     /**
      * 这里会在 {@link BaseApplication#onCreate} 之前被调用,可以做一些较早的初始化
      * 常用于 MultiDex 以及插件化框架的初始化
@@ -87,7 +91,8 @@ public class RBureauApplication extends Application implements App {
         // 初始化 Toast 框架
         ToastUtils.init(this);
         initAutoSize();
-
+        //融云
+        RongIMUtil.getInstance().init();
         //SmartRefreshLayout
         //设置全局的Header构建器
         SmartRefreshLayout.setDefaultRefreshHeaderCreator(new DefaultRefreshHeaderCreator() {

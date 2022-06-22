@@ -63,4 +63,9 @@ public class ViewRaftingModel extends BaseModel implements ViewRaftingContract.M
         return mRepositoryManager.obtainRetrofitService(ApiService.class).messagecontent(message_id);
     }
 
+    @Override
+    public Observable<BaseEntity> messageattending(int message_id) {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).messageattending(message_id);
+    }
+
 }

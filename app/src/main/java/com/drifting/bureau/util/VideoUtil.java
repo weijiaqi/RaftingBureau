@@ -31,7 +31,6 @@ public class VideoUtil {
     //语音操作对象
     private static MediaPlayer mPlayer = null;
 
-    private static CountDownTimer timer;
 
     private static int total_duration;
     private static int current_pos;
@@ -66,8 +65,7 @@ public class VideoUtil {
                                 current_pos = mPlayer.getCurrentPosition() / 1000;
                                 time_remaining = total_duration - current_pos;
                                 mTvTime.setText(time_remaining + "S");
-                                if (time_remaining == 0) {
-                                    handler1.removeCallbacks(runnable);
+                                if (time_remaining <= 0) {
                                     stop(mVideoView, mIvPlay, mTvTime, totaltime);
                                 } else {
                                     handler1.postDelayed(this, 1000);
@@ -95,9 +93,6 @@ public class VideoUtil {
                 e.printStackTrace();
             }
         } else {
-            if (handler1 != null) {
-                handler1.removeCallbacks(runnable);
-            }
             stop(mVideoView, mIvPlay, mTvTime, totaltime);
         }
     }
@@ -107,19 +102,19 @@ public class VideoUtil {
      * @description 语音播放停止
      */
     public static void stop(VoiceWave mVideoView, ImageView mIvPlay, TextView mTvTime, Object animTime) {
-        mVideoView.stop();
-        mVideoView.setDecibel(0);
-        cleanCountDown();
+        close();
         mTvTime.setText(((int) animTime) + "S");
         mIvPlay.setImageResource(R.drawable.voice_play);
-        close();
+        mVideoView.stopRecord();
     }
-
 
     /**
      * @description 播放器清除
      */
     public static void close() {
+        if (handler1 != null) {
+            handler1.removeCallbacks(runnable);
+        }
         if (mPlayer != null) {
             isPlaying = 0;
             mPlayer.stop();
@@ -128,15 +123,6 @@ public class VideoUtil {
         }
     }
 
-    /**
-     * 结束倒计时
-     */
-    public static void cleanCountDown() {
-        if (timer != null) {
-            timer.cancel();
-            timer = null;
-        }
-    }
 
 
     /**

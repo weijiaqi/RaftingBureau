@@ -180,4 +180,30 @@ public class GlideUtil {
     }
 
 
+    /**
+     * 加载普通圆形图片（头像）
+     *
+     * @param context   上下文
+     * @param url       图片url链接
+     * @param imageView ImageView控件
+     */
+    public void loadCirclePic(Context context, String url, ImageView imageView) {
+        if (context == null || imageView == null) return;
+        if (!TextUtils.isEmpty(url)) {
+            RequestOptions options = RequestOptions
+                    .circleCropTransform()
+                    .placeholder(R.drawable.rc_default_portrait)
+                    .error(R.drawable.rc_default_portrait)
+                    .dontAnimate();
+
+            Glide.with(context)
+                    .load(url)
+                    .apply(options)
+                    .into(imageView);
+        } else {
+            imageView.setImageResource(R.drawable.rc_default_portrait);
+        }
+    }
+
+
 }

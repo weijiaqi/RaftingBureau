@@ -8,6 +8,7 @@ import com.drifting.bureau.mvp.model.entity.MysteryboxEntity;
 import com.drifting.bureau.mvp.model.entity.PrizeEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceAboutEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceCheckEntity;
+import com.drifting.bureau.mvp.model.entity.SpaceExchangeEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceStationEntity;
 import com.drifting.bureau.util.ToastUtil;
 import com.jess.arms.base.BaseEntity;
@@ -218,6 +219,38 @@ public class GetSpaceStationPresenter extends BasePresenter<GetSpaceStationContr
                         if (mRootView != null) {
                             if (baseEntity.getCode() == 200) {
                                 mRootView.onSpaceAbout(baseEntity.getData());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        if (mRootView != null) {
+                            mRootView.onNetError();
+                        }
+                    }
+                });
+    }
+
+
+    /**
+     * 兑换码兑换空间站
+     */
+    public void spaceexchange(String code) {
+        mModel.spaceexchange(code).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseEntity<SpaceExchangeEntity>>(mErrorHandler) {
+                    @Override
+                    public void onNext(BaseEntity<SpaceExchangeEntity> baseEntity) {
+                        if (mRootView != null) {
+                            mRootView.hideLoading();
+                            if (baseEntity.getCode() == 200) {
+                                mRootView.showMessage("成功兑换"+baseEntity.getData().getName());
+                            } else {
+                                if (!TextUtils.isEmpty(baseEntity.getMsg())) {
+                                    mRootView.showMessage("兑换码输入错误，请从新输入");
+                                }
                             }
                         }
                     }

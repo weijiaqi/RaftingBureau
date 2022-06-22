@@ -115,7 +115,7 @@ public class ViewUtil {
         if (type == NOT_NULL) {
             frameLayout.setVisibility(View.GONE);
         } else {
-            View inflate = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.layout_not_data, null);
+            View inflate = LayoutInflater.from(context).inflate(R.layout.layout_not_data, null);
             LinearLayout linearLayout = inflate.findViewById(R.id.ll_retry);
             ImageView imageView = inflate.findViewById(R.id.iv_show);
             TextView textView = inflate.findViewById(R.id.tv_content);
@@ -152,7 +152,7 @@ public class ViewUtil {
         if (mStack.size() > 0) {
             frameLayout.removeAllViews();
         }
-        View inflate = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.layout_not_data, null);
+        View inflate = LayoutInflater.from(context).inflate(R.layout.layout_not_data, null);
         LinearLayout linearLayout = inflate.findViewById(R.id.ll_retry);
         ImageView imageView = inflate.findViewById(R.id.iv_show);
         TextView textView = inflate.findViewById(R.id.tv_content);

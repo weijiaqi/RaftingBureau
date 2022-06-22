@@ -15,6 +15,8 @@ public class Preferences {
     public static final String SP_NAME = "config";
 
     private static final String KEY_USER_NAME = "user_name";
+    private static final String KEY_RC_TOKEN = "rc_token";
+    private static final String KEY_USER_PHOTO = "user_photo";
     private static final String KEY_USER_TOKEN = "user_token";
     private static final String KEY_USER_PHONE = "user_phone";
     private static final String KEY_USER_ID = "user_id";
@@ -68,6 +70,28 @@ public class Preferences {
     public static String getUserName() {
         return getString(KEY_USER_NAME);
     }
+
+
+    //用户第一次注册头像
+    public static void saveUserPhoto(String photo) {
+        saveString(KEY_USER_PHOTO, photo);
+    }
+
+    public static String getUserPhoto() {
+        return getString(KEY_USER_PHOTO);
+    }
+
+
+
+    //融云token
+    public static void saveRcToken(String RcToken) {
+        saveString(KEY_RC_TOKEN, RcToken);
+    }
+
+    public static String getRcToken() {
+        return getString(KEY_RC_TOKEN);
+    }
+
 
 
 

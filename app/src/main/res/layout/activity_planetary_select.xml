@@ -3,35 +3,48 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/planetary_bg"
-    android:fitsSystemWindows="true"
+    android:background="@color/color_01"
     android:orientation="vertical">
 
-    <include layout="@layout/include_title" />
 
-    <TextView
-        android:id="@+id/tv_move_away"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="24dp"
-        android:text="搬离星球"
-        android:shadowColor="@color/color_dc4"
-        android:shadowDx="1"
-        android:shadowDy="1"
-        android:shadowRadius="10"
-        android:textColor="@color/white"
-        android:textSize="12sp"
-        android:textStyle="bold" />
-
-
-    <FrameLayout
-        android:id="@+id/main_fame"
+    <ScrollView
+        android:id="@+id/scroll_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar"
-        android:layout_marginTop="30dp" />
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/planetary_bg">
+
+
+            <include layout="@layout/view_height_title_lay" />
+
+            <com.drifting.bureau.view.StrokeTextView
+                android:id="@+id/tv_move_away"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_toolbar"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="24dp"
+                android:text="搬离星球"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:border_color="@color/color_dc4"
+                app:has_boder="true" />
+
+
+            <FrameLayout
+                android:id="@+id/main_fame"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/rl_toolbar"
+                android:layout_marginTop="30dp" />
+
+
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

@@ -9,6 +9,24 @@ public class LoginEntity {
     private String password;
     private Integer status;
     private String user_id;
+    private  String rc_token;
+    private String profile_photo;
+
+    public String getProfile_photo() {
+        return profile_photo;
+    }
+
+    public void setProfile_photo(String profile_photo) {
+        this.profile_photo = profile_photo;
+    }
+
+    public String getRc_token() {
+        return rc_token;
+    }
+
+    public void setRc_token(String rc_token) {
+        this.rc_token = rc_token;
+    }
 
     public String getMobile() {
         return mobile;

@@ -158,6 +158,36 @@ public class ViewRaftingPresenter extends BasePresenter<ViewRaftingContract.Mode
 
 
 
+
+    /**
+     * 参与话题（有免费次数时使用）
+     */
+    public void messageattending(int message_id) {
+        mModel.messageattending(message_id).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseEntity>(mErrorHandler) {
+                    @Override
+                    public void onNext(BaseEntity entity) {
+                        if (mRootView != null) {
+                            if (entity.getCode() == 200) {
+                                mRootView.onMessageAttendingSuccess();
+                            } else {
+                                mRootView.showMessage(entity.getMsg());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        if (mRootView != null) {
+                            mRootView.onNetError();
+                        }
+                    }
+                });
+    }
+
+
     /**
      * @description 播放视频
      */

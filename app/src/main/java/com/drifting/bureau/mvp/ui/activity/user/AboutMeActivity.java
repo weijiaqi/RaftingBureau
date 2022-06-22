@@ -19,14 +19,18 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.billy.android.swipe.SmartSwipe;
 import com.billy.android.swipe.SmartSwipeWrapper;
+import com.billy.android.swipe.SwipeConsumer;
 import com.billy.android.swipe.consumer.DrawerConsumer;
 import com.billy.android.swipe.consumer.SlidingConsumer;
+import com.billy.android.swipe.listener.SimpleSwipeListener;
 import com.drifting.bureau.R;
 
+import com.drifting.bureau.data.event.AnswerCompletedEvent;
 import com.drifting.bureau.di.component.DaggerAboutMeComponent;
 import com.drifting.bureau.mvp.model.entity.AoubtMeEntity;
 import com.drifting.bureau.mvp.model.entity.UserEntity;
@@ -37,19 +41,21 @@ import com.drifting.bureau.mvp.ui.activity.index.PlanetaryDetailActivity;
 import com.drifting.bureau.mvp.ui.activity.index.PlanetarySelectActivity;
 import com.drifting.bureau.mvp.ui.adapter.AboutMeAdapter;
 import com.drifting.bureau.mvp.ui.fragment.PlanetaryDisFragment;
+
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.TextUtil;
 import com.drifting.bureau.util.ToastUtil;
-import com.drifting.bureau.util.callback.BaseDataCallBack;
 import com.drifting.bureau.util.request.RequestUtil;
-import com.hjq.shape.view.ShapeTextView;
 import com.jess.arms.base.BaseActivity;
-import com.jess.arms.base.BaseEntity;
+
 import com.jess.arms.di.component.AppComponent;
 
 import com.drifting.bureau.mvp.contract.AboutMeContract;
 import com.drifting.bureau.mvp.presenter.AboutMePresenter;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -127,6 +133,13 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
         aboutMeAdapter = new AboutMeAdapter(new ArrayList<>());
         mRcyList.setAdapter(aboutMeAdapter);
         aboutMeAdapter.setData(getData());
+        if (userInfoEntity!=null &&userInfoEntity.getPlanet()!=null){
+            setUserInfo();
+        }
+    }
+
+
+    public void setUserInfo() {
         mTvPlace.setText(userInfoEntity.getPlanet().getName());
         mTvPlace2.setText(userInfoEntity.getPlanet().getName());
         mTvIdentity.setText(userInfoEntity.getUser().getLevel_name());
@@ -143,7 +156,7 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
         list.add(new AoubtMeEntity("漂流轨迹", "我的漂流"));
         list.add(new AoubtMeEntity("订单记录", "我的订单"));
         list.add(new AoubtMeEntity("星际战队", "战队成员"));
-        list.add(new AoubtMeEntity("附近门店", "漂流局茶饮店"));
+        list.add(new AoubtMeEntity("实体门店", "漂流局茶饮店"));
         return list;
     }
 
@@ -171,8 +184,8 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
                 case R.id.tv_select: //查看
                     PlanetarySelectActivity.start(this, userInfoEntity.getPlanet().getLevel(), false);
                     break;
-                case R.id.tv_explore:
-                    DiscoveryTourActivity.start(this, true);
+                case R.id.tv_explore: //探索
+                    finish();
                     break;
             }
         }
@@ -185,12 +198,17 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
 
 
     public void setTopSwipe() {
+        int type = userInfoEntity.getPlanet().getLevel();
         View topMenu = LayoutInflater.from(this).inflate(R.layout.activity_planetary_select, null);
-        Fragment fragment = PlanetaryDisFragment.newInstance(userInfoEntity.getPlanet().getLevel());
+        Fragment fragment = PlanetaryDisFragment.newInstance(type);
         getSupportFragmentManager().beginTransaction().replace(R.id.main_fame, fragment).commitAllowingStateLoss();
         RelativeLayout toolbar_back = topMenu.findViewById(R.id.toolbar_back);
         TextView toolbar_title = topMenu.findViewById(R.id.toolbar_title);
+        TextView mTvBar = topMenu.findViewById(R.id.tv_bar);
         TextView tv_move_away = topMenu.findViewById(R.id.tv_move_away);
+        ScrollView scrollView = topMenu.findViewById(R.id.scroll_view);
+        setStatusBarHeight(mTvBar);
+
         toolbar_back.setOnClickListener(v -> {
             finish();
         });
@@ -218,10 +236,42 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
                 //设置边框阴影大小
 //                .setShadowSize(SmartSwipe.dp2px(20, this))
                 //设置监听
-                //  .addListener(listener)
+               .addListener(new SimpleSwipeListener(){
+                   @Override
+                   public void onSwipeOpened(SmartSwipeWrapper wrapper, SwipeConsumer consumer, int direction) {
+                       //设置默认滚动到顶部
+                       scrollView.post(() -> {
+                           // TODO Auto-generated method stub
+                           if (type == 1 || type == 2 || type == 3 || type == 8 || type == 11) {
+                               scrollView.fullScroll(ScrollView.FOCUS_UP);
+                           } else if (type == 17 || type == 7 || type == 4 || type == 5 || type == 15) {
+                               scrollView.scrollTo(0, scrollView.getBottom() / 2);
+                           } else {
+                               scrollView.fullScroll(ScrollView.FOCUS_DOWN);
+                           }
+                       });
+                   }
+               })
                 //将SwipeConsumer类型转换为DrawerConsumer类型
                 .as(DrawerConsumer.class);
+
+
         SmartSwipe.wrap(this).addConsumer(slidingConsumer);
+
+
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void AnswerCompletedEvent(AnswerCompletedEvent answerCompletedEvent) {
+        if (answerCompletedEvent != null) {
+            RequestUtil.create().userplayer(Preferences.getUserId(), entity -> {
+                if (entity != null && entity.getCode() == 200) {
+                    userInfoEntity = entity.getData();
+                    setUserInfo();
+                }
+            });
+        }
     }
 
 

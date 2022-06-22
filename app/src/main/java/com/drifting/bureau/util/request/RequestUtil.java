@@ -6,10 +6,13 @@ import android.util.SparseArray;
 
 import com.drifting.bureau.app.api.ApiProxy;
 import com.drifting.bureau.mvp.model.entity.BoxOpenEntity;
+import com.drifting.bureau.mvp.model.entity.FriendInfoEntity;
 import com.drifting.bureau.mvp.model.entity.MySpaceStationEntity;
 import com.drifting.bureau.mvp.model.entity.MyTreasuryEntity;
 import com.drifting.bureau.mvp.model.entity.PlanetLocationEntity;
 import com.drifting.bureau.mvp.model.entity.PlatformTimesEntity;
+import com.drifting.bureau.mvp.model.entity.RaftingBureaufriendEntity;
+import com.drifting.bureau.mvp.model.entity.SysmessageEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.model.entity.WriteOffInfoEntity;
 import com.drifting.bureau.util.callback.BaseDataCallBack;
@@ -54,7 +57,6 @@ public class RequestUtil {
     }
 
 
-
     /**
      * 查看漂流-玩家信息
      *
@@ -87,7 +89,6 @@ public class RequestUtil {
                     }
                 });
     }
-
 
 
     /**
@@ -124,15 +125,14 @@ public class RequestUtil {
     }
 
 
-
     /**
      * 转赠盲盒
      *
      * @param box_id
      * @param callBack
      */
-    public void mysteryboxtransfer(String box_id,String mobile, BaseDataCallBack callBack) {
-        ApiProxy.getApiService().transfer(box_id,mobile)
+    public void mysteryboxtransfer(String box_id, String mobile, BaseDataCallBack callBack) {
+        ApiProxy.getApiService().transfer(box_id, mobile)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new BaseObserver<BaseEntity>() {
@@ -157,8 +157,6 @@ public class RequestUtil {
                     }
                 });
     }
-
-
 
 
     /**
@@ -167,8 +165,8 @@ public class RequestUtil {
      * @param object_id
      * @param callBack
      */
-    public void mysteryboxtransfer(int object_id,String mobile, BaseDataCallBack callBack) {
-        ApiProxy.getApiService().storagetransfer(object_id,mobile)
+    public void mysteryboxtransfer(int object_id, String mobile, BaseDataCallBack callBack) {
+        ApiProxy.getApiService().storagetransfer(object_id, mobile)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new BaseObserver<BaseEntity>() {
@@ -193,8 +191,6 @@ public class RequestUtil {
                     }
                 });
     }
-
-
 
 
     /**
@@ -230,9 +226,6 @@ public class RequestUtil {
     }
 
 
-
-
-
     /**
      * 添加好友（查看漂流）
      *
@@ -266,15 +259,13 @@ public class RequestUtil {
     }
 
 
-
-
     /**
      * 核销码信息（订单记录-核销）
      *
      * @param callBack
      */
     public void writeOffInfo(int order_sub_id, BaseDataCallBack<WriteOffInfoEntity> callBack) {
-        ApiProxy.getApiService().writeOffInfo(order_sub_id+"")
+        ApiProxy.getApiService().writeOffInfo(order_sub_id + "")
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new BaseObserver<BaseEntity<WriteOffInfoEntity>>() {
@@ -301,14 +292,13 @@ public class RequestUtil {
     }
 
 
-
     /**
      * 使用物品（空间站）
      *
      * @param callBack
      */
-    public void storageusing(int object_id,int object_num , BaseDataCallBack callBack) {
-        ApiProxy.getApiService().storageusing(object_id,object_num)
+    public void storageusing(int object_id, int object_num, BaseDataCallBack callBack) {
+        ApiProxy.getApiService().storageusing(object_id, object_num)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new BaseObserver<BaseEntity>() {
@@ -366,7 +356,6 @@ public class RequestUtil {
     }
 
 
-
     /**
      * 我的库藏(我的空间站)
      */
@@ -396,8 +385,6 @@ public class RequestUtil {
                     }
                 });
     }
-
-
 
 
     /**
@@ -431,13 +418,105 @@ public class RequestUtil {
     }
 
 
-
-
     /**
      * 举报
      */
-    public void reportcommit(int message_id,int report_type,String reason,   BaseDataCallBack callBack) {
-        ApiProxy.getApiService().reportcommit(message_id,report_type,reason)
+    public void reportcommit(int message_id, int report_type, String reason, BaseDataCallBack callBack) {
+        ApiProxy.getApiService().reportcommit(message_id, report_type, reason)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new BaseObserver<BaseEntity>() {
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+                        mDisposables.put(mRequestCount++, disposable);
+                    }
+
+                    @Override
+                    public void onNext(BaseEntity entity) {
+                        if (callBack != null) {
+                            callBack.getData(entity);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (callBack != null) {
+                            callBack.getData(null);
+                        }
+                    }
+                });
+    }
+
+
+    /**
+     * 免费漂流次数
+     */
+    public void platformtimes(int explore_id, BaseDataCallBack<PlatformTimesEntity> callBack) {
+        ApiProxy.getApiService().platformtimes(explore_id)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new BaseObserver<BaseEntity<PlatformTimesEntity>>() {
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+                        mDisposables.put(mRequestCount++, disposable);
+                    }
+
+                    @Override
+                    public void onNext(BaseEntity<PlatformTimesEntity> entity) {
+                        if (callBack != null) {
+                            callBack.getData(entity);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (callBack != null) {
+                            callBack.getData(null);
+                        }
+                    }
+                });
+    }
+
+
+    /**
+     * 未读消息数（消息中心）
+     */
+    public void unread(BaseDataCallBack<SysmessageEntity> callBack) {
+        ApiProxy.getApiService().unread()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new BaseObserver<BaseEntity<SysmessageEntity>>() {
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+                        mDisposables.put(mRequestCount++, disposable);
+                    }
+
+                    @Override
+                    public void onNext(BaseEntity<SysmessageEntity> entity) {
+                        if (callBack != null) {
+                            callBack.getData(entity);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (callBack != null) {
+                            callBack.getData(null);
+                        }
+                    }
+                });
+    }
+
+
+
+    /**
+     * 标记为已读（消息中心）
+     */
+    public void markread(int sys_msg_id,  BaseDataCallBack callBack) {
+        ApiProxy.getApiService().markread(sys_msg_id)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new BaseObserver<BaseEntity>() {
@@ -467,13 +546,13 @@ public class RequestUtil {
 
 
     /**
-     * 免费漂流次数
+     * 同意或拒绝好友申请（消息中心）
      */
-    public void platformtimes( int explore_id,BaseDataCallBack<PlatformTimesEntity> callBack) {
-        ApiProxy.getApiService().platformtimes(explore_id)
+    public void agreeRefuse(int apply_id,int status,  BaseDataCallBack callBack) {
+        ApiProxy.getApiService().agreeRefuse(apply_id,status)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new BaseObserver<BaseEntity<PlatformTimesEntity>>() {
+                .subscribe(new BaseObserver<BaseEntity>() {
 
                     @Override
                     public void onSubscribe(Disposable disposable) {
@@ -481,7 +560,7 @@ public class RequestUtil {
                     }
 
                     @Override
-                    public void onNext(BaseEntity<PlatformTimesEntity> entity) {
+                    public void onNext(BaseEntity entity) {
                         if (callBack != null) {
                             callBack.getData(entity);
                         }
@@ -495,6 +574,75 @@ public class RequestUtil {
                     }
                 });
     }
+
+
+
+
+    /**
+     * 删除好友（消息中心）
+     */
+    public void frienddelete(int user_id ,BaseDataCallBack callBack) {
+        ApiProxy.getApiService().frienddelete(user_id)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new BaseObserver<BaseEntity>() {
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+                        mDisposables.put(mRequestCount++, disposable);
+                    }
+
+                    @Override
+                    public void onNext(BaseEntity entity) {
+                        if (callBack != null) {
+                            callBack.getData(entity);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (callBack != null) {
+                            callBack.getData(null);
+                        }
+                    }
+                });
+    }
+
+
+
+
+    /**
+     * 好友相关信息（头像、昵称）
+     */
+    public void friendinfo(String user_id ,BaseDataCallBack<FriendInfoEntity> callBack) {
+        ApiProxy.getApiService().friendinfo(user_id)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new BaseObserver<BaseEntity<FriendInfoEntity>>() {
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+                        mDisposables.put(mRequestCount++, disposable);
+                    }
+
+                    @Override
+                    public void onNext(BaseEntity<FriendInfoEntity> entity) {
+                        if (callBack != null) {
+                            callBack.getData(entity);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (callBack != null) {
+                            callBack.getData(null);
+                        }
+                    }
+                });
+    }
+
+
+
 
     /**
      * 取消订阅

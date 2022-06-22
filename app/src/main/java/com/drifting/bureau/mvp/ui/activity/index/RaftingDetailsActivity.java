@@ -164,8 +164,8 @@ public class RaftingDetailsActivity extends BaseActivity<RaftingDetailsPresenter
             }
             mRcyBarrage.setLayoutManager(new StaggeredGridLayoutManager(size, StaggeredGridLayoutManager.HORIZONTAL));
             raftingDetailsAdapter = new RaftingDetailsAdapter(new ArrayList<>(), entity1 -> {
-                if (bean.getType_id()==2) {//点击先停止语音播放
-                    VideoUtil.stop(mVideoView, mIvPlay, mTvTime,totaltime);
+                if (bean.getType_id() == 2) {//点击先停止语音播放
+                    VideoUtil.stop(mVideoView, mIvPlay, mTvTime, totaltime);
                 }
                 bean = entity1;
                 setMessageStatus(bean);
@@ -193,7 +193,7 @@ public class RaftingDetailsActivity extends BaseActivity<RaftingDetailsPresenter
             mTvTime.setText(totaltime + "S");
             mVideoView.setDecibel(0);
         } else if (bean.getType_id() == 3) {
-            GlideUtil.create().loadLongImage(this, barrageEntity.getMessage().getImage(), mIvpic);
+            GlideUtil.create().loadLongImage(this, bean.getImage(), mIvpic);
         }
     }
 
@@ -215,6 +215,9 @@ public class RaftingDetailsActivity extends BaseActivity<RaftingDetailsPresenter
                     finish();
                     break;
                 case R.id.tv_passer_num:   //传递详情
+                    if (bean.getType_id() == 2) {
+                       VideoUtil.stop(mVideoView, mIvPlay, mTvTime, totaltime);
+                    }
                     DeliveryDetailsActivity.start(this, id, false);
                     break;
                 case R.id.iv_play: //语音播放
@@ -229,14 +232,14 @@ public class RaftingDetailsActivity extends BaseActivity<RaftingDetailsPresenter
 
     @Override
     public void showMessage(@NonNull String message) {
-       ToastUtil.showToast(message);
+        ToastUtil.showToast(message);
     }
 
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+
         VideoUtil.close();
-        VideoUtil.cleanCountDown();
     }
 }

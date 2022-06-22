@@ -100,11 +100,13 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <TextView
+                <com.drifting.bureau.view.StrokeTextView
                     android:id="@+id/tv_prize_preview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="7dp"
+                    app:has_boder="true"
+                    app:border_color="@color/color_15"
                     android:text="奖品预览"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
@@ -128,12 +130,14 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <TextView
+                <com.drifting.bureau.view.StrokeTextView
                     android:id="@+id/tv_my_blind_box"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="7dp"
                     android:text="我的盲盒"
+                    app:has_boder="true"
+                    app:border_color="@color/color_15"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
 

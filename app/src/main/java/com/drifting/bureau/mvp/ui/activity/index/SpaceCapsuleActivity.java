@@ -24,10 +24,12 @@ import com.drifting.bureau.mvp.model.entity.SpaceStationEntity;
 import com.drifting.bureau.mvp.presenter.GetSpaceStationPresenter;
 import com.drifting.bureau.mvp.presenter.MySpaceStationPresenter;
 import com.drifting.bureau.mvp.ui.activity.user.MySpaceStationActivity;
+import com.drifting.bureau.mvp.ui.dialog.ExchangeCodeDialog;
 import com.drifting.bureau.mvp.ui.dialog.HowToPlayDialog;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.jess.arms.base.BaseActivity;
+import com.jess.arms.base.BaseDialog;
 import com.jess.arms.di.component.AppComponent;
 
 import java.util.List;
@@ -45,6 +47,7 @@ public class SpaceCapsuleActivity extends BaseActivity<GetSpaceStationPresenter>
     TextView mToolbarTitle;
 
     private HowToPlayDialog howToPlayDialog;
+    private ExchangeCodeDialog exchangeCodeDialog;
 
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, SpaceCapsuleActivity.class);
@@ -75,7 +78,7 @@ public class SpaceCapsuleActivity extends BaseActivity<GetSpaceStationPresenter>
     }
 
 
-    @OnClick({R.id.toolbar_back, R.id.tv_how_to_play, R.id.tv_space_obtain, R.id.tv_space_enter})
+    @OnClick({R.id.toolbar_back, R.id.tv_how_to_play, R.id.tv_space_obtain, R.id.tv_space_enter, R.id.iv_exchange_code})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
@@ -94,6 +97,15 @@ public class SpaceCapsuleActivity extends BaseActivity<GetSpaceStationPresenter>
                     if (mPresenter != null) {
                         mPresenter.spacecheck();
                     }
+                    break;
+                case R.id.iv_exchange_code: //兑换入口
+                    exchangeCodeDialog=new ExchangeCodeDialog(this);
+                    exchangeCodeDialog.show();
+                    exchangeCodeDialog.setOnContentClickCallback(content -> {
+                        if (mPresenter!=null){
+                            mPresenter.spaceexchange(content);
+                        }
+                    });
                     break;
             }
         }
@@ -133,7 +145,7 @@ public class SpaceCapsuleActivity extends BaseActivity<GetSpaceStationPresenter>
     @Override
     public void onSpaceAbout(List<SpaceAboutEntity> list) {
         if (list != null && list.size() > 0) {
-            howToPlayDialog = new HowToPlayDialog(this,list);
+            howToPlayDialog = new HowToPlayDialog(this, list);
             howToPlayDialog.show();
         }
     }

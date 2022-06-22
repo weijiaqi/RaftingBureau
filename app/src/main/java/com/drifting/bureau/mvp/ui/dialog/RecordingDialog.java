@@ -61,7 +61,6 @@ public class RecordingDialog extends BottomDialog implements View.OnClickListene
     private int totaltime;
 
 
-
     public RecordingDialog(@NonNull Activity activity) {
         super(activity);
         this.activity = activity;
@@ -142,11 +141,8 @@ public class RecordingDialog extends BottomDialog implements View.OnClickListene
                 startPlay();
                 break;
             case R.id.tv_delete: //删除
-                InVoiceStatus();
-                cPlay.reset();
-                endAudition();
+                EndAudition();
                 deleteFile();
-                close();
                 mRlplay.setVisibility(View.GONE);
                 mLlPrepare.setVisibility(View.VISIBLE);
                 break;
@@ -294,11 +290,15 @@ public class RecordingDialog extends BottomDialog implements View.OnClickListene
             handler.sendMessage(message);
         } else {
             //结束试听
-            cPlay.reset();
-            endAudition();
-            close();
-            InVoiceStatus();
+            EndAudition();
         }
+    }
+
+    public void EndAudition() {
+        cPlay.reset();
+        endAudition();
+        close();
+        InVoiceStatus();
     }
 
     /**
@@ -306,8 +306,7 @@ public class RecordingDialog extends BottomDialog implements View.OnClickListene
      */
 
     public void InVoiceStatus() {
-        voiceWave.stop();
-        voiceWave.setDecibel(0);
+        voiceWave.stopRecord();
     }
 
     public void deleteFile() {
@@ -325,7 +324,11 @@ public class RecordingDialog extends BottomDialog implements View.OnClickListene
         view.setAddCountDownListener(new CircleProgressView.OnCountDownFinishListener() {
             @Override
             public void countDown(int second) {
-                textView.setText(second + "S");
+                if (second <= 0) {
+                    textView.setText("0S");
+                } else {
+                    textView.setText(second + "S");
+                }
                 if (type == 1) {
                     time = totaltime - second;
                 }
@@ -337,7 +340,7 @@ public class RecordingDialog extends BottomDialog implements View.OnClickListene
                 if (type == 1) {
                     stopRecording();
                 } else {
-                    endAudition();
+                    EndAudition();
                 }
             }
         });

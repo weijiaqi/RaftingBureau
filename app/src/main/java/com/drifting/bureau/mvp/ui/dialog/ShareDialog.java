@@ -35,13 +35,12 @@ public class ShareDialog extends BaseDialog implements View.OnClickListener {
     private Handler mHandler = new Handler();
     private Context context;
     private UserInfoEntity userInfoEntity;
-    private String code;
 
-    public ShareDialog(@NonNull Context context, UserInfoEntity userInfoEntity, String code) {
+
+    public ShareDialog(@NonNull Context context, UserInfoEntity userInfoEntity) {
         super(context);
         this.context = context;
         this.userInfoEntity = userInfoEntity;
-        this.code = code;
     }
 
     @Override
@@ -66,7 +65,7 @@ public class ShareDialog extends BaseDialog implements View.OnClickListener {
         mTvAddress.setText(userInfoEntity.getPlanet().getName());
         mTvNum.setText(userInfoEntity.getPlanet().getSchedule() + "%");
         mPrUploadValue.setProgress(userInfoEntity.getPlanet().getSchedule());
-        mIvCode.setImageBitmap(EncodingHandler.createQRCode(code, ArmsUtils.dip2px(context,67), ArmsUtils.dip2px(context,67), BitmapFactory.decodeResource(context.getResources(), R.drawable.plus)));
+        mIvCode.setImageBitmap(EncodingHandler.createQRCode(userInfoEntity.getUser().getShare_code(), ArmsUtils.dip2px(context,67), ArmsUtils.dip2px(context,67), BitmapFactory.decodeResource(context.getResources(), R.drawable.plus)));
     }
 
     @Override

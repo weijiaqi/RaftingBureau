@@ -3,10 +3,12 @@ package com.drifting.bureau.util;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
+import android.text.Editable;
 import android.text.Html;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.EditText;
@@ -340,6 +342,65 @@ public class TextUtil {
             return true;
         }
         return false;
+    }
+
+    /**
+     * 只允许输入两位小数的数字
+     *
+     * @return
+     */
+    public static void watchEditView(EditText mEdit) {
+        mEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //删除.后面超过两位的数字
+                if (s.toString().contains(".")) {
+                    if (s.length() - 1 - s.toString().indexOf(".") > 2) {
+                        s = s.toString().subSequence(0,
+                                s.toString().indexOf(".") + 3);
+                        mEdit.setText(s);
+                        mEdit.setSelection(s.length());
+                    }
+                }
+
+                //如果.在起始位置,则起始位置自动补0
+                if (s.toString().trim().substring(0).equals(".")) {
+                    s = "0" + s;
+                    mEdit.setText(s);
+                    mEdit.setSelection(2);
+                }
+
+                //如果起始位置为0并且第二位跟的不是".",则无法后续输入
+                if (s.toString().startsWith("0")
+                        && s.toString().trim().length() > 1) {
+                    if (!s.toString().substring(1, 2).equals(".")) {
+                        mEdit.setText(s.subSequence(0, 1));
+                        mEdit.setSelection(1);
+                        return;
+                    }
+                }
+
+                //不允许输入两个"."
+                if (s.toString().trim().length() > 2) {
+                    int firstIndex = s.toString().trim().indexOf(".");
+                    int lastIndex = s.toString().trim().lastIndexOf(".");
+                    if (lastIndex - firstIndex == 1) {
+                        mEdit.setText(s.subSequence(0, lastIndex));
+                        mEdit.setSelection(lastIndex);
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
 }

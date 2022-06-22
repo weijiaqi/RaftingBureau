@@ -188,6 +188,15 @@ public class UserInfoEntity implements Serializable {
             private Integer explore_num;
             private Integer created_at_int;
             private Integer updated_at_int;
+            private String share_code;
+
+            public String getShare_code() {
+                return share_code;
+            }
+
+            public void setShare_code(String share_code) {
+                this.share_code = share_code;
+            }
 
             public Integer getId() {
                 return Id;

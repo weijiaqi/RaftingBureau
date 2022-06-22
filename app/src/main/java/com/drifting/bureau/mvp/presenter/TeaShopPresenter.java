@@ -51,7 +51,7 @@ public class TeaShopPresenter extends BasePresenter<TeaShopContract.Model, TeaSh
 
 
     /**
-     * 附近门店
+     * 实体门店
      */
     public void nearby( String name, int page, int limit, boolean loadType) {
         if (mRootView != null) {

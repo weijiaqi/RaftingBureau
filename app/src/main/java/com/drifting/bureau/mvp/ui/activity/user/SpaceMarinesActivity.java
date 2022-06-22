@@ -56,7 +56,7 @@ public class SpaceMarinesActivity extends BaseActivity<SpaceMarinesPresenter> im
     @BindView(R.id.tv_ranking)
     TextView mTvRanking;
 
-    private String code;
+
     private ShareDialog shareDialog;
 
     private UserInfoEntity userInfoEntity;
@@ -113,14 +113,14 @@ public class SpaceMarinesActivity extends BaseActivity<SpaceMarinesPresenter> im
                     finish();
                     break;
                 case R.id.tv_withdrawal: //提现
-                    WithdrawalActivity.start(this, 2, mTvWithdrawalCash.getText().toString(), false);
+                    WithdrawalActivity.start(this, 2, mTvWithdrawal.getText().toString(), false);
                     break;
                 case R.id.tv_withdrawal_record://提现记录
                     WithdrawalRecordActivity.start(this, false);
                     break;
                 case R.id.tv_share: //分享
-                    if (userInfoEntity != null &&code!=null) {
-                        shareDialog = new ShareDialog(this, userInfoEntity,code);
+                    if (userInfoEntity != null) {
+                        shareDialog = new ShareDialog(this, userInfoEntity);
                         shareDialog.show();
                     }
                     break;
@@ -139,7 +139,6 @@ public class SpaceMarinesActivity extends BaseActivity<SpaceMarinesPresenter> im
             mTvWithdrawalCash.setText(entity.getWithdrawn());
             mTvOrderNum.setText(entity.getOrder_num() + "");
             mTvRanking.setText(entity.getRanking() + "");
-            code=entity.getShare_code();
         }
     }
 
