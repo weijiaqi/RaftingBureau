@@ -32,7 +32,7 @@ public class SelectOrderDialog extends BaseDialog implements View.OnClickListene
 
     private TextView mTvLeaveSpace, mTvMadeForHim, mTvname, mTvPlanet, mTvIdentity, mTvWord, mTvTime;
     private RelativeLayout mRlVoicePlay, mRlVideoPlay;
-    private ImageView mIvPlay, mIvPic;
+    private ImageView mIvPlay, mIvPic,mIvMastor;
     private VoiceWave mVideoView;
 
     private UserInfoEntity userInfoEntity;
@@ -62,6 +62,7 @@ public class SelectOrderDialog extends BaseDialog implements View.OnClickListene
         mIvPlay = findViewById(R.id.iv_play);
         mVideoView = findViewById(R.id.videoView);
         mIvPic = findViewById(R.id.iv_pic);
+        mIvMastor= findViewById(R.id.iv_mastor);
     }
 
     @Override
@@ -74,6 +75,8 @@ public class SelectOrderDialog extends BaseDialog implements View.OnClickListene
         mTvname.setText("昵称：" + userInfoEntity.getUser().getName());
         mTvPlanet.setText(userInfoEntity.getPlanet().getName());
         mTvIdentity.setText(userInfoEntity.getUser().getLevel_name());
+        GlideUtil.create().loadLongImage(context,userInfoEntity.getUser().getMascot(),mIvMastor);
+
         switch (orderDetailEntity.getType_id()) {
             case 1:
                 mTvWord.setVisibility(View.VISIBLE);

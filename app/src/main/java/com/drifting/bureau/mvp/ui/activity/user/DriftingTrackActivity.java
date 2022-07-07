@@ -16,7 +16,6 @@ import android.widget.TextView;
 import com.drifting.bureau.R;
 import com.drifting.bureau.di.component.DaggerDriftingTrackComponent;
 import com.drifting.bureau.mvp.model.entity.DriftingTrackEntity;
-import com.drifting.bureau.mvp.model.entity.MyBlindBoxEntity;
 import com.drifting.bureau.mvp.ui.adapter.DriftingTrackAdapter;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.ViewUtil;

@@ -20,7 +20,7 @@ public class Preferences {
     private static final String KEY_USER_TOKEN = "user_token";
     private static final String KEY_USER_PHONE = "user_phone";
     private static final String KEY_USER_ID = "user_id";
-
+    private static final String KEY_USER_MASCOT = "user_mascot";
     private static final String KEY_USER_PASSWORD = "user_password";
 
     private static final String KEY_USER_IS_ANONY = "isanony";//是否为匿名状态
@@ -80,6 +80,18 @@ public class Preferences {
     public static String getUserPhoto() {
         return getString(KEY_USER_PHOTO);
     }
+
+
+
+    //吉祥物头像
+    public static void saveMascot(String photo) {
+        saveString(KEY_USER_MASCOT, photo);
+    }
+
+    public static String getMascot() {
+        return getString(KEY_USER_MASCOT);
+    }
+
 
 
 

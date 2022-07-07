@@ -14,7 +14,6 @@ import com.drifting.bureau.R;
 
 import com.drifting.bureau.di.component.DaggerSpaceCapsuleComponent;
 import com.drifting.bureau.mvp.contract.GetSpaceStationContract;
-import com.drifting.bureau.mvp.contract.MySpaceStationContract;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
 import com.drifting.bureau.mvp.model.entity.MysteryboxEntity;
 import com.drifting.bureau.mvp.model.entity.PrizeEntity;
@@ -22,14 +21,12 @@ import com.drifting.bureau.mvp.model.entity.SpaceAboutEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceCheckEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceStationEntity;
 import com.drifting.bureau.mvp.presenter.GetSpaceStationPresenter;
-import com.drifting.bureau.mvp.presenter.MySpaceStationPresenter;
 import com.drifting.bureau.mvp.ui.activity.user.MySpaceStationActivity;
 import com.drifting.bureau.mvp.ui.dialog.ExchangeCodeDialog;
 import com.drifting.bureau.mvp.ui.dialog.HowToPlayDialog;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.jess.arms.base.BaseActivity;
-import com.jess.arms.base.BaseDialog;
 import com.jess.arms.di.component.AppComponent;
 
 import java.util.List;
@@ -132,7 +129,7 @@ public class SpaceCapsuleActivity extends BaseActivity<GetSpaceStationPresenter>
             if (entity.getStatus() == 0) {
                 showMessage("检测到您还没拥有空间站,请去获取!");
             } else {
-                MySpaceStationActivity.start(this, entity.getSpace_id(), false);
+                MySpaceStationActivity.start(this, false);
             }
         }
     }

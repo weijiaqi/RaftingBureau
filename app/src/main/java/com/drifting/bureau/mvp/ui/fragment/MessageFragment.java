@@ -94,10 +94,7 @@ public class MessageFragment extends BaseFragment<MessagePresenter> implements M
         initListener();
     }
 
-    @Override
-    protected void onFirstVisible() {
-        super.onFirstVisible();
-    }
+
 
     @Override
     public void setData(@Nullable Object data) {

@@ -34,10 +34,11 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tv_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"
-                    android:text="2022/10/15"
+                    android:text=""
                     android:textColor="@color/color_99"
                     android:textSize="11sp" />
             </LinearLayout>

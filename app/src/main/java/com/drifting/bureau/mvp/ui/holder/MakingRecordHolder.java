@@ -1,5 +1,6 @@
 package com.drifting.bureau.mvp.ui.holder;
 
+import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
@@ -25,22 +26,26 @@ public class MakingRecordHolder extends BaseRecyclerHolder {
     TextView mTvPrice;
     @BindView(R.id.tv_status)
     TextView mTvStatus;
+    private Context context;
 
     public MakingRecordHolder(View itemView) {
         super(itemView);
+        context = itemView.getContext();
     }
 
     public void setData(@NonNull List<MakingRecordEntity.ListBean> listBeanList, int position) {
-        TextUtil.setText(mTvTime, "接收时间：" + StringUtil.stampToDate(listBeanList.get(position).getMade_at()));
+        TextUtil.setText(mTvTime, "接收时间：" + StringUtil.stampToDate(listBeanList.get(position).getPath_time()));
         TextUtil.setText(mTvPeople, "漂流人：" + listBeanList.get(position).getBuyer_name());
-        TextUtil.setText(mTvPrice, listBeanList.get(position).getMoney());
         if (listBeanList.get(position).getMade() == 1) {
             TextUtil.setText(mTvStatus, "已制作");
+            mTvStatus.setTextColor(context.getColor(R.color.color_6d));
         } else {
             if (listBeanList.get(position).getIs_throw() == 1 || listBeanList.get(position).getIs_throw() == 2) {
                 TextUtil.setText(mTvStatus, "已丢回");
+                mTvStatus.setTextColor(context.getColor(R.color.color_f8));
             } else {
                 TextUtil.setText(mTvStatus, "未制作");
+                mTvStatus.setTextColor(context.getColor(R.color.color_7d));
             }
         }
     }

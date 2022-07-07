@@ -14,13 +14,10 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.drifting.bureau.R;
-import com.drifting.bureau.data.event.AnswerCompletedEvent;
 import com.drifting.bureau.data.event.FriendApplicationEvent;
 import com.drifting.bureau.di.component.DaggerFriendApplicationComponent;
 import com.drifting.bureau.mvp.model.entity.FriendApplicationEntity;
-import com.drifting.bureau.mvp.model.entity.SysmessageMineEntity;
 import com.drifting.bureau.mvp.ui.adapter.FriendApplicationAdapter;
-import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.ViewUtil;

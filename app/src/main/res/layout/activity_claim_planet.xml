@@ -213,7 +213,6 @@
                 android:textStyle="bold" />
 
 
-
             <TextView
                 android:id="@+id/tv_enter_rb"
                 android:layout_width="163dp"

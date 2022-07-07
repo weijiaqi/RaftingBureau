@@ -45,7 +45,7 @@ public class TeaShopModel extends BaseModel implements TeaShopContract.Model{
     }
 
     @Override
-    public Observable<BaseEntity<TeaShopEntity>> nearby( String name, int page, int limit) {
-        return mRepositoryManager.obtainRetrofitService(ApiService.class).nearby(name, page,limit);
+    public Observable<BaseEntity<TeaShopEntity>> nearby( String name, int page, int limit,String lng,String lat) {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).nearby(name, page,limit,lng,lat);
     }
 }

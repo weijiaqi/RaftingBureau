@@ -13,10 +13,18 @@ public class SpaceInfoEntity {
     private String background;
     private double total_income;
     private double withdrawable;
+    private String ar_url;
     private Integer status;
     private Integer created_at_int;
     private Integer updated_at_int;
 
+    public String getAr_url() {
+        return ar_url;
+    }
+
+    public void setAr_url(String ar_url) {
+        this.ar_url = ar_url;
+    }
 
     public String getBackground() {
         return background;

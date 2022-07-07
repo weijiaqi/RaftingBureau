@@ -13,11 +13,14 @@
 
         <TextView
             android:id="@+id/tv_planet"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:gravity="center"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             android:layout_marginEnd="12dp"
-            android:text="荒芜星球人"
+            android:text=""
             android:textColor="@color/color_6ce"
             android:textSize="11sp" />
 

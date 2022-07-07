@@ -2,12 +2,12 @@ package com.drifting.bureau.mvp.ui.activity.web;
 
 import static com.drifting.bureau.WebUrlConstant.USER_LICENSE;
 import static com.drifting.bureau.WebUrlConstant.USER_PRIVACY;
+import static com.drifting.bureau.WebUrlConstant.USER_PURCHASE;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -19,7 +19,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.drifting.bureau.R;
-import com.drifting.bureau.mvp.ui.activity.user.BuildGuideActivity;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.ViewUtil;
 import com.drifting.bureau.view.customWebview.CustomWebView;
@@ -35,8 +34,7 @@ import butterknife.OnClick;
  * @Author : WeiJiaQI
  * @Time : 2022/5/9 11:51
  */
-public class ShowWebViewActivity extends BaseActivity  implements WebLoadingListener {
-
+public class ShowWebViewActivity extends BaseActivity implements WebLoadingListener {
     @BindView(R.id.fl_container)
     FrameLayout mFlContainer;
     @BindView(R.id.toolbar_title)
@@ -48,7 +46,8 @@ public class ShowWebViewActivity extends BaseActivity  implements WebLoadingList
     private static final String WEB_TYPE = "web_type";
     private int mType = -1;
     private boolean loadErrored;
-    public static void start(Context context,int type, boolean closePage) {
+
+    public static void start(Context context, int type, boolean closePage) {
         Intent intent = new Intent(context, ShowWebViewActivity.class);
         intent.putExtra(WEB_TYPE, type);
         context.startActivity(intent);
@@ -99,11 +98,15 @@ public class ShowWebViewActivity extends BaseActivity  implements WebLoadingList
                 break;
             case 1:
                 mTvTitle.setText("用户隐私协议");
-                mWebView.loadUrl("https://www.kivicube.com/ar-quick-look");
+                mWebView.loadUrl(USER_PRIVACY);
                 break;
             case 2:
                 mTvTitle.setText("用户注册协议");
                 mWebView.loadUrl(USER_LICENSE);
+                break;
+            case 3:
+                mTvTitle.setText("盲盒购买须知");
+                mWebView.loadUrl(USER_PURCHASE);
                 break;
         }
     }

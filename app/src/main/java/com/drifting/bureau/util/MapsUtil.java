@@ -19,6 +19,11 @@ public class MapsUtil {
     public static final String PN_BAIDU_MAP = "com.baidu.BaiduMap"; // 百度地图包名
     public static final String PN_TENCENT_MAP = "com.tencent.map"; // 腾讯地图包名
 
+    public static double x_PI = 3.14159265358979324 * 3000.0 / 180.0;
+    public static double PI = 3.1415926535897932384626;
+    public static double a = 6378245.0;
+    public static double ee = 0.00669342162296594323;
+
     /**
      * 启动百度App进行导航
      *
@@ -27,7 +32,7 @@ public class MapsUtil {
      * @param lon     必填 经度
      */
     public static void goToBaiduActivity(Context context, String address, double lon, double lat) {
-        double[] doubles = gcj02_To_Bd09(lon, lat);
+        double[] doubles = wgs84tobd09(lon, lat);
         //启动路径规划页面
         baiduMap(context, doubles[0], doubles[1]);
     }
@@ -52,6 +57,58 @@ public class MapsUtil {
         }
     }
 
+
+    /**
+     * 启动高德App进行导航
+     *
+     * @param lat 必填 纬度
+     * @param lon 必填 经度
+     */
+    public static void goToGodeActivity(Context context, double lon, double lat) {
+        double[] doubles = wgs84togcj02(lon, lat);
+        //启动路径规划页面
+        goToGaoDeMap(context, doubles[0], doubles[1]);
+    }
+
+    /**
+     * 高德地图
+     */
+    public static void goToGaoDeMap(Context context, double lng, double lat) {
+        if (isAvilible(context, PN_GAODE_MAP)) {//传入指定应用包名
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_VIEW);
+            intent.addCategory(Intent.CATEGORY_DEFAULT);
+            intent.setPackage(PN_GAODE_MAP);
+            try {
+                intent = Intent.getIntent("amapuri://route/plan/?dlat=" + lat + "&dlon=" + lng + "&d&dev=0&t=0");
+                context.startActivity(intent);
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+        } else {//未安装
+            //market为路径，id为包名
+            //显示手机上所有的market商店
+            ToastUtils.show("您尚未安装高德地图");
+            Uri uri = Uri.parse("market://details?id=" + PN_GAODE_MAP);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            context.startActivity(intent);
+        }
+    }
+
+
+    /**
+     * 启动腾讯App进行导航
+     *
+     * @param lat 必填 纬度
+     * @param lon 必填 经度
+     */
+    public static void goToTencentActivity(Context context, double lon, double lat) {
+        double[] doubles = wgs84togcj02(lon, lat);
+        //启动路径规划页面
+        goToTencentMap(context, null, doubles[0], doubles[1]);
+    }
+
+
     /**
      * 腾讯地图
      */
@@ -71,31 +128,6 @@ public class MapsUtil {
             Uri uri1 = Uri.parse("market://details?id=" + PN_TENCENT_MAP);
             Intent intent1 = new Intent(Intent.ACTION_VIEW, uri1);
             context.startActivity(intent1);
-        }
-    }
-
-    /**
-     * 高德地图
-     */
-    public static void goToGaoDeMap(Context context, String lng, String lat) {
-        if (isAvilible(context, PN_GAODE_MAP)) {//传入指定应用包名
-            Intent intent = new Intent();
-            intent.setAction(Intent.ACTION_VIEW);
-            intent.addCategory(Intent.CATEGORY_DEFAULT);
-            intent.setPackage(PN_GAODE_MAP);
-            try {
-                intent = Intent.getIntent("amapuri://route/plan/?dlat=" + lat + "&dlon=" + lng + "&d&dev=0&t=0");
-                context.startActivity(intent);
-            } catch (URISyntaxException e) {
-                e.printStackTrace();
-            }
-        } else {//未安装
-            //market为路径，id为包名
-            //显示手机上所有的market商店
-            ToastUtils.show("您尚未安装高德地图");
-            Uri uri = Uri.parse("market://details?id=" + PN_GAODE_MAP);
-            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-            context.startActivity(intent);
         }
     }
 
@@ -150,4 +182,76 @@ public class MapsUtil {
         return gps;
     }
 
+
+    /**
+     * WGS84 转换为 BD-09(百度)
+     *
+     * @param lng
+     * @param lat
+     * @returns {*[]}
+     */
+    private static double[] wgs84tobd09(double lng, double lat) {
+        //第一次转换
+        double dlat = transformlat(lng - 105.0, lat - 35.0);
+        double dlng = transformlng(lng - 105.0, lat - 35.0);
+        double radlat = lat / 180.0 * PI;
+        double magic = Math.sin(radlat);
+        magic = 1 - ee * magic * magic;
+        double sqrtmagic = Math.sqrt(magic);
+        dlat = (dlat * 180.0) / ((a * (1 - ee)) / (magic * sqrtmagic) * PI);
+        dlng = (dlng * 180.0) / (a / sqrtmagic * Math.cos(radlat) * PI);
+        double mglat = lat + dlat;
+        double mglng = lng + dlng;
+
+        //第二次转换
+        double z = Math.sqrt(mglng * mglng + mglat * mglat) + 0.00002 * Math.sin(mglat * x_PI);
+        double theta = Math.atan2(mglat, mglng) + 0.000003 * Math.cos(mglng * x_PI);
+        double bd_lng = z * Math.cos(theta) + 0.0065;
+        double bd_lat = z * Math.sin(theta) + 0.006;
+
+        double[] gps = {bd_lng, bd_lat};
+        return gps;
+    }
+
+
+    /**
+     * WGS84转GCj02
+     *
+     * @param lng
+     * @param lat
+     * @returns {*[]}
+     */
+    public static double[] wgs84togcj02(double lng, double lat) {
+        double dlat = transformlat(lng - 105.0, lat - 35.0);
+        double dlng = transformlng(lng - 105.0, lat - 35.0);
+        double radlat = lat / 180.0 * PI;
+        double magic = Math.sin(radlat);
+        magic = 1 - ee * magic * magic;
+        double sqrtmagic = Math.sqrt(magic);
+        dlat = (dlat * 180.0) / ((a * (1 - ee)) / (magic * sqrtmagic) * PI);
+        dlng = (dlng * 180.0) / (a / sqrtmagic * Math.cos(radlat) * PI);
+        double mglat = lat + dlat;
+        double mglng = lng + dlng;
+        //Point point=new Point(mglng, mglat);
+        // return point;
+        double[] gps = {mglng, mglat};
+        return gps;
+    }
+
+
+    private static double transformlat(double lng, double lat) {
+        double ret = -100.0 + 2.0 * lng + 3.0 * lat + 0.2 * lat * lat + 0.1 * lng * lat + 0.2 * Math.sqrt(Math.abs(lng));
+        ret += (20.0 * Math.sin(6.0 * lng * PI) + 20.0 * Math.sin(2.0 * lng * PI)) * 2.0 / 3.0;
+        ret += (20.0 * Math.sin(lat * PI) + 40.0 * Math.sin(lat / 3.0 * PI)) * 2.0 / 3.0;
+        ret += (160.0 * Math.sin(lat / 12.0 * PI) + 320 * Math.sin(lat * PI / 30.0)) * 2.0 / 3.0;
+        return ret;
+    }
+
+    private static double transformlng(double lng, double lat) {
+        double ret = 300.0 + lng + 2.0 * lat + 0.1 * lng * lng + 0.1 * lng * lat + 0.1 * Math.sqrt(Math.abs(lng));
+        ret += (20.0 * Math.sin(6.0 * lng * PI) + 20.0 * Math.sin(2.0 * lng * PI)) * 2.0 / 3.0;
+        ret += (20.0 * Math.sin(lng * PI) + 40.0 * Math.sin(lng / 3.0 * PI)) * 2.0 / 3.0;
+        ret += (150.0 * Math.sin(lng / 12.0 * PI) + 300.0 * Math.sin(lng / 30.0 * PI)) * 2.0 / 3.0;
+        return ret;
+    }
 }

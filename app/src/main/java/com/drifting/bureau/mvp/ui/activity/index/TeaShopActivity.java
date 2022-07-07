@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -17,7 +16,6 @@ import android.widget.TextView;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.di.component.DaggerTeaShopComponent;
-import com.drifting.bureau.mvp.model.entity.OrderRecordEntity;
 import com.drifting.bureau.mvp.model.entity.TeaShopEntity;
 import com.drifting.bureau.mvp.ui.adapter.TeaShopAdapter;
 import com.drifting.bureau.util.ClickUtil;
@@ -56,6 +54,8 @@ public class TeaShopActivity extends BaseActivity<TeaShopPresenter> implements T
     private int mPage = 1;
     private int limit = 10;
 
+    private String Longitude, Latitude;
+
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, TeaShopActivity.class);
         context.startActivity(intent);
@@ -90,13 +90,13 @@ public class TeaShopActivity extends BaseActivity<TeaShopPresenter> implements T
         teaShopAdapter = new TeaShopAdapter(new ArrayList<>());
         mRcyPublic.setAdapter(teaShopAdapter);
 
-        getData(mPage, true);
-
+        if (mPresenter != null) {
+            mPresenter.getLocation(this);
+        }
         mEtShaopName.setOnEditorActionListener((v, actionId, event) -> {
             if ((actionId == 0 || actionId == 3) && event != null) {
                 //点击搜索要做的操作
-                DeviceUtils.hideSoftKeyboard(this,mEtShaopName);
-
+                DeviceUtils.hideSoftKeyboard(this, mEtShaopName);
                 mPage = 1;
                 getData(mPage, true);
             }
@@ -105,13 +105,11 @@ public class TeaShopActivity extends BaseActivity<TeaShopPresenter> implements T
 
     }
 
-
     public void getData(int mPage, boolean loadType) {
         if (mPresenter != null) {
-            mPresenter.nearby(mEtShaopName.getText().toString(), mPage, limit, loadType);
+            mPresenter.nearby(mEtShaopName.getText().toString(), mPage, limit, Longitude, Latitude, loadType);
         }
     }
-
 
     @Override
     public void onRefresh() {
@@ -130,6 +128,13 @@ public class TeaShopActivity extends BaseActivity<TeaShopPresenter> implements T
         if (teaShopAdapter.getDatas() == null || teaShopAdapter.getDatas().size() == 0) {
             ViewUtil.create().setAnimation(this, mFlState);
         }
+    }
+
+    @Override
+    public void onLocation(String lng, String lat) {
+        Longitude = lng;
+        Latitude = lat;
+        getData(mPage, true);
     }
 
     @Override

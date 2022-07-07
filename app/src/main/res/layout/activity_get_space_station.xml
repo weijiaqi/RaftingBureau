@@ -39,21 +39,20 @@
             <FrameLayout
                 android:id="@+id/frame"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="160dp"
                 android:clipChildren="false">
 
                 <androidx.viewpager.widget.ViewPager
                     android:id="@+id/vp_img"
                     android:layout_width="match_parent"
                     android:layout_height="120dp"
-                    android:layout_marginTop="5dp"
                     android:layout_marginLeft="80dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginRight="80dp">
 
                 </androidx.viewpager.widget.ViewPager>
 
             </FrameLayout>
-
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -61,6 +60,8 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="110dp"
                 android:src="@drawable/space_base" />
+
+
         </RelativeLayout>
 
 
@@ -68,8 +69,8 @@
             android:id="@+id/tv_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
             android:layout_gravity="center_horizontal"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="17sp"
             android:textStyle="bold" />
@@ -77,8 +78,8 @@
         <TextView
             android:id="@+id/tv_blind_box_name"
             android:layout_width="wrap_content"
-            android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="12dp"
             android:background="@drawable/space_blind_box_button"
             android:gravity="center"
@@ -105,11 +106,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="7dp"
-                    app:has_boder="true"
-                    app:border_color="@color/color_15"
                     android:text="奖品预览"
                     android:textColor="@color/white"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    app:border_color="@color/color_15"
+                    app:has_boder="true" />
 
                 <TextView
                     android:id="@+id/tv_buy"
@@ -136,10 +137,10 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="7dp"
                     android:text="我的盲盒"
-                    app:has_boder="true"
-                    app:border_color="@color/color_15"
                     android:textColor="@color/white"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    app:border_color="@color/color_15"
+                    app:has_boder="true" />
 
                 <TextView
                     android:id="@+id/tv_buy_more"

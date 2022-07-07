@@ -4,7 +4,6 @@ import android.app.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,7 +14,6 @@ import android.widget.TextView;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.data.entity.MessageCenterEntity;
-import com.drifting.bureau.data.event.FriendApplicationEvent;
 import com.drifting.bureau.data.event.MessageCenterEvent;
 import com.drifting.bureau.data.event.MessageEvent;
 import com.drifting.bureau.data.event.MessageRefreshEvent;
@@ -39,7 +37,6 @@ import com.drifting.bureau.mvp.presenter.MessageCenterPresenter;
 import com.rb.core.tab.view.indicator.IndicatorViewPager;
 import com.rb.core.tab.view.indicator.ScrollIndicatorView;
 import com.rb.core.tab.view.indicator.slidebar.LayoutBar;
-import com.rb.core.tab.view.indicator.transition.OnTransitionTextListener;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

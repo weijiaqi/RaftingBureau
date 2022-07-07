@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -27,7 +26,6 @@ import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.animator.SwipeItemAnimator;
 import com.jess.arms.base.BaseActivity;
-import com.jess.arms.base.BaseDialog;
 import com.jess.arms.di.component.AppComponent;
 import com.drifting.bureau.mvp.contract.MoveAwayPlanetaryContract;
 import com.drifting.bureau.mvp.presenter.MoveAwayPlanetaryPresenter;

@@ -65,6 +65,16 @@ public class DeliveryDetailsEntity {
             private Integer friend_apply;
             private Integer type;
             private String level_name;
+            private String mascot;
+
+            public String getMascot() {
+                return mascot;
+            }
+
+            public void setMascot(String mascot) {
+                this.mascot = mascot;
+            }
+
             public String getLevel_name() {
                 return level_name;
             }

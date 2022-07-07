@@ -15,6 +15,7 @@ import com.drifting.bureau.mvp.model.entity.TeaShopEntity;
 import com.drifting.bureau.mvp.ui.dialog.CallTelephoneDialog;
 import com.drifting.bureau.mvp.ui.dialog.NavigationDialog;
 import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
+import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.TextUtil;
 import com.hjq.shape.view.ShapeTextView;
 import com.jess.arms.base.BaseRecyclerHolder;
@@ -39,33 +40,37 @@ public class TeaShopHolder extends BaseRecyclerHolder {
     private Context context;
     private CallTelephoneDialog callTelephoneDialog;
     private NavigationDialog navigationDialog;
+
     public TeaShopHolder(View itemView) {
         super(itemView);
         context = itemView.getContext();
     }
 
     public void setData(@NonNull List<TeaShopEntity.ListBean> listBeanList, int position) {
-        TextUtil.setText(mTvShop,listBeanList.get(position).getBusiness_name());
-        TextUtil.setText(mTvAddress,listBeanList.get(position).getAddress());
-        TextUtil.setText(mTvDistance,"距离"+ listBeanList.get(position).getDistance()+"km");
-         if (listBeanList.get(position).getOpen_status()==1){
-             TextUtil.setText(mTvStatus,"营业中");
-             mTvStatus.getTextColorBuilder().setTextGradientColors(context.getColor(R.color.color_6c),context.getColor(R.color.color_6d)).intoTextColor();
-         }else {
-             TextUtil.setText(mTvStatus,"未营业");
-             mTvStatus.getTextColorBuilder().setTextGradientColors(context.getColor(R.color.color_ff),context.getColor(R.color.color_ff)).intoTextColor();
-         }
+        TextUtil.setText(mTvShop, listBeanList.get(position).getBusiness_name());
+        TextUtil.setText(mTvAddress, listBeanList.get(position).getAddress());
+        TextUtil.setText(mTvDistance, "距离" + StringUtil.distanceFormat(Double.parseDouble(listBeanList.get(position).getDistance())));
+        if (listBeanList.get(position).getOpen_status() == 1) {
+            TextUtil.setText(mTvStatus, "营业中");
+            mTvStatus.getTextColorBuilder().setTextGradientColors(context.getColor(R.color.color_6c), context.getColor(R.color.color_6d)).intoTextColor();
+        } else {
+            TextUtil.setText(mTvStatus, "未营业");
+            mTvStatus.getTextColorBuilder().setTextGradientColors(context.getColor(R.color.color_ff), context.getColor(R.color.color_ff)).intoTextColor();
+        }
+
         mIvCall.setOnClickListener(v -> {
             PermissionDialog.requestPhonePermissions((Activity) context, new PermissionDialog.PermissionCallBack() {
                 @Override
                 public void onSuccess() {
-                    callTelephoneDialog = new CallTelephoneDialog(context,listBeanList.get(position).getTel());
+                    callTelephoneDialog = new CallTelephoneDialog(context, listBeanList.get(position).getTel());
                     callTelephoneDialog.show();
                 }
+
                 @Override
                 public void onFailure() {
 
                 }
+
                 @Override
                 public void onAlwaysFailure() {
                     PermissionDialog.showDialog((Activity) context, "android.permission.CALL_PHONE");
@@ -73,7 +78,7 @@ public class TeaShopHolder extends BaseRecyclerHolder {
             });
         });
         mIvNavigation.setOnClickListener(view -> {
-            navigationDialog=new NavigationDialog(context);
+            navigationDialog = new NavigationDialog(context, listBeanList.get(position).getLng(), listBeanList.get(position).getLat());
             navigationDialog.show();
         });
 

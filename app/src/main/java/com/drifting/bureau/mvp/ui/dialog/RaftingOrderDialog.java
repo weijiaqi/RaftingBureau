@@ -13,6 +13,7 @@ import com.drifting.bureau.mvp.model.entity.RaftingOrderEntity;
 import com.drifting.bureau.mvp.model.entity.SkuListEntity;
 import com.drifting.bureau.mvp.ui.activity.pay.PaymentInfoActivity;
 import com.drifting.bureau.mvp.ui.adapter.RaftingOrderAdapter;
+import com.drifting.bureau.util.DateUtil;
 import com.jess.arms.base.BaseDialog;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class RaftingOrderDialog extends BaseDialog implements View.OnClickListen
     public static final int SELECT_FINISH = 0x01;
 
     private RecyclerView mRecycleView;
-    private TextView mTvBuyNow,mTvSum;
+    private TextView mTvBuyNow,mTvSum,mTvTime;
     private Context context;
     private RaftingOrderAdapter raftingOrderAdapter;
 
@@ -47,6 +48,7 @@ public class RaftingOrderDialog extends BaseDialog implements View.OnClickListen
         mRecycleView = findViewById(R.id.rcy_order);
         mTvBuyNow = findViewById(R.id.tv_buy_now);
         mTvSum= findViewById(R.id.tv_sum);
+        mTvTime= findViewById(R.id.tv_time);
     }
 
     @Override
@@ -58,6 +60,7 @@ public class RaftingOrderDialog extends BaseDialog implements View.OnClickListen
         raftingOrderAdapter = new RaftingOrderAdapter(new ArrayList<>());
         mRecycleView.setAdapter(raftingOrderAdapter);
         raftingOrderAdapter.setData(skuListEntity.getGoods_sku());
+        mTvTime.setText(DateUtil.unxiToDateYMD(System.currentTimeMillis()+""));
     }
 
 

@@ -15,11 +15,9 @@ import com.drifting.bureau.R;
 import com.drifting.bureau.util.ClickUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
-import com.jess.arms.utils.StatusBarUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import io.rong.imkit.utils.RouteUtils;
 
 
 public class SessionListActivity extends BaseActivity {

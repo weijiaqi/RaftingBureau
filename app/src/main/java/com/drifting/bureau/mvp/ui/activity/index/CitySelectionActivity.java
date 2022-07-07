@@ -26,7 +26,6 @@ import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.GsonUtil;
 import com.drifting.bureau.util.ViewUtil;
 import com.drifting.bureau.view.location.QuickLocationBar;
-import com.google.gson.Gson;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 
@@ -35,13 +34,11 @@ import com.drifting.bureau.mvp.presenter.CitySelectionPresenter;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import retrofit2.http.POST;
 
 
 /**

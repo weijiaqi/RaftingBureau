@@ -200,9 +200,6 @@ public class PermissionDialog {
                     permissionsDescribe = "请在“权限管理”中开启读取权限，开通后可正常使用相关功能";
                     break;
                 case "android.permission.ACCESS_FINE_LOCATION":
-                    permissionsTitle = "定位权限管理";
-                    permissionsDescribe = "请在“权限管理”中开启定位权限，开通后可正常使用相关功能";
-                    break;
                 case "android.permission.ACCESS_COARSE_LOCATION":
                     permissionsTitle = "定位权限管理";
                     permissionsDescribe = "请在“权限管理”中开启定位权限，开通后可正常使用相关功能";

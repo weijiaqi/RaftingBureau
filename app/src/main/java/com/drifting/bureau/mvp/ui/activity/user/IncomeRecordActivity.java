@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.IncomeRecordEntity;
-import com.drifting.bureau.mvp.model.entity.MakingRecordEntity;
 import com.drifting.bureau.mvp.ui.adapter.IncomeRecordAdapter;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.ToastUtil;

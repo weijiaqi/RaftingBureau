@@ -79,31 +79,6 @@ public class DiscoveryTourPresenter extends BasePresenter<DiscoveryTourContract.
     }
 
 
-    /**
-     * 连接融云
-     */
-    public void getRongIM(String token){
-        RongIM.connect(token, new RongIMClient.ConnectCallback() {
-            @Override
-            public void onSuccess(String userId) {
-                Log.e("RongIM","融云连接成功");
-
-                UserInfo userInfo = new UserInfo(userId, Preferences.getUserName(), Uri.parse(Preferences.getUserPhoto()));
-                RongUserInfoManager.getInstance().refreshUserInfoCache(userInfo);
-
-            }
-
-            @Override
-            public void onError(RongIMClient.ConnectionErrorCode connectionErrorCode) {
-
-            }
-            @Override
-            public void onDatabaseOpened(RongIMClient.DatabaseOpenStatus databaseOpenStatus) {
-            }
-        });
-
-    }
-
 
     /**
      * 获取经纬度
