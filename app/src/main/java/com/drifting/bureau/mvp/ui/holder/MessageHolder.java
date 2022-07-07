@@ -11,7 +11,12 @@ import androidx.annotation.NonNull;
 import com.drifting.bureau.R;
 import com.drifting.bureau.data.event.MessageEvent;
 import com.drifting.bureau.mvp.model.entity.SysmessageMineEntity;
+import com.drifting.bureau.mvp.ui.activity.index.AnnouncementDetailsActivity;
+import com.drifting.bureau.mvp.ui.activity.index.RaftingDetailsActivity;
 import com.drifting.bureau.mvp.ui.activity.user.MessageCenterActivity;
+import com.drifting.bureau.mvp.ui.activity.user.MySpaceStationActivity;
+import com.drifting.bureau.mvp.ui.activity.user.OrderRecordActivity;
+import com.drifting.bureau.util.DateUtil;
 import com.drifting.bureau.util.TextUtil;
 import com.drifting.bureau.util.callback.BaseDataCallBack;
 import com.drifting.bureau.util.request.RequestUtil;
@@ -59,11 +64,24 @@ public class MessageHolder extends BaseRecyclerHolder {
                         }
                     });
                 }
-                if (MessageCenterActivity.class.isInstance(context)) {
-                    MessageCenterActivity activity = (MessageCenterActivity) context;
-                    activity.finish();
+                if (listBeanList.get(position).getMsy_type() == 1) {  //公告
+                    AnnouncementDetailsActivity.start(context, listBeanList.get(position).getTitle(), DateUtil.unixToDateWeek(listBeanList.get(position).getCreated_at_int() + ""), listBeanList.get(position).getContent(), false);
+                } else if (listBeanList.get(position).getMsy_type() == 2) {  //空间站消息
+                    if (listBeanList.get(position).getMsy_type_sub() == 21) { //空间站订单消息
+                        MySpaceStationActivity.start(context, false);
+                    } else if (listBeanList.get(position).getMsy_type_sub() == 22) { //订单核销
+                        OrderRecordActivity.start(context, false);
+                    }
+                } else if (listBeanList.get(position).getMsy_type() == 3) {  //漂流消息
+                    if (listBeanList.get(position).getMsy_type_sub() == 31) { //收到漂流消息
+                        if (MessageCenterActivity.class.isInstance(context)) {
+                            MessageCenterActivity activity = (MessageCenterActivity) context;
+                            activity.finish();
+                        }
+                    } else if (listBeanList.get(position).getMsy_type_sub() == 32) { //发送漂流消息
+                        RaftingDetailsActivity.start(context, listBeanList.get(position).getMessage_id(), false);
+                    }
                 }
-
             }
         });
     }

@@ -14,6 +14,8 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import io.rong.imkit.utils.StringUtils;
+
 public class StringUtil {
 
     /**
@@ -168,24 +170,41 @@ public class StringUtil {
 
 
     //漂流类型拼接
-    public static String getCupNama(int explore_id, String sku_name,int num) {
+    public static String getCupNama(int explore_id, String sku_name, int num) {
         String name = null;
         switch (explore_id) {
             case 0:
-                if (num>1){
-                    name=sku_name+"*"+num;
-                }else {
-                    name=sku_name;
+                if (num > 1) {
+                    name = sku_name + "*" + num;
+                } else {
+                    name = sku_name;
                 }
                 break;
             case 1:
                 name = "传递漂-";
                 break;
         }
-        if (explore_id==0){
+        if (explore_id == 0) {
             return name;
-        }else {
+        } else {
             return name + sku_name;
         }
     }
+
+
+    /**
+     * 距离只保留两位小数
+     *
+     * @param distance 以米为单位
+     * @return
+     */
+    public static String distanceFormat(double distance) {
+        DecimalFormat df = new DecimalFormat("#.00");
+        if (distance < 1000) {
+            return "两地距离: " + new Double(distance).intValue() + "m";
+        } else {
+            return "两地距离: " + df.format(distance / 1000) + "km";
+        }
+    }
+
 }

@@ -22,10 +22,13 @@ import com.drifting.bureau.R;
 import com.drifting.bureau.data.entity.LoginLocallyEntity;
 import com.drifting.bureau.di.component.DaggerLoginComponent;
 import com.drifting.bureau.mvp.model.entity.LoginEntity;
+import com.drifting.bureau.mvp.ui.activity.SplashActivity;
 import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
 import com.drifting.bureau.mvp.ui.adapter.LoginListAdapter;
+import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.LogInOutDataUtil;
+import com.drifting.bureau.util.RongIMUtil;
 import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.VerifyUtil;
@@ -58,7 +61,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     private LoginListAdapter loginListAdapter;
     private CountDownTimer timer;
     private int status = 1;
-    private String phone;
+    private String phone,nikename;
 
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, LoginActivity.class);
@@ -144,9 +147,11 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
                 showMessage("请输入1~9字符!");
                 return;
             }
-            setData(mEtContent.getText().toString(), 2, false);
+            nikename=mEtContent.getText().toString();
+            setData(nikename, 2, false);
             if (mPresenter != null) {
-                mPresenter.register(phone, mEtContent.getText().toString(), status);
+                mEtContent.setText("");
+                mPresenter.register(phone, nikename, status);
             }
         }
     }
@@ -234,16 +239,40 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
             status = 3;
         } else {
             LogInOutDataUtil.successInSetData(loginEntity);
-            showMessage("登录成功");
-            DiscoveryTourActivity.start(this, true);
+            RongIMUtil.getInstance().connect(loginEntity.getRc_token(), new RongIMUtil.ConnectListener() {
+                @Override
+                public void onConnectSuccess() {
+                    showMessage("登录成功");
+                    DiscoveryTourActivity.start(LoginActivity.this, true);
+                }
+
+                @Override
+                public void onConnectError() {
+                    ToastUtil.showToast("会话消息故障!");
+                    DiscoveryTourActivity.start(LoginActivity.this, true);
+                }
+            });
         }
     }
 
     @Override
     public void registerSuccess(LoginEntity loginEntity) {
         LogInOutDataUtil.successInSetData(loginEntity);
-        setData("恭喜你，信息创建成功!\n请领取你的专属星球！", 3, true);
-        setEditHint("");
+        RongIMUtil.getInstance().connect(loginEntity.getRc_token(), new RongIMUtil.ConnectListener() {
+            @Override
+            public void onConnectSuccess() {
+                setData("恭喜你，信息创建成功!\n请领取你的专属星球！", 3, true);
+                setEditHint("");
+            }
+
+            @Override
+            public void onConnectError() {
+                setData("恭喜你，信息创建成功!\n请领取你的专属星球！", 3, true);
+                setEditHint("");
+            }
+        });
+
+
     }
 
     @Override

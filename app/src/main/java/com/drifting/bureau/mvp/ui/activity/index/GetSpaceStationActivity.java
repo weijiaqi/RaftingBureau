@@ -4,7 +4,6 @@ import android.app.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -12,16 +11,12 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
-import android.util.Log;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -29,20 +24,17 @@ import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.di.component.DaggerGetSpaceStationComponent;
-import com.drifting.bureau.mvp.model.entity.BarrageEntity;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
 import com.drifting.bureau.mvp.model.entity.MysteryboxEntity;
 import com.drifting.bureau.mvp.model.entity.PrizeEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceAboutEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceCheckEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceStationEntity;
-import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
 import com.drifting.bureau.mvp.ui.activity.pay.PaymentInfoActivity;
 import com.drifting.bureau.mvp.ui.activity.user.MyBlindBoxActivity;
 import com.drifting.bureau.mvp.ui.activity.web.ShowWebViewActivity;
@@ -53,7 +45,6 @@ import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.SpannableUtil;
 import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.ToastUtil;
-import com.drifting.bureau.util.animator.AnimatorUtil;
 import com.drifting.bureau.view.AutoPollRecyclerView;
 import com.drifting.bureau.view.ScaleInTransformer;
 import com.jess.arms.base.BaseActivity;
@@ -61,12 +52,9 @@ import com.jess.arms.di.component.AppComponent;
 
 import com.drifting.bureau.mvp.contract.GetSpaceStationContract;
 import com.drifting.bureau.mvp.presenter.GetSpaceStationPresenter;
-import com.jess.arms.utils.ArmsUtils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -138,11 +126,8 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
         mCkProtocol.setOnCheckedChangeListener((compoundButton, ischecked) -> {
             mRlCheck.setVisibility(ischecked ? View.GONE : View.VISIBLE);
         });
-
         mRcyBarrage.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.HORIZONTAL));
         spaceBarrageAdapter = new SpaceBarrageAdapter(new ArrayList<>());
-
-
         if (mPresenter != null) {
             mPresenter.getSpaceList();
             mPresenter.mysterybox(limit);
@@ -173,7 +158,7 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
             @Override
             public void onClick(View widget) {
                 if (!ClickUtil.isFastClick(widget.getId())) {
-                    ShowWebViewActivity.start(GetSpaceStationActivity.this, 1,false);
+                    ShowWebViewActivity.start(GetSpaceStationActivity.this, 3,false);
                 }
             }
 

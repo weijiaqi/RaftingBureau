@@ -5,22 +5,23 @@ import android.app.Activity;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.di.component.DaggerDeliveryDetailsComponent;
 import com.drifting.bureau.mvp.model.entity.DeliveryDetailsEntity;
-import com.drifting.bureau.mvp.model.entity.IncomeRecordEntity;
 import com.drifting.bureau.mvp.ui.adapter.DeliveryDetailsAdapter;
+import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
+import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.ViewUtil;
 import com.drifting.bureau.util.request.RequestUtil;
@@ -31,7 +32,6 @@ import com.drifting.bureau.mvp.contract.DeliveryDetailsContract;
 import com.drifting.bureau.mvp.presenter.DeliveryDetailsPresenter;
 import com.rb.core.xrecycleview.XRecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -61,6 +61,8 @@ public class DeliveryDetailsActivity extends BaseActivity<DeliveryDetailsPresent
     RelativeLayout mRlTop;
     @BindView(R.id.line1)
     View line1;
+    @BindView(R.id.iv_planet_man)
+    ImageView mIvPlanetMan;
     private int mPage = 1;
     private int limit = 10;
     private DeliveryDetailsAdapter deliveryDetailsAdapter;
@@ -103,6 +105,8 @@ public class DeliveryDetailsActivity extends BaseActivity<DeliveryDetailsPresent
     }
 
     public void initListener() {
+        GlideUtil.create().loadLongImage(this, Preferences.getMascot(), mIvPlanetMan);
+
         mRcyDelivery.setNestedScrollingEnabled(false);
         mRcyDelivery.setLayoutManager(new LinearLayoutManager(this));
         mRcyDelivery.setLoadingListener(this);
@@ -130,9 +134,17 @@ public class DeliveryDetailsActivity extends BaseActivity<DeliveryDetailsPresent
     }
 
     @Override
+    public void onloadStart() {
+        if (deliveryDetailsAdapter.getDatas() == null || deliveryDetailsAdapter.getDatas().size() == 0) {
+            ViewUtil.create().setAnimation(this, mFlState);
+        }
+    }
+
+
+    @Override
     public void onPathDetailSuccess(DeliveryDetailsEntity entity, boolean isNotData) {
         if (entity != null) {
-            if ( mPage==1&& entity.getMessage() != null) {
+            if (mPage == 1 && entity.getMessage() != null) {
                 mRlTop.setVisibility(View.VISIBLE);
                 line1.setVisibility(View.VISIBLE);
                 messageBean = entity.getMessage();
@@ -164,13 +176,6 @@ public class DeliveryDetailsActivity extends BaseActivity<DeliveryDetailsPresent
             }
         }
 
-    }
-
-    @Override
-    public void onloadStart() {
-        if (deliveryDetailsAdapter.getDatas() == null || deliveryDetailsAdapter.getDatas().size() == 0) {
-            ViewUtil.create().setAnimation(this, mFlState);
-        }
     }
 
 

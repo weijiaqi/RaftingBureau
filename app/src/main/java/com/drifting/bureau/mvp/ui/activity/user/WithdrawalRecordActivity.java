@@ -14,6 +14,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.drifting.bureau.R;
+
 import com.drifting.bureau.di.component.DaggerWithdrawalRecordComponent;
 import com.drifting.bureau.mvp.model.entity.IncomeRecordEntity;
 import com.drifting.bureau.mvp.ui.adapter.IncomeRecordAdapter;

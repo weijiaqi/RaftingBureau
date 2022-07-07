@@ -3,6 +3,7 @@ package com.drifting.bureau.mvp.ui.holder;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.RaftingOrderEntity;
 import com.drifting.bureau.mvp.model.entity.SkuListEntity;
+import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.TextUtil;
 import com.jess.arms.base.BaseRecyclerHolder;
 
@@ -27,7 +29,8 @@ public class RaftingOrderHolder extends BaseRecyclerHolder {
     TextView mTvDesc;
     @BindView(R.id.view_bottm_line)
     View mViewBottomLine;
-
+    @BindView(R.id.iv_pic)
+    ImageView mIvPic;
     private Context context;
 
     public RaftingOrderHolder(View itemView) {
@@ -40,5 +43,6 @@ public class RaftingOrderHolder extends BaseRecyclerHolder {
         TextUtil.setText(mTvPrice, "￥" + listBeanList.get(position).getPrice());
         TextUtil.setText(mTvDesc, listBeanList.get(position).getDesc());
         mViewBottomLine.setVisibility(position == listBeanList.size() - 1 ? View.GONE : View.VISIBLE);
+        GlideUtil.create().loadNormalPic(context,  listBeanList.get(position).getSmall_image(), mIvPic);
     }
 }

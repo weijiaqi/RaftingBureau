@@ -14,16 +14,12 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.drifting.bureau.R;
-import com.drifting.bureau.data.event.MyBlindBoxRefreshEvent;
 import com.drifting.bureau.data.event.OrderRecordEvent;
 import com.drifting.bureau.data.event.PaymentEvent;
 import com.drifting.bureau.di.component.DaggerOrderRecordComponent;
-import com.drifting.bureau.mvp.model.entity.DriftingTrackEntity;
 
-import com.drifting.bureau.mvp.model.entity.IncomeRecordEntity;
 import com.drifting.bureau.mvp.model.entity.OrderRecordEntity;
 import com.drifting.bureau.mvp.ui.adapter.OrderRecordAdapter;
-import com.drifting.bureau.mvp.ui.holder.OrderRecordHolder;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.ViewUtil;

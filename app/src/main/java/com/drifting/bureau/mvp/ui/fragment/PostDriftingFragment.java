@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,6 +38,7 @@ import com.drifting.bureau.mvp.ui.dialog.RecordingDialog;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.BitmapUtil;
 import com.drifting.bureau.util.ClickUtil;
+import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.VideoUtil;
@@ -116,17 +118,14 @@ public class PostDriftingFragment extends BaseFragment<PostDriftingPresenter> im
     TextView mTvNum;
     @BindView(R.id.tv_starry_sky)
     TextView mTvStarrySky;
+
     private RecordingDialog recordingDialog;
     private List<Object> objectList;
     private String path;
     private RaftingOrderDialog raftingOrderDialog;
     private static final String BUNDLE_TYPE = "bundle_type";
-
     private static final String BUNDLE_EXPLORE_ID = "bundle_explore_id";
-
-
     private static final String BUNDLE_MESSAGE_ID = "bundle_message_id";
-
     private int type, explore_id, message_id;
     private int selectPostion = 1;
     private Bitmap cover;
@@ -172,7 +171,7 @@ public class PostDriftingFragment extends BaseFragment<PostDriftingPresenter> im
      */
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
-        //setToolBarNoBack(toolbar, "PostDrifting");
+
         initListener();
     }
 
@@ -204,7 +203,9 @@ public class PostDriftingFragment extends BaseFragment<PostDriftingPresenter> im
         RequestUtil.create().platformtimes(explore_id, entity -> {
             if (entity != null && entity.getCode() == 200) {
                 int total = entity.getData().getCreate_times() + entity.getData().getCommon_times();
-                mTvNum.setText(getString(R.string.free_times, total + ""));
+                if (PostDriftingFragment.this.isAdded()) {
+                    mTvNum.setText(getString(R.string.free_times, total + ""));
+                }
             }
         });
     }
@@ -395,7 +396,7 @@ public class PostDriftingFragment extends BaseFragment<PostDriftingPresenter> im
         if (event != null) {
             setVideoStatus(2);
             path = event.getPath();
-            cover = BitmapUtil.getVideoThumb(path);
+            cover = BitmapUtil.createVideoThumbnail(path,MediaStore.Images.Thumbnails.MINI_KIND) ;
             mIvpic.setImageBitmap(cover);
             VideoUtil.compressVideo(mContext, path);
         }

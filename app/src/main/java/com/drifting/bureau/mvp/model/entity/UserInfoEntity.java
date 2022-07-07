@@ -189,6 +189,15 @@ public class UserInfoEntity implements Serializable {
             private Integer created_at_int;
             private Integer updated_at_int;
             private String share_code;
+            private String mascot;
+
+            public String getMascot() {
+                return mascot;
+            }
+
+            public void setMascot(String mascot) {
+                this.mascot = mascot;
+            }
 
             public String getShare_code() {
                 return share_code;

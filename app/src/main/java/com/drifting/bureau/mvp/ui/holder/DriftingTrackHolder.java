@@ -2,6 +2,7 @@ package com.drifting.bureau.mvp.ui.holder;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,7 +21,8 @@ import java.util.List;
 import butterknife.BindView;
 
 public class DriftingTrackHolder extends BaseRecyclerHolder {
-
+     @BindView(R.id.ll_content)
+    LinearLayout mLlContent;
     @BindView(R.id.tv_transfer_style)
     TextView mTvTransferStyle;
     @BindView(R.id.tv_time)
@@ -65,7 +67,7 @@ public class DriftingTrackHolder extends BaseRecyclerHolder {
         TextUtil.setText(mTvToName, listBeanList.get(position).getWho_hold());
 
         TextUtil.setText(mTvTransmitNum, context.getString(R.string.transmit, listBeanList.get(position).getTotal_attend() + ""));
-        mTvTransmitNum.setOnClickListener(v -> {
+        mLlContent.setOnClickListener(v -> {
             RaftingDetailsActivity.start(context, listBeanList.get(position).getMessage_id(), false);
         });
 

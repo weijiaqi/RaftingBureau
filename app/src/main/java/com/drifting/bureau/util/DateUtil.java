@@ -130,6 +130,10 @@ public class DateUtil {
     }
 
 
+
+
+
+
     /**
      * unix时间戳转换成HH:mm
      *
@@ -152,6 +156,37 @@ public class DateUtil {
             return unixTime;
         }
     }
+
+
+
+
+    /**
+     * unix时间戳转换成yyyy/MM/dd
+     *
+     * @param unixTime
+     * @return
+     */
+    /**
+     * unix时间戳转换成yyyy-MM-dd HH:mm:ss
+     *
+     * @param unixTime
+     * @return
+     */
+    public static String unxiToDateYMD(String unixTime) {
+        try {
+            String res;
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
+            Date date = new Date(System.currentTimeMillis());
+            res = simpleDateFormat.format(date);
+            return res;
+        } catch (Exception e) {
+            if (TextUtils.isEmpty(unixTime)) {
+                unixTime = "";
+            }
+            return unixTime;
+        }
+    }
+
 
     /**
      * unix时间戳转换成yyyy-MM-dd 星期E

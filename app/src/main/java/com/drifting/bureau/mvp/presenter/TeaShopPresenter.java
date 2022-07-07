@@ -1,9 +1,15 @@
 package com.drifting.bureau.mvp.presenter;
+import android.app.Activity;
 import android.app.Application;
+import android.location.Location;
 import android.util.Log;
+
+import androidx.fragment.app.FragmentActivity;
 
 import com.drifting.bureau.mvp.model.entity.OrderRecordEntity;
 import com.drifting.bureau.mvp.model.entity.TeaShopEntity;
+import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
+import com.drifting.bureau.util.LocationUtil;
 import com.drifting.bureau.util.ViewUtil;
 import com.jess.arms.base.BaseEntity;
 import com.jess.arms.integration.AppManager;
@@ -18,7 +24,11 @@ import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 
 import javax.inject.Inject;
 import com.drifting.bureau.mvp.contract.TeaShopContract;
+import com.jess.arms.utils.PermissionUtil;
 import com.jess.arms.utils.RxLifecycleUtils;
+import com.tbruyelle.rxpermissions2.RxPermissions;
+
+import java.util.List;
 
 /**
  * ================================================
@@ -50,14 +60,52 @@ public class TeaShopPresenter extends BasePresenter<TeaShopContract.Model, TeaSh
 
 
 
+
+    /**
+     * 获取经纬度
+     */
+
+    public void getLocation(Activity activity) {
+        PermissionUtil.launchLocation(new PermissionUtil.RequestPermission() {
+            @Override
+            public void onRequestPermissionSuccess() {
+                LocationUtil.getCurrentLocation(new LocationUtil.LocationCallBack() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        mRootView.onLocation(location.getLongitude() + "", location.getLatitude() + "");
+                    }
+
+                    @Override
+                    public void onFail(String msg) {
+                        mRootView.onLocation("",  "");
+                    }
+                });
+
+            }
+
+            @Override
+            public void onRequestPermissionFailure(List<String> permissions) {
+                mRootView.onLocation("",  "");
+            }
+
+            @Override
+            public void onRequestPermissionFailureWithAskNeverAgain(List<String> permissions) {
+                mRootView.onLocation("",  "");
+            }
+        }, new RxPermissions((FragmentActivity) activity), mErrorHandler);
+
+    }
+
+
+
     /**
      * 实体门店
      */
-    public void nearby( String name, int page, int limit, boolean loadType) {
+    public void nearby( String name, int page, int limit,String lng,String lat, boolean loadType) {
         if (mRootView != null) {
             mRootView.onloadStart();
         }
-        mModel.nearby(name,page, limit)
+        mModel.nearby(name,page, limit,lng,lat)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))

@@ -40,6 +40,7 @@ import me.jessyan.retrofiturlmanager.RetrofitUrlManager;
 
 public class RBureauApplication extends Application implements App {
     private static RBureauApplication instance = null;
+    public static boolean isForeground = false;
     private AppLifecycles mAppDelegate;
     private static Context mContext;
     private HttpProxyCacheServer proxy;
@@ -209,4 +210,5 @@ public class RBureauApplication extends Application implements App {
     private void initApi() {
         RetrofitUrlManager.getInstance().putDomain(Api.API_SERVER_NAME, Api.API_SERVER);
     }
+
 }

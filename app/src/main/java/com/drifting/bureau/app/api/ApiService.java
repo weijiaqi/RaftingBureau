@@ -492,7 +492,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("v/business/nearby")
-    Observable<BaseEntity<TeaShopEntity>> nearby(@Field("name") String name, @Field("page") int page, @Field("limit") int limit);
+    Observable<BaseEntity<TeaShopEntity>> nearby(@Field("name") String name, @Field("page") int page, @Field("limit") int limit,@Field("lng") String lng,@Field("lat") String lat);
 
 
     /**

@@ -16,10 +16,13 @@ public class NavigationDialog extends BaseDialog implements View.OnClickListener
 
     private Context context;
     private TextView mGaode, mTencent, mBaidu;
+    private String lng, lat;
 
-    public NavigationDialog(@NonNull Context context) {
+    public NavigationDialog(@NonNull Context context, String lng, String lat) {
         super(context);
         this.context = context;
+        this.lng = lng;
+        this.lat = lat;
     }
 
     @Override
@@ -44,17 +47,17 @@ public class NavigationDialog extends BaseDialog implements View.OnClickListener
             case R.id.tv_gaode:
                 dismiss();
                 //跳转到高德地图
-                MapsUtil.goToGaoDeMap(context, "116.396794", "39.908572");
+                MapsUtil.goToGodeActivity(context, Double.valueOf(lng), Double.valueOf(lat));
                 break;
             case R.id.tv_tencent:
                 dismiss();
                 //跳转到腾讯地图
-                MapsUtil.goToTencentMap(context, null, Double.valueOf("116.396794"), Double.valueOf("39.908572"));
+                 MapsUtil.goToTencentActivity(context, Double.valueOf(lng), Double.valueOf(lat));
                 break;
             case R.id.tv_baidu:
                 dismiss();
                 //跳转到百度地图
-                MapsUtil.goToBaiduActivity(context, null, Double.valueOf("116.397441"), Double.valueOf("39.909166"));
+                MapsUtil.goToBaiduActivity(context, null, Double.valueOf(lng), Double.valueOf(lat));
                 break;
         }
     }

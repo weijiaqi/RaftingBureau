@@ -28,7 +28,7 @@ import com.jess.arms.utils.ArmsUtils;
  * @Time : 2022/5/29 16:40
  */
 public class ShareDialog extends BaseDialog implements View.OnClickListener {
-    private TextView mTvSavePic, mTvName, mTvIdentity, mTvAddress, mTvNum;
+    private TextView mTvSavePic, mTvName, mTvIdentity, mTvAddress, mTvNum,mTvTitle;
     private ProgressBar mPrUploadValue;
     private LinearLayout mLltop;
     private ImageView mIvCode;
@@ -54,18 +54,20 @@ public class ShareDialog extends BaseDialog implements View.OnClickListener {
         mPrUploadValue = findViewById(R.id.pr_upload_value);
         mTvNum = findViewById(R.id.tv_num);
         mIvCode=findViewById(R.id.iv_code);
+        mTvTitle=findViewById(R.id.tv_title);
     }
 
     @Override
     protected void initEvents() {
         super.initEvents();
         mTvSavePic.setOnClickListener(this);
+        mTvTitle.setText(userInfoEntity.getPlanet().getName()+"居住证");
         mTvName.setText(userInfoEntity.getUser().getName());
         mTvIdentity.setText(userInfoEntity.getUser().getLevel_name());
         mTvAddress.setText(userInfoEntity.getPlanet().getName());
         mTvNum.setText(userInfoEntity.getPlanet().getSchedule() + "%");
         mPrUploadValue.setProgress(userInfoEntity.getPlanet().getSchedule());
-        mIvCode.setImageBitmap(EncodingHandler.createQRCode(userInfoEntity.getUser().getShare_code(), ArmsUtils.dip2px(context,67), ArmsUtils.dip2px(context,67), BitmapFactory.decodeResource(context.getResources(), R.drawable.plus)));
+        mIvCode.setImageBitmap(EncodingHandler.createQRCode(userInfoEntity.getUser().getShare_code(), ArmsUtils.dip2px(context,67), ArmsUtils.dip2px(context,67), BitmapFactory.decodeResource(context.getResources(), R.mipmap.icon_logo)));
     }
 
     @Override

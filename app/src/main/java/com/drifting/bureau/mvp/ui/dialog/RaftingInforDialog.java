@@ -2,6 +2,7 @@ package com.drifting.bureau.mvp.ui.dialog;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -9,6 +10,7 @@ import androidx.annotation.NonNull;
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.ui.activity.index.ViewRaftingActivity;
+import com.drifting.bureau.util.GlideUtil;
 import com.jess.arms.base.BaseDialog;
 
 /**
@@ -18,6 +20,7 @@ import com.jess.arms.base.BaseDialog;
  */
 public class RaftingInforDialog extends BaseDialog implements View.OnClickListener {
     private TextView mTvThrowSpce, mTvSelect, mTvName, mTvPlanet, mTvIdentity, mTvRaftingType;
+    private ImageView mIvMastor;
     public static final int CLICK_SELECT = 0x01;
     public static final int CLICK_FINISH = 0x02;
     private Context mContext;
@@ -50,6 +53,7 @@ public class RaftingInforDialog extends BaseDialog implements View.OnClickListen
         mTvPlanet = findViewById(R.id.tv_planet);
         mTvIdentity = findViewById(R.id.tv_identity);
         mTvRaftingType = findViewById(R.id.tv_rafting_type);
+        mIvMastor=findViewById(R.id.iv_mastor);
     }
 
     @Override
@@ -60,6 +64,7 @@ public class RaftingInforDialog extends BaseDialog implements View.OnClickListen
         mTvName.setText("昵称：" + userInfoEntity.getUser().getName());
         mTvPlanet.setText(userInfoEntity.getPlanet().getName());
         mTvIdentity.setText(userInfoEntity.getUser().getLevel_name());
+        GlideUtil.create().loadLongImage(mContext,"http://106.75.116.154:8000/static/drifting/images/home/mascot_df.png",mIvMastor);
         if (explore_id == 1) {
             mTvRaftingType.setText("传递漂");
         }

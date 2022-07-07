@@ -17,7 +17,6 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Context;
 import android.content.Intent;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 
@@ -38,7 +37,6 @@ import com.drifting.bureau.data.event.AnswerCompletedEvent;
 import com.drifting.bureau.data.event.BackSpaceEvent;
 import com.drifting.bureau.data.event.MessageRefreshEvent;
 import com.drifting.bureau.di.component.DaggerDiscoveryTourComponent;
-import com.drifting.bureau.mvp.model.entity.FriendInfoEntity;
 import com.drifting.bureau.mvp.model.entity.MessageReceiveEntity;
 import com.drifting.bureau.mvp.model.entity.PlanetEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
@@ -49,16 +47,16 @@ import com.drifting.bureau.mvp.ui.activity.user.MessageCenterActivity;
 import com.drifting.bureau.mvp.ui.adapter.DiscoveryViewpagerAdapter;
 import com.drifting.bureau.mvp.ui.dialog.RaftingInforDialog;
 import com.drifting.bureau.storageinfo.Preferences;
+import com.drifting.bureau.util.RongIMUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.animator.AnimatorUtil;
-import com.drifting.bureau.util.callback.BaseDataCallBack;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.drifting.bureau.view.DiscoveryTransformer;
 import com.jess.arms.base.BaseActivity;
-import com.jess.arms.base.BaseEntity;
 import com.jess.arms.di.component.AppComponent;
 import com.drifting.bureau.mvp.contract.DiscoveryTourContract;
 import com.drifting.bureau.mvp.presenter.DiscoveryTourPresenter;
+import com.jess.arms.utils.ArmsUtils;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -67,8 +65,14 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.rong.imkit.IMCenter;
+
+
 import io.rong.imkit.RongIM;
-import io.rong.imlib.model.UserInfo;
+import io.rong.imkit.manager.UnReadMessageManager;
+import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.Conversation;
+import io.rong.imlib.model.Message;
 
 
 /**
@@ -145,12 +149,10 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
     }
 
 
-
     public void loadUI() {
         if (mPresenter != null) {
             mPresenter.getExploreList();
             mPresenter.getLocation(this);
-            mPresenter.getRongIM(Preferences.getRcToken());
         }
         frame.setOnTouchListener((view, motionEvent) -> viewPager.onTouchEvent(motionEvent));
         getUserInfo();
@@ -161,16 +163,15 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
         RequestUtil.create().userplayer(Preferences.getUserId(), entity -> {
             if (entity != null && entity.getCode() == 200) {
                 userInfoEntity = entity.getData();
+                Preferences.saveMascot(userInfoEntity.getUser().getMascot());
                 mTvAboutMe.setText(userInfoEntity.getPlanet().getName());
-                unread();
             }
         });
     }
 
-
     public void unread() {
         RequestUtil.create().unread(entity1 -> {
-            if (entity1.getCode() == 200) {
+            if (entity1 != null && entity1.getCode() == 200) {
                 if (entity1.getData().getIndex_msg() == 0) {
                     mIvHot.setVisibility(View.GONE);
                 } else {
@@ -217,7 +218,7 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
                 });
                 break;
             case R.id.tv_about_me: //关于我
-                if (userInfoEntity!=null){
+                if (userInfoEntity != null) {
                     AboutMeActivity.start(this, userInfoEntity, false);
                 }
                 break;
@@ -249,7 +250,7 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
                 if (isAnmiation) {
                     isAnmiation = false;
                     handler.postDelayed(mAdRunnable, entity.getDrift_rest() * 10);
-                   objectAnimation(1, mIvRocket, mRlMessage, -500, 200, 0, 6, 1000);
+                    objectAnimation(1, mIvRocket, mRlMessage, -500, 200, 0, 6, 1000);
                 }
             } else {
                 mIvRocket.setVisibility(View.INVISIBLE);
@@ -345,13 +346,31 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
     @Override
     protected void onResume() {
         super.onResume();
+        RongIM.getInstance().addUnReadMessageCountChangedObserver(observer, Conversation.ConversationType.PRIVATE);
         handler = new Handler();
         handler.postDelayed(mAdRunnable, 1000);
     }
 
+
+    /**
+     * 未读消息监听回调
+     *
+     * @param i
+     */
+    private UnReadMessageManager.IUnReadMessageObserver observer = i -> {
+        if (i > 0) {   //有未读消息
+            mIvHot.setVisibility(View.VISIBLE);
+        } else {
+            unread();
+        }
+    };
+
+
     @Override
     protected void onPause() {
         super.onPause();
+        //移除监听，防止内存泄漏
+        RongIM.getInstance().removeUnReadMessageCountChangedObserver(observer);
         if (handler != null) {
             handler.removeCallbacks(mAdRunnable);
         }
@@ -380,6 +399,8 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        //移除监听，防止内存泄漏
+        RongIM.getInstance().removeUnReadMessageCountChangedObserver(observer);
         if (handler != null) {
             handler.removeCallbacks(mAdRunnable);
         }

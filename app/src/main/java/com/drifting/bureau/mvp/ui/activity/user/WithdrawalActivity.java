@@ -36,7 +36,6 @@ import butterknife.OnClick;
  * module name is WithdrawalActivity
  */
 public class WithdrawalActivity extends BaseActivity<WithdrawalPresenter> implements WithdrawalContract.View {
-
     @BindView(R.id.tv_money)
     TextView mTvMoney;
     @BindView(R.id.et_money)
@@ -45,10 +44,7 @@ public class WithdrawalActivity extends BaseActivity<WithdrawalPresenter> implem
     TextView mEtAccount;
     @BindView(R.id.et_name)
     TextView mEtName;
-
-
     private PublicDialog publicDialog;
-
     private static String EXTRA_MONEY = "extra_money";
     private static String EXTRA_TYPE = "extra_type";
     private String money;
@@ -127,7 +123,6 @@ public class WithdrawalActivity extends BaseActivity<WithdrawalPresenter> implem
                     if (mPresenter != null) {
                         mPresenter.withdrawapply(mEtName.getText().toString(), mEtAccount.getText().toString(), mEtMoney.getText().toString(), type);
                     }
-
                     break;
             }
         }

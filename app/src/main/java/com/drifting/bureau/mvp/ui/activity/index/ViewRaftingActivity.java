@@ -4,25 +4,20 @@ import android.app.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.data.event.BackSpaceEvent;
 import com.drifting.bureau.data.event.PaymentEvent;
-import com.drifting.bureau.data.event.VideoEvent;
 import com.drifting.bureau.di.component.DaggerViewRaftingComponent;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
 import com.drifting.bureau.mvp.model.entity.MessageContentEntity;
@@ -34,20 +29,15 @@ import com.drifting.bureau.mvp.ui.dialog.PublicDialog;
 import com.drifting.bureau.mvp.ui.dialog.RaftingOrderDialog;
 import com.drifting.bureau.mvp.ui.dialog.ReportDialog;
 import com.drifting.bureau.mvp.ui.fragment.PostDriftingFragment;
-import com.drifting.bureau.util.BitmapUtil;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.DateUtil;
 import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.VideoUtil;
-import com.drifting.bureau.util.callback.BaseDataCallBack;
 import com.drifting.bureau.util.request.RequestUtil;
-import com.drifting.bureau.view.CountDownShowView;
 import com.drifting.bureau.view.VoiceWave;
 import com.hjq.shape.layout.ShapeLinearLayout;
 import com.jess.arms.base.BaseActivity;
-import com.jess.arms.base.BaseDialog;
-import com.jess.arms.base.BaseEntity;
 import com.jess.arms.di.component.AppComponent;
 
 import com.drifting.bureau.mvp.contract.ViewRaftingContract;
@@ -114,6 +104,8 @@ public class ViewRaftingActivity extends BaseActivity<ViewRaftingPresenter> impl
     TextView mTvImprint;
     @BindView(R.id.tv_status)
     TextView mTvStatus;
+    @BindView(R.id.iv_mastor)
+    ImageView mIvMascot;
     private RaftingOrderDialog raftingOrderDialog;
     private PublicDialog publicDialog;
     private ReportDialog reportDialog;
@@ -177,6 +169,7 @@ public class ViewRaftingActivity extends BaseActivity<ViewRaftingPresenter> impl
         mTvName.setText("昵称：" + userInfoEntity.getUser().getName());
         mTvPlanet.setText(userInfoEntity.getPlanet().getName());
         mTvIdentity.setText(userInfoEntity.getUser().getLevel_name());
+        GlideUtil.create().loadLongImage(this,userInfoEntity.getUser().getMascot(),mIvMascot);
         setIsLock(false);
         getMessageContent();
 

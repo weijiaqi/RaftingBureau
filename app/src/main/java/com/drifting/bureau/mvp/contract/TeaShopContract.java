@@ -27,6 +27,8 @@ public interface TeaShopContract {
 
         void onloadStart();
 
+        void onLocation(String lng,String lat);
+
         void onBusinessSuccess(TeaShopEntity entity, boolean isNotData);
 
         void loadFinish(boolean loadType, boolean isNotData);
@@ -40,6 +42,6 @@ public interface TeaShopContract {
     }
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存
     interface Model extends IModel{
-        Observable<BaseEntity<TeaShopEntity>> nearby(String name,int page, int limit);
+        Observable<BaseEntity<TeaShopEntity>> nearby(String name,int page, int limit,String lng,String lat);
     }
 }

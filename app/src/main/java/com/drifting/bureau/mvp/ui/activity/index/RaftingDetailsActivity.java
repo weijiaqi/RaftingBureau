@@ -4,13 +4,11 @@ import android.app.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.SpannableStringBuilder;
 import android.view.View;
 import android.widget.ImageView;
@@ -30,7 +28,6 @@ import com.drifting.bureau.util.VideoUtil;
 import com.drifting.bureau.view.AutoPollRecyclerView;
 import com.drifting.bureau.view.VoiceWave;
 import com.jess.arms.base.BaseActivity;
-import com.jess.arms.base.BaseRecyclerAdapter;
 import com.jess.arms.di.component.AppComponent;
 import com.drifting.bureau.mvp.contract.RaftingDetailsContract;
 import com.drifting.bureau.mvp.presenter.RaftingDetailsPresenter;

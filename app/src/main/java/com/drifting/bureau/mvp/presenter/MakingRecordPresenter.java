@@ -50,7 +50,7 @@ public class MakingRecordPresenter extends BasePresenter<MakingRecordContract.Mo
 
 
     /**
-     * 我的盲盒
+     * 制作记录
      */
     public void ordermadelog(int page, int limit, boolean loadType) {
         if (mRootView != null) {

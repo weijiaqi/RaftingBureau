@@ -110,12 +110,13 @@
         </RelativeLayout>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/iv_mastor"
+            android:layout_width="100dp"
+            android:layout_height="165dp"
             android:layout_alignParentEnd="true"
+
             android:layout_marginTop="14dp"
-            android:layout_marginEnd="20dp"
-            android:src="@drawable/drift_guard" />
+            android:layout_marginEnd="18dp" />
 
     </com.hjq.shape.layout.ShapeRelativeLayout>
 </RelativeLayout>

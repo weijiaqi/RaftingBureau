@@ -20,6 +20,7 @@ import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.LogInOutDataUtil;
+import com.drifting.bureau.util.RongIMUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
@@ -97,8 +98,19 @@ public class SignLoginHintActivity extends BaseActivity<SignLoginPresenter> impl
     @Override
     public void loginSuccess(LoginEntity loginEntity) {
         LogInOutDataUtil.successInSetData(loginEntity);
-        showMessage("登录成功");
-        DiscoveryTourActivity.start(this,true);
+        RongIMUtil.getInstance().connect(loginEntity.getRc_token(), new RongIMUtil.ConnectListener() {
+            @Override
+            public void onConnectSuccess() {
+                showMessage("登录成功");
+                DiscoveryTourActivity.start(SignLoginHintActivity.this,true);
+            }
+
+            @Override
+            public void onConnectError() {
+                ToastUtil.showToast("会话消息故障!");
+                DiscoveryTourActivity.start(SignLoginHintActivity.this,true);
+            }
+        });
     }
 
     @Override

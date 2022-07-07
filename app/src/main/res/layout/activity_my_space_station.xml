@@ -19,7 +19,7 @@
         <ImageView
             android:id="@+id/iv_pic"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
         <ImageView
             android:id="@+id/iv_drink"
@@ -88,8 +88,8 @@
                 android:text="邀请旅行者\n获得更多订单"
                 android:textColor="@color/white"
                 android:textSize="14sp"
-                android:visibility="gone"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone" />
 
         </FrameLayout>
 
@@ -131,12 +131,23 @@
     </RelativeLayout>
 
 
-    <RelativeLayout
+    <ImageView
+        android:id="@+id/vr_space_station"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rl_top"
         android:layout_marginHorizontal="22dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/vr_space_station" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/vr_space_station"
+        android:layout_marginHorizontal="22dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/my_space_station_bottom">
 
         <TextView

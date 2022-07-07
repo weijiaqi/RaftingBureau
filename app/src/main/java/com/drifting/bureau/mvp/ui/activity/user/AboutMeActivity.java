@@ -10,12 +10,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -33,17 +32,15 @@ import com.drifting.bureau.R;
 import com.drifting.bureau.data.event.AnswerCompletedEvent;
 import com.drifting.bureau.di.component.DaggerAboutMeComponent;
 import com.drifting.bureau.mvp.model.entity.AoubtMeEntity;
-import com.drifting.bureau.mvp.model.entity.UserEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
-import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
 import com.drifting.bureau.mvp.ui.activity.index.MoveAwayPlanetaryActivity;
-import com.drifting.bureau.mvp.ui.activity.index.PlanetaryDetailActivity;
 import com.drifting.bureau.mvp.ui.activity.index.PlanetarySelectActivity;
 import com.drifting.bureau.mvp.ui.adapter.AboutMeAdapter;
 import com.drifting.bureau.mvp.ui.fragment.PlanetaryDisFragment;
 
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
+import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.TextUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.request.RequestUtil;
@@ -91,6 +88,8 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
     TextView mTvIdentity2;
     @BindView(R.id.tv_schedule)
     TextView mTvSchedule;
+    @BindView(R.id.iv_drifting)
+    ImageView mDrifting;
     private AboutMeAdapter aboutMeAdapter;
     private UserInfoEntity userInfoEntity;
     private static final String EXTRA_USERINFOENTITY = "userinfo_entity";
@@ -129,6 +128,7 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
     }
 
     public void initListener() {
+        GlideUtil.create().loadLongImage(this,Preferences.getMascot(),mDrifting);
         mRcyList.setLayoutManager(new GridLayoutManager(this, 3));
         aboutMeAdapter = new AboutMeAdapter(new ArrayList<>());
         mRcyList.setAdapter(aboutMeAdapter);

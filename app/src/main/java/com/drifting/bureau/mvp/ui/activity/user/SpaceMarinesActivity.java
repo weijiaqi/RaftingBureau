@@ -9,16 +9,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.di.component.DaggerSpaceMarinesComponent;
-import com.drifting.bureau.mvp.model.entity.InfoForShareEntity;
 import com.drifting.bureau.mvp.model.entity.TeamStatisticEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.ui.dialog.ShareDialog;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
+import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.jess.arms.base.BaseActivity;
@@ -55,8 +56,8 @@ public class SpaceMarinesActivity extends BaseActivity<SpaceMarinesPresenter> im
     TextView mTvOrderNum;
     @BindView(R.id.tv_ranking)
     TextView mTvRanking;
-
-
+    @BindView(R.id.iv_mastor)
+    ImageView mIvMator;
     private ShareDialog shareDialog;
 
     private UserInfoEntity userInfoEntity;
@@ -100,6 +101,7 @@ public class SpaceMarinesActivity extends BaseActivity<SpaceMarinesPresenter> im
         RequestUtil.create().userplayer(Preferences.getUserId(), entity -> {
             if (entity != null && entity.getCode() == 200) {
                 userInfoEntity = entity.getData();
+                GlideUtil.create().loadLongImage(this,userInfoEntity.getUser().getMascot(),mIvMator);
                 mTvName.setText(userInfoEntity.getUser().getName());
             }
         });

@@ -3,7 +3,6 @@ package com.drifting.bureau.mvp.ui.activity.user;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;

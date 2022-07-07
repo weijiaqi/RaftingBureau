@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,6 +22,7 @@ import com.drifting.bureau.mvp.model.entity.OrderDetailEntity;
 import com.drifting.bureau.mvp.model.entity.OrderOneEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceInfoEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
+import com.drifting.bureau.mvp.ui.activity.user.vr.SpaceStationVRActivity;
 import com.drifting.bureau.mvp.ui.dialog.MakeScheduleDialog;
 import com.drifting.bureau.mvp.ui.dialog.MySpaceStationDialog;
 import com.drifting.bureau.mvp.ui.dialog.MyTreasuryDialog;
@@ -32,6 +34,7 @@ import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.DateUtil;
 import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.StringUtil;
+import com.drifting.bureau.util.TextUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.jess.arms.base.BaseActivity;
@@ -78,14 +81,14 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
     private MyTreasuryDialog myTreasuryDialog;
     private ShareDialog shareDialog;
     private MySpaceStationDialog mySpaceStationDialog;
-    private static final String EXTRA_SPACE_ID = "extra_space_id";
+
     private OrderOneEntity orderOneEntity;
     private UserInfoEntity userInfoEntity;
     private Handler handler;
+    private String ar_url;
 
-    public static void start(Context context, int space_id, boolean closePage) {
+    public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, MySpaceStationActivity.class);
-        intent.putExtra(EXTRA_SPACE_ID, space_id);
         context.startActivity(intent);
         if (closePage) ((Activity) context).finish();
     }
@@ -148,7 +151,7 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
         }
     }
 
-    @OnClick({R.id.toolbar_back, R.id.tv_select, R.id.tv_my_treasury, R.id.tv_upgrade, R.id.rl_total_revenue, R.id.rl_making_records, R.id.rl_withdrawal, R.id.tv_not_data})
+    @OnClick({R.id.toolbar_back, R.id.tv_select, R.id.tv_my_treasury, R.id.tv_upgrade, R.id.rl_total_revenue, R.id.rl_making_records, R.id.rl_withdrawal, R.id.tv_not_data, R.id.vr_space_station})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
@@ -186,6 +189,11 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
                         mPresenter.userplayer(2, Preferences.getUserId());
                     }
                     break;
+                case R.id.vr_space_station:
+                    if (!TextUtils.isEmpty(ar_url)) {
+                        SpaceStationVRActivity.start(this, false);
+                    }
+                    break;
             }
         }
     }
@@ -194,6 +202,7 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
     @Override
     public void onSpcaeInfoSuccess(SpaceInfoEntity entity) {
         if (entity != null) {
+            ar_url = entity.getAr_url();
             GlideUtil.create().loadLongImage(this, entity.getBackground(), mIvPic);
             mTvlevelName.setText(entity.getLevel_name());
             mTvWholeMake.setText(entity.getTotal_make() + "");

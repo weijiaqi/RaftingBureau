@@ -29,8 +29,9 @@
             android:textSize="12sp" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/iv_pic"
+            android:layout_width="43dp"
+            android:layout_height="43dp"
             android:layout_alignParentEnd="true"
          />
 

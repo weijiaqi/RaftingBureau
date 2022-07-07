@@ -9,14 +9,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.di.component.DaggerMakingRecordComponent;
 import com.drifting.bureau.mvp.model.entity.MakingRecordEntity;
-import com.drifting.bureau.mvp.model.entity.MyBlindBoxEntity;
 import com.drifting.bureau.mvp.ui.adapter.MakingRecordAdapter;
+import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.ViewUtil;
 import com.jess.arms.base.BaseActivity;
@@ -29,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 
 /**
@@ -152,6 +154,17 @@ public class MakingRecordActivity extends BaseActivity<MakingRecordPresenter> im
             }
         } else {
             ViewUtil.create().setView(mFlState);
+        }
+    }
+
+    @OnClick({R.id.toolbar_back})
+    public void onClick(View view) {
+        if (!ClickUtil.isFastClick(view.getId())) {
+            switch (view.getId()) {
+                case R.id.toolbar_back:
+                    finish();
+                    break;
+            }
         }
     }
 

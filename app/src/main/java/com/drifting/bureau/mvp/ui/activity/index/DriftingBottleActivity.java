@@ -20,7 +20,7 @@ import com.drifting.bureau.mvp.ui.activity.user.DriftingTrackActivity;
 import com.drifting.bureau.mvp.ui.fragment.PostDriftingFragment;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.ToastUtil;
-import com.drifting.bureau.util.VideoUtil;
+import com.drifting.bureau.util.request.RequestUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.drifting.bureau.mvp.contract.DriftingBottleContract;
@@ -37,8 +37,7 @@ import butterknife.OnClick;
  * module name is DriftingBottleActivity
  */
 public class DriftingBottleActivity extends BaseActivity<DriftingBottlePresenter> implements DriftingBottleContract.View {
-    @BindView(R.id.rl_info)
-    RelativeLayout mRlInfo;
+
     @BindView(R.id.toolbar_title)
     TextView mToobarTitle;
     @BindView(R.id.tv_num)
@@ -75,7 +74,6 @@ public class DriftingBottleActivity extends BaseActivity<DriftingBottlePresenter
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
-        mRlInfo.setVisibility(View.VISIBLE);
         if (getIntent() != null) {
             explore_id = getIntent().getExtras().getInt(EXTRA_EXPLORE_ID);
             title = getIntent().getExtras().getString(EXTRA_NAME);
@@ -126,4 +124,10 @@ public class DriftingBottleActivity extends BaseActivity<DriftingBottlePresenter
         return this;
     }
 
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RequestUtil.create().disDispose();
+    }
 }
