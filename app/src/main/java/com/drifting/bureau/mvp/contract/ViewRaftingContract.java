@@ -3,7 +3,6 @@ package com.drifting.bureau.mvp.contract;
 import android.app.Activity;
 
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
-import com.drifting.bureau.mvp.model.entity.CreatewithfileEntity;
 import com.drifting.bureau.mvp.model.entity.MessageContentEntity;
 import com.drifting.bureau.mvp.model.entity.SkuListEntity;
 import com.jess.arms.base.BaseEntity;
@@ -11,7 +10,6 @@ import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IView;
 
 import io.reactivex.Observable;
-import okhttp3.MultipartBody;
 
 /**
  * ================================================
@@ -44,7 +42,7 @@ public interface ViewRaftingContract {
 
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存
     interface Model extends IModel {
-        Observable<BaseEntity<SkuListEntity>> skulist(int type_id, int explore_id, int message_id);
+        Observable<BaseEntity<SkuListEntity>> skulist( int explore_id, int message_id);
 
         Observable<BaseEntity<CreateOrderEntity>> createOrder(int type_id, String sku_codes);
 

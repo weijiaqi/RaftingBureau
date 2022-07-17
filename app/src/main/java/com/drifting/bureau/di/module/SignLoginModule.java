@@ -2,6 +2,7 @@ package com.drifting.bureau.di.module;
 
 import com.drifting.bureau.mvp.contract.SignLoginContract;
 import com.drifting.bureau.mvp.model.SignLoginModel;
+
 import dagger.Binds;
 import dagger.Module;
 

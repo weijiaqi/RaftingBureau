@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/transmit_bg"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_title" />
+
+    <com.hjq.shape.layout.ShapeLinearLayout
+        android:id="@+id/ll_top"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginHorizontal="35dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:visibility="gone"
+        app:shape_radius="17dp"
+        app:shape_solidColor="@color/color_0d1">
+
+
+        <View
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/shape_blue_circles" />
+
+        <TextView
+            android:id="@+id/tv_from_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:text="你的小太阳"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginHorizontal="24dp"
+            android:src="@drawable/transmit" />
+
+        <View
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/shape_purple_circles" />
+
+        <TextView
+            android:id="@+id/tv_to_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:text="你的小太阳"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+    </com.hjq.shape.layout.ShapeLinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_top"
+
+        android:orientation="vertical">
+
+        <HorizontalScrollView
+            android:id="@+id/scroll_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"
+            android:scrollbars="none">
+
+            <com.drifting.bureau.view.chart.LineChartView
+                android:id="@+id/line_chart_view"
+                android:layout_width="wrap_content"
+                android:layout_height="300dp" />
+
+        </HorizontalScrollView>
+
+    </LinearLayout>
+
+
+    <com.hjq.shape.view.ShapeTextView
+        android:id="@+id/tv_open"
+        android:layout_width="86dp"
+        android:layout_height="29dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="226dp"
+        android:gravity="center"
+        android:text="开启新漂流"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:visibility="gone"
+        app:shape_radius="100dp"
+        app:shape_solidColor="@color/color_0d1" />
+
+
+    <com.hjq.shape.layout.ShapeRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="197dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="14dp"
+        app:shape_endColor="@color/color_6d"
+        app:shape_radius="14dp"
+        app:shape_startColor="@color/color_6c">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="19dp"
+            android:background="@drawable/person_bg">
+
+
+            <TextView
+                android:id="@+id/tv_rafting_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="26dp"
+
+                android:background="@drawable/rafting_frame"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_rafting_type"
+                android:layout_alignStart="@+id/tv_rafting_type"
+                android:layout_marginTop="10dp"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_planet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_name"
+                android:layout_alignStart="@+id/tv_name"
+                android:layout_marginTop="6dp"
+                android:text=""
+                android:textColor="@color/color_6ce"
+                android:textSize="11sp" />
+
+            <TextView
+                android:id="@+id/tv_identity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tv_planet"
+                android:layout_marginStart="15dp"
+                android:layout_toRightOf="@+id/tv_planet"
+                android:text=""
+                android:textColor="@color/color_6ce"
+                android:textSize="11sp" />
+
+            <RelativeLayout
+                android:id="@+id/rl_add_friends"
+                android:visibility="gone"
+                android:layout_width="79dp"
+                android:layout_height="22dp"
+                android:layout_below="@+id/tv_planet"
+                android:layout_alignStart="@+id/tv_rafting_type"
+                android:layout_marginTop="12dp">
+
+
+                <ImageView
+                    android:id="@+id/iv_add_friend_bg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/add_friend_bg"
+                    tools:ignore="UseAppTint" />
+
+                <TextView
+                    android:id="@+id/tv_add_friends"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="添加好友"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/iv_mask"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/square_lock" />
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/iv_mastor"
+            android:layout_width="105dp"
+            android:layout_height="158dp"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="4dp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:padding="10dp"
+            android:text="元宇宙星球居住证"
+            android:textColor="@color/color_0b"
+            android:textSize="11sp" />
+
+    </com.hjq.shape.layout.ShapeRelativeLayout>
+
+</RelativeLayout>

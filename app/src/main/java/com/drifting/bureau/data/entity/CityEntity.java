@@ -2,8 +2,6 @@ package com.drifting.bureau.data.entity;
 
 import com.drifting.bureau.util.DigitUtil;
 
-import java.io.Serializable;
-
 public class CityEntity implements Comparable {
 
 

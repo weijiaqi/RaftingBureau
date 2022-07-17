@@ -1,6 +1,5 @@
 package com.drifting.bureau.app.interceptor;
 
-import com.drifting.bureau.storageinfo.Preferences;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.jess.arms.base.BaseEntity;

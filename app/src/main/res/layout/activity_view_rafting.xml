@@ -290,6 +290,7 @@
                 android:layout_marginHorizontal="35dp">
 
                 <com.hjq.shape.view.ShapeTextView
+
                     android:id="@+id/tv_into_space"
                     android:layout_width="125dp"
                     android:layout_height="48dp"

@@ -13,7 +13,7 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.PlanetEntity;
-import com.drifting.bureau.mvp.ui.activity.index.DriftingBottleActivity;
+import com.drifting.bureau.mvp.ui.activity.index.TopicDetailActivity;
 import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.ToastUtil;
 
@@ -53,7 +53,8 @@ public class DiscoveryViewpagerAdapter extends PagerAdapter{
             if (!textView.getText().toString().equals("传递漂")) {
                 ToastUtil.showToast("暂未开放");
             } else {
-                DriftingBottleActivity.start(context, list.get(position % list.size()).getId(), textView.getText().toString(), false);
+                TopicDetailActivity.start(context,list.get(position % list.size()).getId(),0,false);
+               // DriftingBottleActivity.start(context, list.get(position % list.size()).getId(), textView.getText().toString(), false);
             }
         });
         container.addView(view);

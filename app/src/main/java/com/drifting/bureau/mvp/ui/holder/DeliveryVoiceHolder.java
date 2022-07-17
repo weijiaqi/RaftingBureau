@@ -1,7 +1,6 @@
 package com.drifting.bureau.mvp.ui.holder;
 
 import android.content.Context;
-import android.speech.tts.Voice;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -14,10 +13,8 @@ import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.TextUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.VideoUtil;
-import com.drifting.bureau.util.callback.BaseDataCallBack;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.drifting.bureau.view.VoiceWave;
-import com.jess.arms.base.BaseEntity;
 import com.jess.arms.base.BaseRecyclerHolder;
 
 import java.util.List;

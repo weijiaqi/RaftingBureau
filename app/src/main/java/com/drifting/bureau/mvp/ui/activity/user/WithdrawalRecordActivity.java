@@ -1,11 +1,6 @@
 package com.drifting.bureau.mvp.ui.activity.user;
 
 import android.app.Activity;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,19 +8,21 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.drifting.bureau.R;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.drifting.bureau.R;
 import com.drifting.bureau.di.component.DaggerWithdrawalRecordComponent;
+import com.drifting.bureau.mvp.contract.WithdrawalRecordContract;
 import com.drifting.bureau.mvp.model.entity.IncomeRecordEntity;
+import com.drifting.bureau.mvp.presenter.WithdrawalRecordPresenter;
 import com.drifting.bureau.mvp.ui.adapter.IncomeRecordAdapter;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.ViewUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
-
-import com.drifting.bureau.mvp.contract.WithdrawalRecordContract;
-import com.drifting.bureau.mvp.presenter.WithdrawalRecordPresenter;
 import com.rb.core.xrecycleview.XRecyclerView;
 
 import java.util.ArrayList;

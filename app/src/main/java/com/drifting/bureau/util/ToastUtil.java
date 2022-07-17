@@ -3,6 +3,7 @@ package com.drifting.bureau.util;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.Gravity;
+
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.ui.dialog.PublicDialog;
 import com.hjq.toast.ToastUtils;

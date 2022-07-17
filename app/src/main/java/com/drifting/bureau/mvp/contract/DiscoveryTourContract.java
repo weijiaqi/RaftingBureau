@@ -1,9 +1,8 @@
 package com.drifting.bureau.mvp.contract;
-import android.app.Activity;
 
-import com.drifting.bureau.mvp.model.entity.CustomerEntity;
 import com.drifting.bureau.mvp.model.entity.MessageReceiveEntity;
 import com.drifting.bureau.mvp.model.entity.PlanetEntity;
+import com.drifting.bureau.mvp.model.entity.VersionUpdateEntity;
 import com.jess.arms.base.BaseEntity;
 import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IView;
@@ -35,12 +34,15 @@ public interface DiscoveryTourContract {
 
         void finishSuccess();
     }
+
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存
-    interface Model extends IModel{
+    interface Model extends IModel {
         Observable<BaseEntity<List<PlanetEntity>>> exploretypelist();
 
         Observable<BaseEntity<MessageReceiveEntity>> messagereceive();
 
-        Observable<BaseEntity> information(String lng,String lat);
+        Observable<BaseEntity> information(String lng, String lat);
+
+        Observable<BaseEntity<VersionUpdateEntity>> checkVersion();
     }
 }

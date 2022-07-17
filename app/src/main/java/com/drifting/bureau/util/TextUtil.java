@@ -13,15 +13,12 @@ import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 
-
-import com.drifting.bureau.R;
 import com.drifting.bureau.app.application.RBureauApplication;
 
 import java.util.regex.Matcher;

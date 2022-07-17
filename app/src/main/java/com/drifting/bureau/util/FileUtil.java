@@ -1,13 +1,24 @@
 package com.drifting.bureau.util;
 
+import static io.rong.imkit.utils.FileTypeUtils.formatFileSize;
+
 import android.content.Context;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -21,6 +32,7 @@ public class FileUtil {
 
     /**
      * 语音存储路径
+     *
      * @param
      * @return
      */
@@ -49,7 +61,6 @@ public class FileUtil {
         }
         return appDir.getPath() + "/" + fileName;
     }
-
 
 
     /**
@@ -170,4 +181,83 @@ public class FileUtil {
         return fileSizeLong;
     }
 
+    //strFile 为文件名称 返回true为存在
+    public static boolean fileIsExists(String strFile) {
+        try {
+            File f = new File(strFile);
+            if (f.exists()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public static String getUrlFileName(String url) {
+        String fileName = null;
+        int index = url.lastIndexOf(File.separator);
+        if (index != -1) {
+            fileName = url.substring(index + 1);
+        } else {
+            fileName = url;
+        }
+        return fileName;
+    }
+
+
+    /**
+     * 获取网络资源文件大小
+     */
+    private void getNetworkFileSize(String fileUrl) {
+        final Handler handler = new Handler(Looper.myLooper()) {
+            @Override
+            public void handleMessage(Message msg) {
+                String fileSize = msg.getData().getString("fileSize");
+                Log.d("fileSize", fileSize);
+            }
+        };
+
+
+        if (fileUrl == null) {
+            return;
+        }
+
+        if (fileUrl.length() == 0) {
+            return;
+        }
+
+        URL url = null;
+        try {
+            url = new URL(fileUrl);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        if (url == null) {
+            return;
+        }
+
+        final URL finalUrl = url;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    HttpURLConnection urlConnection = (HttpURLConnection) finalUrl.openConnection();
+                    int fileLength = urlConnection.getContentLength();
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("fileSize", "文件大小：" + formatFileSize(fileLength));
+
+                    Message message = handler.obtainMessage();
+                    message.setData(bundle);
+
+                    handler.sendMessage(message);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
 }

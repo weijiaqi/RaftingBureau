@@ -4,19 +4,21 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.provider.Settings;
 import android.view.KeyEvent;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.VideoUtil;
 import com.drifting.bureau.view.VoiceWave;
 import com.jess.arms.base.BaseDialog;
-import com.jess.arms.utils.PermissionUtil;
 import com.tbruyelle.rxpermissions2.Permission;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
@@ -131,6 +133,59 @@ public class PermissionDialog {
                     }
                 });
     }
+
+
+    /**
+     * 开启照相
+     *
+     * @param activity           FragmentActivity
+     * @param permissionCallBack 状态回调
+     */
+    public static void requestCodePermissions(Activity activity, PermissionCallBack permissionCallBack) {
+        new RxPermissions((FragmentActivity) activity)
+                .requestEachCombined(Manifest.permission.CAMERA)
+                .subscribe(permission -> {
+                    if (permission.granted) {
+                        permissionCallBack.onSuccess();
+                    } else if (permission.shouldShowRequestPermissionRationale) {
+                        permissionCallBack.onFailure();
+                    } else {
+                        permissionCallBack.onAlwaysFailure();
+                    }
+                });
+    }
+
+
+    /**
+     * 6.0以上：activity多个权限申请
+     * @param context
+     * @param permissions
+     * @param requstCode
+     * @return
+     */
+    public static boolean requestPermissions(Activity context, List<String> permissions, int requstCode){
+
+        List<String> needRequetPermissions = new ArrayList<>();
+        for(int i = 0;i < permissions.size();i++){
+            String permission =  permissions.get(i);
+            if(ContextCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED){
+                needRequetPermissions.add(permission);
+            }
+        }
+
+        int requestPermissionCount = needRequetPermissions.size();
+        if(requestPermissionCount > 0){
+            String[]requestPermissions = new String[requestPermissionCount];
+            for(int i = 0;i < requestPermissionCount;i++){
+                requestPermissions[i] = needRequetPermissions.get(i);
+            }
+            ActivityCompat.requestPermissions(context, requestPermissions, requstCode);
+            return false;
+        }else{
+            return true;
+        }
+    }
+
 
 
     /**

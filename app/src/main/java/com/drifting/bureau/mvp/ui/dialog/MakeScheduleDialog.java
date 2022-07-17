@@ -1,7 +1,6 @@
 package com.drifting.bureau.mvp.ui.dialog;
 
 import android.content.Context;
-import android.view.Window;
 import android.view.animation.Animation;
 import android.widget.ProgressBar;
 import android.widget.TextView;

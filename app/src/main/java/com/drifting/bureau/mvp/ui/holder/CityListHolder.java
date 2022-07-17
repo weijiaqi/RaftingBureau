@@ -11,7 +11,6 @@ import com.drifting.bureau.R;
 import com.drifting.bureau.data.entity.CityEntity;
 import com.drifting.bureau.util.DigitUtil;
 import com.drifting.bureau.util.TextUtil;
-import com.jess.arms.base.BaseHolder;
 import com.jess.arms.base.BaseRecyclerHolder;
 
 import java.util.List;

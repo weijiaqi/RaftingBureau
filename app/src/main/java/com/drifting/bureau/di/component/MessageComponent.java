@@ -1,14 +1,13 @@
 package com.drifting.bureau.di.component;
 
-import dagger.BindsInstance;
-import dagger.Component;
-
+import com.drifting.bureau.di.module.MessageModule;
 import com.drifting.bureau.mvp.contract.MessageContract;
 import com.drifting.bureau.mvp.ui.fragment.MessageFragment;
 import com.jess.arms.di.component.AppComponent;
-import com.drifting.bureau.di.module.MessageModule;
-
 import com.jess.arms.di.scope.FragmentScope;
+
+import dagger.BindsInstance;
+import dagger.Component;
 
 
 /**

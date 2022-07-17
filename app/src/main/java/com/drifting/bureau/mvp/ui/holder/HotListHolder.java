@@ -1,6 +1,5 @@
 package com.drifting.bureau.mvp.ui.holder;
 
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 

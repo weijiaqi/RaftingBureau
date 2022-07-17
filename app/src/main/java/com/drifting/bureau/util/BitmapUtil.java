@@ -1,20 +1,24 @@
 package com.drifting.bureau.util;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.view.View;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -95,8 +99,8 @@ public class BitmapUtil {
     public static Bitmap compressImage(Bitmap image) {
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.JPEG, 100, baos);// 质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
-        int options = 90;
+        image.compress(Bitmap.CompressFormat.JPEG, 50, baos);// 质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+        int options = 100;
 
         while (baos.toByteArray().length / 1024 > 100) { // 循环判断如果压缩后图片是否大于100kb,大于继续压缩
             baos.reset(); // 重置baos即清空baos
@@ -171,4 +175,58 @@ public class BitmapUtil {
         intent.setData(uri);
         context.sendBroadcast(intent);
     }
+
+
+    /**
+     * 将本地图片转成Bitmap
+     *
+     * @param path 已有图片的路径
+     * @return
+     */
+    public static Bitmap openImage(String path) {
+        Bitmap bitmap = null;
+        try {
+            BufferedInputStream bis = new BufferedInputStream(new FileInputStream(path));
+            bitmap = BitmapFactory.decodeStream(bis);
+            bis.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bitmap;
+    }
+
+
+    /**
+     * 对图片进行旋转，拍照后应用老是显示图片横向，而且是逆时针90度，现在给他设置成显示顺时针90度
+     *
+     * @param bitmap 图片
+     * @param degree 顺时针旋转的角度
+     * @return 返回旋转后的位图
+     */
+    public static Bitmap rotateImage(Bitmap bitmap, float degree) {
+        //create new matrix
+        Matrix matrix = new Matrix();
+        matrix.postRotate(degree);
+        Bitmap bmp = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+        return bmp;
+    }
+
+
+    public static Bitmap getBitmap(Uri uri, Context context) {
+        if (uri == null) return null;
+
+        Bitmap bitmap = null;
+        try {
+            ContentResolver cr = context.getContentResolver();
+            bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+
+        }
+        return bitmap;
+    }
+
+
 }

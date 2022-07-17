@@ -19,11 +19,12 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
-import org.jetbrains.annotations.NotNull;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+
+import org.jetbrains.annotations.NotNull;
+
 import timber.log.Timber;
 
 /**

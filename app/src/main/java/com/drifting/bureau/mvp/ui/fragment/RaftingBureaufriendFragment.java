@@ -1,38 +1,31 @@
 package com.drifting.bureau.mvp.ui.fragment;
 
-import androidx.fragment.app.Fragment;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.drifting.bureau.R;
-import com.drifting.bureau.data.event.AnswerCompletedEvent;
 import com.drifting.bureau.data.event.FriendApplicationEvent;
 import com.drifting.bureau.data.event.MessageCenterEvent;
 import com.drifting.bureau.di.component.DaggerRaftingBureaufriendComponent;
+import com.drifting.bureau.mvp.contract.RaftingBureaufriendContract;
 import com.drifting.bureau.mvp.model.entity.RaftingBureaufriendEntity;
-import com.drifting.bureau.mvp.ui.activity.imkit.MyConversationActivity;
+import com.drifting.bureau.mvp.presenter.RaftingBureaufriendPresenter;
 import com.drifting.bureau.mvp.ui.activity.user.FriendApplicationActivity;
 import com.drifting.bureau.mvp.ui.adapter.RaftingBureaufriendAdapter;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
-
-import com.drifting.bureau.mvp.contract.RaftingBureaufriendContract;
-import com.drifting.bureau.mvp.presenter.RaftingBureaufriendPresenter;
-import com.rb.core.xrecycleview.XRecyclerView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -43,10 +36,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import io.rong.imkit.userinfo.RongUserInfoManager;
-import io.rong.imkit.userinfo.UserDataProvider;
-import io.rong.imkit.utils.RouteUtils;
-import io.rong.imlib.model.UserInfo;
 
 
 /**

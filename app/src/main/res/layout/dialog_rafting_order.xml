@@ -88,6 +88,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tv_glass"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_sum"
@@ -96,6 +97,18 @@
                 android:text="一杯自取，另一杯进行传递"
                 android:textColor="@color/color_99"
                 android:textSize="11sp" />
+
+            <TextView
+                android:id="@+id/tv_warning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_glass"
+                android:text=""
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="13dp"
+                android:textColor="@color/color_ff00"
+                android:textSize="12sp" />
+
 
         </RelativeLayout>
 
@@ -107,7 +120,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ll_top"
-         android:scaleType="fitXY"
+        android:scaleType="fitXY"
         android:src="@drawable/rafting_order_bg" />
 
     <com.hjq.shape.view.ShapeTextView

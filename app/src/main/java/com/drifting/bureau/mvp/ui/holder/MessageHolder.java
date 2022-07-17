@@ -12,7 +12,7 @@ import com.drifting.bureau.R;
 import com.drifting.bureau.data.event.MessageEvent;
 import com.drifting.bureau.mvp.model.entity.SysmessageMineEntity;
 import com.drifting.bureau.mvp.ui.activity.index.AnnouncementDetailsActivity;
-import com.drifting.bureau.mvp.ui.activity.index.RaftingDetailsActivity;
+import com.drifting.bureau.mvp.ui.activity.user.DriftingTrackActivity;
 import com.drifting.bureau.mvp.ui.activity.user.MessageCenterActivity;
 import com.drifting.bureau.mvp.ui.activity.user.MySpaceStationActivity;
 import com.drifting.bureau.mvp.ui.activity.user.OrderRecordActivity;
@@ -79,7 +79,7 @@ public class MessageHolder extends BaseRecyclerHolder {
                             activity.finish();
                         }
                     } else if (listBeanList.get(position).getMsy_type_sub() == 32) { //发送漂流消息
-                        RaftingDetailsActivity.start(context, listBeanList.get(position).getMessage_id(), false);
+                        DriftingTrackActivity.start(context, false);
                     }
                 }
             }

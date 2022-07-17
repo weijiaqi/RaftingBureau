@@ -5,7 +5,6 @@ import android.view.View;
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.DriftingTrackEntity;
 import com.drifting.bureau.mvp.ui.holder.DriftingTrackHolder;
-import com.drifting.bureau.mvp.ui.holder.MakingRecordHolder;
 import com.jess.arms.base.BaseRecyclerAdapter;
 import com.jess.arms.base.BaseRecyclerHolder;
 

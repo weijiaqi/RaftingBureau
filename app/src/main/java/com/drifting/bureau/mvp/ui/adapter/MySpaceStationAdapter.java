@@ -3,7 +3,6 @@ package com.drifting.bureau.mvp.ui.adapter;
 import android.view.View;
 
 import com.drifting.bureau.R;
-import com.drifting.bureau.mvp.model.entity.MyBlindBoxEntity;
 import com.drifting.bureau.mvp.model.entity.MySpaceStationEntity;
 import com.drifting.bureau.mvp.ui.holder.MySpaceStationHolder;
 import com.jess.arms.base.BaseRecyclerAdapter;

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_01"
@@ -21,7 +20,7 @@
             <RelativeLayout
                 android:id="@+id/rl_top"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="310dp"
                 android:background="@drawable/about_me_bg">
 
                 <ImageView
@@ -29,12 +28,12 @@
                     android:layout_width="110dp"
                     android:layout_height="194dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="100dp" />
+                    android:layout_marginTop="110dp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="90dp"
+                    android:layout_marginTop="100dp"
                     android:layout_marginEnd="-25dp"
                     android:layout_toLeftOf="@+id/iv_drifting"
                     android:background="@drawable/lect_select"
@@ -84,7 +83,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@+id/iv_drifting"
                     android:layout_marginStart="-28dp"
-                    android:layout_marginTop="42dp"
+                    android:layout_marginTop="52dp"
                     android:layout_toRightOf="@+id/iv_drifting"
                     android:background="@drawable/right_select"
                     android:gravity="end"
@@ -127,6 +126,18 @@
 
             <include layout="@layout/include_tvbar_title" />
 
+            <TextView
+                android:id="@+id/ar_selected"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_toolbar"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/ar_select"
+                android:gravity="center"
+                android:text="AR查看"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:id="@+id/ll_center"

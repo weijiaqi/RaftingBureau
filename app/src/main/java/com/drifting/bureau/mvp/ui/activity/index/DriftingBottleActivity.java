@@ -1,21 +1,21 @@
 package com.drifting.bureau.mvp.ui.activity.index;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-
 import com.drifting.bureau.R;
 import com.drifting.bureau.di.component.DaggerDriftingBottleComponent;
+import com.drifting.bureau.mvp.contract.DriftingBottleContract;
 import com.drifting.bureau.mvp.model.entity.ExploreTimesEntity;
+import com.drifting.bureau.mvp.presenter.DriftingBottlePresenter;
 import com.drifting.bureau.mvp.ui.activity.user.DriftingTrackActivity;
 import com.drifting.bureau.mvp.ui.fragment.PostDriftingFragment;
 import com.drifting.bureau.util.ClickUtil;
@@ -23,8 +23,6 @@ import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
-import com.drifting.bureau.mvp.contract.DriftingBottleContract;
-import com.drifting.bureau.mvp.presenter.DriftingBottlePresenter;
 
 import butterknife.BindView;
 import butterknife.OnClick;

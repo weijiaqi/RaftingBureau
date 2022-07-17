@@ -1,28 +1,28 @@
 package com.drifting.bureau.app.api;
 
 
-import com.bumptech.glide.annotation.GlideType;
-import com.drifting.bureau.mvp.model.entity.AnswerEntity;
 import com.drifting.bureau.mvp.model.entity.BarrageEntity;
 import com.drifting.bureau.mvp.model.entity.BoxOpenEntity;
+import com.drifting.bureau.mvp.model.entity.CommentDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
 import com.drifting.bureau.mvp.model.entity.CreatewithfileEntity;
-import com.drifting.bureau.mvp.model.entity.CustomerEntity;
 import com.drifting.bureau.mvp.model.entity.DeliveryDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.DriftingTrackEntity;
 import com.drifting.bureau.mvp.model.entity.ExploreTimesEntity;
 import com.drifting.bureau.mvp.model.entity.FriendApplicationEntity;
+import com.drifting.bureau.mvp.model.entity.FriendEntity;
 import com.drifting.bureau.mvp.model.entity.FriendInfoEntity;
 import com.drifting.bureau.mvp.model.entity.IncomeRecordEntity;
-import com.drifting.bureau.mvp.model.entity.InfoForShareEntity;
 import com.drifting.bureau.mvp.model.entity.LoginEntity;
 import com.drifting.bureau.mvp.model.entity.MakingRecordEntity;
 import com.drifting.bureau.mvp.model.entity.MessageContentEntity;
 import com.drifting.bureau.mvp.model.entity.MessageReceiveEntity;
+import com.drifting.bureau.mvp.model.entity.MoreDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.MyBlindBoxEntity;
 import com.drifting.bureau.mvp.model.entity.MySpaceStationEntity;
 import com.drifting.bureau.mvp.model.entity.MyTreasuryEntity;
 import com.drifting.bureau.mvp.model.entity.MysteryboxEntity;
+import com.drifting.bureau.mvp.model.entity.NebulaEntity;
 import com.drifting.bureau.mvp.model.entity.OrderDetailEntity;
 import com.drifting.bureau.mvp.model.entity.OrderOneEntity;
 import com.drifting.bureau.mvp.model.entity.OrderRecordEntity;
@@ -35,6 +35,7 @@ import com.drifting.bureau.mvp.model.entity.PrizeEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionAssessEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionEntity;
 import com.drifting.bureau.mvp.model.entity.RaftingBureaufriendEntity;
+import com.drifting.bureau.mvp.model.entity.SandPayQueryEntity;
 import com.drifting.bureau.mvp.model.entity.SkuListEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceAboutEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceCheckEntity;
@@ -45,24 +46,23 @@ import com.drifting.bureau.mvp.model.entity.SysmessageEntity;
 import com.drifting.bureau.mvp.model.entity.SysmessageMineEntity;
 import com.drifting.bureau.mvp.model.entity.TeaShopEntity;
 import com.drifting.bureau.mvp.model.entity.TeamStatisticEntity;
-import com.drifting.bureau.mvp.model.entity.UserEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
+import com.drifting.bureau.mvp.model.entity.VersionUpdateEntity;
 import com.drifting.bureau.mvp.model.entity.WriteOffInfoEntity;
 import com.jess.arms.base.BaseEntity;
 
 import java.util.List;
-import java.util.Map;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Part;
-import retrofit2.http.PartMap;
+import retrofit2.http.Streaming;
+import retrofit2.http.Url;
 
 /**
  * @author 卫佳琪1
@@ -71,6 +71,24 @@ import retrofit2.http.PartMap;
  */
 
 public interface ApiService {
+
+    /**
+     * app下载
+     *
+     * @param url
+     * @return
+     */
+    @Streaming
+    @GET
+    Observable<ResponseBody> download(@Url String url);
+
+    /**
+     * 版本更新
+     *
+     * @return
+     */
+    @GET("n/version/update")
+    Observable<BaseEntity<VersionUpdateEntity>> checkVersion();
 
 
     /**
@@ -126,11 +144,18 @@ public interface ApiService {
 
 
     /**
+     * 创建话题（支持文件上传，发起和参与话题共用）   (新街口)
+     */
+    @POST("v/message/creatingwithfile")
+    Observable<BaseEntity<CreatewithfileEntity>> creatingwithfileword(@Body MultipartBody shortVoice);
+
+
+    /**
      * 商品列表（发起话题和参与话题）
      */
     @FormUrlEncoded
     @POST("v/sku/list")
-    Observable<BaseEntity<SkuListEntity>> skulist(@Field("type_id") int type_id, @Field("explore_id") int explore_id, @Field("message_id") int message_id);
+    Observable<BaseEntity<SkuListEntity>> skulist(@Field("explore_id") int explore_id, @Field("message_id") int message_id);
 
 
     /**
@@ -184,8 +209,8 @@ public interface ApiService {
      * 支付订单
      */
     @FormUrlEncoded
-    @POST("v/order/payOrder")
-    Observable<BaseEntity<PayOrderEntity>> payOrder(@Field("sn") String sn);
+    @POST("v/order/payOrderAll")
+    Observable<BaseEntity<PayOrderEntity>> payOrder(@Field("sn") String sn, @Field("terminal") String terminal);
 
 
     /**
@@ -492,7 +517,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("v/business/nearby")
-    Observable<BaseEntity<TeaShopEntity>> nearby(@Field("name") String name, @Field("page") int page, @Field("limit") int limit,@Field("lng") String lng,@Field("lat") String lat);
+    Observable<BaseEntity<TeaShopEntity>> nearby(@Field("name") String name, @Field("page") int page, @Field("limit") int limit, @Field("lng") String lng, @Field("lat") String lat);
 
 
     /**
@@ -564,7 +589,7 @@ public interface ApiService {
 
 
     /**
-     * 星际团队信息
+     * 免费漂流次数
      *
      * @return
      */
@@ -628,7 +653,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("v/friend/agreeRefuse")
-    Observable<BaseEntity> agreeRefuse(@Field("apply_id") int apply_id,@Field("status") int status);
+    Observable<BaseEntity> agreeRefuse(@Field("apply_id") int apply_id, @Field("status") int status);
 
 
     /**
@@ -660,5 +685,53 @@ public interface ApiService {
     Observable<BaseEntity<SpaceExchangeEntity>> spaceExchange(@Field("code") String code);
 
 
+    /**
+     * 传递详情（新版）
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/message/moreDetails")
+    Observable<BaseEntity<MoreDetailsEntity>> moreDetails(@Field("message_id") int message_id);
+
+
+    /**
+     * 传递详情（新版）
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/friend/isFriend")
+    Observable<BaseEntity<FriendEntity>> isFriend(@Field("user_id") String user_id);
+
+
+    /**
+     * 查看评论或话题详情
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/message/comment/details")
+    Observable<BaseEntity<CommentDetailsEntity>> details(@Field("log_id") int log_id, @Field("level") int level, @Field("user_id") int user_id);
+
+
+    /**
+     * 我的盲盒（空间站）
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/message/nebula")
+    Observable<BaseEntity<NebulaEntity>> messagenebula(@Field("message_id") int message_id, @Field("page") int page, @Field("limit") int limit);
+
+
+    /**
+     * 查询支付状态
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/order/sandPayQuery")
+    Observable<BaseEntity<SandPayQueryEntity>> sandPayQuery(@Field("sn") String sn);
 
 }

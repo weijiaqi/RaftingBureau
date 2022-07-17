@@ -17,7 +17,6 @@ import com.drifting.bureau.mvp.ui.adapter.OrderListAdapter;
 import com.drifting.bureau.mvp.ui.dialog.WriteOffCodeDialog;
 import com.drifting.bureau.util.DateUtil;
 import com.drifting.bureau.util.TextUtil;
-import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.drifting.bureau.view.ClockView;
 import com.hjq.shape.view.ShapeTextView;
@@ -113,7 +112,12 @@ public class OrderRecordHolder extends BaseRecyclerHolder {
         }
 
         if (listBeanList.get(position).getExplore_id() == 0) {  //0是盲盒
-            mTvWriteOff.setVisibility(View.GONE);
+            if (listBeanList.get(position).getStatus() == 0) {  //未支付
+                mTvWriteOff.setVisibility(View.VISIBLE);
+                mTvWriteOff.setText("立即付款");
+            } else {
+                mTvWriteOff.setVisibility(View.GONE);
+            }
         } else {
             if (listBeanList.get(position).getWrite_off() == 1) {
                 mTvWriteOff.setText("已核销");
@@ -133,14 +137,16 @@ public class OrderRecordHolder extends BaseRecyclerHolder {
         TextUtil.setText(mTvPrice, "￥" + listBeanList.get(position).getMoney());
         mTvWriteOff.setOnClickListener(v -> {
             if (listBeanList.get(position).getStatus() == 0) {  //未支付
-                PaymentInfoActivity.start(context,4,listBeanList.get(position).getSn(),listBeanList.get(position).getMoney(),false);
+                PaymentInfoActivity.start(context, 4, listBeanList.get(position).getSn(), listBeanList.get(position).getMoney(), false);
             } else {
-                RequestUtil.create().writeOffInfo(listBeanList.get(position).getOrder_id(), entity -> {
-                    if (entity != null && entity.getCode() == 200) {
-                        writeOffCodeDialog = new WriteOffCodeDialog(context, entity.getData().getToken());
-                        writeOffCodeDialog.show();
-                    }
-                });
+                if (listBeanList.get(position).getWrite_off() != 1) {
+                    RequestUtil.create().writeOffInfo(listBeanList.get(position).getOrder_id(), entity -> {
+                        if (entity != null && entity.getCode() == 200) {
+                            writeOffCodeDialog = new WriteOffCodeDialog(context, entity.getData().getToken());
+                            writeOffCodeDialog.show();
+                        }
+                    });
+                }
             }
         });
     }

@@ -5,10 +5,8 @@ import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
-
 import com.drifting.bureau.R;
 import com.drifting.bureau.data.entity.LoginLocallyEntity;
-
 import com.jess.arms.base.BaseRecyclerHolder;
 
 import java.util.List;

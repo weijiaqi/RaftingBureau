@@ -2,10 +2,8 @@ package com.drifting.bureau.mvp.ui.adapter;
 
 import android.view.View;
 
-
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.RaftingBureaufriendEntity;
-
 import com.drifting.bureau.mvp.ui.holder.RaftingBureaufriendHolder;
 import com.jess.arms.base.BaseRecyclerAdapter;
 import com.jess.arms.base.BaseRecyclerHolder;

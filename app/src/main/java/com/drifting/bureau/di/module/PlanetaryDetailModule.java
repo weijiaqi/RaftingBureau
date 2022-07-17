@@ -1,9 +1,10 @@
 package com.drifting.bureau.di.module;
-import com.jess.arms.di.scope.ActivityScope;
-import dagger.Binds;
-import dagger.Module;
+
 import com.drifting.bureau.mvp.contract.PlanetaryDetailContract;
 import com.drifting.bureau.mvp.model.PlanetaryDetailModel;
+
+import dagger.Binds;
+import dagger.Module;
 
 /**
  * ================================================

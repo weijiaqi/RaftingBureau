@@ -1,13 +1,6 @@
 package com.drifting.bureau.mvp.ui.activity.index;
 
 import android.app.Activity;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,10 +8,18 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.drifting.bureau.R;
 import com.drifting.bureau.data.entity.CityEntity;
 import com.drifting.bureau.di.component.DaggerCitySelectionComponent;
+import com.drifting.bureau.mvp.contract.CitySelectionContract;
 import com.drifting.bureau.mvp.model.entity.HotCityEntity;
+import com.drifting.bureau.mvp.presenter.CitySelectionPresenter;
 import com.drifting.bureau.mvp.ui.adapter.CityListAdapter;
 import com.drifting.bureau.mvp.ui.adapter.HotListAdapter;
 import com.drifting.bureau.util.AssessUtil;
@@ -28,9 +29,6 @@ import com.drifting.bureau.util.ViewUtil;
 import com.drifting.bureau.view.location.QuickLocationBar;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
-
-import com.drifting.bureau.mvp.contract.CitySelectionContract;
-import com.drifting.bureau.mvp.presenter.CitySelectionPresenter;
 
 import java.util.ArrayList;
 import java.util.Collections;

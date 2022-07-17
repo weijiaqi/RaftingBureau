@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
-import com.drifting.bureau.mvp.ui.activity.index.ViewRaftingActivity;
 import com.drifting.bureau.util.GlideUtil;
 import com.jess.arms.base.BaseDialog;
 
@@ -64,7 +63,7 @@ public class RaftingInforDialog extends BaseDialog implements View.OnClickListen
         mTvName.setText("昵称：" + userInfoEntity.getUser().getName());
         mTvPlanet.setText(userInfoEntity.getPlanet().getName());
         mTvIdentity.setText(userInfoEntity.getUser().getLevel_name());
-        GlideUtil.create().loadLongImage(mContext,"http://106.75.116.154:8000/static/drifting/images/home/mascot_df.png",mIvMastor);
+        GlideUtil.create().loadLongImage(mContext,userInfoEntity.getUser().getMascot(),mIvMastor);
         if (explore_id == 1) {
             mTvRaftingType.setText("传递漂");
         }

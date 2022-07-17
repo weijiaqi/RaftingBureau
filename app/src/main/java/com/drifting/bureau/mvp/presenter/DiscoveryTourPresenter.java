@@ -3,43 +3,23 @@ package com.drifting.bureau.mvp.presenter;
 import android.app.Activity;
 import android.app.Application;
 import android.location.Location;
-import android.net.Uri;
-import android.util.Log;
 
 import androidx.fragment.app.FragmentActivity;
 
-import com.amap.api.location.CoordinateConverter;
-import com.amap.api.location.DPoint;
-import com.drifting.bureau.mvp.model.entity.CustomerEntity;
+import com.drifting.bureau.mvp.contract.DiscoveryTourContract;
 import com.drifting.bureau.mvp.model.entity.MessageReceiveEntity;
 import com.drifting.bureau.mvp.model.entity.PlanetEntity;
-import com.drifting.bureau.mvp.ui.activity.index.VideoActivity;
+import com.drifting.bureau.mvp.model.entity.VersionUpdateEntity;
 import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
-import com.drifting.bureau.storageinfo.Preferences;
-import com.drifting.bureau.util.AppUtil;
+import com.drifting.bureau.mvp.ui.dialog.VersionUpdateDialog;
 import com.drifting.bureau.util.LocationUtil;
-import com.drifting.bureau.util.MapsUtil;
+import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.jess.arms.base.BaseEntity;
-import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
-import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-import io.rong.imkit.RongIM;
-import io.rong.imkit.userinfo.RongUserInfoManager;
-import io.rong.imkit.userinfo.UserDataProvider;
-import io.rong.imlib.RongIMClient;
-import io.rong.imlib.model.UserInfo;
-import me.jessyan.rxerrorhandler.core.RxErrorHandler;
-import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
-
-import javax.inject.Inject;
-
-import com.drifting.bureau.mvp.contract.DiscoveryTourContract;
-import com.jess.arms.utils.LogUtils;
+import com.jess.arms.integration.AppManager;
+import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.utils.PermissionUtil;
 import com.jess.arms.utils.RxLifecycleUtils;
 import com.tbruyelle.rxpermissions2.RxPermissions;
@@ -47,6 +27,13 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import javax.inject.Inject;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import me.jessyan.rxerrorhandler.core.RxErrorHandler;
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 
 /**
  * ================================================
@@ -78,6 +65,44 @@ public class DiscoveryTourPresenter extends BasePresenter<DiscoveryTourContract.
         super(model, rootView);
     }
 
+
+    /**
+     * 版本更新
+     *
+     * @param activity this
+     */
+    public void getVersionInfo(Activity activity) {
+        mModel.checkVersion()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseEntity<VersionUpdateEntity>>(mErrorHandler) {
+                    @Override
+                    public void onNext(BaseEntity<VersionUpdateEntity> data) {
+                        if (mRootView != null && data.getData() != null) {
+                            if (StringUtil.compareVersions(data.getData().getVersion(), StringUtil.getVersion(activity))) {
+                                showVersionDialog(activity, data.getData());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
+    }
+
+
+    /**
+     * 版本更新dialog
+     *
+     * @param activity
+     */
+    public void showVersionDialog(Activity activity, VersionUpdateEntity data) {
+        VersionUpdateDialog versionUpdateDialog = new VersionUpdateDialog(activity, data.getUrl() + "?" + System.currentTimeMillis(), data.getStatus(), data.getMessage(), data.getVersion());
+        versionUpdateDialog.show();
+    }
 
 
     /**

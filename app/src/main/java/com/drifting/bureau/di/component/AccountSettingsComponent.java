@@ -1,14 +1,13 @@
 package com.drifting.bureau.di.component;
+
+import com.drifting.bureau.di.module.AccountSettingsModule;
+import com.drifting.bureau.mvp.contract.AccountSettingsContract;
+import com.drifting.bureau.mvp.ui.activity.user.AccountSettingsActivity;
+import com.jess.arms.di.component.AppComponent;
+import com.jess.arms.di.scope.ActivityScope;
+
 import dagger.BindsInstance;
 import dagger.Component;
-
-import com.drifting.bureau.mvp.contract.AccountSettingsContract;
-import com.drifting.bureau.mvp.contract.WithdrawalContract;
-import com.jess.arms.di.component.AppComponent;
-import com.drifting.bureau.di.module.AccountSettingsModule;
-
-import com.jess.arms.di.scope.ActivityScope;
-import com.drifting.bureau.mvp.ui.activity.user.AccountSettingsActivity;
 
 /**
  * ================================================

@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 
 import com.danikula.videocache.HttpProxyCacheServer;
 import com.drifting.bureau.R;
+import com.drifting.bureau.app.RBConstant;
 import com.drifting.bureau.app.api.Api;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.FileGenerator;
@@ -27,11 +28,10 @@ import com.scwang.smart.refresh.layout.api.RefreshHeader;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.DefaultRefreshFooterCreator;
 import com.scwang.smart.refresh.layout.listener.DefaultRefreshHeaderCreator;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.Locale;
 
-import io.rong.imkit.RongIM;
-import io.rong.imlib.RongIMClient;
 import me.jessyan.autosize.AutoSize;
 import me.jessyan.autosize.AutoSizeConfig;
 import me.jessyan.autosize.onAdaptListener;
@@ -92,6 +92,7 @@ public class RBureauApplication extends Application implements App {
         // 初始化 Toast 框架
         ToastUtils.init(this);
         initAutoSize();
+        initBugly();
         //融云
         RongIMUtil.getInstance().init();
         //SmartRefreshLayout
@@ -113,6 +114,13 @@ public class RBureauApplication extends Application implements App {
         });
     }
 
+
+    /**
+     * 初始化腾讯bugly
+     */
+    private void initBugly() {
+        CrashReport.initCrashReport(getApplicationContext(), RBConstant.BUGLY_APPID, false);
+    }
 
     public void initAutoSize() {
         //当 App 中出现多进程, 并且您需要适配所有的进程, 就需要在 App 初始化时调用 initCompatMultiProcess()

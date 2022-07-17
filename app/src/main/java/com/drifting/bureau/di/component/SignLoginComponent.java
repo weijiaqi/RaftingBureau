@@ -5,6 +5,7 @@ import com.drifting.bureau.mvp.contract.SignLoginContract;
 import com.drifting.bureau.mvp.ui.activity.user.SignLoginHintActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.di.scope.ActivityScope;
+
 import dagger.BindsInstance;
 import dagger.Component;
 

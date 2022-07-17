@@ -2,7 +2,6 @@ package com.drifting.bureau.mvp.ui.dialog;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;

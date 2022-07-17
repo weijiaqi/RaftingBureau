@@ -1,11 +1,6 @@
 package com.drifting.bureau.mvp.ui.activity.user;
 
 import android.app.Activity;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,10 +8,16 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.drifting.bureau.R;
 import com.drifting.bureau.data.event.FriendApplicationEvent;
 import com.drifting.bureau.di.component.DaggerFriendApplicationComponent;
+import com.drifting.bureau.mvp.contract.FriendApplicationContract;
 import com.drifting.bureau.mvp.model.entity.FriendApplicationEntity;
+import com.drifting.bureau.mvp.presenter.FriendApplicationPresenter;
 import com.drifting.bureau.mvp.ui.adapter.FriendApplicationAdapter;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.ToastUtil;
@@ -24,9 +25,6 @@ import com.drifting.bureau.util.ViewUtil;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
-
-import com.drifting.bureau.mvp.contract.FriendApplicationContract;
-import com.drifting.bureau.mvp.presenter.FriendApplicationPresenter;
 import com.rb.core.xrecycleview.XRecyclerView;
 
 import org.greenrobot.eventbus.Subscribe;

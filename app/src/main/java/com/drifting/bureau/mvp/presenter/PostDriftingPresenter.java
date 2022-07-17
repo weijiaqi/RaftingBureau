@@ -2,23 +2,30 @@ package com.drifting.bureau.mvp.presenter;
 
 import android.app.Activity;
 import android.app.Application;
-import android.text.TextUtils;
 
 import androidx.fragment.app.FragmentActivity;
 
+import com.drifting.bureau.mvp.contract.PostDriftingContract;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
 import com.drifting.bureau.mvp.model.entity.CreatewithfileEntity;
-import com.drifting.bureau.mvp.model.entity.LoginEntity;
 import com.drifting.bureau.mvp.model.entity.SkuListEntity;
 import com.drifting.bureau.mvp.ui.activity.index.VideoActivity;
 import com.drifting.bureau.mvp.ui.activity.index.VideoRecordingActivity;
 import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
 import com.drifting.bureau.util.ToastUtil;
 import com.jess.arms.base.BaseEntity;
-import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.FragmentScope;
-import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
+import com.jess.arms.integration.AppManager;
+import com.jess.arms.mvp.BasePresenter;
+import com.jess.arms.utils.PermissionUtil;
+import com.jess.arms.utils.RxLifecycleUtils;
+import com.tbruyelle.rxpermissions2.RxPermissions;
+
+import java.io.File;
+import java.util.List;
+
+import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -27,18 +34,6 @@ import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-
-import javax.inject.Inject;
-
-import com.drifting.bureau.mvp.contract.PostDriftingContract;
-import com.jess.arms.utils.PermissionUtil;
-import com.jess.arms.utils.RxLifecycleUtils;
-import com.tbruyelle.rxpermissions2.RxPermissions;
-
-import java.io.File;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * ================================================
@@ -181,8 +176,8 @@ public class PostDriftingPresenter extends BasePresenter<PostDriftingContract.Mo
     /**
      * 商品列表（发起话题和参与话题）
      */
-    public void skulist(int type_id, int explore_id, int message_id) {
-        mModel.skulist(type_id, explore_id, message_id).subscribeOn(Schedulers.io())
+    public void skulist( int explore_id, int message_id) {
+        mModel.skulist(explore_id, message_id).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
                 .subscribe(new ErrorHandleSubscriber<BaseEntity<SkuListEntity>>(mErrorHandler) {

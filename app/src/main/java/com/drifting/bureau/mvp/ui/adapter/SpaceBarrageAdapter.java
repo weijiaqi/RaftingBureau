@@ -3,9 +3,7 @@ package com.drifting.bureau.mvp.ui.adapter;
 import android.view.View;
 
 import com.drifting.bureau.R;
-import com.drifting.bureau.mvp.model.entity.BarrageEntity;
 import com.drifting.bureau.mvp.model.entity.MysteryboxEntity;
-import com.drifting.bureau.mvp.ui.holder.RaftingDetailsHolder;
 import com.drifting.bureau.mvp.ui.holder.SpaceBarrageHolder;
 import com.jess.arms.base.BaseRecyclerAdapter;
 import com.jess.arms.base.BaseRecyclerHolder;

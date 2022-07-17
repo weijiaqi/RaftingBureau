@@ -1,54 +1,71 @@
-<com.hjq.shape.layout.ShapeRelativeLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:shape_endColor="@color/color_6d"
-    app:shape_radius="100dp"
-    app:shape_startColor="@color/color_6c"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:gravity="center_vertical">
+
+    <com.hjq.shape.layout.ShapeRelativeLayout
+        android:id="@+id/rl_start_voice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:shape_endColor="@color/color_6d"
+        app:shape_radius="100dp"
+        app:shape_startColor="@color/color_6c">
+
+
+        <ImageView
+            android:id="@+id/iv_play"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="6dp"
+            android:src="@drawable/voice_play" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginVertical="2dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="37dp"
+            android:layout_toRightOf="@+id/iv_play">
+
+            <ImageView
+                android:id="@+id/iv_horizontal_line"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/drifting_horizontal_line" />
+
+            <com.drifting.bureau.view.VoiceWave
+                android:id="@+id/videoView"
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:layout_centerVertical="true" />
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:text=""
+            android:textColor="@color/color_00"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </com.hjq.shape.layout.ShapeRelativeLayout>
 
 
     <ImageView
-        android:id="@+id/iv_play"
+        android:id="@+id/iv_voice_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="6dp"
-        android:src="@drawable/voice_play" />
+         android:paddingStart="10dp"
+        android:src="@drawable/drifting_delete"
+         />
+</LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="37dp"
-        android:layout_toRightOf="@+id/iv_play">
-
-        <ImageView
-            android:id="@+id/iv_horizontal_line"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/drifting_horizontal_line" />
-
-        <com.drifting.bureau.view.VoiceWave
-            android:id="@+id/videoView"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_centerVertical="true" />
-    </RelativeLayout>
-
-
-    <TextView
-        android:id="@+id/tv_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="10dp"
-        android:text=""
-        android:textColor="@color/color_00"
-        android:textSize="12sp"
-        android:textStyle="bold" />
-</com.hjq.shape.layout.ShapeRelativeLayout>

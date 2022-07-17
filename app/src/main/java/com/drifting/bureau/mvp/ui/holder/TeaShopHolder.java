@@ -8,10 +8,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.TeaShopEntity;
-
 import com.drifting.bureau.mvp.ui.dialog.CallTelephoneDialog;
 import com.drifting.bureau.mvp.ui.dialog.NavigationDialog;
 import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
@@ -37,6 +35,8 @@ public class TeaShopHolder extends BaseRecyclerHolder {
     TextView mTvShop;
     @BindView(R.id.tv_status)
     ShapeTextView mTvStatus;
+    @BindView(R.id.tv_time)
+    TextView mTvTime;
     private Context context;
     private CallTelephoneDialog callTelephoneDialog;
     private NavigationDialog navigationDialog;
@@ -48,6 +48,7 @@ public class TeaShopHolder extends BaseRecyclerHolder {
 
     public void setData(@NonNull List<TeaShopEntity.ListBean> listBeanList, int position) {
         TextUtil.setText(mTvShop, listBeanList.get(position).getBusiness_name());
+        TextUtil.setText(mTvTime, listBeanList.get(position).getOpening() + "-" + listBeanList.get(position).getOpening_end());
         TextUtil.setText(mTvAddress, listBeanList.get(position).getAddress());
         TextUtil.setText(mTvDistance, "距离" + StringUtil.distanceFormat(Double.parseDouble(listBeanList.get(position).getDistance())));
         if (listBeanList.get(position).getOpen_status() == 1) {

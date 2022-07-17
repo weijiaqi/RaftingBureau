@@ -1,6 +1,7 @@
 package com.drifting.bureau.mvp.ui.dialog;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -9,15 +10,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.drifting.bureau.R;
-import com.drifting.bureau.mvp.model.entity.RaftingOrderEntity;
 import com.drifting.bureau.mvp.model.entity.SkuListEntity;
-import com.drifting.bureau.mvp.ui.activity.pay.PaymentInfoActivity;
 import com.drifting.bureau.mvp.ui.adapter.RaftingOrderAdapter;
 import com.drifting.bureau.util.DateUtil;
 import com.jess.arms.base.BaseDialog;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author 卫佳琪1
@@ -30,7 +28,7 @@ public class RaftingOrderDialog extends BaseDialog implements View.OnClickListen
     public static final int SELECT_FINISH = 0x01;
 
     private RecyclerView mRecycleView;
-    private TextView mTvBuyNow,mTvSum,mTvTime;
+    private TextView mTvBuyNow,mTvSum,mTvTime,mTvWarning;
     private Context context;
     private RaftingOrderAdapter raftingOrderAdapter;
 
@@ -49,6 +47,7 @@ public class RaftingOrderDialog extends BaseDialog implements View.OnClickListen
         mTvBuyNow = findViewById(R.id.tv_buy_now);
         mTvSum= findViewById(R.id.tv_sum);
         mTvTime= findViewById(R.id.tv_time);
+        mTvWarning=findViewById(R.id.tv_warning);
     }
 
     @Override
@@ -61,6 +60,13 @@ public class RaftingOrderDialog extends BaseDialog implements View.OnClickListen
         mRecycleView.setAdapter(raftingOrderAdapter);
         raftingOrderAdapter.setData(skuListEntity.getGoods_sku());
         mTvTime.setText(DateUtil.unxiToDateYMD(System.currentTimeMillis()+""));
+
+        if (!TextUtils.isEmpty(skuListEntity.getWarning())){
+            mTvWarning.setVisibility(View.VISIBLE);
+            mTvWarning.setText(skuListEntity.getWarning());
+        }else {
+            mTvWarning.setVisibility(View.GONE);
+        }
     }
 
 

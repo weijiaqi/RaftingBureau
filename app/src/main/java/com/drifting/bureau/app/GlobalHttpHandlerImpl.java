@@ -16,20 +16,15 @@
 package com.drifting.bureau.app;
 
 import android.content.Context;
-import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.gson.reflect.TypeToken;
 import com.jess.arms.http.GlobalHttpHandler;
-import com.jess.arms.http.log.RequestInterceptor;
-import com.jess.arms.utils.ArmsUtils;
 
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
-import timber.log.Timber;
 
 /**
  * ================================================

@@ -1,14 +1,13 @@
 package com.drifting.bureau.di.component;
+
+import com.drifting.bureau.di.module.ViewRaftingModule;
+import com.drifting.bureau.mvp.contract.ViewRaftingContract;
+import com.drifting.bureau.mvp.ui.activity.index.ViewRaftingActivity;
+import com.jess.arms.di.component.AppComponent;
+import com.jess.arms.di.scope.ActivityScope;
+
 import dagger.BindsInstance;
 import dagger.Component;
-
-import com.drifting.bureau.mvp.contract.VideoRecordingContract;
-import com.drifting.bureau.mvp.contract.ViewRaftingContract;
-import com.jess.arms.di.component.AppComponent;
-import com.drifting.bureau.di.module.ViewRaftingModule;
-
-import com.jess.arms.di.scope.ActivityScope;
-import com.drifting.bureau.mvp.ui.activity.index.ViewRaftingActivity;
 
 /**
  * ================================================

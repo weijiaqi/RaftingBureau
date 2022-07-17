@@ -2,8 +2,6 @@ package com.drifting.bureau.mvp.contract;
 
 import androidx.fragment.app.Fragment;
 
-
-import com.drifting.bureau.mvp.model.entity.MyBlindBoxEntity;
 import com.drifting.bureau.mvp.model.entity.RaftingBureaufriendEntity;
 import com.jess.arms.base.BaseEntity;
 import com.jess.arms.mvp.IModel;

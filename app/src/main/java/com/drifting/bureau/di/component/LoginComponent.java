@@ -1,13 +1,13 @@
 package com.drifting.bureau.di.component;
+
+import com.drifting.bureau.di.module.LoginModule;
+import com.drifting.bureau.mvp.contract.LoginContract;
+import com.drifting.bureau.mvp.ui.activity.user.LoginActivity;
+import com.jess.arms.di.component.AppComponent;
+import com.jess.arms.di.scope.ActivityScope;
+
 import dagger.BindsInstance;
 import dagger.Component;
-
-import com.drifting.bureau.mvp.contract.LoginContract;
-import com.jess.arms.di.component.AppComponent;
-import com.drifting.bureau.di.module.LoginModule;
-
-import com.jess.arms.di.scope.ActivityScope;
-import com.drifting.bureau.mvp.ui.activity.user.LoginActivity;
 
 /**
  * ================================================

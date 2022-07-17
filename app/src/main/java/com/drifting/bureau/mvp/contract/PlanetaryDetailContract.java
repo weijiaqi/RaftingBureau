@@ -2,9 +2,7 @@ package com.drifting.bureau.mvp.contract;
 
 import android.app.Activity;
 
-import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
 import com.drifting.bureau.mvp.model.entity.PlanetaryDetailEntity;
-import com.drifting.bureau.mvp.model.entity.SkuListEntity;
 import com.jess.arms.base.BaseEntity;
 import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IView;

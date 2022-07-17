@@ -1,7 +1,5 @@
 package com.drifting.bureau.mvp.model.entity;
 
-import java.lang.ref.PhantomReference;
-
 public class LoginEntity {
     private String mobile;
     private String name;

@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">元宇宙漂流局</string>
     <string name="phone">验证码已经发送至%1$s的手机上，请输入</string>
-    <string name="passer">我是第 %1$s 传递人</string>
     <string name="transmit"> 已传递%1$s人></string>
     <string name="free_times">(免费次数：%1$s)</string>
 </resources>

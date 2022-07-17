@@ -2,9 +2,6 @@ package com.drifting.bureau.mvp.ui.adapter;
 
 import android.view.View;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.AoubtMeEntity;
 import com.drifting.bureau.mvp.ui.holder.AboutMeHolder;

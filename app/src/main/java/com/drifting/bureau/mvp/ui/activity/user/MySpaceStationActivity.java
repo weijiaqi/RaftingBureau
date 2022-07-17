@@ -1,10 +1,6 @@
 package com.drifting.bureau.mvp.ui.activity.user;
 
 import android.app.Activity;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,15 +11,21 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.drifting.bureau.R;
 import com.drifting.bureau.di.component.DaggerMySpaceStationComponent;
-
+import com.drifting.bureau.mvp.contract.MySpaceStationContract;
+import com.drifting.bureau.mvp.model.entity.CommentDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.OrderDetailEntity;
 import com.drifting.bureau.mvp.model.entity.OrderOneEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceInfoEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
-import com.drifting.bureau.mvp.ui.activity.user.vr.SpaceStationVRActivity;
+import com.drifting.bureau.mvp.presenter.MySpaceStationPresenter;
+import com.drifting.bureau.mvp.ui.activity.index.vr.SpaceStationVRActivity;
 import com.drifting.bureau.mvp.ui.dialog.MakeScheduleDialog;
+import com.drifting.bureau.mvp.ui.dialog.MakingTeaDialog;
 import com.drifting.bureau.mvp.ui.dialog.MySpaceStationDialog;
 import com.drifting.bureau.mvp.ui.dialog.MyTreasuryDialog;
 import com.drifting.bureau.mvp.ui.dialog.PublicDialog;
@@ -34,14 +36,10 @@ import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.DateUtil;
 import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.StringUtil;
-import com.drifting.bureau.util.TextUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
-import com.drifting.bureau.mvp.contract.MySpaceStationContract;
-import com.drifting.bureau.mvp.presenter.MySpaceStationPresenter;
-
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -82,6 +80,7 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
     private ShareDialog shareDialog;
     private MySpaceStationDialog mySpaceStationDialog;
 
+    private MakingTeaDialog makingTeaDialog;
     private OrderOneEntity orderOneEntity;
     private UserInfoEntity userInfoEntity;
     private Handler handler;
@@ -124,7 +123,7 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
 
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         handler = new Handler();
         handler.postDelayed(mAdRunnable, 60);
@@ -160,7 +159,7 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
                     break;
                 case R.id.tv_select:   //查看
                     if (mPresenter != null & orderOneEntity != null) {
-                        mPresenter.userplayer(1, orderOneEntity.getUser_id() + "");
+                        mPresenter.details(orderOneEntity.getLog_id(), orderOneEntity.getLevel(), orderOneEntity.getUser_id());
                     }
                     break;
                 case R.id.tv_my_treasury: //我的库存
@@ -191,7 +190,7 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
                     break;
                 case R.id.vr_space_station:
                     if (!TextUtils.isEmpty(ar_url)) {
-                        SpaceStationVRActivity.start(this, false);
+                        SpaceStationVRActivity.start(this, ar_url, false);
                     }
                     break;
             }
@@ -272,6 +271,34 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
         }
     }
 
+    @Override
+    public void onCommentDetailsSuccess(CommentDetailsEntity entity) {
+        if (entity != null) {
+            makingTeaDialog = new MakingTeaDialog(this, entity);
+            makingTeaDialog.show();
+            if (orderOneEntity != null) {
+                makingTeaDialog.setOnClickCallback(type -> {
+                    if (type == SelectOrderDialog.SELECT_CANCEL) { //丢回太空
+                        if (mPresenter != null) {
+                            mPresenter.orderthrow(orderOneEntity.getSpace_order_id());
+                        }
+                    } else if (type == SelectOrderDialog.SELECT_FINISH) { //为他制作
+                        makeScheduleDialog = new MakeScheduleDialog(this);
+                        makeScheduleDialog.show();
+                        makeScheduleDialog.setCancelable(false);
+                        makeScheduleDialog.setOnClickCallback(type1 -> {
+                            if (type1 == SelectOrderDialog.SELECT_FINISH) {
+                                if (mPresenter != null) {
+                                    mPresenter.ordermaking(orderOneEntity.getSpace_order_id());
+                                }
+                            }
+                        });
+                    }
+                });
+            }
+        }
+    }
+
 
     @Override
     public void onOrderMakingSuccess() { //制作成功
@@ -280,7 +307,7 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
 
     @Override
     public void onOrderThrowSuccess() { //丢回太空
-        selectOrderDialog.dismiss();
+        makingTeaDialog.dismiss();
         showDialog(2, "订单已丢回太空", "已经把该订单丢回太空\n该订单的收益将无法拥有");
     }
 

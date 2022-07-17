@@ -2,6 +2,7 @@ package com.jess.arms.base;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.Window;
@@ -27,6 +28,9 @@ public abstract class BaseDialog extends Dialog {
     protected OnContentClickCallback onContentClickCallback;
     protected OnTypeClickCallback onTypeClickCallback;
     protected OnMoreClickCallback onMoreClickCallback;
+
+    protected OnStarrySkyClickCallback onStarrySkyClickCallback;
+
     public BaseDialog(@NonNull Context context) {
         super(context, R.style.base_dialog);
     }
@@ -122,6 +126,9 @@ public abstract class BaseDialog extends Dialog {
         void onMoreClick(int type, List<Object> list);
     }
 
+    public interface OnStarrySkyClickCallback {
+        void onStarrySkyClick(int type, String word, String path, List<Object> list, Bitmap cover);
+    }
 
     public void setOnTypeClickCallback(OnTypeClickCallback onTypeClickCallback) {
         this.onTypeClickCallback = onTypeClickCallback;
@@ -133,5 +140,9 @@ public abstract class BaseDialog extends Dialog {
 
     public void setOnMoreClickCallback(OnMoreClickCallback onMoreClickCallback) {
         this.onMoreClickCallback = onMoreClickCallback;
+    }
+
+    public void setOnStarrySkyClickCallback(OnStarrySkyClickCallback onStarrySkyClickCallback) {
+        this.onStarrySkyClickCallback = onStarrySkyClickCallback;
     }
 }

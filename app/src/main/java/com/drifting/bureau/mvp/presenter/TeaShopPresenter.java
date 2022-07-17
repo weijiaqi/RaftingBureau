@@ -1,4 +1,5 @@
 package com.drifting.bureau.mvp.presenter;
+
 import android.app.Activity;
 import android.app.Application;
 import android.location.Location;
@@ -6,29 +7,27 @@ import android.util.Log;
 
 import androidx.fragment.app.FragmentActivity;
 
-import com.drifting.bureau.mvp.model.entity.OrderRecordEntity;
+import com.drifting.bureau.mvp.contract.TeaShopContract;
 import com.drifting.bureau.mvp.model.entity.TeaShopEntity;
-import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
 import com.drifting.bureau.util.LocationUtil;
 import com.drifting.bureau.util.ViewUtil;
 import com.jess.arms.base.BaseEntity;
-import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
-import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-import me.jessyan.rxerrorhandler.core.RxErrorHandler;
-import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
-
-import javax.inject.Inject;
-import com.drifting.bureau.mvp.contract.TeaShopContract;
+import com.jess.arms.integration.AppManager;
+import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.utils.PermissionUtil;
 import com.jess.arms.utils.RxLifecycleUtils;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.util.List;
+
+import javax.inject.Inject;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import me.jessyan.rxerrorhandler.core.RxErrorHandler;
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 
 /**
  * ================================================
@@ -43,7 +42,7 @@ import java.util.List;
  * ================================================
  */
 @ActivityScope
-public class TeaShopPresenter extends BasePresenter<TeaShopContract.Model, TeaShopContract.View>{
+public class TeaShopPresenter extends BasePresenter<TeaShopContract.Model, TeaShopContract.View> {
     @Inject
     RxErrorHandler mErrorHandler;
     @Inject
@@ -54,11 +53,9 @@ public class TeaShopPresenter extends BasePresenter<TeaShopContract.Model, TeaSh
     AppManager mAppManager;
 
     @Inject
-    public TeaShopPresenter (TeaShopContract.Model model, TeaShopContract.View rootView) {
+    public TeaShopPresenter(TeaShopContract.Model model, TeaShopContract.View rootView) {
         super(model, rootView);
     }
-
-
 
 
     /**
@@ -72,12 +69,16 @@ public class TeaShopPresenter extends BasePresenter<TeaShopContract.Model, TeaSh
                 LocationUtil.getCurrentLocation(new LocationUtil.LocationCallBack() {
                     @Override
                     public void onSuccess(Location location) {
-                        mRootView.onLocation(location.getLongitude() + "", location.getLatitude() + "");
+                        if (mRootView != null) {
+                            mRootView.onLocation(location.getLongitude() + "", location.getLatitude() + "");
+                        }
                     }
 
                     @Override
                     public void onFail(String msg) {
-                        mRootView.onLocation("",  "");
+                        if (mRootView != null) {
+                            mRootView.onLocation("", "");
+                        }
                     }
                 });
 
@@ -85,27 +86,30 @@ public class TeaShopPresenter extends BasePresenter<TeaShopContract.Model, TeaSh
 
             @Override
             public void onRequestPermissionFailure(List<String> permissions) {
-                mRootView.onLocation("",  "");
+                if (mRootView != null) {
+                    mRootView.onLocation("", "");
+                }
             }
 
             @Override
             public void onRequestPermissionFailureWithAskNeverAgain(List<String> permissions) {
-                mRootView.onLocation("",  "");
+                if (mRootView != null) {
+                    mRootView.onLocation("", "");
+                }
             }
         }, new RxPermissions((FragmentActivity) activity), mErrorHandler);
 
     }
 
 
-
     /**
      * 实体门店
      */
-    public void nearby( String name, int page, int limit,String lng,String lat, boolean loadType) {
+    public void nearby(String name, int page, int limit, String lng, String lat, boolean loadType) {
         if (mRootView != null) {
             mRootView.onloadStart();
         }
-        mModel.nearby(name,page, limit,lng,lat)
+        mModel.nearby(name, page, limit, lng, lat)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))

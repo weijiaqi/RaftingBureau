@@ -1,15 +1,13 @@
 package com.drifting.bureau.di.component;
 
+import com.drifting.bureau.di.module.RaftingBureaufriendModule;
+import com.drifting.bureau.mvp.contract.RaftingBureaufriendContract;
+import com.drifting.bureau.mvp.ui.fragment.RaftingBureaufriendFragment;
+import com.jess.arms.di.component.AppComponent;
+import com.jess.arms.di.scope.FragmentScope;
+
 import dagger.BindsInstance;
 import dagger.Component;
-
-import com.drifting.bureau.mvp.contract.MessageContract;
-import com.drifting.bureau.mvp.contract.RaftingBureaufriendContract;
-import com.jess.arms.di.component.AppComponent;
-import com.drifting.bureau.di.module.RaftingBureaufriendModule;
-
-import com.jess.arms.di.scope.FragmentScope;
-import com.drifting.bureau.mvp.ui.fragment.RaftingBureaufriendFragment;
 
 /**
  * ================================================

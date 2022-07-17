@@ -1,27 +1,40 @@
 package com.drifting.bureau.mvp.ui.activity.index;
 
+import static com.drifting.bureau.app.FilePathConstant.STAR_PATH;
+
 import android.app.Activity;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.drifting.bureau.R;
+import com.drifting.bureau.data.event.UpdateProgressEvent;
 import com.drifting.bureau.di.component.DaggerPlanetaryDetailComponent;
+import com.drifting.bureau.mvp.contract.PlanetaryDetailContract;
 import com.drifting.bureau.mvp.model.entity.PlanetaryDetailEntity;
+import com.drifting.bureau.mvp.presenter.PlanetaryDetailPresenter;
+import com.drifting.bureau.mvp.ui.activity.index.ar.ARActivity;
+import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
+import com.drifting.bureau.util.ARCoreUtil;
 import com.drifting.bureau.util.ClickUtil;
+import com.drifting.bureau.util.FileUtil;
+import com.drifting.bureau.util.NotificationUtil;
 import com.drifting.bureau.util.ToastUtil;
+import com.drifting.bureau.util.downloadutil.DownloadRequest;
+import com.drifting.bureau.util.manager.NotificationManager;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 
-import com.drifting.bureau.mvp.contract.PlanetaryDetailContract;
-import com.drifting.bureau.mvp.presenter.PlanetaryDetailPresenter;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -48,8 +61,9 @@ public class PlanetaryDetailActivity extends BaseActivity<PlanetaryDetailPresent
     @BindView(R.id.tv_num)
     TextView mTvNum;
     private static String EXTRA_TYPE = "extra_type";
-
+    private String ArUrl;
     private int type;
+    private boolean ISFinsh = false;
 
     public static void start(Context context, int type, boolean closePage) {
         Intent intent = new Intent(context, PlanetaryDetailActivity.class);
@@ -85,7 +99,6 @@ public class PlanetaryDetailActivity extends BaseActivity<PlanetaryDetailPresent
         if (mPresenter != null) {
             mPresenter.planetdetails(type);
         }
-
 
         initListener();
     }
@@ -207,6 +220,7 @@ public class PlanetaryDetailActivity extends BaseActivity<PlanetaryDetailPresent
     public void onPlanetaryDetailSuccess(PlanetaryDetailEntity entity) {
         if (entity != null) {
             mTvNum.setText(entity.getPeople() + "");
+            ArUrl = entity.getAr_url();
         }
     }
 
@@ -220,19 +234,69 @@ public class PlanetaryDetailActivity extends BaseActivity<PlanetaryDetailPresent
     }
 
 
-    @OnClick({R.id.toolbar_back})
+    @OnClick({R.id.toolbar_back, R.id.tv_Ar})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
                 case R.id.toolbar_back:
                     finish();
                     break;
+                case R.id.tv_Ar:  //AR体验
+                    if (!TextUtils.isEmpty(ArUrl)) {
+                        if (ARCoreUtil.checkArCoreAvailability(getActivity())) {
+                            startCamrea(ArUrl); //开启AR
+                        }
+                    }
+                    break;
             }
         }
     }
 
+    public void startCamrea(String url) {
+        PermissionDialog.requestCodePermissions(this, new PermissionDialog.PermissionCallBack() {
+            @Override
+            public void onSuccess() {
+                ARActivity.start(PlanetaryDetailActivity.this, url, false);
+
+//                String file = STAR_PATH + FileUtil.getUrlFileName(url);
+//                if (FileUtil.fileIsExists(file)) {
+//                    if (!ISFinsh) {
+//                        ARActivity.start(PlanetaryDetailActivity.this, file, false);
+//                    } else {
+//                        ToastUtil.showToast("正在下载中,请等待...");
+//                    }
+//                } else {
+//                    if (NotificationManager.isOpenNotification(PlanetaryDetailActivity.this)) {
+//                        DownloadRequest.whith().downloadWithNotification(PlanetaryDetailActivity.this, url);
+//                    } else {
+//                        NotificationUtil.showNotificationDialog(PlanetaryDetailActivity.this);
+//                    }
+//                }
+            }
+
+            @Override
+            public void onFailure() {
+            }
+
+            @Override
+            public void onAlwaysFailure() {
+                PermissionDialog.showDialog(PlanetaryDetailActivity.this, "android.permission.CAMERA");
+            }
+        });
+
+    }
+
+
     @Override
     public void showMessage(@NonNull String message) {
         ToastUtil.showToast(message);
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void UpdateProgressEvent(UpdateProgressEvent event) {
+        if (event.isDone()) {
+            ISFinsh = true;
+        }
     }
 }

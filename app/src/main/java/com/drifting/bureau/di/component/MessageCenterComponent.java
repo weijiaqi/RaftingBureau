@@ -1,14 +1,13 @@
 package com.drifting.bureau.di.component;
+
+import com.drifting.bureau.di.module.MessageCenterModule;
+import com.drifting.bureau.mvp.contract.MessageCenterContract;
+import com.drifting.bureau.mvp.ui.activity.user.MessageCenterActivity;
+import com.jess.arms.di.component.AppComponent;
+import com.jess.arms.di.scope.ActivityScope;
+
 import dagger.BindsInstance;
 import dagger.Component;
-
-import com.drifting.bureau.mvp.contract.MessageCenterContract;
-import com.drifting.bureau.mvp.contract.MoveAwayPlanetaryContract;
-import com.jess.arms.di.component.AppComponent;
-import com.drifting.bureau.di.module.MessageCenterModule;
-
-import com.jess.arms.di.scope.ActivityScope;
-import com.drifting.bureau.mvp.ui.activity.user.MessageCenterActivity;
 
 /**
  * ================================================

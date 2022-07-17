@@ -8,71 +8,59 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import androidx.viewpager.widget.ViewPager;
-
 import android.content.Context;
 import android.content.Intent;
-
+import android.content.res.AssetManager;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
-
-import android.util.Log;
 import android.view.KeyEvent;
-
 import android.view.View;
-
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.viewpager.widget.ViewPager;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.data.event.AnswerCompletedEvent;
 import com.drifting.bureau.data.event.BackSpaceEvent;
 import com.drifting.bureau.data.event.MessageRefreshEvent;
 import com.drifting.bureau.di.component.DaggerDiscoveryTourComponent;
+import com.drifting.bureau.mvp.contract.DiscoveryTourContract;
 import com.drifting.bureau.mvp.model.entity.MessageReceiveEntity;
 import com.drifting.bureau.mvp.model.entity.PlanetEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
+import com.drifting.bureau.mvp.presenter.DiscoveryTourPresenter;
+import com.drifting.bureau.mvp.ui.activity.index.PlanetarySelectActivity;
 import com.drifting.bureau.mvp.ui.activity.index.SpaceCapsuleActivity;
-import com.drifting.bureau.mvp.ui.activity.index.ViewRaftingActivity;
+import com.drifting.bureau.mvp.ui.activity.index.TopicDetailActivity;
 import com.drifting.bureau.mvp.ui.activity.user.AboutMeActivity;
 import com.drifting.bureau.mvp.ui.activity.user.MessageCenterActivity;
 import com.drifting.bureau.mvp.ui.adapter.DiscoveryViewpagerAdapter;
-import com.drifting.bureau.mvp.ui.dialog.RaftingInforDialog;
 import com.drifting.bureau.storageinfo.Preferences;
-import com.drifting.bureau.util.RongIMUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.animator.AnimatorUtil;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.drifting.bureau.view.DiscoveryTransformer;
+import com.google.vr.sdk.widgets.pano.VrPanoramaView;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
-import com.drifting.bureau.mvp.contract.DiscoveryTourContract;
-import com.drifting.bureau.mvp.presenter.DiscoveryTourPresenter;
-import com.jess.arms.utils.ArmsUtils;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.InputStream;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import io.rong.imkit.IMCenter;
-
-
 import io.rong.imkit.RongIM;
 import io.rong.imkit.manager.UnReadMessageManager;
-import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
-import io.rong.imlib.model.Message;
 
 
 /**
@@ -83,7 +71,8 @@ import io.rong.imlib.model.Message;
  * module name is DiscoveryTourActivity
  */
 public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> implements DiscoveryTourContract.View {
-
+    @BindView(R.id.tv_bar)
+    TextView mTvBar;
     @BindView(R.id.toolbar_back)
     RelativeLayout mToobarBack;
     @BindView(R.id.rl_info)
@@ -100,8 +89,11 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
     TextView mTvAboutMe;
     @BindView(R.id.iv_hot)
     ImageView mIvHot;
+    @BindView(R.id.vrPanoramaView)
+    VrPanoramaView mVRPanoramaView;
+
     private List<PlanetEntity> list;
-    private RaftingInforDialog raftingInforDialog;
+
     private AnimatorSet animatorSet;
 
     private Handler handler;
@@ -143,11 +135,45 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
+        setStatusBarHeight(mTvBar);
         mToobarBack.setVisibility(View.GONE);
         mRlInfo.setVisibility(View.VISIBLE);
+        loadAnimator();
+        loadPhotoSphere();
         loadUI();
     }
 
+
+    @Override
+    protected void initVisible() {
+        super.initVisible();
+        if (mPresenter != null) {
+            mPresenter.getVersionInfo(this);
+        }
+    }
+
+
+    public void loadAnimator() {
+        //AnimatorUtil.TransAnim(mIvStar1, mIvStar2, mIvStar3, 2500);
+    }
+
+    private void loadPhotoSphere() {
+        mVRPanoramaView.setInfoButtonEnabled(false);//隐藏信息按钮
+        mVRPanoramaView.setStereoModeButtonEnabled(false);//隐藏cardboard按钮
+        mVRPanoramaView.setFullscreenButtonEnabled(false);//隐藏全屏按钮
+        VrPanoramaView.Options options = new VrPanoramaView.Options();
+        InputStream inputStream = null;
+        AssetManager assetManager = getAssets();
+        try {
+            inputStream = assetManager.open("discovery_bg.png");
+            options.inputType = VrPanoramaView.Options.TYPE_MONO;
+            mVRPanoramaView.loadImageFromBitmap(BitmapFactory.decodeStream(inputStream), options);
+            inputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 
     public void loadUI() {
         if (mPresenter != null) {
@@ -193,29 +219,31 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
     }
 
 
-    @OnClick({R.id.rl_message, R.id.tv_about_me, R.id.tv_space_capsule, R.id.rl_info})
+    @OnClick({R.id.rl_message, R.id.tv_about_me, R.id.tv_space_capsule, R.id.rl_info, R.id.ll_step_star})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rl_message: //开启新消息
-                RequestUtil.create().userplayer(user_id + "", entity -> {
-                    if (entity != null && entity.getCode() == 200) {
-                        raftingInforDialog = new RaftingInforDialog(DiscoveryTourActivity.this, entity.getData(), explore_id);
-                        raftingInforDialog.show();
-                        raftingInforDialog.setOnClickCallback(type -> {
-                            if (type == RaftingInforDialog.CLICK_FINISH) {
-                                RequestUtil.create().messagethrow(id, entity1 -> {
-                                    if (entity1.getCode() == 200) {
-                                        IntoSpace();
-                                    } else {
-                                        showMessage(entity1.getMsg());
-                                    }
-                                });
-                            } else if (type == RaftingInforDialog.CLICK_SELECT) {
-                                ViewRaftingActivity.start(DiscoveryTourActivity.this, user_id, id, explore_id, entity.getData(), false);
-                            }
-                        });
-                    }
-                });
+                TopicDetailActivity.start(this, explore_id, id, false);
+
+//                RequestUtil.create().userplayer(user_id + "", entity -> {
+//                    if (entity != null && entity.getCode() == 200) {
+//                        raftingInforDialog = new RaftingInforDialog(DiscoveryTourActivity.this, entity.getData(), explore_id);
+//                        raftingInforDialog.show();
+//                        raftingInforDialog.setOnClickCallback(type -> {
+//                            if (type == RaftingInforDialog.CLICK_FINISH) {
+//                                RequestUtil.create().messagethrow(id, entity1 -> {
+//                                    if (entity1.getCode() == 200) {
+//                                        IntoSpace();
+//                                    } else {
+//                                        showMessage(entity1.getMsg());
+//                                    }
+//                                });
+//                            } else if (type == RaftingInforDialog.CLICK_SELECT) {
+//                                ViewRaftingActivity.start(DiscoveryTourActivity.this, user_id, id, explore_id, entity.getData(), false);
+//                            }
+//                        });
+//                    }
+//                });
                 break;
             case R.id.tv_about_me: //关于我
                 if (userInfoEntity != null) {
@@ -227,6 +255,12 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
                 break;
             case R.id.rl_info:
                 MessageCenterActivity.start(this, false);
+                break;
+            case R.id.ll_step_star:
+                if (userInfoEntity != null) {
+                    PlanetarySelectActivity.start(this, userInfoEntity.getPlanet().getLevel(), false);
+                }
+                break;
         }
 
     }
@@ -259,6 +293,7 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
             }
         }
     }
+
 
     @Override
     public void onLocationSuccess() {
@@ -305,8 +340,8 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
                 super.onAnimationEnd(animation);
                 if (type == 1) {
                     tagetview.setVisibility(View.VISIBLE);
-                    AnimatorUtil.floatAnim(view, 2000);
-                    AnimatorUtil.floatAnim(tagetview, 2000);
+                    AnimatorUtil.floatAnim(view, 2000, 6f);
+                    AnimatorUtil.floatAnim(tagetview, 2000, 6f);
                 } else {
                     tagetview.setVisibility(View.INVISIBLE);
                 }
@@ -343,8 +378,9 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
         }
     }
 
+
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         RongIM.getInstance().addUnReadMessageCountChangedObserver(observer, Conversation.ConversationType.PRIVATE);
         handler = new Handler();

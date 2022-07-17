@@ -1,11 +1,6 @@
 package com.drifting.bureau.mvp.ui.activity.index;
 
 import android.app.Activity;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,14 +10,20 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import com.drifting.bureau.R;
 import com.drifting.bureau.data.event.BackSpaceEvent;
 import com.drifting.bureau.data.event.PaymentEvent;
 import com.drifting.bureau.di.component.DaggerViewRaftingComponent;
+import com.drifting.bureau.mvp.contract.ViewRaftingContract;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
 import com.drifting.bureau.mvp.model.entity.MessageContentEntity;
 import com.drifting.bureau.mvp.model.entity.SkuListEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
+import com.drifting.bureau.mvp.presenter.ViewRaftingPresenter;
 import com.drifting.bureau.mvp.ui.activity.pay.PaymentInfoActivity;
 import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
 import com.drifting.bureau.mvp.ui.dialog.PublicDialog;
@@ -39,9 +40,6 @@ import com.drifting.bureau.view.VoiceWave;
 import com.hjq.shape.layout.ShapeLinearLayout;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
-
-import com.drifting.bureau.mvp.contract.ViewRaftingContract;
-import com.drifting.bureau.mvp.presenter.ViewRaftingPresenter;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -221,7 +219,7 @@ public class ViewRaftingActivity extends BaseActivity<ViewRaftingPresenter> impl
                         }
                     } else {
                         if (mPresenter != null) {
-                            mPresenter.skulist(type, explore_id, id);
+                            mPresenter.skulist(explore_id, id);
                         }
                     }
                     break;

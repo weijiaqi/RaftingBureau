@@ -1,12 +1,10 @@
 package com.drifting.bureau.di.module;
 
-import com.jess.arms.di.scope.FragmentScope;
+import com.drifting.bureau.mvp.contract.RaftingBureaufriendContract;
+import com.drifting.bureau.mvp.model.RaftingBureaufriendModel;
 
 import dagger.Binds;
 import dagger.Module;
-
-import com.drifting.bureau.mvp.contract.RaftingBureaufriendContract;
-import com.drifting.bureau.mvp.model.RaftingBureaufriendModel;
 
 /**
  * ================================================

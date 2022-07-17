@@ -1,11 +1,7 @@
 package com.drifting.bureau.mvp.ui.dialog;
 
 import android.app.Activity;
-import android.content.Context;
-import android.media.AudioFormat;
 import android.media.MediaPlayer;
-import android.media.MediaRecorder;
-import android.media.audiofx.Visualizer;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
@@ -22,7 +18,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
 import com.buihha.audiorecorder.Mp3Recorder;
-import com.buihha.audiorecorder.other.RecordConfig;
 import com.drifting.bureau.R;
 import com.drifting.bureau.util.FileUtil;
 import com.drifting.bureau.util.StorageUtils;

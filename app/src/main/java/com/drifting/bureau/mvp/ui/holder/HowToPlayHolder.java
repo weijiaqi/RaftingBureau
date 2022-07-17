@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.SpaceAboutEntity;
-import com.drifting.bureau.util.TextUtil;
 import com.jess.arms.base.BaseRecyclerHolder;
 
 import java.util.List;
@@ -26,7 +25,9 @@ public class HowToPlayHolder extends BaseRecyclerHolder {
     }
 
     public void setData(@NonNull List<SpaceAboutEntity> listBeanList, int position) {
-        TextUtil.setText(mTvTitle,listBeanList.get(position).getTitle());
-        TextUtil.setText(mTvContent, listBeanList.get(position).getContent());
+
+        mTvTitle.setText(listBeanList.get(position).getTitle());
+        mTvContent.setText( listBeanList.get(position).getContent());
+
     }
 }

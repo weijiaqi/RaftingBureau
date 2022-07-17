@@ -4,7 +4,6 @@ import android.view.View;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.TeaShopEntity;
-import com.drifting.bureau.mvp.ui.holder.OrderRecordHolder;
 import com.drifting.bureau.mvp.ui.holder.TeaShopHolder;
 import com.jess.arms.base.BaseRecyclerAdapter;
 import com.jess.arms.base.BaseRecyclerHolder;

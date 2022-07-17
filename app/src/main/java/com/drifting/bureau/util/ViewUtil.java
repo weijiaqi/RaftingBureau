@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.ui.dialog.LoadingDialog;
 

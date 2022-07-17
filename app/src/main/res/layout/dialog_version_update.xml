@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="234dp"
+    android:layout_gravity="center"
+    android:layout_height="wrap_content">
+
+    <com.hjq.shape.layout.ShapeFrameLayout
+        android:id="@+id/fl_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/version_bg">
+
+        <com.drifting.bureau.view.FontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="36dp"
+            android:text="发现新功能"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            app:fontType="PangMen" />
+
+
+        <TextView
+            android:id="@+id/tv_version_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="69dp"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="41dp"
+            android:layout_marginTop="95dp"
+            android:lineSpacingExtra="5dp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            tools:text=""/>
+    </com.hjq.shape.layout.ShapeFrameLayout>
+
+
+    <TextView
+        android:id="@+id/tv_upload"
+        android:layout_width="237dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fl_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="13dp"
+        android:layout_marginBottom="17dp"
+        android:background="@drawable/version_update_bg"
+        android:gravity="center"
+        android:text="立即更新"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+
+    <ImageView
+        android:id="@+id/iv_colse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_upload"
+        android:layout_centerHorizontal="true"
+        android:padding="15dp"
+        android:src="@drawable/icon_version_close" />
+</RelativeLayout>

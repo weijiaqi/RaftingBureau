@@ -14,13 +14,9 @@ import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.MySpaceStationEntity;
 import com.drifting.bureau.mvp.ui.adapter.MySpaceStationAdapter;
 import com.drifting.bureau.util.SpannableUtil;
-import com.drifting.bureau.util.callback.BaseDataCallBack;
-import com.drifting.bureau.util.request.RequestUtil;
 import com.jess.arms.base.BaseDialog;
-import com.jess.arms.base.BaseEntity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @Description: 我的空间站升级

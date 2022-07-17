@@ -4,9 +4,7 @@ import android.view.View;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.data.entity.CityEntity;
-import com.drifting.bureau.mvp.model.entity.OrderRecordEntity;
 import com.drifting.bureau.mvp.ui.holder.CityListHolder;
-import com.drifting.bureau.mvp.ui.holder.DriftingTrackHolder;
 import com.drifting.bureau.util.DigitUtil;
 import com.jess.arms.base.BaseRecyclerAdapter;
 import com.jess.arms.base.BaseRecyclerHolder;

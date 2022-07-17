@@ -1,8 +1,6 @@
 package com.drifting.bureau.view;
 
 
-import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 
 import androidx.viewpager.widget.ViewPager;
@@ -22,7 +20,6 @@ public class ScaleInTransformer implements ViewPager.PageTransformer {
         pageWidth = view.getWidth();
         pageHeight = view.getHeight();
         statFloatAnim(view);
-
         view.setPivotY(pageHeight / 2);
         view.setPivotX(pageWidth / 2);
         if (position == 0.0f) {
@@ -78,7 +75,7 @@ public class ScaleInTransformer implements ViewPager.PageTransformer {
 
 
     public void statFloatAnim(View view) {
-        AnimatorUtil.floatAnim(view, 2000);
+        AnimatorUtil.floatAnim(view, 2000,6f);
 
     }
 }

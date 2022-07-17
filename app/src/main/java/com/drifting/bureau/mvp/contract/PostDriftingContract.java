@@ -2,20 +2,15 @@ package com.drifting.bureau.mvp.contract;
 
 import androidx.fragment.app.Fragment;
 
-
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
 import com.drifting.bureau.mvp.model.entity.CreatewithfileEntity;
-import com.drifting.bureau.mvp.model.entity.LoginEntity;
 import com.drifting.bureau.mvp.model.entity.SkuListEntity;
 import com.jess.arms.base.BaseEntity;
 import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IView;
 
-import java.util.Map;
-
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 
 /**
  * ================================================
@@ -52,7 +47,7 @@ public interface PostDriftingContract {
 
         Observable<BaseEntity<CreatewithfileEntity>> createwithvoice(MultipartBody shortVoice);
 
-        Observable<BaseEntity<SkuListEntity>> skulist(int type_id, int explore_id, int message_id);
+        Observable<BaseEntity<SkuListEntity>> skulist( int explore_id, int message_id);
 
         Observable<BaseEntity<CreateOrderEntity>> createOrder(int type_id, String sku_codes);
     }

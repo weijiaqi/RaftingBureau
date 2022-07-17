@@ -7,7 +7,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
+
 import com.d.lib.slidelayout.SlideLayout;
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.RaftingBureaufriendEntity;
@@ -16,7 +18,9 @@ import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.TextUtil;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.jess.arms.base.BaseRecyclerHolder;
+
 import java.util.List;
+
 import butterknife.BindView;
 import io.rong.imkit.utils.RouteUtils;
 import io.rong.imlib.model.Conversation;
