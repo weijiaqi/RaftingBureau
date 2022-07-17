@@ -1,11 +1,6 @@
 package com.drifting.bureau.mvp.ui.activity.index;
 
 import android.app.Activity;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,9 +10,15 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
 import com.drifting.bureau.R;
 import com.drifting.bureau.di.component.DaggerRaftingDetailsComponent;
+import com.drifting.bureau.mvp.contract.RaftingDetailsContract;
 import com.drifting.bureau.mvp.model.entity.BarrageEntity;
+import com.drifting.bureau.mvp.presenter.RaftingDetailsPresenter;
 import com.drifting.bureau.mvp.ui.adapter.RaftingDetailsAdapter;
 import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
 import com.drifting.bureau.util.ClickUtil;
@@ -29,9 +30,6 @@ import com.drifting.bureau.view.AutoPollRecyclerView;
 import com.drifting.bureau.view.VoiceWave;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
-import com.drifting.bureau.mvp.contract.RaftingDetailsContract;
-import com.drifting.bureau.mvp.presenter.RaftingDetailsPresenter;
-
 
 import java.util.ArrayList;
 import java.util.List;

@@ -2,6 +2,7 @@ package com.drifting.bureau.app.api;
 
 
 import com.drifting.bureau.app.interceptor.CommonParInterceptor;
+import com.drifting.bureau.app.interceptor.DownLoadInterceptor;
 
 import java.util.concurrent.TimeUnit;
 
@@ -17,6 +18,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * @CreateDate: 2021/9/10 18:25
  */
 public class ApiProxy {
+
+    private static ApiService apiDownload;
     private static ApiService apiService;
 
     public static ApiService getApiService() {
@@ -36,5 +39,22 @@ public class ApiProxy {
             apiService = sRetrofit.create(ApiService.class);
         }
         return apiService;
+    }
+
+
+    public static ApiService getDownLoad() {
+        if (apiDownload == null) {
+            OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                    .connectTimeout(20, TimeUnit.SECONDS)
+                    .addNetworkInterceptor(new DownLoadInterceptor())
+                    .build();
+            Retrofit retrofit = new Retrofit.Builder()
+                    .client(okHttpClient)
+                    .baseUrl(Api.API_SERVER)
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .build();
+            apiDownload = retrofit.create(ApiService.class);
+        }
+        return apiDownload;
     }
 }

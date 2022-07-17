@@ -8,8 +8,6 @@ import androidx.annotation.NonNull;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.IncomeRecordEntity;
-import com.drifting.bureau.mvp.model.entity.MyBlindBoxEntity;
-import com.drifting.bureau.util.ColorUtil;
 import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.TextUtil;
 import com.jess.arms.base.BaseRecyclerHolder;

@@ -7,8 +7,6 @@ import com.jess.arms.base.BaseEntity;
 import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IView;
 
-import java.util.List;
-
 import io.reactivex.Observable;
 
 /**

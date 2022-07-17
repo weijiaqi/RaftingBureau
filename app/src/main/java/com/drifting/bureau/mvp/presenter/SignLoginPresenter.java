@@ -3,10 +3,8 @@ package com.drifting.bureau.mvp.presenter;
 import android.app.Application;
 import android.text.TextUtils;
 
-
 import com.drifting.bureau.mvp.contract.SignLoginContract;
 import com.drifting.bureau.mvp.model.entity.LoginEntity;
-import com.drifting.bureau.util.ToastUtil;
 import com.jess.arms.base.BaseEntity;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.http.imageloader.ImageLoader;

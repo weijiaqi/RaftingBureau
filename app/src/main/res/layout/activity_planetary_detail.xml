@@ -14,6 +14,21 @@
         android:layout_below="@+id/toolbar">
 
 
+        <TextView
+            android:id="@+id/tv_Ar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="24dp"
+            android:drawableTop="@drawable/star_ar"
+            android:drawablePadding="5dp"
+            android:text="AR体验"
+            android:textColor="@color/color_82"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+
         <ImageView
             android:id="@+id/iv_planet"
             android:layout_width="wrap_content"
@@ -22,8 +37,7 @@
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="-25dp"
-             android:src="@drawable/planetary_detail01"
-            />
+            android:src="@drawable/planetary_detail01" />
 
 
         <LinearLayout
@@ -57,6 +71,8 @@
                 app:shape_textEndColor="@color/color_6d"
                 app:shape_textStartColor="@color/color_6c" />
         </LinearLayout>
+
+
     </RelativeLayout>
 
 

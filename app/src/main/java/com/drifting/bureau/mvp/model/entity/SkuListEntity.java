@@ -9,6 +9,15 @@ public class SkuListEntity {
 
     private List<GoodsSkuBean> goods_sku;
     private String totalAmount;
+    private String warning;
+
+    public String getWarning() {
+        return warning;
+    }
+
+    public void setWarning(String warning) {
+        this.warning = warning;
+    }
 
     public List<GoodsSkuBean> getGoods_sku() {
         return goods_sku;

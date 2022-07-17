@@ -1,35 +1,26 @@
 package com.drifting.bureau.mvp.presenter;
 
 import android.app.Application;
-import android.util.Log;
 
-import com.drifting.bureau.mvp.model.entity.CustomerEntity;
-import com.drifting.bureau.mvp.model.entity.MyBlindBoxEntity;
-import com.drifting.bureau.mvp.model.entity.MySpaceStationEntity;
-import com.drifting.bureau.mvp.model.entity.MyTreasuryEntity;
+import com.drifting.bureau.mvp.contract.MySpaceStationContract;
+import com.drifting.bureau.mvp.model.entity.CommentDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.OrderDetailEntity;
 import com.drifting.bureau.mvp.model.entity.OrderOneEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceInfoEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
-import com.drifting.bureau.util.ToastUtil;
-import com.drifting.bureau.util.ViewUtil;
 import com.jess.arms.base.BaseEntity;
-import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
-import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
+import com.jess.arms.integration.AppManager;
+import com.jess.arms.mvp.BasePresenter;
+import com.jess.arms.utils.RxLifecycleUtils;
+
+import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
-
-import javax.inject.Inject;
-
-import com.drifting.bureau.mvp.contract.MySpaceStationContract;
-import com.jess.arms.utils.RxLifecycleUtils;
-
-import java.util.List;
 
 /**
  * ================================================
@@ -237,6 +228,34 @@ public class MySpaceStationPresenter extends BasePresenter<MySpaceStationContrac
 
 
 
+
+    /**
+     * 查看评论或话题详情
+     */
+    public void details(int log_id, int level, int user_id) {
+        mModel.details(log_id, level, user_id).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseEntity<CommentDetailsEntity>>(mErrorHandler) {
+                    @Override
+                    public void onNext(BaseEntity<CommentDetailsEntity> entity) {
+                        if (mRootView != null) {
+                            if (entity.getCode() == 200) {
+                                mRootView.onCommentDetailsSuccess(entity.getData());
+                            } else {
+                                mRootView.showMessage(entity.getMsg());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        if (mRootView != null) {
+                            mRootView.onNetError();
+                        }
+                    }
+                });
+    }
 
     @Override
     public void onDestroy() {

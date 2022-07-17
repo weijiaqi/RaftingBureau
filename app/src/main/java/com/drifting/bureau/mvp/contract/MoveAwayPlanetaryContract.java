@@ -2,8 +2,6 @@ package com.drifting.bureau.mvp.contract;
 
 import android.app.Activity;
 
-import com.drifting.bureau.mvp.model.entity.LoginEntity;
-import com.drifting.bureau.mvp.model.entity.MyBlindBoxEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionAssessEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionEntity;
 import com.jess.arms.base.BaseEntity;

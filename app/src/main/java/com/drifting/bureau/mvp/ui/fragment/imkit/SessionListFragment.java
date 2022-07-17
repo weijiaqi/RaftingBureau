@@ -5,10 +5,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import com.drifting.bureau.R;
 import com.drifting.bureau.util.request.RequestUtil;
+
 import io.rong.imkit.RongIM;
 import io.rong.imkit.conversationlist.ConversationListFragment;
 import io.rong.imkit.userinfo.RongUserInfoManager;

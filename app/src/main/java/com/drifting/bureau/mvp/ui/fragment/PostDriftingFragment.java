@@ -1,10 +1,5 @@
 package com.drifting.bureau.mvp.ui.fragment;
 
-import androidx.annotation.RequiresApi;
-import androidx.fragment.app.Fragment;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Build;
@@ -20,17 +15,21 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.fragment.app.Fragment;
 
 import com.drifting.bureau.R;
-
 import com.drifting.bureau.data.event.BackSpaceEvent;
 import com.drifting.bureau.data.event.PaymentEvent;
 import com.drifting.bureau.data.event.VideoEvent;
+import com.drifting.bureau.di.component.DaggerPostDriftingComponent;
+import com.drifting.bureau.mvp.contract.PostDriftingContract;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
 import com.drifting.bureau.mvp.model.entity.CreatewithfileEntity;
-
 import com.drifting.bureau.mvp.model.entity.SkuListEntity;
-import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
+import com.drifting.bureau.mvp.presenter.PostDriftingPresenter;
 import com.drifting.bureau.mvp.ui.activity.pay.PaymentInfoActivity;
 import com.drifting.bureau.mvp.ui.dialog.PublicDialog;
 import com.drifting.bureau.mvp.ui.dialog.RaftingOrderDialog;
@@ -38,22 +37,14 @@ import com.drifting.bureau.mvp.ui.dialog.RecordingDialog;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.BitmapUtil;
 import com.drifting.bureau.util.ClickUtil;
-import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.VideoUtil;
 import com.drifting.bureau.util.ViewGroupUtil;
-import com.drifting.bureau.util.callback.BaseDataCallBack;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.drifting.bureau.view.VoiceWave;
-import com.jess.arms.base.BaseDialog;
-import com.jess.arms.base.BaseEntity;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
-import com.drifting.bureau.di.component.DaggerPostDriftingComponent;
-import com.drifting.bureau.di.module.PostDriftingModule;
-import com.drifting.bureau.mvp.contract.PostDriftingContract;
-import com.drifting.bureau.mvp.presenter.PostDriftingPresenter;
 import com.jess.arms.utils.ArmsUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -91,7 +82,7 @@ public class PostDriftingFragment extends BaseFragment<PostDriftingPresenter> im
     @BindView(R.id.iv_video)
     ImageView mIvVideo;
     @BindView(R.id.rl_voice_play)
-    RelativeLayout mRlVoicePlay;
+    LinearLayout mRlVoicePlay;
     @BindView(R.id.iv_delete)
     ImageView mIvDelete;
     @BindView(R.id.iv_play)
@@ -325,7 +316,7 @@ public class PostDriftingFragment extends BaseFragment<PostDriftingPresenter> im
                 if (entity.getNeed_pay() == 1) {
                     createwithfileEntity = entity;
                     if (mPresenter != null) {
-                        mPresenter.skulist(selectPostion, 1, 0);
+                        mPresenter.skulist(1, 0);
                     }
                 } else {
                     sendSuccess();
@@ -396,9 +387,9 @@ public class PostDriftingFragment extends BaseFragment<PostDriftingPresenter> im
         if (event != null) {
             setVideoStatus(2);
             path = event.getPath();
-            cover = BitmapUtil.createVideoThumbnail(path,MediaStore.Images.Thumbnails.MINI_KIND) ;
+          //  cover = BitmapUtil.createVideoThumbnail(path,MediaStore.Images.Thumbnails.MINI_KIND) ;
             mIvpic.setImageBitmap(cover);
-            VideoUtil.compressVideo(mContext, path);
+//            VideoUtil.compressVideo(mContext, path);
         }
     }
 

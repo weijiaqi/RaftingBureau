@@ -1,7 +1,5 @@
 package com.drifting.bureau.mvp.contract;
 
-import android.app.Activity;
-
 import com.drifting.bureau.mvp.model.entity.LoginEntity;
 import com.jess.arms.base.BaseEntity;
 import com.jess.arms.mvp.IModel;

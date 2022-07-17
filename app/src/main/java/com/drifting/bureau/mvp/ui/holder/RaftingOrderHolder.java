@@ -1,7 +1,6 @@
 package com.drifting.bureau.mvp.ui.holder;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -9,7 +8,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.drifting.bureau.R;
-import com.drifting.bureau.mvp.model.entity.RaftingOrderEntity;
 import com.drifting.bureau.mvp.model.entity.SkuListEntity;
 import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.TextUtil;

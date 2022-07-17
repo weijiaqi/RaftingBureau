@@ -1,33 +1,27 @@
 package com.drifting.bureau.mvp.ui.fragment;
 
-import androidx.fragment.app.Fragment;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.data.event.MessageEvent;
 import com.drifting.bureau.di.component.DaggerMessageComponent;
+import com.drifting.bureau.mvp.contract.MessageContract;
 import com.drifting.bureau.mvp.model.entity.SysmessageMineEntity;
-import com.drifting.bureau.mvp.model.entity.TeaShopEntity;
+import com.drifting.bureau.mvp.presenter.MessagePresenter;
 import com.drifting.bureau.mvp.ui.adapter.MessageAdapter;
-
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.ViewUtil;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
-
-
-import com.drifting.bureau.mvp.contract.MessageContract;
-import com.drifting.bureau.mvp.presenter.MessagePresenter;
 import com.rb.core.xrecycleview.XRecyclerView;
 
 import org.greenrobot.eventbus.Subscribe;

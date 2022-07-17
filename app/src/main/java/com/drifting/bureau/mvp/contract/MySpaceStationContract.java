@@ -2,8 +2,7 @@ package com.drifting.bureau.mvp.contract;
 
 import android.app.Activity;
 
-import com.drifting.bureau.mvp.model.entity.MySpaceStationEntity;
-import com.drifting.bureau.mvp.model.entity.MyTreasuryEntity;
+import com.drifting.bureau.mvp.model.entity.CommentDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.OrderDetailEntity;
 import com.drifting.bureau.mvp.model.entity.OrderOneEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceInfoEntity;
@@ -11,8 +10,6 @@ import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.jess.arms.base.BaseEntity;
 import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IView;
-
-import java.util.List;
 
 import io.reactivex.Observable;
 
@@ -34,12 +31,13 @@ public interface MySpaceStationContract {
 
         void onSpcaeInfoSuccess(SpaceInfoEntity entity);
 
-        void onOrderOneSuccess( OrderOneEntity entity);
+        void onOrderOneSuccess(OrderOneEntity entity);
 
         void onOrderDetailSuccess(OrderDetailEntity entity);
 
-        void onUserInfoSuccess(int type,UserInfoEntity entity);
+        void onUserInfoSuccess(int type, UserInfoEntity entity);
 
+        void onCommentDetailsSuccess(CommentDetailsEntity entity);
 
         void onOrderMakingSuccess();
 
@@ -64,6 +62,9 @@ public interface MySpaceStationContract {
         Observable<BaseEntity> orderthrow(int space_order_id);
 
         Observable<BaseEntity> ordermaking(int space_order_id);
+
+
+        Observable<BaseEntity<CommentDetailsEntity>> details(int log_id, int level, int user_id);
 
     }
 }

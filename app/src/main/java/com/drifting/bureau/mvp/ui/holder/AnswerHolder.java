@@ -1,7 +1,6 @@
 package com.drifting.bureau.mvp.ui.holder;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -24,7 +23,6 @@ import com.jess.arms.utils.ArmsUtils;
 import java.util.List;
 
 import butterknife.BindView;
-import retrofit2.http.PUT;
 
 public class AnswerHolder extends BaseRecyclerHolder {
     @BindView(R.id.rl_a)

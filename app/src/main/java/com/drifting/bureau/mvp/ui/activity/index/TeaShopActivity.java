@@ -1,11 +1,6 @@
 package com.drifting.bureau.mvp.ui.activity.index;
 
 import android.app.Activity;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,16 +9,20 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.drifting.bureau.R;
 import com.drifting.bureau.di.component.DaggerTeaShopComponent;
+import com.drifting.bureau.mvp.contract.TeaShopContract;
 import com.drifting.bureau.mvp.model.entity.TeaShopEntity;
+import com.drifting.bureau.mvp.presenter.TeaShopPresenter;
 import com.drifting.bureau.mvp.ui.adapter.TeaShopAdapter;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.ViewUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
-import com.drifting.bureau.mvp.contract.TeaShopContract;
-import com.drifting.bureau.mvp.presenter.TeaShopPresenter;
 import com.jess.arms.utils.DeviceUtils;
 import com.rb.core.xrecycleview.XRecyclerView;
 
@@ -55,7 +54,7 @@ public class TeaShopActivity extends BaseActivity<TeaShopPresenter> implements T
     private int limit = 10;
 
     private String Longitude, Latitude;
-
+    private Activity mActivity;
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, TeaShopActivity.class);
         context.startActivity(intent);
@@ -91,7 +90,7 @@ public class TeaShopActivity extends BaseActivity<TeaShopPresenter> implements T
         mRcyPublic.setAdapter(teaShopAdapter);
 
         if (mPresenter != null) {
-            mPresenter.getLocation(this);
+            mPresenter.getLocation(getActivity());
         }
         mEtShaopName.setOnEditorActionListener((v, actionId, event) -> {
             if ((actionId == 0 || actionId == 3) && event != null) {

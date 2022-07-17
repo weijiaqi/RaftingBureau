@@ -1,7 +1,6 @@
 package com.drifting.bureau.mvp.ui.dialog;
 
 import android.content.Context;
-import android.text.SpannableStringBuilder;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -15,14 +14,9 @@ import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.MyTreasuryEntity;
 import com.drifting.bureau.mvp.ui.adapter.MyTreasuryAdapter;
 import com.drifting.bureau.util.GlideUtil;
-import com.drifting.bureau.util.SpannableUtil;
 import com.drifting.bureau.util.ToastUtil;
-import com.drifting.bureau.util.callback.BaseDataCallBack;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.jess.arms.base.BaseDialog;
-import com.jess.arms.base.BaseEntity;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,12 +1,8 @@
 package com.drifting.bureau.mvp.ui.holder;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.text.TextUtils;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -15,9 +11,7 @@ import androidx.annotation.NonNull;
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.BarrageEntity;
 import com.drifting.bureau.mvp.ui.adapter.RaftingDetailsAdapter;
-import com.drifting.bureau.util.ColorUtil;
 import com.drifting.bureau.util.TextUtil;
-import com.drifting.bureau.util.ToastUtil;
 import com.jess.arms.base.BaseRecyclerHolder;
 import com.jess.arms.utils.ArmsUtils;
 

@@ -1,12 +1,16 @@
 package com.drifting.bureau.mvp.presenter;
+
 import android.app.Application;
-import com.jess.arms.integration.AppManager;
-import com.jess.arms.di.scope.ActivityScope;
-import com.jess.arms.mvp.BasePresenter;
-import com.jess.arms.http.imageloader.ImageLoader;
-import me.jessyan.rxerrorhandler.core.RxErrorHandler;
-import javax.inject.Inject;
+
 import com.drifting.bureau.mvp.contract.VideoRecordingContract;
+import com.jess.arms.di.scope.ActivityScope;
+import com.jess.arms.http.imageloader.ImageLoader;
+import com.jess.arms.integration.AppManager;
+import com.jess.arms.mvp.BasePresenter;
+
+import javax.inject.Inject;
+
+import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 
 /**
  * ================================================

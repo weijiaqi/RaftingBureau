@@ -7,10 +7,8 @@ import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
-import android.os.CountDownTimer;
 import android.os.Handler;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,7 +20,6 @@ import com.drifting.bureau.view.VoiceWave;
 import com.hw.videoprocessor.VideoProcessor;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 import timber.log.Timber;
 
@@ -160,45 +157,6 @@ public class VideoUtil {
 
     private static String runLog = "";
 
-    /**
-     * 视频压缩
-     *
-     * @return
-     */
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    public static void compressVideo(Context context, String videoPath) {
-        String filepath = FileUtil.saveVideoPath(context);
-        new Thread(() -> {
-            boolean success = true;
-            try {
-                MediaMetadataRetriever retriever = new MediaMetadataRetriever();
-                retriever.setDataSource(videoPath);
-                int originWidth = Integer.parseInt(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH));
-                int originHeight = Integer.parseInt(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT));
-                int bitrate = Integer.parseInt(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_BITRATE));
-                double fileSize = FileUtil.getFileOrFilesSize(videoPath, FileUtil.SIZETYPE_MB);
-                Timber.e("1----------" + fileSize);
-                VideoProcessor.processor(RBureauApplication.getContext())
-                        .input(videoPath)
-                        .output(filepath)
-                        .outWidth(originWidth)
-                        .outHeight(originHeight)
-                        .bitrate(bitrate / 2)
-                        .process();
-            } catch (Exception e) {
-                success = false;
-                e.printStackTrace();
-                Timber.e("压缩失败");
-            }
-            if (success) {
-                Timber.e("压缩成功---" + filepath);
-                runLog = filepath;
-                double fileSize = FileUtil.getFileOrFilesSize(filepath, FileUtil.SIZETYPE_MB);
-                Timber.e("1----------" + fileSize);
-
-            }
-        }).start();
-    }
 
     public static String getRunLog() {
         return runLog;

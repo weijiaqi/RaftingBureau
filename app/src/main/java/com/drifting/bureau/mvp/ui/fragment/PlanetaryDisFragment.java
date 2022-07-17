@@ -6,14 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.ui.activity.index.PlanetaryDetailActivity;
-import com.drifting.bureau.mvp.ui.activity.index.PlanetarySelectActivity;
 import com.drifting.bureau.util.ClickUtil;
 import com.hjq.shape.view.ShapeTextView;
 import com.jess.arms.base.BaseFragment;

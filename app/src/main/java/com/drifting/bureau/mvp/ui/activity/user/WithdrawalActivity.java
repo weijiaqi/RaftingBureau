@@ -1,10 +1,6 @@
 package com.drifting.bureau.mvp.ui.activity.user;
 
 import android.app.Activity;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,8 +8,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.drifting.bureau.R;
 import com.drifting.bureau.di.component.DaggerWithdrawalComponent;
+import com.drifting.bureau.mvp.contract.WithdrawalContract;
+import com.drifting.bureau.mvp.presenter.WithdrawalPresenter;
 import com.drifting.bureau.mvp.ui.dialog.PublicDialog;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.StringUtil;
@@ -21,9 +22,6 @@ import com.drifting.bureau.util.TextUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
-
-import com.drifting.bureau.mvp.contract.WithdrawalContract;
-import com.drifting.bureau.mvp.presenter.WithdrawalPresenter;
 
 import butterknife.BindView;
 import butterknife.OnClick;

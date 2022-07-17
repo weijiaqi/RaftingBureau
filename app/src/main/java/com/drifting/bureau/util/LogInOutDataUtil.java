@@ -2,9 +2,8 @@ package com.drifting.bureau.util;
 
 
 import com.drifting.bureau.mvp.model.entity.LoginEntity;
-import com.drifting.bureau.mvp.ui.activity.SplashActivity;
-import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
 import com.drifting.bureau.storageinfo.Preferences;
+import com.jess.arms.integration.AppManager;
 
 import io.rong.imkit.RongIM;
 
@@ -29,5 +28,6 @@ public class LogInOutDataUtil {
     public static void successOutClearData() {
         RongIM.getInstance().logout();
         Preferences.clearUserLoginData();
+        AppManager.getAppManager().killAll();
     }
 }

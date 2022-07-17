@@ -41,6 +41,15 @@ public class UserInfoEntity implements Serializable {
             private Integer schedule;
             private Integer created_at_int;
             private Integer updated_at_int;
+            private String ar_url;
+
+            public String getAr_url() {
+                return ar_url;
+            }
+
+            public void setAr_url(String ar_url) {
+                this.ar_url = ar_url;
+            }
 
             public Integer getId() {
                 return Id;

@@ -7,15 +7,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.drifting.bureau.R;
-import com.drifting.bureau.data.event.AnswerCompletedEvent;
 import com.drifting.bureau.data.event.FriendApplicationEvent;
 import com.drifting.bureau.mvp.model.entity.FriendApplicationEntity;
 import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.TextUtil;
-import com.drifting.bureau.util.callback.BaseDataCallBack;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.hjq.shape.view.ShapeTextView;
-import com.jess.arms.base.BaseEntity;
 import com.jess.arms.base.BaseRecyclerHolder;
 
 import org.greenrobot.eventbus.EventBus;

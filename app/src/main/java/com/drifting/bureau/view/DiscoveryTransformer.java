@@ -5,6 +5,7 @@ import android.view.View;
 import androidx.viewpager.widget.ViewPager;
 
 import com.drifting.bureau.app.application.RBureauApplication;
+import com.drifting.bureau.util.animator.AnimatorUtil;
 import com.jess.arms.utils.ArmsUtils;
 
 
@@ -21,6 +22,10 @@ public class DiscoveryTransformer  implements ViewPager.PageTransformer{
         pageHeight = view.getHeight();
         view.setPivotY(pageHeight / 2);
         view.setPivotX(pageWidth / 2);
+
+        AnimatorUtil.floatAnim(view,2000,20f);
+
+
         if (position == 0.0f) {
             view.setAlpha(1f);
         } else if (position < -1.0f) {

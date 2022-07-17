@@ -3,8 +3,6 @@ package com.drifting.bureau.mvp.contract;
 import android.app.Activity;
 
 import com.drifting.bureau.mvp.model.entity.DeliveryDetailsEntity;
-import com.drifting.bureau.mvp.model.entity.IncomeRecordEntity;
-import com.drifting.bureau.mvp.model.entity.MessageReceiveEntity;
 import com.jess.arms.base.BaseEntity;
 import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IView;

@@ -1,7 +1,6 @@
 package com.drifting.bureau.mvp.ui.activity.imkit;
 
 import android.os.Bundle;
-
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;

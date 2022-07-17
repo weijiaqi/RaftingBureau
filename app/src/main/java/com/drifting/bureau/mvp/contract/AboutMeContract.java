@@ -2,16 +2,8 @@ package com.drifting.bureau.mvp.contract;
 
 import android.app.Activity;
 
-import com.drifting.bureau.mvp.model.entity.CustomerEntity;
-import com.drifting.bureau.mvp.model.entity.UserEntity;
-import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
-import com.jess.arms.base.BaseEntity;
 import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IView;
-
-import java.util.List;
-
-import io.reactivex.Observable;
 
 /**
  * ================================================

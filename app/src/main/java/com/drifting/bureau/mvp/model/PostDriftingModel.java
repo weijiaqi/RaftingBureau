@@ -3,25 +3,20 @@ package com.drifting.bureau.mvp.model;
 import android.app.Application;
 
 import com.drifting.bureau.app.api.ApiService;
+import com.drifting.bureau.mvp.contract.PostDriftingContract;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
 import com.drifting.bureau.mvp.model.entity.CreatewithfileEntity;
 import com.drifting.bureau.mvp.model.entity.SkuListEntity;
 import com.google.gson.Gson;
 import com.jess.arms.base.BaseEntity;
+import com.jess.arms.di.scope.FragmentScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
-import com.jess.arms.di.scope.FragmentScope;
 
 import javax.inject.Inject;
 
-import com.drifting.bureau.mvp.contract.PostDriftingContract;
-
-import java.util.Map;
-
 import io.reactivex.Observable;
-import okhttp3.MediaType;
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 
 /**
  * ================================================
@@ -65,8 +60,8 @@ public class PostDriftingModel extends BaseModel implements PostDriftingContract
     }
 
     @Override
-    public Observable<BaseEntity<SkuListEntity>> skulist(int type_id, int explore_id, int message_id) {
-        return mRepositoryManager.obtainRetrofitService(ApiService.class).skulist(type_id,explore_id,message_id);
+    public Observable<BaseEntity<SkuListEntity>> skulist(int explore_id, int message_id) {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).skulist(explore_id,message_id);
     }
 
     @Override

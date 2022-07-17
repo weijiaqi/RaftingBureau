@@ -1,22 +1,21 @@
 package com.drifting.bureau.mvp.presenter;
+
 import android.app.Application;
 
-import com.drifting.bureau.mvp.model.entity.SkuListEntity;
-import com.drifting.bureau.util.ToastUtil;
+import com.drifting.bureau.mvp.contract.WithdrawalContract;
 import com.jess.arms.base.BaseEntity;
-import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
-import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
+import com.jess.arms.integration.AppManager;
+import com.jess.arms.mvp.BasePresenter;
+import com.jess.arms.utils.RxLifecycleUtils;
+
+import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
-
-import javax.inject.Inject;
-import com.drifting.bureau.mvp.contract.WithdrawalContract;
-import com.jess.arms.utils.RxLifecycleUtils;
 
 /**
  * ================================================

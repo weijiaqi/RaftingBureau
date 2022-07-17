@@ -18,13 +18,11 @@ package com.drifting.bureau.app;
 import android.app.Application;
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+
 import com.drifting.bureau.BuildConfig;
 import com.jess.arms.base.delegate.AppLifecycles;
-import com.jess.arms.integration.cache.IntelligentCache;
-import com.jess.arms.utils.ArmsUtils;
 
-
-import androidx.annotation.NonNull;
 import butterknife.ButterKnife;
 import timber.log.Timber;
 

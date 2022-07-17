@@ -1,13 +1,6 @@
 package com.drifting.bureau.mvp.ui.activity.index;
 
 import android.app.Activity;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,14 +20,22 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
 import com.drifting.bureau.R;
 import com.drifting.bureau.di.component.DaggerGetSpaceStationComponent;
+import com.drifting.bureau.mvp.contract.GetSpaceStationContract;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
 import com.drifting.bureau.mvp.model.entity.MysteryboxEntity;
 import com.drifting.bureau.mvp.model.entity.PrizeEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceAboutEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceCheckEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceStationEntity;
+import com.drifting.bureau.mvp.presenter.GetSpaceStationPresenter;
 import com.drifting.bureau.mvp.ui.activity.pay.PaymentInfoActivity;
 import com.drifting.bureau.mvp.ui.activity.user.MyBlindBoxActivity;
 import com.drifting.bureau.mvp.ui.activity.web.ShowWebViewActivity;
@@ -49,9 +50,6 @@ import com.drifting.bureau.view.AutoPollRecyclerView;
 import com.drifting.bureau.view.ScaleInTransformer;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
-
-import com.drifting.bureau.mvp.contract.GetSpaceStationContract;
-import com.drifting.bureau.mvp.presenter.GetSpaceStationPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,9 +84,9 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
     @BindView(R.id.frame)
     FrameLayout frame;
     private SpaceBarrageAdapter spaceBarrageAdapter;
-    private List<ImageView> imageViewList;
+
     private List<SpaceStationEntity> list;
-    private ImageView iv;
+
     private String skuCode;
     private SpannableStringBuilder passer;
     private PrizepreviewDialog prizepreviewDialog;
@@ -195,11 +193,8 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
     @Override
     public void onGetSpaceList(List<SpaceStationEntity> data) {
         list = data;
-        imageViewList = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            iv = new ImageView(this);
-            iv.setImageResource(R.drawable.space_blind_box);
-            imageViewList.add(iv);
+        if (list.size()==1){
+            list.add(list.get(0));
         }
         setText(0);
         MyAdapter myAdapter = new MyAdapter();

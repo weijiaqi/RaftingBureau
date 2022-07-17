@@ -1,12 +1,8 @@
 package com.drifting.bureau.mvp.contract;
 
-import android.app.Activity;
-
 import androidx.fragment.app.Fragment;
 
-
 import com.drifting.bureau.mvp.model.entity.SysmessageMineEntity;
-import com.drifting.bureau.mvp.model.entity.TeaShopEntity;
 import com.jess.arms.base.BaseEntity;
 import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IView;

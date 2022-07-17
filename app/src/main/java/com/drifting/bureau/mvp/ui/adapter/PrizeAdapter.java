@@ -3,9 +3,7 @@ package com.drifting.bureau.mvp.ui.adapter;
 import android.view.View;
 
 import com.drifting.bureau.R;
-import com.drifting.bureau.mvp.model.entity.OrderRecordEntity;
 import com.drifting.bureau.mvp.model.entity.PrizeEntity;
-import com.drifting.bureau.mvp.ui.holder.OrderRecordHolder;
 import com.drifting.bureau.mvp.ui.holder.PrizeHolder;
 import com.jess.arms.base.BaseRecyclerAdapter;
 import com.jess.arms.base.BaseRecyclerHolder;

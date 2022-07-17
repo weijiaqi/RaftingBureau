@@ -1,14 +1,13 @@
 package com.drifting.bureau.di.component;
+
+import com.drifting.bureau.di.module.PlanetarySelectModule;
+import com.drifting.bureau.mvp.contract.PlanetarySelectContract;
+import com.drifting.bureau.mvp.ui.activity.index.PlanetarySelectActivity;
+import com.jess.arms.di.component.AppComponent;
+import com.jess.arms.di.scope.ActivityScope;
+
 import dagger.BindsInstance;
 import dagger.Component;
-
-import com.drifting.bureau.mvp.contract.PlanetarySelectContract;
-import com.drifting.bureau.mvp.contract.PostDriftingContract;
-import com.jess.arms.di.component.AppComponent;
-import com.drifting.bureau.di.module.PlanetarySelectModule;
-
-import com.jess.arms.di.scope.ActivityScope;
-import com.drifting.bureau.mvp.ui.activity.index.PlanetarySelectActivity;
 
 /**
  * ================================================

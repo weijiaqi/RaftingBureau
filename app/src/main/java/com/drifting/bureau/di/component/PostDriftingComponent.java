@@ -1,16 +1,13 @@
 package com.drifting.bureau.di.component;
 
-import dagger.BindsInstance;
-import dagger.Component;
-
+import com.drifting.bureau.di.module.PostDriftingModule;
 import com.drifting.bureau.mvp.contract.PostDriftingContract;
-import com.drifting.bureau.mvp.contract.SignLoginContract;
-
 import com.drifting.bureau.mvp.ui.fragment.PostDriftingFragment;
 import com.jess.arms.di.component.AppComponent;
-import com.drifting.bureau.di.module.PostDriftingModule;
-
 import com.jess.arms.di.scope.FragmentScope;
+
+import dagger.BindsInstance;
+import dagger.Component;
 
 
 /**

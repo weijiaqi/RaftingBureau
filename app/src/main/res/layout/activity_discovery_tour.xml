@@ -3,18 +3,58 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/discovery_bg"
-    android:fitsSystemWindows="true"
+    android:background="@color/color_01"
     android:orientation="vertical">
 
-    <include layout="@layout/include_title" />
+
+    <com.google.vr.sdk.widgets.pano.VrPanoramaView
+
+        android:id="@+id/vrPanoramaView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+    <com.drifting.bureau.view.StarSkyView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transparent"
+        android:visibility="visible"
+        app:meteor_head_size="2"
+        app:one_cycle_time_ms="50000"
+        app:star_nums="10" />
+
+    <include layout="@layout/include_tvbar_title" />
+
+
+    <LinearLayout
+        android:id="@+id/ll_step_star"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="14dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/step_star" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="还没找到宜居星球？"
+            android:textColor="@color/white"
+            android:textSize="11sp" />
+    </LinearLayout>
 
 
     <ImageView
         android:id="@+id/iv_start_discovery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar"
+        android:layout_below="@+id/ll_toolbar"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="35dp"
         android:src="@drawable/start_discovery" />

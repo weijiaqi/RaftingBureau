@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="302dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+
+    android:background="@drawable/release_drifting_bg"
+    android:orientation="vertical">
+
+
+    <com.hjq.shape.layout.ShapeRelativeLayout
+        android:id="@+id/rl_top"
+        android:layout_width="240dp"
+        android:layout_height="264dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="5dp"
+        android:orientation="vertical"
+        app:shape_radius="10dp"
+        app:shape_solidColor="@color/color_070b">
+
+
+        <com.drifting.bureau.view.FontTextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="查看漂流~~"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            app:fontType="PangMen" />
+
+
+        <TextView
+            android:id="@+id/tv_word"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@+id/tv_title"
+            android:layout_marginTop="14dp"
+            android:background="@null"
+            android:gravity="top"
+            android:hint="请在这里输入你想要发送的漂流信息。"
+            android:lineSpacingExtra="5dp"
+            android:paddingHorizontal="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/color_2e"
+            android:textSize="12sp" />
+
+        <include
+            android:id="@+id/rl_voice_play"
+            layout="@layout/include_voice_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="40dp"
+            android:visibility="gone" />
+
+
+        <include
+            android:id="@+id/rl_video_play"
+            layout="@layout/include_video_play"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="40dp"
+            android:visibility="gone" />
+
+
+
+
+
+    </com.hjq.shape.layout.ShapeRelativeLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginTop="25dp">
+
+        <com.hjq.shape.view.ShapeTextView
+            android:id="@+id/tv_leave_space"
+            android:layout_width="106dp"
+            android:layout_height="38dp"
+            android:gravity="center"
+            android:text="丢回太空"
+            android:textColor="@color/color_cc"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:shape_radius="100dp"
+            app:shape_solidColor="@color/color_26" />
+
+
+        <com.hjq.shape.view.ShapeTextView
+            android:id="@+id/tv_made_for_him"
+            android:layout_width="106dp"
+            android:layout_height="38dp"
+            android:layout_alignParentEnd="true"
+            android:gravity="center"
+            android:text="为他制作"
+            android:textColor="@color/color_00"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:shape_endColor="@color/color_6d"
+            app:shape_radius="100dp"
+            app:shape_startColor="@color/color_6c" />
+
+    </RelativeLayout>
+
+
+
+
+
+</LinearLayout>

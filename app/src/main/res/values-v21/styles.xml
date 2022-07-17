@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="CenterProfileTheme" parent="AppTheme">
-
-        <item name="android:statusBarColor">@color/transparent</item>
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryDark">@color/purple_200</item>
-        <item name="colorAccent">@color/purple_200</item>
-
-    </style>
     <!--设置背景图Theme-->
     <style name="AppSplash" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/layer_splash</item>

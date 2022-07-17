@@ -22,7 +22,6 @@ import androidx.fragment.app.FragmentManager;
 
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.base.delegate.IActivity;
-import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.integration.cache.Cache;
 import com.jess.arms.integration.cache.CacheType;
 import com.jess.arms.integration.lifecycle.ActivityLifecycleable;

@@ -30,7 +30,6 @@ import androidx.fragment.app.FragmentActivity;
  * }
  **/
 public class CustomWebView extends WebView {
-    private static boolean imageClickable;
 
     private boolean mIsLoadCurrtenView;
 

@@ -1,10 +1,6 @@
 package com.drifting.bureau.mvp.ui.activity.user;
 
 import android.app.Activity;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -12,28 +8,27 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.drifting.bureau.R;
 import com.drifting.bureau.data.entity.MessageCenterEntity;
 import com.drifting.bureau.data.event.MessageCenterEvent;
 import com.drifting.bureau.data.event.MessageEvent;
 import com.drifting.bureau.data.event.MessageRefreshEvent;
 import com.drifting.bureau.di.component.DaggerMessageCenterComponent;
-
+import com.drifting.bureau.mvp.contract.MessageCenterContract;
+import com.drifting.bureau.mvp.presenter.MessageCenterPresenter;
 import com.drifting.bureau.mvp.ui.activity.imkit.MyConversationActivity;
-
 import com.drifting.bureau.mvp.ui.adapter.MessageCenterAdapter;
 import com.drifting.bureau.mvp.ui.listener.OnTransitionViewListener;
 import com.drifting.bureau.util.ClickUtil;
-
 import com.drifting.bureau.util.callback.BaseDataCallBack;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.drifting.bureau.view.NoScrollViewPager;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.base.BaseEntity;
 import com.jess.arms.di.component.AppComponent;
-
-import com.drifting.bureau.mvp.contract.MessageCenterContract;
-import com.drifting.bureau.mvp.presenter.MessageCenterPresenter;
 import com.rb.core.tab.view.indicator.IndicatorViewPager;
 import com.rb.core.tab.view.indicator.ScrollIndicatorView;
 import com.rb.core.tab.view.indicator.slidebar.LayoutBar;

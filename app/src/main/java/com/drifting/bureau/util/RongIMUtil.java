@@ -11,15 +11,14 @@ import androidx.annotation.NonNull;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
+import com.drifting.bureau.app.RBConstant;
 import com.drifting.bureau.app.application.RBureauApplication;
-import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
 import com.drifting.bureau.storageinfo.Preferences;
 
 import io.rong.imkit.GlideKitImageEngine;
 import io.rong.imkit.RongIM;
 import io.rong.imkit.config.RongConfigCenter;
 import io.rong.imkit.userinfo.RongUserInfoManager;
-import io.rong.imkit.utils.RouteUtils;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
 import io.rong.imlib.model.Message;
@@ -35,7 +34,7 @@ public class RongIMUtil {
 
     public void init() {
         // 融云 App Key
-        RongIM.init(RBureauApplication.getInstance(), "sfci50a7sgf6i",true);
+        RongIM.init(RBureauApplication.getInstance(), RBConstant.RONGIM_APPKEY,true);
         RongConfigCenter.featureConfig().setKitImageEngine(new GlideKitImageEngine() {
             @Override
             public void loadConversationListPortrait(@NonNull Context context, @NonNull String url, @NonNull ImageView imageView, Conversation conversation) {

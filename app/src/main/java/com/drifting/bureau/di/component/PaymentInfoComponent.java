@@ -1,14 +1,13 @@
 package com.drifting.bureau.di.component;
+
+import com.drifting.bureau.di.module.PaymentInfoModule;
+import com.drifting.bureau.mvp.contract.PaymentInfoContract;
+import com.drifting.bureau.mvp.ui.activity.pay.PaymentInfoActivity;
+import com.jess.arms.di.component.AppComponent;
+import com.jess.arms.di.scope.ActivityScope;
+
 import dagger.BindsInstance;
 import dagger.Component;
-
-import com.drifting.bureau.mvp.contract.PaymentInfoContract;
-import com.drifting.bureau.mvp.contract.VideoRecordingContract;
-import com.jess.arms.di.component.AppComponent;
-import com.drifting.bureau.di.module.PaymentInfoModule;
-
-import com.jess.arms.di.scope.ActivityScope;
-import com.drifting.bureau.mvp.ui.activity.pay.PaymentInfoActivity;
 
 /**
  * ================================================

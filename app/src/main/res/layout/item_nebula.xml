@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="135dp"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginBottom="15dp"
+    android:background="@drawable/channel_bg">
+
+
+    <TextView
+        android:id="@+id/tv_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="25dp"
+        android:text="传递过程中发现新的星云"
+        android:textColor="@color/color_cc"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_top"
+        android:layout_marginStart="66dp"
+        android:layout_marginTop="9dp"
+        android:text=""
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+
+    <com.hjq.shape.view.ShapeTextView
+        android:id="@+id/tv_nebulae"
+        android:layout_width="72dp"
+        android:layout_height="24dp"
+        android:layout_below="@+id/tv_name"
+        android:layout_alignStart="@+id/tv_name"
+        android:layout_marginTop="14dp"
+        android:gravity="center"
+        android:text="了解星云"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:shape_radius="100dp"
+        app:shape_strokeEndColor="@color/color_6c"
+        app:shape_strokeStartColor="@color/color_6d"
+        app:shape_strokeWidth="1dp" />
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true">
+
+        <RelativeLayout
+            android:id="@+id/rl_circle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="40dp">
+
+            <com.hjq.shape.view.ShapeView
+                android:id="@+id/shpe_circle1"
+                android:layout_width="29dp"
+                android:layout_height="29dp"
+                android:layout_centerInParent="true"
+                app:shape_radius="100dp"
+                app:shape_solidColor="@color/color_95_ed" />
+
+            <com.hjq.shape.view.ShapeView
+                android:id="@+id/shpe_circle"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                app:shape_radius="100dp"
+                app:shape_solidColor="@color/color_95_ed" />
+
+            <ImageView
+                android:layout_width="9dp"
+                android:layout_height="9dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/shape_purple_circles" />
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
+

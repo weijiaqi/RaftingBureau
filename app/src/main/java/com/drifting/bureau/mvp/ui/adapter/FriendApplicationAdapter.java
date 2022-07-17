@@ -5,9 +5,9 @@ import android.view.View;
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.FriendApplicationEntity;
 import com.drifting.bureau.mvp.ui.holder.FriendApplicationHolder;
-import com.drifting.bureau.mvp.ui.holder.MessageHolder;
 import com.jess.arms.base.BaseRecyclerAdapter;
 import com.jess.arms.base.BaseRecyclerHolder;
+
 import java.util.List;
 
 public class FriendApplicationAdapter   extends BaseRecyclerAdapter<FriendApplicationEntity.ListBean> {

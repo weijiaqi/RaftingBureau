@@ -1,12 +1,6 @@
 package com.drifting.bureau.mvp.ui.activity.user;
 
 import android.app.Activity;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,14 +12,19 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.drifting.bureau.R;
 import com.drifting.bureau.data.entity.LoginLocallyEntity;
 import com.drifting.bureau.di.component.DaggerLoginComponent;
+import com.drifting.bureau.mvp.contract.LoginContract;
 import com.drifting.bureau.mvp.model.entity.LoginEntity;
-import com.drifting.bureau.mvp.ui.activity.SplashActivity;
+import com.drifting.bureau.mvp.presenter.LoginPresenter;
 import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
 import com.drifting.bureau.mvp.ui.adapter.LoginListAdapter;
-import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.LogInOutDataUtil;
 import com.drifting.bureau.util.RongIMUtil;
@@ -34,9 +33,6 @@ import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.VerifyUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
-
-import com.drifting.bureau.mvp.contract.LoginContract;
-import com.drifting.bureau.mvp.presenter.LoginPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +57,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     private LoginListAdapter loginListAdapter;
     private CountDownTimer timer;
     private int status = 1;
-    private String phone,nikename;
+    private String phone,code,nikename;
 
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, LoginActivity.class);
@@ -138,9 +134,11 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
                 mPresenter.getCode(mEtContent.getText().toString(), 1, status);
             }
         } else if (status == 2) {
-            setData(mEtContent.getText().toString(), 2, false);
+            code=mEtContent.getText().toString();
+            setData(code, 2, false);
             if (mPresenter != null) {
-                mPresenter.login(phone, mEtContent.getText().toString(), status);
+                mEtContent.setText("");
+                mPresenter.login(phone, code, status);
             }
         } else if (status == 3) {
             if (mEtContent.getText().length() > 9) {

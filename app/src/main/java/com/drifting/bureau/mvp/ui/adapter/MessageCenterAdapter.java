@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -19,7 +18,6 @@ import com.drifting.bureau.data.entity.MessageCenterEntity;
 import com.drifting.bureau.mvp.ui.fragment.MessageFragment;
 import com.drifting.bureau.mvp.ui.fragment.RaftingBureaufriendFragment;
 import com.drifting.bureau.mvp.ui.fragment.imkit.SessionListFragment;
-import com.jess.arms.utils.ArmsUtils;
 import com.rb.core.tab.view.indicator.IndicatorViewPager;
 
 import java.util.ArrayList;

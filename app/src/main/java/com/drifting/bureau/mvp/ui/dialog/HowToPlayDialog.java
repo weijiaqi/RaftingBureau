@@ -43,6 +43,7 @@ public class HowToPlayDialog extends BaseDialog {
     protected void initEvents() {
         super.initEvents();
         mRcyList.setLayoutManager(new LinearLayoutManager(context));
+        mRcyList.setHasFixedSize(true);
         howToPlayAdapter = new HowToPlayAdapter(new ArrayList<>());
         mRcyList.setAdapter(howToPlayAdapter);
         howToPlayAdapter.setData(list);

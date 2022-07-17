@@ -1,30 +1,19 @@
 package com.drifting.bureau.util;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.location.Address;
 import android.location.Criteria;
-import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
-import android.widget.Toast;
 
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.drifting.bureau.app.application.RBureauApplication;
-
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.util.List;
-import java.util.Locale;
 
 import timber.log.Timber;
 

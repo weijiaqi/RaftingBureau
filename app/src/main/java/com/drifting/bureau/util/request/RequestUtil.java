@@ -3,36 +3,27 @@ package com.drifting.bureau.util.request;
 
 import android.util.SparseArray;
 
-
 import com.drifting.bureau.app.api.ApiProxy;
 import com.drifting.bureau.mvp.model.entity.BoxOpenEntity;
+import com.drifting.bureau.mvp.model.entity.FriendEntity;
 import com.drifting.bureau.mvp.model.entity.FriendInfoEntity;
 import com.drifting.bureau.mvp.model.entity.MySpaceStationEntity;
 import com.drifting.bureau.mvp.model.entity.MyTreasuryEntity;
 import com.drifting.bureau.mvp.model.entity.PlanetLocationEntity;
 import com.drifting.bureau.mvp.model.entity.PlatformTimesEntity;
-import com.drifting.bureau.mvp.model.entity.RaftingBureaufriendEntity;
 import com.drifting.bureau.mvp.model.entity.SysmessageEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.model.entity.WriteOffInfoEntity;
 import com.drifting.bureau.util.callback.BaseDataCallBack;
 import com.jess.arms.base.BaseEntity;
 import com.jess.arms.base.BaseObserver;
-import com.jess.arms.utils.RxLifecycleUtils;
 
-import java.io.IOException;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Retrofit;
 
 /**
  * @Description:请求公共类工具类
@@ -641,6 +632,38 @@ public class RequestUtil {
                 });
     }
 
+
+
+
+    /**
+     * 是否是好友
+     */
+    public void isFriend(String user_id ,BaseDataCallBack<FriendEntity> callBack) {
+        ApiProxy.getApiService().isFriend(user_id)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new BaseObserver<BaseEntity<FriendEntity>>() {
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+                        mDisposables.put(mRequestCount++, disposable);
+                    }
+
+                    @Override
+                    public void onNext(BaseEntity<FriendEntity> entity) {
+                        if (callBack != null) {
+                            callBack.getData(entity);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (callBack != null) {
+                            callBack.getData(null);
+                        }
+                    }
+                });
+    }
 
 
 

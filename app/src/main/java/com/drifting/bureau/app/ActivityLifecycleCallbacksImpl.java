@@ -17,15 +17,7 @@ package com.drifting.bureau.app;
 
 import android.app.Activity;
 import android.app.Application;
-import android.os.Build;
 import android.os.Bundle;
-import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.drifting.bureau.R;
-
-import java.util.Objects;
 
 import timber.log.Timber;
 

@@ -1,14 +1,13 @@
 package com.drifting.bureau.di.component;
+
+import com.drifting.bureau.di.module.DriftingBottleModule;
+import com.drifting.bureau.mvp.contract.DriftingBottleContract;
+import com.drifting.bureau.mvp.ui.activity.index.DriftingBottleActivity;
+import com.jess.arms.di.component.AppComponent;
+import com.jess.arms.di.scope.ActivityScope;
+
 import dagger.BindsInstance;
 import dagger.Component;
-
-import com.drifting.bureau.mvp.contract.DiscoveryTourContract;
-import com.drifting.bureau.mvp.contract.DriftingBottleContract;
-import com.jess.arms.di.component.AppComponent;
-import com.drifting.bureau.di.module.DriftingBottleModule;
-
-import com.jess.arms.di.scope.ActivityScope;
-import com.drifting.bureau.mvp.ui.activity.index.DriftingBottleActivity;
 
 /**
  * ================================================

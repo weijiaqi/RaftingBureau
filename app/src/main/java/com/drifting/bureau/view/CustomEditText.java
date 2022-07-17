@@ -10,10 +10,8 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.EditText;
 
-
 import com.drifting.bureau.R;
 import com.drifting.bureau.util.ToastUtil;
-import com.hjq.toast.ToastUtils;
 
 import java.io.UnsupportedEncodingException;
 

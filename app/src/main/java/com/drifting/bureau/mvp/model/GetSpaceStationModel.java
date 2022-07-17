@@ -1,7 +1,9 @@
 package com.drifting.bureau.mvp.model;
+
 import android.app.Application;
 
 import com.drifting.bureau.app.api.ApiService;
+import com.drifting.bureau.mvp.contract.GetSpaceStationContract;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
 import com.drifting.bureau.mvp.model.entity.MysteryboxEntity;
 import com.drifting.bureau.mvp.model.entity.PrizeEntity;
@@ -11,16 +13,15 @@ import com.drifting.bureau.mvp.model.entity.SpaceExchangeEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceStationEntity;
 import com.google.gson.Gson;
 import com.jess.arms.base.BaseEntity;
+import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
-import com.jess.arms.di.scope.ActivityScope;
-import javax.inject.Inject;
-import com.drifting.bureau.mvp.contract.GetSpaceStationContract;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observable;
-import retrofit2.http.Field;
 
 /**
  * ================================================

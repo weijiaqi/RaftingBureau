@@ -9,12 +9,10 @@ import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
-
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
-
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -25,7 +23,6 @@ import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.ui.activity.web.ShowWebViewActivity;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.StringUtil;
-
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 

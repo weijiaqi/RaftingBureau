@@ -1,15 +1,17 @@
 package com.drifting.bureau.mvp.model;
+
 import android.app.Application;
 
 import com.drifting.bureau.app.api.ApiService;
+import com.drifting.bureau.mvp.contract.OrderRecordContract;
 import com.drifting.bureau.mvp.model.entity.OrderRecordEntity;
 import com.google.gson.Gson;
 import com.jess.arms.base.BaseEntity;
+import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
-import com.jess.arms.di.scope.ActivityScope;
+
 import javax.inject.Inject;
-import com.drifting.bureau.mvp.contract.OrderRecordContract;
 
 import io.reactivex.Observable;
 

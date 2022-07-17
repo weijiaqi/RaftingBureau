@@ -1,17 +1,11 @@
 package com.drifting.bureau.mvp.ui.activity.user;
 
+import static com.drifting.bureau.app.FilePathConstant.STAR_PATH;
+
 import android.app.Activity;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +15,12 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.billy.android.swipe.SmartSwipe;
 import com.billy.android.swipe.SmartSwipeWrapper;
 import com.billy.android.swipe.SwipeConsumer;
@@ -28,28 +28,31 @@ import com.billy.android.swipe.consumer.DrawerConsumer;
 import com.billy.android.swipe.consumer.SlidingConsumer;
 import com.billy.android.swipe.listener.SimpleSwipeListener;
 import com.drifting.bureau.R;
-
 import com.drifting.bureau.data.event.AnswerCompletedEvent;
 import com.drifting.bureau.di.component.DaggerAboutMeComponent;
+import com.drifting.bureau.mvp.contract.AboutMeContract;
 import com.drifting.bureau.mvp.model.entity.AoubtMeEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
+import com.drifting.bureau.mvp.presenter.AboutMePresenter;
 import com.drifting.bureau.mvp.ui.activity.index.MoveAwayPlanetaryActivity;
 import com.drifting.bureau.mvp.ui.activity.index.PlanetarySelectActivity;
+import com.drifting.bureau.mvp.ui.activity.index.ar.ARActivity;
 import com.drifting.bureau.mvp.ui.adapter.AboutMeAdapter;
+import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
 import com.drifting.bureau.mvp.ui.fragment.PlanetaryDisFragment;
-
 import com.drifting.bureau.storageinfo.Preferences;
+import com.drifting.bureau.util.ARCoreUtil;
 import com.drifting.bureau.util.ClickUtil;
+import com.drifting.bureau.util.FileUtil;
 import com.drifting.bureau.util.GlideUtil;
+import com.drifting.bureau.util.NotificationUtil;
 import com.drifting.bureau.util.TextUtil;
 import com.drifting.bureau.util.ToastUtil;
+import com.drifting.bureau.util.downloadutil.DownloadRequest;
+import com.drifting.bureau.util.manager.NotificationManager;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.jess.arms.base.BaseActivity;
-
 import com.jess.arms.di.component.AppComponent;
-
-import com.drifting.bureau.mvp.contract.AboutMeContract;
-import com.drifting.bureau.mvp.presenter.AboutMePresenter;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -128,12 +131,12 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
     }
 
     public void initListener() {
-        GlideUtil.create().loadLongImage(this,Preferences.getMascot(),mDrifting);
+        GlideUtil.create().loadLongImage(this, Preferences.getMascot(), mDrifting);
         mRcyList.setLayoutManager(new GridLayoutManager(this, 3));
         aboutMeAdapter = new AboutMeAdapter(new ArrayList<>());
         mRcyList.setAdapter(aboutMeAdapter);
         aboutMeAdapter.setData(getData());
-        if (userInfoEntity!=null &&userInfoEntity.getPlanet()!=null){
+        if (userInfoEntity != null && userInfoEntity.getPlanet() != null) {
             setUserInfo();
         }
     }
@@ -171,7 +174,7 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
     }
 
 
-    @OnClick({R.id.toolbar_back, R.id.iv_right, R.id.tv_select, R.id.tv_explore})
+    @OnClick({R.id.toolbar_back, R.id.iv_right, R.id.tv_select, R.id.tv_explore, R.id.ar_selected})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
@@ -187,9 +190,45 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
                 case R.id.tv_explore: //探索
                     finish();
                     break;
+                case R.id.ar_selected:
+                    if (ARCoreUtil.checkArCoreAvailability(getActivity())) {
+                        startCamrea(userInfoEntity.getPlanet().getAr_url()); //开启AR
+                    }
+                    break;
             }
         }
     }
+
+
+    public void startCamrea(String url) {
+        PermissionDialog.requestCodePermissions(this, new PermissionDialog.PermissionCallBack() {
+            @Override
+            public void onSuccess() {
+                ARActivity.start(AboutMeActivity.this,url,false);
+//                String file = STAR_PATH + FileUtil.getUrlFileName(url);
+//                if (FileUtil.fileIsExists(file)) {
+//                    ARActivity.start(AboutMeActivity.this,file,false);
+//                } else {
+//                    if (NotificationManager.isOpenNotification(AboutMeActivity.this)) {
+//                        DownloadRequest.whith().downloadWithNotification(AboutMeActivity.this, url);
+//                    } else {
+//                        NotificationUtil.showNotificationDialog(AboutMeActivity.this);
+//                    }
+//                }
+            }
+
+            @Override
+            public void onFailure() {
+            }
+
+            @Override
+            public void onAlwaysFailure() {
+                PermissionDialog.showDialog(AboutMeActivity.this, "android.permission.CAMERA");
+            }
+        });
+
+    }
+
 
     @Override
     public void showMessage(@NonNull String message) {
@@ -236,22 +275,22 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
                 //设置边框阴影大小
 //                .setShadowSize(SmartSwipe.dp2px(20, this))
                 //设置监听
-               .addListener(new SimpleSwipeListener(){
-                   @Override
-                   public void onSwipeOpened(SmartSwipeWrapper wrapper, SwipeConsumer consumer, int direction) {
-                       //设置默认滚动到顶部
-                       scrollView.post(() -> {
-                           // TODO Auto-generated method stub
-                           if (type == 1 || type == 2 || type == 3 || type == 8 || type == 11) {
-                               scrollView.fullScroll(ScrollView.FOCUS_UP);
-                           } else if (type == 17 || type == 7 || type == 4 || type == 5 || type == 15) {
-                               scrollView.scrollTo(0, scrollView.getBottom() / 2);
-                           } else {
-                               scrollView.fullScroll(ScrollView.FOCUS_DOWN);
-                           }
-                       });
-                   }
-               })
+                .addListener(new SimpleSwipeListener() {
+                    @Override
+                    public void onSwipeOpened(SmartSwipeWrapper wrapper, SwipeConsumer consumer, int direction) {
+                        //设置默认滚动到顶部
+                        scrollView.post(() -> {
+                            // TODO Auto-generated method stub
+                            if (type == 1 || type == 2 || type == 3 || type == 8 || type == 11) {
+                                scrollView.fullScroll(ScrollView.FOCUS_UP);
+                            } else if (type == 17 || type == 7 || type == 4 || type == 5 || type == 15) {
+                                scrollView.scrollTo(0, scrollView.getBottom() / 2);
+                            } else {
+                                scrollView.fullScroll(ScrollView.FOCUS_DOWN);
+                            }
+                        });
+                    }
+                })
                 //将SwipeConsumer类型转换为DrawerConsumer类型
                 .as(DrawerConsumer.class);
 

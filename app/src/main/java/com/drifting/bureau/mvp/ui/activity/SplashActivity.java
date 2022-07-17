@@ -3,7 +3,6 @@ package com.drifting.bureau.mvp.ui.activity;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,13 +11,9 @@ import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
 import com.drifting.bureau.mvp.ui.activity.user.BuildGuideActivity;
 import com.drifting.bureau.storageinfo.Preferences;
-import com.drifting.bureau.util.AppUtil;
 import com.drifting.bureau.util.RongIMUtil;
-import com.drifting.bureau.util.ToastUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
-
-import java.util.Timer;
 
 import timber.log.Timber;
 

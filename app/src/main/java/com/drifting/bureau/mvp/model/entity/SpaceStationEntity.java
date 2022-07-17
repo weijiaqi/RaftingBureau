@@ -1,7 +1,5 @@
 package com.drifting.bureau.mvp.model.entity;
 
-import java.util.List;
-
 public class SpaceStationEntity {
 
         private Integer business_id;

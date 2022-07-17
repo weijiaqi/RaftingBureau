@@ -105,7 +105,6 @@ public class DateUtil {
     }
 
 
-
     /**
      * unix时间戳转换成yyyy-MM-dd HH:mm
      *
@@ -130,10 +129,6 @@ public class DateUtil {
     }
 
 
-
-
-
-
     /**
      * unix时间戳转换成HH:mm
      *
@@ -156,8 +151,6 @@ public class DateUtil {
             return unixTime;
         }
     }
-
-
 
 
     /**
@@ -292,6 +285,17 @@ public class DateUtil {
     }
 
 
+    //转换成天
+    public static String getDay(int second) {
+        int hour = second / 3600;
+        if (hour<24){
+            return "1";
+        }
+
+        return hour/24+"";
+    }
+
+
     //根据秒数转化为时分秒   00:00:00
     public static String getTime(int second) {
         if (second < 10) {
@@ -347,11 +351,11 @@ public class DateUtil {
         if (second < 60) {
             return "1分钟";
         }
-        if (second<3600){
+        if (second < 3600) {
             int minute = second / 60;
-            return minute+"分钟";
+            return minute + "分钟";
         }
         int hour = second / 3600;
-        return hour+"小时";
+        return hour + "小时";
     }
 }

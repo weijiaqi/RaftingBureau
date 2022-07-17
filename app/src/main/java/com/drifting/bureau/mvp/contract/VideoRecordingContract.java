@@ -1,5 +1,7 @@
 package com.drifting.bureau.mvp.contract;
+
 import android.app.Activity;
+
 import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IView;
 

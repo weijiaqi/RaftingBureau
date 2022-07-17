@@ -1,14 +1,13 @@
 package com.drifting.bureau.di.component;
+
+import com.drifting.bureau.di.module.TeaShopModule;
+import com.drifting.bureau.mvp.contract.TeaShopContract;
+import com.drifting.bureau.mvp.ui.activity.index.TeaShopActivity;
+import com.jess.arms.di.component.AppComponent;
+import com.jess.arms.di.scope.ActivityScope;
+
 import dagger.BindsInstance;
 import dagger.Component;
-
-import com.drifting.bureau.mvp.contract.SpaceMarinesContract;
-import com.drifting.bureau.mvp.contract.TeaShopContract;
-import com.jess.arms.di.component.AppComponent;
-import com.drifting.bureau.di.module.TeaShopModule;
-
-import com.jess.arms.di.scope.ActivityScope;
-import com.drifting.bureau.mvp.ui.activity.index.TeaShopActivity;
 
 /**
  * ================================================
