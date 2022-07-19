@@ -50,7 +50,7 @@ public class TeaShopHolder extends BaseRecyclerHolder {
         TextUtil.setText(mTvShop, listBeanList.get(position).getBusiness_name());
         TextUtil.setText(mTvTime, listBeanList.get(position).getOpening() + "-" + listBeanList.get(position).getOpening_end());
         TextUtil.setText(mTvAddress, listBeanList.get(position).getAddress());
-        TextUtil.setText(mTvDistance, "距离" + StringUtil.distanceFormat(Double.parseDouble(listBeanList.get(position).getDistance())));
+        TextUtil.setText(mTvDistance,  StringUtil.distanceFormat(Double.parseDouble(listBeanList.get(position).getDistance())));
         if (listBeanList.get(position).getOpen_status() == 1) {
             TextUtil.setText(mTvStatus, "营业中");
             mTvStatus.getTextColorBuilder().setTextGradientColors(context.getColor(R.color.color_6c), context.getColor(R.color.color_6d)).intoTextColor();

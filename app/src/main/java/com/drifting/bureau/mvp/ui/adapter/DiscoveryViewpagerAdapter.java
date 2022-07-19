@@ -16,10 +16,11 @@ import com.drifting.bureau.mvp.model.entity.PlanetEntity;
 import com.drifting.bureau.mvp.ui.activity.index.TopicDetailActivity;
 import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.ToastUtil;
+import com.drifting.bureau.util.animator.AnimatorUtil;
 
 import java.util.List;
 
-public class DiscoveryViewpagerAdapter extends PagerAdapter{
+public class DiscoveryViewpagerAdapter extends PagerAdapter {
 
     private List<PlanetEntity> list;
 
@@ -49,12 +50,15 @@ public class DiscoveryViewpagerAdapter extends PagerAdapter{
         TextView textView = view.findViewById(R.id.tv_planet);
         GlideUtil.create().loadLongImage(context, list.get(position % list.size()).getImageUrl(), imageView);
         textView.setText(list.get(position % list.size()).getName());
+
+        AnimatorUtil.floatAnim(view, 1000, (int) (Math.random() * (10 - 4 + 1) + 4));
+
         mRlPlanet.setOnClickListener(v -> {
             if (!textView.getText().toString().equals("传递漂")) {
                 ToastUtil.showToast("暂未开放");
             } else {
-                TopicDetailActivity.start(context,list.get(position % list.size()).getId(),0,false);
-               // DriftingBottleActivity.start(context, list.get(position % list.size()).getId(), textView.getText().toString(), false);
+                TopicDetailActivity.start(context, list.get(position % list.size()).getId(), 0, false);
+                // DriftingBottleActivity.start(context, list.get(position % list.size()).getId(), textView.getText().toString(), false);
             }
         });
         container.addView(view);

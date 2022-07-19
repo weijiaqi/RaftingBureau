@@ -167,6 +167,8 @@ public class Preferences {
         savePassword(password);
     }
 
+
+
     /**
      * 清空所有数据
      */

@@ -63,6 +63,8 @@ public class PaymentInfoPresenter extends BasePresenter<PaymentInfoContract.Mode
                         if (mRootView != null) {
                             if (baseEntity.getCode() == 200) {
                                 mRootView.payOrderSuccess(baseEntity.getData());
+                            }else {
+                                mRootView.showMessage(baseEntity.getMsg());
                             }
                         }
                     }

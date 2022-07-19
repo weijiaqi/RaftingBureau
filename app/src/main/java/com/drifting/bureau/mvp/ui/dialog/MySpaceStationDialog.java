@@ -80,7 +80,7 @@ public class MySpaceStationDialog extends BaseDialog implements View.OnClickList
 
     @Override
     protected float getDialogWith() {
-        return 0.8f;
+        return 1f;
     }
 
     @Override

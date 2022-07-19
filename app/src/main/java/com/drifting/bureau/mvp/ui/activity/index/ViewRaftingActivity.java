@@ -200,8 +200,8 @@ public class ViewRaftingActivity extends BaseActivity<ViewRaftingPresenter> impl
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
                 case R.id.iv_right:   //举报
-                    reportDialog = new ReportDialog(this, id);
-                    reportDialog.show();
+              //      reportDialog = new ReportDialog(this, id);
+                 //   reportDialog.show();
                     break;
                 case R.id.toolbar_back:
                     finish();

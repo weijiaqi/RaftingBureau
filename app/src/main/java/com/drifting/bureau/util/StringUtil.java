@@ -198,9 +198,9 @@ public class StringUtil {
     public static String distanceFormat(double distance) {
         DecimalFormat df = new DecimalFormat("#.00");
         if (distance < 1000) {
-            return "两地距离: " + new Double(distance).intValue() + "m";
+            return  new Double(distance).intValue() + "m";
         } else {
-            return "两地距离: " + df.format(distance / 1000) + "km";
+            return  df.format(distance / 1000) + "km";
         }
     }
 

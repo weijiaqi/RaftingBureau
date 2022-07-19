@@ -24,9 +24,9 @@
             android:textSize="29sp"
             app:fontType="PangMen" />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="211dp"
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="132dp"
             android:background="@drawable/share_data_bg"
@@ -34,9 +34,10 @@
             android:paddingLeft="22dp">
 
             <LinearLayout
+                android:id="@+id/ll_center_top"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="25dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -93,9 +94,11 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_below="@+id/ll_center_top"
+                android:layout_marginTop="15dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -117,8 +120,10 @@
             </LinearLayout>
 
             <LinearLayout
+                android:layout_marginBottom="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
                 android:layout_marginTop="14dp"
                 android:orientation="vertical">
 
@@ -162,7 +167,7 @@
 
                 </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
+        </RelativeLayout>
 
 
         <RelativeLayout

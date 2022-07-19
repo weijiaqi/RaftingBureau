@@ -307,7 +307,7 @@ public class ReleaseDriftingDialog extends BaseDialog implements View.OnClickLis
                 }
                 break;
             case R.id.iv_report://举报
-                reportDialog = new ReportDialog(context, commentDetailsEntity.getMessage_id());
+                reportDialog = new ReportDialog(context, commentDetailsEntity.getMessage_id(),commentDetailsEntity.getComment_id());
                 reportDialog.show();
                 break;
         }

@@ -1,9 +1,11 @@
 package com.drifting.bureau.util;
 
+import android.os.Build;
 import android.text.TextUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -288,11 +290,11 @@ public class DateUtil {
     //转换成天
     public static String getDay(int second) {
         int hour = second / 3600;
-        if (hour<24){
+        if (hour < 24) {
             return "1";
         }
 
-        return hour/24+"";
+        return hour / 24 + "";
     }
 
 
@@ -357,5 +359,28 @@ public class DateUtil {
         }
         int hour = second / 3600;
         return hour + "小时";
+    }
+
+    /**
+     * 比较第一个日期是否大于第二个日期
+     *
+     * @return true-大于;false-不大于
+     */
+    public static boolean localDateIsAfter() {
+        LocalDate date1 = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            date1 = LocalDate.now();
+        }
+        LocalDate date2 = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            date2 = LocalDate.of(2022, 8, 21);
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (date1.isAfter(date2) || date1.equals(date2)) {
+                    return true;
+            }
+        }
+        return false;
     }
 }

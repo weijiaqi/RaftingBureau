@@ -116,21 +116,9 @@ public class DiscoveryTourPresenter extends BasePresenter<DiscoveryTourContract.
                 LocationUtil.getCurrentLocation(new LocationUtil.LocationCallBack() {
                     @Override
                     public void onSuccess(Location location) {
-                        getLoaction(location.getLongitude() + "", location.getLatitude() + "");
-//                        CoordinateConverter converter  = new CoordinateConverter(activity);
-//                        // CoordType.GPS 待转换坐标类型
-//                        converter.from(CoordinateConverter.CoordType.GPS);
-//                        DPoint sourceLatLng=new DPoint();
-//                        sourceLatLng.setLatitude(location.getLatitude());
-//                        sourceLatLng.setLongitude( location.getLongitude());
-//                        try {
-//                            converter.coord(sourceLatLng);
-//                            DPoint desLatLng = converter.convert();
-//                            Log.e("1111111111",desLatLng.getLatitude()+"----------"+ desLatLng.getLongitude());
-//
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                        }
+                        if(location!=null){
+                            getLoaction(location.getLongitude() + "", location.getLatitude() + "");
+                        }
                     }
 
                     @Override

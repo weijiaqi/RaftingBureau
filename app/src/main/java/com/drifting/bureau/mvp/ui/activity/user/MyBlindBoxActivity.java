@@ -45,6 +45,8 @@ import butterknife.OnClick;
 public class MyBlindBoxActivity extends BaseActivity<MyBlindBoxPresenter> implements MyBlindBoxContract.View, XRecyclerView.LoadingListener {
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
+    @BindView(R.id.tv_right)
+    TextView mTvRight;
     @BindView(R.id.rcy_public)
     XRecyclerView mRcyPublic;
     @BindView(R.id.fl_container)
@@ -78,6 +80,8 @@ public class MyBlindBoxActivity extends BaseActivity<MyBlindBoxPresenter> implem
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
         mToolbarTitle.setText("我的盲盒");
+        mTvRight.setVisibility(View.VISIBLE);
+        mTvRight.setText("盲盒记录");
         initListener();
     }
 
@@ -163,12 +167,15 @@ public class MyBlindBoxActivity extends BaseActivity<MyBlindBoxPresenter> implem
         return this;
     }
 
-    @OnClick({R.id.toolbar_back})
+    @OnClick({R.id.toolbar_back,R.id.tv_right})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
                 case R.id.toolbar_back:
                     finish();
+                    break;
+                case R.id.tv_right:  //盲盒记录
+                    BlindBoxRecordActivity.start(this,false);
                     break;
             }
         }

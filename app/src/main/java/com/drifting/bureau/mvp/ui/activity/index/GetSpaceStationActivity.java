@@ -90,7 +90,8 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
     private String skuCode;
     private SpannableStringBuilder passer;
     private PrizepreviewDialog prizepreviewDialog;
-    private int limit=50;
+    private int limit = 50;
+
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, GetSpaceStationActivity.class);
         context.startActivity(intent);
@@ -128,7 +129,7 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
         spaceBarrageAdapter = new SpaceBarrageAdapter(new ArrayList<>());
         if (mPresenter != null) {
             mPresenter.getSpaceList();
-            mPresenter.mysterybox(limit);
+        //    mPresenter.mysterybox(limit);
         }
         setUserComment();
         frame.setOnTouchListener((view, motionEvent) -> mViewPager.onTouchEvent(motionEvent));
@@ -156,7 +157,7 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
             @Override
             public void onClick(View widget) {
                 if (!ClickUtil.isFastClick(widget.getId())) {
-                    ShowWebViewActivity.start(GetSpaceStationActivity.this, 3,false);
+                    ShowWebViewActivity.start(GetSpaceStationActivity.this, 3, false);
                 }
             }
 
@@ -193,7 +194,7 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
     @Override
     public void onGetSpaceList(List<SpaceStationEntity> data) {
         list = data;
-        if (list.size()==1){
+        if (list.size() == 1) {
             list.add(list.get(0));
         }
         setText(0);
@@ -211,7 +212,7 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
 
             @Override
             public void onPageSelected(int position) {
-                  setText(position % list.size());
+                setText(position % list.size());
             }
 
             @Override
@@ -244,7 +245,7 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
         @Override
         public Object instantiateItem(@NonNull ViewGroup container, int position) {
             ImageView iv = new ImageView(getApplication());
-            GlideUtil.create().loadLongImage(GetSpaceStationActivity.this,list.get(position%list.size()).getSmall_image(),iv);
+            GlideUtil.create().loadLongImage(GetSpaceStationActivity.this, list.get(position % list.size()).getSmall_image(), iv);
             container.addView(iv);
             return iv;
         }
@@ -272,7 +273,7 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
     }
 
 
-    @OnClick({R.id.toolbar_back, R.id.tv_buy, R.id.tv_buy_more, R.id.tv_my_blind_box, R.id.tv_prize_preview})
+    @OnClick({R.id.toolbar_back, R.id.tv_buy, R.id.tv_buy_more, R.id.iv_my_blind_box, R.id.iv_prize_preview})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
@@ -283,19 +284,17 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
                     if (list != null) {
                         createOrder(skuCode, "1");
                     }
-
                     break;
                 case R.id.tv_buy_more:
                     createOrder(skuCode, "10");
                     break;
-                case R.id.tv_my_blind_box:  //我的盲盒
-                    MyBlindBoxActivity.start(this, false);
-                    break;
-
-                case R.id.tv_prize_preview:  //奖品预览
+                case R.id.iv_prize_preview:   //奖品预览
                     if (mPresenter != null) {
                         mPresenter.getAwardList();
                     }
+                    break;
+                case R.id.iv_my_blind_box: //我的盲盒
+                    MyBlindBoxActivity.start(this, false);
                     break;
             }
         }

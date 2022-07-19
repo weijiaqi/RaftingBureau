@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,6 +25,7 @@ import com.drifting.bureau.mvp.ui.activity.user.MySpaceStationActivity;
 import com.drifting.bureau.mvp.ui.dialog.ExchangeCodeDialog;
 import com.drifting.bureau.mvp.ui.dialog.HowToPlayDialog;
 import com.drifting.bureau.util.ClickUtil;
+import com.drifting.bureau.util.DateUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
@@ -41,7 +43,8 @@ import butterknife.OnClick;
 public class SpaceCapsuleActivity extends BaseActivity<GetSpaceStationPresenter> implements GetSpaceStationContract.View {
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
-
+    @BindView(R.id.iv_exchange_code)
+    ImageView mIvExchangeCode;
     private HowToPlayDialog howToPlayDialog;
     private ExchangeCodeDialog exchangeCodeDialog;
 
@@ -71,6 +74,11 @@ public class SpaceCapsuleActivity extends BaseActivity<GetSpaceStationPresenter>
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
         mToolbarTitle.setText("空间站");
+        if (DateUtil.localDateIsAfter()) {  //返回true
+            mIvExchangeCode.setVisibility(View.GONE);
+        } else {
+            mIvExchangeCode.setVisibility(View.VISIBLE);
+        }
     }
 
 
@@ -95,10 +103,10 @@ public class SpaceCapsuleActivity extends BaseActivity<GetSpaceStationPresenter>
                     }
                     break;
                 case R.id.iv_exchange_code: //兑换入口
-                    exchangeCodeDialog=new ExchangeCodeDialog(this);
+                    exchangeCodeDialog = new ExchangeCodeDialog(this);
                     exchangeCodeDialog.show();
                     exchangeCodeDialog.setOnContentClickCallback(content -> {
-                        if (mPresenter!=null){
+                        if (mPresenter != null) {
                             mPresenter.spaceexchange(content);
                         }
                     });

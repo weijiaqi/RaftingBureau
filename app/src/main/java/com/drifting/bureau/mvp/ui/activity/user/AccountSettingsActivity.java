@@ -11,18 +11,29 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.drifting.bureau.R;
+import com.drifting.bureau.app.application.RBureauApplication;
+import com.drifting.bureau.data.event.AnswerCompletedEvent;
+
 import com.drifting.bureau.di.component.DaggerAccountSettingsComponent;
 import com.drifting.bureau.mvp.contract.AccountSettingsContract;
 import com.drifting.bureau.mvp.presenter.AccountSettingsPresenter;
 import com.drifting.bureau.mvp.ui.activity.web.ShowWebViewActivity;
+import com.drifting.bureau.mvp.ui.dialog.LogOutDialog;
 import com.drifting.bureau.mvp.ui.dialog.ModifyNicknameDialog;
 import com.drifting.bureau.storageinfo.Preferences;
+import com.drifting.bureau.util.AppUtil;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.LogInOutDataUtil;
+import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.ToastUtil;
+import com.drifting.bureau.util.callback.BaseDataCallBack;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.jess.arms.base.BaseActivity;
+import com.jess.arms.base.BaseDialog;
+import com.jess.arms.base.BaseEntity;
 import com.jess.arms.di.component.AppComponent;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -39,7 +50,10 @@ public class AccountSettingsActivity extends BaseActivity<AccountSettingsPresent
     TextView mToolbarTitle;
     @BindView(R.id.tv_nikename)
     TextView mTvNikename;
+    @BindView(R.id.tv_version_code)
+    TextView mTvVersionCode;
     private ModifyNicknameDialog modifyNicknameDialog;
+    private LogOutDialog logOutDialog;
 
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, AccountSettingsActivity.class);
@@ -66,6 +80,7 @@ public class AccountSettingsActivity extends BaseActivity<AccountSettingsPresent
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
         mToolbarTitle.setText("账户设置");
+        mTvVersionCode.setText("版本号：V" + StringUtil.formatNullString(AppUtil.getVerName(RBureauApplication.getContext())));
         initListener();
     }
 
@@ -81,7 +96,7 @@ public class AccountSettingsActivity extends BaseActivity<AccountSettingsPresent
         });
     }
 
-    @OnClick({R.id.toolbar_back, R.id.rl_nikename, R.id.rl_feedback, R.id.rl_privacy, R.id.rl_register, R.id.tv_exit})
+    @OnClick({R.id.toolbar_back, R.id.rl_nikename, R.id.rl_feedback, R.id.rl_privacy, R.id.rl_register, R.id.tv_exit, R.id.rl_log_out})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
@@ -96,7 +111,6 @@ public class AccountSettingsActivity extends BaseActivity<AccountSettingsPresent
                             mPresenter.setName(content);
                         }
                     });
-
                     break;
                 case R.id.rl_feedback:
                     FeedBackActivity.start(this, false);
@@ -108,17 +122,39 @@ public class AccountSettingsActivity extends BaseActivity<AccountSettingsPresent
                     ShowWebViewActivity.start(this, 2, false);
                     break;
                 case R.id.tv_exit:  //退出
-                    LogInOutDataUtil.successOutClearData();
-                    BuildGuideActivity.start(this, true);
+                    exit(1);
+                    break;
+                case R.id.rl_log_out: //注销账户
+                    logOutDialog = new LogOutDialog(this);
+                    logOutDialog.show();
+                    logOutDialog.setOnClickCallback(type -> {
+                        if (type == LogOutDialog.SELECT_FINISH) {
+                            RequestUtil.create().unregister(entity -> {
+                                if (entity != null && entity.getCode() == 200) {
+                                    exit(2);
+                                }
+                            });
+                        }
+                    });
                     break;
             }
         }
     }
 
 
+    public void exit(int type) {
+        if (type == 1) {
+            LogInOutDataUtil.successOutClearData();
+        } else {
+            LogInOutDataUtil.successOutClearAllData();
+        }
+        BuildGuideActivity.start(this, true);
+    }
+
     @Override
     public void onSetNameSuccess() {
-        getUserInfo();
+        mTvNikename.setText(Preferences.getUserName());
+        EventBus.getDefault().post(new AnswerCompletedEvent());
     }
 
     @Override

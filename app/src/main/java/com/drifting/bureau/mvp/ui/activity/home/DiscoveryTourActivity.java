@@ -91,11 +91,8 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
     ImageView mIvHot;
     @BindView(R.id.vrPanoramaView)
     VrPanoramaView mVRPanoramaView;
-
     private List<PlanetEntity> list;
-
     private AnimatorSet animatorSet;
-
     private Handler handler;
     private boolean isAnmiation = true;
     private int id, user_id, explore_id;
@@ -181,7 +178,6 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
             mPresenter.getLocation(this);
         }
         frame.setOnTouchListener((view, motionEvent) -> viewPager.onTouchEvent(motionEvent));
-        getUserInfo();
     }
 
 
@@ -340,8 +336,8 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
                 super.onAnimationEnd(animation);
                 if (type == 1) {
                     tagetview.setVisibility(View.VISIBLE);
-                    AnimatorUtil.floatAnim(view, 2000, 6f);
-                    AnimatorUtil.floatAnim(tagetview, 2000, 6f);
+                    AnimatorUtil.floatAnim(view, 2000, 6);
+                    AnimatorUtil.floatAnim(tagetview, 2000, 6);
                 } else {
                     tagetview.setVisibility(View.INVISIBLE);
                 }
@@ -360,6 +356,7 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
             viewPager.setOffscreenPageLimit(list.size());
             viewPager.setClipChildren(false);
             viewPager.setPageTransformer(true, new DiscoveryTransformer());
+            getUserInfo();
         }
     }
 
@@ -370,6 +367,8 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
             getUserInfo();
         }
     }
+
+
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void MessageRefreshEvent(MessageRefreshEvent event) {

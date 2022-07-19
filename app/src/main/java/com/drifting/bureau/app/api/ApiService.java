@@ -2,6 +2,7 @@ package com.drifting.bureau.app.api;
 
 
 import com.drifting.bureau.mvp.model.entity.BarrageEntity;
+import com.drifting.bureau.mvp.model.entity.BlindBoxRecordEntity;
 import com.drifting.bureau.mvp.model.entity.BoxOpenEntity;
 import com.drifting.bureau.mvp.model.entity.CommentDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
@@ -585,7 +586,8 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("v/report/commit")
-    Observable<BaseEntity> reportcommit(@Field("message_id") int message_id, @Field("report_type") int report_type, @Field("reason") String reason);
+    Observable<BaseEntity> reportcommit(@Field("message_id") int message_id, @Field("comment_id") int comment_id, @Field("report_type") int report_type, @Field("reason") String reason);
+
 
 
     /**
@@ -733,5 +735,25 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("v/order/sandPayQuery")
     Observable<BaseEntity<SandPayQueryEntity>> sandPayQuery(@Field("sn") String sn);
+
+
+    /**
+     * 盲盒记录列表
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/mysterybox/open/logs")
+    Observable<BaseEntity<BlindBoxRecordEntity>> openlogs(@Field("page") int page, @Field("limit") int limit);
+
+
+
+    /**
+     * 注销
+     *
+     * @return
+     */
+    @GET("v/user/unregister")
+    Observable<BaseEntity> unregister();
 
 }
