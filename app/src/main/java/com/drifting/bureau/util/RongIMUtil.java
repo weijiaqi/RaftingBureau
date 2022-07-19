@@ -34,7 +34,7 @@ public class RongIMUtil {
 
     public void init() {
         // 融云 App Key
-        RongIM.init(RBureauApplication.getInstance(), RBConstant.RONGIM_APPKEY,true);
+        RongIM.init(RBureauApplication.getInstance(), RBConstant.RONGIM_APPKEY, true);
         RongConfigCenter.featureConfig().setKitImageEngine(new GlideKitImageEngine() {
             @Override
             public void loadConversationListPortrait(@NonNull Context context, @NonNull String url, @NonNull ImageView imageView, Conversation conversation) {
@@ -53,24 +53,25 @@ public class RongIMUtil {
     }
 
 
-    public void connect(String token,ConnectListener connectListener){
+    public void connect(String token, ConnectListener connectListener) {
         RongIM.connect(token, new RongIMClient.ConnectCallback() {
             @Override
             public void onSuccess(String userId) {
-                Log.e("RongIM","融云连接成功");
+                Log.e("RongIM", "融云连接成功");
                 UserInfo userInfo = new UserInfo(userId, Preferences.getUserName(), Uri.parse(Preferences.getUserPhoto()));
                 RongUserInfoManager.getInstance().refreshUserInfoCache(userInfo);
-                if (connectListener!=null){
+                if (connectListener != null) {
                     connectListener.onConnectSuccess();
                 }
             }
 
             @Override
             public void onError(RongIMClient.ConnectionErrorCode connectionErrorCode) {
-                if (connectListener!=null){
+                if (connectListener != null) {
                     connectListener.onConnectError();
                 }
             }
+
             @Override
             public void onDatabaseOpened(RongIMClient.DatabaseOpenStatus databaseOpenStatus) {
             }

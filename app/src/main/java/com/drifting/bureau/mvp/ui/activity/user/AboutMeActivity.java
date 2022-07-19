@@ -204,7 +204,7 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
         PermissionDialog.requestCodePermissions(this, new PermissionDialog.PermissionCallBack() {
             @Override
             public void onSuccess() {
-                ARActivity.start(AboutMeActivity.this,url,false);
+                ARActivity.start(AboutMeActivity.this, url, false);
 //                String file = STAR_PATH + FileUtil.getUrlFileName(url);
 //                if (FileUtil.fileIsExists(file)) {
 //                    ARActivity.start(AboutMeActivity.this,file,false);
@@ -312,6 +312,8 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
             });
         }
     }
+
+
 
 
     @Override

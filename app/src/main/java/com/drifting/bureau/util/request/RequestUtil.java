@@ -412,8 +412,8 @@ public class RequestUtil {
     /**
      * 举报
      */
-    public void reportcommit(int message_id, int report_type, String reason, BaseDataCallBack callBack) {
-        ApiProxy.getApiService().reportcommit(message_id, report_type, reason)
+    public void reportcommit(int message_id,int comment_id, int report_type, String reason, BaseDataCallBack callBack) {
+        ApiProxy.getApiService().reportcommit(message_id, comment_id,report_type, reason)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new BaseObserver<BaseEntity>() {
@@ -665,6 +665,37 @@ public class RequestUtil {
                 });
     }
 
+
+
+    /**
+     * 注销
+     */
+    public void unregister(BaseDataCallBack callBack) {
+        ApiProxy.getApiService().unregister()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new BaseObserver<BaseEntity>() {
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+                        mDisposables.put(mRequestCount++, disposable);
+                    }
+
+                    @Override
+                    public void onNext(BaseEntity entity) {
+                        if (callBack != null) {
+                            callBack.getData(entity);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (callBack != null) {
+                            callBack.getData(null);
+                        }
+                    }
+                });
+    }
 
 
     /**

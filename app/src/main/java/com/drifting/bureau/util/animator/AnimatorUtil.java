@@ -13,7 +13,7 @@ public class AnimatorUtil {
     /**
      * @description 上下抖动动画
      */
-    public static void floatAnim(View view, int delay,float value) {
+    public static void floatAnim(View view, int delay,int value) {
         ObjectAnimator translationYAnim = ObjectAnimator.ofFloat(view, TRANSLATION_Y, -value, value, -value);
         translationYAnim.setDuration(delay);
         translationYAnim.setRepeatCount(ValueAnimator.INFINITE);

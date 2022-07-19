@@ -30,4 +30,10 @@ public class LogInOutDataUtil {
         Preferences.clearUserLoginData();
         AppManager.getAppManager().killAll();
     }
+
+    public static void successOutClearAllData() {
+        RongIM.getInstance().logout();
+        Preferences.clear();
+        AppManager.getAppManager().killAll();
+    }
 }

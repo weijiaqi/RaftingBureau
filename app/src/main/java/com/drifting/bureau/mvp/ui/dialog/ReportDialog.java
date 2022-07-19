@@ -21,11 +21,12 @@ public class ReportDialog extends BaseDialog implements View.OnClickListener {
     private EditText mEtReason;
 
     private int type = 0;
-    private int id;
+    private int id,comment_id;
 
-    public ReportDialog(@NonNull Context context, int id) {
+    public ReportDialog(@NonNull Context context, int id,int comment_id) {
         super(context);
         this.id = id;
+        this.comment_id=comment_id;
     }
 
     @Override
@@ -83,7 +84,7 @@ public class ReportDialog extends BaseDialog implements View.OnClickListener {
                     showMessage("请在此处留下举报的原因");
                     return;
                 }
-                RequestUtil.create().reportcommit(id, type, mEtReason.getText().toString(), entity -> {
+                RequestUtil.create().reportcommit(id,comment_id, type, mEtReason.getText().toString(), entity -> {
                     if (entity != null && entity.getCode() == 200) {
                         dismiss();
                         showMessage("提交成功");

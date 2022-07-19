@@ -3,13 +3,15 @@ package com.drifting.bureau.app.application;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
-
 import com.danikula.videocache.HttpProxyCacheServer;
 import com.drifting.bureau.R;
 import com.drifting.bureau.app.RBConstant;
 import com.drifting.bureau.app.api.Api;
+import com.drifting.bureau.mvp.ui.activity.SplashActivity;
+import com.drifting.bureau.mvp.ui.activity.error.CustomErrorActivity;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.FileGenerator;
 import com.drifting.bureau.util.RongIMUtil;
@@ -28,10 +30,13 @@ import com.scwang.smart.refresh.layout.api.RefreshHeader;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.DefaultRefreshFooterCreator;
 import com.scwang.smart.refresh.layout.listener.DefaultRefreshHeaderCreator;
+import com.star.core.BuildConfig;
 import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.Locale;
 
+import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
+import cat.ereza.customactivityoncrash.config.CaocConfig;
 import me.jessyan.autosize.AutoSize;
 import me.jessyan.autosize.AutoSizeConfig;
 import me.jessyan.autosize.onAdaptListener;
@@ -43,6 +48,7 @@ public class RBureauApplication extends Application implements App {
     public static boolean isForeground = false;
     private AppLifecycles mAppDelegate;
     private static Context mContext;
+    private static String TAG = "RBureauApplication";
     private HttpProxyCacheServer proxy;
 
     /**
@@ -92,7 +98,10 @@ public class RBureauApplication extends Application implements App {
         // 初始化 Toast 框架
         ToastUtils.init(this);
         initAutoSize();
+        //bugly异常捕捉
         initBugly();
+        //防止崩溃处理
+        initCrash();
         //融云
         RongIMUtil.getInstance().init();
         //SmartRefreshLayout
@@ -179,6 +188,43 @@ public class RBureauApplication extends Application implements App {
 //                .setAutoAdaptStrategy(new AutoAdaptStrategy())
         ;
     }
+
+
+    public void initCrash() {
+        CaocConfig.Builder.create()
+                .errorDrawable(R.mipmap.icon_logo)
+                .restartActivity(SplashActivity.class)
+                .errorActivity(CustomErrorActivity.class)
+                .eventListener(new CustomEventListener())
+                .apply();
+
+    }
+
+
+    /**
+     * 监听程序崩溃/重启
+     */
+    private static class CustomEventListener implements CustomActivityOnCrash.EventListener {
+        //程序崩溃回调
+        @Override
+        public void onLaunchErrorActivity() {
+            Log.d("huangxiaoguo", "程序崩溃回调");
+        }
+
+        //重启程序时回调
+        @Override
+        public void onRestartAppFromErrorActivity() {
+            Log.d("huangxiaoguo", "重启程序时回调");
+        }
+
+        //在崩溃提示页面关闭程序时回调
+        @Override
+        public void onCloseAppFromErrorActivity() {
+            Log.d("huangxiaoguo", "在崩溃提示页面关闭程序时回调");
+        }
+
+    }
+
 
 
     public static HttpProxyCacheServer getProxy(Context context) {

@@ -23,9 +23,6 @@ public class DiscoveryTransformer  implements ViewPager.PageTransformer{
         view.setPivotY(pageHeight / 2);
         view.setPivotX(pageWidth / 2);
 
-        AnimatorUtil.floatAnim(view,2000,20f);
-
-
         if (position == 0.0f) {
             view.setAlpha(1f);
         } else if (position < -1.0f) {

@@ -39,11 +39,22 @@
 
         <ImageView
             android:id="@+id/iv_right"
-            android:paddingHorizontal="14dp"
-            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_centerVertical="true" />
+            android:layout_centerVertical="true"
+            android:paddingHorizontal="14dp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_centerVertical="true"
+            android:paddingHorizontal="14dp"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            android:textSize="12sp" />
     </RelativeLayout>
 
 
@@ -67,8 +78,8 @@
             android:layout_height="7dp"
             android:layout_alignEnd="@+id/iv_message"
             android:layout_marginTop="11dp"
-            android:visibility="gone"
-            android:src="@drawable/shape_red_circle" />
+            android:src="@drawable/shape_red_circle"
+            android:visibility="gone" />
 
     </RelativeLayout>
 
