@@ -176,9 +176,11 @@
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_account_settings.xml" value="0.25" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_announcement_details.xml" value="0.286231884057971" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_ar_display.xml" value="0.25" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/activity_blind_box_record.xml" value="0.19791666666666666" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_build_guide.xml" value="0.335" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_city_selection.xml" value="0.21" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_claim_planet.xml" value="0.25" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/activity_custom_error.xml" value="0.2421875" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_delivery_details.xml" value="0.165" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_discovery_tour.xml" value="0.21" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_drifting_bottle.xml" value="0.165" />
@@ -204,7 +206,7 @@
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_set_up.xml" value="0.2644927536231884" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_show_web.xml" value="0.335" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_sign_login_hint.xml" value="0.2644927536231884" />
-        <entry key="..\:/Drifting/app/src/main/res/layout/activity_space_capsule.xml" value="0.25" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/activity_space_capsule.xml" value="0.19114583333333332" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_space_marines.xml" value="0.25" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_splash.xml" value="0.33" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_tea_shop.xml" value="0.25" />
@@ -225,6 +227,7 @@
         <entry key="..\:/Drifting/app/src/main/res/layout/dialog_exchange_code.xml" value="0.26811594202898553" />
         <entry key="..\:/Drifting/app/src/main/res/layout/dialog_how_to_play.xml" value="0.25" />
         <entry key="..\:/Drifting/app/src/main/res/layout/dialog_loading.xml" value="0.12771739130434784" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/dialog_log_out.xml" value="0.2869791666666667" />
         <entry key="..\:/Drifting/app/src/main/res/layout/dialog_make_schedule.xml" value="0.14356884057971014" />
         <entry key="..\:/Drifting/app/src/main/res/layout/dialog_making_tea.xml" value="0.3177083333333333" />
         <entry key="..\:/Drifting/app/src/main/res/layout/dialog_modify_nikename.xml" value="0.25" />
@@ -240,7 +243,7 @@
         <entry key="..\:/Drifting/app/src/main/res/layout/dialog_repor.xml" value="0.26614583333333336" />
         <entry key="..\:/Drifting/app/src/main/res/layout/dialog_report.xml" value="0.26614583333333336" />
         <entry key="..\:/Drifting/app/src/main/res/layout/dialog_select_order.xml" value="0.25" />
-        <entry key="..\:/Drifting/app/src/main/res/layout/dialog_share.xml" value="0.22" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/dialog_share.xml" value="0.33" />
         <entry key="..\:/Drifting/app/src/main/res/layout/dialog_space_station_upgrade.xml" value="0.3177083333333333" />
         <entry key="..\:/Drifting/app/src/main/res/layout/dialog_version_update.xml" value="0.3188405797101449" />
         <entry key="..\:/Drifting/app/src/main/res/layout/dialog_voice_play.xml" value="0.3088768115942029" />
@@ -263,6 +266,7 @@
         <entry key="..\:/Drifting/app/src/main/res/layout/item_about_me.xml" value="0.25" />
         <entry key="..\:/Drifting/app/src/main/res/layout/item_answer.xml" value="0.25" />
         <entry key="..\:/Drifting/app/src/main/res/layout/item_blind_box.xml" value="0.12635869565217392" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/item_blind_box_record.xml" value="0.30434782608695654" />
         <entry key="..\:/Drifting/app/src/main/res/layout/item_city_list.xml" value="0.10872855701311807" />
         <entry key="..\:/Drifting/app/src/main/res/layout/item_conversationlist.xml" value="0.31567028985507245" />
         <entry key="..\:/Drifting/app/src/main/res/layout/item_delivery_details.xml" value="0.30842391304347827" />
