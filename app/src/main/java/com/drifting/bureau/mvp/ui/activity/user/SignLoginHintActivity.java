@@ -107,7 +107,7 @@ public class SignLoginHintActivity extends BaseActivity<SignLoginPresenter> impl
 
             @Override
             public void onConnectError() {
-                ToastUtil.showToast("会话消息故障!");
+               // ToastUtil.showToast("会话消息故障!");
                 DiscoveryTourActivity.start(SignLoginHintActivity.this,true);
             }
         });
