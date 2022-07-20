@@ -132,7 +132,7 @@ public class MessageCenterActivity extends BaseActivity<MessageCenterPresenter> 
         mTabTitle = new ArrayList();
         mTabTitle.clear();
         RequestUtil.create().unread(entity -> {
-            if (entity.getCode() == 200) {
+            if (entity != null && entity.getCode() == 200) {
                 Sys_msg = entity.getData().getSys_msg();
                 mTabTitle.add(new MessageCenterEntity(1, "星际会话", false));
                 mTabTitle.add(new MessageCenterEntity(2, "接收电波", entity.getData().getSys_msg() == 0 ? false : true));

@@ -35,5 +35,6 @@ public class LogInOutDataUtil {
         RongIM.getInstance().logout();
         Preferences.clear();
         AppManager.getAppManager().killAll();
+
     }
 }

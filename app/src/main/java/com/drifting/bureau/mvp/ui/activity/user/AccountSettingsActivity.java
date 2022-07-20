@@ -17,7 +17,9 @@ import com.drifting.bureau.data.event.AnswerCompletedEvent;
 import com.drifting.bureau.di.component.DaggerAccountSettingsComponent;
 import com.drifting.bureau.mvp.contract.AccountSettingsContract;
 import com.drifting.bureau.mvp.presenter.AccountSettingsPresenter;
+import com.drifting.bureau.mvp.ui.activity.SplashActivity;
 import com.drifting.bureau.mvp.ui.activity.web.ShowWebViewActivity;
+import com.drifting.bureau.mvp.ui.dialog.CurrencyDialog;
 import com.drifting.bureau.mvp.ui.dialog.LogOutDialog;
 import com.drifting.bureau.mvp.ui.dialog.ModifyNicknameDialog;
 import com.drifting.bureau.storageinfo.Preferences;
@@ -37,6 +39,8 @@ import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
+import cat.ereza.customactivityoncrash.config.CaocConfig;
 
 
 /**
@@ -54,6 +58,9 @@ public class AccountSettingsActivity extends BaseActivity<AccountSettingsPresent
     TextView mTvVersionCode;
     private ModifyNicknameDialog modifyNicknameDialog;
     private LogOutDialog logOutDialog;
+    private int clickCount = 0;
+
+    private CurrencyDialog currencyDialog;
 
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, AccountSettingsActivity.class);
@@ -82,6 +89,38 @@ public class AccountSettingsActivity extends BaseActivity<AccountSettingsPresent
         mToolbarTitle.setText("账户设置");
         mTvVersionCode.setText("版本号：V" + StringUtil.formatNullString(AppUtil.getVerName(RBureauApplication.getContext())));
         initListener();
+
+        mTvVersionCode.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                if (clickCount == 3) {
+                    currencyDialog = new CurrencyDialog(AccountSettingsActivity.this);
+                    currencyDialog.show();
+                    currencyDialog.setTitleText("环境切换");
+                    currencyDialog.setText("正式环境", "测试环境");
+                    currencyDialog.setOnClickCallback(type -> {
+                        if (type == CurrencyDialog.SELECT_CANCEL) {
+                            //正式环境
+                            Preferences.saveTestState(false);
+                        }
+
+                        if (type == CurrencyDialog.SELECT_FINISH) {
+                            //测试环境
+                            Preferences.saveTestState(true);
+                        }
+
+                        Preferences.clearUserLoginData();
+
+                        //重启App
+                        CaocConfig config = new CaocConfig();
+                        config.setRestartActivityClass(SplashActivity.class);
+                        CustomActivityOnCrash.restartApplication(AccountSettingsActivity.this, config);
+                    });
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     public void initListener() {
@@ -96,7 +135,7 @@ public class AccountSettingsActivity extends BaseActivity<AccountSettingsPresent
         });
     }
 
-    @OnClick({R.id.toolbar_back, R.id.rl_nikename, R.id.rl_feedback, R.id.rl_privacy, R.id.rl_register, R.id.tv_exit, R.id.rl_log_out})
+    @OnClick({R.id.toolbar_back, R.id.rl_nikename, R.id.rl_feedback, R.id.rl_privacy, R.id.rl_register, R.id.tv_exit, R.id.rl_log_out, R.id.tv_version_code})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
@@ -137,6 +176,10 @@ public class AccountSettingsActivity extends BaseActivity<AccountSettingsPresent
                         }
                     });
                     break;
+                case R.id.tv_version_code:
+                    clickCount++;
+                    break;
+
             }
         }
     }

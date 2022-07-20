@@ -102,13 +102,13 @@ public class SignLoginHintActivity extends BaseActivity<SignLoginPresenter> impl
             @Override
             public void onConnectSuccess() {
                 showMessage("登录成功");
-                DiscoveryTourActivity.start(SignLoginHintActivity.this,true);
+                DiscoveryTourActivity.start(SignLoginHintActivity.this, true);
             }
 
             @Override
             public void onConnectError() {
-                ToastUtil.showToast("会话消息故障!");
-                DiscoveryTourActivity.start(SignLoginHintActivity.this,true);
+                //ToastUtil.showToast("会话消息故障!");
+                DiscoveryTourActivity.start(SignLoginHintActivity.this, true);
             }
         });
     }
