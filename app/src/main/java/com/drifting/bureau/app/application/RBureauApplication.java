@@ -13,6 +13,7 @@ import com.drifting.bureau.app.api.Api;
 import com.drifting.bureau.mvp.ui.activity.SplashActivity;
 import com.drifting.bureau.mvp.ui.activity.error.CustomErrorActivity;
 import com.drifting.bureau.storageinfo.Preferences;
+import com.drifting.bureau.util.AppUtil;
 import com.drifting.bureau.util.FileGenerator;
 import com.drifting.bureau.util.RongIMUtil;
 import com.hjq.toast.ToastUtils;
@@ -32,6 +33,7 @@ import com.scwang.smart.refresh.layout.listener.DefaultRefreshFooterCreator;
 import com.scwang.smart.refresh.layout.listener.DefaultRefreshHeaderCreator;
 import com.star.core.BuildConfig;
 import com.tencent.bugly.crashreport.CrashReport;
+import com.umeng.commonsdk.UMConfigure;
 
 import java.util.Locale;
 
@@ -121,6 +123,9 @@ public class RBureauApplication extends Application implements App {
                 return new ClassicsFooter(context).setDrawableSize(20);
             }
         });
+
+        //友盟
+        UMConfigure.init(this, RBConstant.UM_INIT_APPKEY, AppUtil.getChannel(getApplicationContext()),UMConfigure.DEVICE_TYPE_PHONE, "");
     }
 
 

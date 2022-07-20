@@ -169,4 +169,8 @@ dependencies {
 
     //崩溃跳转
     implementation 'cat.ereza:customactivityoncrash:2.4.0'
+
+    // 友盟统计SDK
+    implementation  'com.umeng.umsdk:common:9.4.7'// 必选
+    implementation  'com.umeng.umsdk:asms:1.4.0'// 必选
 }

@@ -3,6 +3,7 @@ package com.drifting.bureau.util;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.text.TextUtils;
 
 import com.drifting.bureau.app.application.RBureauApplication;
 
@@ -62,6 +63,24 @@ public class AppUtil {
         }
 
         return false;
+    }
+
+
+    /**
+     * 获取腾讯打包工具生成的渠道信息，直接运行或无渠道信息默认
+     *
+     * @param context
+     * @return
+     */
+    public static String getChannel(Context context) {
+        String channelName = SubChannelUtil.getChannel(context);
+        if (!TextUtils.isEmpty(channelName)) {
+            return channelName;
+        }
+        if (TextUtils.isEmpty(channelName)) {
+            channelName = "a_drifting_user";
+        }
+        return channelName;
     }
 
 

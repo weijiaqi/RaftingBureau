@@ -307,7 +307,7 @@ public class ReleaseDriftingDialog extends BaseDialog implements View.OnClickLis
                 }
                 break;
             case R.id.iv_report://举报
-                reportDialog = new ReportDialog(context, commentDetailsEntity.getMessage_id(),commentDetailsEntity.getComment_id());
+                reportDialog = new ReportDialog(context, commentDetailsEntity.getMessage_id(), commentDetailsEntity.getComment_id());
                 reportDialog.show();
                 break;
         }
@@ -352,13 +352,12 @@ public class ReleaseDriftingDialog extends BaseDialog implements View.OnClickLis
         path = route;
         deleteVoice();  //删除语音
         mRlVideoPlay.setVisibility(View.VISIBLE);
-        if (type == 1) {
+        if (type == 1) {//视频
             mIvVideoPlay.setVisibility(View.VISIBLE);
-            cover = BitmapUtil.createVideoThumbnail(path, MediaStore.Images.Thumbnails.MINI_KIND);
+            cover = BitmapUtil.createVideoThumbnail(context, path);
         } else {
             mIvVideoPlay.setVisibility(View.GONE);
             cover = BitmapUtil.openImage(path);
-
             Luban.with(context).load(path).ignoreBy(100)
                     .filter(path -> !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif")))
                     .setCompressListener(new OnCompressListener() {

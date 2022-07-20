@@ -60,14 +60,18 @@ public class PaymentInfoActivity extends BaseActivity<PaymentInfoPresenter> impl
     private static final String EXRA_TYPE = "exra_type";
     private static final String EXRA_SN = "exra_sn";
     private static final String EXRA_TOTAL = "exra_total";
+    private static final String EXRA_TOTAL_TIME = "exra_total_time";
     private String sn, total;
     private int type;
+    private long totaltime;
+    private long curTime;
 
-    public static void start(Context context, int type, String sn, String tatal, boolean closePage) {
+    public static void start(Context context, int type, String sn, String tatal, long totaltime, boolean closePage) {
         Intent intent = new Intent(context, PaymentInfoActivity.class);
         intent.putExtra(EXRA_TYPE, type);
         intent.putExtra(EXRA_SN, sn);
         intent.putExtra(EXRA_TOTAL, tatal);
+        intent.putExtra(EXRA_TOTAL_TIME, totaltime);
         context.startActivity(intent);
         if (closePage) ((Activity) context).finish();
     }
@@ -95,6 +99,7 @@ public class PaymentInfoActivity extends BaseActivity<PaymentInfoPresenter> impl
             type = getIntent().getIntExtra(EXRA_TYPE, 0);
             sn = getIntent().getStringExtra(EXRA_SN);
             total = getIntent().getStringExtra(EXRA_TOTAL);
+            totaltime = getIntent().getLongExtra(EXRA_TOTAL_TIME, 0);
         }
         initListener();
     }
@@ -103,7 +108,11 @@ public class PaymentInfoActivity extends BaseActivity<PaymentInfoPresenter> impl
         mTvPrice.setText(total);
         //   mViewLine.setBackgroundColor(getColor(R.color.color_33));
         mTvClockview.setType(1);
-        long curTime = System.currentTimeMillis() + 1000 * 60 * 15;
+        if (type == 4) {
+            curTime = totaltime*1000+ System.currentTimeMillis();
+        } else {
+            curTime = System.currentTimeMillis() + 1000 * 60 * 15;
+        }
         mTvClockview.setEndTime(curTime);
     }
 

@@ -37,7 +37,7 @@
                 android:id="@+id/ll_center_top"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="20dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -120,11 +120,10 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginBottom="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_marginTop="14dp"
+                android:layout_marginBottom="20dp"
                 android:orientation="vertical">
 
                 <TextView

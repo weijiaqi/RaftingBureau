@@ -157,7 +157,7 @@ public class OrderRecordEntity {
         public static class OrderSubBean {
             private Integer business_id;
             private String sku_code;
-            private Integer money;
+            private String money;
             private Integer order_sub_id;
             private String sku_name;
             private Integer goods_num;
@@ -195,11 +195,11 @@ public class OrderRecordEntity {
                 this.sku_code = sku_code;
             }
 
-            public Integer getMoney() {
+            public String getMoney() {
                 return money;
             }
 
-            public void setMoney(Integer money) {
+            public void setMoney(String money) {
                 this.money = money;
             }
 

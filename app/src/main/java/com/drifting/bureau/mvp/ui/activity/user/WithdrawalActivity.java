@@ -98,18 +98,18 @@ public class WithdrawalActivity extends BaseActivity<WithdrawalPresenter> implem
                     break;
                 case R.id.tv_withdrawal:  //提现
                     if (StringUtil.isEmpty(mEtAccount.getText().toString())) {
-                        showMessage("请输入支付宝账号!");
+                        showMessage("请输入银行卡号!");
                         return;
                     }
                     if (StringUtil.isEmpty(mEtName.getText().toString())) {
-                        showMessage("请输入支付宝实名认证的姓名!");
+                        showMessage("请输入银行账户的实名信息!");
                         return;
                     }
                     if (StringUtil.isEmpty(mEtMoney.getText().toString())) {
                         showMessage("请输入需要提现的金额!");
                         return;
                     }
-                    if (Double.parseDouble(mEtMoney.getText().toString()) == 0 || Double.parseDouble(mEtMoney.getText().toString()) > Double.parseDouble(money)) {
+                    if (Double.parseDouble(mEtMoney.getText().toString()) == 0) {
                         showMessage("请输入正确的提现金额!");
                         return;
                     }

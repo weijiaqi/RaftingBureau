@@ -292,7 +292,7 @@ public class ViewRaftingActivity extends BaseActivity<ViewRaftingPresenter> impl
     @Override
     public void onCreateOrderSuccess(CreateOrderEntity entity) {
         if (entity != null) {
-            PaymentInfoActivity.start(this, 3, entity.getSn(), entity.getTotal_amount(), false);
+            PaymentInfoActivity.start(this, 3, entity.getSn(), entity.getTotal_amount(), 0,false);
         }
     }
 

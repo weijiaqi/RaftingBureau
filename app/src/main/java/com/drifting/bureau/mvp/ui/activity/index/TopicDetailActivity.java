@@ -223,7 +223,7 @@ public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> impl
                                     if (mPresenter != null) {
                                         showLoading();
                                         if (type == 1) { //视频
-                                            mPresenter.compressVideo(TopicDetailActivity.this,type, explore_id, word, 0, path, list != null ? new File(list.get(0).toString()) : null, cover != null ? BitmapUtil.saveBitmapFile(getActivity(), cover) : null);
+                                            mPresenter.compressVideo(TopicDetailActivity.this, type, explore_id, word, 0, path, list != null ? new File(list.get(0).toString()) : null, cover != null ? BitmapUtil.saveBitmapFile(getActivity(), cover) : null);
                                         } else {
                                             mPresenter.createwithword(type, explore_id, word, 0, path != null ? new File(path) : null, list != null ? new File(list.get(0).toString()) : null, cover != null ? BitmapUtil.saveBitmapFile(getActivity(), cover) : null);
                                         }
@@ -385,7 +385,7 @@ public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> impl
     @Override
     public void onCreateOrderSuccess(CreateOrderEntity entity) {
         if (entity != null) {
-            PaymentInfoActivity.start(this, 1, entity.getSn(), entity.getTotal_amount(), false);
+            PaymentInfoActivity.start(this, 1, entity.getSn(), entity.getTotal_amount(), 0,false);
         }
     }
 
