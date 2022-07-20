@@ -61,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="29dp"
-                android:text="支付宝账号"
+                android:text="银行账户"
                 android:textColor="@color/color_00"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -72,7 +72,7 @@
                 android:layout_height="34dp"
                 android:layout_marginTop="10dp"
                 android:background="@null"
-                android:hint="请输入支付宝账号"
+                android:hint="请输入银行卡号"
                 android:paddingLeft="11dp"
                 android:text=""
                 android:textColor="@color/color_00"
@@ -85,7 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="19dp"
-                android:text="支付宝实名名称"
+                android:text="账户姓名"
                 android:textColor="@color/color_00"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -96,7 +96,7 @@
                 android:layout_height="34dp"
                 android:layout_marginTop="10dp"
                 android:background="@null"
-                android:hint="请输入支付宝实名认证的姓名"
+                android:hint="请输入银行账户的实名信息"
                 android:paddingLeft="11dp"
                 android:text=""
                 android:textColor="@color/color_00"
@@ -129,10 +129,10 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:hint="请输入需要提现的金额"
+                    android:hint="最低提现金额为100元"
+                    android:inputType="number|numberDecimal"
                     android:paddingLeft="11dp"
                     android:text=""
-                    android:inputType="number|numberDecimal"
                     android:textColor="@color/color_00"
                     android:textCursorDrawable="@drawable/text_cursor"
                     android:textSize="11sp" />
@@ -176,6 +176,5 @@
             app:shape_radius="100dp"
             app:shape_startColor="@color/color_6c" />
     </LinearLayout>
-
 
 </RelativeLayout>

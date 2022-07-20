@@ -352,7 +352,7 @@ public class PostDriftingFragment extends BaseFragment<PostDriftingPresenter> im
     @Override
     public void onCreateOrderSuccess(CreateOrderEntity entity) {
         if (entity != null) {
-            PaymentInfoActivity.start(mContext, 1, entity.getSn(), entity.getTotal_amount(), false);
+            PaymentInfoActivity.start(mContext, 1, entity.getSn(), entity.getTotal_amount(), 0,false);
         }
     }
 

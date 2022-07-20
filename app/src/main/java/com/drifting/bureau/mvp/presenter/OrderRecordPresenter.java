@@ -33,7 +33,7 @@ import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
  * ================================================
  */
 @ActivityScope
-public class OrderRecordPresenter extends BasePresenter<OrderRecordContract.Model, OrderRecordContract.View>{
+public class OrderRecordPresenter extends BasePresenter<OrderRecordContract.Model, OrderRecordContract.View> {
     @Inject
     RxErrorHandler mErrorHandler;
     @Inject
@@ -44,7 +44,7 @@ public class OrderRecordPresenter extends BasePresenter<OrderRecordContract.Mode
     AppManager mAppManager;
 
     @Inject
-    public OrderRecordPresenter (OrderRecordContract.Model model, OrderRecordContract.View rootView) {
+    public OrderRecordPresenter(OrderRecordContract.Model model, OrderRecordContract.View rootView) {
         super(model, rootView);
     }
 

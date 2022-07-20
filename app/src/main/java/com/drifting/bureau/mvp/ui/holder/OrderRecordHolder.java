@@ -52,6 +52,7 @@ public class OrderRecordHolder extends BaseRecyclerHolder {
     private WriteOffCodeDialog writeOffCodeDialog;
     private Context context;
     private OrderListAdapter orderListAdapter;
+    private long Remaining_time;
 
     public OrderRecordHolder(View itemView) {
         super(itemView);
@@ -64,10 +65,7 @@ public class OrderRecordHolder extends BaseRecyclerHolder {
     public void setData(@NonNull List<OrderRecordEntity.ListBean> listBeanList, int position) {
 
         TextUtil.setText(mTvTime, "订单时间：" + DateUtil.unxiToDateYMDHM(listBeanList.get(position).getCreated_at_int() + ""));
-
         orderListAdapter.setData(listBeanList.get(position).getOrder_sub());
-
-
         if (listBeanList.get(position).getPlatform_gift() == 1) { //是平台赠送
             mTvStatus.getTextColorBuilder().setTextColor(context.getColor(R.color.color_ff)).intoTextColor();
             mTvStatus.setText("平台赠送");
@@ -93,6 +91,11 @@ public class OrderRecordHolder extends BaseRecyclerHolder {
                         @Override
                         public void timeEnd() {
                             EventBus.getDefault().post(new OrderRecordEvent());
+                        }
+
+                        @Override
+                        public void timeRemaining(long time) {
+                            Remaining_time=time;
                         }
 
                         @Override
@@ -137,7 +140,7 @@ public class OrderRecordHolder extends BaseRecyclerHolder {
         TextUtil.setText(mTvPrice, "￥" + listBeanList.get(position).getMoney());
         mTvWriteOff.setOnClickListener(v -> {
             if (listBeanList.get(position).getStatus() == 0) {  //未支付
-                PaymentInfoActivity.start(context, 4, listBeanList.get(position).getSn(), listBeanList.get(position).getMoney(), false);
+                PaymentInfoActivity.start(context, 4, listBeanList.get(position).getSn(), listBeanList.get(position).getMoney(), Remaining_time, false);
             } else {
                 if (listBeanList.get(position).getWrite_off() != 1) {
                     RequestUtil.create().writeOffInfo(listBeanList.get(position).getOrder_id(), entity -> {

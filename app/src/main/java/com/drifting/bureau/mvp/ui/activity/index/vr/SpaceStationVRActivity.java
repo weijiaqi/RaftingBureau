@@ -61,12 +61,10 @@ public class SpaceStationVRActivity extends BaseActivity {
         if (getIntent() != null) {
             arurl = getIntent().getStringExtra(AR_URL);
         }
-
-
-        mVRPanoramaView.setInfoButtonEnabled(false);//隐藏信息按钮
-        mVRPanoramaView.setStereoModeButtonEnabled(false);//隐藏cardboard按钮
-        mVRPanoramaView.setFullscreenButtonEnabled(false);//隐藏全屏按钮
-
+        mVRPanoramaView.setTouchTrackingEnabled(true);
+        mVRPanoramaView.setFullscreenButtonEnabled(false);
+        mVRPanoramaView.setInfoButtonEnabled(false);
+        mVRPanoramaView.setStereoModeButtonEnabled(false);
 
         new AsyncTask<Void, Void, Bitmap>() {
             @Override
@@ -76,7 +74,7 @@ public class SpaceStationVRActivity extends BaseActivity {
                     bitmap = Glide.with(SpaceStationVRActivity.this)
                             .asBitmap()
                             .load(arurl)
-                            .submit(360, 480).get();
+                            .submit(1080, 1920).get();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

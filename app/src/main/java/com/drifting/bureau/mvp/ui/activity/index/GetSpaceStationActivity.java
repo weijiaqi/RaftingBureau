@@ -314,7 +314,7 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
 
     @Override
     public void onCreateOrderSpaceSuccess(CreateOrderEntity entity) {
-        PaymentInfoActivity.start(this, 2, entity.getSn(), entity.getTotal_amount(), false);
+        PaymentInfoActivity.start(this, 2, entity.getSn(), entity.getTotal_amount(), 0,false);
     }
 
     @Override

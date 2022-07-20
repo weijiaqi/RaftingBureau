@@ -9,9 +9,12 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.media.MediaMetadataRetriever;
+import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.view.View;
+
+import com.jess.arms.utils.ArmsUtils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -52,7 +55,7 @@ public class BitmapUtil {
      * @param
      * @return
      */
-    public static Bitmap createVideoThumbnail(String filePath, int kind) {
+    public static Bitmap createVideoThumbnail(Context context, String filePath) {
         Bitmap bitmap = null;
         MediaMetadataRetriever retriever = new MediaMetadataRetriever();
         try {
@@ -83,34 +86,13 @@ public class BitmapUtil {
             return null;
         }
 
-        if (kind == MediaStore.Images.Thumbnails.MINI_KIND) {
-            bitmap = compressImage(bitmap);
-        }
-
+        //缩放法压缩
+        Matrix matrix=new Matrix();
+        matrix.setScale(0.5f,0.5f);
+        bitmap=Bitmap.createBitmap(bitmap,0,0,bitmap.getWidth(),bitmap.getHeight(),matrix,true);
         return bitmap;
     }
 
-    /**
-     * 质量压缩方法
-     *
-     * @param image
-     * @return
-     */
-    public static Bitmap compressImage(Bitmap image) {
-
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.JPEG, 50, baos);// 质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
-        int options = 100;
-
-        while (baos.toByteArray().length / 1024 > 100) { // 循环判断如果压缩后图片是否大于100kb,大于继续压缩
-            baos.reset(); // 重置baos即清空baos
-            image.compress(Bitmap.CompressFormat.JPEG, options, baos);// 这里压缩options%，把压缩后的数据存放到baos中
-            options -= 10;// 每次都减少10
-        }
-        ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());// 把压缩后的数据baos存放到ByteArrayInputStream中
-        Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);// 把ByteArrayInputStream数据生成图片
-        return bitmap;
-    }
 
     /**
      * 把batmap 转file

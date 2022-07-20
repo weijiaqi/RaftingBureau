@@ -49,6 +49,7 @@ import com.drifting.bureau.view.DiscoveryTransformer;
 import com.google.vr.sdk.widgets.pano.VrPanoramaView;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
+import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -369,7 +370,6 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
     }
 
 
-
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void MessageRefreshEvent(MessageRefreshEvent event) {
         if (event != null) {
@@ -413,6 +413,8 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
 
     @Override
     public void finishSuccess() {
+        // 友盟统计退出
+        MobclickAgent.onKillProcess(this);
         finish();
     }
 

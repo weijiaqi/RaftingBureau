@@ -7,6 +7,8 @@ buildscript {
     repositories {
         google()
         maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+        //友盟
+        maven { url 'https://repo1.maven.org/maven2/' }
     }
     dependencies {
         classpath "com.android.tools.build:gradle:7.0.2"
@@ -35,6 +37,8 @@ allprojects {
         maven { url "https://jitpack.io" }
         //融云 maven 仓库地址
         maven {url "https://maven.rongcloud.cn/repository/maven-releases/"}
+        //友盟
+        maven { url 'https://repo1.maven.org/maven2/' }
     }
 }
 

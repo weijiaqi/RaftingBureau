@@ -75,6 +75,8 @@ public class ClockView extends TextView {
                     setTextContent();
                 } else {
                     setText(dealTime(distanceTime));
+                    if (null != mClockListener)
+                        mClockListener.timeRemaining(distanceTime);
                 }
                 invalidate();
                 long now = SystemClock.uptimeMillis();
@@ -158,6 +160,8 @@ public class ClockView extends TextView {
 
     public interface ClockListener {
         void timeEnd();
+
+        void timeRemaining(long time);
 
         void remainFiveMinutes();
     }
