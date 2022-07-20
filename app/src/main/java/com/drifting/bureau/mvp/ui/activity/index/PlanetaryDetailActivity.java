@@ -6,6 +6,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +25,7 @@ import com.drifting.bureau.mvp.contract.PlanetaryDetailContract;
 import com.drifting.bureau.mvp.model.entity.PlanetaryDetailEntity;
 import com.drifting.bureau.mvp.presenter.PlanetaryDetailPresenter;
 import com.drifting.bureau.mvp.ui.activity.index.ar.ARActivity;
+import com.drifting.bureau.mvp.ui.activity.user.AboutMeActivity;
 import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
 import com.drifting.bureau.util.ARCoreUtil;
 import com.drifting.bureau.util.ClickUtil;
@@ -35,6 +39,8 @@ import com.jess.arms.di.component.AppComponent;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -256,22 +262,23 @@ public class PlanetaryDetailActivity extends BaseActivity<PlanetaryDetailPresent
         PermissionDialog.requestCodePermissions(this, new PermissionDialog.PermissionCallBack() {
             @Override
             public void onSuccess() {
-                ARActivity.start(PlanetaryDetailActivity.this, url, false);
+                String file = STAR_PATH + FileUtil.getUrlFileName(url);
+                if (FileUtil.fileIsExists(file)) {
+                    FileUtil.getNetworkFileSize(url, new Handler(Looper.myLooper()) {
+                        @Override
+                        public void handleMessage(Message msg) {
+                            int fileSize = msg.getData().getInt("fileSize");
+                            if (fileSize == new File(file).length()) {
+                                ARActivity.start(PlanetaryDetailActivity.this, file, false);
+                            } else {
+                                showNotificationDialog(url);
+                            }
+                        }
+                    });
+                } else {
+                    showNotificationDialog(url);
+                }
 
-//                String file = STAR_PATH + FileUtil.getUrlFileName(url);
-//                if (FileUtil.fileIsExists(file)) {
-//                    if (!ISFinsh) {
-//                        ARActivity.start(PlanetaryDetailActivity.this, file, false);
-//                    } else {
-//                        ToastUtil.showToast("正在下载中,请等待...");
-//                    }
-//                } else {
-//                    if (NotificationManager.isOpenNotification(PlanetaryDetailActivity.this)) {
-//                        DownloadRequest.whith().downloadWithNotification(PlanetaryDetailActivity.this, url);
-//                    } else {
-//                        NotificationUtil.showNotificationDialog(PlanetaryDetailActivity.this);
-//                    }
-//                }
             }
 
             @Override
@@ -283,9 +290,15 @@ public class PlanetaryDetailActivity extends BaseActivity<PlanetaryDetailPresent
                 PermissionDialog.showDialog(PlanetaryDetailActivity.this, "android.permission.CAMERA");
             }
         });
-
     }
 
+    public void showNotificationDialog(String url) {
+        if (NotificationManager.isOpenNotification(PlanetaryDetailActivity.this)) {
+            DownloadRequest.whith().downloadWithNotification(PlanetaryDetailActivity.this, url);
+        } else {
+            NotificationUtil.showNotificationDialog(PlanetaryDetailActivity.this);
+        }
+    }
 
     @Override
     public void showMessage(@NonNull String message) {

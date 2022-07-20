@@ -6,6 +6,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +61,7 @@ import com.jess.arms.di.component.AppComponent;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -204,17 +209,23 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
         PermissionDialog.requestCodePermissions(this, new PermissionDialog.PermissionCallBack() {
             @Override
             public void onSuccess() {
-                ARActivity.start(AboutMeActivity.this, url, false);
-//                String file = STAR_PATH + FileUtil.getUrlFileName(url);
-//                if (FileUtil.fileIsExists(file)) {
-//                    ARActivity.start(AboutMeActivity.this,file,false);
-//                } else {
-//                    if (NotificationManager.isOpenNotification(AboutMeActivity.this)) {
-//                        DownloadRequest.whith().downloadWithNotification(AboutMeActivity.this, url);
-//                    } else {
-//                        NotificationUtil.showNotificationDialog(AboutMeActivity.this);
-//                    }
-//                }
+                String file = STAR_PATH + FileUtil.getUrlFileName(url);
+                if (FileUtil.fileIsExists(file)) {
+                    FileUtil.getNetworkFileSize(url, new Handler(Looper.myLooper()) {
+                        @Override
+                        public void handleMessage(Message msg) {
+                            int fileSize = msg.getData().getInt("fileSize");
+                            if (fileSize==new File(file).length()){
+                                ARActivity.start(AboutMeActivity.this,file,false);
+                            }else {
+                                showNotificationDialog(url);
+                            }
+                        }
+                    });
+                } else {
+                    showNotificationDialog(url);
+                }
+
             }
 
             @Override
@@ -226,9 +237,16 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
                 PermissionDialog.showDialog(AboutMeActivity.this, "android.permission.CAMERA");
             }
         });
-
     }
 
+
+    public void showNotificationDialog(String url){
+        if (NotificationManager.isOpenNotification(AboutMeActivity.this)) {
+            DownloadRequest.whith().downloadWithNotification(AboutMeActivity.this, url);
+        } else {
+            NotificationUtil.showNotificationDialog(AboutMeActivity.this);
+        }
+    }
 
     @Override
     public void showMessage(@NonNull String message) {
@@ -312,8 +330,6 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
             });
         }
     }
-
-
 
 
     @Override
