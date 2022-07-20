@@ -19,13 +19,13 @@ ext {
             rxlifecycle2SdkVersion  : "2.2.2",
             espressoSdkVersion      : "3.0.1",
             canarySdkVersion        : "2.7",
-            zxing_version           :"3.3.0"
+            zxing_version           : "3.3.0"
     ]
 
     dependencies = [
             //material
-            "material"             : "com.google.android.material:material:1.1.0",
-            "constraintlayout"             : "androidx.constraintlayout:constraintlayout:1.1.3",
+            "material"                 : "com.google.android.material:material:1.1.0",
+            "constraintlayout"         : "androidx.constraintlayout:constraintlayout:1.1.3",
             //support
             "appcompat-v7"             : "com.android.support:appcompat-v7:${version["androidSupportSdkVersion"]}",
             "support-design"           : "com.android.support:design:${version["androidSupportSdkVersion"]}",
@@ -108,7 +108,7 @@ ext {
 
 
             "junit"                    : "junit:junit:4.+",
-            "junit-test"                    : "androidx.test.ext:junit:1.1.1",
+            "junit-test"               : "androidx.test.ext:junit:1.1.1",
             "androidJUnitRunner"       : "androidx.test.runner.AndroidJUnitRunner",
             "runner"                   : "com.android.support.test:runner:1.0.1",
             "espresso-core"            : "com.android.support.test.espresso:espresso-core:${version["espressoSdkVersion"]}",
@@ -120,6 +120,10 @@ ext {
             "canary-debug"             : "com.squareup.leakcanary:leakcanary-android:${version["canarySdkVersion"]}",
             "canary-release"           : "com.squareup.leakcanary:leakcanary-android-no-op:1.6.3",
             "umeng-analytics"          : "com.umeng.analytics:analytics:6.0.1",
-            "zxing"                    :"com.google.zxing:core:${version["zxing_version"]}",
+            "zxing"                    : "com.google.zxing:core:${version["zxing_version"]}",
+            "rongcloud"                : "cn.rongcloud.sdk:im_kit:5.1.3",
+            "ShapeView"                : "com.github.getActivity:ShapeView:8.0",
+            "ToastUtils"               : "com.github.getActivity:ToastUtils:10.3",
+            "justifytextview"          : "io.github.leibnik:justifytextview:1.0.2",
     ]
 }

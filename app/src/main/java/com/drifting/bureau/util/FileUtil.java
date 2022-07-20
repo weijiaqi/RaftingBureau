@@ -210,15 +210,7 @@ public class FileUtil {
     /**
      * 获取网络资源文件大小
      */
-    private void getNetworkFileSize(String fileUrl) {
-        final Handler handler = new Handler(Looper.myLooper()) {
-            @Override
-            public void handleMessage(Message msg) {
-                String fileSize = msg.getData().getString("fileSize");
-                Log.d("fileSize", fileSize);
-            }
-        };
-
+    public static void getNetworkFileSize(String fileUrl,Handler handler) {
 
         if (fileUrl == null) {
             return;
@@ -248,7 +240,7 @@ public class FileUtil {
                     int fileLength = urlConnection.getContentLength();
 
                     Bundle bundle = new Bundle();
-                    bundle.putString("fileSize", "文件大小：" + formatFileSize(fileLength));
+                    bundle.putInt("fileSize", fileLength);
 
                     Message message = handler.obtainMessage();
                     message.setData(bundle);
