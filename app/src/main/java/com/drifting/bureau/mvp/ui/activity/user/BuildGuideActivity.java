@@ -21,8 +21,10 @@ import androidx.annotation.Nullable;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.ui.activity.web.ShowWebViewActivity;
+import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.StringUtil;
+import com.drifting.bureau.util.ToastUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 
@@ -65,6 +67,10 @@ public class BuildGuideActivity extends BaseActivity {
         mCkProtocol.setOnCheckedChangeListener((compoundButton, ischecked) -> {
             mRlCheck.setVisibility(ischecked ? View.GONE : View.VISIBLE);
         });
+
+        if (Preferences.isTest()) {
+            ToastUtil.showToast("测试环境");
+        }
     }
 
     /**

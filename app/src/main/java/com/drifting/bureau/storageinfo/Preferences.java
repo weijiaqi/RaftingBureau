@@ -24,6 +24,7 @@ public class Preferences {
     private static final String KEY_USER_PASSWORD = "user_password";
 
     private static final String KEY_USER_IS_ANONY = "isanony";//是否为匿名状态
+    public static final String KEY_IS_TEST = "isTest"; //是不是测试环境
 
     /**
      * 初始化构建
@@ -34,6 +35,15 @@ public class Preferences {
 
     static SharedPreferences getSharedPreferences() {
         return mContext.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
+    }
+
+
+    public static void saveTestState(boolean isTest) {
+        saveBoolean(KEY_IS_TEST, isTest);
+    }
+
+    public static boolean isTest() {
+        return getBoolean(KEY_IS_TEST);
     }
 
 
@@ -82,7 +92,6 @@ public class Preferences {
     }
 
 
-
     //吉祥物头像
     public static void saveMascot(String photo) {
         saveString(KEY_USER_MASCOT, photo);
@@ -93,8 +102,6 @@ public class Preferences {
     }
 
 
-
-
     //融云token
     public static void saveRcToken(String RcToken) {
         saveString(KEY_RC_TOKEN, RcToken);
@@ -103,8 +110,6 @@ public class Preferences {
     public static String getRcToken() {
         return getString(KEY_RC_TOKEN);
     }
-
-
 
 
     //用户手机号
@@ -147,6 +152,17 @@ public class Preferences {
     }
 
 
+    public static void saveBoolean(String key, boolean value) {
+        SharedPreferences.Editor editor = getSharedPreferences().edit();
+        editor.putBoolean(key, value);
+        editor.commit();
+    }
+
+    public static boolean getBoolean(String key) {
+        return getSharedPreferences().getBoolean(key, false);
+    }
+
+
     /**
      * 清除某个内容
      */
@@ -160,13 +176,14 @@ public class Preferences {
      * 退出登录清除用户数据
      */
     public static void clearUserLoginData() {
+        boolean isTest = isTest();//测试环境
         String phone = getPhone();
-        String password=getPassword();
+        String password = getPassword();
         clear();
         savePhone(phone);
         savePassword(password);
+        saveTestState(isTest);//测试环境
     }
-
 
 
     /**

@@ -16,6 +16,7 @@ import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.AppUtil;
 import com.drifting.bureau.util.FileGenerator;
 import com.drifting.bureau.util.RongIMUtil;
+import com.drifting.bureau.util.ToastUtil;
 import com.hjq.toast.ToastUtils;
 import com.jess.arms.base.App;
 import com.jess.arms.base.BaseApplication;
@@ -96,7 +97,6 @@ public class RBureauApplication extends Application implements App {
 
 
     private void initSDK() {
-        Preferences.initialize(this);
         // 初始化 Toast 框架
         ToastUtils.init(this);
         initAutoSize();
@@ -267,6 +267,10 @@ public class RBureauApplication extends Application implements App {
      * 请求域名添加
      */
     private void initApi() {
+        Preferences.initialize(this);
+        if (Preferences.isTest()) {
+            Api.API_SERVER = "http://106.75.116.154:9092/";
+        }
         RetrofitUrlManager.getInstance().putDomain(Api.API_SERVER_NAME, Api.API_SERVER);
     }
 
