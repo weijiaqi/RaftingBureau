@@ -18,7 +18,7 @@ import java.util.List;
 public class AppUtil {
 
     private static String VERNAME;
-
+    private static int VERCODE;
     /**
      * 得到软件显示版本信息
      *
@@ -34,6 +34,22 @@ public class AppUtil {
                 e.printStackTrace();
             }
         return VERNAME;
+    }
+
+
+    /**
+     * @description 获取版本号
+     */
+    public static int getVersionCode(Context context){
+        if (VERCODE == 0)
+            try {
+                String packageName = context.getPackageName();
+                VERCODE = context.getPackageManager().getPackageInfo(packageName, 0).versionCode;
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
+        return VERCODE;
+
     }
 
 
