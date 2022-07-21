@@ -129,7 +129,7 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
         spaceBarrageAdapter = new SpaceBarrageAdapter(new ArrayList<>());
         if (mPresenter != null) {
             mPresenter.getSpaceList();
-        //    mPresenter.mysterybox(limit);
+            mPresenter.mysterybox(limit);
         }
         setUserComment();
         frame.setOnTouchListener((view, motionEvent) -> mViewPager.onTouchEvent(motionEvent));
