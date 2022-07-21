@@ -6,6 +6,7 @@ import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+
 import com.danikula.videocache.HttpProxyCacheServer;
 import com.drifting.bureau.R;
 import com.drifting.bureau.app.RBConstant;
@@ -125,7 +126,7 @@ public class RBureauApplication extends Application implements App {
         });
 
         //友盟
-        UMConfigure.init(this, RBConstant.UM_INIT_APPKEY, AppUtil.getChannel(getApplicationContext()),UMConfigure.DEVICE_TYPE_PHONE, "");
+        UMConfigure.init(this, RBConstant.UM_INIT_APPKEY, AppUtil.getChannel(getApplicationContext()), UMConfigure.DEVICE_TYPE_PHONE, "");
     }
 
 
@@ -229,7 +230,6 @@ public class RBureauApplication extends Application implements App {
         }
 
     }
-
 
 
     public static HttpProxyCacheServer getProxy(Context context) {

@@ -60,7 +60,7 @@
             android:layout_toRightOf="@+id/tv_cofim"
             android:gravity="center"
             android:text="取消"
-            android:textColor="@color/white"
+            android:textColor="@color/color_00"
             android:textSize="14sp"
             android:textStyle="bold"
             app:shape_endColor="@color/color_6c"
