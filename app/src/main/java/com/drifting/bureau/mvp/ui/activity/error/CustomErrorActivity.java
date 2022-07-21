@@ -28,8 +28,6 @@ public class CustomErrorActivity extends BaseActivity {
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(false, false);
-//        TextView errorDetailsText = findViewById(R.id.error_details);
-//        errorDetailsText.setText(CustomActivityOnCrash.getStackTraceFromIntent(getIntent()));
         ShapeTextView restartButton = findViewById(R.id.restart_button);
         final CaocConfig config = CustomActivityOnCrash.getConfigFromIntent(getIntent());
         if (config == null) {
@@ -39,19 +37,9 @@ public class CustomErrorActivity extends BaseActivity {
         }
         if (config.isShowRestartButton() && config.getRestartActivityClass() != null) {
             restartButton.setText("重启应用");
-            restartButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    CustomActivityOnCrash.restartApplication(CustomErrorActivity.this, config);
-                }
-            });
+            restartButton.setOnClickListener(v -> CustomActivityOnCrash.restartApplication(CustomErrorActivity.this, config));
         } else {
-            restartButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    CustomActivityOnCrash.closeApplication(CustomErrorActivity.this, config);
-                }
-            });
+            restartButton.setOnClickListener(v -> CustomActivityOnCrash.closeApplication(CustomErrorActivity.this, config));
         }
     }
 }
