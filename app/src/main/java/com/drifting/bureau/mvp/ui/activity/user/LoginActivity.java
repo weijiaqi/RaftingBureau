@@ -246,7 +246,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
 
                 @Override
                 public void onConnectError() {
-                    ToastUtil.showToast("会话消息故障!");
+                    //ToastUtil.showToast("会话消息故障!");
                     DiscoveryTourActivity.start(LoginActivity.this, true);
                 }
             });
