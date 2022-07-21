@@ -87,7 +87,7 @@ public class AccountSettingsActivity extends BaseActivity<AccountSettingsPresent
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
         mToolbarTitle.setText("账户设置");
-        mTvVersionCode.setText("版本号：V" + StringUtil.formatNullString(AppUtil.getVerName(RBureauApplication.getContext())));
+        mTvVersionCode.setText("版本号：V" + StringUtil.formatNullString(AppUtil.getVerName(RBureauApplication.getContext()) + "(" + AppUtil.getVersionCode(RBureauApplication.getContext()) + ")"));
         initListener();
 
         mTvVersionCode.setOnLongClickListener(new View.OnLongClickListener() {
