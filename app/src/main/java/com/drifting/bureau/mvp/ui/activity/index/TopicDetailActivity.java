@@ -98,7 +98,7 @@ public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> impl
     TextView mTvAddFriend;
     @BindView(R.id.iv_add_friend_bg)
     ImageView mIvAddFriendBg;
-    private int explore_id, message_id, total, postion;
+    private int explore_id, message_id, message_id2, total, postion;
     private String path;
     private int status;
     private ReleaseDriftingDialog releaseDriftingDialog;
@@ -112,7 +112,8 @@ public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> impl
     private MoreDetailsEntity.MessageBean messageBean;
     private MoreDetailsEntity.RelevanceBean relevanceBean;
     private int user_id, attend;
-    private CreatewithfileEntity createwithfileEntity;
+
+
     private RaftingOrderDialog raftingOrderDialog;
     private PublicDialog publicDialog;
 
@@ -195,6 +196,7 @@ public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> impl
             if (messageBean.getId() == 0) {  //发起话题
                 InitiateTopic();
             } else {
+                message_id2 = messageBean.getId();
                 MoreDetailsEntity.MessagePathBean messagePathBean = new MoreDetailsEntity.MessagePathBean();
                 messagePathBean.setUser_id(messageBean.getUser_id());
                 messagePathBean.setComment_id(-1);
@@ -284,9 +286,9 @@ public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> impl
     @Override
     public void onCreatewithwordSuccess(CreatewithfileEntity entity) {
         if (entity != null) {
+            message_id2 = entity.getMessage_id();
             if (status == 1) {
                 if (entity.getNeed_pay() == 1) {
-                    createwithfileEntity = entity;
                     if (mPresenter != null) {
                         mPresenter.skulist(1, 0);
                     }
@@ -316,7 +318,7 @@ public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> impl
                         sb.append(skuListEntity.getGoods_sku().get(i).getSku_code());
                     }
                     if (mPresenter != null) {
-                        mPresenter.createOrder(createwithfileEntity.getMessage_id(), sb.toString());
+                        mPresenter.createOrder(message_id2, sb.toString());
                     }
                 }
             });
@@ -385,7 +387,7 @@ public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> impl
     @Override
     public void onCreateOrderSuccess(CreateOrderEntity entity) {
         if (entity != null) {
-            PaymentInfoActivity.start(this, 1, entity.getSn(), entity.getTotal_amount(), 0,false);
+            PaymentInfoActivity.start(this, 1, entity.getSn(), entity.getTotal_amount(), 0, false);
         }
     }
 
