@@ -39,6 +39,7 @@ import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.jess.arms.base.BaseActivity;
+import com.jess.arms.base.BaseDialog;
 import com.jess.arms.di.component.AppComponent;
 
 import butterknife.BindView;
@@ -171,6 +172,12 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
                         if (entity1 != null && entity1.getCode() == 200) {
                             mySpaceStationDialog = new MySpaceStationDialog(this, entity1.getData());
                             mySpaceStationDialog.show();
+                            mySpaceStationDialog.setOnClickCallback(type -> {
+                                if (type == MySpaceStationDialog.SELECT_FINISH) {
+                                    myTreasuryDialog = new MyTreasuryDialog(this);
+                                    myTreasuryDialog.show();
+                                }
+                            });
                         }
                     });
                     break;

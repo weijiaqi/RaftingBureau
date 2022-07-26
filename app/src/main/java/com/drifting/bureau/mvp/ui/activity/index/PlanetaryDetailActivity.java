@@ -66,10 +66,12 @@ public class PlanetaryDetailActivity extends BaseActivity<PlanetaryDetailPresent
     TextView mTvAttribute;
     @BindView(R.id.tv_num)
     TextView mTvNum;
+    @BindView(R.id.tv_Ar)
+    TextView mTvAr;
     private static String EXTRA_TYPE = "extra_type";
     private String ArUrl;
     private int type;
-    private boolean ISFinsh = false;
+
 
     public static void start(Context context, int type, boolean closePage) {
         Intent intent = new Intent(context, PlanetaryDetailActivity.class);
@@ -227,6 +229,7 @@ public class PlanetaryDetailActivity extends BaseActivity<PlanetaryDetailPresent
         if (entity != null) {
             mTvNum.setText(entity.getPeople() + "");
             ArUrl = entity.getAr_url();
+            mTvAr.setVisibility(!TextUtils.isEmpty(ArUrl)?View.VISIBLE:View.GONE);
         }
     }
 
@@ -278,7 +281,6 @@ public class PlanetaryDetailActivity extends BaseActivity<PlanetaryDetailPresent
                 } else {
                     showNotificationDialog(url);
                 }
-
             }
 
             @Override
@@ -305,11 +307,4 @@ public class PlanetaryDetailActivity extends BaseActivity<PlanetaryDetailPresent
         ToastUtil.showToast(message);
     }
 
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void UpdateProgressEvent(UpdateProgressEvent event) {
-        if (event.isDone()) {
-            ISFinsh = true;
-        }
-    }
 }
