@@ -196,7 +196,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
 
-            android:text="丢入星空"
+            android:text="下一个星云"
             android:textColor="@color/color_00"
             android:textSize="14sp"
             android:textStyle="bold" />

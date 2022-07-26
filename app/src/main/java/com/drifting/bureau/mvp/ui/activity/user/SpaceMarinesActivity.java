@@ -90,9 +90,6 @@ public class SpaceMarinesActivity extends BaseActivity<SpaceMarinesPresenter> im
     }
 
     public void initListener() {
-        if (mPresenter != null) {
-            mPresenter.team();
-        }
         getUserInfo();
     }
 
@@ -100,8 +97,11 @@ public class SpaceMarinesActivity extends BaseActivity<SpaceMarinesPresenter> im
         RequestUtil.create().userplayer(Preferences.getUserId(), entity -> {
             if (entity != null && entity.getCode() == 200) {
                 userInfoEntity = entity.getData();
-                GlideUtil.create().loadLongImage(this,userInfoEntity.getUser().getMascot(),mIvMator);
+                GlideUtil.create().loadLongImage(this, userInfoEntity.getUser().getMascot(), mIvMator);
                 mTvName.setText(userInfoEntity.getUser().getName());
+                if (mPresenter != null) {
+                    mPresenter.team();
+                }
             }
         });
     }

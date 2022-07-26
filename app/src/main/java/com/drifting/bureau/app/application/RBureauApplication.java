@@ -49,7 +49,6 @@ import me.jessyan.retrofiturlmanager.RetrofitUrlManager;
 
 public class RBureauApplication extends Application implements App {
     private static RBureauApplication instance = null;
-    public static boolean isForeground = false;
     private AppLifecycles mAppDelegate;
     private static Context mContext;
     private static String TAG = "RBureauApplication";

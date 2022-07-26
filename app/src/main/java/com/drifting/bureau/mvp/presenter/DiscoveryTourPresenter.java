@@ -3,6 +3,7 @@ package com.drifting.bureau.mvp.presenter;
 import android.app.Activity;
 import android.app.Application;
 import android.location.Location;
+import android.util.Log;
 
 import androidx.fragment.app.FragmentActivity;
 
@@ -116,8 +117,10 @@ public class DiscoveryTourPresenter extends BasePresenter<DiscoveryTourContract.
                 LocationUtil.getCurrentLocation(new LocationUtil.LocationCallBack() {
                     @Override
                     public void onSuccess(Location location) {
-                        if(location!=null){
+                        try {
                             getLoaction(location.getLongitude() + "", location.getLatitude() + "");
+                        } catch (Exception e) {
+                            Log.e(activity.getPackageName(), e.toString());
                         }
                     }
 

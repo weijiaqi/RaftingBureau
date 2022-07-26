@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -33,6 +34,7 @@ public class SpaceStationVRActivity extends BaseActivity {
     @BindView(R.id.vrPanoramaView)
     VrPanoramaView mVRPanoramaView;
 
+    private static String TAG = SpaceStationVRActivity.class.getSimpleName();
     private static final String AR_URL = "ar_url";
     private String arurl;
 
@@ -66,29 +68,35 @@ public class SpaceStationVRActivity extends BaseActivity {
         mVRPanoramaView.setInfoButtonEnabled(false);
         mVRPanoramaView.setStereoModeButtonEnabled(false);
 
-        new AsyncTask<Void, Void, Bitmap>() {
-            @Override
-            protected Bitmap doInBackground(Void... params) {
-                Bitmap bitmap = null;
-                try {
-                    bitmap = Glide.with(SpaceStationVRActivity.this)
-                            .asBitmap()
-                            .load(arurl)
-                            .submit(1080, 1920).get();
-                } catch (Exception e) {
-                    e.printStackTrace();
+        try {
+            new AsyncTask<Void, Void, Bitmap>() {
+                @Override
+                protected Bitmap doInBackground(Void... params) {
+                    Bitmap bitmap = null;
+                    try {
+                        bitmap = Glide.with(SpaceStationVRActivity.this)
+                                .asBitmap()
+                                .load(arurl)
+                                .submit(1080, 1920).get();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    return bitmap;
                 }
-                return bitmap;
-            }
 
-            @Override
-            protected void onPostExecute(Bitmap bitmap) {
-                VrPanoramaView.Options options = new VrPanoramaView.Options();
-                //设置图片类型为单通道图片
-                options.inputType = VrPanoramaView.Options.TYPE_MONO;
-                mVRPanoramaView.loadImageFromBitmap(bitmap, options);
-            }
-        }.execute();
+                @Override
+                protected void onPostExecute(Bitmap bitmap) {
+                    if (bitmap != null) {
+                        VrPanoramaView.Options options = new VrPanoramaView.Options();
+                        //设置图片类型为单通道图片
+                        options.inputType = VrPanoramaView.Options.TYPE_MONO;
+                        mVRPanoramaView.loadImageFromBitmap(bitmap, options);
+                    }
+                }
+            }.execute();
+        } catch (Exception e) {
+            Log.e(TAG, e.toString());
+        }
 
     }
 

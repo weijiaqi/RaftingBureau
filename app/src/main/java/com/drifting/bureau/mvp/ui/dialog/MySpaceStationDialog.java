@@ -33,6 +33,7 @@ public class MySpaceStationDialog extends BaseDialog implements View.OnClickList
 
     private MySpaceStationEntity mySpaceStationEntity;
 
+    public static final int SELECT_FINISH = 0x01;
 
     public MySpaceStationDialog(@NonNull Context context, MySpaceStationEntity mySpaceStationEntity) {
         super(context);
@@ -88,6 +89,9 @@ public class MySpaceStationDialog extends BaseDialog implements View.OnClickList
         switch (view.getId()) {
             case R.id.tv_cofim:
                 dismiss();
+                if (onClickCallback != null) {
+                    onClickCallback.onClickType(SELECT_FINISH);
+                }
                 break;
         }
     }
