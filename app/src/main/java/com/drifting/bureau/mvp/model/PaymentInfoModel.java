@@ -53,8 +53,8 @@ public class PaymentInfoModel extends BaseModel implements PaymentInfoContract.M
     }
 
     @Override
-    public Observable<BaseEntity<SandPayQueryEntity>> sandPayQuery(String sn) {
-        return mRepositoryManager.obtainRetrofitService(ApiService.class).sandPayQuery(sn);
+    public Observable<BaseEntity<SandPayQueryEntity>> sandPayQuery(String sn,String terminal) {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).sandPayQuery(sn,terminal);
     }
 
 }

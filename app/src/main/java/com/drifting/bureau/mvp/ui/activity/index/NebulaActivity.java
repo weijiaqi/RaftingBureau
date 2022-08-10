@@ -51,8 +51,6 @@ public class NebulaActivity extends BaseActivity<NebulaPresenter> implements Neb
     @BindView(R.id.fl_container)
     FrameLayout mFlState;
 
-
-
     private NebulaAdapter nebulaAdapter;
     private int mPage = 1;
     private int limit = 10;
@@ -85,8 +83,6 @@ public class NebulaActivity extends BaseActivity<NebulaPresenter> implements Neb
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
-
-
         initListener();
     }
 

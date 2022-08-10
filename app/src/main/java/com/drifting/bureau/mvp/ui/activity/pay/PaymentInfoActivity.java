@@ -20,7 +20,9 @@ import com.drifting.bureau.mvp.contract.PaymentInfoContract;
 import com.drifting.bureau.mvp.model.entity.PayOrderEntity;
 import com.drifting.bureau.mvp.model.entity.SandPayQueryEntity;
 import com.drifting.bureau.mvp.presenter.PaymentInfoPresenter;
+import com.drifting.bureau.pay.WXPay;
 import com.drifting.bureau.util.ClickUtil;
+import com.drifting.bureau.util.GsonUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.ViewUtil;
 import com.drifting.bureau.view.ClockView;
@@ -29,6 +31,8 @@ import com.jess.arms.di.component.AppComponent;
 import com.unionpay.UPPayAssistEx;
 
 import org.greenrobot.eventbus.EventBus;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -42,15 +46,10 @@ import butterknife.OnClick;
 public class PaymentInfoActivity extends BaseActivity<PaymentInfoPresenter> implements PaymentInfoContract.View {
     @BindView(R.id.toolbar_title)
     TextView mToobarTitle;
-
     @BindView(R.id.ck_wecheat)
     CheckBox mCkWeCheat;
-    @BindView(R.id.ck_alipay)
-    CheckBox mCkAlipay;
-
     @BindView(R.id.ck_ysf)
     CheckBox mCkYsf;
-
     @BindView(R.id.clockview)
     ClockView mTvClockview;
     @BindView(R.id.tv_price)
@@ -109,7 +108,7 @@ public class PaymentInfoActivity extends BaseActivity<PaymentInfoPresenter> impl
         //   mViewLine.setBackgroundColor(getColor(R.color.color_33));
         mTvClockview.setType(1);
         if (type == 4) {
-            curTime = totaltime*1000+ System.currentTimeMillis();
+            curTime = totaltime * 1000 + System.currentTimeMillis();
         } else {
             curTime = System.currentTimeMillis() + 1000 * 60 * 15;
         }
@@ -121,58 +120,118 @@ public class PaymentInfoActivity extends BaseActivity<PaymentInfoPresenter> impl
         return this;
     }
 
-    @OnClick({R.id.toolbar_back, R.id.rl_wechat, R.id.ck_wecheat, R.id.rl_alipay, R.id.ck_alipay, R.id.rl_ysf, R.id.tv_cofim_pay})
+    @OnClick({R.id.toolbar_back, R.id.rl_wechat, R.id.ck_wecheat, R.id.rl_ysf, R.id.ck_ysf, R.id.tv_cofim_pay})
     public void onClick(View view) {
-        if (!ClickUtil.isFastClick(view.getId())) {
-            switch (view.getId()) {
-                case R.id.toolbar_back:
-                    finish();
-                    break;
-                case R.id.rl_wechat:
-                case R.id.ck_wecheat:
-                    setCheckStatus(1);
-                    break;
-                case R.id.rl_alipay:
-                case R.id.ck_alipay:
-                    setCheckStatus(2);
-                    break;
-                case R.id.rl_ysf:
-                    mCkYsf.setChecked(!mCkYsf.isChecked());
-                    break;
-                case R.id.tv_cofim_pay: //立即购买
-                    if (!mCkYsf.isChecked()) {
-                        showMessage("请选择支付方式");
-                        return;
+        switch (view.getId()) {
+            case R.id.toolbar_back:
+                finish();
+                break;
+            case R.id.rl_wechat:
+                setCheckStatus(1);
+                break;
+            case R.id.ck_wecheat:
+                if (mCkWeCheat.isChecked()) {
+                    mCkYsf.setChecked(false);
+                }
+                break;
+            case R.id.rl_ysf:
+                setCheckStatus(3);
+                break;
+            case R.id.ck_ysf: //云闪付
+                if (mCkYsf.isChecked()) {
+                    mCkWeCheat.setChecked(false);
+                }
+                break;
+            case R.id.tv_cofim_pay: //立即购买
+                if (!mCkYsf.isChecked() && !mCkWeCheat.isChecked()) {
+                    showMessage("请选择支付方式");
+                    return;
+                }
+                if (mPresenter != null) {
+                    if (mCkYsf.isChecked()) {  //云闪付
+                        mPresenter.payOrder(sn, "sand", 1);
+                    } else if (mCkWeCheat.isChecked()) { //微信
+                        mPresenter.payOrder(sn, "wechat", 2);
                     }
-                    if (mPresenter != null) {
-                        mPresenter.payOrder(sn, "sand");
-                    }
-                    break;
+                }
+                break;
+        }
+
+    }
+
+
+    @Override
+    public void payOrderSuccess(PayOrderEntity entity, int type) {
+        if (entity != null) {
+            if (type == 1) { //云闪付
+                if (entity.getTn() != null) {
+                    startUnionpay(PaymentInfoActivity.this, entity.getTn());
+                }
+            } else if (type == 2) { //微信
+                try {
+                    wecheatpay(new JSONObject(GsonUtil.toJson(entity)));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
 
 
-    @Override
-    public void payOrderSuccess(PayOrderEntity entity) {
-        if (entity != null && entity.getTn() != null) {
-            startUnionpay(PaymentInfoActivity.this, entity.getTn());
+    /**
+     * 微信支付
+     */
+    public void wecheatpay(JSONObject param) {
+        String appid = param.optString("appId");
+        if (TextUtils.isEmpty(appid)) {
+            mWXPayCallBack.onError(WXPay.ERROR_PAY_PARAM);
+            return;
         }
+        WXPay.init(this, appid);
+        WXPay.getInstance().doPay(param, mWXPayCallBack);
     }
+
+    /**
+     * 微信回调
+     */
+    private WXPay.WXPayResultCallBack mWXPayCallBack = new WXPay.WXPayResultCallBack() {
+        @Override
+        public void onSuccess() {
+            sandPayQuery("wechat");
+        }
+
+        @Override
+        public void onError(int error_code) {
+            switch (error_code) {
+                case WXPay.NO_OR_LOW_WX:
+                    ToastUtil.showToast("未安装微信或微信版本过低");
+                    break;
+                case WXPay.ERROR_PAY_PARAM:
+                    ToastUtil.showToast("参数错误");
+                    break;
+                case WXPay.ERROR_PAY:
+                    ToastUtil.showToast("支付失败");
+                    break;
+            }
+        }
+
+        @Override
+        public void onCancel() {
+            ToastUtil.showToast("支付取消");
+        }
+    };
+
 
     @Override
     public void sandPayQuerySuccess(SandPayQueryEntity entity) {
         if (entity != null) {
             if (entity.getStatus() == 1) {
-                showMessage("购买成功");
-                EventBus.getDefault().post(new PaymentEvent());
-                finish();
+                PaySuccess();
             } else {
                 showMessage("暂未查询到支付结果，请稍后尝试");
             }
         }
     }
-
 
     /**
      * 银联云闪付
@@ -192,9 +251,7 @@ public class PaymentInfoActivity extends BaseActivity<PaymentInfoPresenter> impl
         if (str != null) {
             if (str.equalsIgnoreCase("success")) {
                 if (!TextUtils.isEmpty(sn)) {
-                    if (mPresenter != null) {
-                        mPresenter.sandPayOrderQuery(sn);
-                    }
+                    sandPayQuery("sand");
                 }
             } else if (str.equalsIgnoreCase("fail")) {
                 showMessage("支付失败！");
@@ -202,6 +259,12 @@ public class PaymentInfoActivity extends BaseActivity<PaymentInfoPresenter> impl
                 showMessage("你已取消了本次订单的支付！");
             }
         }
+    }
+
+    public void PaySuccess() {
+        showMessage("购买成功");
+        EventBus.getDefault().post(new PaymentEvent());
+        finish();
     }
 
     @Override
@@ -227,8 +290,21 @@ public class PaymentInfoActivity extends BaseActivity<PaymentInfoPresenter> impl
     }
 
     public void setCheckStatus(int status) {
-        mCkWeCheat.setChecked(status == 1 ? true : false);
-        mCkAlipay.setChecked(status == 1 ? false : true);
+        if (status == 1) {  //微信
+            mCkWeCheat.setChecked(!mCkWeCheat.isChecked());
+            mCkYsf.setChecked(false);
+        } else if (status == 3) {   //云闪付
+            mCkYsf.setChecked(!mCkYsf.isChecked());
+            mCkWeCheat.setChecked(false);
+        }
     }
 
+    /**
+    * @description 主动查询支付状态
+    */
+    public void sandPayQuery(String terminal){
+        if (mPresenter != null) {
+            mPresenter.sandPayOrderQuery(sn,terminal);
+        }
+    }
 }

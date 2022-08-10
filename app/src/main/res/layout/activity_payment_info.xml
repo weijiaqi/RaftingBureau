@@ -96,7 +96,6 @@
 
         <RelativeLayout
             android:id="@+id/rl_ysf"
-            android:layout_marginBottom="-15dp"
             android:layout_width="match_parent"
             android:layout_height="58dp">
 
@@ -117,7 +116,6 @@
                 android:textColor="@color/white"
                 android:textSize="15sp" />
 
-
             <CheckBox
                 android:id="@+id/ck_ysf"
                 android:layout_width="wrap_content"
@@ -128,13 +126,18 @@
 
         </RelativeLayout>
 
-<!--        <include layout="@layout/view_color_line" />-->
+        <View
+            android:id="@+id/view_color_line"
+            android:layout_width="match_parent"
+            android:layout_height="0.4dp"
+            android:background="@color/color_33" />
+
 
         <RelativeLayout
             android:id="@+id/rl_wechat"
             android:layout_width="match_parent"
             android:layout_height="58dp"
-            android:visibility="gone">
+            android:layout_marginBottom="12dp">
 
             <ImageView
                 android:id="@+id/iv_wechat"

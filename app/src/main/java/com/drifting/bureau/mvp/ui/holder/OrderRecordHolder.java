@@ -63,7 +63,6 @@ public class OrderRecordHolder extends BaseRecyclerHolder {
     }
 
     public void setData(@NonNull List<OrderRecordEntity.ListBean> listBeanList, int position) {
-
         TextUtil.setText(mTvTime, "订单时间：" + DateUtil.unxiToDateYMDHM(listBeanList.get(position).getCreated_at_int() + ""));
         orderListAdapter.setData(listBeanList.get(position).getOrder_sub());
         if (listBeanList.get(position).getPlatform_gift() == 1) { //是平台赠送
@@ -95,7 +94,7 @@ public class OrderRecordHolder extends BaseRecyclerHolder {
 
                         @Override
                         public void timeRemaining(long time) {
-                            Remaining_time=time;
+                            Remaining_time = time;
                         }
 
                         @Override
@@ -115,7 +114,7 @@ public class OrderRecordHolder extends BaseRecyclerHolder {
         }
 
         if (listBeanList.get(position).getExplore_id() == 0) {  //0是盲盒
-            if (listBeanList.get(position).getStatus() == 0) {  //未支付
+            if (listBeanList.get(position).getStatus() == 0 && listBeanList.get(position).getTimeout() != 0) {  //未支付
                 mTvWriteOff.setVisibility(View.VISIBLE);
                 mTvWriteOff.setText("立即付款");
             } else {

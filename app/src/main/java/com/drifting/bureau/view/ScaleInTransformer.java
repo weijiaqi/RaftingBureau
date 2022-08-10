@@ -76,6 +76,5 @@ public class ScaleInTransformer implements ViewPager.PageTransformer {
 
     public void statFloatAnim(View view) {
         AnimatorUtil.floatAnim(view, 2000,6);
-
     }
 }

@@ -259,6 +259,7 @@ public class VideoRecordingActivity extends BaseActivity<VideoRecordingPresenter
                     .build();
             // 申请音频权限
             if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+                showMessage("检测到你未开启录音权限!");
                 return;
             }
             recording = videoCapture.getOutput().prepareRecording(getActivity(), mediaStoreOutputOptions)

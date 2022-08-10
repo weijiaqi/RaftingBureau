@@ -24,10 +24,12 @@ import com.drifting.bureau.mvp.model.entity.MySpaceStationEntity;
 import com.drifting.bureau.mvp.model.entity.MyTreasuryEntity;
 import com.drifting.bureau.mvp.model.entity.MysteryboxEntity;
 import com.drifting.bureau.mvp.model.entity.NebulaEntity;
+import com.drifting.bureau.mvp.model.entity.NebulaListEntity;
 import com.drifting.bureau.mvp.model.entity.OrderDetailEntity;
 import com.drifting.bureau.mvp.model.entity.OrderOneEntity;
 import com.drifting.bureau.mvp.model.entity.OrderRecordEntity;
 import com.drifting.bureau.mvp.model.entity.PayOrderEntity;
+import com.drifting.bureau.mvp.model.entity.PlanetArEntity;
 import com.drifting.bureau.mvp.model.entity.PlanetEntity;
 import com.drifting.bureau.mvp.model.entity.PlanetLocationEntity;
 import com.drifting.bureau.mvp.model.entity.PlanetaryDetailEntity;
@@ -50,6 +52,7 @@ import com.drifting.bureau.mvp.model.entity.TeamStatisticEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.model.entity.VersionUpdateEntity;
 import com.drifting.bureau.mvp.model.entity.WriteOffInfoEntity;
+import com.drifting.bureau.view.chart.EnergyChartView;
 import com.jess.arms.base.BaseEntity;
 
 import java.util.List;
@@ -377,11 +380,11 @@ public interface ApiService {
 
 
     /**
-     * 当前所在星球及答题状态
+     * 答题间隔天数
      *
      * @return
      */
-    @GET("v/planet/location")
+    @GET("v/planet/whenMove")
     Observable<BaseEntity<PlanetLocationEntity>> planetlocation();
 
 
@@ -589,7 +592,6 @@ public interface ApiService {
     Observable<BaseEntity> reportcommit(@Field("message_id") int message_id, @Field("comment_id") int comment_id, @Field("report_type") int report_type, @Field("reason") String reason);
 
 
-
     /**
      * 免费漂流次数
      *
@@ -734,7 +736,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("v/order/sandPayQuery")
-    Observable<BaseEntity<SandPayQueryEntity>> sandPayQuery(@Field("sn") String sn);
+    Observable<BaseEntity<SandPayQueryEntity>> sandPayQuery(@Field("sn") String sn,@Field("terminal") String terminal);
 
 
     /**
@@ -747,7 +749,6 @@ public interface ApiService {
     Observable<BaseEntity<BlindBoxRecordEntity>> openlogs(@Field("page") int page, @Field("limit") int limit);
 
 
-
     /**
      * 注销
      *
@@ -755,5 +756,22 @@ public interface ApiService {
      */
     @GET("v/user/unregister")
     Observable<BaseEntity> unregister();
+
+
+    /**
+     * 获取AR Url (登录前)
+     *
+     * @return
+     */
+    @GET("n/planet/ar")
+    Observable<BaseEntity<PlanetArEntity>> planetar();
+
+    /**
+     * 获取AR Url (登录前)
+     *
+     * @return
+     */
+    @GET("v/nebula/list")
+    Observable<BaseEntity<NebulaListEntity>> nebulalist();
 
 }

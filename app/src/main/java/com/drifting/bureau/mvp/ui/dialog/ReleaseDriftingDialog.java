@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -70,7 +71,7 @@ public class ReleaseDriftingDialog extends BaseDialog implements View.OnClickLis
     private MoreDetailsEntity.RelevanceBean relevanceBean;
 
     public static final int SELECT_FINISH = 0x01;
-    private boolean IsJoin = false;
+
 
     public ReleaseDriftingDialog(@NonNull Context context, int status, int total) {
         super(context);
@@ -150,7 +151,8 @@ public class ReleaseDriftingDialog extends BaseDialog implements View.OnClickLis
             } else {
                 mEtWord.setText(commentDetailsEntity.getContent());
             }
-            mEtWord.setEnabled(false);
+            mEtWord.setFocusable(false);
+            mEtWord.setCursorVisible(false);
             if (!TextUtils.isEmpty(commentDetailsEntity.getAlbum())) {  //图片
                 mRlVideoPlay.setVisibility(View.VISIBLE);
                 mIvVideoPlay.setVisibility(View.GONE);
@@ -161,8 +163,9 @@ public class ReleaseDriftingDialog extends BaseDialog implements View.OnClickLis
                 mIvVideoPlay.setVisibility(View.VISIBLE);
                 GlideUtil.create().loadLongImage(context, commentDetailsEntity.getImage(), mIvPic);
             }
-            if (!TextUtils.isEmpty(commentDetailsEntity.getAudio())) {
+            if (!TextUtils.isEmpty(commentDetailsEntity.getAudio())) {//语音
                 mRlVoicePlay.setVisibility(View.VISIBLE);
+                mIvVoiceDelete.setVisibility(View.GONE);
                 totaltime = VideoUtil.getLocalVideoDuration(commentDetailsEntity.getAudio());
                 mTvTime.setText(totaltime + "S");
                 mVideoView.setDecibel(0);
@@ -174,7 +177,6 @@ public class ReleaseDriftingDialog extends BaseDialog implements View.OnClickLis
                     mTvIntoSpace.setVisibility(View.GONE);
                     mTvNums.setVisibility(View.GONE);
                     mLlJoin.setClickable(false);
-                    IsJoin = true;
                 } else {
                     mLlImprint.setVisibility(View.VISIBLE);
                     second = relevanceBean.getFootprint_rest();
@@ -217,6 +219,7 @@ public class ReleaseDriftingDialog extends BaseDialog implements View.OnClickLis
                 strings.add(Manifest.permission.READ_EXTERNAL_STORAGE);
                 strings.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
                 strings.add(Manifest.permission.CAMERA);
+                strings.add(Manifest.permission.RECORD_AUDIO);
                 if (PermissionDialog.requestPermissions((Activity) context, strings, 1)) {
                     if (type != -1 && !isFirst) {
                         coverDialog = new CoverDialog(context);
@@ -231,7 +234,7 @@ public class ReleaseDriftingDialog extends BaseDialog implements View.OnClickLis
                         VideoRecordingActivity.start(context, false);
                     }
                 } else {
-                    ShowMessage("请开启拍照/存储相关权限");
+                    ShowMessage("请开启拍照/存储/录音相关权限");
                 }
                 break;
             case R.id.iv_release_recording: //录音
@@ -299,7 +302,12 @@ public class ReleaseDriftingDialog extends BaseDialog implements View.OnClickLis
                 mIvRelaseRecording.setVisibility(View.VISIBLE);
                 mIvReport.setVisibility(View.GONE);
                 mEtWord.setText("");
-                mEtWord.setEnabled(true);
+                mEtWord.setFocusableInTouchMode(true);
+                mEtWord.setCursorVisible(true);
+                mEtWord.setFocusable(true);
+                mEtWord.requestFocus();
+                mRlVoicePlay.setVisibility(View.GONE);
+                mRlVideoPlay.setVisibility(View.GONE);
                 break;
             case R.id.tv_into_space:  //不感兴趣
                 if (onClickCallback != null) {
@@ -325,6 +333,7 @@ public class ReleaseDriftingDialog extends BaseDialog implements View.OnClickLis
                     objectList = list;
                     if (objectList.size() > 0) {
                         mRlVoicePlay.setVisibility(View.VISIBLE);
+                        mIvVoiceDelete.setVisibility(View.VISIBLE);
                         mTvTime.setText(objectList.get(1).toString() + "S");
                         mVideoView.setDecibel(0);
                         if (!TextUtils.isEmpty(path)) {

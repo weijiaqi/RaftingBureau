@@ -22,7 +22,7 @@
         app:one_cycle_time_ms="50000"
         app:star_nums="10" />
 
-    <include layout="@layout/include_tvbar_title" />
+    <include layout="@layout/include_index_title" />
 
 
     <LinearLayout
@@ -132,6 +132,40 @@
             app:shape_endColor="@color/color_6c"
             app:shape_radius="100dp"
             app:shape_startColor="@color/color_6d" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="end"
+        android:layout_marginEnd="29dp"
+        android:layout_marginBottom="195dp">
+
+        <TextView
+            android:id="@+id/iv_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/home_message"
+            android:drawablePadding="4dp"
+            android:gravity="center_horizontal"
+            android:text="电波"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/iv_hot"
+            android:layout_width="7dp"
+            android:layout_height="7dp"
+            android:visibility="gone"
+            android:layout_alignEnd="@+id/iv_message"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/shape_red_circle" />
+
     </RelativeLayout>
 
 

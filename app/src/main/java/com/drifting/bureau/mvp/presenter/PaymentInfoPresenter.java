@@ -52,7 +52,7 @@ public class PaymentInfoPresenter extends BasePresenter<PaymentInfoContract.Mode
      * 支付订单
      */
 
-    public void payOrder(String sn, String terminal) {
+    public void payOrder(String sn, String terminal,int type) {
         mModel.payOrder(sn, terminal)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -62,7 +62,7 @@ public class PaymentInfoPresenter extends BasePresenter<PaymentInfoContract.Mode
                     public void onNext(BaseEntity<PayOrderEntity> baseEntity) {
                         if (mRootView != null) {
                             if (baseEntity.getCode() == 200) {
-                                mRootView.payOrderSuccess(baseEntity.getData());
+                                mRootView.payOrderSuccess(baseEntity.getData(),type);
                             }else {
                                 mRootView.showMessage(baseEntity.getMsg());
                             }
@@ -83,11 +83,11 @@ public class PaymentInfoPresenter extends BasePresenter<PaymentInfoContract.Mode
      *
      * @param sn
      */
-    public void sandPayOrderQuery(String sn) {
+    public void sandPayOrderQuery(String sn,String terminal) {
         if (mRootView != null) {
             mRootView.showLoading();
         }
-        mModel.sandPayQuery(sn).subscribeOn(Schedulers.io())
+        mModel.sandPayQuery(sn,terminal).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
                 .subscribe(new ErrorHandleSubscriber<BaseEntity<SandPayQueryEntity>>(mErrorHandler) {

@@ -55,7 +55,7 @@ public class DownloadRequest {
             return;
         }
         if (downloadList.contains(url)) {
-            ToastUtil.showToast("下载任务已存在");
+            ToastUtil.showToast("正在下载中");
             return;
         }
         downloadList.add(url);

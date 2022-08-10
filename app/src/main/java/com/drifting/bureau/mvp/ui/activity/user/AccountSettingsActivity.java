@@ -191,7 +191,7 @@ public class AccountSettingsActivity extends BaseActivity<AccountSettingsPresent
         } else {
             LogInOutDataUtil.successOutClearAllData();
         }
-        BuildGuideActivity.start(this, true);
+        PullNewGuideActivity.start(this, true);
     }
 
     @Override

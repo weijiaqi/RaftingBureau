@@ -16,10 +16,9 @@ public class NebulaAdapter extends BaseRecyclerAdapter<NebulaEntity.ListBean> {
         super(infos);
     }
 
-
     @Override
     public void getHolder(BaseRecyclerHolder holder, int position) {
-        NebulaHolder nebulaHolder=(NebulaHolder) holder;
+        NebulaHolder nebulaHolder = (NebulaHolder) holder;
         nebulaHolder.setData(mDatas, position);
     }
 
@@ -32,6 +31,4 @@ public class NebulaAdapter extends BaseRecyclerAdapter<NebulaEntity.ListBean> {
     public BaseRecyclerHolder getCreateViewHolder(View view, int viewType) {
         return new NebulaHolder(view);
     }
-
-
 }

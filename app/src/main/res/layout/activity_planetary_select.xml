@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_01"
     android:orientation="vertical">
-
 
     <ScrollView
         android:id="@+id/scroll_view"
@@ -21,30 +19,60 @@
 
             <include layout="@layout/view_height_title_lay" />
 
-            <com.drifting.bureau.view.StrokeTextView
-                android:id="@+id/tv_move_away"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/rl_toolbar"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="24dp"
-                android:text="搬离星球"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                app:border_color="@color/color_dc4"
-                app:has_boder="true" />
-
 
             <FrameLayout
                 android:id="@+id/main_fame"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/rl_toolbar"
-                android:layout_marginTop="30dp" />
+                android:layout_marginTop="10dp" />
 
 
         </RelativeLayout>
     </ScrollView>
+
+
+    <LinearLayout
+        android:id="@+id/ll_move_away"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_toolbar"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="110dp"
+        android:layout_marginEnd="70dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_rocket"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/explore_planet" />
+
+        <TextView
+            android:id="@+id/tv_seek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="探寻星球中..."
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/iv_open_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/open_search" />
+
+        <TextView
+            android:id="@+id/tv_three_day"
+            android:layout_marginTop="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/three_day"
+            android:textColor="@color/color_white_cc"
+            android:textSize="11sp" />
+    </LinearLayout>
 </RelativeLayout>
