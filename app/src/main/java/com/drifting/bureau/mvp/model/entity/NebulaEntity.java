@@ -55,10 +55,28 @@ public class NebulaEntity {
             private Integer msg_nebula_id;
             private Integer message_id;
             private String nebula;
+            private String nebula_code;
             private Integer counter;
             private Integer nebula_x;
             private Integer nebula_y;
             private Integer created_at_int;
+            private String meta_power;
+
+            public String getMeta_power() {
+                return meta_power;
+            }
+
+            public void setMeta_power(String meta_power) {
+                this.meta_power = meta_power;
+            }
+
+            public String getNebula_code() {
+                return nebula_code;
+            }
+
+            public void setNebula_code(String nebula_code) {
+                this.nebula_code = nebula_code;
+            }
 
             public Integer getMsg_nebula_id() {
                 return msg_nebula_id;
@@ -116,5 +134,6 @@ public class NebulaEntity {
                 this.created_at_int = created_at_int;
             }
         }
+
 
 }

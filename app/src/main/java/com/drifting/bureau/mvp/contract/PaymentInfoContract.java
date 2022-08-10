@@ -27,7 +27,7 @@ public interface PaymentInfoContract {
     interface View extends IView {
 
 
-        void payOrderSuccess(PayOrderEntity entity);
+        void payOrderSuccess(PayOrderEntity entity,int type);
 
         void sandPayQuerySuccess(SandPayQueryEntity entity);
 
@@ -40,6 +40,6 @@ public interface PaymentInfoContract {
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存
     interface Model extends IModel {
         Observable<BaseEntity<PayOrderEntity>> payOrder(String sn,String terminal);
-        Observable<BaseEntity<SandPayQueryEntity>> sandPayQuery(String sn);
+        Observable<BaseEntity<SandPayQueryEntity>> sandPayQuery(String sn,String terminal);
     }
 }

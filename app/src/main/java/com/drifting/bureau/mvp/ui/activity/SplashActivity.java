@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
 import com.drifting.bureau.mvp.ui.activity.user.BuildGuideActivity;
+import com.drifting.bureau.mvp.ui.activity.user.PullNewGuideActivity;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.RongIMUtil;
 import com.jess.arms.base.BaseActivity;
@@ -39,7 +40,7 @@ public class SplashActivity extends BaseActivity {
 
     Runnable mHomeRunnable = () -> {
         if (!Preferences.isAnony()) {
-            BuildGuideActivity.start(SplashActivity.this, true);
+            PullNewGuideActivity.start(SplashActivity.this, true);
         } else {
             RongIMUtil.getInstance().connect(Preferences.getRcToken(), new RongIMUtil.ConnectListener() {
                 @Override

@@ -3,4 +3,5 @@
     <string name="phone">验证码已经发送至%1$s的手机上，请输入</string>
     <string name="transmit"> 已传递%1$s人></string>
     <string name="free_times">(免费次数：%1$s)</string>
+    <string name="three_day">(%1$s天以后可继续探寻)</string>
 </resources>

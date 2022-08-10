@@ -40,6 +40,7 @@ import com.drifting.bureau.mvp.ui.activity.index.SpaceCapsuleActivity;
 import com.drifting.bureau.mvp.ui.activity.index.TopicDetailActivity;
 import com.drifting.bureau.mvp.ui.activity.user.AboutMeActivity;
 import com.drifting.bureau.mvp.ui.activity.user.MessageCenterActivity;
+import com.drifting.bureau.mvp.ui.activity.web.ShowWebViewActivity;
 import com.drifting.bureau.mvp.ui.adapter.DiscoveryViewpagerAdapter;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ToastUtil;
@@ -74,10 +75,8 @@ import io.rong.imlib.model.Conversation;
 public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> implements DiscoveryTourContract.View {
     @BindView(R.id.tv_bar)
     TextView mTvBar;
-    @BindView(R.id.toolbar_back)
-    RelativeLayout mToobarBack;
-    @BindView(R.id.rl_info)
-    RelativeLayout mRlInfo;
+     @BindView(R.id.tv_energy)
+     TextView mTvEnergy;
     @BindView(R.id.iv_rocket)
     ImageView mIvRocket;
     @BindView(R.id.rl_message)
@@ -134,8 +133,6 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
         setStatusBarHeight(mTvBar);
-        mToobarBack.setVisibility(View.GONE);
-        mRlInfo.setVisibility(View.VISIBLE);
         loadAnimator();
         loadPhotoSphere();
         loadUI();
@@ -188,6 +185,7 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
                 userInfoEntity = entity.getData();
                 Preferences.saveMascot(userInfoEntity.getUser().getMascot());
                 mTvAboutMe.setText(userInfoEntity.getPlanet().getName());
+                mTvEnergy.setText(userInfoEntity.getUser().getMeta_power());
             }
         });
     }
@@ -216,9 +214,12 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
     }
 
 
-    @OnClick({R.id.rl_message, R.id.tv_about_me, R.id.tv_space_capsule, R.id.rl_info, R.id.ll_step_star})
+    @OnClick({R.id.rl_message, R.id.tv_about_me, R.id.tv_space_capsule, R.id.rl_info, R.id.ll_step_star,R.id.rl_right})
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.rl_right:  //右边
+                ShowWebViewActivity.start(this,4,false);
+            break;
             case R.id.rl_message: //开启新消息
                 TopicDetailActivity.start(this, explore_id, id, false);
 

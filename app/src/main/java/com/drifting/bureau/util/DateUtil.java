@@ -132,6 +132,30 @@ public class DateUtil {
 
 
     /**
+     * unix时间戳转换成yyyy年MM月dd日 HH:mm
+     *
+     * @param unixTime
+     * @return
+     */
+    public static String unxiToCompanyDateYMDHM(String unixTime) {
+        try {
+            String s = Long.parseLong(unixTime) * 1000 + "";
+            String res;
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年 MM月 dd日  HH:mm");
+            long lt = new Long(s);
+            Date date = new Date(lt);
+            res = simpleDateFormat.format(date);
+            return res;
+        } catch (Exception e) {
+            if (TextUtils.isEmpty(unixTime)) {
+                unixTime = "";
+            }
+            return unixTime;
+        }
+    }
+
+
+    /**
      * unix时间戳转换成HH:mm
      *
      * @param unixTime
@@ -373,7 +397,7 @@ public class DateUtil {
         }
         LocalDate date2 = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            date2 = LocalDate.of(2022, 8, 21);
+            date2 = LocalDate.of(2022, 9, 1);
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

@@ -1,5 +1,6 @@
 package com.drifting.bureau.mvp.ui.activity.web;
 
+import static com.drifting.bureau.WebUrlConstant.USER_ACT;
 import static com.drifting.bureau.WebUrlConstant.USER_LICENSE;
 import static com.drifting.bureau.WebUrlConstant.USER_PRIVACY;
 import static com.drifting.bureau.WebUrlConstant.USER_PURCHASE;
@@ -107,6 +108,10 @@ public class ShowWebViewActivity extends BaseActivity implements WebLoadingListe
             case 3:
                 mTvTitle.setText("盲盒购买须知");
                 mWebView.loadUrl(USER_PURCHASE);
+                break;
+            case 4:
+                mTvTitle.setText("元能量攻略");
+                mWebView.loadUrl(USER_ACT);
                 break;
         }
     }

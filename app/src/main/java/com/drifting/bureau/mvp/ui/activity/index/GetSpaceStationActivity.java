@@ -121,9 +121,10 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
     }
 
     public void initListener() {
+        setUserComment();
         //协议选中
         mCkProtocol.setOnCheckedChangeListener((compoundButton, ischecked) -> {
-            mRlCheck.setVisibility(ischecked ? View.GONE : View.VISIBLE);
+            mRlCheck.setVisibility(ischecked ? View.INVISIBLE : View.VISIBLE);
         });
         mRcyBarrage.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.HORIZONTAL));
         spaceBarrageAdapter = new SpaceBarrageAdapter(new ArrayList<>());
@@ -131,7 +132,7 @@ public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresent
             mPresenter.getSpaceList();
             mPresenter.mysterybox(limit);
         }
-        setUserComment();
+
         frame.setOnTouchListener((view, motionEvent) -> mViewPager.onTouchEvent(motionEvent));
     }
 

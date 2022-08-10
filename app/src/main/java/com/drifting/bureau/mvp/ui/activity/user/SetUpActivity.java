@@ -46,7 +46,7 @@ public class SetUpActivity  extends BaseActivity {
             switch (view.getId()) {
                 case R.id.tv_exit:
                     LogInOutDataUtil.successOutClearData();
-                    BuildGuideActivity.start(this,true);
+                    PullNewGuideActivity.start(this,true);
                     break;
             }
         }

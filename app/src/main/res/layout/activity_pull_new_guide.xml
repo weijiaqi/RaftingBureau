@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_01"
+    android:fitsSystemWindows="true">
+
+    <com.drifting.bureau.view.StarSkyView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transparent"
+        android:visibility="visible"
+        app:meteor_head_size="2"
+        app:one_cycle_time_ms="50000"
+        app:star_nums="10" />
+
+    <ImageView
+        android:id="@+id/iv_titile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="48dp"
+        android:src="@drawable/pull_new_guide" />
+
+
+    <ImageView
+        android:id="@+id/iv_astronaut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_titile"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="54dp"
+        android:src="@drawable/guide_astronaut" />
+
+
+    <ImageView
+        android:id="@+id/iv_pull1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_titile"
+        android:layout_marginTop="2dp"
+        android:layout_toLeftOf="@+id/iv_titile"
+        android:src="@drawable/pull1" />
+
+    <ImageView
+        android:id="@+id/iv_pull2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_titile"
+        android:layout_alignEnd="@+id/iv_titile"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="56dp"
+        android:src="@drawable/pull2" />
+
+
+    <ImageView
+        android:id="@+id/iv_pull3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_titile"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="48dp"
+        android:src="@drawable/pull3" />
+
+
+    <ImageView
+        android:id="@+id/iv_pull4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_titile"
+        android:layout_alignStart="@+id/iv_astronaut"
+        android:layout_alignTop="@+id/iv_astronaut"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="109dp"
+        android:layout_marginEnd="48dp"
+        android:src="@drawable/pull4" />
+
+
+    <ImageView
+        android:id="@+id/iv_pull5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/iv_astronaut"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="81dp"
+        android:layout_toRightOf="@+id/iv_astronaut"
+        android:src="@drawable/pull5" />
+
+
+    <ImageView
+        android:id="@+id/iv_pull6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/iv_astronaut"
+        android:layout_alignBottom="@+id/iv_astronaut"
+        android:layout_marginBottom="-12dp"
+        android:src="@drawable/pull6" />
+
+
+    <ImageView
+        android:id="@+id/iv_pull7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_astronaut"
+        android:layout_alignStart="@+id/iv_astronaut"
+        android:layout_marginStart="71dp"
+        android:layout_marginTop="17dp"
+        android:src="@drawable/pull7" />
+
+
+    <ImageView
+        android:id="@+id/iv_new_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/iv_astronaut"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="190dp"
+        android:layout_marginEnd="12dp"
+        android:src="@drawable/new_user" />
+
+
+    <TextView
+        android:id="@+id/tv_ar_select"
+        android:layout_width="240dp"
+        android:layout_height="38dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="135dp"
+        android:background="@drawable/ar_view"
+        android:gravity="center"
+        android:text="AR查看荒芜星"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/tv_create_planet"
+        android:layout_width="240dp"
+        android:layout_height="38dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="82dp"
+        android:background="@drawable/solid_blue_block_button"
+        android:gravity="center"
+        android:text="建立自己的星球"
+        android:textColor="@color/color_01"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+
+    <RelativeLayout
+        android:id="@+id/rl_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="35dp"
+        android:layout_marginBottom="40dp"
+        android:visibility="gone">
+
+        <com.hjq.shape.view.ShapeTextView
+            android:id="@+id/tv_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="11dp"
+            android:paddingVertical="1dp"
+            android:text="请阅读并勾选"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            app:shape="rectangle"
+            app:shape_angle="45"
+            app:shape_endColor="@color/color_70"
+            app:shape_radius="9dp"
+            app:shape_startColor="@color/color_d6" />
+
+        <com.drifting.bureau.view.TriangleView
+            android:layout_width="8dp"
+            android:layout_height="6dp"
+            android:layout_below="@+id/tv_check"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            app:trv_color="@color/color_c5"
+            app:trv_direction="bottom" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_agree"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="33dp"
+        android:layout_marginBottom="12dp">
+
+        <CheckBox
+            android:id="@+id/ck_protocol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:button="@drawable/selector_protocol"
+            android:textColor="@color/white"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/tv_protocol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/ck_protocol"
+            android:ellipsize="end"
+            android:paddingVertical="10dp"
+            android:singleLine="true"
+            android:text=""
+            android:textColor="@color/color_99"
+            android:textSize="11sp" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

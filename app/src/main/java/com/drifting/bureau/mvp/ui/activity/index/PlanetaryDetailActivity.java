@@ -134,13 +134,10 @@ public class PlanetaryDetailActivity extends BaseActivity<PlanetaryDetailPresent
                 mTvAttribute.setText("土壤、能量、天空、风");
                 break;
             case 4:
-
                 mIvPlanet.setImageResource(R.drawable.planetary_detail05);
                 mTvName.setText("盘古星");
                 mTvDesc.setText("盘古星球⼈⽣活在思想的世界⾥。他们是独⽴的、有独创性的思想家，具有强烈的感情、坚定的原则和正直的⼈性。");
                 mTvAttribute.setText("土壤、动物、大海、风");
-
-
                 break;
             case 5:
                 mIvPlanet.setImageResource(R.drawable.planetary_detail06);

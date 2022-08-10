@@ -52,9 +52,8 @@ public class TeaShopActivity extends BaseActivity<TeaShopPresenter> implements T
 
     private int mPage = 1;
     private int limit = 10;
-
     private String Longitude, Latitude;
-    private Activity mActivity;
+
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, TeaShopActivity.class);
         context.startActivity(intent);

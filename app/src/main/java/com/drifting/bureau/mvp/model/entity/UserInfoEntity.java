@@ -199,6 +199,15 @@ public class UserInfoEntity implements Serializable {
             private Integer updated_at_int;
             private String share_code;
             private String mascot;
+            private String meta_power;
+
+            public String getMeta_power() {
+                return meta_power;
+            }
+
+            public void setMeta_power(String meta_power) {
+                this.meta_power = meta_power;
+            }
 
             public String getMascot() {
                 return mascot;

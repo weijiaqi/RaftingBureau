@@ -9,7 +9,10 @@
     <!--30% -->
     <!--50% -->
     <color name="color_white_cc">#ccFFFFFF</color><!--80% -->
-
+    <color name="color_white_7f">#7fFFFFFF</color><!--50% -->
+    <color name="color_white_4d">#4dFFFFFF</color><!--30% -->
+    <color name="color_white_99ffffff">#99ffffff</color><!-- 60% -->
+    <color name="color_white_b2ffffff">#b2ffffff</color><!-- 70% -->
     <color name="color_0d">#0D1114</color>
     <color name="color_01">#010103</color>
     <color name="transparent">#00000000</color>
@@ -18,7 +21,10 @@
     <color name="color_36">#36E8BC</color>
     <color name="color_99">#999999</color>
     <color name="color_70">#7044D8</color>
+    <color name="color_70_7f">#7f7044D8</color><!--50% -->
     <color name="color_d6">#D64CB6</color>
+    <color name="color_d6_7f">#7fD64CB6</color><!--50% -->
+
     <color name="color_c5">#C54BBC</color>
     <color name="color_21">#21212A</color>
     <color name="color_8b">#8B46CF</color>
@@ -27,12 +33,15 @@
     <color name="color_cc">#CCCCCC</color>
     <color name="color_cb">#CB0B0B</color>
     <color name="color_00">#000000</color>
+
+    <color name="color_00_cc">#cc000000</color><!--80% -->
+
     <color name="color_0b">#0B1D2C</color>
     <color name="color_6de">#6DECDF</color>
     <color name="color_162">#16202B</color>
     <color name="color_6ca">#6CECCA</color>
     <color name="color_e3_7f">#7fE3E3E3</color><!--50% -->
-
+    <color name="color_0de">#0D0E12</color>
     <color name="color_82">#82E7DC</color>
     <!--10% -->
     <color name="color_82_ed">#4d82E7DC</color><!--30% -->
@@ -108,4 +117,5 @@
     <color name="color_6b">#6B6D77</color>
     <color name="color_ff13">#FF1313</color>
     <color name="color_fc">#FC0000</color>
+    <color name="color_18">#18191D</color>
 </resources>

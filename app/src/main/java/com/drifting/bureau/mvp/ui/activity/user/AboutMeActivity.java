@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -52,6 +53,7 @@ import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.NotificationUtil;
 import com.drifting.bureau.util.TextUtil;
 import com.drifting.bureau.util.ToastUtil;
+import com.drifting.bureau.util.animator.AnimatorUtil;
 import com.drifting.bureau.util.downloadutil.DownloadRequest;
 import com.drifting.bureau.util.manager.NotificationManager;
 import com.drifting.bureau.util.request.RequestUtil;
@@ -100,6 +102,7 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
     ImageView mDrifting;
     private AboutMeAdapter aboutMeAdapter;
     private UserInfoEntity userInfoEntity;
+    private int assess_after, assess_status;
     private static final String EXTRA_USERINFOENTITY = "userinfo_entity";
 
     public static void start(Context context, UserInfoEntity entity, boolean closePage) {
@@ -215,9 +218,9 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
                         @Override
                         public void handleMessage(Message msg) {
                             int fileSize = msg.getData().getInt("fileSize");
-                            if (fileSize==new File(file).length()){
-                                ARActivity.start(AboutMeActivity.this,file,false);
-                            }else {
+                            if (fileSize == new File(file).length()) {
+                                ARActivity.start(AboutMeActivity.this, file, false);
+                            } else {
                                 showNotificationDialog(url);
                             }
                         }
@@ -240,7 +243,7 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
     }
 
 
-    public void showNotificationDialog(String url){
+    public void showNotificationDialog(String url) {
         if (NotificationManager.isOpenNotification(AboutMeActivity.this)) {
             DownloadRequest.whith().downloadWithNotification(AboutMeActivity.this, url);
         } else {
@@ -262,24 +265,45 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
         RelativeLayout toolbar_back = topMenu.findViewById(R.id.toolbar_back);
         TextView toolbar_title = topMenu.findViewById(R.id.toolbar_title);
         TextView mTvBar = topMenu.findViewById(R.id.tv_bar);
-        TextView tv_move_away = topMenu.findViewById(R.id.tv_move_away);
+        LinearLayout ll_move_away = topMenu.findViewById(R.id.ll_move_away);
+        ImageView mIvRocket = topMenu.findViewById(R.id.iv_rocket);
+        ImageView mIvOpenSearch = topMenu.findViewById(R.id.iv_open_search);
+        TextView mTvThreeDay = topMenu.findViewById(R.id.tv_three_day);
+        TextView mTvSeek = topMenu.findViewById(R.id.tv_seek);
         ScrollView scrollView = topMenu.findViewById(R.id.scroll_view);
         setStatusBarHeight(mTvBar);
-
         toolbar_back.setOnClickListener(v -> {
             finish();
         });
         toolbar_title.setText("星球分布");
-        tv_move_away.setOnClickListener(v -> {
-            RequestUtil.create().planetlocation(entity -> {
-                if (entity != null && entity.getCode() == 200) {
-                    if (entity.getData().getAssess_status() == 0) {
-                        showMessage(" 您还不能搬离所在星球");
+        RequestUtil.create().planetlocation(entity -> {
+            if (entity != null && entity.getCode() == 200) {
+                if (entity.getData().getShow() == 0) {  //不显示
+                    ll_move_away.setVisibility(View.GONE);
+                } else { //显示
+                    ll_move_away.setVisibility(View.VISIBLE);
+                    assess_after = entity.getData().getAssess_after();
+                    assess_status = entity.getData().getAssess_status();
+                    if (assess_status == 1) {//可以答题
+                        mTvSeek.setText("可探寻星球");
+                        mIvOpenSearch.setVisibility(View.VISIBLE);
+                        mTvThreeDay.setVisibility(View.GONE);
                     } else {
-                        MoveAwayPlanetaryActivity.start(AboutMeActivity.this, 1, false);
+                        mTvSeek.setText("探寻星球中...");
+                        mTvThreeDay.setVisibility(View.VISIBLE);
+                        mTvThreeDay.setText(getString(R.string.three_day, assess_after + ""));
+                        mIvOpenSearch.setVisibility(View.GONE);
+                        statScaleAnim(mTvSeek);
+                        statFloatAnim(mIvRocket);
                     }
                 }
-            });
+            }
+        });
+
+        ll_move_away.setOnClickListener(v -> {
+            if (assess_status == 1) {
+                MoveAwayPlanetaryActivity.start(AboutMeActivity.this, 1, false);
+            }
         });
         topMenu.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         SmartSwipeWrapper topMenuWrapper = SmartSwipe.wrap(topMenu);
@@ -299,10 +323,10 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
                         //设置默认滚动到顶部
                         scrollView.post(() -> {
                             // TODO Auto-generated method stub
-                            if (type == 1 || type == 2 || type == 3 || type == 8 || type == 11) {
+                            if (type == 1 || type == 9 || type == 3 || type == 8 || type == 2 || type == 6) {
                                 scrollView.fullScroll(ScrollView.FOCUS_UP);
-                            } else if (type == 17 || type == 7 || type == 4 || type == 5 || type == 15) {
-                                scrollView.scrollTo(0, scrollView.getBottom() / 2);
+                            } else if (type == 11 || type == 17 || type == 10 || type == 12 || type == 7) {
+                                scrollView.scrollTo(0, scrollView.getBottom() / 3);
                             } else {
                                 scrollView.fullScroll(ScrollView.FOCUS_DOWN);
                             }
@@ -318,6 +342,13 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
 
     }
 
+    public void statScaleAnim(View view) {
+        AnimatorUtil.AlphaAnim(view, 3000);
+    }
+
+    public void statFloatAnim(View view) {
+        AnimatorUtil.floatAnim(view, 1000, 3);
+    }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void AnswerCompletedEvent(AnswerCompletedEvent answerCompletedEvent) {

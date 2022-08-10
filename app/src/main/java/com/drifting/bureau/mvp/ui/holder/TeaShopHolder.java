@@ -54,6 +54,9 @@ public class TeaShopHolder extends BaseRecyclerHolder {
         if (listBeanList.get(position).getOpen_status() == 1) {
             TextUtil.setText(mTvStatus, "营业中");
             mTvStatus.getTextColorBuilder().setTextGradientColors(context.getColor(R.color.color_6c), context.getColor(R.color.color_6d)).intoTextColor();
+        }else if (listBeanList.get(position).getOpen_status() == 2){
+            TextUtil.setText(mTvStatus, "配料中");
+            mTvStatus.getTextColorBuilder().setTextGradientColors(context.getColor(R.color.color_ff), context.getColor(R.color.color_ff)).intoTextColor();
         } else {
             TextUtil.setText(mTvStatus, "未营业");
             mTvStatus.getTextColorBuilder().setTextGradientColors(context.getColor(R.color.color_ff), context.getColor(R.color.color_ff)).intoTextColor();

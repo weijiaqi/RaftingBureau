@@ -2,23 +2,32 @@ package com.drifting.bureau.mvp.model.entity;
 
 public class PlanetLocationEntity {
 
-        private Integer assess_status;
-        private Integer pl_id;
 
-        public Integer getAssess_status() {
-            return assess_status;
-        }
+    private int show;
+    private int assess_after;
+    private int assess_status;
 
-        public void setAssess_status(Integer assess_status) {
-            this.assess_status = assess_status;
-        }
+    public int getShow() {
+        return show;
+    }
 
-        public Integer getPl_id() {
-            return pl_id;
-        }
+    public void setShow(int show) {
+        this.show = show;
+    }
 
-        public void setPl_id(Integer pl_id) {
-            this.pl_id = pl_id;
-        }
+    public int getAssess_after() {
+        return assess_after;
+    }
 
+    public void setAssess_after(int assess_after) {
+        this.assess_after = assess_after;
+    }
+
+    public int getAssess_status() {
+        return assess_status;
+    }
+
+    public void setAssess_status(int assess_status) {
+        this.assess_status = assess_status;
+    }
 }
