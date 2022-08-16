@@ -40,11 +40,14 @@ public class IncomeRecordHolder extends BaseRecyclerHolder {
             TextUtil.setText(mTvMoney, "+" + listBeanList.get(position).getMoney());
         } else {
             mTvIncomeStatus.setText("申请提现");
-            TextUtil.setText(mTvMoney,"-" + listBeanList.get(position).getMoney());
+            TextUtil.setText(mTvMoney, "-" + listBeanList.get(position).getMoney());
         }
         if (listBeanList.get(position).getStatus() == 1) {
             mTvStatus.setText("已完成");
             mTvStatus.setTextColor(context.getColor(R.color.color_6d));
+        } else if (listBeanList.get(position).getStatus() == 2) {
+            mTvStatus.setText("已驳回");
+            mTvStatus.setTextColor(context.getColor(R.color.color_86));
         } else {
             mTvStatus.setText("审核中");
             mTvStatus.setTextColor(context.getColor(R.color.color_f8));

@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.drifting.bureau.R;
+import com.drifting.bureau.data.event.WithdrawEvent;
 import com.drifting.bureau.di.component.DaggerWithdrawalComponent;
 import com.drifting.bureau.mvp.contract.WithdrawalContract;
 import com.drifting.bureau.mvp.presenter.WithdrawalPresenter;
@@ -21,7 +22,10 @@ import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.TextUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.jess.arms.base.BaseActivity;
+import com.jess.arms.base.BaseDialog;
 import com.jess.arms.di.component.AppComponent;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -133,6 +137,17 @@ public class WithdrawalActivity extends BaseActivity<WithdrawalPresenter> implem
         publicDialog.setCancelable(false);
         publicDialog.setTitleText("申请成功");
         publicDialog.setContentText("已成功提交提现申请 请耐心等待审核");
+        publicDialog.setOnClickCallback(new BaseDialog.OnClickCallback() {
+            @Override
+            public void onClickType(int status) {
+                if (status == PublicDialog.SELECT_FINISH) {
+                    finish();
+                    WithdrawEvent withdrawEvent=new WithdrawEvent();
+                    withdrawEvent.setType(type);
+                    EventBus.getDefault().post(withdrawEvent);
+                }
+            }
+        });
     }
 
     @Override
