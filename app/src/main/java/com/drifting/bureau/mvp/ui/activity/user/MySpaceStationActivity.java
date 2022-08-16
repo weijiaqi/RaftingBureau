@@ -3,6 +3,7 @@ package com.drifting.bureau.mvp.ui.activity.user;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -13,8 +14,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import com.drifting.bureau.R;
+import com.drifting.bureau.data.event.VideoEvent;
+import com.drifting.bureau.data.event.WithdrawEvent;
 import com.drifting.bureau.di.component.DaggerMySpaceStationComponent;
 import com.drifting.bureau.mvp.contract.MySpaceStationContract;
 import com.drifting.bureau.mvp.model.entity.CommentDetailsEntity;
@@ -41,6 +45,9 @@ import com.drifting.bureau.util.request.RequestUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.base.BaseDialog;
 import com.jess.arms.di.component.AppComponent;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -348,6 +355,17 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
     @Override
     public void showMessage(@NonNull String message) {
         ToastUtil.showToast(message);
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void WithdrawEvent(WithdrawEvent event) {
+        if (event != null) {
+            if (event.getType() == 1) {
+                getInfo();
+            }
+        }
     }
 
 

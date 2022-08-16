@@ -1,6 +1,7 @@
 package com.drifting.bureau.util;
 
 
+import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.LoginEntity;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.jess.arms.integration.AppManager;
@@ -23,6 +24,7 @@ public class LogInOutDataUtil {
         Preferences.saveUserId(entity == null ? "" : entity.getUser_id());
         Preferences.savePhone(entity == null ? "" : entity.getMobile());
         Preferences.savePassword(entity == null ? "" : entity.getPassword());
+
     }
 
     public static void successOutClearData() {

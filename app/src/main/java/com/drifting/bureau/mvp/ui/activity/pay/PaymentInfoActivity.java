@@ -222,16 +222,6 @@ public class PaymentInfoActivity extends BaseActivity<PaymentInfoPresenter> impl
     };
 
 
-    @Override
-    public void sandPayQuerySuccess(SandPayQueryEntity entity) {
-        if (entity != null) {
-            if (entity.getStatus() == 1) {
-                PaySuccess();
-            } else {
-                showMessage("暂未查询到支付结果，请稍后尝试");
-            }
-        }
-    }
 
     /**
      * 银联云闪付
@@ -257,6 +247,26 @@ public class PaymentInfoActivity extends BaseActivity<PaymentInfoPresenter> impl
                 showMessage("支付失败！");
             } else if (str.equalsIgnoreCase("cancel")) {
                 showMessage("你已取消了本次订单的支付！");
+            }
+        }
+    }
+
+    /**
+     * @description 主动查询支付状态
+     */
+    public void sandPayQuery(String terminal){
+        if (mPresenter != null) {
+            mPresenter.sandPayOrderQuery(sn,terminal);
+        }
+    }
+
+    @Override
+    public void sandPayQuerySuccess(SandPayQueryEntity entity) {
+        if (entity != null) {
+            if (entity.getStatus() == 1) {
+                PaySuccess();
+            } else {
+                showMessage("暂未查询到支付结果，请稍后尝试");
             }
         }
     }
@@ -299,12 +309,5 @@ public class PaymentInfoActivity extends BaseActivity<PaymentInfoPresenter> impl
         }
     }
 
-    /**
-    * @description 主动查询支付状态
-    */
-    public void sandPayQuery(String terminal){
-        if (mPresenter != null) {
-            mPresenter.sandPayOrderQuery(sn,terminal);
-        }
-    }
+
 }

@@ -3,6 +3,7 @@ package com.drifting.bureau.mvp.ui.activity.user;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -10,8 +11,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import com.drifting.bureau.R;
+import com.drifting.bureau.data.event.WithdrawEvent;
 import com.drifting.bureau.di.component.DaggerSpaceMarinesComponent;
 import com.drifting.bureau.mvp.contract.SpaceMarinesContract;
 import com.drifting.bureau.mvp.model.entity.TeamStatisticEntity;
@@ -25,6 +28,9 @@ import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -99,12 +105,18 @@ public class SpaceMarinesActivity extends BaseActivity<SpaceMarinesPresenter> im
                 userInfoEntity = entity.getData();
                 GlideUtil.create().loadLongImage(this, userInfoEntity.getUser().getMascot(), mIvMator);
                 mTvName.setText(userInfoEntity.getUser().getName());
-                if (mPresenter != null) {
-                    mPresenter.team();
-                }
+                getTeam();
             }
         });
     }
+
+
+    public void getTeam(){
+        if (mPresenter != null) {
+            mPresenter.team();
+        }
+    }
+
 
     @OnClick({R.id.toolbar_back, R.id.tv_withdrawal, R.id.tv_withdrawal_record, R.id.tv_share})
     public void onClick(View view) {
@@ -140,6 +152,17 @@ public class SpaceMarinesActivity extends BaseActivity<SpaceMarinesPresenter> im
             mTvWithdrawalCash.setText(entity.getWithdrawn());
             mTvOrderNum.setText(entity.getOrder_num() + "");
             mTvRanking.setText(entity.getRanking() + "");
+        }
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void WithdrawEvent(WithdrawEvent event) {
+        if (event != null) {
+            if (event.getType() == 2) {
+                getTeam();
+            }
         }
     }
 

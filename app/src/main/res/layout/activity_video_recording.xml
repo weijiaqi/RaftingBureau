@@ -16,7 +16,7 @@
         android:layout_below="@+id/toolbar"
         android:layout_marginBottom="123dp" />
 
-    <VideoView
+    <com.drifting.bureau.view.FullScreenVideoView
         android:id="@+id/videoView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

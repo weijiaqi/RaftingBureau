@@ -34,6 +34,7 @@ import com.drifting.bureau.util.NotificationUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.downloadutil.DownloadRequest;
 import com.drifting.bureau.util.manager.NotificationManager;
+import com.google.ar.sceneform.Sceneform;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 
@@ -226,7 +227,7 @@ public class PlanetaryDetailActivity extends BaseActivity<PlanetaryDetailPresent
         if (entity != null) {
             mTvNum.setText(entity.getPeople() + "");
             ArUrl = entity.getAr_url();
-            mTvAr.setVisibility(!TextUtils.isEmpty(ArUrl)?View.VISIBLE:View.GONE);
+            mTvAr.setVisibility(!TextUtils.isEmpty(ArUrl) ? View.VISIBLE : View.GONE);
         }
     }
 
