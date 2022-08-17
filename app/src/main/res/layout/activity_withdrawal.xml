@@ -81,6 +81,32 @@
                 app:shape_radius="100dp"
                 app:shape_solidColor="@color/color_e6" />
 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="29dp"
+                android:text="银行名称"
+                android:textColor="@color/color_00"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <com.hjq.shape.view.ShapeEditText
+                android:id="@+id/et_bank_name"
+                android:layout_width="match_parent"
+                android:layout_height="34dp"
+                android:layout_marginTop="10dp"
+                android:background="@null"
+                android:hint="请输出账户所在银行名称和支行"
+                android:paddingLeft="11dp"
+                android:text=""
+                android:textColor="@color/color_00"
+                android:textCursorDrawable="@drawable/text_cursor"
+                android:textSize="11sp"
+                app:shape_radius="100dp"
+                app:shape_solidColor="@color/color_e6" />
+
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
