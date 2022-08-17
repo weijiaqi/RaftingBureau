@@ -21,6 +21,7 @@ import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.TextUtil;
 import com.drifting.bureau.util.ToastUtil;
+import com.hjq.shape.view.ShapeEditText;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.base.BaseDialog;
 import com.jess.arms.di.component.AppComponent;
@@ -42,6 +43,8 @@ public class WithdrawalActivity extends BaseActivity<WithdrawalPresenter> implem
     TextView mTvMoney;
     @BindView(R.id.et_money)
     EditText mEtMoney;
+    @BindView(R.id.et_bank_name)
+    EditText mEtBankName;
     @BindView(R.id.et_account)
     TextView mEtAccount;
     @BindView(R.id.et_name)
@@ -105,6 +108,10 @@ public class WithdrawalActivity extends BaseActivity<WithdrawalPresenter> implem
                         showMessage("请输入银行卡号!");
                         return;
                     }
+                    if (StringUtil.isEmpty(mEtBankName.getText().toString())) {
+                        showMessage("请输出账户所在银行名称和支行!");
+                        return;
+                    }
                     if (StringUtil.isEmpty(mEtName.getText().toString())) {
                         showMessage("请输入银行账户的实名信息!");
                         return;
@@ -123,7 +130,7 @@ public class WithdrawalActivity extends BaseActivity<WithdrawalPresenter> implem
                         return;
                     }
                     if (mPresenter != null) {
-                        mPresenter.withdrawapply(mEtName.getText().toString(), mEtAccount.getText().toString(), mEtMoney.getText().toString(), type);
+                        mPresenter.withdrawapply(mEtName.getText().toString(), mEtAccount.getText().toString(),mEtMoney.getText().toString(), mEtBankName.getText().toString(), type);
                     }
                     break;
             }
@@ -142,7 +149,7 @@ public class WithdrawalActivity extends BaseActivity<WithdrawalPresenter> implem
             public void onClickType(int status) {
                 if (status == PublicDialog.SELECT_FINISH) {
                     finish();
-                    WithdrawEvent withdrawEvent=new WithdrawEvent();
+                    WithdrawEvent withdrawEvent = new WithdrawEvent();
                     withdrawEvent.setType(type);
                     EventBus.getDefault().post(withdrawEvent);
                 }

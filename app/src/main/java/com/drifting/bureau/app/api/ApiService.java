@@ -289,7 +289,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("v/withdraw/apply")
-    Observable<BaseEntity> withdrawapply(@Field("name") String name, @Field("account") String account, @Field("money") String money, @Field("op_type") int op_type);
+    Observable<BaseEntity> withdrawapply(@Field("name") String name, @Field("account") String account, @Field("money") String money, @Field("bank_name") String bank_name,@Field("op_type") int op_type);
 
 
     /**

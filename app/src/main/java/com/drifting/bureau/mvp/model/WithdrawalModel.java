@@ -46,7 +46,7 @@ public class WithdrawalModel extends BaseModel implements WithdrawalContract.Mod
     }
 
     @Override
-    public Observable<BaseEntity> withdrawapply(String name, String account, String money, int op_type) {
-        return mRepositoryManager.obtainRetrofitService(ApiService.class).withdrawapply(name,account,money,op_type);
+    public Observable<BaseEntity> withdrawapply(String name, String account, String money,String bank_name,int op_type) {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).withdrawapply(name,account,money,bank_name,op_type);
     }
 }
