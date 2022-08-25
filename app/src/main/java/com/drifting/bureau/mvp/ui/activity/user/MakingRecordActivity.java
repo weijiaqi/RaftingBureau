@@ -80,7 +80,7 @@ public class MakingRecordActivity extends BaseActivity<MakingRecordPresenter> im
     public void initListener() {
         mRcyPublic.setLayoutManager(new LinearLayoutManager(this));
         mRcyPublic.setLoadingListener(this);
-        makingRecordAdapter = new MakingRecordAdapter(new ArrayList<>());
+        makingRecordAdapter = new MakingRecordAdapter(new ArrayList<>(),1);
         mRcyPublic.setAdapter(makingRecordAdapter);
         getData(mPage, true);
     }

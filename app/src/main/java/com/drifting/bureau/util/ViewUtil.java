@@ -138,6 +138,49 @@ public class ViewUtil {
         }
     }
 
+
+
+    /**
+     * @param context     context
+     * @param frameLayout 容器
+     * @param type        NOT_SERVER 404    NOT_NETWORK 无网络
+     *                    HAS_DELETED 内容被删除
+     *                    NOT_DATA 无数据   NOT_NULL 容器移除
+     */
+    @SuppressLint("InflateParams")
+    public void setARView(Context context, FrameLayout frameLayout, int type) {
+        if (frameLayout == null) return;
+        if (mStack.size() > 0) {
+            frameLayout.removeAllViews();
+        }
+        if (type == NOT_NULL) {
+            frameLayout.setVisibility(View.GONE);
+        } else {
+            View inflate = LayoutInflater.from(context).inflate(R.layout.layout_ar_not_data, null);
+            LinearLayout linearLayout = inflate.findViewById(R.id.ll_retry);
+            ImageView imageView = inflate.findViewById(R.id.iv_show);
+            TextView textView = inflate.findViewById(R.id.tv_content);
+
+            if (type == NOT_SERVER) {
+                imageView.setImageResource(R.drawable.icon_not_network);
+                textView.setText("暂无内容");
+            } else if (type == NOT_NETWORK) {
+                imageView.setImageResource(R.drawable.icon_not_network);
+                textView.setText("网络连接失败");
+            } else if (type == HAS_DELETED) {
+                imageView.setImageResource(R.drawable.icon_not_data);
+                textView.setText("此内容已被删除，若有疑问请联系官方");
+            }  else {
+                imageView.setImageResource(R.drawable.icon_not_data);
+                textView.setText("暂无内容");
+            }
+            frameLayout.addView(linearLayout);
+            frameLayout.setVisibility(View.VISIBLE);
+            mStack.push(linearLayout);
+        }
+    }
+
+
     /**
      * 自定义显示内容
      *

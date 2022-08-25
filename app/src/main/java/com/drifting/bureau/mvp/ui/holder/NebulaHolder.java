@@ -49,7 +49,7 @@ public class NebulaHolder extends BaseRecyclerHolder {
 
 
     public void setData(List<NebulaEntity.ListBean> list, int postion) {
-        TextUtil.setText(mTvName, list.get(postion).getNebula());
+        TextUtil.setText(mTvName, list.get(postion).getNebula()+"星云");
         TextUtil.setText(mTvNum, list.get(postion).getMeta_power());
         mTvNebulae.setOnClickListener(v -> {
             NebulaeActivity.start(context, list.get(postion).getNebula_code(), false);

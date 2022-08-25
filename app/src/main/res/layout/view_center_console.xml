@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="800dp"
+    android:layout_height="450dp"
+    android:background="@drawable/center_console">
+
+
+    <LinearLayout
+        android:id="@+id/ll_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="54.5dp"
+        android:orientation="vertical" />
+
+
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_marginBottom="19dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="5dp"
+        android:orientation="horizontal"
+        android:paddingBottom="4dp">
+
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/border1"
+                android:layout_width="112dp"
+                android:layout_height="33dp"
+                android:layout_gravity="center"
+                android:src="@drawable/center_console_border" />
+
+            <ImageView
+                android:id="@+id/iv_operation"
+                android:layout_width="82dp"
+                android:layout_height="28dp"
+                android:layout_gravity="center"
+                android:src="@drawable/home_operation" />
+
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/border2"
+                android:layout_width="112dp"
+                android:layout_height="33dp"
+                android:layout_gravity="center"
+                android:src="@drawable/center_console_border"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/iv_drift_track"
+                android:layout_width="85dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:src="@drawable/drift_track" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/border3"
+                android:layout_width="112dp"
+                android:layout_height="33dp"
+                android:layout_gravity="center"
+                android:src="@drawable/center_console_border"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/iv_star_troopers"
+                android:layout_width="82dp"
+                android:layout_height="27dp"
+                android:layout_gravity="center"
+                android:src="@drawable/star_troopers" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/border4"
+                android:layout_width="112dp"
+                android:layout_height="33dp"
+                android:layout_gravity="center"
+                android:src="@drawable/center_console_border"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/iv_physical_store"
+                android:layout_width="79dp"
+                android:layout_height="27dp"
+                android:layout_gravity="center"
+                android:src="@drawable/physical_store" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/border5"
+                android:layout_width="112dp"
+                android:layout_height="33dp"
+                android:layout_gravity="center"
+                android:src="@drawable/center_console_border"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/iv_radio_news"
+                android:layout_width="82dp"
+                android:layout_height="27dp"
+                android:layout_gravity="center"
+                android:src="@drawable/radio_news" />
+        </FrameLayout>
+    </LinearLayout>
+</RelativeLayout>

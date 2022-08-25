@@ -4,7 +4,9 @@ package com.drifting.bureau.util.request;
 import android.util.SparseArray;
 
 import com.drifting.bureau.app.api.ApiProxy;
+import com.drifting.bureau.mvp.model.entity.AnnouncementEntity;
 import com.drifting.bureau.mvp.model.entity.BoxOpenEntity;
+import com.drifting.bureau.mvp.model.entity.DidAttendEntity;
 import com.drifting.bureau.mvp.model.entity.FriendEntity;
 import com.drifting.bureau.mvp.model.entity.FriendInfoEntity;
 import com.drifting.bureau.mvp.model.entity.MySpaceStationEntity;
@@ -12,6 +14,7 @@ import com.drifting.bureau.mvp.model.entity.MyTreasuryEntity;
 import com.drifting.bureau.mvp.model.entity.PlanetArEntity;
 import com.drifting.bureau.mvp.model.entity.PlanetLocationEntity;
 import com.drifting.bureau.mvp.model.entity.PlatformTimesEntity;
+import com.drifting.bureau.mvp.model.entity.StarUpIndexEntity;
 import com.drifting.bureau.mvp.model.entity.SysmessageEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.model.entity.WriteOffInfoEntity;
@@ -333,6 +336,38 @@ public class RequestUtil {
 
                     @Override
                     public void onNext(BaseEntity<List<MyTreasuryEntity>> entity) {
+                        if (callBack != null) {
+                            callBack.getData(entity);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (callBack != null) {
+                            callBack.getData(null);
+                        }
+                    }
+                });
+    }
+
+
+
+    /**
+     * AR  公告
+     */
+    public void latest(BaseDataCallBack<List<AnnouncementEntity>> callBack) {
+        ApiProxy.getApiService().latest()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new BaseObserver<BaseEntity<List<AnnouncementEntity>>>() {
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+                        mDisposables.put(mRequestCount++, disposable);
+                    }
+
+                    @Override
+                    public void onNext(BaseEntity<List<AnnouncementEntity>> entity) {
                         if (callBack != null) {
                             callBack.getData(entity);
                         }
@@ -701,6 +736,71 @@ public class RequestUtil {
 
 
     /**
+     * 青年创业营
+     */
+    public void startup(BaseDataCallBack<StarUpIndexEntity> callBack) {
+        ApiProxy.getApiService().startup()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new BaseObserver<BaseEntity<StarUpIndexEntity>>() {
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+                        mDisposables.put(mRequestCount++, disposable);
+                    }
+
+                    @Override
+                    public void onNext(BaseEntity<StarUpIndexEntity> entity) {
+                        if (callBack != null) {
+                            callBack.getData(entity);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (callBack != null) {
+                            callBack.getData(null);
+                        }
+                    }
+                });
+    }
+
+
+
+
+    /**
+     * 是否参与过漂流
+     */
+    public void didAttend(BaseDataCallBack<DidAttendEntity> callBack) {
+        ApiProxy.getApiService().didAttend()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new BaseObserver<BaseEntity<DidAttendEntity>>() {
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+                        mDisposables.put(mRequestCount++, disposable);
+                    }
+
+                    @Override
+                    public void onNext(BaseEntity<DidAttendEntity> entity) {
+                        if (callBack != null) {
+                            callBack.getData(entity);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (callBack != null) {
+                            callBack.getData(null);
+                        }
+                    }
+                });
+    }
+
+
+
+    /**
      * 注销
      */
     public void unregister(BaseDataCallBack callBack) {
@@ -729,6 +829,10 @@ public class RequestUtil {
                     }
                 });
     }
+
+
+
+
 
 
     /**

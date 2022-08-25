@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="738dp"
+        android:layout_height="300dp"
+        android:layout_marginHorizontal="11dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/drift_track_bg">
+
+        <com.hjq.shape.layout.ShapeLinearLayout
+            android:id="@+id/ll_top"
+            android:layout_width="240dp"
+            android:layout_height="28dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="36dp"
+            android:gravity="center_horizontal"
+            app:shape_radius="100dp"
+            app:shape_solidColor="@color/color_0d1">
+
+
+            <View
+                android:layout_width="11dp"
+                android:layout_height="11dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/shape_blue_circles" />
+
+            <TextView
+                android:id="@+id/tv_from_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxEms="6"
+                android:singleLine="true"
+                android:text="你的小太阳"
+                android:textColor="@color/white"
+                android:textSize="9sp" />
+
+
+            <ImageView
+                android:layout_width="23dp"
+                android:layout_height="2dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginHorizontal="15dp"
+                android:src="@drawable/transmit" />
+
+            <View
+                android:layout_width="11dp"
+                android:layout_height="11dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/shape_purple_circles" />
+
+            <TextView
+                android:id="@+id/tv_to_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxEms="6"
+                android:singleLine="true"
+                android:text="你的小太阳"
+                android:textColor="@color/white"
+                android:textSize="9sp" />
+        </com.hjq.shape.layout.ShapeLinearLayout>
+
+
+        <HorizontalScrollView
+            android:id="@+id/scroll_view"
+            android:layout_width="wrap_content"
+            android:layout_height="250dp"
+            android:layout_centerVertical="true"
+            android:overScrollMode="never"
+            android:scrollbars="none">
+
+            <com.drifting.bureau.view.chart.LineChartView
+                android:id="@+id/line_chart_view"
+                android:layout_width="wrap_content"
+                android:layout_height="250dp" />
+
+        </HorizontalScrollView>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

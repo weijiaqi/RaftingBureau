@@ -1,6 +1,7 @@
 package com.drifting.bureau.app.api;
 
 
+import com.drifting.bureau.mvp.model.entity.AnnouncementEntity;
 import com.drifting.bureau.mvp.model.entity.BarrageEntity;
 import com.drifting.bureau.mvp.model.entity.BlindBoxRecordEntity;
 import com.drifting.bureau.mvp.model.entity.BoxOpenEntity;
@@ -8,6 +9,7 @@ import com.drifting.bureau.mvp.model.entity.CommentDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
 import com.drifting.bureau.mvp.model.entity.CreatewithfileEntity;
 import com.drifting.bureau.mvp.model.entity.DeliveryDetailsEntity;
+import com.drifting.bureau.mvp.model.entity.DidAttendEntity;
 import com.drifting.bureau.mvp.model.entity.DriftingTrackEntity;
 import com.drifting.bureau.mvp.model.entity.ExploreTimesEntity;
 import com.drifting.bureau.mvp.model.entity.FriendApplicationEntity;
@@ -45,6 +47,7 @@ import com.drifting.bureau.mvp.model.entity.SpaceCheckEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceExchangeEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceInfoEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceStationEntity;
+import com.drifting.bureau.mvp.model.entity.StarUpIndexEntity;
 import com.drifting.bureau.mvp.model.entity.SysmessageEntity;
 import com.drifting.bureau.mvp.model.entity.SysmessageMineEntity;
 import com.drifting.bureau.mvp.model.entity.TeaShopEntity;
@@ -395,6 +398,18 @@ public interface ApiService {
      */
     @GET("v/space/storage/mine")
     Observable<BaseEntity<List<MyTreasuryEntity>>> storagemine();
+
+
+
+    /**
+     * 公告
+     *
+     * @return
+     */
+    @GET("v/announcement/latest")
+    Observable<BaseEntity<List<AnnouncementEntity>>> latest();
+
+
 
 
     /**
@@ -773,5 +788,22 @@ public interface ApiService {
      */
     @GET("v/nebula/list")
     Observable<BaseEntity<NebulaListEntity>> nebulalist();
+
+    /**
+     *青年创业营
+     *
+     * @return
+     */
+    @GET("v/startup/index")
+    Observable<BaseEntity<StarUpIndexEntity>> startup();
+
+
+    /**
+     *是否参与过漂流
+     *
+     * @return
+     */
+    @GET("v/topic/didAttend")
+    Observable<BaseEntity<DidAttendEntity>> didAttend();
 
 }

@@ -176,13 +176,15 @@
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_account_settings.xml" value="0.25" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_announcement_details.xml" value="0.286231884057971" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_ar_display.xml" value="0.25" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/activity_ar_guide.xml" value="0.3177083333333333" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/activity_ar_starry_sky.xml" value="0.21614583333333334" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_blind_box_record.xml" value="0.19791666666666666" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_build_guide.xml" value="0.335" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_city_selection.xml" value="0.21" />
-        <entry key="..\:/Drifting/app/src/main/res/layout/activity_claim_planet.xml" value="0.25" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/activity_claim_planet.xml" value="0.2545289855072464" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_custom_error.xml" value="0.2421875" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_delivery_details.xml" value="0.165" />
-        <entry key="..\:/Drifting/app/src/main/res/layout/activity_discovery_tour.xml" value="0.21" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/activity_discovery_tour.xml" value="0.25" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_drifting_bottle.xml" value="0.165" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_drifting_track.xml" value="0.10280797101449275" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_feed_back.xml" value="0.17" />
@@ -194,7 +196,7 @@
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_move_away_planetary.xml" value="0.25" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_my_blind_box.xml" value="0.11231884057971014" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_my_conversation.xml" value="0.31567028985507245" />
-        <entry key="..\:/Drifting/app/src/main/res/layout/activity_my_space_station.xml" value="0.33" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/activity_my_space_station.xml" value="0.5" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_nebula.xml" value="0.20425724637681159" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_nebulae.xml" value="0.1910551454624403" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_payment_info.xml" value="0.33" />
@@ -222,12 +224,15 @@
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_withdrawal_record.xml" value="0.16847826086956522" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_wxpay_call_back.xml" value="0.2824074074074074" />
         <entry key="..\:/Drifting/app/src/main/res/layout/demo.xml" value="0.25" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/dialog_announcement_display.xml" value="0.25" />
         <entry key="..\:/Drifting/app/src/main/res/layout/dialog_attribute_results.xml" value="0.25" />
         <entry key="..\:/Drifting/app/src/main/res/layout/dialog_call_telephone.xml" value="0.11831483350151362" />
         <entry key="..\:/Drifting/app/src/main/res/layout/dialog_cover.xml" value="0.29010416666666666" />
         <entry key="..\:/Drifting/app/src/main/res/layout/dialog_currency.xml" value="0.21" />
         <entry key="..\:/Drifting/app/src/main/res/layout/dialog_donation.xml" value="0.25" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/dialog_drifting_play.xml" value="0.2824074074074074" />
         <entry key="..\:/Drifting/app/src/main/res/layout/dialog_exchange_code.xml" value="0.26811594202898553" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/dialog_exclusive_planet.xml" value="0.25" />
         <entry key="..\:/Drifting/app/src/main/res/layout/dialog_how_to_play.xml" value="0.25" />
         <entry key="..\:/Drifting/app/src/main/res/layout/dialog_loading.xml" value="0.12771739130434784" />
         <entry key="..\:/Drifting/app/src/main/res/layout/dialog_log_out.xml" value="0.2869791666666667" />
@@ -256,6 +261,7 @@
         <entry key="..\:/Drifting/app/src/main/res/layout/fragment_planetary_dis.xml" value="0.33" />
         <entry key="..\:/Drifting/app/src/main/res/layout/fragment_post_drifting.xml" value="0.28854166666666664" />
         <entry key="..\:/Drifting/app/src/main/res/layout/fragment_rafting_bureaufriend.xml" value="0.33" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/include_ar_title.xml" value="0.25" />
         <entry key="..\:/Drifting/app/src/main/res/layout/include_blue_solid_block.xml" value="0.2644927536231884" />
         <entry key="..\:/Drifting/app/src/main/res/layout/include_claim planet.xml" value="0.2644927536231884" />
         <entry key="..\:/Drifting/app/src/main/res/layout/include_claim_planet.xml" value="0.2644927536231884" />
@@ -269,6 +275,10 @@
         <entry key="..\:/Drifting/app/src/main/res/layout/include_voice_play.xml" value="0.2916666666666667" />
         <entry key="..\:/Drifting/app/src/main/res/layout/item_about_me.xml" value="0.25" />
         <entry key="..\:/Drifting/app/src/main/res/layout/item_answer.xml" value="0.25" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/item_ar_announcement.xml" value="0.3177083333333333" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/item_ar_income_record.xml" value="0.19709429824561403" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/item_ar_making_record.xml" value="0.5" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/item_ar_with_record.xml" value="0.18012820512820513" />
         <entry key="..\:/Drifting/app/src/main/res/layout/item_blind_box.xml" value="0.12635869565217392" />
         <entry key="..\:/Drifting/app/src/main/res/layout/item_blind_box_record.xml" value="0.30434782608695654" />
         <entry key="..\:/Drifting/app/src/main/res/layout/item_city_list.xml" value="0.10872855701311807" />
@@ -302,14 +312,19 @@
         <entry key="..\:/Drifting/app/src/main/res/layout/item_space_barrage.xml" value="0.25" />
         <entry key="..\:/Drifting/app/src/main/res/layout/item_space_station.xml" value="0.165" />
         <entry key="..\:/Drifting/app/src/main/res/layout/item_tea_shop.xml" value="0.335" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/layout_ar_not_data.xml" value="0.3" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/layout_drift_track.xml" value="0.33" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/layout_home_operation.xml" value="0.33" />
         <entry key="..\:/Drifting/app/src/main/res/layout/layout_index_banner.xml" value="0.13541666666666666" />
         <entry key="..\:/Drifting/app/src/main/res/layout/layout_indicator_view.xml" value="0.28020833333333334" />
         <entry key="..\:/Drifting/app/src/main/res/layout/layout_left_planet_introduction.xml" value="0.27685185185185185" />
         <entry key="..\:/Drifting/app/src/main/res/layout/layout_loading.xml" value="0.32083333333333336" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/layout_new_ar_message.xml" value="0.67" />
         <entry key="..\:/Drifting/app/src/main/res/layout/layout_new_message.xml" value="0.5" />
         <entry key="..\:/Drifting/app/src/main/res/layout/layout_not_data.xml" value="0.12771739130434784" />
         <entry key="..\:/Drifting/app/src/main/res/layout/layout_planet_introduction.xml" value="0.2449074074074074" />
         <entry key="..\:/Drifting/app/src/main/res/layout/layout_show_state.xml" value="0.10544904137235116" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/layout_star_troopers.xml" value="0.5" />
         <entry key="..\:/Drifting/app/src/main/res/layout/layout_start_drifting.xml" value="0.1503623188405797" />
         <entry key="..\:/Drifting/app/src/main/res/layout/layout_tab_top.xml" value="0.33" />
         <entry key="..\:/Drifting/app/src/main/res/layout/layout_voice_play.xml" value="0.2916666666666667" />
@@ -320,11 +335,21 @@
         <entry key="..\:/Drifting/app/src/main/res/layout/rc_message_item.xml" value="0.31567028985507245" />
         <entry key="..\:/Drifting/app/src/main/res/layout/toast_layout_center.xml" value="0.2644927536231884" />
         <entry key="..\:/Drifting/app/src/main/res/layout/view_3d_color_line.xml" value="0.1118659420289855" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/view_center_console.xml" value="0.25" />
         <entry key="..\:/Drifting/app/src/main/res/layout/view_color_line.xml" value="0.26992753623188404" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/view_expenditure_record.xml" value="0.23044871794871793" />
         <entry key="..\:/Drifting/app/src/main/res/layout/view_height_title_lay.xml" value="0.27445652173913043" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/view_make_record.xml" value="0.33" />
         <entry key="..\:/Drifting/app/src/main/res/layout/view_model_title.xml" value="1.15625" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/view_query_inventory.xml" value="0.23044871794871793" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/view_space_station.xml" value="0.5" />
         <entry key="..\:/Drifting/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.296" />
         <entry key="..\:/Drifting/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.296" />
+        <entry key="..\:/Drifting/rbcore/src/main/res/drawable/refresh_loading.xml" value="0.308" />
+        <entry key="..\:/Drifting/rbcore/src/main/res/layout/listview_ar_footer.xml" value="0.2824074074074074" />
+        <entry key="..\:/Drifting/rbcore/src/main/res/layout/listview_ar_header.xml" value="0.5198889916743756" />
+        <entry key="..\:/Drifting/rbcore/src/main/res/layout/listview_footer.xml" value="0.2824074074074074" />
+        <entry key="..\:/Drifting/rbcore/src/main/res/layout/listview_header.xml" value="0.2545289855072464" />
         <entry key="..\:/Users/卫佳琪/.gradle/caches/transforms-3/1289752bc6b8ab3093517486c3cd2e7d/transformed/jetified-im_kit-5.1.3/res/layout/rc_conversation_fragment.xml" value="0.10872855701311807" />
         <entry key="..\:/Users/卫佳琪/.gradle/caches/transforms-3/1289752bc6b8ab3093517486c3cd2e7d/transformed/jetified-im_kit-5.1.3/res/layout/rc_conversationlist_activity.xml" value="0.31567028985507245" />
         <entry key="..\:/Users/卫佳琪/.gradle/caches/transforms-3/1b7f791d90c5b9baf86d6082cba8f2bd/transformed/jetified-bga-banner-2.1.7/res/drawable/bga_banner_selector_point_hollow.xml" value="0.192" />

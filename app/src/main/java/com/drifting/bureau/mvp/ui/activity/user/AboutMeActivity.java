@@ -158,7 +158,7 @@ public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements A
         mTvName.setText(userInfoEntity.getUser().getName());
         mTvSchedule.setText(userInfoEntity.getPlanet().getSchedule() + "%");
         mPrUpload.setProgress(userInfoEntity.getPlanet().getSchedule());
-        setTopSwipe();
+//        setTopSwipe();
     }
 
 

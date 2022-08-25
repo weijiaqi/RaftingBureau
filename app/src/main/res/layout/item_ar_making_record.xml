@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="190dp"
+    android:layout_height="80.5dp"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="10dp"
+    android:paddingHorizontal="14.5dp"
+    android:orientation="vertical"
+    android:background="@drawable/ar_making_record_bg"
+    tools:ignore="MissingDefaultResource">
+
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12.5dp"
+
+        android:layout_marginBottom="5dp"
+        android:text="接收时间：2022-10-15 14：00"
+        android:textColor="@color/color_cc"
+        android:textSize="7sp" />
+
+    <View
+        android:id="@+id/view_color_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.4dp"
+        android:background="@color/color_white_4d" />
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/tv_people"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text=""
+            android:visibility="gone"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+       >
+
+        <TextView
+            android:id="@+id/tv_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="漂流方式："
+            android:textColor="@color/color_cc"
+            android:textSize="8sp" />
+
+
+        <com.hjq.shape.view.ShapeTextView
+            android:id="@+id/tv_explore_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tv_mode"
+            android:text="传递漂"
+            android:textColor="@color/white"
+            android:textSize="8sp"
+            app:shape_textEndColor="@color/color_70"
+            app:shape_textStartColor="@color/color_d6" />
+
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text=""
+            android:textColor="@color/color_6d"
+            android:textSize="8sp" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

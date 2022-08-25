@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="90dp"
+    android:layout_height="42dp"
+    android:background="@drawable/announcement_tab"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:layout_marginStart="13dp"
+    android:paddingStart="11dp">
+
+
+    <TextView
+        android:id="@+id/tv_receive_waves"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="接收电波"
+        android:textColor="@color/color_00"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_create_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2022.8.12"
+        android:textColor="@color/color_33"
+        android:textSize="11sp" />
+
+</LinearLayout>

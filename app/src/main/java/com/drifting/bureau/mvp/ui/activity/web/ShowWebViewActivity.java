@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -45,12 +46,25 @@ public class ShowWebViewActivity extends BaseActivity implements WebLoadingListe
 
     private CustomWebView mWebView;
     private static final String WEB_TYPE = "web_type";
+    private static final String WEB_URL = "web_url";
+    private static final String WEB_TITLE = "web_title";
     private int mType = -1;
     private boolean loadErrored;
+    private String mWebUrl, mTitle;
 
     public static void start(Context context, int type, boolean closePage) {
         Intent intent = new Intent(context, ShowWebViewActivity.class);
         intent.putExtra(WEB_TYPE, type);
+        context.startActivity(intent);
+        if (closePage) ((Activity) context).finish();
+    }
+
+
+    public static void start(Context context, int type, String title, String url,boolean closePage) {
+        Intent intent = new Intent(context, ShowWebViewActivity.class);
+        intent.putExtra(WEB_TYPE, type);
+        intent.putExtra(WEB_TITLE, title);
+        intent.putExtra(WEB_URL, url);
         context.startActivity(intent);
         if (closePage) ((Activity) context).finish();
     }
@@ -69,6 +83,8 @@ public class ShowWebViewActivity extends BaseActivity implements WebLoadingListe
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
         mType = getIntent().getIntExtra(WEB_TYPE, 0);
+        mWebUrl = getIntent().getStringExtra(WEB_URL);
+        mTitle = getIntent().getStringExtra(WEB_TITLE);
         initView();
     }
 
@@ -86,16 +102,17 @@ public class ShowWebViewActivity extends BaseActivity implements WebLoadingListe
     private void setDatas() {
         switch (mType) {
             case 0:
-                mWebView.setWebChromeClient(new WebChromeClient() {
-                    @Override
-                    public void onReceivedTitle(WebView view, String title) {
-                        super.onReceivedTitle(view, title);
-                        mTvTitle.setText(title);
-                    }
-                });
-//                if (!TextUtils.isEmpty(mWebUrl)) {
-//                    mWebView.loadUrl(mWebUrl);
-//                }
+//                mWebView.setWebChromeClient(new WebChromeClient() {
+//                    @Override
+//                    public void onReceivedTitle(WebView view, String title) {
+//                        super.onReceivedTitle(view, title);
+//                        mTvTitle.setText(title);
+//                    }
+//                });
+                mTvTitle.setText(mTitle);
+                if (!TextUtils.isEmpty(mWebUrl)) {
+                    mWebView.loadUrl(mWebUrl);
+                }
                 break;
             case 1:
                 mTvTitle.setText("用户隐私协议");

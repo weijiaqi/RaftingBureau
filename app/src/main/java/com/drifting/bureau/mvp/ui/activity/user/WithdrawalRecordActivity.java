@@ -80,7 +80,7 @@ public class WithdrawalRecordActivity extends BaseActivity<WithdrawalRecordPrese
     public void initListener() {
         mRcyPublic.setLayoutManager(new LinearLayoutManager(this));
         mRcyPublic.setLoadingListener(this);
-        incomeRecordAdapter = new IncomeRecordAdapter(new ArrayList<>());
+        incomeRecordAdapter = new IncomeRecordAdapter(new ArrayList<>(),1);
         mRcyPublic.setAdapter(incomeRecordAdapter);
         getData(mPage, true);
     }

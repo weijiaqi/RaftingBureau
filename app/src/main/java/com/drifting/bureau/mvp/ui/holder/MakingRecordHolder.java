@@ -26,6 +26,8 @@ public class MakingRecordHolder extends BaseRecyclerHolder {
     TextView mTvPrice;
     @BindView(R.id.tv_status)
     TextView mTvStatus;
+    @BindView(R.id.tv_explore_id)
+    TextView mTvExploreId;
     private Context context;
 
     public MakingRecordHolder(View itemView) {
@@ -36,6 +38,10 @@ public class MakingRecordHolder extends BaseRecyclerHolder {
     public void setData(@NonNull List<MakingRecordEntity.ListBean> listBeanList, int position) {
         TextUtil.setText(mTvTime, "接收时间：" + StringUtil.stampToDate(listBeanList.get(position).getPath_time()));
         TextUtil.setText(mTvPeople, "漂流人：" + listBeanList.get(position).getBuyer_name());
+        if (listBeanList.get(position).getExplore_id()==1){
+            mTvExploreId.setText("传递漂");
+        }
+
         if (listBeanList.get(position).getMade() == 1) {
             TextUtil.setText(mTvStatus, "已制作");
             mTvStatus.setTextColor(context.getColor(R.color.color_6d));

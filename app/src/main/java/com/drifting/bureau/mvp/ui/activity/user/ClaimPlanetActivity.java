@@ -11,9 +11,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.drifting.bureau.R;
+import com.drifting.bureau.mvp.ui.activity.home.ArCenterConsoleActivity;
 import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
 import com.drifting.bureau.mvp.ui.activity.index.MoveAwayPlanetaryActivity;
 import com.drifting.bureau.storageinfo.Preferences;
+import com.drifting.bureau.util.ARCoreUtil;
 import com.drifting.bureau.util.ClickUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
@@ -31,6 +33,7 @@ public class ClaimPlanetActivity extends BaseActivity {
     @BindView(R.id.tv_name)
     TextView mTvName;
 
+    public  static ClaimPlanetActivity claimPlanetActivity;
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, ClaimPlanetActivity.class);
         context.startActivity(intent);
@@ -50,6 +53,7 @@ public class ClaimPlanetActivity extends BaseActivity {
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
+        claimPlanetActivity=this;
         mTvName.setText(Preferences.getUserName());
     }
 
@@ -60,13 +64,12 @@ public class ClaimPlanetActivity extends BaseActivity {
                 case R.id.tv_enter_rb:
                     DiscoveryTourActivity.start(this, true);
                     break;
-                case R.id.tv_perfect:
-                    MoveAwayPlanetaryActivity.start(ClaimPlanetActivity.this, 2, false);
+                case R.id.tv_perfect:  //进入AR版本
+                    ArGuideActivity.start(this,false);
                     break;
             }
         }
     }
-
 
 
 }

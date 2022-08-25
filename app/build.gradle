@@ -162,6 +162,7 @@ dependencies {
     //VR
     implementation 'com.google.vr:sdk-panowidget:1.80.0'
     //AR
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1"
     implementation "com.gorisse.thomas.sceneform:sceneform:1.21.0"
 
     //鲁班压缩

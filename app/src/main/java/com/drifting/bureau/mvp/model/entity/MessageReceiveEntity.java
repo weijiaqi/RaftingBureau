@@ -12,6 +12,24 @@ public class MessageReceiveEntity {
     private Integer updated_at_int;
     private Integer explore_id;
     private Integer drift_rest;
+    private Integer drift_end;
+    private String nebula_name;
+
+    public Integer getDrift_end() {
+        return drift_end;
+    }
+
+    public void setDrift_end(Integer drift_end) {
+        this.drift_end = drift_end;
+    }
+
+    public String getNebula_name() {
+        return nebula_name;
+    }
+
+    public void setNebula_name(String nebula_name) {
+        this.nebula_name = nebula_name;
+    }
 
     public Integer getDrift_rest() {
         return drift_rest;

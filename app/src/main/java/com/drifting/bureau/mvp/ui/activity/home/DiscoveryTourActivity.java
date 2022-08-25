@@ -14,6 +14,7 @@ import android.content.res.AssetManager;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -33,8 +34,10 @@ import com.drifting.bureau.di.component.DaggerDiscoveryTourComponent;
 import com.drifting.bureau.mvp.contract.DiscoveryTourContract;
 import com.drifting.bureau.mvp.model.entity.MessageReceiveEntity;
 import com.drifting.bureau.mvp.model.entity.PlanetEntity;
+import com.drifting.bureau.mvp.model.entity.StarUpIndexEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.presenter.DiscoveryTourPresenter;
+import com.drifting.bureau.mvp.ui.activity.index.GetSpaceStationActivity;
 import com.drifting.bureau.mvp.ui.activity.index.PlanetarySelectActivity;
 import com.drifting.bureau.mvp.ui.activity.index.SpaceCapsuleActivity;
 import com.drifting.bureau.mvp.ui.activity.index.TopicDetailActivity;
@@ -43,12 +46,17 @@ import com.drifting.bureau.mvp.ui.activity.user.MessageCenterActivity;
 import com.drifting.bureau.mvp.ui.activity.web.ShowWebViewActivity;
 import com.drifting.bureau.mvp.ui.adapter.DiscoveryViewpagerAdapter;
 import com.drifting.bureau.storageinfo.Preferences;
+import com.drifting.bureau.util.AppUtil;
+import com.drifting.bureau.util.ClickUtil;
+import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.animator.AnimatorUtil;
+import com.drifting.bureau.util.callback.BaseDataCallBack;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.drifting.bureau.view.DiscoveryTransformer;
 import com.google.vr.sdk.widgets.pano.VrPanoramaView;
 import com.jess.arms.base.BaseActivity;
+import com.jess.arms.base.BaseEntity;
 import com.jess.arms.di.component.AppComponent;
 import com.umeng.analytics.MobclickAgent;
 
@@ -75,8 +83,8 @@ import io.rong.imlib.model.Conversation;
 public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> implements DiscoveryTourContract.View {
     @BindView(R.id.tv_bar)
     TextView mTvBar;
-     @BindView(R.id.tv_energy)
-     TextView mTvEnergy;
+    @BindView(R.id.tv_energy)
+    TextView mTvEnergy;
     @BindView(R.id.iv_rocket)
     ImageView mIvRocket;
     @BindView(R.id.rl_message)
@@ -91,6 +99,8 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
     ImageView mIvHot;
     @BindView(R.id.vrPanoramaView)
     VrPanoramaView mVRPanoramaView;
+    @BindView(R.id.tv_youth_camp)
+    TextView mTvYouthCamp;
     private List<PlanetEntity> list;
     private AnimatorSet animatorSet;
     private Handler handler;
@@ -98,6 +108,7 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
     private int id, user_id, explore_id;
     private DiscoveryViewpagerAdapter discoveryViewpagerAdapter;
     private UserInfoEntity userInfoEntity;
+    private StarUpIndexEntity starUpIndexEntity;
 
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, DiscoveryTourActivity.class);
@@ -133,7 +144,6 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
         setStatusBarHeight(mTvBar);
-        loadAnimator();
         loadPhotoSphere();
         loadUI();
     }
@@ -147,10 +157,6 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
         }
     }
 
-
-    public void loadAnimator() {
-        //AnimatorUtil.TransAnim(mIvStar1, mIvStar2, mIvStar3, 2500);
-    }
 
     private void loadPhotoSphere() {
         mVRPanoramaView.setInfoButtonEnabled(false);//隐藏信息按钮
@@ -186,6 +192,12 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
                 Preferences.saveMascot(userInfoEntity.getUser().getMascot());
                 mTvAboutMe.setText(userInfoEntity.getPlanet().getName());
                 mTvEnergy.setText(userInfoEntity.getUser().getMeta_power());
+                RequestUtil.create().startup(entity1 -> {
+                    if (entity1 != null && entity1.getCode() == 200) {
+                        starUpIndexEntity = entity1.getData();
+                        mTvYouthCamp.setVisibility(!TextUtils.isEmpty(starUpIndexEntity.getUrl()) ? View.VISIBLE : View.INVISIBLE);
+                    }
+                });
             }
         });
     }
@@ -214,53 +226,41 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
     }
 
 
-    @OnClick({R.id.rl_message, R.id.tv_about_me, R.id.tv_space_capsule, R.id.rl_info, R.id.ll_step_star,R.id.rl_right})
+    @OnClick({R.id.rl_message, R.id.tv_about_me, R.id.tv_space_capsule, R.id.rl_info, R.id.ll_step_star, R.id.rl_right, R.id.tv_youth_camp})
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.rl_right:  //右边
-                ShowWebViewActivity.start(this,4,false);
-            break;
-            case R.id.rl_message: //开启新消息
-                TopicDetailActivity.start(this, explore_id, id, false);
-
-//                RequestUtil.create().userplayer(user_id + "", entity -> {
-//                    if (entity != null && entity.getCode() == 200) {
-//                        raftingInforDialog = new RaftingInforDialog(DiscoveryTourActivity.this, entity.getData(), explore_id);
-//                        raftingInforDialog.show();
-//                        raftingInforDialog.setOnClickCallback(type -> {
-//                            if (type == RaftingInforDialog.CLICK_FINISH) {
-//                                RequestUtil.create().messagethrow(id, entity1 -> {
-//                                    if (entity1.getCode() == 200) {
-//                                        IntoSpace();
-//                                    } else {
-//                                        showMessage(entity1.getMsg());
-//                                    }
-//                                });
-//                            } else if (type == RaftingInforDialog.CLICK_SELECT) {
-//                                ViewRaftingActivity.start(DiscoveryTourActivity.this, user_id, id, explore_id, entity.getData(), false);
-//                            }
-//                        });
-//                    }
-//                });
-                break;
-            case R.id.tv_about_me: //关于我
-                if (userInfoEntity != null) {
-                    AboutMeActivity.start(this, userInfoEntity, false);
-                }
-                break;
-            case R.id.tv_space_capsule: //太空舱
-                SpaceCapsuleActivity.start(this, false);
-                break;
-            case R.id.rl_info:
-                MessageCenterActivity.start(this, false);
-                break;
-            case R.id.ll_step_star:
-                if (userInfoEntity != null) {
-                    PlanetarySelectActivity.start(this, userInfoEntity.getPlanet().getLevel(), false);
-                }
-                break;
+        if (!ClickUtil.isFastClick(view.getId())) {
+            switch (view.getId()) {
+                case R.id.rl_right:  //右边
+                    ShowWebViewActivity.start(this, 4, false);
+                    break;
+                case R.id.rl_message: //开启新消息
+                    TopicDetailActivity.start(this, explore_id, id, false);
+                    break;
+                case R.id.tv_about_me: //关于我
+                    if (userInfoEntity != null) {
+                        AboutMeActivity.start(this, userInfoEntity, false);
+                    }
+                    break;
+                case R.id.tv_space_capsule: //太空舱
+                    SpaceCapsuleActivity.start(this, false);
+                    break;
+                case R.id.rl_info:
+                    MessageCenterActivity.start(this, false);
+                    break;
+                case R.id.ll_step_star:
+                    Preferences.setARModel(true);
+                    ArCenterConsoleActivity.start(this, true);
+//                if (userInfoEntity != null) {
+//                    PlanetarySelectActivity.start(this, userInfoEntity.getPlanet().getLevel(), false);
+//                }
+                    break;
+                case R.id.tv_youth_camp:  //青年创业营
+                    if (starUpIndexEntity != null) {
+                        ShowWebViewActivity.start(this, 0, "青年创业营",starUpIndexEntity.getUrl()+"?Sign="+ StringUtil.formatNullString(AppUtil.getSign(Preferences.getPhone()))+"&token="+StringUtil.formatNullString(Preferences.getToken()),false);
+                    }
+                    break;
+            }
         }
-
     }
 
     Runnable mAdRunnable = () -> getMessage();

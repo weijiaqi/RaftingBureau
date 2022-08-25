@@ -8,8 +8,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.drifting.bureau.R;
+import com.drifting.bureau.mvp.ui.activity.home.ArCenterConsoleActivity;
 import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
+import com.drifting.bureau.mvp.ui.activity.user.ArGuideActivity;
 import com.drifting.bureau.mvp.ui.activity.user.BuildGuideActivity;
+import com.drifting.bureau.mvp.ui.activity.user.ClaimPlanetActivity;
 import com.drifting.bureau.mvp.ui.activity.user.PullNewGuideActivity;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.RongIMUtil;
@@ -45,18 +48,26 @@ public class SplashActivity extends BaseActivity {
             RongIMUtil.getInstance().connect(Preferences.getRcToken(), new RongIMUtil.ConnectListener() {
                 @Override
                 public void onConnectSuccess() {
-                    DiscoveryTourActivity.start(SplashActivity.this, true);
+                    startMainActivity();
                 }
 
                 @Override
                 public void onConnectError() {
                     Timber.e("融云连接失败");
-                    DiscoveryTourActivity.start(SplashActivity.this, true);
+                    startMainActivity();
                 }
             });
-
         }
     };
+
+
+    public void startMainActivity() {
+        if (Preferences.isARModel()) {
+            ArCenterConsoleActivity.start(SplashActivity.this, true);
+        } else {
+            DiscoveryTourActivity.start(SplashActivity.this, true);
+        }
+    }
 
     @Override
     protected void onDestroy() {

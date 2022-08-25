@@ -81,7 +81,7 @@ public class IncomeRecordActivity extends BaseActivity<IncomeRecordPresenter> im
     public void initListener() {
         mRcyPublic.setLayoutManager(new LinearLayoutManager(this));
         mRcyPublic.setLoadingListener(this);
-        incomeRecordAdapter = new IncomeRecordAdapter(new ArrayList<>());
+        incomeRecordAdapter = new IncomeRecordAdapter(new ArrayList<>(),1);
         mRcyPublic.setAdapter(incomeRecordAdapter);
         getData(mPage, true);
     }
