@@ -235,7 +235,7 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
             } else {
                 setOrderGone(false);
                 mTvTimeLine.setText(DateUtil.TimeRemaining(orderOneEntity.getTimeout()) + "后将消失");
-                handler.postDelayed(mAdRunnable, entity.getTimeout() * 10);
+                handler.postDelayed(mAdRunnable, entity.getTimeout() * 1000);
             }
         }
     }

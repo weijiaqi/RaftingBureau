@@ -73,9 +73,8 @@ public class XRecyclerViewHeader extends LinearLayout {
     //初始化
     private void initView(Context context) {
         mContext = context;
-
-        // 初始情况，设置下拉刷新view高度为0
         mContainer = (LinearLayout) LayoutInflater.from(context).inflate(R.layout.listview_header, null);
+
         LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         lp.setMargins(0, 0, 0, 0);
         this.setLayoutParams(lp);

@@ -6,6 +6,15 @@ public class PlanetLocationEntity {
     private int show;
     private int assess_after;
     private int assess_status;
+    private int answer;
+
+    public int getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(int answer) {
+        this.answer = answer;
+    }
 
     public int getShow() {
         return show;

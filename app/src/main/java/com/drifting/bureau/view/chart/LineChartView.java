@@ -526,11 +526,11 @@ public class LineChartView extends View {
         floatAnim(mBitmap2, canvas, point.x + 30, point.y - mBitmapHeight);
 
         mTopRect.left = point.x + 30;
-        mTopRect.top = mHeight + point.y - mBitmapHeight;
+        mTopRect.top = mHeight / 2f + (getViewDrawHeight() + topSpace + bottomSpace) / 2f + point.y - mBitmapHeight;
         mTopRect.right = point.x + 30 + mBitmapWidth;
-        mTopRect.bottom = mHeight + point.y + mBitmapHeight;
+        mTopRect.bottom = mHeight / 2f + (getViewDrawHeight() + topSpace + bottomSpace) / 2f + point.y + mBitmapHeight;
 
-        //canvas.drawRect(mTopRect, customPaint(Color.BLUE));
+//        canvas.drawRect(mTopRect, customPaint(Color.WHITE));
     }
 
 
@@ -576,9 +576,9 @@ public class LineChartView extends View {
                 floatAnim(mBitmap2, canvas, point.x - (mBitmapWidth / 2), point.y - (mBitmapWidth / 2));
 
                 mOpenRect.left = point.x - (mBitmapWidth / 2);
-                mOpenRect.top = mHeight + point.y - (mBitmapHeight / 2);
+                mOpenRect.top = mHeight / 2f + (getViewDrawHeight() + topSpace + bottomSpace) / 2f + point.y - (mBitmapWidth / 2);
                 mOpenRect.right = point.x - (mBitmapWidth / 2) + mBitmapWidth;
-                mOpenRect.bottom = mHeight + point.y + mBitmapHeight;
+                mOpenRect.bottom = mHeight / 2f + (getViewDrawHeight() + topSpace + bottomSpace) / 2f + point.y + (mBitmapWidth / 2);
             }
         }
     }

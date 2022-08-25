@@ -12,19 +12,37 @@ import java.util.List;
 
 public class IncomeRecordAdapter extends BaseRecyclerAdapter<IncomeRecordEntity.ListBean> {
 
-    public IncomeRecordAdapter(List<IncomeRecordEntity.ListBean> infos) {
+    private int type;
+    private int ITEM_INCOME = 1;
+    private int ITEM_AR_INCOME = 2;
+
+    public IncomeRecordAdapter(List<IncomeRecordEntity.ListBean> infos, int type) {
         super(infos);
+        this.type = type;
     }
 
     @Override
     public void getHolder(BaseRecyclerHolder holder, int position) {
-        IncomeRecordHolder incomeRecordHolder=(IncomeRecordHolder) holder;
+        IncomeRecordHolder incomeRecordHolder = (IncomeRecordHolder) holder;
         incomeRecordHolder.setData(mDatas, position);
     }
 
     @Override
+    public int getItemViewType(int position) {
+        if (type == 1) {
+            return ITEM_INCOME;
+        } else {
+            return ITEM_AR_INCOME;
+        }
+    }
+
+    @Override
     protected int getLayoutId(int viewType) {
-        return R.layout.item_income_record;
+        if (viewType == ITEM_INCOME) {
+            return R.layout.item_income_record;
+        } else{
+            return R.layout.item_ar_income_record;
+        }
     }
 
     @Override

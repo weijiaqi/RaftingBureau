@@ -39,7 +39,7 @@ public class CommonParInterceptor implements Interceptor {
                         .addHeader("User-Agent", SystemUtil.getUserAgent(RBureauApplication.getContext()))//添加真正的头部
                         .addHeader("Token", StringUtil.formatNullString(Preferences.getToken()))
                         .addHeader("Version", StringUtil.formatNullString(AppUtil.getVerName(RBureauApplication.getContext()) + ""))
-                        .addHeader("Sign",StringUtil.formatNullString(getSign(Preferences.getPhone())))
+                        .addHeader("Sign",StringUtil.formatNullString(AppUtil.getSign(Preferences.getPhone())))
                         .addHeader("source","Android")
                         .addHeader("Accept", "application/json")
                         .post(formBody)
@@ -51,7 +51,7 @@ public class CommonParInterceptor implements Interceptor {
                         .addHeader("User-Agent", SystemUtil.getUserAgent(RBureauApplication.getContext()))//添加真正的头部
                         .addHeader("Token", StringUtil.formatNullString(Preferences.getToken()))
                         .addHeader("Version", StringUtil.formatNullString(AppUtil.getVerName(RBureauApplication.getContext()) + ""))
-                        .addHeader("Sign",StringUtil.formatNullString(getSign(Preferences.getPhone())))
+                        .addHeader("Sign",StringUtil.formatNullString(AppUtil.getSign(Preferences.getPhone())))
                         .addHeader("source","Android")
                         .addHeader("Accept", "application/json")
                         .post(multipartBody)
@@ -64,7 +64,7 @@ public class CommonParInterceptor implements Interceptor {
                             SystemUtil.getUserAgent(RBureauApplication.getContext()))
                     .addHeader("Token", StringUtil.formatNullString(Preferences.getToken()))
                     .addHeader("Version", StringUtil.formatNullString(AppUtil.getVerName(RBureauApplication.getContext()) + ""))
-                    .addHeader("Sign",StringUtil.formatNullString(getSign(Preferences.getPhone())))
+                    .addHeader("Sign",StringUtil.formatNullString(AppUtil.getSign(Preferences.getPhone())))
                     .addHeader("source","Android")
                     .url(originalRequest.url())
                     .build();
@@ -73,11 +73,5 @@ public class CommonParInterceptor implements Interceptor {
         return response;
     }
 
-    private String  getSign(String phone){
-        if (!TextUtils.isEmpty(phone)){
-            return StringUtil.md5(phone+"gu940s");
-        }else {
-            return "";
-        }
-    }
+
 }

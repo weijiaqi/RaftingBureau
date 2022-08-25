@@ -202,6 +202,8 @@ public class XRecyclerView extends RecyclerView {
         }
     }
 
+
+
     @Override
     public void setAdapter(Adapter adapter) {
         mAdapter = adapter;

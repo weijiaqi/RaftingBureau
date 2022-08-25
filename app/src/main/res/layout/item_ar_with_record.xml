@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.hjq.shape.layout.ShapeLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:orientation="vertical"
+    android:paddingHorizontal="10dp"
+    android:paddingTop="5dp"
+    android:paddingBottom="8dp"
+    app:shape_radius="5dp"
+    app:shape_solidColor="@color/color_4d_0076">
+
+    <LinearLayout
+
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp">
+
+        <ImageView
+            android:layout_width="6dp"
+            android:layout_height="6dp"
+            android:src="@drawable/income_record_time" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text=""
+            android:textColor="@color/color_cc"
+            android:textSize="9sp" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view_color_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.4dp"
+
+        android:background="@color/color_white_4d" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/tv_income_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_marginTop="2dp"
+                android:textColor="@color/color_cc"
+                android:textSize="9sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:text=""
+            android:layout_marginEnd="5dp"
+            android:textColor="@color/color_6d"
+            android:textSize="9sp" />
+
+
+    </RelativeLayout>
+
+
+</com.hjq.shape.layout.ShapeLinearLayout>

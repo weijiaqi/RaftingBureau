@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+
+    <RelativeLayout
+        android:id="@+id/ll_left"
+        android:layout_width="460dp"
+        android:layout_height="300dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="27dp"
+        android:background="@drawable/home_operation_bg1"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:id="@+id/ll_receive_tea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <com.drifting.bureau.view.FontTextView
+                android:id="@+id/tv_nebula_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/nebula_name"
+                android:textSize="18sp"
+                app:fontType="PangMen"
+                app:shape_textEndColor="@color/color_6d"
+                app:shape_textStartColor="@color/color_6c" />
+
+
+            <TextView
+                android:id="@+id/tv_time_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="@string/time_left"
+                android:textColor="@color/color_ec"
+                android:textSize="11sp"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/iv_drink"
+                android:layout_width="66dp"
+                android:layout_height="94.5dp"
+
+                android:layout_marginTop="2dp" />
+
+            <ImageView
+                android:id="@+id/iv_lock"
+                android:layout_width="78.5dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="12dp"
+                android:src="@drawable/unlock_fingerprint"
+                android:visibility="gone" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+    <ImageView
+        android:id="@+id/iv_find_planet"
+        android:layout_width="116dp"
+        android:layout_height="116dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="19dp"
+        android:layout_toLeftOf="@+id/iv_explore_play"
+        android:src="@drawable/find_planet" />
+
+    <ImageView
+        android:id="@+id/iv_explore_play"
+        android:layout_width="116dp"
+        android:layout_height="116dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="32dp"
+        android:src="@drawable/explore_play" />
+
+
+    <RelativeLayout
+        android:id="@+id/rl_bottom"
+        android:layout_width="265.5dp"
+        android:layout_height="169dp"
+        android:layout_marginTop="7dp"
+        android:layout_below="@+id/iv_explore_play"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="25dp">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:background="@drawable/home_operation_bg2"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="25dp"
+                android:drawableLeft="@drawable/planet_permit"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:text="元宇宙星球居住证"
+                android:textColor="@color/color_6cec"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="昵称："
+                    android:textColor="@color/color_6cec"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/tv_nikename"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:ellipsize="end"
+                    android:maxEms="6"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="7dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="身份："
+                    android:textColor="@color/color_6cec"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/tv_identity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="7dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="居住地："
+                    android:textColor="@color/color_6cec"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/tv_planet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_mastor"
+            android:layout_width="107dp"
+            android:layout_height="145dp"
+            android:layout_alignParentEnd="true" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

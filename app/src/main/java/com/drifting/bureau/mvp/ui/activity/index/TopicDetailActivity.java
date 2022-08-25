@@ -98,20 +98,20 @@ public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> impl
     TextView mTvAddFriend;
     @BindView(R.id.iv_add_friend_bg)
     ImageView mIvAddFriendBg;
-    private int explore_id, message_id, message_id2, total, postion;
+    private int explore_id, message_id, message_id2, total, postion, status, user_id, attend, Msgtype;
     private String path;
-    private int status;
     private ReleaseDriftingDialog releaseDriftingDialog;
     private static String EXTRA_EXPLORE_ID = "extra_explore_id";
 
     private static String EXTRA_MESSAGE_ID = "extra_message_id";
+
+    private static String EXTRA_TYPE = "extra_type";
 
     private List<LineChartView.Data> datas;
     private List<MoreDetailsEntity.MessagePathBean> messagePathBeanList;
 
     private MoreDetailsEntity.MessageBean messageBean;
     private MoreDetailsEntity.RelevanceBean relevanceBean;
-    private int user_id, attend;
 
 
     private RaftingOrderDialog raftingOrderDialog;
@@ -121,6 +121,17 @@ public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> impl
     private int[] dataArr = new int[]{152, 59, 185, 134, 45, 169, 54, 155, 40, 146, 52, 59, 185, 134, 45, 169, 54, 155, 40, 146, 52, 59, 185, 134, 45, 169, 54, 155, 40, 146, 52, 59, 185, 134, 45, 169, 54, 155, 40, 146, 52, 59, 185, 134, 45, 169, 54, 155, 40, 146, 52, 59, 185, 134, 45, 169, 54, 155, 40, 146, 52, 59, 185, 134, 45, 169, 54, 155, 40, 146, 52, 59, 185, 134, 45, 169, 54, 155, 40, 146, 52, 59, 185, 134, 45, 169, 54, 155, 40, 146, 52, 59, 185, 134, 45, 169, 54, 155, 40, 146};
 
     private int[] newData;
+
+
+    public static void start(Context context, int type, int explore_id, int message_id, boolean closePage) {
+        Intent intent = new Intent(context, TopicDetailActivity.class);
+        intent.putExtra(EXTRA_TYPE, type);
+        intent.putExtra(EXTRA_EXPLORE_ID, explore_id);
+        intent.putExtra(EXTRA_MESSAGE_ID, message_id);
+        context.startActivity(intent);
+        if (closePage) ((Activity) context).finish();
+    }
+
 
     public static void start(Context context, int explore_id, int message_id, boolean closePage) {
         Intent intent = new Intent(context, TopicDetailActivity.class);
@@ -150,6 +161,7 @@ public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> impl
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
         if (getIntent() != null) {
+            Msgtype = getIntent().getExtras().getInt(EXTRA_TYPE);
             explore_id = getIntent().getExtras().getInt(EXTRA_EXPLORE_ID);
             message_id = getIntent().getExtras().getInt(EXTRA_MESSAGE_ID);
         }
@@ -162,7 +174,14 @@ public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> impl
 
     public void initListener() {
         datas = new ArrayList<>();
-        getDetail(1);
+        if (Msgtype == 1) {  //开启新漂流
+            InitiateTopic();
+            OpenNewMsg();
+            getUserinfo(user_id);
+        } else {
+            getDetail(1);
+        }
+
     }
 
     public void getDetail(int type) {
@@ -215,26 +234,7 @@ public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> impl
                 @Override
                 public void onClick(int index) {
                     if (index == -1) {
-                        RequestUtil.create().platformtimes(explore_id, entity -> {
-                            if (entity != null && entity.getCode() == 200) {
-                                total = entity.getData().getAttend_times() + entity.getData().getCommon_times();
-                                releaseDriftingDialog = new ReleaseDriftingDialog(getActivity(), 1, total);
-                                releaseDriftingDialog.show();
-                                releaseDriftingDialog.setOnStarrySkyClickCallback((type, word, path, list, cover) -> {
-                                    status = 1;
-                                    if (mPresenter != null) {
-                                        showLoading();
-                                        if (type == 1) { //视频
-                                            mPresenter.compressVideo(TopicDetailActivity.this, type, explore_id, word, 0, path, list != null ? new File(list.get(0).toString()) : null, cover != null ? BitmapUtil.saveBitmapFile(getActivity(), cover) : null);
-                                        } else {
-                                            mPresenter.createwithword(type, explore_id, word, 0, path != null ? new File(path) : null, list != null ? new File(list.get(0).toString()) : null, cover != null ? BitmapUtil.saveBitmapFile(getActivity(), cover) : null);
-                                        }
-                                    }
-                                });
-
-                            }
-                        });
-
+                        OpenNewMsg();
                     } else {
                         user_id = messagePathBeanList.get(index).getUser_id();
                         getUserinfo(user_id);
@@ -257,9 +257,32 @@ public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> impl
             });
 
             getUserinfo(user_id);
-
         }
     }
+
+    public void OpenNewMsg() {
+        RequestUtil.create().platformtimes(explore_id, entity -> {
+            if (entity != null && entity.getCode() == 200) {
+                total = entity.getData().getAttend_times() + entity.getData().getCommon_times();
+                releaseDriftingDialog = new ReleaseDriftingDialog(getActivity(), 1, total);
+                releaseDriftingDialog.show();
+                releaseDriftingDialog.setOnStarrySkyClickCallback((type, word, path, list, cover) -> {
+                    status = 1;
+                    if (mPresenter != null) {
+                        showLoading();
+                        if (type == 1) { //视频
+                            mPresenter.compressVideo(TopicDetailActivity.this, type, explore_id, word, 0, path, list != null ? new File(list.get(0).toString()) : null, cover != null ? BitmapUtil.saveBitmapFile(getActivity(), cover) : null);
+                        } else {
+                            mPresenter.createwithword(type, explore_id, word, 0, path != null ? new File(path) : null, list != null ? new File(list.get(0).toString()) : null, cover != null ? BitmapUtil.saveBitmapFile(getActivity(), cover) : null);
+                        }
+                    }
+                });
+
+            }
+        });
+
+    }
+
 
     public void showDetails(int type) {
         if (type == 0) {
@@ -482,6 +505,7 @@ public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> impl
                     mLlTop.setVisibility(View.GONE);
                     mTvOpen.setVisibility(View.GONE);
                     InitiateTopic();
+                    getUserinfo(user_id);
                     break;
                 case R.id.iv_right:  //星云
                     if (messageBean != null) {

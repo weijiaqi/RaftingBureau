@@ -193,7 +193,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="13dp"
-                android:text="请尽快完善性格信息，找到适合自己的星球居住"
+                android:text="请选择进入元宇宙漂流局得方式"
                 android:textColor="@color/color_53"
                 android:textSize="12sp" />
 
@@ -205,7 +205,7 @@
                 android:layout_marginTop="24dp"
                 android:background="@drawable/solid_purple_block_button"
                 android:gravity="center"
-                android:text="完善星球属性"
+                android:text="进入AR版本"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -219,7 +219,7 @@
                 android:layout_marginTop="19dp"
                 android:background="@drawable/solid_blue_block_button"
                 android:gravity="center"
-                android:text="进入漂流局"
+                android:text="进入普通版本"
                 android:textColor="@color/color_01"
                 android:textSize="14sp"
                 android:textStyle="bold" />

@@ -160,11 +160,11 @@
             android:id="@+id/iv_hot"
             android:layout_width="7dp"
             android:layout_height="7dp"
-            android:visibility="gone"
             android:layout_alignEnd="@+id/iv_message"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="5dp"
-            android:src="@drawable/shape_red_circle" />
+            android:src="@drawable/shape_red_circle"
+            android:visibility="gone" />
 
     </RelativeLayout>
 
@@ -200,4 +200,18 @@
         android:textSize="12sp" />
 
 
+    <TextView
+        android:id="@+id/tv_youth_camp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="122dp"
+        android:layout_marginBottom="122dp"
+        android:drawableTop="@drawable/youth_camp"
+        android:text="“青年创业营”"
+        android:visibility="invisible"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:textStyle="bold" />
 </RelativeLayout>

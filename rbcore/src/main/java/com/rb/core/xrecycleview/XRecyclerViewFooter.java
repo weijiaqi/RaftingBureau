@@ -42,10 +42,12 @@ public class XRecyclerViewFooter extends LinearLayout {
         initView(context);
     }
 
+
     //初始化
     private void initView(Context context) {
         mContext = context;
         mContainer = (LinearLayout) LayoutInflater.from(context).inflate(R.layout.listview_footer, null);
+
         LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         lp.setMargins(0, 0, 0, 0);
         this.setLayoutParams(lp);

@@ -10,8 +10,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import com.drifting.bureau.R;
+import com.hjq.shape.view.ShapeTextView;
 
-public class FontTextView extends AppCompatTextView {
+public class FontTextView extends ShapeTextView {
 
     private final int PangMen = 1;
 

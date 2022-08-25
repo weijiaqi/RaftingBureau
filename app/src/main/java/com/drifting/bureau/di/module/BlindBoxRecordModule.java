@@ -1,9 +1,8 @@
 package com.drifting.bureau.di.module;
-import com.jess.arms.di.scope.ActivityScope;
 import dagger.Binds;
 import dagger.Module;
-import com.drifting.bureau.mvp.ui.contract.BlindBoxRecordContract;
-import com.drifting.bureau.mvp.ui.model.BlindBoxRecordModel;
+import com.drifting.bureau.mvp.contract.BlindBoxRecordContract;
+import com.drifting.bureau.mvp.model.BlindBoxRecordModel;
 
 /**
  * ================================================

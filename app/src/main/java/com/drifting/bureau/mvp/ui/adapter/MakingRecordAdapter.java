@@ -12,8 +12,14 @@ import java.util.List;
 
 public class MakingRecordAdapter extends BaseRecyclerAdapter<MakingRecordEntity.ListBean> {
 
-    public MakingRecordAdapter(List<MakingRecordEntity.ListBean> infos) {
+    private int type;
+    private int ITEM_MAKEING = 1;
+    private int ITEM_AR_MAKEING = 2;
+
+
+    public MakingRecordAdapter(List<MakingRecordEntity.ListBean> infos,int type) {
         super(infos);
+        this.type=type;
     }
 
 
@@ -25,8 +31,22 @@ public class MakingRecordAdapter extends BaseRecyclerAdapter<MakingRecordEntity.
     }
 
     @Override
+    public int getItemViewType(int position) {
+        if (type == 1) {
+            return ITEM_MAKEING;
+        }else {
+            return ITEM_AR_MAKEING;
+        }
+    }
+
+    @Override
     protected int getLayoutId(int viewType) {
-        return R.layout.item_making_record;
+
+        if (viewType == ITEM_MAKEING) {
+            return R.layout.item_making_record;
+        } else{
+            return R.layout.item_ar_making_record;
+        }
     }
 
     @Override

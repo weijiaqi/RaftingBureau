@@ -33,7 +33,7 @@ public class NebulaListHolder extends BaseRecyclerHolder {
     }
 
     public void setData(@NonNull List<NebulaListEntity.ListBean> listBeanList, int position, String nebula) {
-        TextUtil.setText(mTvName, listBeanList.get(position).getNebula());
+        TextUtil.setText(mTvName, listBeanList.get(position).getNebula()+"星云");
         if (TextUtils.equals(listBeanList.get(position).getNebula_code(), nebula)) {
             mTvName.setAlpha(1);
             mTvName.getShapeDrawableBuilder().setSolidGradientColors(context.getColor(R.color.color_d6_7f), context.getColor(R.color.color_70_7f)).intoBackground();

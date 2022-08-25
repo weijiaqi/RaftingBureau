@@ -63,6 +63,9 @@ public class TeaShopPresenter extends BasePresenter<TeaShopContract.Model, TeaSh
      */
 
     public void getLocation(Activity activity) {
+        if (mRootView != null) {
+            mRootView.onloadStart();
+        }
         PermissionUtil.launchLocation(new PermissionUtil.RequestPermission() {
             @Override
             public void onRequestPermissionSuccess() {
@@ -106,9 +109,6 @@ public class TeaShopPresenter extends BasePresenter<TeaShopContract.Model, TeaSh
      * 实体门店
      */
     public void nearby(String name, int page, int limit, String lng, String lat, boolean loadType) {
-        if (mRootView != null) {
-            mRootView.onloadStart();
-        }
         mModel.nearby(name, page, limit, lng, lat)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

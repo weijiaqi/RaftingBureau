@@ -231,7 +231,6 @@
 
         </LinearLayout>
 
-
         <com.hjq.shape.view.ShapeTextView
             android:id="@+id/tv_withdrawal"
             android:layout_width="246dp"

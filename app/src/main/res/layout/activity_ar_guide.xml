@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ar_guide_bg"
+    android:fitsSystemWindows="true"
+    >
+
+
+    <ImageView
+        android:id="@+id/iv_play_bear"
+        android:layout_width="85dp"
+        android:layout_height="129dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginBottom="84.5dp"
+        android:src="@drawable/play_bear" />
+
+
+    <RelativeLayout
+        android:layout_width="243dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="105dp"
+        android:layout_marginBottom="210.5dp"
+        android:background="@drawable/ar_guide_border">
+
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="61dp"
+            android:layout_marginTop="15dp"
+            android:text="欢迎来到元宇宙漂流局"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_title"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="17.5dp"
+            android:lineSpacingExtra="2dp"
+            android:text="你好，我是元漂熊。接下来，我会带你\n体验AR＋VR技术呈现得的元宇宙世\n界，需要你得硬件设备支持相关呈现。\n请问你准备好了进入了吗？"
+            android:textColor="@color/white"
+            android:textSize="11sp" />
+
+
+        <RelativeLayout
+            android:layout_marginTop="7dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_content">
+
+            <com.hjq.shape.view.ShapeTextView
+                android:id="@+id/tv_no_like"
+                android:layout_width="91dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="21dp"
+                android:gravity="center"
+                android:paddingVertical="6dp"
+                android:text="我不感兴趣"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:shape_endColor="@color/color_70"
+                app:shape_radius="100dp"
+                app:shape_startColor="@color/color_d6" />
+
+
+            <com.hjq.shape.view.ShapeTextView
+                android:id="@+id/tv_enter"
+                android:layout_width="91dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_toRightOf="@+id/tv_no_like"
+                android:gravity="center"
+                android:paddingVertical="6dp"
+                android:text="进入元宇宙"
+                android:textColor="@color/color_00"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:shape_endColor="@color/color_6c"
+                app:shape_radius="100dp"
+                app:shape_startColor="@color/color_6d" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

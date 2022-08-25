@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:layout_marginStart="9dp"
         android:gravity="center"
-        android:text="BC-33星云"
+        android:text="BC-33"
         android:textColor="@color/white"
         android:textSize="12sp"
         app:shape_endColor="@color/color_70_7f"

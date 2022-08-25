@@ -19,6 +19,17 @@ public class AppUtil {
 
     private static String VERNAME;
     private static int VERCODE;
+
+
+    public static String  getSign(String phone){
+        if (!TextUtils.isEmpty(phone)){
+            return StringUtil.md5(phone+"gu940s");
+        }else {
+            return "";
+        }
+    }
+
+
     /**
      * 得到软件显示版本信息
      *
