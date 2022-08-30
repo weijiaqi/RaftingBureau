@@ -19,7 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
 import com.drifting.bureau.R;
-import com.drifting.bureau.base.BaseActivity;
+import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.data.event.BackSpaceEvent;
 import com.drifting.bureau.data.event.PaymentEvent;
 import com.drifting.bureau.data.event.VideoEvent;
@@ -40,7 +40,6 @@ import com.drifting.bureau.util.BitmapUtil;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.ToastUtil;
-import com.drifting.bureau.util.VideoUtil;
 import com.drifting.bureau.util.ViewUtil;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.drifting.bureau.view.chart.LineChartView;
@@ -65,7 +64,7 @@ import butterknife.OnClick;
  * @author 发布话题
  * module name is TopicDetailActivity
  */
-public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> implements TopicDetailContract.View {
+public class TopicDetailActivity extends BaseManagerActivity<TopicDetailPresenter> implements TopicDetailContract.View {
     @BindView(R.id.line_chart_view)
     LineChartView lineChartView;
     @BindView(R.id.scroll_view)
@@ -229,7 +228,6 @@ public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> impl
                 lineChartView.setData(datas, 2);
             }
 
-
             lineChartView.setClockListener(new LineChartView.OpenMessageListener() {
                 @Override
                 public void onClick(int index) {
@@ -266,7 +264,7 @@ public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> impl
                 total = entity.getData().getAttend_times() + entity.getData().getCommon_times();
                 releaseDriftingDialog = new ReleaseDriftingDialog(getActivity(), 1, total);
                 releaseDriftingDialog.show();
-                releaseDriftingDialog.setOnStarrySkyClickCallback((type, word, path, list, cover) -> {
+                releaseDriftingDialog.setOnStarrySkyClickCallback((type, word, path, list, cover,tag) -> {
                     status = 1;
                     if (mPresenter != null) {
                         showLoading();
@@ -368,7 +366,7 @@ public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> impl
                         }
                     });
 
-                    releaseDriftingDialog.setOnStarrySkyClickCallback((type, word, path, list, cover) -> {
+                    releaseDriftingDialog.setOnStarrySkyClickCallback((type, word, path, list, cover,tag) -> {
                         status = 2;
                         if (mPresenter != null) {
                             showLoading();
@@ -545,7 +543,6 @@ public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> impl
                 mTvPlanet.setText(entity.getData().getPlanet().getName());
                 mTvIdentity.setText(entity.getData().getUser().getLevel_name());
                 GlideUtil.create().loadLongImage(this, entity.getData().getUser().getMascot(), mIvMastor);
-
                 if (user_id == Integer.parseInt(Preferences.getUserId())) {
                     mRlAddFriends.setVisibility(View.GONE);
                 } else {

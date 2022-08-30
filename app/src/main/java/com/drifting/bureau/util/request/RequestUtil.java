@@ -16,7 +16,9 @@ import com.drifting.bureau.mvp.model.entity.PlanetLocationEntity;
 import com.drifting.bureau.mvp.model.entity.PlatformTimesEntity;
 import com.drifting.bureau.mvp.model.entity.StarUpIndexEntity;
 import com.drifting.bureau.mvp.model.entity.SysmessageEntity;
+import com.drifting.bureau.mvp.model.entity.TopicTagsEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
+import com.drifting.bureau.mvp.model.entity.VersionUpdateEntity;
 import com.drifting.bureau.mvp.model.entity.WriteOffInfoEntity;
 import com.drifting.bureau.util.callback.BaseDataCallBack;
 import com.jess.arms.base.BaseEntity;
@@ -49,6 +51,33 @@ public class RequestUtil {
             }
         }
         return mRequestUtil;
+    }
+
+    /**
+     * @description 版本更新
+     */
+    public void checkVersion(BaseDataCallBack<VersionUpdateEntity> callBack) {
+        ApiProxy.getApiService().checkVersion()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new BaseObserver<BaseEntity<VersionUpdateEntity>>() {
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+                        mDisposables.put(mRequestCount++, disposable);
+                    }
+
+                    @Override
+                    public void onNext(BaseEntity<VersionUpdateEntity> entity) {
+                        callBack.getData(entity);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (callBack != null) {
+                            callBack.getData(null);
+                        }
+                    }
+                });
     }
 
 
@@ -351,7 +380,6 @@ public class RequestUtil {
     }
 
 
-
     /**
      * AR  公告
      */
@@ -448,8 +476,8 @@ public class RequestUtil {
     /**
      * 举报
      */
-    public void reportcommit(int message_id,int comment_id, int report_type, String reason, BaseDataCallBack callBack) {
-        ApiProxy.getApiService().reportcommit(message_id, comment_id,report_type, reason)
+    public void reportcommit(int message_id, int comment_id, int report_type, String reason, BaseDataCallBack callBack) {
+        ApiProxy.getApiService().reportcommit(message_id, comment_id, report_type, reason)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new BaseObserver<BaseEntity>() {
@@ -540,9 +568,40 @@ public class RequestUtil {
 
 
     /**
+     * 话题标签
+     */
+    public void tags(BaseDataCallBack<List<TopicTagsEntity>> callBack) {
+        ApiProxy.getApiService().tagslist()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new BaseObserver<BaseEntity<List<TopicTagsEntity>>>() {
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+                        mDisposables.put(mRequestCount++, disposable);
+                    }
+
+                    @Override
+                    public void onNext(BaseEntity<List<TopicTagsEntity>> entity) {
+                        if (callBack != null) {
+                            callBack.getData(entity);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (callBack != null) {
+                            callBack.getData(null);
+                        }
+                    }
+                });
+    }
+
+
+    /**
      * 标记为已读（消息中心）
      */
-    public void markread(int sys_msg_id,  BaseDataCallBack callBack) {
+    public void markread(int sys_msg_id, BaseDataCallBack callBack) {
         ApiProxy.getApiService().markread(sys_msg_id)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -570,13 +629,11 @@ public class RequestUtil {
     }
 
 
-
-
     /**
      * 同意或拒绝好友申请（消息中心）
      */
-    public void agreeRefuse(int apply_id,int status,  BaseDataCallBack callBack) {
-        ApiProxy.getApiService().agreeRefuse(apply_id,status)
+    public void agreeRefuse(int apply_id, int status, BaseDataCallBack callBack) {
+        ApiProxy.getApiService().agreeRefuse(apply_id, status)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new BaseObserver<BaseEntity>() {
@@ -603,12 +660,10 @@ public class RequestUtil {
     }
 
 
-
-
     /**
      * 删除好友（消息中心）
      */
-    public void frienddelete(int user_id ,BaseDataCallBack callBack) {
+    public void frienddelete(int user_id, BaseDataCallBack callBack) {
         ApiProxy.getApiService().frienddelete(user_id)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -636,12 +691,10 @@ public class RequestUtil {
     }
 
 
-
-
     /**
      * 好友相关信息（头像、昵称）
      */
-    public void friendinfo(String user_id ,BaseDataCallBack<FriendInfoEntity> callBack) {
+    public void friendinfo(String user_id, BaseDataCallBack<FriendInfoEntity> callBack) {
         ApiProxy.getApiService().friendinfo(user_id)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -669,12 +722,10 @@ public class RequestUtil {
     }
 
 
-
-
     /**
      * 是否是好友
      */
-    public void isFriend(String user_id ,BaseDataCallBack<FriendEntity> callBack) {
+    public void isFriend(String user_id, BaseDataCallBack<FriendEntity> callBack) {
         ApiProxy.getApiService().isFriend(user_id)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -700,8 +751,6 @@ public class RequestUtil {
                     }
                 });
     }
-
-
 
 
     /**
@@ -766,8 +815,6 @@ public class RequestUtil {
     }
 
 
-
-
     /**
      * 是否参与过漂流
      */
@@ -799,7 +846,6 @@ public class RequestUtil {
     }
 
 
-
     /**
      * 注销
      */
@@ -829,10 +875,6 @@ public class RequestUtil {
                     }
                 });
     }
-
-
-
-
 
 
     /**

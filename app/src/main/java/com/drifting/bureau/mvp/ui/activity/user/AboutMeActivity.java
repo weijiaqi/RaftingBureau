@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,7 +56,7 @@ import com.drifting.bureau.util.animator.AnimatorUtil;
 import com.drifting.bureau.util.downloadutil.DownloadRequest;
 import com.drifting.bureau.util.manager.NotificationManager;
 import com.drifting.bureau.util.request.RequestUtil;
-import com.jess.arms.base.BaseActivity;
+import com.drifting.bureau.base.BaseManagerActivity;
 import com.jess.arms.di.component.AppComponent;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -77,7 +76,7 @@ import butterknife.OnClick;
  * @author 关于我
  * module name is AboutMeActivity
  */
-public class AboutMeActivity extends BaseActivity<AboutMePresenter> implements AboutMeContract.View {
+public class AboutMeActivity extends BaseManagerActivity<AboutMePresenter> implements AboutMeContract.View {
     @BindView(R.id.tv_bar)
     TextView mTvBar;
     @BindView(R.id.iv_right)

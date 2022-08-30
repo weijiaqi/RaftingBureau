@@ -1,13 +1,18 @@
 package com.drifting.bureau.util;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.text.TextUtils;
 
 import com.drifting.bureau.app.application.RBureauApplication;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * @author 卫佳琪1
@@ -129,5 +134,20 @@ public class AppUtil {
             }
         }
         return false;
+    }
+
+    // 获取地址信息
+    public static List<Address> getAddress(Activity activity, Location location) {
+        List<Address> result = null;
+        try {
+            if (location != null) {
+                Geocoder gc = new Geocoder(activity, Locale.getDefault());
+                result = gc.getFromLocation(location.getLatitude(),
+                        location.getLongitude(), 1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }

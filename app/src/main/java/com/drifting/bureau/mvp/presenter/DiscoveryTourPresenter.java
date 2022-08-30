@@ -7,12 +7,16 @@ import android.util.Log;
 
 import androidx.fragment.app.FragmentActivity;
 
+import com.baidu.mapapi.model.LatLng;
+import com.drifting.bureau.app.application.RBureauApplication;
 import com.drifting.bureau.mvp.contract.DiscoveryTourContract;
 import com.drifting.bureau.mvp.model.entity.MessageReceiveEntity;
 import com.drifting.bureau.mvp.model.entity.PlanetEntity;
 import com.drifting.bureau.mvp.model.entity.VersionUpdateEntity;
 import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
 import com.drifting.bureau.mvp.ui.dialog.VersionUpdateDialog;
+import com.drifting.bureau.storageinfo.Preferences;
+import com.drifting.bureau.util.AppUtil;
 import com.drifting.bureau.util.LocationUtil;
 import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.ToastUtil;
@@ -109,7 +113,6 @@ public class DiscoveryTourPresenter extends BasePresenter<DiscoveryTourContract.
     /**
      * 获取经纬度
      */
-
     public void getLocation(Activity activity) {
         PermissionUtil.launchLocation(new PermissionUtil.RequestPermission() {
             @Override
@@ -118,6 +121,8 @@ public class DiscoveryTourPresenter extends BasePresenter<DiscoveryTourContract.
                     @Override
                     public void onSuccess(Location location) {
                         try {
+                            RBureauApplication.latLng=new LatLng(location.getLatitude(),location.getLongitude());
+                            Preferences.saveCity(AppUtil.getAddress(activity,location).get(0).getLocality());
                             getLoaction(location.getLongitude() + "", location.getLatitude() + "");
                         } catch (Exception e) {
                             Log.e(activity.getPackageName(), e.toString());

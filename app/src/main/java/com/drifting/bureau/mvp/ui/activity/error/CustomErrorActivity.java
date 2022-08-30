@@ -1,20 +1,19 @@
 package com.drifting.bureau.mvp.ui.activity.error;
 
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.drifting.bureau.R;
-import com.drifting.bureau.base.BaseActivity;
+import com.drifting.bureau.base.BaseManagerActivity;
 import com.hjq.shape.view.ShapeTextView;
 import com.jess.arms.di.component.AppComponent;
 
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
 import cat.ereza.customactivityoncrash.config.CaocConfig;
 
-public class CustomErrorActivity extends BaseActivity {
+public class CustomErrorActivity extends BaseManagerActivity {
     @Override
     public void setupActivityComponent(@NonNull AppComponent appComponent) {
 

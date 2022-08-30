@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.drifting.bureau.R;
+import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.data.entity.LoginLocallyEntity;
 import com.drifting.bureau.di.component.DaggerLoginComponent;
 import com.drifting.bureau.mvp.contract.LoginContract;
@@ -31,7 +32,6 @@ import com.drifting.bureau.util.RongIMUtil;
 import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.VerifyUtil;
-import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 
 import java.util.ArrayList;
@@ -46,7 +46,7 @@ import butterknife.OnClick;
  * @time 15:35 15:35
  */
 
-public class LoginActivity extends BaseActivity<LoginPresenter> implements LoginContract.View {
+public class LoginActivity extends BaseManagerActivity<LoginPresenter> implements LoginContract.View {
     @BindView(R.id.rcy_login)
     RecyclerView mRcyLogin;
     @BindView(R.id.et_content)

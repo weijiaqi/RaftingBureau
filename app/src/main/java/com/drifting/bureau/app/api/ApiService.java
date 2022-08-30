@@ -21,6 +21,7 @@ import com.drifting.bureau.mvp.model.entity.MakingRecordEntity;
 import com.drifting.bureau.mvp.model.entity.MessageContentEntity;
 import com.drifting.bureau.mvp.model.entity.MessageReceiveEntity;
 import com.drifting.bureau.mvp.model.entity.MoreDetailsEntity;
+import com.drifting.bureau.mvp.model.entity.MoreDetailsForMapEntity;
 import com.drifting.bureau.mvp.model.entity.MyBlindBoxEntity;
 import com.drifting.bureau.mvp.model.entity.MySpaceStationEntity;
 import com.drifting.bureau.mvp.model.entity.MyTreasuryEntity;
@@ -52,6 +53,7 @@ import com.drifting.bureau.mvp.model.entity.SysmessageEntity;
 import com.drifting.bureau.mvp.model.entity.SysmessageMineEntity;
 import com.drifting.bureau.mvp.model.entity.TeaShopEntity;
 import com.drifting.bureau.mvp.model.entity.TeamStatisticEntity;
+import com.drifting.bureau.mvp.model.entity.TopicTagsEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.model.entity.VersionUpdateEntity;
 import com.drifting.bureau.mvp.model.entity.WriteOffInfoEntity;
@@ -151,9 +153,9 @@ public interface ApiService {
 
 
     /**
-     * 创建话题（支持文件上传，发起和参与话题共用）   (新街口)
+     * 创建话题（V2-话题标签）
      */
-    @POST("v/message/creatingwithfile")
+    @POST("v/message/creatingwithfile/v2")
     Observable<BaseEntity<CreatewithfileEntity>> creatingwithfileword(@Body MultipartBody shortVoice);
 
 
@@ -715,7 +717,7 @@ public interface ApiService {
 
 
     /**
-     * 传递详情（新版）
+     * 是否添加好友
      *
      * @return
      */
@@ -806,4 +808,22 @@ public interface ApiService {
     @GET("v/topic/didAttend")
     Observable<BaseEntity<DidAttendEntity>> didAttend();
 
+
+    /**
+     * 传递详情（适用地图版）
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/message/moreDetailsForMap")
+    Observable<BaseEntity<MoreDetailsForMapEntity>> moreDetailsForMap(@Field("message_id") int message_id);
+
+
+    /**
+     *话题标签
+     *
+     * @return
+     */
+    @GET("v/topic/tags/list")
+    Observable<BaseEntity<List<TopicTagsEntity>>> tagslist();
 }

@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.DriftingTrackEntity;
+import com.drifting.bureau.mvp.ui.activity.index.DriftTrackMapActivity;
 import com.drifting.bureau.mvp.ui.activity.index.TopicDetailActivity;
 import com.drifting.bureau.util.DateUtil;
 import com.drifting.bureau.util.TextUtil;
@@ -67,7 +68,7 @@ public class DriftingTrackHolder extends BaseRecyclerHolder {
 
         TextUtil.setText(mTvTransmitNum, context.getString(R.string.transmit, listBeanList.get(position).getTotal_attend() + ""));
         mLlContent.setOnClickListener(v -> {
-            TopicDetailActivity.start(context, listBeanList.get(position).getExplore_id(), listBeanList.get(position).getMessage_id(), false);
+            DriftTrackMapActivity.start(context, listBeanList.get(position).getExplore_id(), listBeanList.get(position).getMessage_id(), false);
         });
 
     }

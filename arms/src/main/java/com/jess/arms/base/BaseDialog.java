@@ -127,7 +127,7 @@ public abstract class BaseDialog extends Dialog {
     }
 
     public interface OnStarrySkyClickCallback {
-        void onStarrySkyClick(int type, String word, String path, List<Object> list, Bitmap cover);
+        void onStarrySkyClick(int type, String word, String path, List<Object> list, Bitmap cover,String tag);
     }
 
     public void setOnTypeClickCallback(OnTypeClickCallback onTypeClickCallback) {

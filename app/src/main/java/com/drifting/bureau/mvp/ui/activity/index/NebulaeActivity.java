@@ -20,7 +20,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.drifting.bureau.R;
-import com.drifting.bureau.base.BaseActivity;
+import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.di.component.DaggerNebulaeComponent;
 import com.drifting.bureau.mvp.model.entity.NebulaListEntity;
 import com.drifting.bureau.mvp.ui.adapter.NebulaeListAdapter;
@@ -32,7 +32,6 @@ import com.drifting.bureau.util.GsonUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.ViewUtil;
 import com.drifting.bureau.view.chart.EnergyChartView;
-import com.jess.arms.base.BaseRecyclerAdapter;
 import com.jess.arms.di.component.AppComponent;
 import com.drifting.bureau.mvp.contract.NebulaeContract;
 import com.drifting.bureau.mvp.presenter.NebulaePresenter;
@@ -49,7 +48,7 @@ import butterknife.OnClick;
  * @author 了解星云
  * module name is NebulaeActivity
  */
-public class NebulaeActivity extends BaseActivity<NebulaePresenter> implements NebulaeContract.View {
+public class NebulaeActivity extends BaseManagerActivity<NebulaePresenter> implements NebulaeContract.View {
     @BindView(R.id.tv_bar)
     TextView mTvBar;
     @BindView(R.id.line_chart_view)

@@ -12,13 +12,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentOnAttachListener;
 
 import com.drifting.bureau.R;
-import com.drifting.bureau.base.BaseActivity;
+import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.util.ClickUtil;
 import com.google.ar.core.Anchor;
 import com.google.ar.core.Config;
@@ -27,7 +26,6 @@ import com.google.ar.core.Plane;
 import com.google.ar.core.Session;
 import com.google.ar.sceneform.AnchorNode;
 import com.google.ar.sceneform.ArSceneView;
-import com.google.ar.sceneform.Node;
 import com.google.ar.sceneform.SceneView;
 import com.google.ar.sceneform.Sceneform;
 import com.google.ar.sceneform.rendering.ModelRenderable;
@@ -35,7 +33,6 @@ import com.google.ar.sceneform.rendering.Renderable;
 import com.google.ar.sceneform.ux.ArFragment;
 import com.google.ar.sceneform.ux.BaseArFragment;
 import com.google.ar.sceneform.ux.TransformableNode;
-import com.gorisse.thomas.sceneform.light.LightEstimationConfig;
 import com.jess.arms.di.component.AppComponent;
 
 import java.lang.ref.WeakReference;
@@ -43,7 +40,7 @@ import java.lang.ref.WeakReference;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class ARActivity extends BaseActivity implements
+public class ARActivity extends BaseManagerActivity implements
         FragmentOnAttachListener,
         BaseArFragment.OnTapArPlaneListener,
         BaseArFragment.OnSessionConfigurationListener,

@@ -6,4 +6,5 @@
     <string name="three_day">(%1$s天以后可继续探寻)</string>
    <string name="nebula_name">接收%1$s星云漂来的奶茶</string>
     <string name="time_left">（%1$s分钟后将会漂走哦）</string>
+    <string name="from_city">从%1$s漂出一杯有故事的奶茶</string>
 </resources>

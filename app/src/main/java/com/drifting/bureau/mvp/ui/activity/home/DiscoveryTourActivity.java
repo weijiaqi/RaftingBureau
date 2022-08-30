@@ -27,6 +27,7 @@ import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
 
 import com.drifting.bureau.R;
+import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.data.event.AnswerCompletedEvent;
 import com.drifting.bureau.data.event.BackSpaceEvent;
 import com.drifting.bureau.data.event.MessageRefreshEvent;
@@ -37,8 +38,7 @@ import com.drifting.bureau.mvp.model.entity.PlanetEntity;
 import com.drifting.bureau.mvp.model.entity.StarUpIndexEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.presenter.DiscoveryTourPresenter;
-import com.drifting.bureau.mvp.ui.activity.index.GetSpaceStationActivity;
-import com.drifting.bureau.mvp.ui.activity.index.PlanetarySelectActivity;
+import com.drifting.bureau.mvp.ui.activity.index.DriftTrackMapActivity;
 import com.drifting.bureau.mvp.ui.activity.index.SpaceCapsuleActivity;
 import com.drifting.bureau.mvp.ui.activity.index.TopicDetailActivity;
 import com.drifting.bureau.mvp.ui.activity.user.AboutMeActivity;
@@ -46,17 +46,16 @@ import com.drifting.bureau.mvp.ui.activity.user.MessageCenterActivity;
 import com.drifting.bureau.mvp.ui.activity.web.ShowWebViewActivity;
 import com.drifting.bureau.mvp.ui.adapter.DiscoveryViewpagerAdapter;
 import com.drifting.bureau.storageinfo.Preferences;
+import com.drifting.bureau.util.ARCoreUtil;
 import com.drifting.bureau.util.AppUtil;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.animator.AnimatorUtil;
-import com.drifting.bureau.util.callback.BaseDataCallBack;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.drifting.bureau.view.DiscoveryTransformer;
 import com.google.vr.sdk.widgets.pano.VrPanoramaView;
-import com.jess.arms.base.BaseActivity;
-import com.jess.arms.base.BaseEntity;
+
 import com.jess.arms.di.component.AppComponent;
 import com.umeng.analytics.MobclickAgent;
 
@@ -80,7 +79,7 @@ import io.rong.imlib.model.Conversation;
  * @author WJQ
  * module name is DiscoveryTourActivity
  */
-public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> implements DiscoveryTourContract.View {
+public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPresenter> implements DiscoveryTourContract.View {
     @BindView(R.id.tv_bar)
     TextView mTvBar;
     @BindView(R.id.tv_energy)
@@ -234,7 +233,7 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
                     ShowWebViewActivity.start(this, 4, false);
                     break;
                 case R.id.rl_message: //开启新消息
-                    TopicDetailActivity.start(this, explore_id, id, false);
+                    DriftTrackMapActivity.start(this, explore_id, id, false);
                     break;
                 case R.id.tv_about_me: //关于我
                     if (userInfoEntity != null) {
@@ -248,8 +247,11 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
                     MessageCenterActivity.start(this, false);
                     break;
                 case R.id.ll_step_star:
-                    Preferences.setARModel(true);
-                    ArCenterConsoleActivity.start(this, true);
+                    if (ARCoreUtil.checkArCoreAvailability(this)) {
+                        Preferences.setARModel(true);
+                        ArCenterConsoleActivity.start(this, true);
+                    }
+
 //                if (userInfoEntity != null) {
 //                    PlanetarySelectActivity.start(this, userInfoEntity.getPlanet().getLevel(), false);
 //                }
@@ -279,9 +281,9 @@ public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> 
                 id = entity.getId();
                 user_id = entity.getUser_id();
                 explore_id = entity.getExplore_id();
+                handler.postDelayed(mAdRunnable, entity.getDrift_rest() * 1000);
                 if (isAnmiation) {
                     isAnmiation = false;
-                    handler.postDelayed(mAdRunnable, entity.getDrift_rest() * 10);
                     objectAnimation(1, mIvRocket, mRlMessage, -500, 200, 0, 6, 1000);
                 }
             } else {

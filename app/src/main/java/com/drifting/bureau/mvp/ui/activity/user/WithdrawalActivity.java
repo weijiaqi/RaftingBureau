@@ -21,8 +21,7 @@ import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.TextUtil;
 import com.drifting.bureau.util.ToastUtil;
-import com.hjq.shape.view.ShapeEditText;
-import com.jess.arms.base.BaseActivity;
+import com.drifting.bureau.base.BaseManagerActivity;
 import com.jess.arms.base.BaseDialog;
 import com.jess.arms.di.component.AppComponent;
 
@@ -38,7 +37,7 @@ import butterknife.OnClick;
  * @author 提现
  * module name is WithdrawalActivity
  */
-public class WithdrawalActivity extends BaseActivity<WithdrawalPresenter> implements WithdrawalContract.View {
+public class WithdrawalActivity extends BaseManagerActivity<WithdrawalPresenter> implements WithdrawalContract.View {
     @BindView(R.id.tv_money)
     TextView mTvMoney;
     @BindView(R.id.et_money)

@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.drifting.bureau.R;
+import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.data.event.MyBlindBoxRefreshEvent;
 import com.drifting.bureau.di.component.DaggerMyBlindBoxComponent;
 import com.drifting.bureau.mvp.contract.MyBlindBoxContract;
@@ -22,7 +23,6 @@ import com.drifting.bureau.mvp.ui.adapter.MyBlindBoxAdapter;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.ViewUtil;
 import com.drifting.bureau.util.request.RequestUtil;
-import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.rb.core.xrecycleview.XRecyclerView;
 
@@ -42,7 +42,7 @@ import butterknife.OnClick;
  * @author 我的盲盒
  * module name is MyBlindBoxActivity
  */
-public class MyBlindBoxActivity extends BaseActivity<MyBlindBoxPresenter> implements MyBlindBoxContract.View, XRecyclerView.LoadingListener {
+public class MyBlindBoxActivity extends BaseManagerActivity<MyBlindBoxPresenter> implements MyBlindBoxContract.View, XRecyclerView.LoadingListener {
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
     @BindView(R.id.tv_right)

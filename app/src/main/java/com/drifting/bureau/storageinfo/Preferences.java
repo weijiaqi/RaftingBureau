@@ -3,6 +3,7 @@ package com.drifting.bureau.storageinfo;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.location.Location;
 
 /**
  * @author 卫佳琪1
@@ -22,6 +23,9 @@ public class Preferences {
     private static final String KEY_USER_ID = "user_id";
     private static final String KEY_USER_MASCOT = "user_mascot";
     private static final String KEY_USER_PASSWORD = "user_password";
+
+    private static final String KEY_USER_CITY= "user_city";
+
 
     private static final String KEY_USER_IS_ANONY = "isanony";//是否为匿名状态
 
@@ -111,6 +115,19 @@ public class Preferences {
     public static String getToken() {
         return getString(KEY_USER_TOKEN);
     }
+
+
+    //用户所在城市
+    public static void saveCity(String lat) {
+        saveString(KEY_USER_CITY, lat);
+    }
+
+    public static String getCity() {
+        return getString(KEY_USER_CITY);
+    }
+
+
+
 
 
     //用户第一次注册昵称

@@ -19,13 +19,12 @@ import com.drifting.bureau.data.event.AnswerCompletedEvent;
 import com.drifting.bureau.di.component.DaggerPlanetarySelectComponent;
 import com.drifting.bureau.mvp.contract.PlanetarySelectContract;
 import com.drifting.bureau.mvp.presenter.PlanetarySelectPresenter;
-import com.drifting.bureau.mvp.ui.activity.user.AboutMeActivity;
 import com.drifting.bureau.mvp.ui.fragment.PlanetaryDisFragment;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.animator.AnimatorUtil;
 import com.drifting.bureau.util.request.RequestUtil;
-import com.jess.arms.base.BaseActivity;
+import com.drifting.bureau.base.BaseManagerActivity;
 import com.jess.arms.di.component.AppComponent;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -41,7 +40,7 @@ import butterknife.OnClick;
  * @author 星球分布
  * module name is PlanetarySelectActivity
  */
-public class PlanetarySelectActivity extends BaseActivity<PlanetarySelectPresenter> implements PlanetarySelectContract.View {
+public class PlanetarySelectActivity extends BaseManagerActivity<PlanetarySelectPresenter> implements PlanetarySelectContract.View {
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
     @BindView(R.id.tv_bar)

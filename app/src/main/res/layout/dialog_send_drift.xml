@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="302dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal">
+
+    <LinearLayout
+        android:layout_width="293dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/release_drifting_bg"
+        android:orientation="vertical">
+
+        <com.hjq.shape.layout.ShapeRelativeLayout
+            android:id="@+id/rl_top"
+            android:layout_width="240dp"
+            android:layout_height="264dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="64dp"
+            android:orientation="vertical"
+            app:shape_radius="10dp"
+            app:shape_solidColor="@color/color_070b">
+
+
+            <com.drifting.bureau.view.FontTextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="留下我的故事~~"
+                android:textColor="@color/white"
+                android:textSize="17sp"
+                app:fontType="PangMen" />
+
+
+            <include
+                android:id="@+id/rl_voice_play"
+                layout="@layout/include_voice_play"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_title"
+                android:layout_marginHorizontal="25dp"
+                android:visibility="gone" />
+
+
+            <include
+                android:id="@+id/rl_video_play"
+                layout="@layout/include_video_play"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_title"
+                android:layout_centerHorizontal="true"
+                android:layout_marginHorizontal="25dp"
+                android:visibility="gone" />
+
+
+            <EditText
+                android:id="@+id/et_word"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_below="@+id/tv_title"
+                android:layout_marginTop="14dp"
+                android:background="@null"
+                android:gravity="top"
+                android:hint="请在这里输入你想要发送的漂流信息。"
+                android:lineSpacingExtra="5dp"
+                android:paddingHorizontal="10dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/color_2e"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+
+            <com.hjq.shape.view.ShapeTextView
+                android:id="@+id/tv_add_topic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="12dp"
+                android:layout_marginBottom="40dp"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="3dp"
+                android:text="#添加话题"
+                android:textColor="@color/white"
+                android:textSize="11sp"
+                app:shape_radius="100dp"
+                app:shape_solidColor="@color/color_1a2" />
+
+            <LinearLayout
+                android:id="@+id/ll_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_alignParentBottom="true"
+                android:gravity="center_vertical"
+                android:paddingLeft="5dp">
+
+                <ImageView
+                    android:id="@+id/iv_release_camrea"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="5dp"
+                    android:src="@drawable/release_camera" />
+
+
+                <ImageView
+                    android:id="@+id/iv_release_recording"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="10dp"
+                    android:src="@drawable/release_sound"
+                    android:visibility="gone" />
+
+
+                <ImageView
+                    android:id="@+id/iv_release_word"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="5dp"
+                    android:src="@drawable/release_word" />
+
+            </LinearLayout>
+
+
+        </com.hjq.shape.layout.ShapeRelativeLayout>
+
+
+        <com.hjq.shape.layout.ShapeLinearLayout
+            android:id="@+id/ll_starry_sky"
+            android:layout_width="144dp"
+            android:layout_height="38dp"
+            android:layout_below="@+id/rl_top"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="7dp"
+            android:gravity="center"
+            android:visibility="gone"
+            android:orientation="vertical"
+            app:shape_endColor="@color/color_6d"
+            app:shape_radius="100dp"
+            app:shape_startColor="@color/color_6c">
+
+            <TextView
+                android:id="@+id/tv_starry_sky"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="传递下一个星云"
+                android:textColor="@color/color_00"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text=""
+                android:textColor="@color/color_00"
+                android:textSize="11sp"
+                android:visibility="gone" />
+
+
+        </com.hjq.shape.layout.ShapeLinearLayout>
+
+        <LinearLayout
+            android:id="@+id/rl_participate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl_top"
+            android:layout_marginHorizontal="19dp"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <com.hjq.shape.view.ShapeTextView
+                android:id="@+id/tv_into_space"
+                android:layout_width="106dp"
+                android:layout_height="38dp"
+                android:layout_marginEnd="29dp"
+                android:gravity="center"
+                android:text="不感兴趣"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:shape_endColor="@color/color_70"
+                app:shape_radius="100dp"
+                app:shape_startColor="@color/color_d6" />
+
+            <com.hjq.shape.layout.ShapeLinearLayout
+                android:id="@+id/ll_join"
+                android:layout_width="106dp"
+                android:layout_height="38dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:shape_endColor="@color/color_6d"
+                app:shape_radius="100dp"
+                app:shape_startColor="@color/color_6c">
+
+                <TextView
+                    android:id="@+id/tv_participate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="参与传递"
+                    android:textColor="@color/color_00"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_nums"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="(免费次数：10)"
+                    android:textColor="@color/color_33"
+                    android:textSize="11sp" />
+
+            </com.hjq.shape.layout.ShapeLinearLayout>
+
+
+        </LinearLayout>
+
+
+        <com.hjq.shape.layout.ShapeLinearLayout
+            android:id="@+id/ll_imprint"
+            android:layout_width="192dp"
+            android:layout_height="48dp"
+            android:layout_below="@+id/rl_top"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="7dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:shape_radius="10dp"
+            app:shape_solidColor="@color/color_96">
+
+            <TextView
+                android:id="@+id/tv_imprint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="留下我的传递漂印记"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_by_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="2小时后将会自动发送"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+
+        </com.hjq.shape.layout.ShapeLinearLayout>
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="80dp"
+        android:layout_height="60dp"
+        android:layout_alignParentEnd="true">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/star_top" />
+
+        <ImageView
+            android:id="@+id/iv_report"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/report" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

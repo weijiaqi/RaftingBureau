@@ -105,6 +105,7 @@ public class DriftingPlayDialog extends BottomDialog implements View.OnClickList
                     }
                     break;
                 case R.id.tv_youth_camp:
+                    dismiss();
                     ShowWebViewActivity.start(context, 0, "青年创业营", starUpIndexEntity.getUrl() + "?Sign=" + StringUtil.formatNullString(AppUtil.getSign(Preferences.getPhone())) + "&token=" + StringUtil.formatNullString(Preferences.getToken()), false);
                     break;
             }

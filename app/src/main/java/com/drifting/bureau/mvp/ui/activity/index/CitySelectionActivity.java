@@ -27,7 +27,7 @@ import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.GsonUtil;
 import com.drifting.bureau.util.ViewUtil;
 import com.drifting.bureau.view.location.QuickLocationBar;
-import com.jess.arms.base.BaseActivity;
+import com.drifting.bureau.base.BaseManagerActivity;
 import com.jess.arms.di.component.AppComponent;
 
 import java.util.ArrayList;
@@ -45,7 +45,7 @@ import butterknife.OnClick;
  * @author 城市选择
  * module name is CitySelectionActivity
  */
-public class CitySelectionActivity extends BaseActivity<CitySelectionPresenter> implements CitySelectionContract.View {
+public class CitySelectionActivity extends BaseManagerActivity<CitySelectionPresenter> implements CitySelectionContract.View {
     @BindView(R.id.rcy_hotlist)
     RecyclerView mHotList;
     @BindView(R.id.city_list)

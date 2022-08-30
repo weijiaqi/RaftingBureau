@@ -13,14 +13,14 @@ import androidx.annotation.Nullable;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.util.ClickUtil;
-import com.jess.arms.base.BaseActivity;
+import com.drifting.bureau.base.BaseManagerActivity;
 import com.jess.arms.di.component.AppComponent;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
 
-public class SessionListActivity extends BaseActivity {
+public class SessionListActivity extends BaseManagerActivity {
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
 

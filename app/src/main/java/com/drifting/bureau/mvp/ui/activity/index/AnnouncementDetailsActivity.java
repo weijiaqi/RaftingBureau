@@ -11,8 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.drifting.bureau.R;
+import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.util.ClickUtil;
-import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 
 import butterknife.BindView;
@@ -23,7 +23,7 @@ import butterknife.OnClick;
  * @description 公告详情
  * @time 16:40 16:40
  */
-public class AnnouncementDetailsActivity extends BaseActivity {
+public class AnnouncementDetailsActivity extends BaseManagerActivity {
     @BindView(R.id.tv_title)
     TextView mTvTitle;
     @BindView(R.id.tv_content)

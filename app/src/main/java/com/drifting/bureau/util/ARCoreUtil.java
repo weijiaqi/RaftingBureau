@@ -28,7 +28,6 @@ public class ARCoreUtil {
             message = "此设备不支持 AR！";
         } else if (availability == availability.UNKNOWN_CHECKING) {
             message = "请安装 Google Play Services以使用场景展示";
-            new Handler().postDelayed(() -> checkArCoreAvailability(context), 250);
         } else if (availability == availability.UNKNOWN_TIMED_OUT) {
             message = "此设备不支持 AR！";
         } else if (availability == availability.UNSUPPORTED_DEVICE_NOT_CAPABLE) {

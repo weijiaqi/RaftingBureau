@@ -12,12 +12,12 @@ import androidx.annotation.Nullable;
 import com.drifting.bureau.R;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.LogInOutDataUtil;
-import com.jess.arms.base.BaseActivity;
+import com.drifting.bureau.base.BaseManagerActivity;
 import com.jess.arms.di.component.AppComponent;
 
 import butterknife.OnClick;
 
-public class SetUpActivity  extends BaseActivity {
+public class SetUpActivity  extends BaseManagerActivity {
 
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, SetUpActivity.class);

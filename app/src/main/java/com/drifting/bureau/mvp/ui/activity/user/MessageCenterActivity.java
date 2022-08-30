@@ -26,7 +26,8 @@ import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.callback.BaseDataCallBack;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.drifting.bureau.view.NoScrollViewPager;
-import com.jess.arms.base.BaseActivity;
+import com.drifting.bureau.base.BaseManagerActivity;
+
 import com.jess.arms.base.BaseEntity;
 import com.jess.arms.di.component.AppComponent;
 import com.rb.core.tab.view.indicator.IndicatorViewPager;
@@ -51,7 +52,7 @@ import io.rong.imkit.utils.RouteUtils;
  * @author 消息中心
  * module name is MessageCenterActivity
  */
-public class MessageCenterActivity extends BaseActivity<MessageCenterPresenter> implements MessageCenterContract.View {
+public class MessageCenterActivity extends BaseManagerActivity<MessageCenterPresenter> implements MessageCenterContract.View {
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
     @BindView(R.id.indicator_tablayout)

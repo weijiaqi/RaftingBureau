@@ -20,7 +20,7 @@ import com.drifting.bureau.mvp.presenter.DriftingTrackPresenter;
 import com.drifting.bureau.mvp.ui.adapter.DriftingTrackAdapter;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.ViewUtil;
-import com.jess.arms.base.BaseActivity;
+import com.drifting.bureau.base.BaseManagerActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.rb.core.xrecycleview.XRecyclerView;
 
@@ -37,7 +37,7 @@ import butterknife.OnClick;
  * @author 漂流轨迹
  * module name is DriftingTrackActivity
  */
-public class DriftingTrackActivity extends BaseActivity<DriftingTrackPresenter> implements DriftingTrackContract.View, XRecyclerView.LoadingListener {
+public class DriftingTrackActivity extends BaseManagerActivity<DriftingTrackPresenter> implements DriftingTrackContract.View, XRecyclerView.LoadingListener {
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
     @BindView(R.id.rcy_public)

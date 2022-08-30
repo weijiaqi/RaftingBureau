@@ -33,7 +33,7 @@ public interface MySpaceStationContract {
 
         void onOrderOneSuccess(OrderOneEntity entity);
 
-        void onOrderDetailSuccess(OrderDetailEntity entity);
+
 
         void onUserInfoSuccess(int type, UserInfoEntity entity);
 
@@ -54,8 +54,6 @@ public interface MySpaceStationContract {
         Observable<BaseEntity<SpaceInfoEntity>> spaceinfo(String user_id);
 
         Observable<BaseEntity<OrderOneEntity>> orderone();
-
-        Observable<BaseEntity<OrderDetailEntity>> orderdetail(int space_order_id);
 
         Observable<BaseEntity<UserInfoEntity>> userplayer(String user_id);
 

@@ -12,8 +12,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
-import android.webkit.WebChromeClient;
-import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -21,11 +19,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.drifting.bureau.R;
+import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.ViewUtil;
 import com.drifting.bureau.view.customWebview.CustomWebView;
 import com.drifting.bureau.view.customWebview.WebLoadingListener;
-import com.jess.arms.base.BaseActivity;
+
 import com.jess.arms.di.component.AppComponent;
 
 import butterknife.BindView;
@@ -36,7 +35,7 @@ import butterknife.OnClick;
  * @Author : WeiJiaQI
  * @Time : 2022/5/9 11:51
  */
-public class ShowWebViewActivity extends BaseActivity implements WebLoadingListener {
+public class ShowWebViewActivity extends BaseManagerActivity implements WebLoadingListener {
     @BindView(R.id.fl_container)
     FrameLayout mFlContainer;
     @BindView(R.id.toolbar_title)

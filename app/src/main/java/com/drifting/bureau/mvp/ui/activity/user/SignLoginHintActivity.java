@@ -22,7 +22,7 @@ import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.LogInOutDataUtil;
 import com.drifting.bureau.util.RongIMUtil;
 import com.drifting.bureau.util.ToastUtil;
-import com.jess.arms.base.BaseActivity;
+import com.drifting.bureau.base.BaseManagerActivity;
 import com.jess.arms.di.component.AppComponent;
 
 import butterknife.BindView;
@@ -33,7 +33,7 @@ import butterknife.OnClick;
  * @Author : WeiJiaQI
  * @Time : 2022/5/9 13:31
  */
-public class SignLoginHintActivity extends BaseActivity<SignLoginPresenter> implements SignLoginContract.View {
+public class SignLoginHintActivity extends BaseManagerActivity<SignLoginPresenter> implements SignLoginContract.View {
     @BindView(R.id.tv_content)
     TextView mTvContent;
     @BindView(R.id.tv_sign_login)

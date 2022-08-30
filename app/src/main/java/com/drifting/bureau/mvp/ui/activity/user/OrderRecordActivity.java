@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.drifting.bureau.R;
+import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.data.event.OrderRecordEvent;
 import com.drifting.bureau.data.event.PaymentEvent;
 import com.drifting.bureau.di.component.DaggerOrderRecordComponent;
@@ -24,7 +25,6 @@ import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.ViewUtil;
 import com.drifting.bureau.util.request.RequestUtil;
-import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.rb.core.xrecycleview.XRecyclerView;
 
@@ -44,7 +44,7 @@ import butterknife.OnClick;
  * @author 订单记录
  * module name is OrderRecordActivity
  */
-public class OrderRecordActivity extends BaseActivity<OrderRecordPresenter> implements OrderRecordContract.View, XRecyclerView.LoadingListener {
+public class OrderRecordActivity extends BaseManagerActivity<OrderRecordPresenter> implements OrderRecordContract.View, XRecyclerView.LoadingListener {
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
     @BindView(R.id.rcy_public)

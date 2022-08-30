@@ -2,86 +2,104 @@ package com.drifting.bureau.mvp.model.entity;
 
 public class CommentDetailsEntity {
 
-        private Integer message_id;
-        private Integer comment_id;
-        private Integer user_id;
-        private String user_name;
-        private String content;
-        private String audio;
-        private String vedio;
-        private String image;
-        private String album;
+    private Integer message_id;
+    private Integer comment_id;
+    private Integer user_id;
+    private String user_name;
+    private String content;
+    private String audio;
+    private String vedio;
+    private String image;
+    private String album;
+    private String tag;
+    private String tag_name;
 
-        public Integer getMessage_id() {
-            return message_id;
-        }
+    public String getTag_name() {
+        return tag_name;
+    }
 
-        public void setMessage_id(Integer message_id) {
-            this.message_id = message_id;
-        }
+    public void setTag_name(String tag_name) {
+        this.tag_name = tag_name;
+    }
 
-        public Integer getComment_id() {
-            return comment_id;
-        }
+    public String getTag() {
+        return tag;
+    }
 
-        public void setComment_id(Integer comment_id) {
-            this.comment_id = comment_id;
-        }
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
 
-        public Integer getUser_id() {
-            return user_id;
-        }
+    public Integer getMessage_id() {
+        return message_id;
+    }
 
-        public void setUser_id(Integer user_id) {
-            this.user_id = user_id;
-        }
+    public void setMessage_id(Integer message_id) {
+        this.message_id = message_id;
+    }
 
-        public String getUser_name() {
-            return user_name;
-        }
+    public Integer getComment_id() {
+        return comment_id;
+    }
 
-        public void setUser_name(String user_name) {
-            this.user_name = user_name;
-        }
+    public void setComment_id(Integer comment_id) {
+        this.comment_id = comment_id;
+    }
 
-        public String getContent() {
-            return content;
-        }
+    public Integer getUser_id() {
+        return user_id;
+    }
 
-        public void setContent(String content) {
-            this.content = content;
-        }
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
+    }
 
-        public String getAudio() {
-            return audio;
-        }
+    public String getUser_name() {
+        return user_name;
+    }
 
-        public void setAudio(String audio) {
-            this.audio = audio;
-        }
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
 
-        public String getVedio() {
-            return vedio;
-        }
+    public String getContent() {
+        return content;
+    }
 
-        public void setVedio(String vedio) {
-            this.vedio = vedio;
-        }
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-        public String getImage() {
-            return image;
-        }
+    public String getAudio() {
+        return audio;
+    }
 
-        public void setImage(String image) {
-            this.image = image;
-        }
+    public void setAudio(String audio) {
+        this.audio = audio;
+    }
 
-        public String getAlbum() {
-            return album;
-        }
+    public String getVedio() {
+        return vedio;
+    }
 
-        public void setAlbum(String album) {
-            this.album = album;
-        }
+    public void setVedio(String vedio) {
+        this.vedio = vedio;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(String album) {
+        this.album = album;
+    }
 
 }

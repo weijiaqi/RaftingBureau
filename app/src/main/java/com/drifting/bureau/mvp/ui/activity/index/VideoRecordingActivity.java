@@ -52,7 +52,7 @@ import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.VideoUtil;
 import com.drifting.bureau.view.CircleProgressButtonView;
 import com.google.common.util.concurrent.ListenableFuture;
-import com.jess.arms.base.BaseActivity;
+import com.drifting.bureau.base.BaseManagerActivity;
 import com.jess.arms.di.component.AppComponent;
 
 import org.greenrobot.eventbus.EventBus;
@@ -74,7 +74,7 @@ import io.rong.imkit.picture.photoview.PhotoView;
  * @Author : WeiJiaQI
  * @Time : 2022/5/16 11:49
  */
-public class VideoRecordingActivity extends BaseActivity<VideoRecordingPresenter> implements VideoRecordingContract.View {
+public class VideoRecordingActivity extends BaseManagerActivity<VideoRecordingPresenter> implements VideoRecordingContract.View {
     @BindView(R.id.iv_right)
     ImageView mIvRight;
     @BindView(R.id.viewFinder)

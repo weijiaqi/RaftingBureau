@@ -26,7 +26,7 @@ import com.drifting.bureau.mvp.ui.dialog.AttributeResultsDialog;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.animator.SwipeItemAnimator;
-import com.jess.arms.base.BaseActivity;
+import com.drifting.bureau.base.BaseManagerActivity;
 import com.jess.arms.di.component.AppComponent;
 
 import org.greenrobot.eventbus.EventBus;
@@ -44,7 +44,7 @@ import butterknife.OnClick;
  * @author 搬离星球
  * module name is MoveAwayPlanetaryActivity
  */
-public class MoveAwayPlanetaryActivity extends BaseActivity<MoveAwayPlanetaryPresenter> implements MoveAwayPlanetaryContract.View {
+public class MoveAwayPlanetaryActivity extends BaseManagerActivity<MoveAwayPlanetaryPresenter> implements MoveAwayPlanetaryContract.View {
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
     @BindView(R.id.rcy_answer)

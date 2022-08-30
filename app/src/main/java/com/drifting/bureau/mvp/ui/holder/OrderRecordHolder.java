@@ -69,6 +69,7 @@ public class OrderRecordHolder extends BaseRecyclerHolder {
             mTvStatus.getTextColorBuilder().setTextColor(context.getColor(R.color.color_ff)).intoTextColor();
             mTvStatus.setText("平台赠送");
             mLlPayMent.setVisibility(View.GONE);
+            mTvWriteOff.setVisibility(View.GONE);
         } else {
             if (listBeanList.get(position).getStatus() == 0) {  //未支付
                 mTvStatus.getTextColorBuilder().setTextGradientColors(context.getColor(R.color.color_d6), context.getColor(R.color.color_70)).intoTextColor();
@@ -81,7 +82,6 @@ public class OrderRecordHolder extends BaseRecyclerHolder {
                     mTvTimeRemaining.setText("订单已超时");
                     mTvTimeRemaining.setTextColor(context.getColor(R.color.color_99));
                 } else {
-                    mTvWriteOff.setVisibility(View.VISIBLE);
                     clockview.setVisibility(View.VISIBLE);
                     mTvTimeRemaining.setText("剩余支付时间");
                     mTvTimeRemaining.setTextColor(context.getColor(R.color.color_cc));
@@ -102,6 +102,7 @@ public class OrderRecordHolder extends BaseRecyclerHolder {
 
                         }
                     });
+                    mTvWriteOff.setVisibility(View.VISIBLE);
                     mTvWriteOff.setText("立即付款");
                     mTvWriteOff.setTextColor(context.getColor(R.color.white));
                 }
@@ -110,6 +111,7 @@ public class OrderRecordHolder extends BaseRecyclerHolder {
                 mTvStatus.getTextColorBuilder().setTextGradientColors(context.getColor(R.color.color_6c), context.getColor(R.color.color_6d)).intoTextColor();
                 mTvStatus.setText("已付款");
                 mLlPayMent.setVisibility(View.GONE);
+                mTvWriteOff.setVisibility(View.GONE);
             }
         }
 
@@ -121,6 +123,7 @@ public class OrderRecordHolder extends BaseRecyclerHolder {
                 mTvWriteOff.setVisibility(View.GONE);
             }
         } else {
+            mTvWriteOff.setVisibility(View.VISIBLE);
             if (listBeanList.get(position).getWrite_off() == 1) {
                 mTvWriteOff.setText("已核销");
                 mTvWriteOff.setClickable(false);

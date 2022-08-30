@@ -20,7 +20,7 @@
     <style name="AppSplash" parent="AppTheme">
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowAnimationStyle">@style/RemoveTransitions</item>
-        <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="LOLLIPOP">false</item>
+       <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="LOLLIPOP">false</item>
     </style>
 
     <!--移除转场效果-->
