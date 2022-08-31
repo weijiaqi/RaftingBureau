@@ -48,7 +48,11 @@
             android:layout_marginTop="6dp"
             android:layout_marginEnd="17.5dp"
             android:lineSpacingExtra="2dp"
+<<<<<<< HEAD
             android:text="你好，我是元漂熊。接下来，我会带你\n体验AR＋VR技术呈现得的元宇宙世\n界，需要你的硬件设备支持相关呈现。\n请问你准备好了进入了吗？"
+=======
+            android:text="你好，我是元漂熊。接下来，我会带你\n体验AR＋VR技术呈现得的元宇宙世\n界，需要你得硬件设备支持相关呈现。\n请问你准备好了进入了吗？"
+>>>>>>> origin/dev
             android:textColor="@color/white"
             android:textSize="11sp" />
 

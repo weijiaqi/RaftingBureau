@@ -48,7 +48,11 @@ import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.view.AutoPollRecyclerView;
 import com.drifting.bureau.view.ScaleInTransformer;
+<<<<<<< HEAD
 import com.drifting.bureau.base.BaseManagerActivity;
+=======
+import com.jess.arms.base.BaseActivity;
+>>>>>>> origin/dev
 import com.jess.arms.di.component.AppComponent;
 
 import java.util.ArrayList;
@@ -64,7 +68,11 @@ import butterknife.OnClick;
  * @author 获取空间站
  * module name is GetSpaceStationActivity
  */
+<<<<<<< HEAD
 public class GetSpaceStationActivity extends BaseManagerActivity<GetSpaceStationPresenter> implements GetSpaceStationContract.View {
+=======
+public class GetSpaceStationActivity extends BaseActivity<GetSpaceStationPresenter> implements GetSpaceStationContract.View {
+>>>>>>> origin/dev
     @BindView(R.id.toolbar_title)
     TextView mToobarTitle;
     @BindView(R.id.rcy_barrage)

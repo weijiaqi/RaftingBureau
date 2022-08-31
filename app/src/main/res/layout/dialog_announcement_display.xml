@@ -23,12 +23,20 @@
 
         <TextView
             android:id="@+id/tv_content"
+<<<<<<< HEAD
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/iv_pic"
             android:layout_marginHorizontal="32dp"
             android:layout_marginTop="14dp"
             android:gravity="center"
+=======
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_pic"
+            android:layout_marginTop="14dp"
+            android:layout_marginHorizontal="64dp"
+>>>>>>> origin/dev
             android:text=""
             android:textColor="@color/color_33"
             android:textSize="12sp" />

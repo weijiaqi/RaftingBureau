@@ -12,7 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.drifting.bureau.R;
+<<<<<<< HEAD
 import com.drifting.bureau.base.BaseManagerActivity;
+=======
+>>>>>>> origin/dev
 import com.drifting.bureau.di.component.DaggerSpaceCapsuleComponent;
 import com.drifting.bureau.mvp.contract.GetSpaceStationContract;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
@@ -28,6 +31,10 @@ import com.drifting.bureau.mvp.ui.dialog.HowToPlayDialog;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.DateUtil;
 import com.drifting.bureau.util.ToastUtil;
+<<<<<<< HEAD
+=======
+import com.jess.arms.base.BaseActivity;
+>>>>>>> origin/dev
 import com.jess.arms.di.component.AppComponent;
 
 import java.util.List;
@@ -40,7 +47,11 @@ import butterknife.OnClick;
  * @Author : WeiJiaQI
  * @Time : 2022/5/24 9:39
  */
+<<<<<<< HEAD
 public class SpaceCapsuleActivity extends BaseManagerActivity<GetSpaceStationPresenter> implements GetSpaceStationContract.View {
+=======
+public class SpaceCapsuleActivity extends BaseActivity<GetSpaceStationPresenter> implements GetSpaceStationContract.View {
+>>>>>>> origin/dev
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
     @BindView(R.id.iv_exchange_code)

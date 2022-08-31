@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_01"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_title" />
+
+
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:scrollbars="none">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.hjq.shape.layout.ShapeLinearLayout
+                android:id="@+id/ll_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="35dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="29dp"
+                android:orientation="vertical"
+                app:shape_endColor="@color/color_6d"
+                app:shape_radius="10dp"
+                app:shape_startColor="@color/color_6c">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:shape_endColor="@color/color_6c"
+                    app:shape_radius="10dp"
+                    app:shape_startColor="@color/color_6d">
+
+                    <TextView
+                        android:id="@+id/tv_message"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="14dp"
+                        android:text="漂来电波信息"
+                        android:textColor="@color/color_0b"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_message"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="9dp"
+                        android:layout_marginBottom="13dp"
+                        android:background="@drawable/rafting_info_bg"
+                        android:paddingStart="24dp">
+
+                        <TextView
+                            android:id="@+id/tv_rafting_type"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="26dp"
+                            android:background="@drawable/rafting_frame"
+                            android:gravity="center"
+                            android:text=""
+                            android:textColor="@color/white"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/tv_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_rafting_type"
+                            android:layout_marginTop="11dp"
+                            android:text=""
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_planet"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_name"
+                            android:layout_marginTop="3dp"
+                            android:text=""
+                            android:textColor="@color/color_6ce"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:id="@+id/tv_identity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignTop="@+id/tv_planet"
+                            android:layout_marginStart="15dp"
+                            android:layout_toRightOf="@+id/tv_planet"
+                            android:text=""
+                            android:textColor="@color/color_6ce"
+                            android:textSize="11sp" />
+
+                        <RelativeLayout
+                            android:id="@+id/rl_add_friends"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_planet"
+                            android:layout_marginTop="12dp">
+
+                            <TextView
+                                android:id="@+id/tv_add_friends"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/short_green_frame"
+                                android:gravity="center"
+                                android:text="添加好友"
+                                android:textColor="@color/color_00"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/iv_mask"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/square_lock" />
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                    <ImageView
+                        android:id="@+id/iv_mastor"
+                        android:layout_width="120dp"
+                        android:layout_height="165dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="15dp" />
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/rl_explore">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="19dp"
+                            android:text="共有"
+                            android:textColor="@color/color_01"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/tv_num"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="3dp"
+                            android:layout_marginTop="1dp"
+                            android:text=""
+                            android:textColor="@color/color_00"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="人参与传递"
+                            android:textColor="@color/color_01"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/rl_explore"
+                        android:layout_width="77dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="14dp">
+
+                        <com.hjq.shape.view.ShapeTextView
+                            android:id="@+id/tv_explore"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="探寻过程"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            app:shape_endColor="@color/color_70"
+                            app:shape_radius="100dp"
+                            app:shape_startColor="@color/color_d6" />
+
+                        <ImageView
+                            android:id="@+id/iv_explore_lock"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/round_lock" />
+                    </RelativeLayout>
+                </RelativeLayout>
+
+
+                <com.hjq.shape.layout.ShapeLinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="202dp"
+                    android:layout_margin="16dp"
+                    app:shape_radius="10dp"
+                    app:shape_strokeColor="@color/color_33"
+                    app:shape_strokeWidth="1dp">
+
+                    <com.hjq.shape.layout.ShapeRelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        app:shape_radius="10dp"
+                        app:shape_solidColor="@color/color_0b">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:src="@drawable/top_comma" />
+
+
+                        <TextView
+                            android:id="@+id/tv_word"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginHorizontal="17dp"
+                            android:layout_marginVertical="26dp"
+                            android:gravity="center"
+                            android:lineSpacingExtra="2dp"
+                            android:scrollbars="vertical"
+                            android:text=""
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            android:visibility="gone" />
+
+                        <include
+                            android:id="@+id/rl_voice_play"
+                            layout="@layout/include_voice_play"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginHorizontal="6dp"
+                            android:visibility="gone" />
+
+
+                        <include
+                            android:id="@+id/rl_video_play"
+                            layout="@layout/include_video_play"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginVertical="30dp"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_margin="8dp"
+                            android:src="@drawable/bottom_comma" />
+
+                    </com.hjq.shape.layout.ShapeRelativeLayout>
+
+
+                </com.hjq.shape.layout.ShapeLinearLayout>
+            </com.hjq.shape.layout.ShapeLinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_participate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_top"
+                android:layout_marginHorizontal="35dp">
+
+                <com.hjq.shape.view.ShapeTextView
+
+                    android:id="@+id/tv_into_space"
+                    android:layout_width="125dp"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="38dp"
+                    android:gravity="center"
+                    android:text="丢回太空"
+                    android:textColor="@color/color_cc"
+                    android:textSize="14sp"
+                    app:shape_radius="10dp"
+                    app:shape_solidColor="@color/color_26" />
+
+                <com.hjq.shape.layout.ShapeLinearLayout
+                    android:id="@+id/ll_join"
+                    android:layout_width="125dp"
+                    android:layout_height="48dp"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:shape_endColor="@color/color_6d"
+                    app:shape_radius="10dp"
+                    app:shape_startColor="@color/color_6c">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="参与传递"
+                        android:textColor="@color/color_00"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="可添加好友"
+                        android:textColor="@color/color_00"
+                        android:textSize="12sp" />
+
+                </com.hjq.shape.layout.ShapeLinearLayout>
+
+
+            </RelativeLayout>
+
+            <com.hjq.shape.layout.ShapeLinearLayout
+                android:id="@+id/ll_imprint"
+                android:layout_width="192dp"
+                android:layout_height="48dp"
+                android:layout_below="@+id/ll_top"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone"
+                app:shape_radius="10dp"
+                app:shape_solidColor="@color/color_96">
+
+                <TextView
+                    android:id="@+id/tv_imprint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="留下我的传递漂印记"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_by_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="2小时后将会自动发送"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+
+            </com.hjq.shape.layout.ShapeLinearLayout>
+
+            <FrameLayout
+                android:id="@+id/main_fame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_top"
+                android:layout_marginHorizontal="18dp" />
+
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

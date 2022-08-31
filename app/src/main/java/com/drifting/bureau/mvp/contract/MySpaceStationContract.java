@@ -33,7 +33,11 @@ public interface MySpaceStationContract {
 
         void onOrderOneSuccess(OrderOneEntity entity);
 
+<<<<<<< HEAD
 
+=======
+        void onOrderDetailSuccess(OrderDetailEntity entity);
+>>>>>>> origin/dev
 
         void onUserInfoSuccess(int type, UserInfoEntity entity);
 
@@ -55,6 +59,11 @@ public interface MySpaceStationContract {
 
         Observable<BaseEntity<OrderOneEntity>> orderone();
 
+<<<<<<< HEAD
+=======
+        Observable<BaseEntity<OrderDetailEntity>> orderdetail(int space_order_id);
+
+>>>>>>> origin/dev
         Observable<BaseEntity<UserInfoEntity>> userplayer(String user_id);
 
         Observable<BaseEntity> orderthrow(int space_order_id);

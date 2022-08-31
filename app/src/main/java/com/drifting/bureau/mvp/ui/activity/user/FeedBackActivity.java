@@ -18,7 +18,11 @@ import com.drifting.bureau.mvp.presenter.FeedBackPresenter;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.ToastUtil;
+<<<<<<< HEAD
 import com.drifting.bureau.base.BaseManagerActivity;
+=======
+import com.jess.arms.base.BaseActivity;
+>>>>>>> origin/dev
 import com.jess.arms.di.component.AppComponent;
 
 import butterknife.BindView;
@@ -31,7 +35,11 @@ import butterknife.OnClick;
  * @author 意见反馈
  * module name is FeedBackActivity
  */
+<<<<<<< HEAD
 public class FeedBackActivity extends BaseManagerActivity<FeedBackPresenter> implements FeedBackContract.View {
+=======
+public class FeedBackActivity extends BaseActivity<FeedBackPresenter> implements FeedBackContract.View {
+>>>>>>> origin/dev
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
     @BindView(R.id.et_content)

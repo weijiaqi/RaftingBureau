@@ -4,15 +4,21 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
+<<<<<<< HEAD
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+=======
+>>>>>>> origin/dev
 import android.text.TextUtils;
 
 import com.drifting.bureau.app.application.RBureauApplication;
 
 import java.util.List;
+<<<<<<< HEAD
 import java.util.Locale;
+=======
+>>>>>>> origin/dev
 
 /**
  * @author 卫佳琪1
@@ -135,6 +141,7 @@ public class AppUtil {
         }
         return false;
     }
+<<<<<<< HEAD
 
     // 获取地址信息
     public static List<Address> getAddress(Activity activity, Location location) {
@@ -150,4 +157,6 @@ public class AppUtil {
         }
         return result;
     }
+=======
+>>>>>>> origin/dev
 }

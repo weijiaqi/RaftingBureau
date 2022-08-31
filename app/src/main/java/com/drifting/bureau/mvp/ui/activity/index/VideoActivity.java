@@ -20,7 +20,11 @@ import com.danikula.videocache.HttpProxyCacheServer;
 import com.drifting.bureau.R;
 import com.drifting.bureau.app.application.RBureauApplication;
 import com.drifting.bureau.util.ClickUtil;
+<<<<<<< HEAD
 import com.drifting.bureau.base.BaseManagerActivity;
+=======
+import com.jess.arms.base.BaseActivity;
+>>>>>>> origin/dev
 import com.jess.arms.di.component.AppComponent;
 
 import butterknife.BindView;
@@ -31,7 +35,11 @@ import butterknife.OnClick;
  * @Author : WeiJiaQI
  * @Time : 2022/5/17 16:04
  */
+<<<<<<< HEAD
 public class VideoActivity extends BaseManagerActivity {
+=======
+public class VideoActivity extends BaseActivity {
+>>>>>>> origin/dev
     @BindView(R.id.toolbar_title)
     TextView mToobarTitle;
     @BindView(R.id.videoView)

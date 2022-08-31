@@ -7,9 +7,12 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+<<<<<<< HEAD
 import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.model.LatLng;
+=======
+>>>>>>> origin/dev
 import com.danikula.videocache.HttpProxyCacheServer;
 import com.drifting.bureau.R;
 import com.drifting.bureau.app.RBConstant;
@@ -56,8 +59,12 @@ public class RBureauApplication extends Application implements App {
     private static Context mContext;
     private static String TAG = "RBureauApplication";
     private HttpProxyCacheServer proxy;
+<<<<<<< HEAD
     public static boolean isForeground = false;
     public static LatLng latLng ;
+=======
+
+>>>>>>> origin/dev
     /**
      * 这里会在 {@link BaseApplication#onCreate} 之前被调用,可以做一些较早的初始化
      * 常用于 MultiDex 以及插件化框架的初始化
@@ -130,6 +137,7 @@ public class RBureauApplication extends Application implements App {
 
         //友盟
         UMConfigure.init(this, RBConstant.UM_INIT_APPKEY, AppUtil.getChannel(getApplicationContext()), UMConfigure.DEVICE_TYPE_PHONE, "");
+<<<<<<< HEAD
 
         //地图
         SDKInitializer.setAgreePrivacy(getApplicationContext(),true);
@@ -138,6 +146,8 @@ public class RBureauApplication extends Application implements App {
         //自4.3.0起，百度地图SDK所有接口均支持百度坐标和国测局坐标，用此方法设置您使用的坐标类型.
         //包括BD09LL和GCJ02两种坐标，默认是BD09LL坐标。
         SDKInitializer.setCoordType(CoordType.BD09LL);
+=======
+>>>>>>> origin/dev
     }
 
 

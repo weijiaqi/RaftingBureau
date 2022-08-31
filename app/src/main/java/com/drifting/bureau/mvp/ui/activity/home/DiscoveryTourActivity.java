@@ -27,7 +27,10 @@ import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
 
 import com.drifting.bureau.R;
+<<<<<<< HEAD
 import com.drifting.bureau.base.BaseManagerActivity;
+=======
+>>>>>>> origin/dev
 import com.drifting.bureau.data.event.AnswerCompletedEvent;
 import com.drifting.bureau.data.event.BackSpaceEvent;
 import com.drifting.bureau.data.event.MessageRefreshEvent;
@@ -38,7 +41,12 @@ import com.drifting.bureau.mvp.model.entity.PlanetEntity;
 import com.drifting.bureau.mvp.model.entity.StarUpIndexEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.presenter.DiscoveryTourPresenter;
+<<<<<<< HEAD
 import com.drifting.bureau.mvp.ui.activity.index.DriftTrackMapActivity;
+=======
+import com.drifting.bureau.mvp.ui.activity.index.GetSpaceStationActivity;
+import com.drifting.bureau.mvp.ui.activity.index.PlanetarySelectActivity;
+>>>>>>> origin/dev
 import com.drifting.bureau.mvp.ui.activity.index.SpaceCapsuleActivity;
 import com.drifting.bureau.mvp.ui.activity.index.TopicDetailActivity;
 import com.drifting.bureau.mvp.ui.activity.user.AboutMeActivity;
@@ -46,12 +54,16 @@ import com.drifting.bureau.mvp.ui.activity.user.MessageCenterActivity;
 import com.drifting.bureau.mvp.ui.activity.web.ShowWebViewActivity;
 import com.drifting.bureau.mvp.ui.adapter.DiscoveryViewpagerAdapter;
 import com.drifting.bureau.storageinfo.Preferences;
+<<<<<<< HEAD
 import com.drifting.bureau.util.ARCoreUtil;
+=======
+>>>>>>> origin/dev
 import com.drifting.bureau.util.AppUtil;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.animator.AnimatorUtil;
+<<<<<<< HEAD
 import com.drifting.bureau.util.request.RequestUtil;
 import com.drifting.bureau.view.DiscoveryTransformer;
 import com.google.vr.sdk.widgets.pano.VrPanoramaView;
@@ -62,6 +74,20 @@ import com.umeng.analytics.MobclickAgent;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+=======
+import com.drifting.bureau.util.callback.BaseDataCallBack;
+import com.drifting.bureau.util.request.RequestUtil;
+import com.drifting.bureau.view.DiscoveryTransformer;
+import com.google.vr.sdk.widgets.pano.VrPanoramaView;
+import com.jess.arms.base.BaseActivity;
+import com.jess.arms.base.BaseEntity;
+import com.jess.arms.di.component.AppComponent;
+import com.umeng.analytics.MobclickAgent;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+>>>>>>> origin/dev
 import java.io.InputStream;
 import java.util.List;
 
@@ -79,7 +105,11 @@ import io.rong.imlib.model.Conversation;
  * @author WJQ
  * module name is DiscoveryTourActivity
  */
+<<<<<<< HEAD
 public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPresenter> implements DiscoveryTourContract.View {
+=======
+public class DiscoveryTourActivity extends BaseActivity<DiscoveryTourPresenter> implements DiscoveryTourContract.View {
+>>>>>>> origin/dev
     @BindView(R.id.tv_bar)
     TextView mTvBar;
     @BindView(R.id.tv_energy)
@@ -172,8 +202,11 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
         } catch (Exception e) {
             e.printStackTrace();
         }
+<<<<<<< HEAD
+=======
 
     }
+>>>>>>> origin/dev
 
     public void loadUI() {
         if (mPresenter != null) {
@@ -201,6 +234,35 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
         });
     }
 
+<<<<<<< HEAD
+    public void loadUI() {
+        if (mPresenter != null) {
+            mPresenter.getExploreList();
+            mPresenter.getLocation(this);
+        }
+        frame.setOnTouchListener((view, motionEvent) -> viewPager.onTouchEvent(motionEvent));
+    }
+
+
+    public void getUserInfo() {
+        RequestUtil.create().userplayer(Preferences.getUserId(), entity -> {
+            if (entity != null && entity.getCode() == 200) {
+                userInfoEntity = entity.getData();
+                Preferences.saveMascot(userInfoEntity.getUser().getMascot());
+                mTvAboutMe.setText(userInfoEntity.getPlanet().getName());
+                mTvEnergy.setText(userInfoEntity.getUser().getMeta_power());
+                RequestUtil.create().startup(entity1 -> {
+                    if (entity1 != null && entity1.getCode() == 200) {
+                        starUpIndexEntity = entity1.getData();
+                        mTvYouthCamp.setVisibility(!TextUtils.isEmpty(starUpIndexEntity.getUrl()) ? View.VISIBLE : View.INVISIBLE);
+                    }
+                });
+            }
+        });
+    }
+
+=======
+>>>>>>> origin/dev
     public void unread() {
         RequestUtil.create().unread(entity1 -> {
             if (entity1 != null && entity1.getCode() == 200) {
@@ -233,7 +295,11 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
                     ShowWebViewActivity.start(this, 4, false);
                     break;
                 case R.id.rl_message: //开启新消息
+<<<<<<< HEAD
                     DriftTrackMapActivity.start(this, explore_id, id, false);
+=======
+                    TopicDetailActivity.start(this, explore_id, id, false);
+>>>>>>> origin/dev
                     break;
                 case R.id.tv_about_me: //关于我
                     if (userInfoEntity != null) {
@@ -247,11 +313,16 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
                     MessageCenterActivity.start(this, false);
                     break;
                 case R.id.ll_step_star:
+<<<<<<< HEAD
                     if (ARCoreUtil.checkArCoreAvailability(this)) {
                         Preferences.setARModel(true);
                         ArCenterConsoleActivity.start(this, true);
                     }
 
+=======
+                    Preferences.setARModel(true);
+                    ArCenterConsoleActivity.start(this, true);
+>>>>>>> origin/dev
 //                if (userInfoEntity != null) {
 //                    PlanetarySelectActivity.start(this, userInfoEntity.getPlanet().getLevel(), false);
 //                }
@@ -281,9 +352,15 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
                 id = entity.getId();
                 user_id = entity.getUser_id();
                 explore_id = entity.getExplore_id();
+<<<<<<< HEAD
                 handler.postDelayed(mAdRunnable, entity.getDrift_rest() * 1000);
                 if (isAnmiation) {
                     isAnmiation = false;
+=======
+                if (isAnmiation) {
+                    isAnmiation = false;
+                    handler.postDelayed(mAdRunnable, entity.getDrift_rest() * 10);
+>>>>>>> origin/dev
                     objectAnimation(1, mIvRocket, mRlMessage, -500, 200, 0, 6, 1000);
                 }
             } else {
@@ -362,6 +439,7 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
             viewPager.setPageTransformer(true, new DiscoveryTransformer());
             getUserInfo();
         }
+<<<<<<< HEAD
     }
 
 
@@ -370,9 +448,27 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
         if (answerCompletedEvent != null) {
             getUserInfo();
         }
+=======
+>>>>>>> origin/dev
     }
 
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+<<<<<<< HEAD
+    public void MessageRefreshEvent(MessageRefreshEvent event) {
+        if (event != null) {
+            unread();
+=======
+    public void AnswerCompletedEvent(AnswerCompletedEvent answerCompletedEvent) {
+        if (answerCompletedEvent != null) {
+            getUserInfo();
+>>>>>>> origin/dev
+        }
+    }
+
+
+<<<<<<< HEAD
+=======
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void MessageRefreshEvent(MessageRefreshEvent event) {
         if (event != null) {
@@ -381,6 +477,7 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
     }
 
 
+>>>>>>> origin/dev
     @Override
     public void onResume() {
         super.onResume();

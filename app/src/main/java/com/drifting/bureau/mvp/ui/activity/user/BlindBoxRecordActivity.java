@@ -16,7 +16,11 @@ import com.drifting.bureau.mvp.ui.adapter.BlindBoxRecordAdapter;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.ViewUtil;
+<<<<<<< HEAD
 import com.drifting.bureau.base.BaseManagerActivity;
+=======
+import com.jess.arms.base.BaseActivity;
+>>>>>>> origin/dev
 import com.jess.arms.di.component.AppComponent;
 import com.drifting.bureau.mvp.contract.BlindBoxRecordContract;
 import com.drifting.bureau.mvp.presenter.BlindBoxRecordPresenter;
@@ -32,7 +36,11 @@ import butterknife.OnClick;
  * @author 盲盒记录
  * module name is BlindBoxRecordActivity
  */
+<<<<<<< HEAD
 public class BlindBoxRecordActivity extends BaseManagerActivity<BlindBoxRecordPresenter> implements BlindBoxRecordContract.View,XRecyclerView.LoadingListener {
+=======
+public class BlindBoxRecordActivity extends BaseActivity<BlindBoxRecordPresenter> implements BlindBoxRecordContract.View,XRecyclerView.LoadingListener {
+>>>>>>> origin/dev
 
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;

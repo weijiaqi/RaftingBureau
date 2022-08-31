@@ -97,6 +97,7 @@ public class VoiceWave extends View {
                 dataList.add(new Bean(i, 20, 20));
             }
         } else {
+<<<<<<< HEAD
             dataList.add(new Bean(1, 10, 30));
             dataList.add(new Bean(2, 10, 30));
             dataList.add(new Bean(3, isQuiet ? 20 : base + 35, 20));
@@ -142,6 +143,53 @@ public class VoiceWave extends View {
             //-----------------------------------------------------
             dataList.add(new Bean(39, isQuiet ? 10 : base + 50, 30));
             dataList.add(new Bean(40, 20, isQuiet ? 20 : base + 50));
+=======
+            dataList.add(new Bean(1, 20, 30));
+            dataList.add(new Bean(2, 20, 30));
+            dataList.add(new Bean(3, isQuiet ? 30 : base + 35, 20));
+            dataList.add(new Bean(4, 20, 30));
+            dataList.add(new Bean(5, 30, isQuiet ? 20 : base + 20));
+            dataList.add(new Bean(6, isQuiet ? 20 : base + 20, 30));
+            dataList.add(new Bean(7, 30, isQuiet ? 20 : base + 20));
+            dataList.add(new Bean(8, isQuiet ? 20 : base + 50, 30));
+            dataList.add(new Bean(9, 20, isQuiet ? 30 : base + 30));
+            dataList.add(new Bean(10, isQuiet ? 20 : base + 20, 30));
+            dataList.add(new Bean(11, 30, isQuiet ? 20 : base + 50));
+            dataList.add(new Bean(12, isQuiet ? 20 : base + 50, 30));
+            //-----------------------------------------------------
+            dataList.add(new Bean(13, 30, isQuiet ? 20 : base + 70));
+            //-----------------------------------------------------
+            dataList.add(new Bean(14, isQuiet ? 20 : base + 50, 30));
+            dataList.add(new Bean(15, 30, isQuiet ? 20 : base + 50));
+            dataList.add(new Bean(16, isQuiet ? 20 : base + 20, 30));
+            dataList.add(new Bean(17, 20, isQuiet ? 30 : base + 30));
+            dataList.add(new Bean(18, isQuiet ? 20 : base + 50, 30));
+            dataList.add(new Bean(19, 30, isQuiet ? 20 : base + 20));
+            dataList.add(new Bean(20, isQuiet ? 20 : base + 20, 30));
+            dataList.add(new Bean(21, 30, isQuiet ? 20 : base + 20));
+            dataList.add(new Bean(22, 20, 30));
+            dataList.add(new Bean(23, isQuiet ? 30 : base + 35, 20));
+            dataList.add(new Bean(24, 20, 30));//20
+            dataList.add(new Bean(25, 20, 30));
+
+            dataList.add(new Bean(26, 20, 30));
+            dataList.add(new Bean(27, 20, 30));
+            dataList.add(new Bean(28, isQuiet ? 30 : base + 35, 20));
+            dataList.add(new Bean(29, 20, 30));
+            dataList.add(new Bean(30, 30, isQuiet ? 20 : base + 20));
+            dataList.add(new Bean(31, isQuiet ? 20 : base + 20, 30));
+            dataList.add(new Bean(32, 30, isQuiet ? 20 : base + 20));
+            dataList.add(new Bean(33, isQuiet ? 20 : base + 50, 30));
+            dataList.add(new Bean(34, 20, isQuiet ? 30 : base + 30));
+            dataList.add(new Bean(35, isQuiet ? 20 : base + 20, 30));
+            dataList.add(new Bean(36, 30, isQuiet ? 20 : base + 50));
+            dataList.add(new Bean(37, isQuiet ? 20 : base + 50, 30));
+            //-----------------------------------------------------
+            dataList.add(new Bean(38, 30, isQuiet ? 20 : base + 70));
+            //-----------------------------------------------------
+            dataList.add(new Bean(39, isQuiet ? 20 : base + 50, 30));
+            dataList.add(new Bean(40, 30, isQuiet ? 20 : base + 50));
+>>>>>>> origin/dev
             dataList.add(new Bean(41, isQuiet ? 20 : base + 20, 30));
             dataList.add(new Bean(42, 20, isQuiet ? 30 : base + 30));
             dataList.add(new Bean(43, isQuiet ? 20 : base + 50, 30));

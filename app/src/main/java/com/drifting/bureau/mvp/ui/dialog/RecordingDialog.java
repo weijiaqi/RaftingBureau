@@ -181,7 +181,11 @@ public class RecordingDialog extends BottomDialog implements View.OnClickListene
                     @Override
                     public void onStart() {
                         //开始录音
+<<<<<<< HEAD
                         totaltime = 60;
+=======
+                        totaltime = 15;
+>>>>>>> origin/dev
                         Message message = new Message();
                         message.what = 1;
                         handler.sendMessage(message);
@@ -189,7 +193,11 @@ public class RecordingDialog extends BottomDialog implements View.OnClickListene
 
                     @Override
                     public void onError() {
+<<<<<<< HEAD
                         totaltime = 60;
+=======
+                        totaltime = 15;
+>>>>>>> origin/dev
                         Message message = new Message();
                         message.what = 1;
                         handler.sendMessage(message);

@@ -61,6 +61,14 @@ public class MySpaceStationModel extends BaseModel implements MySpaceStationCont
     }
 
     @Override
+<<<<<<< HEAD
+=======
+    public Observable<BaseEntity<OrderDetailEntity>> orderdetail( int space_order_id) {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).orderdetail(space_order_id);
+    }
+
+    @Override
+>>>>>>> origin/dev
     public Observable<BaseEntity<UserInfoEntity>> userplayer(String user_id) {
         return mRepositoryManager.obtainRetrofitService(ApiService.class).userplayer(user_id);
     }

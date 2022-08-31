@@ -23,7 +23,11 @@ import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.ViewUtil;
 import com.drifting.bureau.util.request.RequestUtil;
+<<<<<<< HEAD
 import com.drifting.bureau.base.BaseManagerActivity;
+=======
+import com.jess.arms.base.BaseActivity;
+>>>>>>> origin/dev
 import com.jess.arms.di.component.AppComponent;
 import com.rb.core.xrecycleview.XRecyclerView;
 
@@ -43,7 +47,11 @@ import butterknife.OnClick;
  * @author 好友申请
  * module name is FriendApplicationActivity
  */
+<<<<<<< HEAD
 public class FriendApplicationActivity extends BaseManagerActivity<FriendApplicationPresenter> implements FriendApplicationContract.View, XRecyclerView.LoadingListener {
+=======
+public class FriendApplicationActivity extends BaseActivity<FriendApplicationPresenter> implements FriendApplicationContract.View, XRecyclerView.LoadingListener {
+>>>>>>> origin/dev
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
     @BindView(R.id.rcy_public)

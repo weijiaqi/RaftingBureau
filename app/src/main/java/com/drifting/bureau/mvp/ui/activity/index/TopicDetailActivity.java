@@ -19,7 +19,11 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
 import com.drifting.bureau.R;
+<<<<<<< HEAD
 import com.drifting.bureau.base.BaseManagerActivity;
+=======
+import com.drifting.bureau.base.BaseActivity;
+>>>>>>> origin/dev
 import com.drifting.bureau.data.event.BackSpaceEvent;
 import com.drifting.bureau.data.event.PaymentEvent;
 import com.drifting.bureau.data.event.VideoEvent;
@@ -40,6 +44,10 @@ import com.drifting.bureau.util.BitmapUtil;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.ToastUtil;
+<<<<<<< HEAD
+=======
+import com.drifting.bureau.util.VideoUtil;
+>>>>>>> origin/dev
 import com.drifting.bureau.util.ViewUtil;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.drifting.bureau.view.chart.LineChartView;
@@ -64,7 +72,11 @@ import butterknife.OnClick;
  * @author 发布话题
  * module name is TopicDetailActivity
  */
+<<<<<<< HEAD
 public class TopicDetailActivity extends BaseManagerActivity<TopicDetailPresenter> implements TopicDetailContract.View {
+=======
+public class TopicDetailActivity extends BaseActivity<TopicDetailPresenter> implements TopicDetailContract.View {
+>>>>>>> origin/dev
     @BindView(R.id.line_chart_view)
     LineChartView lineChartView;
     @BindView(R.id.scroll_view)
@@ -228,6 +240,10 @@ public class TopicDetailActivity extends BaseManagerActivity<TopicDetailPresente
                 lineChartView.setData(datas, 2);
             }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/dev
             lineChartView.setClockListener(new LineChartView.OpenMessageListener() {
                 @Override
                 public void onClick(int index) {
@@ -264,7 +280,11 @@ public class TopicDetailActivity extends BaseManagerActivity<TopicDetailPresente
                 total = entity.getData().getAttend_times() + entity.getData().getCommon_times();
                 releaseDriftingDialog = new ReleaseDriftingDialog(getActivity(), 1, total);
                 releaseDriftingDialog.show();
+<<<<<<< HEAD
                 releaseDriftingDialog.setOnStarrySkyClickCallback((type, word, path, list, cover,tag) -> {
+=======
+                releaseDriftingDialog.setOnStarrySkyClickCallback((type, word, path, list, cover) -> {
+>>>>>>> origin/dev
                     status = 1;
                     if (mPresenter != null) {
                         showLoading();
@@ -366,7 +386,11 @@ public class TopicDetailActivity extends BaseManagerActivity<TopicDetailPresente
                         }
                     });
 
+<<<<<<< HEAD
                     releaseDriftingDialog.setOnStarrySkyClickCallback((type, word, path, list, cover,tag) -> {
+=======
+                    releaseDriftingDialog.setOnStarrySkyClickCallback((type, word, path, list, cover) -> {
+>>>>>>> origin/dev
                         status = 2;
                         if (mPresenter != null) {
                             showLoading();
@@ -543,6 +567,10 @@ public class TopicDetailActivity extends BaseManagerActivity<TopicDetailPresente
                 mTvPlanet.setText(entity.getData().getPlanet().getName());
                 mTvIdentity.setText(entity.getData().getUser().getLevel_name());
                 GlideUtil.create().loadLongImage(this, entity.getData().getUser().getMascot(), mIvMastor);
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/dev
                 if (user_id == Integer.parseInt(Preferences.getUserId())) {
                     mRlAddFriends.setVisibility(View.GONE);
                 } else {

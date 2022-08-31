@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -8,6 +9,16 @@
     <com.hjq.shape.layout.ShapeRelativeLayout
         android:id="@+id/rl_start_voice"
         android:layout_marginTop="52dp"
+=======
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical">
+
+    <com.hjq.shape.layout.ShapeRelativeLayout
+        android:id="@+id/rl_start_voice"
+>>>>>>> origin/dev
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -22,8 +33,12 @@
             android:layout_height="18dp"
             android:layout_centerVertical="true"
             android:layout_marginStart="6dp"
+<<<<<<< HEAD
             android:src="@drawable/voice_play"
             android:visibility="gone" />
+=======
+            android:src="@drawable/voice_play" />
+>>>>>>> origin/dev
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -45,6 +60,7 @@
                 android:id="@+id/videoView"
                 android:layout_width="match_parent"
                 android:layout_height="15dp"
+<<<<<<< HEAD
                 android:layout_centerVertical="true"
                 android:visibility="gone" />
 
@@ -56,6 +72,9 @@
                 android:text="录入漂到下一个星云"
                 android:textColor="@color/color_00"
                 android:textSize="12sp" />
+=======
+                android:layout_centerVertical="true" />
+>>>>>>> origin/dev
         </RelativeLayout>
 
 
@@ -74,6 +93,7 @@
 
 
     <ImageView
+<<<<<<< HEAD
         android:id="@+id/iv_recording"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -82,4 +102,13 @@
         android:src="@drawable/recording" />
 
 </RelativeLayout>
+=======
+        android:id="@+id/iv_voice_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         android:paddingStart="10dp"
+        android:src="@drawable/drifting_delete"
+         />
+</LinearLayout>
+>>>>>>> origin/dev
 

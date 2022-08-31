@@ -12,8 +12,13 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.drifting.bureau.R;
+<<<<<<< HEAD
 import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.util.ClickUtil;
+=======
+import com.drifting.bureau.util.ClickUtil;
+import com.jess.arms.base.BaseActivity;
+>>>>>>> origin/dev
 import com.jess.arms.di.component.AppComponent;
 
 import java.util.Locale;
@@ -27,7 +32,11 @@ import io.rong.imlib.model.Conversation;
 import io.rong.imlib.model.Group;
 import io.rong.imlib.model.UserInfo;
 
+<<<<<<< HEAD
 public class MyConversationActivity extends BaseManagerActivity {
+=======
+public class MyConversationActivity extends BaseActivity {
+>>>>>>> origin/dev
 
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;

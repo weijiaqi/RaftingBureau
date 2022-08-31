@@ -18,7 +18,11 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         ndk {
+<<<<<<< HEAD
             abiFilters 'armeabi', 'armeabi-v7a', 'x86','arm64-v8a', 'x86_64'
+=======
+            abiFilters 'armeabi', 'armeabi-v7a', 'x86'
+>>>>>>> origin/dev
         }
     }
 
@@ -149,7 +153,11 @@ dependencies {
     implementation 'io.github.scwang90:refresh-footer-classics:2.0.5'    //经典加载
 
     //mp3录音
+<<<<<<< HEAD
     implementation 'com.github.zhang-hai:Mp3Recorder:1.1.4'
+=======
+    implementation 'com.github.zhang-hai:Mp3Recorder:1.1.3'
+>>>>>>> origin/dev
 
     //侧滑删除
     implementation 'com.dsiner.lib:slidelayout:1.0.4'
@@ -183,8 +191,11 @@ dependencies {
     implementation 'com.umeng.umsdk:asms:1.4.0'// 必选
     //微信支付
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android:+'
+<<<<<<< HEAD
 
     //地图
     implementation files('libs/BaiduLBS_AndroidSDK_Lib.aar')
+=======
+>>>>>>> origin/dev
 
 }

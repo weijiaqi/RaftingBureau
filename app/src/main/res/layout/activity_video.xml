@@ -16,7 +16,12 @@
         <VideoView
             android:id="@+id/videoView"
             android:layout_width="fill_parent"
+<<<<<<< HEAD
             android:layout_height="fill_parent" />
+=======
+            android:layout_height="fill_parent"
+           />
+>>>>>>> origin/dev
 
     </RelativeLayout>
     <LinearLayout

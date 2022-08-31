@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_centerHorizontal="true">
@@ -35,4 +36,38 @@
         android:layout_marginTop="145dp"
         android:src="@drawable/video" />
 
+=======
+    android:layout_width="72dp"
+    android:layout_height="72dp"
+    android:layout_centerHorizontal="true">
+
+    <ImageView
+        android:id="@+id/iv_pic"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:scaleType="centerCrop" />
+
+    <RelativeLayout
+        android:id="@+id/rl_video_delete"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="-6dp"
+        android:layout_toRightOf="@+id/iv_pic"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/iv_video_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/video_delete" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_video_play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/video_play" />
+>>>>>>> origin/dev
 </RelativeLayout>

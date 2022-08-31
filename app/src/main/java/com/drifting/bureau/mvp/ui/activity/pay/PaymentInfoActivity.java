@@ -14,7 +14,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.drifting.bureau.R;
+<<<<<<< HEAD
 import com.drifting.bureau.base.BaseManagerActivity;
+=======
+>>>>>>> origin/dev
 import com.drifting.bureau.data.event.PaymentEvent;
 import com.drifting.bureau.di.component.DaggerPaymentInfoComponent;
 import com.drifting.bureau.mvp.contract.PaymentInfoContract;
@@ -22,10 +25,18 @@ import com.drifting.bureau.mvp.model.entity.PayOrderEntity;
 import com.drifting.bureau.mvp.model.entity.SandPayQueryEntity;
 import com.drifting.bureau.mvp.presenter.PaymentInfoPresenter;
 import com.drifting.bureau.pay.WXPay;
+<<<<<<< HEAD
+=======
+import com.drifting.bureau.util.ClickUtil;
+>>>>>>> origin/dev
 import com.drifting.bureau.util.GsonUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.ViewUtil;
 import com.drifting.bureau.view.ClockView;
+<<<<<<< HEAD
+=======
+import com.jess.arms.base.BaseActivity;
+>>>>>>> origin/dev
 import com.jess.arms.di.component.AppComponent;
 import com.unionpay.UPPayAssistEx;
 
@@ -42,7 +53,11 @@ import butterknife.OnClick;
  *
  * @author支付信息 module name is PaymentInfoActivity
  */
+<<<<<<< HEAD
 public class PaymentInfoActivity extends BaseManagerActivity<PaymentInfoPresenter> implements PaymentInfoContract.View {
+=======
+public class PaymentInfoActivity extends BaseActivity<PaymentInfoPresenter> implements PaymentInfoContract.View {
+>>>>>>> origin/dev
     @BindView(R.id.toolbar_title)
     TextView mToobarTitle;
     @BindView(R.id.ck_wecheat)
