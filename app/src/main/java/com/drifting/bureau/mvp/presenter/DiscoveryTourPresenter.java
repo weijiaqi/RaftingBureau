@@ -144,7 +144,7 @@ public class DiscoveryTourPresenter extends BasePresenter<DiscoveryTourContract.
 
             @Override
             public void onRequestPermissionFailureWithAskNeverAgain(List<String> permissions) {
-                PermissionDialog.create().showDialog(activity, permissions);
+//                PermissionDialog.create().showDialog(activity, permissions);
             }
         }, new RxPermissions((FragmentActivity) activity), mErrorHandler);
 

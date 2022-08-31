@@ -24,10 +24,10 @@
         android:id="@+id/tv_shop_no"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="（NC01-No.860001）"
+        android:text=""
         android:textSize="10sp"
         android:layout_marginTop="2dp"
-        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="14dp"
         android:textColor="@color/color_cc"
         />
 

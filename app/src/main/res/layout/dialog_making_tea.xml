@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            android:text="查看漂流~~"
+            android:text="查看Ta的故事~~"
             android:textColor="@color/white"
             android:textSize="17sp"
             app:fontType="PangMen" />
@@ -36,7 +36,7 @@
         <TextView
             android:id="@+id/tv_word"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="150dp"
             android:layout_below="@+id/tv_title"
             android:layout_marginTop="14dp"
             android:background="@null"
@@ -46,7 +46,9 @@
             android:paddingHorizontal="10dp"
             android:textColor="@color/white"
             android:textColorHint="@color/color_2e"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            android:visibility="gone"
+            />
 
         <include
             android:id="@+id/rl_voice_play"
@@ -62,11 +64,11 @@
         <include
             android:id="@+id/rl_video_play"
             layout="@layout/include_video_play"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginHorizontal="25dp"
             android:visibility="gone" />
 
 

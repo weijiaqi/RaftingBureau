@@ -195,12 +195,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp">
 
-                <ImageView
-                    android:id="@+id/iv_left_mask"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:src="@drawable/square_lock" />
 
                 <TextView
                     android:id="@+id/tv_add_left_friend"
@@ -213,6 +207,12 @@
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
+                <ImageView
+                    android:id="@+id/iv_left_mask"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/round_lock" />
 
             </RelativeLayout>
 
@@ -289,12 +289,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp">
 
-                <ImageView
-                    android:id="@+id/iv_right_mask"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:src="@drawable/square_lock" />
 
                 <TextView
                     android:id="@+id/tv_add_right_friend"
@@ -306,6 +300,13 @@
                     android:textColor="@color/white"
                     android:textSize="12sp"
                     android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/iv_right_mask"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/round_lock" />
 
             </RelativeLayout>
 

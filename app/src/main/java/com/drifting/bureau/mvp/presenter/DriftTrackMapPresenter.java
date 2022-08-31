@@ -1,13 +1,18 @@
 package com.drifting.bureau.mvp.presenter;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.location.Location;
 import android.media.MediaMetadataRetriever;
 import android.os.Build;
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
+import androidx.fragment.app.FragmentActivity;
 
+import com.baidu.mapapi.model.LatLng;
 import com.drifting.bureau.app.application.RBureauApplication;
 import com.drifting.bureau.mvp.model.entity.CommentDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
@@ -15,7 +20,11 @@ import com.drifting.bureau.mvp.model.entity.CreatewithfileEntity;
 import com.drifting.bureau.mvp.model.entity.MoreDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.MoreDetailsForMapEntity;
 import com.drifting.bureau.mvp.model.entity.SkuListEntity;
+import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
+import com.drifting.bureau.storageinfo.Preferences;
+import com.drifting.bureau.util.AppUtil;
 import com.drifting.bureau.util.FileUtil;
+import com.drifting.bureau.util.LocationUtil;
 import com.hw.videoprocessor.VideoProcessor;
 import com.jess.arms.base.BaseEntity;
 import com.jess.arms.integration.AppManager;
@@ -35,9 +44,12 @@ import timber.log.Timber;
 import javax.inject.Inject;
 
 import com.drifting.bureau.mvp.contract.DriftTrackMapContract;
+import com.jess.arms.utils.PermissionUtil;
 import com.jess.arms.utils.RxLifecycleUtils;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * ================================================
@@ -319,6 +331,71 @@ public class DriftTrackMapPresenter extends BasePresenter<DriftTrackMapContract.
     }
 
 
+
+    /**
+     * 获取经纬度
+     */
+    public void getLocation(Activity activity) {
+        PermissionUtil.launchLocation(new PermissionUtil.RequestPermission() {
+            @Override
+            public void onRequestPermissionSuccess() {
+                LocationUtil.getCurrentLocation(new LocationUtil.LocationCallBack() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        try {
+                            RBureauApplication.latLng=new LatLng(location.getLatitude(),location.getLongitude());
+                            Preferences.saveCity(AppUtil.getAddress(activity,location).get(0).getLocality());
+                            getLoaction(location.getLongitude() + "", location.getLatitude() + "");
+                        } catch (Exception e) {
+                            Log.e(activity.getPackageName(), e.toString());
+                        }
+                    }
+
+                    @Override
+                    public void onFail(String msg) {
+
+                    }
+                });
+
+            }
+
+            @Override
+            public void onRequestPermissionFailure(List<String> permissions) {
+
+            }
+
+            @Override
+            public void onRequestPermissionFailureWithAskNeverAgain(List<String> permissions) {
+                PermissionDialog.create().showDialog(activity, permissions);
+            }
+        }, new RxPermissions((FragmentActivity) activity), mErrorHandler);
+
+    }
+
+
+    /**
+     * 探索方式列表
+     */
+    public void getLoaction(String lng, String lat) {
+        mModel.information(lng, lat).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseEntity>(mErrorHandler) {
+                    @Override
+                    public void onNext(BaseEntity baseEntity) {
+                        if (mRootView != null) {
+                            if (baseEntity.getCode() == 200) {
+                                mRootView.onLocationSuccess();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
+    }
     @Override
     public void onDestroy() {
         super.onDestroy();

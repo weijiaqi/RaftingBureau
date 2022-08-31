@@ -64,9 +64,9 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
     private List<String> strings;
     private int status, total, totaltime, second;
 
-    private int type = -1;
-    private String path, tag, tag_name;
-    private boolean isFirst;
+    private int cameratype = -1;
+    private String path, tag;
+    private boolean isCameraFirst;
     private CoverDialog coverDialog;
     private Bitmap cover;
 
@@ -137,7 +137,7 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
         mLlParticipate.setOnClickListener(this);
         mIvReport.setOnClickListener(this);
         mLlImprint.setOnClickListener(this);
-
+        mTvIntoSpace.setOnClickListener(this);
         if (status == 1) {  //编辑
             mIvReport.setVisibility(View.GONE);
             mLlStarrySky.setVisibility(View.VISIBLE);
@@ -160,27 +160,12 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
             }
             mLlBottom.setVisibility(View.GONE);
 
-            if (!TextUtils.isEmpty(commentDetailsEntity.getContent())) {  //判断文字不为空
-                mEtWord.setVisibility(View.VISIBLE);
-                mEtWord.setFocusable(false);
-                mEtWord.setCursorVisible(false);
-                mEtWord.setText(commentDetailsEntity.getContent());
-            }
-
-            if (!TextUtils.isEmpty(commentDetailsEntity.getAlbum())) {  //图片
-                mRlViedeoPlay.setVisibility(View.VISIBLE);
-                mIvVideoPlay.setVisibility(View.GONE);
-                GlideUtil.create().loadLongImage(context, commentDetailsEntity.getAlbum(), mIvPic);
-            }
-
             if (!TextUtils.isEmpty(commentDetailsEntity.getVedio())) {  //视频
                 mRlViedeoPlay.setVisibility(View.VISIBLE);
                 mIvVideoPlay.setVisibility(View.VISIBLE);
                 mIvVideo.setVisibility(View.GONE);
                 GlideUtil.create().loadLongImage(context, commentDetailsEntity.getImage(), mIvPic);
-            }
-
-            if (!TextUtils.isEmpty(commentDetailsEntity.getAudio())) {//语音
+            } else if (!TextUtils.isEmpty(commentDetailsEntity.getAudio())) {//语音
                 mRlVoicePlay.setVisibility(View.VISIBLE);
                 mIvPlay.setVisibility(View.VISIBLE);
                 mIvRecording.setVisibility(View.GONE);
@@ -189,7 +174,18 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
                 totaltime = VideoUtil.getLocalVideoDuration(commentDetailsEntity.getAudio());
                 mTvTime.setText(totaltime + "S");
                 mVideoView.setDecibel(0);
+            } else if (!TextUtils.isEmpty(commentDetailsEntity.getAlbum())) {  //图片
+                mRlViedeoPlay.setVisibility(View.VISIBLE);
+                mIvVideoPlay.setVisibility(View.GONE);
+                mIvVideo.setVisibility(View.GONE);
+                GlideUtil.create().loadLongImage(context, commentDetailsEntity.getAlbum(), mIvPic);
+            } else if (!TextUtils.isEmpty(commentDetailsEntity.getContent())) {  //判断文字不为空
+                mEtWord.setVisibility(View.VISIBLE);
+                mEtWord.setFocusable(false);
+                mEtWord.setCursorVisible(false);
+                mEtWord.setText(commentDetailsEntity.getContent());
             }
+
 
             if (relevanceBean.getAttend() == 1) { //是否参与了该话题，0否、1是
                 if (relevanceBean.getIs_comment() == 1) {
@@ -250,7 +246,7 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
                     startVocie();
                     break;
                 case R.id.iv_play: //语音播放
-                    if (status == 1 ||status==3) {
+                    if (status == 1 || status == 3) {
                         if (objectList != null) {
                             VideoUtil.startVoicePlay(objectList.get(0).toString(), objectList.get(1), mIvPlay, mVideoView, mTvTime);
                         }
@@ -262,9 +258,9 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
                     startCamera();
                     break;
                 case R.id.iv_pic:  //添加图片/视频
-                    if (status == 1 ||status==3) {
+                    if (status == 1 || status == 3) {
                         if (path != null) {
-                            if (type == 1) { //视频
+                            if (cameratype == 1) { //视频
                                 VideoActivity.start(context, path, false);
                             } else {  //查看图片
                                 SelectImageActivity.start(context, path, false);
@@ -288,14 +284,14 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
                         ShowMessage("内容不能为空!");
                         return;
                     }
-                    if (status==1){ //发起漂流
+                    if (status == 1) { //发起漂流
                         if (tag == null && TextUtils.isEmpty(tag)) {
                             ShowMessage("请添加话题标签!");
                             return;
                         }
                     }
                     if (onStarrySkyClickCallback != null) {
-                        onStarrySkyClickCallback.onStarrySkyClick(type, mEtWord.getText().toString(), path, objectList, cover, tag);
+                        onStarrySkyClickCallback.onStarrySkyClick(cameratype, mEtWord.getText().toString(), path, objectList, cover, tag);
                     }
                     break;
                 case R.id.ll_join:
@@ -346,12 +342,12 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
         strings.add(Manifest.permission.CAMERA);
         strings.add(Manifest.permission.RECORD_AUDIO);
         if (PermissionDialog.requestPermissions((Activity) context, strings, 1)) {
-            if (type != -1 && !isFirst) {
+            if (cameratype != -1 && !isCameraFirst) {
                 coverDialog = new CoverDialog(context);
                 coverDialog.show();
                 coverDialog.setOnClickCallback(type -> {
                     if (type == CoverDialog.SELECT_FINISH) {
-                        isFirst = true;
+                        isCameraFirst = true;
                         VideoRecordingActivity.start(context, false);
                     }
                 });
@@ -408,9 +404,9 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
 
 
     public void setData(int index, String route) {
-        type = index;
+        cameratype = index;
         path = route;
-        if (type == 1) {//视频
+        if (cameratype == 1) {//视频
             mIvVideoPlay.setVisibility(View.VISIBLE);
             cover = BitmapUtil.createVideoThumbnail(context, path);
         } else {
@@ -443,23 +439,31 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
     /**
      * @description 切换底部图标
      */
-    public void toggleIcon(int type) {
+    public void toggleIcon(int isType) {
+        //删除语音
         deleteVoice();
         //删除视频
         if (!TextUtils.isEmpty(path)) {
+            cameratype = -1;
+            isCameraFirst = false;
             mIvPic.setImageResource(R.drawable.add_video_thumb);
+            mIvVideoPlay.setVisibility(View.GONE);
             path = null;
         }
 
-        mIvReleaseCamera.setVisibility(type == 1 ? View.GONE : View.VISIBLE);
-        mRlViedeoPlay.setVisibility(type == 1 ? View.VISIBLE : View.GONE);
+        if (!TextUtils.isEmpty(mEtWord.getText().toString())) {
+            mEtWord.setText("");
+        }
 
-        mIvReleaseRecording.setVisibility(type == 2 ? View.GONE : View.VISIBLE);
-        mRlVoicePlay.setVisibility(type == 2 ? View.VISIBLE : View.GONE);
+        mIvReleaseCamera.setVisibility(isType == 1 ? View.GONE : View.VISIBLE);
+        mRlViedeoPlay.setVisibility(isType == 1 ? View.VISIBLE : View.GONE);
+
+        mIvReleaseRecording.setVisibility(isType == 2 ? View.GONE : View.VISIBLE);
+        mRlVoicePlay.setVisibility(isType == 2 ? View.VISIBLE : View.GONE);
 
 
-        mIvReleaseWord.setVisibility(type == 3 ? View.GONE : View.VISIBLE);
-        mEtWord.setVisibility(type == 3 ? View.VISIBLE : View.GONE);
+        mIvReleaseWord.setVisibility(isType == 3 ? View.GONE : View.VISIBLE);
+        mEtWord.setVisibility(isType == 3 ? View.VISIBLE : View.GONE);
     }
 
     /**

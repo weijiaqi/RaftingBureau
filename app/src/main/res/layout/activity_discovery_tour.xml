@@ -101,20 +101,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_way_to_explore"
-        android:layout_marginTop="75dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginTop="70dp"
         android:layout_toRightOf="@+id/iv_rocket"
-        android:background="@drawable/message_box"
+        android:background="@drawable/message_unread"
         android:visibility="invisible">
-
 
         <TextView
             android:id="@+id/tv_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="6dp"
-            android:text="漂来宇宙电波"
+            android:layout_marginTop="12dp"
+            android:text="@string/from_nebula"
             android:textColor="@color/white"
             android:textSize="12sp" />
 
@@ -124,9 +122,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_message"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="6dp"
             android:paddingHorizontal="17dp"
-            android:text="开启"
+            android:paddingVertical="2dp"
+            android:text="接收奶茶"
             android:textColor="@color/color_00"
             android:textSize="12sp"
             app:shape_endColor="@color/color_6c"
@@ -210,8 +209,73 @@
         android:layout_marginBottom="122dp"
         android:drawableTop="@drawable/youth_camp"
         android:text="“青年创业营”"
-        android:visibility="invisible"
         android:textColor="@color/white"
         android:textSize="12sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:visibility="invisible" />
+
+
+    <RelativeLayout
+        android:id="@+id/rl_explore_planet"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
+
+        <ImageView
+            android:id="@+id/iv_mastor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="-20dp"
+            android:src="@drawable/index_astronaut" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp"
+            android:layout_toRightOf="@+id/iv_mastor">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/index_bottom_border"
+                    android:gravity="center"
+                    android:text="点我寻找星球"
+                    android:textColor="@color/white"
+                    android:textSize="11sp" />
+
+
+                <com.hjq.shape.view.ShapeTextView
+                    android:id="@+id/tv_share_journey"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="12dp"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="3dp"
+                    android:text="分享我的旅程"
+                    android:textColor="@color/color_00"
+                    android:textSize="9sp"
+                    android:textStyle="bold"
+                    app:shape_endColor="@color/color_6d"
+                    app:shape_radius="100dp"
+                    app:shape_startColor="@color/color_6c" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+
 </RelativeLayout>

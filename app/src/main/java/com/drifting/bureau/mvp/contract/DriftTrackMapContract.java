@@ -44,6 +44,8 @@ public interface DriftTrackMapContract {
 
         void onCreateOrderSuccess(CreateOrderEntity entity);
 
+        void onLocationSuccess();
+
         void onNetError();
 
         Activity getActivity();
@@ -62,7 +64,7 @@ public interface DriftTrackMapContract {
 
         Observable<BaseEntity<CreatewithfileEntity>> createwithfileword(MultipartBody shortVoice);
 
-
+        Observable<BaseEntity> information(String lng, String lat);
 
         Observable<BaseEntity<CreateOrderEntity>> createOrder(int type_id, String sku_codes);
 

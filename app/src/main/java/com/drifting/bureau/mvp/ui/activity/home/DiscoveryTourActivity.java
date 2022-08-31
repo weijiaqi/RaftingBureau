@@ -39,12 +39,13 @@ import com.drifting.bureau.mvp.model.entity.StarUpIndexEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.presenter.DiscoveryTourPresenter;
 import com.drifting.bureau.mvp.ui.activity.index.DriftTrackMapActivity;
+import com.drifting.bureau.mvp.ui.activity.index.PlanetarySelectActivity;
 import com.drifting.bureau.mvp.ui.activity.index.SpaceCapsuleActivity;
-import com.drifting.bureau.mvp.ui.activity.index.TopicDetailActivity;
 import com.drifting.bureau.mvp.ui.activity.user.AboutMeActivity;
 import com.drifting.bureau.mvp.ui.activity.user.MessageCenterActivity;
 import com.drifting.bureau.mvp.ui.activity.web.ShowWebViewActivity;
 import com.drifting.bureau.mvp.ui.adapter.DiscoveryViewpagerAdapter;
+import com.drifting.bureau.mvp.ui.dialog.ShareDialog;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ARCoreUtil;
 import com.drifting.bureau.util.AppUtil;
@@ -100,6 +101,8 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
     VrPanoramaView mVRPanoramaView;
     @BindView(R.id.tv_youth_camp)
     TextView mTvYouthCamp;
+    @BindView(R.id.tv_message)
+    TextView mTvMessage;
     private List<PlanetEntity> list;
     private AnimatorSet animatorSet;
     private Handler handler;
@@ -108,7 +111,7 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
     private DiscoveryViewpagerAdapter discoveryViewpagerAdapter;
     private UserInfoEntity userInfoEntity;
     private StarUpIndexEntity starUpIndexEntity;
-
+    private ShareDialog shareDialog;
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, DiscoveryTourActivity.class);
         context.startActivity(intent);
@@ -225,7 +228,7 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
     }
 
 
-    @OnClick({R.id.rl_message, R.id.tv_about_me, R.id.tv_space_capsule, R.id.rl_info, R.id.ll_step_star, R.id.rl_right, R.id.tv_youth_camp})
+    @OnClick({R.id.rl_message, R.id.tv_about_me, R.id.tv_space_capsule, R.id.rl_info, R.id.ll_step_star, R.id.rl_right, R.id.tv_youth_camp,R.id.rl_explore_planet,R.id.tv_share_journey})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
@@ -251,14 +254,21 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
                         Preferences.setARModel(true);
                         ArCenterConsoleActivity.start(this, true);
                     }
-
-//                if (userInfoEntity != null) {
-//                    PlanetarySelectActivity.start(this, userInfoEntity.getPlanet().getLevel(), false);
-//                }
                     break;
                 case R.id.tv_youth_camp:  //青年创业营
                     if (starUpIndexEntity != null) {
-                        ShowWebViewActivity.start(this, 0, "青年创业营",starUpIndexEntity.getUrl()+"?Sign="+ StringUtil.formatNullString(AppUtil.getSign(Preferences.getPhone()))+"&token="+StringUtil.formatNullString(Preferences.getToken()),false);
+                        ShowWebViewActivity.start(this, 0, "青年创业营", starUpIndexEntity.getUrl() + "?Sign=" + StringUtil.formatNullString(AppUtil.getSign(Preferences.getPhone())) + "&token=" + StringUtil.formatNullString(Preferences.getToken()), false);
+                    }
+                    break;
+                case R.id.rl_explore_planet://探索星球
+                    if (userInfoEntity != null) {
+                        PlanetarySelectActivity.start(this, userInfoEntity.getPlanet().getLevel(), false);
+                    }
+                    break;
+                case R.id.tv_share_journey: //分享旅程
+                    if (userInfoEntity != null) {
+                        shareDialog = new ShareDialog(this, userInfoEntity);
+                        shareDialog.show();
                     }
                     break;
             }
@@ -281,6 +291,7 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
                 id = entity.getId();
                 user_id = entity.getUser_id();
                 explore_id = entity.getExplore_id();
+                mTvMessage.setText(getString(R.string.from_nebula,entity.getNebula_name()));
                 handler.postDelayed(mAdRunnable, entity.getDrift_rest() * 1000);
                 if (isAnmiation) {
                     isAnmiation = false;
@@ -310,7 +321,7 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
 
     public void IntoSpace() {
         isAnmiation = true;
-        objectAnimation(2, mIvRocket, mRlMessage, 0, 0, 1500, -500, 500);
+        objectAnimation(2, mIvRocket, mRlMessage, 0, 0, 1500, -600, 500);
     }
 
 
@@ -327,7 +338,6 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
             view.setVisibility(View.VISIBLE);
         }
         tagetview.setVisibility(View.INVISIBLE);
-
         ObjectAnimator translationX = ObjectAnimator.ofFloat(view, TRANSLATION_X, values1, x);
         ObjectAnimator translationY = ObjectAnimator.ofFloat(view, View.TRANSLATION_Y, values2, y);
         animatorSet = new AnimatorSet();

@@ -37,6 +37,7 @@ import com.baidu.mapapi.map.MarkerOptions;
 
 import com.baidu.mapapi.map.OverlayOptions;
 
+import com.baidu.mapapi.map.Polyline;
 import com.baidu.mapapi.map.PolylineOptions;
 
 import com.baidu.mapapi.map.UiSettings;
@@ -119,6 +120,8 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
     TextView mTvFromName;
     @BindView(R.id.tv_to_name)
     TextView mTvToName;
+    @BindView(R.id.iv_right)
+    ImageView mIvRight;
     @BindView(R.id.tv_left_name)
     TextView mTvLeftName;
     @BindView(R.id.tv_right_name)
@@ -131,8 +134,6 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
     ImageView mIvMastorLeft;
     @BindView(R.id.iv_mastor_right)
     ImageView mIvMastorRight;
-    @BindView(R.id.fl_to_name)
-    FrameLayout mFlToName;
     @BindView(R.id.rl_to_right)
     RelativeLayout mRlRight;
     @BindView(R.id.ll_to_right)
@@ -154,6 +155,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
     private LayoutInflater inflater;
     private List<InfoWindow> infoWindowList;
     private int status, explore_id, message_id, attend, message_id2, user_id, user_id2, total, postion, Msgtype, leftStatus, rightStatus;
+    private int PermisType;
     private String path;
     private UiSettings mUiSettings;
     private static String EXTRA_EXPLORE_ID = "extra_explore_id";
@@ -177,7 +179,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
     private MoreDetailsForMapEntity.RelevanceBean relevanceBean;
     private MoreDetailsForMapEntity.FutureBean futureBea;
     private List<MoreDetailsForMapEntity.MessagePathBean> messagePathBeanList;
-
+    private CommentDetailsEntity commentDetailsEntity;
 
     public static void start(Context context, int type, int explore_id, int message_id, boolean closePage) {
         Intent intent = new Intent(context, DriftTrackMapActivity.class);
@@ -221,6 +223,11 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
             explore_id = getIntent().getExtras().getInt(EXTRA_EXPLORE_ID);
             message_id = getIntent().getExtras().getInt(EXTRA_MESSAGE_ID);
         }
+        if (message_id != 0) {
+            mIvRight.setVisibility(View.VISIBLE);
+            mIvRight.setImageResource(R.drawable.tran_detail);
+        }
+
         initListener();
     }
 
@@ -259,7 +266,16 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
         mDistrictSearch = DistrictSearch.newInstance();
         mDistrictSearch.setOnDistrictSearchListener(listener);
 
-        getDetail(1);
+
+        if (Msgtype == 1) {  //开启新漂流
+            openNewDrift();
+            if (RBureauApplication.latLng != null) {
+                OpenNewMsg();
+            }
+        } else {
+            getDetail(1);
+        }
+
 
         AddListener();
     }
@@ -304,22 +320,24 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
         TextView mTvReceiveTime = view.findViewById(R.id.tv_receive_time);
         TextView mTvShopNo = view.findViewById(R.id.tv_shop_no);
         mTvTitle.setText(getString(R.string.from_city, messagePathBeanList.get(index).getName_city()));
-        mTvShopNo.setText(messagePathBeanList.get(index).getShop_no());
-
+        if (messagePathBeanList.get(index).getHas_shop() == 0) {
+            mTvShopNo.setVisibility(View.GONE);
+        } else {
+            mTvShopNo.setVisibility(View.INVISIBLE);
+            mTvShopNo.setText("（" + messagePathBeanList.get(index).getShop_no() + "）");
+        }
 
         mInfoWindow = new InfoWindow(view, latLng, -80);
         infoWindowList.add(mInfoWindow);
         mTvReceiveTime.setOnClickListener(v -> {
             showDetails(postion);
         });
-
         TextView textView = new TextView(getApplicationContext());
         textView.setText("已传递等待漂出");
         textView.setTextSize(12);
         textView.setTextColor(getColor(R.color.white));
         mInfoWindow2 = new InfoWindow(textView, new LatLng(Double.parseDouble(messagePathBeanList.get(messagePathBeanList.size() - 1).getLat()), Double.parseDouble(messagePathBeanList.get(messagePathBeanList.size() - 1).getLng())), 80);
         infoWindowList.add(mInfoWindow2);
-
         mBaiduMap.showInfoWindows(infoWindowList);
     }
 
@@ -347,19 +365,19 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
     @Override
     public void onCommentDetailsSuccess(CommentDetailsEntity entity) {
         if (entity != null) {
+            commentDetailsEntity = entity;
             RequestUtil.create().platformtimes(explore_id, entity1 -> {
                 if (entity1 != null && entity1.getCode() == 200) {
                     total = entity1.getData().getAttend_times() + entity1.getData().getCommon_times();
-                    mapSendDriftDialog = new MapSendDriftDialog(getActivity(), 2, entity, relevanceBean, total);
+                    mapSendDriftDialog = new MapSendDriftDialog(getActivity(), 2, commentDetailsEntity, relevanceBean, total);
                     mapSendDriftDialog.show();
                     mapSendDriftDialog.setOnContentClickCallback(content -> {
-                        if (total > 0) {   //有免费次数
-                            if (mPresenter != null) {
-                                mPresenter.messageattending(entity.getMessage_id());
-                            }
+                        if (RBureauApplication.latLng != null) {
+                            participate();
                         } else {
-                            if (mPresenter != null) {
-                                mPresenter.skulist(explore_id, entity.getMessage_id());
+                            if (mPresenter != null) {  //开启定位
+                                PermisType = 2;
+                                mPresenter.getLocation(this);
                             }
                         }
                     });
@@ -371,13 +389,12 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
                             if (type == 1) {//视频
                                 mPresenter.compressVideo(DriftTrackMapActivity.this, type, word, 0, path, list != null ? new File(list.get(0).toString()) : null, cover != null ? BitmapUtil.saveBitmapFile(getActivity(), cover) : null, tag);
                             } else {
-                                mPresenter.createwithword(type, word, entity.getMessage_id(), path != null ? new File(path) : null, list != null ? new File(list.get(0).toString()) : null, cover != null ? BitmapUtil.saveBitmapFile(this, cover) : null, tag);
+                                mPresenter.createwithword(type, word, commentDetailsEntity.getMessage_id(), path != null ? new File(path) : null, list != null ? new File(list.get(0).toString()) : null, cover != null ? BitmapUtil.saveBitmapFile(this, cover) : null, tag);
                             }
                         }
                     });
                     mapSendDriftDialog.setOnClickCallback(type -> {
                         if (type == ReleaseDriftingDialog.SELECT_FINISH) {
-
                             RequestUtil.create().messagethrow(message_id, entity2 -> {
                                 if (entity2.getCode() == 200) {
                                     mapSendDriftDialog.dismiss();
@@ -407,6 +424,22 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
 
     }
 
+
+    /**
+     * @description 参与话题
+     */
+    public void participate() {
+        if (total > 0) {   //有免费次数
+            if (mPresenter != null) {
+                mPresenter.messageattending(commentDetailsEntity.getMessage_id());
+            }
+        } else {
+            if (mPresenter != null) {
+                mPresenter.skulist(explore_id, commentDetailsEntity.getMessage_id());
+            }
+        }
+    }
+
     @Override
     public void onMoreDetailsForMapSuccess(MoreDetailsForMapEntity entity, int type) {
         if (entity != null) {
@@ -421,12 +454,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
 
 
             if (messageBean.getId() == 0) {  //发起话题
-//                 InitiateTopic();
-                setIsVisible(false);
-                if (!TextUtils.isEmpty(Preferences.getCity())) {
-                    selectCity(Preferences.getCity());
-                }
-                getFromUser(Integer.parseInt(Preferences.getUserId()));
+                openNewDrift();
             } else {
                 message_id2 = messageBean.getId();
                 MoreDetailsForMapEntity.MessagePathBean messagePathBean = new MoreDetailsForMapEntity.MessagePathBean();
@@ -448,12 +476,10 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
                     setIsVisible(false);
                 } else {
                     getFromUser(messageBean.getUser_id());
-
                     getToUser(messagePathBeanList.get(messagePathBeanList.size() - 2).getUser_id());
                 }
 
                 selectCity(messageBean.getName_city());
-                setMapOption();
             }
 
             if (type == 2) { // type=2 表示参与成功刷新dialog
@@ -539,6 +565,15 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
         }
     }
 
+    @Override
+    public void onLocationSuccess() {
+        if (PermisType == 1) {
+            clearOrOpen();
+        } else if (PermisType == 2) {
+            participate();
+        }
+    }
+
 
     public void showParticipateDialog() {
         publicDialog = new PublicDialog(this);
@@ -560,7 +595,6 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
      * @description设置右侧接收人是否展示
      */
     public void setIsVisible(boolean type) {
-        mFlToName.setVisibility(type ? View.VISIBLE : View.INVISIBLE);
         mRlRight.setVisibility(type ? View.VISIBLE : View.INVISIBLE);
         mLlRight.setVisibility(type ? View.VISIBLE : View.INVISIBLE);
     }
@@ -636,13 +670,13 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
                     mRlRIghtAddFriends.setClickable(true);
                 }
                 setText("添加好友", type);
-            } else if (status == 1) {//已申请
+            } else if (status == 1) {//待通过
                 if (type == 1) {
                     mRlLeftAddFriends.setClickable(false);
                 } else {
                     mRlRIghtAddFriends.setClickable(false);
                 }
-                setText("已申请", type);
+                setText("待通过", type);
             } else if (status == 2) {//已经是好友
                 if (type == 1) {
                     mRlLeftAddFriends.setClickable(true);
@@ -661,7 +695,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
                     mIvRightMask.setVisibility(View.VISIBLE);
                 }
                 setText("添加好友", type);
-            } else if (status == 1) {//已申请
+            } else if (status == 1) {//待通过
                 if (type == 1) {
                     mRlLeftAddFriends.setClickable(false);
                     mIvLeftMask.setVisibility(View.GONE);
@@ -669,7 +703,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
                     mRlRIghtAddFriends.setClickable(false);
                     mIvRightMask.setVisibility(View.GONE);
                 }
-                setText("已申请", type);
+                setText("待通过", type);
             } else if (status == 2) {//已经是好友
                 if (type == 1) {
                     mRlLeftAddFriends.setClickable(true);
@@ -896,9 +930,21 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
                         builder.include(latLng);
                     }
                 }
-                if (isNew) {
-                    mBaiduMap.setMapStatus(MapStatusUpdateFactory.newLatLngBounds(builder.build()));
-                    showNewInfoWindow(RBureauApplication.latLng);
+                try {
+                    if (messagePathBeanList != null && messagePathBeanList.size() == 3) {
+                        builder = new LatLngBounds.Builder();
+                        builder.include(new LatLng(Double.parseDouble(messagePathBeanList.get(messagePathBeanList.size() - 2).getLat()), Double.parseDouble(messagePathBeanList.get(messagePathBeanList.size() - 2).getLng())));
+                        mBaiduMap.setMapStatus(MapStatusUpdateFactory.newLatLngBounds(builder.build()));
+                    } else {
+                        mBaiduMap.setMapStatus(MapStatusUpdateFactory.newLatLngBounds(builder.build()));
+                    }
+                    if (isNew) {
+                        showNewInfoWindow(RBureauApplication.latLng);
+                    } else {
+                        setMapOption();
+                    }
+                } catch (Exception e) {
+                    Log.e("latlng---", e.toString());
                 }
             }
         }
@@ -928,11 +974,15 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
      */
 
     public void setLastLine() {
-        OverlayOptions ooPolylineAA = new PolylineOptions().width(6)
-                .points(getTrace())
-                .dottedLine(true) // 设置折线是否虚线
-                .customTexture(mBlueTexture);// 设置折线多纹理分段绘制的纹理队列
-        mBaiduMap.addOverlay(ooPolylineAA);
+        OverlayOptions ooGeoPolyline = new PolylineOptions()
+                .isGeodesic(true)
+                .width(6)
+                .color(0x7fFFFFFF)
+                // 折线经度跨180需增加此字段
+                .lineDirectionCross180(PolylineOptions.LineDirectionCross180.FROM_WEST_TO_EAST)
+                .points(getTrace());// 折线坐标点列表 数目[2,10000]，且不能包含 null
+        Polyline mGeoPolyline = (Polyline) mBaiduMap.addOverlay(ooGeoPolyline);
+        mGeoPolyline.setDottedLine(true);
 
         if (messagePathBeanList.size() == 2) {
             showInfoWindow(new LatLng(Double.parseDouble(messagePathBeanList.get(0).getLat()), Double.parseDouble(messagePathBeanList.get(0).getLng())), 0);
@@ -1038,7 +1088,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
         }
     }
 
-    @OnClick({R.id.toolbar_back, R.id.tv_open, R.id.rl_left_add_friend, R.id.rl_right_add_friend})
+    @OnClick({R.id.toolbar_back, R.id.tv_open, R.id.rl_left_add_friend, R.id.rl_right_add_friend, R.id.iv_right,})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
@@ -1047,14 +1097,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
                     break;
                 case R.id.tv_open:  //开启漂流
                     // 清除所有图层
-                    if (RBureauApplication.latLng != null) {
-                        removeTrace();
-                        mBaiduMap.clear();
-                        isNew = true;
-                        if (!TextUtils.isEmpty(Preferences.getCity())) {
-                            selectCity(Preferences.getCity());
-                        }
-                    }
+                    openNewDrift();
                     break;
                 case R.id.rl_left_add_friend:  //左边添加好友
                     if (leftStatus == 2) {
@@ -1069,9 +1112,42 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
                     } else {
                         friendapply(user_id2, 2);
                     }
-
+                    break;
+                case R.id.iv_right:  //星云
+                    if (messageBean != null) {
+                        NebulaActivity.start(this, message_id, false);
+                    }
                     break;
             }
+        }
+    }
+
+    /**
+     * @description 开启新漂流
+     */
+    public void openNewDrift() {
+        if (RBureauApplication.latLng != null) {
+            clearOrOpen();
+        } else {
+            if (mPresenter != null) {  //开启定位
+                PermisType = 1;
+                mPresenter.getLocation(this);
+            }
+        }
+    }
+
+
+    /**
+     * @description 清除地图重新开启
+     */
+    public void clearOrOpen() {
+        removeTrace();
+        mBaiduMap.clear();
+        isNew = true;
+        setIsVisible(false);
+        getFromUser(Integer.parseInt(Preferences.getUserId()));
+        if (!TextUtils.isEmpty(Preferences.getCity())) {
+            selectCity(Preferences.getCity());
         }
     }
 
@@ -1139,10 +1215,10 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
                 if (entity.getCode() == 200) {
                     if (type == 1) {
                         mRlLeftAddFriends.setClickable(false);
-                        mTvAddLeftFriend.setText("已申请");
+                        mTvAddLeftFriend.setText("待通过");
                     } else {
                         mRlRIghtAddFriends.setClickable(false);
-                        mTvAddRightFriend.setText("已申请");
+                        mTvAddRightFriend.setText("待通过");
                     }
                     ToastUtil.showAddFriendDialog(this);
                 } else {

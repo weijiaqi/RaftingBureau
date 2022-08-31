@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -30,9 +31,8 @@ import com.jess.arms.utils.ArmsUtils;
  * @Time : 2022/5/29 16:40
  */
 public class ShareDialog extends BaseDialog implements View.OnClickListener {
-    private TextView mTvSavePic, mTvName, mTvIdentity, mTvAddress, mTvNum, mTvTitle;
-    private ProgressBar mPrUploadValue;
-    private LinearLayout mLltop;
+    private TextView mTvSavePic;
+    private RelativeLayout mRltop;
     private ImageView mIvCode;
     private Handler mHandler = new Handler();
     private Context context;
@@ -49,26 +49,15 @@ public class ShareDialog extends BaseDialog implements View.OnClickListener {
     protected void initDatas() {
         super.initDatas();
         mTvSavePic = findViewById(R.id.tv_save_pic);
-        mLltop = findViewById(R.id.ll_top);
-        mTvName = findViewById(R.id.tv_name);
-        mTvIdentity = findViewById(R.id.tv_identity);
-        mTvAddress = findViewById(R.id.tv_address);
-        mPrUploadValue = findViewById(R.id.pr_upload_value);
-        mTvNum = findViewById(R.id.tv_num);
+        mRltop = findViewById(R.id.rl_top);
         mIvCode = findViewById(R.id.iv_code);
-        mTvTitle = findViewById(R.id.tv_title);
+
     }
 
     @Override
     protected void initEvents() {
         super.initEvents();
         mTvSavePic.setOnClickListener(this);
-        mTvTitle.setText(userInfoEntity.getPlanet().getName() + "居住证");
-        mTvName.setText(userInfoEntity.getUser().getName());
-        mTvIdentity.setText(userInfoEntity.getUser().getLevel_name());
-        mTvAddress.setText(userInfoEntity.getPlanet().getName());
-        mTvNum.setText(userInfoEntity.getPlanet().getSchedule() + "%");
-        mPrUploadValue.setProgress(userInfoEntity.getPlanet().getSchedule());
         mIvCode.setImageBitmap(EncodingHandler.createQRCode(WEB_BASEURL + "?share_code=" + userInfoEntity.getUser().getShare_code(), ArmsUtils.dip2px(context, 67), ArmsUtils.dip2px(context, 67), BitmapFactory.decodeResource(context.getResources(), R.mipmap.icon_logo)));
     }
 
@@ -79,7 +68,7 @@ public class ShareDialog extends BaseDialog implements View.OnClickListener {
 
     @Override
     protected float getDialogWith() {
-        return 0.85f;
+        return 1f;
     }
 
     @Override
@@ -88,7 +77,7 @@ public class ShareDialog extends BaseDialog implements View.OnClickListener {
             case R.id.tv_save_pic:
                 showLoading();
                 mHandler.postDelayed(() -> {
-                    Bitmap bitmap = BitmapUtil.captureView(mLltop);
+                    Bitmap bitmap = BitmapUtil.captureView(mRltop);
                     PermissionDialog.requestPermissions((Activity) context, new PermissionDialog.PermissionCallBack() {
                         @Override
                         public void onSuccess() {

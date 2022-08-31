@@ -25,13 +25,11 @@ import com.jess.arms.base.BaseDialog;
  */
 
 public class MakingTeaDialog extends BaseDialog implements View.OnClickListener {
-    private LinearLayout mRlVoicePlay;
-
-    private ImageView mIvPlay, mIvVideoPlay, mIvPic;
+    private ImageView mIvPlay, mIvVideoPlay, mIvPic, mIvVideo;
     private VoiceWave mVideoView;
-    private TextView mTvTime, mTvLeaveSpace, mTvMadeForHim,mTtWord;
+    private TextView mTvTime, mTvLeaveSpace, mTvMadeForHim, mTvWord,mTvTip;
     private CommentDetailsEntity orderDetailEntity;
-    private RelativeLayout mRlVideoPlay,mRlStartVoice;
+    private RelativeLayout mRlVideoPlay, mRlStartVoice, mRlVoicePlay;
     private Context context;
     private int totaltime;
 
@@ -52,7 +50,7 @@ public class MakingTeaDialog extends BaseDialog implements View.OnClickListener 
     @Override
     protected void initView() {
         super.initView();
-        mTtWord = findViewById(R.id.tv_word);
+        mTvWord = findViewById(R.id.tv_word);
         mIvPlay = findViewById(R.id.iv_play);
 
         mIvVideoPlay = findViewById(R.id.iv_video_play);
@@ -63,7 +61,9 @@ public class MakingTeaDialog extends BaseDialog implements View.OnClickListener 
         mTvMadeForHim = findViewById(R.id.tv_made_for_him);
         mRlVoicePlay = findViewById(R.id.rl_voice_play);
         mRlVideoPlay = findViewById(R.id.rl_video_play);
-        mRlStartVoice=findViewById(R.id.rl_start_voice);
+        mRlStartVoice = findViewById(R.id.rl_start_voice);
+        mIvVideo = findViewById(R.id.iv_video);
+        mTvTip= findViewById(R.id.tv_tip);
     }
 
 
@@ -75,29 +75,32 @@ public class MakingTeaDialog extends BaseDialog implements View.OnClickListener 
         mTvMadeForHim.setOnClickListener(this);
         mRlVideoPlay.setOnClickListener(this);
         mRlStartVoice.setOnClickListener(this);
-        if (TextUtils.isEmpty(orderDetailEntity.getContent())) {
-            mTtWord.setText("收到一份来自元宇宙的电波传递");
-        } else {
-            mTtWord.setText(orderDetailEntity.getContent());
+
+        if (!TextUtils.isEmpty(orderDetailEntity.getContent())) {  //判断文字不为空
+            mTvWord.setVisibility(View.VISIBLE);
+            mTvWord.setText(orderDetailEntity.getContent());
         }
 
         if (!TextUtils.isEmpty(orderDetailEntity.getAlbum())) {  //图片
             mRlVideoPlay.setVisibility(View.VISIBLE);
-            mIvVideoPlay.setVisibility(View.GONE);
+            mIvVideo.setVisibility(View.GONE);
             GlideUtil.create().loadLongImage(context, orderDetailEntity.getAlbum(), mIvPic);
         }
 
-
-        if (!TextUtils.isEmpty(orderDetailEntity.getAudio())) { //语音
-            mRlVoicePlay.setVisibility(View.VISIBLE);
-            totaltime = VideoUtil.getLocalVideoDuration(orderDetailEntity.getAudio());
-            mTvTime.setText(totaltime + "S");
-            mVideoView.setDecibel(0);
-        }
         if (!TextUtils.isEmpty(orderDetailEntity.getImage())) {  //视频
             mRlVideoPlay.setVisibility(View.VISIBLE);
             mIvVideoPlay.setVisibility(View.VISIBLE);
             GlideUtil.create().loadLongImage(context, orderDetailEntity.getImage(), mIvPic);
+        }
+
+        if (!TextUtils.isEmpty(orderDetailEntity.getAudio())) { //语音
+            mRlVoicePlay.setVisibility(View.VISIBLE);
+            mTvTip.setVisibility(View.GONE);
+            mVideoView.setVisibility(View.VISIBLE);
+            mIvPlay.setVisibility(View.VISIBLE);
+            totaltime = VideoUtil.getLocalVideoDuration(orderDetailEntity.getAudio());
+            mTvTime.setText(totaltime + "S");
+            mVideoView.setDecibel(0);
         }
 
     }

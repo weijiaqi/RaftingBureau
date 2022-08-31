@@ -20,6 +20,7 @@ import com.drifting.bureau.view.VoiceWave;
 import com.hw.videoprocessor.VideoProcessor;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import timber.log.Timber;
 
@@ -144,7 +145,7 @@ public class VideoUtil {
         int duration;
         try {
             MediaMetadataRetriever mmr = new MediaMetadataRetriever();
-            mmr.setDataSource(videoPath);
+            mmr.setDataSource(videoPath, new HashMap<String, String>());
             duration = Integer.parseInt(mmr.extractMetadata
                     (MediaMetadataRetriever.METADATA_KEY_DURATION)) / 1000;
         } catch (Exception e) {

@@ -20,7 +20,7 @@
             android:layout_marginTop="38dp"
             android:gravity="center"
             android:lineSpacingExtra="4dp"
-            android:text="再次上传新文件的会覆盖当 前文件，是否继续操作"
+            android:text="再次上传新的文件会覆盖当前文件，是否继续操作"
             android:textColor="@color/color_33"
             android:textSize="14sp" />
 

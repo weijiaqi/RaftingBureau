@@ -1000,12 +1000,12 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
             lineChartView.setClockListener(new LineChartView.OpenMessageListener() {
                 @Override
                 public void onClick(int index) { //开启
-                    TopicDetailActivity.start(ArCenterConsoleActivity.this, 1, 0, false);
+                    DriftTrackMapActivity.start(ArCenterConsoleActivity.this, 1, 0, false);
                 }
 
                 @Override
                 public void onOPenClick(int index) {   //点击飘来宇宙电波
-                    TopicDetailActivity.start(ArCenterConsoleActivity.this, 1, 0, false);
+                    DriftTrackMapActivity.start(ArCenterConsoleActivity.this, 1, 0, false);
                 }
             });
 
@@ -1044,6 +1044,7 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
                 case R.id.rl_info:
+                case R.id.iv_radio_news:  //电波消息
                     MessageCenterActivity.start(this, false);
                     break;
                 case R.id.tv_about_me:
@@ -1083,11 +1084,8 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
                 case R.id.iv_physical_store:  //实体门店
                     TeaShopActivity.start(this, false);
                     break;
-                case R.id.iv_radio_news:  //电波消息
-                    MessageCenterActivity.start(this, false);
-                    break;
                 case R.id.iv_lock: //解锁奶茶
-                    TopicDetailActivity.start(this, explore_id, id, false);
+                    DriftTrackMapActivity.start(this, explore_id, id, false);
                     break;
                 case R.id.tv_share: //分享
                     if (userInfoEntity != null) {

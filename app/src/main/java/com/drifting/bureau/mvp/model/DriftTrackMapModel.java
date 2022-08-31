@@ -75,6 +75,11 @@ public class DriftTrackMapModel extends BaseModel implements DriftTrackMapContra
     }
 
     @Override
+    public Observable<BaseEntity> information(String lng, String lat) {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).information(lng,lat);
+    }
+
+    @Override
     public Observable<BaseEntity<CreateOrderEntity>> createOrder(int type_id, String sku_codes) {
         return mRepositoryManager.obtainRetrofitService(ApiService.class).createOrder(type_id, sku_codes);
     }
