@@ -180,20 +180,12 @@
 
             <RelativeLayout
                 android:id="@+id/rl_add_friends"
-<<<<<<< HEAD
-=======
-                android:visibility="gone"
->>>>>>> origin/dev
                 android:layout_width="79dp"
                 android:layout_height="22dp"
                 android:layout_below="@+id/tv_planet"
                 android:layout_alignStart="@+id/tv_rafting_type"
-<<<<<<< HEAD
                 android:layout_marginTop="12dp"
                 android:visibility="gone">
-=======
-                android:layout_marginTop="12dp">
->>>>>>> origin/dev
 
 
                 <ImageView

@@ -27,11 +27,7 @@ import com.jess.arms.base.BaseDialog;
 public class MakingTeaDialog extends BaseDialog implements View.OnClickListener {
     private LinearLayout mRlVoicePlay;
 
-<<<<<<< HEAD
     private ImageView mIvPlay, mIvVideoPlay, mIvPic;
-=======
-    private ImageView mIvPlay, mIvVoiceDelete, mIvVideoPlay, mIvPic;
->>>>>>> origin/dev
     private VoiceWave mVideoView;
     private TextView mTvTime, mTvLeaveSpace, mTvMadeForHim,mTtWord;
     private CommentDetailsEntity orderDetailEntity;
@@ -58,11 +54,7 @@ public class MakingTeaDialog extends BaseDialog implements View.OnClickListener 
         super.initView();
         mTtWord = findViewById(R.id.tv_word);
         mIvPlay = findViewById(R.id.iv_play);
-<<<<<<< HEAD
 
-=======
-        mIvVoiceDelete = findViewById(R.id.iv_voice_delete);
->>>>>>> origin/dev
         mIvVideoPlay = findViewById(R.id.iv_video_play);
         mIvPic = findViewById(R.id.iv_pic);
         mVideoView = findViewById(R.id.videoView);
@@ -78,11 +70,7 @@ public class MakingTeaDialog extends BaseDialog implements View.OnClickListener 
     @Override
     protected void initEvents() {
         super.initEvents();
-<<<<<<< HEAD
 
-=======
-        mIvVoiceDelete.setOnClickListener(this);
->>>>>>> origin/dev
         mTvLeaveSpace.setOnClickListener(this);
         mTvMadeForHim.setOnClickListener(this);
         mRlVideoPlay.setOnClickListener(this);
@@ -102,10 +90,6 @@ public class MakingTeaDialog extends BaseDialog implements View.OnClickListener 
 
         if (!TextUtils.isEmpty(orderDetailEntity.getAudio())) { //语音
             mRlVoicePlay.setVisibility(View.VISIBLE);
-<<<<<<< HEAD
-=======
-            mIvVoiceDelete.setVisibility(View.GONE);
->>>>>>> origin/dev
             totaltime = VideoUtil.getLocalVideoDuration(orderDetailEntity.getAudio());
             mTvTime.setText(totaltime + "S");
             mVideoView.setDecibel(0);

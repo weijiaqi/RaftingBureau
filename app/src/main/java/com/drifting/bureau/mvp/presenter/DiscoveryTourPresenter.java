@@ -7,22 +7,16 @@ import android.util.Log;
 
 import androidx.fragment.app.FragmentActivity;
 
-<<<<<<< HEAD
 import com.baidu.mapapi.model.LatLng;
 import com.drifting.bureau.app.application.RBureauApplication;
-=======
->>>>>>> origin/dev
 import com.drifting.bureau.mvp.contract.DiscoveryTourContract;
 import com.drifting.bureau.mvp.model.entity.MessageReceiveEntity;
 import com.drifting.bureau.mvp.model.entity.PlanetEntity;
 import com.drifting.bureau.mvp.model.entity.VersionUpdateEntity;
 import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
 import com.drifting.bureau.mvp.ui.dialog.VersionUpdateDialog;
-<<<<<<< HEAD
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.AppUtil;
-=======
->>>>>>> origin/dev
 import com.drifting.bureau.util.LocationUtil;
 import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.ToastUtil;
@@ -77,7 +71,6 @@ public class DiscoveryTourPresenter extends BasePresenter<DiscoveryTourContract.
     }
 
 
-<<<<<<< HEAD
     /**
      * 版本更新
      *
@@ -171,99 +164,6 @@ public class DiscoveryTourPresenter extends BasePresenter<DiscoveryTourContract.
                         if (mRootView != null) {
                             if (baseEntity.getCode() == 200) {
                                 mRootView.onLocationSuccess();
-=======
-    /**
-     * 版本更新
-     *
-     * @param activity this
-     */
-    public void getVersionInfo(Activity activity) {
-        mModel.checkVersion()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
-                .subscribe(new ErrorHandleSubscriber<BaseEntity<VersionUpdateEntity>>(mErrorHandler) {
-                    @Override
-                    public void onNext(BaseEntity<VersionUpdateEntity> data) {
-                        if (mRootView != null && data.getData() != null) {
-                            if (StringUtil.compareVersions(data.getData().getVersion(), StringUtil.getVersion(activity))) {
-                                showVersionDialog(activity, data.getData());
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable t) {
-                        t.printStackTrace();
-                    }
-                });
-    }
-
-
-    /**
-     * 版本更新dialog
-     *
-     * @param activity
-     */
-    public void showVersionDialog(Activity activity, VersionUpdateEntity data) {
-        VersionUpdateDialog versionUpdateDialog = new VersionUpdateDialog(activity, data.getUrl() + "?" + System.currentTimeMillis(), data.getStatus(), data.getMessage(), data.getVersion());
-        versionUpdateDialog.show();
-    }
-
-
-    /**
-     * 获取经纬度
-     */
-
-    public void getLocation(Activity activity) {
-        PermissionUtil.launchLocation(new PermissionUtil.RequestPermission() {
-            @Override
-            public void onRequestPermissionSuccess() {
-                LocationUtil.getCurrentLocation(new LocationUtil.LocationCallBack() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        try {
-                            getLoaction(location.getLongitude() + "", location.getLatitude() + "");
-                        } catch (Exception e) {
-                            Log.e(activity.getPackageName(), e.toString());
-                        }
-                    }
-
-                    @Override
-                    public void onFail(String msg) {
-
-                    }
-                });
-
-            }
-
-            @Override
-            public void onRequestPermissionFailure(List<String> permissions) {
-
-            }
-
-            @Override
-            public void onRequestPermissionFailureWithAskNeverAgain(List<String> permissions) {
-                PermissionDialog.create().showDialog(activity, permissions);
-            }
-        }, new RxPermissions((FragmentActivity) activity), mErrorHandler);
-
-    }
-
-
-    /**
-     * 探索方式列表
-     */
-    public void getLoaction(String lng, String lat) {
-        mModel.information(lng, lat).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
-                .subscribe(new ErrorHandleSubscriber<BaseEntity>(mErrorHandler) {
-                    @Override
-                    public void onNext(BaseEntity baseEntity) {
-                        if (mRootView != null) {
-                            if (baseEntity.getCode() == 200) {
-                                mRootView.onLocationSuccess();
                             }
                         }
                     }
@@ -314,7 +214,6 @@ public class DiscoveryTourPresenter extends BasePresenter<DiscoveryTourContract.
                         if (mRootView != null) {
                             if (baseEntity.getCode() == 200) {
                                 mRootView.onMessageReceiveSuccess(baseEntity.getData());
->>>>>>> origin/dev
                             }
                         }
                     }
@@ -328,59 +227,6 @@ public class DiscoveryTourPresenter extends BasePresenter<DiscoveryTourContract.
 
 
     /**
-<<<<<<< HEAD
-     * 探索方式列表
-     */
-    public void getExploreList() {
-        mModel.exploretypelist().subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
-                .subscribe(new ErrorHandleSubscriber<BaseEntity<List<PlanetEntity>>>(mErrorHandler) {
-                    @Override
-                    public void onNext(BaseEntity<List<PlanetEntity>> baseEntity) {
-                        if (mRootView != null) {
-                            if (baseEntity.getCode() == 200) {
-                                mRootView.onExploretypeSuccess(baseEntity.getData());
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable t) {
-                        t.printStackTrace();
-                    }
-                });
-    }
-
-
-    /**
-     * 飘来新消息（话题）
-     */
-    public void getMessage() {
-        mModel.messagereceive().subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
-                .subscribe(new ErrorHandleSubscriber<BaseEntity<MessageReceiveEntity>>(mErrorHandler) {
-                    @Override
-                    public void onNext(BaseEntity<MessageReceiveEntity> baseEntity) {
-                        if (mRootView != null) {
-                            if (baseEntity.getCode() == 200) {
-                                mRootView.onMessageReceiveSuccess(baseEntity.getData());
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable t) {
-                        t.printStackTrace();
-                    }
-                });
-    }
-
-
-    /**
-=======
->>>>>>> origin/dev
      * 调用双击退出函数
      */
     public void exitBy2Click() {

@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.drifting.bureau.R;
-<<<<<<< HEAD
 import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.mvp.ui.activity.home.ArCenterConsoleActivity;
 import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
@@ -16,27 +15,12 @@ import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
 import com.drifting.bureau.mvp.ui.activity.user.PullNewGuideActivity;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.RongIMUtil;
-=======
-import com.drifting.bureau.mvp.ui.activity.home.ArCenterConsoleActivity;
-import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
-import com.drifting.bureau.mvp.ui.activity.user.ArGuideActivity;
-import com.drifting.bureau.mvp.ui.activity.user.BuildGuideActivity;
-import com.drifting.bureau.mvp.ui.activity.user.ClaimPlanetActivity;
-import com.drifting.bureau.mvp.ui.activity.user.PullNewGuideActivity;
-import com.drifting.bureau.storageinfo.Preferences;
-import com.drifting.bureau.util.RongIMUtil;
-import com.jess.arms.base.BaseActivity;
->>>>>>> origin/dev
 import com.jess.arms.di.component.AppComponent;
 
 import timber.log.Timber;
 
 
-<<<<<<< HEAD
 public class SplashActivity extends BaseManagerActivity {
-=======
-public class SplashActivity extends BaseActivity {
->>>>>>> origin/dev
 
     private Handler mHandler = new Handler();
 

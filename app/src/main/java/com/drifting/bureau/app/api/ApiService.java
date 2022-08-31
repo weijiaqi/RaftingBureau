@@ -21,10 +21,7 @@ import com.drifting.bureau.mvp.model.entity.MakingRecordEntity;
 import com.drifting.bureau.mvp.model.entity.MessageContentEntity;
 import com.drifting.bureau.mvp.model.entity.MessageReceiveEntity;
 import com.drifting.bureau.mvp.model.entity.MoreDetailsEntity;
-<<<<<<< HEAD
 import com.drifting.bureau.mvp.model.entity.MoreDetailsForMapEntity;
-=======
->>>>>>> origin/dev
 import com.drifting.bureau.mvp.model.entity.MyBlindBoxEntity;
 import com.drifting.bureau.mvp.model.entity.MySpaceStationEntity;
 import com.drifting.bureau.mvp.model.entity.MyTreasuryEntity;
@@ -56,10 +53,7 @@ import com.drifting.bureau.mvp.model.entity.SysmessageEntity;
 import com.drifting.bureau.mvp.model.entity.SysmessageMineEntity;
 import com.drifting.bureau.mvp.model.entity.TeaShopEntity;
 import com.drifting.bureau.mvp.model.entity.TeamStatisticEntity;
-<<<<<<< HEAD
 import com.drifting.bureau.mvp.model.entity.TopicTagsEntity;
-=======
->>>>>>> origin/dev
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.model.entity.VersionUpdateEntity;
 import com.drifting.bureau.mvp.model.entity.WriteOffInfoEntity;
@@ -159,15 +153,9 @@ public interface ApiService {
 
 
     /**
-<<<<<<< HEAD
      * 创建话题（V2-话题标签）
      */
     @POST("v/message/creatingwithfile/v2")
-=======
-     * 创建话题（支持文件上传，发起和参与话题共用）   (新街口)
-     */
-    @POST("v/message/creatingwithfile")
->>>>>>> origin/dev
     Observable<BaseEntity<CreatewithfileEntity>> creatingwithfileword(@Body MultipartBody shortVoice);
 
 
@@ -729,7 +717,6 @@ public interface ApiService {
 
 
     /**
-<<<<<<< HEAD
      * 是否添加好友
      *
      * @return
@@ -789,67 +776,6 @@ public interface ApiService {
 
 
     /**
-=======
-     * 传递详情（新版）
-     *
-     * @return
-     */
-    @FormUrlEncoded
-    @POST("v/friend/isFriend")
-    Observable<BaseEntity<FriendEntity>> isFriend(@Field("user_id") String user_id);
-
-
-    /**
-     * 查看评论或话题详情
-     *
-     * @return
-     */
-    @FormUrlEncoded
-    @POST("v/message/comment/details")
-    Observable<BaseEntity<CommentDetailsEntity>> details(@Field("log_id") int log_id, @Field("level") int level, @Field("user_id") int user_id);
-
-
-    /**
-     * 我的盲盒（空间站）
-     *
-     * @return
-     */
-    @FormUrlEncoded
-    @POST("v/message/nebula")
-    Observable<BaseEntity<NebulaEntity>> messagenebula(@Field("message_id") int message_id, @Field("page") int page, @Field("limit") int limit);
-
-
-    /**
-     * 查询支付状态
-     *
-     * @return
-     */
-    @FormUrlEncoded
-    @POST("v/order/sandPayQuery")
-    Observable<BaseEntity<SandPayQueryEntity>> sandPayQuery(@Field("sn") String sn,@Field("terminal") String terminal);
-
-
-    /**
-     * 盲盒记录列表
-     *
-     * @return
-     */
-    @FormUrlEncoded
-    @POST("v/mysterybox/open/logs")
-    Observable<BaseEntity<BlindBoxRecordEntity>> openlogs(@Field("page") int page, @Field("limit") int limit);
-
-
-    /**
-     * 注销
-     *
-     * @return
-     */
-    @GET("v/user/unregister")
-    Observable<BaseEntity> unregister();
-
-
-    /**
->>>>>>> origin/dev
      * 获取AR Url (登录前)
      *
      * @return
@@ -882,7 +808,6 @@ public interface ApiService {
     @GET("v/topic/didAttend")
     Observable<BaseEntity<DidAttendEntity>> didAttend();
 
-<<<<<<< HEAD
 
     /**
      * 传递详情（适用地图版）
@@ -901,6 +826,4 @@ public interface ApiService {
      */
     @GET("v/topic/tags/list")
     Observable<BaseEntity<List<TopicTagsEntity>>> tagslist();
-=======
->>>>>>> origin/dev
 }

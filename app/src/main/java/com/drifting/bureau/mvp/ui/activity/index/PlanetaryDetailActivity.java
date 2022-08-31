@@ -10,10 +10,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.text.TextUtils;
-<<<<<<< HEAD
-=======
-import android.util.Log;
->>>>>>> origin/dev
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,20 +18,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.drifting.bureau.R;
-<<<<<<< HEAD
 import com.drifting.bureau.base.BaseManagerActivity;
-=======
-import com.drifting.bureau.data.event.UpdateProgressEvent;
->>>>>>> origin/dev
 import com.drifting.bureau.di.component.DaggerPlanetaryDetailComponent;
 import com.drifting.bureau.mvp.contract.PlanetaryDetailContract;
 import com.drifting.bureau.mvp.model.entity.PlanetaryDetailEntity;
 import com.drifting.bureau.mvp.presenter.PlanetaryDetailPresenter;
 import com.drifting.bureau.mvp.ui.activity.index.ar.ARActivity;
-<<<<<<< HEAD
-=======
-import com.drifting.bureau.mvp.ui.activity.user.AboutMeActivity;
->>>>>>> origin/dev
 import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
 import com.drifting.bureau.util.ARCoreUtil;
 import com.drifting.bureau.util.ClickUtil;
@@ -44,18 +32,8 @@ import com.drifting.bureau.util.NotificationUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.downloadutil.DownloadRequest;
 import com.drifting.bureau.util.manager.NotificationManager;
-<<<<<<< HEAD
 import com.jess.arms.di.component.AppComponent;
 
-=======
-import com.google.ar.sceneform.Sceneform;
-import com.jess.arms.base.BaseActivity;
-import com.jess.arms.di.component.AppComponent;
-
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
->>>>>>> origin/dev
 import java.io.File;
 
 import butterknife.BindView;
@@ -68,11 +46,7 @@ import butterknife.OnClick;
  * @author 星球详情
  * module name is PlanetaryDetailActivity
  */
-<<<<<<< HEAD
 public class PlanetaryDetailActivity extends BaseManagerActivity<PlanetaryDetailPresenter> implements PlanetaryDetailContract.View {
-=======
-public class PlanetaryDetailActivity extends BaseActivity<PlanetaryDetailPresenter> implements PlanetaryDetailContract.View {
->>>>>>> origin/dev
 
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;

@@ -15,11 +15,7 @@ import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.drifting.bureau.R;
-<<<<<<< HEAD
 import com.drifting.bureau.base.BaseManagerActivity;
-=======
-import com.drifting.bureau.base.BaseActivity;
->>>>>>> origin/dev
 import com.drifting.bureau.util.ClickUtil;
 import com.google.vr.sdk.widgets.pano.VrPanoramaView;
 import com.jess.arms.di.component.AppComponent;
@@ -32,11 +28,7 @@ import butterknife.OnClick;
  * @Author : WeiJiaQI
  * @Time : 2022/7/7 14:25
  */
-<<<<<<< HEAD
 public class SpaceStationVRActivity extends BaseManagerActivity {
-=======
-public class SpaceStationVRActivity extends BaseActivity {
->>>>>>> origin/dev
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
     @BindView(R.id.vrPanoramaView)
@@ -127,10 +119,7 @@ public class SpaceStationVRActivity extends BaseActivity {
         mVRPanoramaView.pauseRendering();
     }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/dev
     @Override
     protected void onResume() {
         super.onResume();

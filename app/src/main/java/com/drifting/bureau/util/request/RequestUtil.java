@@ -16,13 +16,9 @@ import com.drifting.bureau.mvp.model.entity.PlanetLocationEntity;
 import com.drifting.bureau.mvp.model.entity.PlatformTimesEntity;
 import com.drifting.bureau.mvp.model.entity.StarUpIndexEntity;
 import com.drifting.bureau.mvp.model.entity.SysmessageEntity;
-<<<<<<< HEAD
 import com.drifting.bureau.mvp.model.entity.TopicTagsEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.model.entity.VersionUpdateEntity;
-=======
-import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
->>>>>>> origin/dev
 import com.drifting.bureau.mvp.model.entity.WriteOffInfoEntity;
 import com.drifting.bureau.util.callback.BaseDataCallBack;
 import com.jess.arms.base.BaseEntity;
@@ -57,7 +53,6 @@ public class RequestUtil {
         return mRequestUtil;
     }
 
-<<<<<<< HEAD
     /**
      * @description 版本更新
      */
@@ -85,8 +80,6 @@ public class RequestUtil {
                 });
     }
 
-=======
->>>>>>> origin/dev
 
     /**
      * 查看漂流-玩家信息
@@ -387,10 +380,6 @@ public class RequestUtil {
     }
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/dev
     /**
      * AR  公告
      */
@@ -487,13 +476,8 @@ public class RequestUtil {
     /**
      * 举报
      */
-<<<<<<< HEAD
     public void reportcommit(int message_id, int comment_id, int report_type, String reason, BaseDataCallBack callBack) {
         ApiProxy.getApiService().reportcommit(message_id, comment_id, report_type, reason)
-=======
-    public void reportcommit(int message_id,int comment_id, int report_type, String reason, BaseDataCallBack callBack) {
-        ApiProxy.getApiService().reportcommit(message_id, comment_id,report_type, reason)
->>>>>>> origin/dev
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new BaseObserver<BaseEntity>() {
@@ -584,7 +568,6 @@ public class RequestUtil {
 
 
     /**
-<<<<<<< HEAD
      * 话题标签
      */
     public void tags(BaseDataCallBack<List<TopicTagsEntity>> callBack) {
@@ -619,11 +602,6 @@ public class RequestUtil {
      * 标记为已读（消息中心）
      */
     public void markread(int sys_msg_id, BaseDataCallBack callBack) {
-=======
-     * 标记为已读（消息中心）
-     */
-    public void markread(int sys_msg_id,  BaseDataCallBack callBack) {
->>>>>>> origin/dev
         ApiProxy.getApiService().markread(sys_msg_id)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -651,21 +629,11 @@ public class RequestUtil {
     }
 
 
-<<<<<<< HEAD
     /**
      * 同意或拒绝好友申请（消息中心）
      */
     public void agreeRefuse(int apply_id, int status, BaseDataCallBack callBack) {
         ApiProxy.getApiService().agreeRefuse(apply_id, status)
-=======
-
-
-    /**
-     * 同意或拒绝好友申请（消息中心）
-     */
-    public void agreeRefuse(int apply_id,int status,  BaseDataCallBack callBack) {
-        ApiProxy.getApiService().agreeRefuse(apply_id,status)
->>>>>>> origin/dev
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new BaseObserver<BaseEntity>() {
@@ -692,19 +660,10 @@ public class RequestUtil {
     }
 
 
-<<<<<<< HEAD
     /**
      * 删除好友（消息中心）
      */
     public void frienddelete(int user_id, BaseDataCallBack callBack) {
-=======
-
-
-    /**
-     * 删除好友（消息中心）
-     */
-    public void frienddelete(int user_id ,BaseDataCallBack callBack) {
->>>>>>> origin/dev
         ApiProxy.getApiService().frienddelete(user_id)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -732,19 +691,10 @@ public class RequestUtil {
     }
 
 
-<<<<<<< HEAD
     /**
      * 好友相关信息（头像、昵称）
      */
     public void friendinfo(String user_id, BaseDataCallBack<FriendInfoEntity> callBack) {
-=======
-
-
-    /**
-     * 好友相关信息（头像、昵称）
-     */
-    public void friendinfo(String user_id ,BaseDataCallBack<FriendInfoEntity> callBack) {
->>>>>>> origin/dev
         ApiProxy.getApiService().friendinfo(user_id)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -772,19 +722,10 @@ public class RequestUtil {
     }
 
 
-<<<<<<< HEAD
     /**
      * 是否是好友
      */
     public void isFriend(String user_id, BaseDataCallBack<FriendEntity> callBack) {
-=======
-
-
-    /**
-     * 是否是好友
-     */
-    public void isFriend(String user_id ,BaseDataCallBack<FriendEntity> callBack) {
->>>>>>> origin/dev
         ApiProxy.getApiService().isFriend(user_id)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -812,11 +753,6 @@ public class RequestUtil {
     }
 
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> origin/dev
     /**
      * 获取AR Url (登录前)
      */
@@ -879,11 +815,6 @@ public class RequestUtil {
     }
 
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> origin/dev
     /**
      * 是否参与过漂流
      */
@@ -915,10 +846,6 @@ public class RequestUtil {
     }
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/dev
     /**
      * 注销
      */
@@ -950,13 +877,6 @@ public class RequestUtil {
     }
 
 
-<<<<<<< HEAD
-=======
-
-
-
-
->>>>>>> origin/dev
     /**
      * 取消订阅
      */

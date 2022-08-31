@@ -111,38 +111,6 @@ public class MySpaceStationPresenter extends BasePresenter<MySpaceStationContrac
     }
 
 
-<<<<<<< HEAD
-=======
-    /**
-     * 新订单的详情（空间站查看漂来的订单）
-     */
-
-    public void orderdetail(int space_order_id) {
-        mModel.orderdetail(space_order_id).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
-                .subscribe(new ErrorHandleSubscriber<BaseEntity<OrderDetailEntity>>(mErrorHandler) {
-                    @Override
-                    public void onNext(BaseEntity<OrderDetailEntity> baseEntity) {
-                        if (mRootView != null) {
-                            if (baseEntity.getCode() == 200) {
-                                mRootView.onOrderDetailSuccess(baseEntity.getData());
-                            } else {
-                                mRootView.showMessage(baseEntity.getMsg());
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable t) {
-                        if (mRootView != null) {
-                            mRootView.onNetError();
-                        }
-                    }
-                });
-    }
-
->>>>>>> origin/dev
 
     /**
      * 用户信息

@@ -14,10 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.drifting.bureau.R;
-<<<<<<< HEAD
 import com.drifting.bureau.base.BaseManagerActivity;
-=======
->>>>>>> origin/dev
 import com.drifting.bureau.di.component.DaggerTeaShopComponent;
 import com.drifting.bureau.mvp.contract.TeaShopContract;
 import com.drifting.bureau.mvp.model.entity.TeaShopEntity;
@@ -25,10 +22,6 @@ import com.drifting.bureau.mvp.presenter.TeaShopPresenter;
 import com.drifting.bureau.mvp.ui.adapter.TeaShopAdapter;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.ViewUtil;
-<<<<<<< HEAD
-=======
-import com.jess.arms.base.BaseActivity;
->>>>>>> origin/dev
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.DeviceUtils;
 import com.rb.core.xrecycleview.XRecyclerView;
@@ -46,11 +39,7 @@ import butterknife.OnClick;
  * @author 实体门店
  * module name is TeaShopActivity
  */
-<<<<<<< HEAD
 public class TeaShopActivity extends BaseManagerActivity<TeaShopPresenter> implements TeaShopContract.View, XRecyclerView.LoadingListener {
-=======
-public class TeaShopActivity extends BaseActivity<TeaShopPresenter> implements TeaShopContract.View, XRecyclerView.LoadingListener {
->>>>>>> origin/dev
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
     @BindView(R.id.rcy_public)

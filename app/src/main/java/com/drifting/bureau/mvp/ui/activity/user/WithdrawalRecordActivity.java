@@ -13,10 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.drifting.bureau.R;
-<<<<<<< HEAD
 import com.drifting.bureau.base.BaseManagerActivity;
-=======
->>>>>>> origin/dev
 import com.drifting.bureau.di.component.DaggerWithdrawalRecordComponent;
 import com.drifting.bureau.mvp.contract.WithdrawalRecordContract;
 import com.drifting.bureau.mvp.model.entity.IncomeRecordEntity;
@@ -25,11 +22,7 @@ import com.drifting.bureau.mvp.ui.adapter.IncomeRecordAdapter;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.ViewUtil;
-<<<<<<< HEAD
 
-=======
-import com.jess.arms.base.BaseActivity;
->>>>>>> origin/dev
 import com.jess.arms.di.component.AppComponent;
 import com.rb.core.xrecycleview.XRecyclerView;
 
@@ -46,11 +39,7 @@ import butterknife.OnClick;
  * @author 提现记录
  * module name is WithdrawalRecordActivity
  */
-<<<<<<< HEAD
 public class WithdrawalRecordActivity extends BaseManagerActivity<WithdrawalRecordPresenter> implements WithdrawalRecordContract.View, XRecyclerView.LoadingListener {
-=======
-public class WithdrawalRecordActivity extends BaseActivity<WithdrawalRecordPresenter> implements WithdrawalRecordContract.View, XRecyclerView.LoadingListener {
->>>>>>> origin/dev
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
     @BindView(R.id.rcy_public)

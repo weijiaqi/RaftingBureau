@@ -64,7 +64,6 @@
         <!--流星头部的尺寸-->
         <attr format="integer|reference" name="meteor_head_size" />
     </declare-styleable>
-<<<<<<< HEAD
 
 
     <declare-styleable name="TagFlowLayout">
@@ -76,6 +75,4 @@
         </attr>
     </declare-styleable>
 
-=======
->>>>>>> origin/dev
 </resources>

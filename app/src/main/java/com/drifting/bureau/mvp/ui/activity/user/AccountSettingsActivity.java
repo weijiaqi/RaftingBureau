@@ -28,18 +28,11 @@ import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.LogInOutDataUtil;
 import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.ToastUtil;
-<<<<<<< HEAD
-
-import com.drifting.bureau.util.request.RequestUtil;
-import com.drifting.bureau.base.BaseManagerActivity;
-
-=======
 import com.drifting.bureau.util.callback.BaseDataCallBack;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.base.BaseDialog;
 import com.jess.arms.base.BaseEntity;
->>>>>>> origin/dev
 import com.jess.arms.di.component.AppComponent;
 
 import org.greenrobot.eventbus.EventBus;
@@ -56,11 +49,7 @@ import cat.ereza.customactivityoncrash.config.CaocConfig;
  * @author 账户设置
  * module name is AccountSettingsActivity
  */
-<<<<<<< HEAD
-public class AccountSettingsActivity extends BaseManagerActivity<AccountSettingsPresenter> implements AccountSettingsContract.View {
-=======
 public class AccountSettingsActivity extends BaseActivity<AccountSettingsPresenter> implements AccountSettingsContract.View {
->>>>>>> origin/dev
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
     @BindView(R.id.tv_nikename)

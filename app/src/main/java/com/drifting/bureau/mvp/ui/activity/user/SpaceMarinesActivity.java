@@ -26,11 +26,7 @@ import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.request.RequestUtil;
-<<<<<<< HEAD
 import com.drifting.bureau.base.BaseManagerActivity;
-=======
-import com.jess.arms.base.BaseActivity;
->>>>>>> origin/dev
 import com.jess.arms.di.component.AppComponent;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -46,11 +42,7 @@ import butterknife.OnClick;
  * @author 星际战队
  * module name is SpaceMarinesActivity
  */
-<<<<<<< HEAD
 public class SpaceMarinesActivity extends BaseManagerActivity<SpaceMarinesPresenter> implements SpaceMarinesContract.View {
-=======
-public class SpaceMarinesActivity extends BaseActivity<SpaceMarinesPresenter> implements SpaceMarinesContract.View {
->>>>>>> origin/dev
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
     @BindView(R.id.tv_name)

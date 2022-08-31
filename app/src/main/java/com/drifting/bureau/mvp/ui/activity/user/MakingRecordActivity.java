@@ -13,10 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.drifting.bureau.R;
-<<<<<<< HEAD
 import com.drifting.bureau.base.BaseManagerActivity;
-=======
->>>>>>> origin/dev
 import com.drifting.bureau.di.component.DaggerMakingRecordComponent;
 import com.drifting.bureau.mvp.contract.MakingRecordContract;
 import com.drifting.bureau.mvp.model.entity.MakingRecordEntity;
@@ -25,10 +22,6 @@ import com.drifting.bureau.mvp.ui.adapter.MakingRecordAdapter;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.ViewUtil;
-<<<<<<< HEAD
-=======
-import com.jess.arms.base.BaseActivity;
->>>>>>> origin/dev
 import com.jess.arms.di.component.AppComponent;
 import com.rb.core.xrecycleview.XRecyclerView;
 
@@ -45,11 +38,7 @@ import butterknife.OnClick;
  * @author 制作记录
  * module name is MakingRecordActivity
  */
-<<<<<<< HEAD
 public class MakingRecordActivity extends BaseManagerActivity<MakingRecordPresenter> implements MakingRecordContract.View, XRecyclerView.LoadingListener {
-=======
-public class MakingRecordActivity extends BaseActivity<MakingRecordPresenter> implements MakingRecordContract.View, XRecyclerView.LoadingListener {
->>>>>>> origin/dev
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
     @BindView(R.id.rcy_public)

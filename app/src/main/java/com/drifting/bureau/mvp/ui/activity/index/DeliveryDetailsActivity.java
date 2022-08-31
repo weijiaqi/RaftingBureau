@@ -15,10 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.drifting.bureau.R;
-<<<<<<< HEAD
 import com.drifting.bureau.base.BaseManagerActivity;
-=======
->>>>>>> origin/dev
 import com.drifting.bureau.di.component.DaggerDeliveryDetailsComponent;
 import com.drifting.bureau.mvp.contract.DeliveryDetailsContract;
 import com.drifting.bureau.mvp.model.entity.DeliveryDetailsEntity;
@@ -30,10 +27,6 @@ import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.ViewUtil;
 import com.drifting.bureau.util.request.RequestUtil;
-<<<<<<< HEAD
-=======
-import com.jess.arms.base.BaseActivity;
->>>>>>> origin/dev
 import com.jess.arms.di.component.AppComponent;
 import com.rb.core.xrecycleview.XRecyclerView;
 
@@ -49,11 +42,7 @@ import butterknife.OnClick;
  * @author 传递详情
  * module name is DeliveryDetailsActivity
  */
-<<<<<<< HEAD
 public class DeliveryDetailsActivity extends BaseManagerActivity<DeliveryDetailsPresenter> implements DeliveryDetailsContract.View, XRecyclerView.LoadingListener {
-=======
-public class DeliveryDetailsActivity extends BaseActivity<DeliveryDetailsPresenter> implements DeliveryDetailsContract.View, XRecyclerView.LoadingListener {
->>>>>>> origin/dev
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
     @BindView(R.id.rcy_delivery)

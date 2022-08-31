@@ -14,11 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.drifting.bureau.R;
-<<<<<<< HEAD
 import com.drifting.bureau.base.BaseManagerActivity;
-=======
-import com.drifting.bureau.base.BaseActivity;
->>>>>>> origin/dev
 import com.drifting.bureau.di.component.DaggerNebulaComponent;
 import com.drifting.bureau.mvp.contract.NebulaContract;
 import com.drifting.bureau.mvp.model.entity.NebulaEntity;
@@ -44,11 +40,7 @@ import butterknife.OnClick;
  * @author 星云
  * module name is NebulaActivity
  */
-<<<<<<< HEAD
 public class NebulaActivity extends BaseManagerActivity<NebulaPresenter> implements NebulaContract.View, LRecyclerView.LoadingListener {
-=======
-public class NebulaActivity extends BaseActivity<NebulaPresenter> implements NebulaContract.View, LRecyclerView.LoadingListener {
->>>>>>> origin/dev
 
     @BindView(R.id.tv_channel)
     TextView mTvChannel;

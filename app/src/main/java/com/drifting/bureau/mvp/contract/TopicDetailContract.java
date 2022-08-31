@@ -30,25 +30,15 @@ public interface TopicDetailContract {
     //对于经常使用的关于UI的方法可以定义到IView中,如显示隐藏进度条,和显示文字消息
     interface View extends IView {
 
-<<<<<<< HEAD
         void onMoreDetailsSuccess(MoreDetailsEntity entity, int type);
-=======
-        void onMoreDetailsSuccess(MoreDetailsEntity entity,int type);
->>>>>>> origin/dev
 
         void onCreatewithwordSuccess(CreatewithfileEntity entity);
 
         void onSkuListSuccess(SkuListEntity skuListEntity);
 
-<<<<<<< HEAD
         void onCommentDetailsSuccess(CommentDetailsEntity entity);
 
         void onCreateOrderSuccess(CreateOrderEntity entity);
-=======
-        void  onCommentDetailsSuccess(CommentDetailsEntity entity);
-
-        void  onCreateOrderSuccess(CreateOrderEntity entity);
->>>>>>> origin/dev
 
         void onMessageAttendingSuccess();
 
@@ -65,19 +55,11 @@ public interface TopicDetailContract {
         Observable<BaseEntity<CreatewithfileEntity>> createwithfileword(MultipartBody shortVoice);
 
 
-<<<<<<< HEAD
         Observable<BaseEntity<SkuListEntity>> skulist(int explore_id, int message_id);
 
         Observable<BaseEntity<CreateOrderEntity>> createOrder(int type_id, String sku_codes);
 
         Observable<BaseEntity<CommentDetailsEntity>> details(int log_id, int level, int user_id);
-=======
-        Observable<BaseEntity<SkuListEntity>> skulist( int explore_id, int message_id);
-
-        Observable<BaseEntity<CreateOrderEntity>> createOrder(int type_id, String sku_codes);
-
-        Observable<BaseEntity<CommentDetailsEntity>> details(int log_id, int level,int user_id);
->>>>>>> origin/dev
 
         Observable<BaseEntity> messageattending(int message_id);
     }

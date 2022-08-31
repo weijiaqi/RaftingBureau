@@ -7,10 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentOnAttachListener;
-<<<<<<< HEAD
 import androidx.lifecycle.LifecycleOwnerKt;
-=======
->>>>>>> origin/dev
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -34,11 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.drifting.bureau.R;
-<<<<<<< HEAD
 import com.drifting.bureau.base.BaseManagerActivity;
-=======
-import com.drifting.bureau.base.BaseActivity;
->>>>>>> origin/dev
 import com.drifting.bureau.di.component.DaggerArCenterConsoleComponent;
 import com.drifting.bureau.mvp.model.entity.CommentDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.DidAttendEntity;
@@ -51,18 +44,12 @@ import com.drifting.bureau.mvp.model.entity.SpaceCheckEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceInfoEntity;
 import com.drifting.bureau.mvp.model.entity.TeamStatisticEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
-<<<<<<< HEAD
 import com.drifting.bureau.mvp.ui.activity.index.DriftTrackMapActivity;
-=======
->>>>>>> origin/dev
 import com.drifting.bureau.mvp.ui.activity.index.MoveAwayPlanetaryActivity;
 import com.drifting.bureau.mvp.ui.activity.index.PlanetarySelectActivity;
 import com.drifting.bureau.mvp.ui.activity.index.TeaShopActivity;
 import com.drifting.bureau.mvp.ui.activity.index.TopicDetailActivity;
-<<<<<<< HEAD
 import com.drifting.bureau.mvp.ui.activity.user.AboutMeActivity;
-=======
->>>>>>> origin/dev
 import com.drifting.bureau.mvp.ui.activity.user.MessageCenterActivity;
 import com.drifting.bureau.mvp.ui.activity.user.WithdrawalActivity;
 import com.drifting.bureau.mvp.ui.adapter.ARWithRecordAdapter;
@@ -75,10 +62,6 @@ import com.drifting.bureau.mvp.ui.dialog.MakeScheduleDialog;
 import com.drifting.bureau.mvp.ui.dialog.MakingTeaDialog;
 import com.drifting.bureau.mvp.ui.dialog.MyTreasuryDialog;
 import com.drifting.bureau.mvp.ui.dialog.PublicDialog;
-<<<<<<< HEAD
-=======
-import com.drifting.bureau.mvp.ui.dialog.SelectOrderDialog;
->>>>>>> origin/dev
 import com.drifting.bureau.mvp.ui.dialog.ShareDialog;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
@@ -91,10 +74,7 @@ import com.drifting.bureau.util.callback.BaseDataCallBack;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.drifting.bureau.view.CleanArFragment;
 import com.drifting.bureau.view.chart.LineChartView;
-<<<<<<< HEAD
 import com.google.android.filament.utils.HDRLoader;
-=======
->>>>>>> origin/dev
 import com.google.ar.core.Config;
 import com.google.ar.core.Session;
 import com.google.ar.sceneform.AnchorNode;
@@ -103,10 +83,7 @@ import com.google.ar.sceneform.FrameTime;
 import com.google.ar.sceneform.HitTestResult;
 import com.google.ar.sceneform.Node;
 import com.google.ar.sceneform.Scene;
-<<<<<<< HEAD
 import com.google.ar.sceneform.SceneView;
-=======
->>>>>>> origin/dev
 import com.google.ar.sceneform.Sceneform;
 import com.google.ar.sceneform.math.Quaternion;
 import com.google.ar.sceneform.math.Vector3;
@@ -120,14 +97,11 @@ import com.google.ar.sceneform.ux.FootprintSelectionVisualizer;
 import com.google.ar.sceneform.ux.TransformableNode;
 import com.google.ar.sceneform.ux.TransformationSystem;
 
-<<<<<<< HEAD
 import com.gorisse.thomas.sceneform.ArSceneViewKt;
 import com.gorisse.thomas.sceneform.SceneViewKt;
 import com.gorisse.thomas.sceneform.environment.Environment;
 import com.gorisse.thomas.sceneform.environment.HDREnvironmentKt;
 import com.gorisse.thomas.sceneform.light.LightEstimationConfig;
-=======
->>>>>>> origin/dev
 import com.hjq.shape.view.ShapeTextView;
 import com.jess.arms.base.BaseEntity;
 import com.jess.arms.di.component.AppComponent;
@@ -143,13 +117,10 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-<<<<<<< HEAD
 import io.rong.imkit.RongIM;
 import io.rong.imkit.manager.UnReadMessageManager;
 import io.rong.imlib.model.Conversation;
 import kotlin.Unit;
-=======
->>>>>>> origin/dev
 
 /**
  * Created on 2022/08/20 10:53
@@ -157,11 +128,7 @@ import kotlin.Unit;
  * @author 主页AR
  * module name is ArCenterConsoleActivity
  */
-<<<<<<< HEAD
 public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsolePresenter> implements FragmentOnAttachListener, BaseArFragment.OnSessionConfigurationListener,
-=======
-public class ArCenterConsoleActivity extends BaseActivity<ArCenterConsolePresenter> implements FragmentOnAttachListener, BaseArFragment.OnSessionConfigurationListener,
->>>>>>> origin/dev
         CleanArFragment.OnViewCreatedListener, View.OnClickListener, ArCenterConsoleContract.View, XRecyclerView.LoadingListener {
 
     @BindView(R.id.tv_bar)
@@ -170,13 +137,10 @@ public class ArCenterConsoleActivity extends BaseActivity<ArCenterConsolePresent
     ShapeTextView mTvChangeMode;
     @BindView(R.id.tv_energy)
     TextView mTvEnergy;
-<<<<<<< HEAD
     @BindView(R.id.tv_about_me)
     TextView mTvAboutMe;
     @BindView(R.id.iv_hot)
     ImageView mIvHot;
-=======
->>>>>>> origin/dev
     private ImageView mIvBorder1, mIvBorder2, mIvBorder3, mIvBorder4, mIvBorder5, mIvOperation, mIvDriftTrack, mIvStarTroopers, mIvPhysicalstore, mIvRadioNews, mIvMastor, mIvLock, mIvDrink, mIvFindPlanet, mIvExplorePlay, mIvHaveNewOrder, mIvNoneNewOrder, mIvQueryInventory;
     private XRecyclerView mRcyWithdrawalsRecord, mRcyMakeRecord, mRcyIncomeRecord;
     private LinearLayout mLlContent, mLlReceiveTea, mLlTop, mLlNewSpaceOrder;
@@ -186,27 +150,16 @@ public class ArCenterConsoleActivity extends BaseActivity<ArCenterConsolePresent
     private HorizontalScrollView scrollView;
     private LineChartView lineChartView;
     private ArSceneView arSceneView;
-<<<<<<< HEAD
     private Renderable model, model2, model3, model5, model7, model8, model9, model10, model11;
     private ViewRenderable viewRenderable, viewRenderable2, viewRenderable3, viewRenderable4, viewRenderable5;
     private int status = 1;
     private int id, explore_id, rcyid;
-=======
-    private Renderable model, model2, model3,  model5, model7, model8, model9, model10, model11;
-    private ViewRenderable viewRenderable, viewRenderable2, viewRenderable3, viewRenderable4, viewRenderable5;
-    private int status = 1;
-    private int id, explore_id,rcyid;
->>>>>>> origin/dev
     private DriftingPlayDialog driftingPlayDialog;
     private ExclusivePlanetDialog exclusivePlanetDialog;
     private AnchorNode anchorNode;
     private Node titleNode, spacenode, recordnode, recordnode2, inventorynode, inventorynode2, expenditurenode, expenditurenode2;
     private TransformationSystem transformationSystem;
-<<<<<<< HEAD
     private TransformableNode andy, andy2, andy3, andy5, andy7, andy8, andy9, andy10, andy11;
-=======
-    private TransformableNode andy, andy2, andy3, andy5,  andy7, andy8, andy9, andy10, andy11;
->>>>>>> origin/dev
     private View view;
     private Handler handlerModel, handlerReciver, handlerSpace;
     private ARWithRecordAdapter arWithRecordAdapter;
@@ -230,10 +183,6 @@ public class ArCenterConsoleActivity extends BaseActivity<ArCenterConsolePresent
     private ArAnnouncementDisplayDialog arAnnouncementDisplayDialog;
     private int[] dataArr = new int[]{152, 59, 185, 134, 45, 169, 54, 155, 40, 146, 52, 59, 185, 134, 45, 169, 54, 155, 40, 146, 52, 59, 185, 134, 45, 169, 54, 155, 40, 146, 52, 59, 185, 134, 45, 169, 54, 155, 40, 146, 52, 59, 185, 134, 45, 169, 54, 155, 40, 146, 52, 59, 185, 134, 45, 169, 54, 155, 40, 146, 52, 59, 185, 134, 45, 169, 54, 155, 40, 146, 52, 59, 185, 134, 45, 169, 54, 155, 40, 146, 52, 59, 185, 134, 45, 169, 54, 155, 40, 146, 52, 59, 185, 134, 45, 169, 54, 155, 40, 146};
 
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/dev
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, ArCenterConsoleActivity.class);
         context.startActivity(intent);
@@ -259,10 +208,6 @@ public class ArCenterConsoleActivity extends BaseActivity<ArCenterConsolePresent
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(false);
-<<<<<<< HEAD
-=======
-//        setStatusBarHeight(mTvBar);
->>>>>>> origin/dev
         getSupportFragmentManager().addFragmentOnAttachListener(this);
         if (savedInstanceState == null) {
             if (Sceneform.isSupported(this)) {
@@ -276,10 +221,6 @@ public class ArCenterConsoleActivity extends BaseActivity<ArCenterConsolePresent
 
     Runnable mAdRunnable = () -> getMessage();
 
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/dev
     //获取新消息
     public void getMessage() {
         if (mPresenter != null) {
@@ -305,7 +246,6 @@ public class ArCenterConsoleActivity extends BaseActivity<ArCenterConsolePresent
         this.arSceneView.getPlaneRenderer().setVisible(false); //隐藏小白点
 
 
-<<<<<<< HEAD
 //        this.arSceneView.getRenderer().setMainLight(null);
 //        this.arSceneView.getRenderer().setIndirectLight(null);
 
@@ -324,13 +264,6 @@ public class ArCenterConsoleActivity extends BaseActivity<ArCenterConsolePresent
                     return Unit.INSTANCE;
                 }
         );
-=======
-//        ArSceneViewKt.setLightEstimationConfig(arSceneView, LightEstimationConfig.DISABLED);
-//
-//        this.arSceneView.getRenderer().setIndirectLight(null);
-//        this.arSceneView.getRenderer().setMainLight(null);
-
->>>>>>> origin/dev
     }
 
     @Override
@@ -588,42 +521,21 @@ public class ArCenterConsoleActivity extends BaseActivity<ArCenterConsolePresent
             transformationSystem.onTouch(hitTestResult, motionEvent);
         });
 
-<<<<<<< HEAD
-=======
-//        Light light = Light.builder(Light.Type.DIRECTIONAL)
-//                .setColor(new Color(android.graphics.Color.WHITE))
-//                .setFalloffRadius(5f)
-//                .setShadowCastingEnabled(false)
-//                .setIntensity(150_000f)
-//                .build();
-
->>>>>>> origin/dev
 
         //星球世界
         anchorNode = new AnchorNode();
         anchorNode.setParent(arFragment.getArSceneView().getScene());
-<<<<<<< HEAD
-=======
-   //     anchorNode.setLight(light);
->>>>>>> origin/dev
 
         andy = new TransformableNode(transformationSystem);
         andy.setParent(anchorNode);
         andy.setRenderable(this.model).animate(true).start();
         andy.setWorldScale(new Vector3(0.3f, 0.3f, 0.3f));
         andy.setLocalPosition(new Vector3(0f, 3.7f, -10.5f));
-<<<<<<< HEAD
         andy.getRenderableInstance().setCulling(false);
-=======
->>>>>>> origin/dev
         // 禁止缩放
         andy.getScaleController().setEnabled(false);
         andy.getRotationController().setEnabled(false);
         andy.getTranslationController().setEnabled(false);
-<<<<<<< HEAD
-=======
-        andy.getRenderableInstance().setCulling(false);
->>>>>>> origin/dev
         andy.select();
 
         //中控台
@@ -633,23 +545,14 @@ public class ArCenterConsoleActivity extends BaseActivity<ArCenterConsolePresent
         andy2 = new TransformableNode(transformationSystem);
         andy2.setParent(anchorNode);
         andy2.setRenderable(this.model2).animate(true).start();
-<<<<<<< HEAD
         andy2.setWorldScale(new Vector3(0.07f, 0.07f, 0.07f));
         andy2.setLocalPosition(new Vector3(0.2f, 0f, -3f));
         andy2.getRenderableInstance().setCulling(false);
-=======
-        andy2.setWorldScale(new Vector3(0.03f, 0.03f, 0.03f));
-        andy2.setLocalPosition(new Vector3(0.2f, -0.5f, -2f));
->>>>>>> origin/dev
 
         // 禁止缩放，没禁止缩放，设置的倍数会失效，自动加载默认的大小
         andy2.getScaleController().setEnabled(false);
         andy2.getRotationController().setEnabled(false);
         andy2.getTranslationController().setEnabled(false);
-<<<<<<< HEAD
-=======
-        andy2.getRenderableInstance().setCulling(false);
->>>>>>> origin/dev
         andy2.select();
 
         andy2.setOnTapListener(new Node.OnTapListener() {
@@ -668,34 +571,20 @@ public class ArCenterConsoleActivity extends BaseActivity<ArCenterConsolePresent
                             andy8 = new TransformableNode(transformationSystem);
                             andy8.setParent(anchorNode);
                             andy8.setRenderable(model8).animate(true).start();
-<<<<<<< HEAD
                             andy8.setWorldScale(new Vector3(0.02f, 0.02f, 0.02f));
                             andy8.setLocalPosition(new Vector3(1.3f, 0f, -2.2f));
                             andy8.getRenderableInstance().setCulling(false);
                             andy8.setLocalRotation(Quaternion.axisAngle(new Vector3(0f, 1f, 0f), -30f));
-=======
-                            andy8.setWorldScale(new Vector3(0.008f, 0.008f, 0.008f));
-                            andy8.setLocalPosition(new Vector3(0.7f, -0.3f, -1.8f));
-                            //     andy8.setLocalRotation(Quaternion.axisAngle(new Vector3(0f, 1f, 0f), -15f));
->>>>>>> origin/dev
                             // 禁止缩放，没禁止缩放，设置的倍数会失效，自动加载默认的大小
                             andy8.getScaleController().setEnabled(false);
                             andy8.getRotationController().setEnabled(false);
                             andy8.getTranslationController().setEnabled(false);
-<<<<<<< HEAD
-=======
-                            andy8.getRenderableInstance().setCulling(false);
->>>>>>> origin/dev
                             andy8.select();
                             andy8.setOnTapListener(new Node.OnTapListener() {
                                 @Override
                                 public void onTap(HitTestResult hitTestResult, MotionEvent motionEvent) {
                                     anchorNode.removeChild(andy8);
-<<<<<<< HEAD
                                     DriftTrackMapActivity.start(ArCenterConsoleActivity.this, 1, 1, 0, false);
-=======
-                                    TopicDetailActivity.start(ArCenterConsoleActivity.this, 1, 1, 0, false);
->>>>>>> origin/dev
                                 }
                             });
                         } else if (type == DriftingPlayDialog.START_SPACE) {//空间站
@@ -709,10 +598,6 @@ public class ArCenterConsoleActivity extends BaseActivity<ArCenterConsolePresent
         });
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/dev
         if (Preferences.isDidAttend()) {
             showAndy9();
         } else {
@@ -736,18 +621,11 @@ public class ArCenterConsoleActivity extends BaseActivity<ArCenterConsolePresent
         andy5.setRenderable(this.model5).animate(true).start();
         andy5.setWorldScale(new Vector3(0.3f, 0.3f, 0.3f));
         andy5.setLocalPosition(new Vector3(0f, -1f, 0f));
-<<<<<<< HEAD
         andy5.getRenderableInstance().setCulling(false);
-=======
->>>>>>> origin/dev
         // 禁止缩放，没禁止缩放，设置的倍数会失效，自动加载默认的大小
         andy5.getScaleController().setEnabled(false);
         andy5.getRotationController().setEnabled(false);
         andy5.getTranslationController().setEnabled(false);
-<<<<<<< HEAD
-=======
-        andy5.getRenderableInstance().setCulling(false);
->>>>>>> origin/dev
         andy5.select();
         andy5.setOnTapListener(new Node.OnTapListener() {
             @Override
@@ -780,20 +658,12 @@ public class ArCenterConsoleActivity extends BaseActivity<ArCenterConsolePresent
                                         andy7 = new TransformableNode(transformationSystem);
                                         andy7.setParent(anchorNode);
                                         andy7.setRenderable(model7).animate(true).start();
-<<<<<<< HEAD
                                         andy7.setLocalPosition(new Vector3(0f, -2f, 0f));
                                         andy7.getRenderableInstance().setCulling(false);
-=======
-                                        andy7.setLocalPosition(new Vector3(-0.5f, -1f, 0f));
->>>>>>> origin/dev
                                         // 禁止缩放，没禁止缩放，设置的倍数会失效，自动加载默认的大小
                                         andy7.getScaleController().setEnabled(false);
                                         andy7.getRotationController().setEnabled(false);
                                         andy7.getTranslationController().setEnabled(false);
-<<<<<<< HEAD
-=======
-                                        andy7.getRenderableInstance().setCulling(false);
->>>>>>> origin/dev
                                         andy7.select();
                                         //移除中控台
                                         addDeleteNode();
@@ -814,18 +684,11 @@ public class ArCenterConsoleActivity extends BaseActivity<ArCenterConsolePresent
         andy3.setRenderable(this.model3).animate(true).start();
         andy3.setWorldScale(new Vector3(0.3f, 0.3f, 0.3f));
         andy3.setLocalPosition(new Vector3(0f, 1f, -15f));
-<<<<<<< HEAD
         andy3.getRenderableInstance().setCulling(false);
-=======
->>>>>>> origin/dev
         // 禁止缩放，没禁止缩放，设置的倍数会失效，自动加载默认的大小
         andy3.getScaleController().setEnabled(false);
         andy3.getRotationController().setEnabled(false);
         andy3.getTranslationController().setEnabled(false);
-<<<<<<< HEAD
-=======
-        andy3.getRenderableInstance().setCulling(false);
->>>>>>> origin/dev
         andy3.select();
         andy3.setOnTapListener(new Node.OnTapListener() {
             @Override
@@ -842,18 +705,11 @@ public class ArCenterConsoleActivity extends BaseActivity<ArCenterConsolePresent
         andy11.setParent(anchorNode);
         andy11.setRenderable(this.model11).animate(true).start();
         andy11.setWorldScale(new Vector3(0.1f, 0.1f, 0.1f));
-<<<<<<< HEAD
         andy11.getRenderableInstance().setCulling(false);
-=======
->>>>>>> origin/dev
         // 禁止缩放，没禁止缩放，设置的倍数会失效，自动加载默认的大小
         andy11.getScaleController().setEnabled(false);
         andy11.getRotationController().setEnabled(false);
         andy11.getTranslationController().setEnabled(false);
-<<<<<<< HEAD
-=======
-        andy11.getRenderableInstance().setCulling(false);
->>>>>>> origin/dev
         andy11.select();
         andy11.setOnTapListener((hitTestResult, motionEvent) -> {
             if (!ClickUtil.isFastClick(motionEvent.getDeviceId())) {
@@ -900,11 +756,7 @@ public class ArCenterConsoleActivity extends BaseActivity<ArCenterConsolePresent
         arSceneView.getScene().addOnUpdateListener(new Scene.OnUpdateListener() {
             @Override
             public void onUpdate(FrameTime frameTime) {
-<<<<<<< HEAD
                 titleNode.setWorldPosition(new Vector3(arSceneView.getScene().getCamera().getWorldPosition().x - 0.3f, arSceneView.getScene().getCamera().getWorldPosition().y - 0.2f, arSceneView.getScene().getCamera().getWorldPosition().z + 0.1f));
-=======
-               titleNode.setWorldPosition(new Vector3(arSceneView.getScene().getCamera().getWorldPosition().x - 0.3f, arSceneView.getScene().getCamera().getWorldPosition().y - 0.2f, arSceneView.getScene().getCamera().getWorldPosition().z + 0.1f));
->>>>>>> origin/dev
             }
         });
     }
@@ -1004,10 +856,7 @@ public class ArCenterConsoleActivity extends BaseActivity<ArCenterConsolePresent
                     mTvIdentity.setText(entity.getData().getUser().getLevel_name());
                     GlideUtil.create().loadLongImage(ArCenterConsoleActivity.this, entity.getData().getUser().getMascot(), mIvMastor);
                     mTvEnergy.setText(userInfoEntity.getUser().getMeta_power());
-<<<<<<< HEAD
                     mTvAboutMe.setText(userInfoEntity.getPlanet().getName());
-=======
->>>>>>> origin/dev
                 } else {
                     mTvNikeName.setText(entity.getData().getUser().getName());
                     GlideUtil.create().loadLongImage(ArCenterConsoleActivity.this, entity.getData().getUser().getMascot(), mIvMastor);
@@ -1190,7 +1039,6 @@ public class ArCenterConsoleActivity extends BaseActivity<ArCenterConsolePresent
 
     }
 
-<<<<<<< HEAD
     @OnClick({R.id.tv_change_mode, R.id.rl_info, R.id.tv_about_me})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
@@ -1203,12 +1051,6 @@ public class ArCenterConsoleActivity extends BaseActivity<ArCenterConsolePresent
                         AboutMeActivity.start(this, userInfoEntity, false);
                     }
                     break;
-=======
-    @OnClick({R.id.tv_change_mode})
-    public void onClick(View view) {
-        if (!ClickUtil.isFastClick(view.getId())) {
-            switch (view.getId()) {
->>>>>>> origin/dev
                 case R.id.iv_find_planet:  //寻找星球
                     if (userInfoEntity != null) {
                         PlanetarySelectActivity.start(this, userInfoEntity.getPlanet().getLevel(), false);
@@ -1422,28 +1264,16 @@ public class ArCenterConsoleActivity extends BaseActivity<ArCenterConsolePresent
             makingTeaDialog.show();
             if (orderOneEntity != null) {
                 makingTeaDialog.setOnClickCallback(type -> {
-<<<<<<< HEAD
                     if (type == MakingTeaDialog.SELECT_CANCEL) { //丢回太空
                         if (mPresenter != null) {
                             mPresenter.orderthrow(orderOneEntity.getSpace_order_id());
                         }
                     } else if (type == MakingTeaDialog.SELECT_FINISH) { //为他制作
-=======
-                    if (type == SelectOrderDialog.SELECT_CANCEL) { //丢回太空
-                        if (mPresenter != null) {
-                            mPresenter.orderthrow(orderOneEntity.getSpace_order_id());
-                        }
-                    } else if (type == SelectOrderDialog.SELECT_FINISH) { //为他制作
->>>>>>> origin/dev
                         makeScheduleDialog = new MakeScheduleDialog(this);
                         makeScheduleDialog.show();
                         makeScheduleDialog.setCancelable(false);
                         makeScheduleDialog.setOnClickCallback(type1 -> {
-<<<<<<< HEAD
                             if (type1 == MakingTeaDialog.SELECT_FINISH) {
-=======
-                            if (type1 == SelectOrderDialog.SELECT_FINISH) {
->>>>>>> origin/dev
                                 if (mPresenter != null) {
                                     mPresenter.ordermaking(orderOneEntity.getSpace_order_id());
                                 }
@@ -1586,10 +1416,6 @@ public class ArCenterConsoleActivity extends BaseActivity<ArCenterConsolePresent
                 andy10.getScaleController().setEnabled(false);
                 andy10.getRotationController().setEnabled(false);
                 andy10.getTranslationController().setEnabled(false);
-<<<<<<< HEAD
-=======
-                andy10.getRenderableInstance().setCulling(false);
->>>>>>> origin/dev
                 andy10.select();
 
                 //移除中控台
@@ -1725,10 +1551,6 @@ public class ArCenterConsoleActivity extends BaseActivity<ArCenterConsolePresent
         andy9.getScaleController().setEnabled(false);
         andy9.getRotationController().setEnabled(false);
         andy9.getTranslationController().setEnabled(false);
-<<<<<<< HEAD
-=======
-        andy9.getRenderableInstance().setCulling(false);
->>>>>>> origin/dev
         andy9.select();
     }
 
@@ -1758,10 +1580,7 @@ public class ArCenterConsoleActivity extends BaseActivity<ArCenterConsolePresent
     @Override
     public void onResume() {
         super.onResume();
-<<<<<<< HEAD
         RongIM.getInstance().addUnReadMessageCountChangedObserver(observer, Conversation.ConversationType.PRIVATE);
-=======
->>>>>>> origin/dev
         if (handlerReciver != null) {
             handlerReciver.postDelayed(mAdRunnable, 1000);
         }
@@ -1770,7 +1589,6 @@ public class ArCenterConsoleActivity extends BaseActivity<ArCenterConsolePresent
         }
     }
 
-<<<<<<< HEAD
     /**
      * 未读消息监听回调
      *
@@ -1798,8 +1616,6 @@ public class ArCenterConsoleActivity extends BaseActivity<ArCenterConsolePresent
 
     }
 
-=======
->>>>>>> origin/dev
     @Override
     protected void onPause() {
         super.onPause();
@@ -1841,12 +1657,9 @@ public class ArCenterConsoleActivity extends BaseActivity<ArCenterConsolePresent
     }
 
     public void removeHandler() {
-<<<<<<< HEAD
         //移除监听，防止内存泄漏
         RongIM.getInstance().removeUnReadMessageCountChangedObserver(observer);
 
-=======
->>>>>>> origin/dev
         if (handlerReciver != null) {
             handlerReciver.removeCallbacks(mAdRunnable);
         }

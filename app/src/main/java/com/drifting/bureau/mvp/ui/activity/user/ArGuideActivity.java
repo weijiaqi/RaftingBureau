@@ -10,14 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.drifting.bureau.R;
-<<<<<<< HEAD
 import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.mvp.ui.activity.home.ArCenterConsoleActivity;
-=======
-import com.drifting.bureau.base.BaseActivity;
-import com.drifting.bureau.mvp.ui.activity.home.ArCenterConsoleActivity;
-import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
->>>>>>> origin/dev
 import com.drifting.bureau.util.ARCoreUtil;
 import com.drifting.bureau.util.ClickUtil;
 import com.jess.arms.di.component.AppComponent;
@@ -29,11 +23,7 @@ import butterknife.OnClick;
  * @Author : WeiJiaQI
  * @Time : 2022/8/23 17:43
  */
-<<<<<<< HEAD
 public class ArGuideActivity extends BaseManagerActivity {
-=======
-public class ArGuideActivity extends BaseActivity {
->>>>>>> origin/dev
 
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, ArGuideActivity.class);

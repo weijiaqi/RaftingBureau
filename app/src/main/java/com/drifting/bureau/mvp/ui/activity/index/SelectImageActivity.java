@@ -11,11 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.drifting.bureau.R;
-<<<<<<< HEAD
 import com.drifting.bureau.base.BaseManagerActivity;
-=======
-import com.drifting.bureau.base.BaseActivity;
->>>>>>> origin/dev
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.GlideUtil;
 import com.jess.arms.di.component.AppComponent;
@@ -29,11 +25,7 @@ import io.rong.imkit.picture.photoview.PhotoView;
  * @Author : WeiJiaQI
  * @Time : 2022/7/12 15:37
  */
-<<<<<<< HEAD
 public class SelectImageActivity extends BaseManagerActivity {
-=======
-public class SelectImageActivity extends BaseActivity {
->>>>>>> origin/dev
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
     @BindView(R.id.photo_view)

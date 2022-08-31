@@ -140,11 +140,6 @@ public class TopicDetailPresenter extends BasePresenter<TopicDetailContract.Mode
     }
 
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> origin/dev
     //发送漂流信息
     public  void createwithword(int type, int explore_id, String content, int message_id, File path, File voice, File image) {
 
@@ -264,10 +259,6 @@ public class TopicDetailPresenter extends BasePresenter<TopicDetailContract.Mode
      * 查看评论或话题详情
      */
     public void details(int log_id, int level, int user_id) {
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/dev
         mModel.details(log_id, level, user_id).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))

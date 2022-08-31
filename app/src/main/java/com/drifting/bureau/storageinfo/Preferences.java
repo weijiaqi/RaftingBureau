@@ -117,7 +117,6 @@ public class Preferences {
     }
 
 
-<<<<<<< HEAD
     //用户所在城市
     public static void saveCity(String lat) {
         saveString(KEY_USER_CITY, lat);
@@ -131,8 +130,6 @@ public class Preferences {
 
 
 
-=======
->>>>>>> origin/dev
     //用户第一次注册昵称
     public static void saveUserName(String name) {
         saveString(KEY_USER_NAME, name);

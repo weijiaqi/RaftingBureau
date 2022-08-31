@@ -4,13 +4,8 @@ ext {
             compileSdkVersion: 32,
             minSdkVersion    : 24,
             targetSdkVersion : 28,
-<<<<<<< HEAD
             versionCode      : 7,
             versionName      : "1.0.7"
-=======
-            versionCode      : 6,
-            versionName      : "1.0.6"
->>>>>>> origin/dev
     ]
 
     version = [

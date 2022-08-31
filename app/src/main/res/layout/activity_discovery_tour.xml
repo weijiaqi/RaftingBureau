@@ -43,11 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-<<<<<<< HEAD
             android:text="转换AR场景"
-=======
-            android:text="还没找到宜居星球？"
->>>>>>> origin/dev
             android:textColor="@color/white"
             android:textSize="11sp" />
     </LinearLayout>

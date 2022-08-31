@@ -17,10 +17,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
 import com.drifting.bureau.R;
-<<<<<<< HEAD
-=======
-import com.drifting.bureau.data.event.VideoEvent;
->>>>>>> origin/dev
 import com.drifting.bureau.data.event.WithdrawEvent;
 import com.drifting.bureau.di.component.DaggerMySpaceStationComponent;
 import com.drifting.bureau.mvp.contract.MySpaceStationContract;
@@ -36,11 +32,7 @@ import com.drifting.bureau.mvp.ui.dialog.MakingTeaDialog;
 import com.drifting.bureau.mvp.ui.dialog.MySpaceStationDialog;
 import com.drifting.bureau.mvp.ui.dialog.MyTreasuryDialog;
 import com.drifting.bureau.mvp.ui.dialog.PublicDialog;
-<<<<<<< HEAD
 
-=======
-import com.drifting.bureau.mvp.ui.dialog.SelectOrderDialog;
->>>>>>> origin/dev
 import com.drifting.bureau.mvp.ui.dialog.ShareDialog;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
@@ -49,12 +41,7 @@ import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.request.RequestUtil;
-<<<<<<< HEAD
 import com.drifting.bureau.base.BaseManagerActivity;
-=======
-import com.jess.arms.base.BaseActivity;
-import com.jess.arms.base.BaseDialog;
->>>>>>> origin/dev
 import com.jess.arms.di.component.AppComponent;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -70,16 +57,9 @@ import butterknife.OnClick;
  * @author 我的空间站
  * module name is MySpaceStationActivity
  */
-<<<<<<< HEAD
 public class MySpaceStationActivity extends BaseManagerActivity<MySpaceStationPresenter> implements MySpaceStationContract.View {
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
-=======
-public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter> implements MySpaceStationContract.View {
-    @BindView(R.id.toolbar_title)
-    TextView mToolbarTitle;
-
->>>>>>> origin/dev
     @BindView(R.id.iv_pic)
     ImageView mIvPic;
     @BindView(R.id.tv_levle_name)
@@ -98,11 +78,7 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
     TextView mTvNotData;
     @BindView(R.id.tv_timeliness)
     TextView mTvTimeLine;
-<<<<<<< HEAD
 
-=======
-    private SelectOrderDialog selectOrderDialog;
->>>>>>> origin/dev
     private MakeScheduleDialog makeScheduleDialog;
     private PublicDialog publicDialog;
     private MyTreasuryDialog myTreasuryDialog;
@@ -262,55 +238,20 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
     }
 
 
+
+
     public void setOrderGone(boolean type) {
         mLlContent.setVisibility(type ? View.GONE : View.VISIBLE);
         mTvNotData.setVisibility(type ? View.VISIBLE : View.GONE);
     }
 
-<<<<<<< HEAD
-=======
-    @Override
-    public void onOrderDetailSuccess(OrderDetailEntity entity) {
-        if (entity != null) {
-            selectOrderDialog = new SelectOrderDialog(this, userInfoEntity, entity);
-            selectOrderDialog.show();
-            selectOrderDialog.setOnClickCallback(type -> {
-                if (type == SelectOrderDialog.SELECT_CANCEL) { //丢回太空
-                    if (mPresenter != null) {
-                        mPresenter.orderthrow(entity.getSpace_order_id());
-                    }
-                } else if (type == SelectOrderDialog.SELECT_FINISH) { //为他制作
-                    makeScheduleDialog = new MakeScheduleDialog(this);
-                    makeScheduleDialog.show();
-                    makeScheduleDialog.setCancelable(false);
-                    makeScheduleDialog.setOnClickCallback(type1 -> {
-                        if (type1 == SelectOrderDialog.SELECT_FINISH) {
-                            if (mPresenter != null) {
-                                mPresenter.ordermaking(entity.getSpace_order_id());
-                            }
-                        }
-                    });
-                }
-            });
-        }
-    }
->>>>>>> origin/dev
 
     @Override
     public void onUserInfoSuccess(int type, UserInfoEntity entity) {
         if (entity != null & entity.getUser() != null) {
             userInfoEntity = entity;
-<<<<<<< HEAD
             shareDialog = new ShareDialog(this, userInfoEntity);
             shareDialog.show();
-=======
-            if (type == 1) {
-                mPresenter.orderdetail(orderOneEntity.getSpace_order_id());
-            } else {
-                shareDialog = new ShareDialog(this, userInfoEntity);
-                shareDialog.show();
-            }
->>>>>>> origin/dev
         }
     }
 
@@ -321,28 +262,16 @@ public class MySpaceStationActivity extends BaseActivity<MySpaceStationPresenter
             makingTeaDialog.show();
             if (orderOneEntity != null) {
                 makingTeaDialog.setOnClickCallback(type -> {
-<<<<<<< HEAD
                     if (type == MakingTeaDialog.SELECT_CANCEL) { //丢回太空
                         if (mPresenter != null) {
                             mPresenter.orderthrow(orderOneEntity.getSpace_order_id());
                         }
                     } else if (type == MakingTeaDialog.SELECT_FINISH) { //为他制作
-=======
-                    if (type == SelectOrderDialog.SELECT_CANCEL) { //丢回太空
-                        if (mPresenter != null) {
-                            mPresenter.orderthrow(orderOneEntity.getSpace_order_id());
-                        }
-                    } else if (type == SelectOrderDialog.SELECT_FINISH) { //为他制作
->>>>>>> origin/dev
                         makeScheduleDialog = new MakeScheduleDialog(this);
                         makeScheduleDialog.show();
                         makeScheduleDialog.setCancelable(false);
                         makeScheduleDialog.setOnClickCallback(type1 -> {
-<<<<<<< HEAD
                             if (type1 == MakingTeaDialog.SELECT_FINISH) {
-=======
-                            if (type1 == SelectOrderDialog.SELECT_FINISH) {
->>>>>>> origin/dev
                                 if (mPresenter != null) {
                                     mPresenter.ordermaking(orderOneEntity.getSpace_order_id());
                                 }

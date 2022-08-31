@@ -48,16 +48,10 @@ import top.zibin.luban.OnCompressListener;
  * @Time : 2022/7/11 10:54
  */
 public class ReleaseDriftingDialog extends BaseDialog implements View.OnClickListener {
-<<<<<<< HEAD
     private LinearLayout mLlStarrySky, mLlParticipate, mLlJoin;
     private RelativeLayout mRlVoicePlay;
     private ShapeLinearLayout mLlImprint;
     private ImageView mIvReleaseCamera, mIvRelaseRecording, mIvPlay, mIvVideoPlay, mIvPic, mIvReport;
-=======
-    private LinearLayout mRlVoicePlay, mLlStarrySky, mLlParticipate, mLlJoin;
-    private ShapeLinearLayout mLlImprint;
-    private ImageView mIvReleaseCamera, mIvRelaseRecording, mIvVoiceDelete, mIvPlay, mIvVideoPlay, mIvPic, mIvReport;
->>>>>>> origin/dev
     private RecordingDialog recordingDialog;
     private ReportDialog reportDialog;
     private RelativeLayout mRlVideoPlay, mRlStartVoice;
@@ -104,11 +98,7 @@ public class ReleaseDriftingDialog extends BaseDialog implements View.OnClickLis
         mIvRelaseRecording = findViewById(R.id.iv_release_recording);
         mTvTime = findViewById(R.id.tv_time);
         mVideoView = findViewById(R.id.videoView);
-<<<<<<< HEAD
 
-=======
-        mIvVoiceDelete = findViewById(R.id.iv_voice_delete);
->>>>>>> origin/dev
         mRlStartVoice = findViewById(R.id.rl_start_voice);
         mIvPlay = findViewById(R.id.iv_play);
         mRlVideoPlay = findViewById(R.id.rl_video_play);
@@ -135,11 +125,7 @@ public class ReleaseDriftingDialog extends BaseDialog implements View.OnClickLis
         mRlStartVoice.setOnClickListener(this);
         mIvReleaseCamera.setOnClickListener(this);
         mIvRelaseRecording.setOnClickListener(this);
-<<<<<<< HEAD
 
-=======
-        mIvVoiceDelete.setOnClickListener(this);
->>>>>>> origin/dev
         mRlVideoPlay.setOnClickListener(this);
         mLlStarrySky.setOnClickListener(this);
         mLlParticipate.setOnClickListener(this);
@@ -180,11 +166,7 @@ public class ReleaseDriftingDialog extends BaseDialog implements View.OnClickLis
             }
             if (!TextUtils.isEmpty(commentDetailsEntity.getAudio())) {//语音
                 mRlVoicePlay.setVisibility(View.VISIBLE);
-<<<<<<< HEAD
 
-=======
-                mIvVoiceDelete.setVisibility(View.GONE);
->>>>>>> origin/dev
                 totaltime = VideoUtil.getLocalVideoDuration(commentDetailsEntity.getAudio());
                 mTvTime.setText(totaltime + "S");
                 mVideoView.setDecibel(0);
@@ -279,14 +261,7 @@ public class ReleaseDriftingDialog extends BaseDialog implements View.OnClickLis
                     PermissionDialog.startVoicePlay((Activity) context, commentDetailsEntity.getAudio(), totaltime, mIvPlay, mVideoView, mTvTime);
                 }
                 break;
-<<<<<<< HEAD
 
-=======
-            case R.id.iv_voice_delete: //删除语音播放
-                type = -1;
-                deleteVoice();
-                break;
->>>>>>> origin/dev
             case R.id.rl_video_play:  //视频播放
                 if (status == 2) {  //查看
                     if (!TextUtils.isEmpty(commentDetailsEntity.getVedio())) {
@@ -308,11 +283,7 @@ public class ReleaseDriftingDialog extends BaseDialog implements View.OnClickLis
                     return;
                 }
                 if (onStarrySkyClickCallback != null) {
-<<<<<<< HEAD
                     onStarrySkyClickCallback.onStarrySkyClick(type, mEtWord.getText().toString(), path, objectList, cover,"");
-=======
-                    onStarrySkyClickCallback.onStarrySkyClick(type, mEtWord.getText().toString(), path, objectList, cover);
->>>>>>> origin/dev
                 }
                 break;
             case R.id.ll_join:
@@ -360,11 +331,7 @@ public class ReleaseDriftingDialog extends BaseDialog implements View.OnClickLis
                     objectList = list;
                     if (objectList.size() > 0) {
                         mRlVoicePlay.setVisibility(View.VISIBLE);
-<<<<<<< HEAD
 
-=======
-                        mIvVoiceDelete.setVisibility(View.VISIBLE);
->>>>>>> origin/dev
                         mTvTime.setText(objectList.get(1).toString() + "S");
                         mVideoView.setDecibel(0);
                         if (!TextUtils.isEmpty(path)) {

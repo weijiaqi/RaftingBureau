@@ -8,7 +8,6 @@
         android:layout_height="match_parent" />
 
     <include layout="@layout/include_ar_title" />
-<<<<<<< HEAD
 
     <RelativeLayout
         android:id="@+id/rl_info"
@@ -58,6 +57,4 @@
         android:text=""
         android:textColor="@color/white"
         android:textSize="12sp" />
-=======
->>>>>>> origin/dev
 </RelativeLayout>

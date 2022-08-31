@@ -27,13 +27,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.drifting.bureau.R;
-<<<<<<< HEAD
 import com.drifting.bureau.base.BaseManagerActivity;
-=======
-import com.drifting.bureau.base.BaseActivity;
-import com.drifting.bureau.mvp.model.entity.PlanetArEntity;
-import com.drifting.bureau.mvp.ui.activity.index.PlanetaryDetailActivity;
->>>>>>> origin/dev
 import com.drifting.bureau.mvp.ui.activity.index.ar.ARActivity;
 import com.drifting.bureau.mvp.ui.activity.web.ShowWebViewActivity;
 import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
@@ -45,17 +39,9 @@ import com.drifting.bureau.util.NotificationUtil;
 import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.animator.AnimatorUtil;
-<<<<<<< HEAD
 import com.drifting.bureau.util.downloadutil.DownloadRequest;
 import com.drifting.bureau.util.manager.NotificationManager;
 import com.drifting.bureau.util.request.RequestUtil;
-=======
-import com.drifting.bureau.util.callback.BaseDataCallBack;
-import com.drifting.bureau.util.downloadutil.DownloadRequest;
-import com.drifting.bureau.util.manager.NotificationManager;
-import com.drifting.bureau.util.request.RequestUtil;
-import com.jess.arms.base.BaseEntity;
->>>>>>> origin/dev
 import com.jess.arms.di.component.AppComponent;
 
 import java.io.File;
@@ -68,11 +54,7 @@ import butterknife.OnClick;
  * @Author : WeiJiaQI
  * @Time : 2022/7/26 14:28
  */
-<<<<<<< HEAD
 public class PullNewGuideActivity extends BaseManagerActivity {
-=======
-public class PullNewGuideActivity extends BaseActivity {
->>>>>>> origin/dev
     @BindView(R.id.tv_protocol)
     TextView mTvProtocol;
     @BindView(R.id.ck_protocol)
