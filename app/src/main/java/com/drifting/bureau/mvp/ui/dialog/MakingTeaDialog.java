@@ -3,6 +3,7 @@ package com.drifting.bureau.mvp.ui.dialog;
 import android.app.Activity;
 import android.content.Context;
 import android.text.TextUtils;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,9 +26,9 @@ import com.jess.arms.base.BaseDialog;
  */
 
 public class MakingTeaDialog extends BaseDialog implements View.OnClickListener {
-    private ImageView mIvPlay, mIvVideoPlay, mIvPic, mIvVideo;
+    private ImageView mIvPlay, mIvVideoPlay, mIvPic, mIvVideo, mIvRecording;
     private VoiceWave mVideoView;
-    private TextView mTvTime, mTvLeaveSpace, mTvMadeForHim, mTvWord,mTvTip;
+    private TextView mTvTime, mTvLeaveSpace, mTvMadeForHim, mTvWord, mTvTip, mTvAddTopic;
     private CommentDetailsEntity orderDetailEntity;
     private RelativeLayout mRlVideoPlay, mRlStartVoice, mRlVoicePlay;
     private Context context;
@@ -52,7 +53,7 @@ public class MakingTeaDialog extends BaseDialog implements View.OnClickListener 
         super.initView();
         mTvWord = findViewById(R.id.tv_word);
         mIvPlay = findViewById(R.id.iv_play);
-
+        mTvAddTopic = findViewById(R.id.tv_add_topic);
         mIvVideoPlay = findViewById(R.id.iv_video_play);
         mIvPic = findViewById(R.id.iv_pic);
         mVideoView = findViewById(R.id.videoView);
@@ -63,7 +64,8 @@ public class MakingTeaDialog extends BaseDialog implements View.OnClickListener 
         mRlVideoPlay = findViewById(R.id.rl_video_play);
         mRlStartVoice = findViewById(R.id.rl_start_voice);
         mIvVideo = findViewById(R.id.iv_video);
-        mTvTip= findViewById(R.id.tv_tip);
+        mTvTip = findViewById(R.id.tv_tip);
+        mIvRecording = findViewById(R.id.iv_recording);
     }
 
 
@@ -76,33 +78,36 @@ public class MakingTeaDialog extends BaseDialog implements View.OnClickListener 
         mRlVideoPlay.setOnClickListener(this);
         mRlStartVoice.setOnClickListener(this);
 
-        if (!TextUtils.isEmpty(orderDetailEntity.getContent())) {  //判断文字不为空
-            mTvWord.setVisibility(View.VISIBLE);
-            mTvWord.setText(orderDetailEntity.getContent());
-        }
-
-        if (!TextUtils.isEmpty(orderDetailEntity.getAlbum())) {  //图片
-            mRlVideoPlay.setVisibility(View.VISIBLE);
-            mIvVideo.setVisibility(View.GONE);
-            GlideUtil.create().loadLongImage(context, orderDetailEntity.getAlbum(), mIvPic);
+        if (!TextUtils.isEmpty(orderDetailEntity.getTag_name())) {
+            mTvAddTopic.setVisibility(View.VISIBLE);
+            mTvAddTopic.setText("#"+orderDetailEntity.getTag_name());
+        } else {
+            mTvAddTopic.setVisibility(View.GONE);
         }
 
         if (!TextUtils.isEmpty(orderDetailEntity.getImage())) {  //视频
             mRlVideoPlay.setVisibility(View.VISIBLE);
             mIvVideoPlay.setVisibility(View.VISIBLE);
+            mIvVideo.setVisibility(View.INVISIBLE);
             GlideUtil.create().loadLongImage(context, orderDetailEntity.getImage(), mIvPic);
-        }
-
-        if (!TextUtils.isEmpty(orderDetailEntity.getAudio())) { //语音
+        } else if (!TextUtils.isEmpty(orderDetailEntity.getAudio())) { //语音
             mRlVoicePlay.setVisibility(View.VISIBLE);
             mTvTip.setVisibility(View.GONE);
             mVideoView.setVisibility(View.VISIBLE);
             mIvPlay.setVisibility(View.VISIBLE);
+            mIvRecording.setVisibility(View.INVISIBLE);
             totaltime = VideoUtil.getLocalVideoDuration(orderDetailEntity.getAudio());
             mTvTime.setText(totaltime + "S");
             mVideoView.setDecibel(0);
+        } else if (!TextUtils.isEmpty(orderDetailEntity.getAlbum())) {  //图片
+            mRlVideoPlay.setVisibility(View.VISIBLE);
+            mIvVideo.setVisibility(View.INVISIBLE);
+            GlideUtil.create().loadLongImage(context, orderDetailEntity.getAlbum(), mIvPic);
+        } else if (!TextUtils.isEmpty(orderDetailEntity.getContent())) {  //判断文字不为空
+            mTvWord.setVisibility(View.VISIBLE);
+            mTvWord.setMovementMethod(ScrollingMovementMethod.getInstance());
+            mTvWord.setText(orderDetailEntity.getContent());
         }
-
     }
 
     @Override

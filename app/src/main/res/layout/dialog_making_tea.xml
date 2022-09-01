@@ -4,7 +4,6 @@
     android:layout_width="302dp"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
-
     android:background="@drawable/release_drifting_bg"
     android:orientation="vertical">
 
@@ -36,19 +35,21 @@
         <TextView
             android:id="@+id/tv_word"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="match_parent"
             android:layout_below="@+id/tv_title"
             android:layout_marginTop="14dp"
+            android:layout_marginBottom="70dp"
             android:background="@null"
             android:gravity="top"
             android:hint="请在这里输入你想要发送的漂流信息。"
             android:lineSpacingExtra="5dp"
             android:paddingHorizontal="10dp"
+            android:text=""
             android:textColor="@color/white"
             android:textColorHint="@color/color_2e"
             android:textSize="12sp"
             android:visibility="gone"
-            />
+             />
 
         <include
             android:id="@+id/rl_voice_play"
@@ -56,8 +57,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginBottom="70dp"
             android:visibility="gone" />
 
 
@@ -66,25 +67,36 @@
             layout="@layout/include_video_play"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_title"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginHorizontal="25dp"
+            android:layout_marginBottom="70dp"
             android:visibility="gone" />
 
-
-
-
+        <com.hjq.shape.view.ShapeTextView
+            android:id="@+id/tv_add_topic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="12dp"
+            android:layout_marginBottom="40dp"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="3dp"
+            android:text="#添加话题"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            app:shape_radius="100dp"
+            app:shape_solidColor="@color/color_1a2" />
 
     </com.hjq.shape.layout.ShapeRelativeLayout>
-
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginEnd="35dp"
-        android:layout_marginTop="25dp">
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="35dp">
 
         <com.hjq.shape.view.ShapeTextView
             android:id="@+id/tv_leave_space"
@@ -114,9 +126,6 @@
             app:shape_startColor="@color/color_6c" />
 
     </RelativeLayout>
-
-
-
 
 
 </LinearLayout>

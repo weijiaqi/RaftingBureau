@@ -145,11 +145,10 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
             toggleIcon(2);
         } else { //查看
             mTvTitle.setText("查看Ta的故事~~");
-
             if (!TextUtils.isEmpty(commentDetailsEntity.getTag_name())) {
                 mTvAddTopic.setVisibility(View.VISIBLE);
                 tag = commentDetailsEntity.getTag();
-                mTvAddTopic.setText(commentDetailsEntity.getTag_name());
+                mTvAddTopic.setText("#"+commentDetailsEntity.getTag_name());
             } else {
                 mTvAddTopic.setVisibility(View.GONE);
             }
@@ -301,7 +300,7 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
                     break;
                 case R.id.ll_imprint:  //留下你的飘来印记
                     status = 3;
-                    mTvTitle.setText("发送漂流~~");
+                    mTvTitle.setText("留下我的故事~~");
                     mLlImprint.setVisibility(View.GONE);
                     mLlStarrySky.setVisibility(View.VISIBLE);
                     mIvReport.setVisibility(View.GONE);

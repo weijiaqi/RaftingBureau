@@ -5,10 +5,10 @@
 
     <RelativeLayout
         android:id="@+id/rl_video"
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
+        android:layout_height="123dp"
         android:layout_centerHorizontal="true"
-        android:layout_height="123dp">
+        android:layout_marginTop="10dp">
 
         <ImageView
             android:id="@+id/iv_pic"
@@ -19,11 +19,11 @@
 
         <ImageView
             android:id="@+id/iv_video_play"
-            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:src="@drawable/video_play" />
+            android:src="@drawable/video_play"
+            android:visibility="gone" />
     </RelativeLayout>
 
 

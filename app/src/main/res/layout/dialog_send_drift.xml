@@ -39,9 +39,11 @@
                 layout="@layout/include_voice_play"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_title"
+                android:layout_alignParentBottom="true"
                 android:layout_marginHorizontal="25dp"
-                android:visibility="gone" />
+                android:layout_marginBottom="70dp"
+                android:visibility="gone"
+               />
 
 
             <include
@@ -49,18 +51,21 @@
                 layout="@layout/include_video_play"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_title"
+                android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginHorizontal="25dp"
+                android:layout_marginBottom="70dp"
                 android:visibility="gone" />
+
 
 
             <EditText
                 android:id="@+id/et_word"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="match_parent"
                 android:layout_below="@+id/tv_title"
                 android:layout_marginTop="14dp"
+                android:layout_marginBottom="70dp"
                 android:background="@null"
                 android:gravity="top"
                 android:hint="请在这里输入你想要发送的漂流信息。"
@@ -68,8 +73,8 @@
                 android:paddingHorizontal="10dp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/color_2e"
-                android:textSize="12sp"
-                android:visibility="gone" />
+                android:visibility="gone"
+                android:textSize="12sp" />
 
 
             <com.hjq.shape.view.ShapeTextView
