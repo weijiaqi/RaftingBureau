@@ -125,11 +125,10 @@
         <activity
             android:name=".mvp.ui.activity.user.AboutMeActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".mvp.ui.activity.index.DriftingBottleActivity"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name=".mvp.ui.activity.index.VideoActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait" />
         <activity
             android:name=".mvp.ui.activity.index.VideoRecordingActivity"
@@ -143,12 +142,7 @@
         <activity
             android:name=".mvp.ui.activity.user.SetUpActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".mvp.ui.activity.index.ViewRaftingActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".mvp.ui.activity.index.RaftingDetailsActivity"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name=".mvp.ui.activity.index.DeliveryDetailsActivity"
             android:screenOrientation="portrait" />

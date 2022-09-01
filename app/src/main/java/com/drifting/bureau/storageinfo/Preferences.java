@@ -23,16 +23,10 @@ public class Preferences {
     private static final String KEY_USER_ID = "user_id";
     private static final String KEY_USER_MASCOT = "user_mascot";
     private static final String KEY_USER_PASSWORD = "user_password";
-
     private static final String KEY_USER_CITY= "user_city";
-
-
     private static final String KEY_USER_IS_ANONY = "isanony";//是否为匿名状态
-
     private static final String KEY_USER_IS_ARMODEL = "isarmodel";//是否为AR模式
-
     private static final String KEY_USER_IS_DIDATTEND = "isdidAttend";//是否参与过漂流
-
     public static final String KEY_IS_TEST = "isTest"; //是不是测试环境
 
     /**
@@ -86,7 +80,6 @@ public class Preferences {
             saveString(KEY_USER_IS_ARMODEL, 0 + "");
         }
     }
-
 
 
     /**

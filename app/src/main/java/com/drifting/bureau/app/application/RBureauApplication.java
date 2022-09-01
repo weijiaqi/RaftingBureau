@@ -4,13 +4,10 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.util.Log;
-
 import androidx.annotation.NonNull;
-
 import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.model.LatLng;
-import com.danikula.videocache.HttpProxyCacheServer;
 import com.drifting.bureau.R;
 import com.drifting.bureau.app.RBConstant;
 import com.drifting.bureau.app.api.Api;
@@ -18,9 +15,7 @@ import com.drifting.bureau.mvp.ui.activity.SplashActivity;
 import com.drifting.bureau.mvp.ui.activity.error.CustomErrorActivity;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.AppUtil;
-import com.drifting.bureau.util.FileGenerator;
 import com.drifting.bureau.util.RongIMUtil;
-import com.drifting.bureau.util.ToastUtil;
 import com.hjq.toast.ToastUtils;
 import com.jess.arms.base.App;
 import com.jess.arms.base.BaseApplication;
@@ -36,12 +31,9 @@ import com.scwang.smart.refresh.layout.api.RefreshHeader;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.DefaultRefreshFooterCreator;
 import com.scwang.smart.refresh.layout.listener.DefaultRefreshHeaderCreator;
-import com.star.core.BuildConfig;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.umeng.commonsdk.UMConfigure;
-
 import java.util.Locale;
-
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
 import cat.ereza.customactivityoncrash.config.CaocConfig;
 import me.jessyan.autosize.AutoSize;
@@ -55,7 +47,6 @@ public class RBureauApplication extends Application implements App {
     private AppLifecycles mAppDelegate;
     private static Context mContext;
     private static String TAG = "RBureauApplication";
-    private HttpProxyCacheServer proxy;
     public static boolean isForeground = false;
     public static LatLng latLng ;
     /**
@@ -242,18 +233,6 @@ public class RBureauApplication extends Application implements App {
 
     }
 
-
-    public static HttpProxyCacheServer getProxy(Context context) {
-        RBureauApplication app = (RBureauApplication) context.getApplicationContext();
-        return app.proxy == null ? (app.proxy = app.newProxy()) : app.proxy;
-    }
-
-    private HttpProxyCacheServer newProxy() {
-        return new HttpProxyCacheServer.Builder(this)
-                .maxCacheSize(1024 * 1024 * 1024)       // 1 Gb for cache
-                .fileNameGenerator(new FileGenerator())
-                .build();
-    }
 
 
     /**

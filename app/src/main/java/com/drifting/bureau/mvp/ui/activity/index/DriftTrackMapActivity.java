@@ -326,8 +326,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
             mTvShopNo.setVisibility(View.INVISIBLE);
             mTvShopNo.setText("（" + messagePathBeanList.get(index).getShop_no() + "）");
         }
-
-        mInfoWindow = new InfoWindow(view, latLng, -80);
+        mInfoWindow = new InfoWindow(view,   latLng, -80);
         infoWindowList.add(mInfoWindow);
         mTvReceiveTime.setOnClickListener(v -> {
             showDetails(postion);

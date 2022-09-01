@@ -41,6 +41,7 @@ import com.drifting.bureau.mvp.presenter.DiscoveryTourPresenter;
 import com.drifting.bureau.mvp.ui.activity.index.DriftTrackMapActivity;
 import com.drifting.bureau.mvp.ui.activity.index.PlanetarySelectActivity;
 import com.drifting.bureau.mvp.ui.activity.index.SpaceCapsuleActivity;
+import com.drifting.bureau.mvp.ui.activity.index.VideoActivity;
 import com.drifting.bureau.mvp.ui.activity.user.AboutMeActivity;
 import com.drifting.bureau.mvp.ui.activity.user.MessageCenterActivity;
 import com.drifting.bureau.mvp.ui.activity.web.ShowWebViewActivity;

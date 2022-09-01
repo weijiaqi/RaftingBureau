@@ -52,7 +52,7 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
     private ImageView mIvReleaseCamera, mIvReleaseRecording, mIvReleaseWord, mIvRecording, mIvPlay, mIvVideo, mIvVideoPlay, mIvPic, mIvReport;
     private TextView mTvTip, mTvTime, mTvAddTopic, mTvTitle, mTvParticipate, mTvIntoSpace, mTvNums, mTvByTime, mTvImprint;
     private EditText mEtWord;
-    private RelativeLayout mRlVoicePlay, mRlViedeoPlay;
+    private RelativeLayout mRlVoicePlay, mRlViedeoPlay,mRlStartVoice;
     private LinearLayout mLlStarrySky, mLlBottom, mLlParticipate, mLlJoin;
     private ShapeLinearLayout mLlImprint;
     private VoiceWave mVideoView;
@@ -119,6 +119,7 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
         mTvByTime = findViewById(R.id.tv_by_time);
         mTvImprint = findViewById(R.id.tv_imprint);
         mLlImprint = findViewById(R.id.ll_imprint);
+        mRlStartVoice= findViewById(R.id.rl_start_voice);
     }
 
     @Override
@@ -128,7 +129,7 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
         mIvReleaseRecording.setOnClickListener(this);
         mIvReleaseWord.setOnClickListener(this);
         mIvRecording.setOnClickListener(this);
-        mIvPlay.setOnClickListener(this);
+
         mIvVideo.setOnClickListener(this);
         mLlStarrySky.setOnClickListener(this);
         mIvPic.setOnClickListener(this);
@@ -138,6 +139,7 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
         mIvReport.setOnClickListener(this);
         mLlImprint.setOnClickListener(this);
         mTvIntoSpace.setOnClickListener(this);
+        mRlStartVoice.setOnClickListener(this);
         if (status == 1) {  //编辑
             mIvReport.setVisibility(View.GONE);
             mLlStarrySky.setVisibility(View.VISIBLE);
@@ -244,7 +246,7 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
                 case R.id.iv_recording:  //录音
                     startVocie();
                     break;
-                case R.id.iv_play: //语音播放
+                case R.id.rl_start_voice: //语音播放
                     if (status == 1 || status == 3) {
                         if (objectList != null) {
                             VideoUtil.startVoicePlay(objectList.get(0).toString(), objectList.get(1), mIvPlay, mVideoView, mTvTime);
