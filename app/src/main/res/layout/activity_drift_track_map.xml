@@ -250,7 +250,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="4dp"
                 android:text="来自荒芜星"
-                android:textColor="@color/color_6ce"
+                android:textColor="@color/color_e7"
                 android:textSize="11sp" />
         </RelativeLayout>
 
@@ -314,6 +314,9 @@
         </LinearLayout>
 
     </RelativeLayout>
+
+
+
 
 
 </RelativeLayout>

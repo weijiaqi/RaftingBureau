@@ -86,12 +86,7 @@ public class VersionUpdateDialog extends BaseDialog implements View.OnClickListe
         mIvColse.setOnClickListener(this);
         mTvUpload.setOnClickListener(this);
         setCanceledOnTouchOutside(false);
-        setOnKeyListener(new DialogInterface.OnKeyListener() {
-            @Override
-            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                return true;
-            }
-        });
+        setOnKeyListener((dialog, keyCode, event) -> true);
         setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {

@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import com.jess.arms.R;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 
 /**
@@ -103,7 +104,7 @@ public abstract class BaseDialog extends Dialog {
      * type类型判断
      */
     public interface OnClickCallback {
-        void onClickType(int type);
+        void onClickType(int type) ;
     }
 
     public void setOnClickCallback(OnClickCallback onClickCallback) {

@@ -6,12 +6,10 @@
     android:background="@color/color_01"
     android:orientation="vertical">
 
-
     <com.google.vr.sdk.widgets.pano.VrPanoramaView
         android:id="@+id/vrPanoramaView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
 
     <com.drifting.bureau.view.StarSkyView
         android:layout_width="match_parent"
@@ -278,4 +276,6 @@
     </RelativeLayout>
 
 
+
+    <include layout="@layout/layout_index_guide_view"/>
 </RelativeLayout>

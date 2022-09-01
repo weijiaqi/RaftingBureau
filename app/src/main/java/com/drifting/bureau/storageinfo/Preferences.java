@@ -29,6 +29,7 @@ public class Preferences {
     private static final String KEY_USER_IS_DIDATTEND = "isdidAttend";//是否参与过漂流
     public static final String KEY_IS_TEST = "isTest"; //是不是测试环境
 
+    private static final String KEY_IS_ORDINARY = "is_ordinary";// 普通引导
     /**
      * 初始化构建
      */
@@ -97,6 +98,20 @@ public class Preferences {
         }
     }
 
+
+    public static boolean isOrdinaryGuide() {
+        return !(getString(KEY_IS_ORDINARY) == null || "0".equals(getString(KEY_IS_ORDINARY))) && "1".equals(getString(KEY_IS_ORDINARY));
+    }
+
+
+    //普通版本引导
+    public static void setOrdinaryGuide(boolean isMatch) {
+        if (isMatch) {
+            saveString(KEY_IS_ORDINARY, 1 + "");
+        } else {
+            saveString(KEY_IS_ORDINARY, 0 + "");
+        }
+    }
 
 
 

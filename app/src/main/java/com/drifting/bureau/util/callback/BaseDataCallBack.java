@@ -3,6 +3,8 @@ package com.drifting.bureau.util.callback;
 
 import com.jess.arms.base.BaseEntity;
 
+import java.util.concurrent.ExecutionException;
+
 /**
  * data为返回数据基类
  *
@@ -11,5 +13,5 @@ import com.jess.arms.base.BaseEntity;
  */
 
 public interface BaseDataCallBack<T> {
-    void getData(BaseEntity<T> entity);
+    void getData(BaseEntity<T> entity) ;
 }

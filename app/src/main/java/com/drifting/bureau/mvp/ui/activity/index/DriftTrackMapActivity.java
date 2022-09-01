@@ -233,34 +233,30 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
 
     public void initListener() {
         mMapView = new MapView(this, new BaiduMapOptions());
-        mBaiduMap = mMapView.getMap();
-        mUiSettings = mBaiduMap.getUiSettings();
-        mFrameLayout.addView(mMapView);
-        //通过设置enable为true或false 选择是否启用地图旋转功能
-        mUiSettings.setRotateGesturesEnabled(false);
-
         // 获取.sty文件路径
         String customStyleFilePath = getCustomStyleFilePath(this, CUSTOM_FILE_NAME_GRAY);
         // 设置个性化地图样式文件的路径和加载方式
         mMapView.setMapCustomStylePath(customStyleFilePath);
         // 动态设置个性化地图样式是否生效
         mMapView.setMapCustomStyleEnable(true);
+        //通过设置enable为true或false 选择是否显示比例尺
+        mMapView.showScaleControl(false);
+        mMapView.showZoomControls(false);  //隐藏加减缩放按钮
+        //删除logo
+        mMapView.removeViewAt(1);
+        mFrameLayout.addView(mMapView);
+        mBaiduMap = mMapView.getMap();
+        mUiSettings = mBaiduMap.getUiSettings();
+        //通过设置enable为true或false 选择是否启用地图旋转功能
+        mUiSettings.setRotateGesturesEnabled(false);
         //设置当前缩放等级
         builder = new MapStatus.Builder();
         builder.zoom(10.0f);
         mBaiduMap.setMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
-        //通过设置enable为true或false 选择是否显示比例尺
-        mMapView.showScaleControl(false);
-        mMapView.showZoomControls(false);  //隐藏加减缩放按钮
         //隐藏底图标注
         mBaiduMap.showMapPoi(false);
         //隐藏底部+-按钮
         mBaiduMap.setMyLocationEnabled(true);
-
-        //删除logo
-        mMapView.removeViewAt(1);
-
-
         //设置缩放等级范围
         mBaiduMap.setMaxAndMinZoomLevel(13, 6);
         mDistrictSearch = DistrictSearch.newInstance();
@@ -326,7 +322,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
             mTvShopNo.setVisibility(View.INVISIBLE);
             mTvShopNo.setText("（" + messagePathBeanList.get(index).getShop_no() + "）");
         }
-        mInfoWindow = new InfoWindow(view,   latLng, -80);
+        mInfoWindow = new InfoWindow(view, latLng, -80);
         infoWindowList.add(mInfoWindow);
         mTvReceiveTime.setOnClickListener(v -> {
             showDetails(postion);

@@ -56,6 +56,7 @@ import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.animator.AnimatorUtil;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.drifting.bureau.view.DiscoveryTransformer;
+import com.drifting.bureau.view.guide.IndexGuiView;
 import com.google.vr.sdk.widgets.pano.VrPanoramaView;
 
 import com.jess.arms.di.component.AppComponent;
@@ -104,6 +105,8 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
     TextView mTvYouthCamp;
     @BindView(R.id.tv_message)
     TextView mTvMessage;
+    @BindView(R.id.guide_view)
+    IndexGuiView mGuideView;
     private List<PlanetEntity> list;
     private AnimatorSet animatorSet;
     private Handler handler;
@@ -113,6 +116,7 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
     private UserInfoEntity userInfoEntity;
     private StarUpIndexEntity starUpIndexEntity;
     private ShareDialog shareDialog;
+
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, DiscoveryTourActivity.class);
         context.startActivity(intent);
@@ -180,6 +184,13 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
     }
 
     public void loadUI() {
+        //是否展示引导
+        mGuideView.setVisibility(!Preferences.isOrdinaryGuide()?View.VISIBLE:View.GONE);
+        mGuideView.setOnClickCallback(() -> {
+            DriftTrackMapActivity.start(DiscoveryTourActivity.this, 1, 1, 0, false);
+            mGuideView.setVisibility(View.GONE);
+        });
+
         if (mPresenter != null) {
             mPresenter.getExploreList();
             mPresenter.getLocation(this);
@@ -229,7 +240,7 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
     }
 
 
-    @OnClick({R.id.rl_message, R.id.tv_about_me, R.id.tv_space_capsule, R.id.rl_info, R.id.ll_step_star, R.id.rl_right, R.id.tv_youth_camp,R.id.rl_explore_planet,R.id.tv_share_journey})
+    @OnClick({R.id.rl_message, R.id.tv_about_me, R.id.tv_space_capsule, R.id.rl_info, R.id.ll_step_star, R.id.rl_right, R.id.tv_youth_camp, R.id.rl_explore_planet, R.id.tv_share_journey})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
@@ -292,7 +303,7 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
                 id = entity.getId();
                 user_id = entity.getUser_id();
                 explore_id = entity.getExplore_id();
-                mTvMessage.setText(getString(R.string.from_nebula,entity.getNebula_name()));
+                mTvMessage.setText(getString(R.string.from_nebula, entity.getNebula_name()));
                 handler.postDelayed(mAdRunnable, entity.getDrift_rest() * 1000);
                 if (isAnmiation) {
                     isAnmiation = false;

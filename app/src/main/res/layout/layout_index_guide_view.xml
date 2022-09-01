@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.drifting.bureau.view.guide.IndexGuiView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/guide_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:visibility="gone">
+
+    <TextView
+        android:id="@+id/tv_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_black_cc000000"
+        android:visibility="gone" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/color_black_cc000000">
+
+        <RelativeLayout
+            android:id="@+id/fl_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="95dp"
+            android:paddingEnd="14dp">
+
+            <ImageView
+                android:id="@+id/iv_top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/guide_index_top" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="31dp"
+                android:layout_marginTop="69dp"
+                android:lineSpacingExtra="5dp"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+
+        </RelativeLayout>
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fl_top"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="4dp"
+            android:paddingEnd="14dp"
+            android:src="@drawable/guide_index_bottom" />
+
+    </RelativeLayout>
+
+
+</com.drifting.bureau.view.guide.IndexGuiView>

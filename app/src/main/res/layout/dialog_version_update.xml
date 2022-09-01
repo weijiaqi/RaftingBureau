@@ -45,7 +45,7 @@
             android:lineSpacingExtra="5dp"
             android:textColor="@color/white"
             android:textSize="12sp"
-            tools:text=""/>
+            tools:text="" />
     </com.hjq.shape.layout.ShapeFrameLayout>
 
 

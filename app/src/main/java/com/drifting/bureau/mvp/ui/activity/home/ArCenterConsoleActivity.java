@@ -28,7 +28,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.base.BaseManagerActivity;
@@ -48,7 +47,6 @@ import com.drifting.bureau.mvp.ui.activity.index.DriftTrackMapActivity;
 import com.drifting.bureau.mvp.ui.activity.index.MoveAwayPlanetaryActivity;
 import com.drifting.bureau.mvp.ui.activity.index.PlanetarySelectActivity;
 import com.drifting.bureau.mvp.ui.activity.index.TeaShopActivity;
-import com.drifting.bureau.mvp.ui.activity.index.TopicDetailActivity;
 import com.drifting.bureau.mvp.ui.activity.user.AboutMeActivity;
 import com.drifting.bureau.mvp.ui.activity.user.MessageCenterActivity;
 import com.drifting.bureau.mvp.ui.activity.user.WithdrawalActivity;
@@ -114,6 +112,8 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -150,8 +150,8 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
     private HorizontalScrollView scrollView;
     private LineChartView lineChartView;
     private ArSceneView arSceneView;
-    private Renderable model, model2, model3, model5, model7, model8, model9, model10, model11;
-    private ViewRenderable viewRenderable, viewRenderable2, viewRenderable3, viewRenderable4, viewRenderable5;
+    private CompletableFuture<ModelRenderable> model, model2, model3, model5, model7, model8, model9, model10, model11;
+    private CompletableFuture<ViewRenderable> viewRenderable, viewRenderable2, viewRenderable3, viewRenderable4, viewRenderable5;
     private int status = 1;
     private int id, explore_id, rcyid;
     private DriftingPlayDialog driftingPlayDialog;
@@ -161,7 +161,7 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
     private TransformationSystem transformationSystem;
     private TransformableNode andy, andy2, andy3, andy5, andy7, andy8, andy9, andy10, andy11;
     private View view;
-    private Handler handlerModel, handlerReciver, handlerSpace;
+    private Handler handlerReciver, handlerSpace;
     private ARWithRecordAdapter arWithRecordAdapter;
     private MakingRecordAdapter makingRecordAdapter;
     private IncomeRecordAdapter incomeRecordAdapter;
@@ -274,448 +274,300 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
     }
 
     public void loadModels() {
-        WeakReference<ArCenterConsoleActivity> weakActivity = new WeakReference<>(this);
-        ModelRenderable.builder()
-                .setSource(this, Uri.parse("models/shijieqiu.glb"))
+
+        model = ModelRenderable
+                .builder()
+                .setSource(this
+                        , Uri.parse("models/shijieqiu.glb"))
                 .setIsFilamentGltf(true)
                 .setAsyncLoadEnabled(true)
-                .build()
-                .thenAccept(model -> {
-                    ArCenterConsoleActivity activity = weakActivity.get();
-                    if (activity != null) {
-                        activity.model = model;
-                    }
-                })
-                .exceptionally(throwable -> {
-                    Toast.makeText(
-                            this, "Unable to load model", Toast.LENGTH_LONG).show();
-                    return null;
-                });
+                .build();
 
-
-        ModelRenderable.builder()
+        model2 = ModelRenderable.builder()
                 .setSource(this, Uri.parse("models/xiaoxiong.glb"))
                 .setIsFilamentGltf(true)
                 .setAsyncLoadEnabled(true)
-                .build()
-                .thenAccept(model -> {
-                    ArCenterConsoleActivity activity = weakActivity.get();
-                    if (activity != null) {
-                        activity.model2 = model;
-                    }
-                })
-                .exceptionally(throwable -> {
-                    Toast.makeText(
-                            this, "Unable to load model", Toast.LENGTH_LONG).show();
-                    return null;
-                });
-
-
-        ModelRenderable.builder()
+                .build();
+        model3 = ModelRenderable.builder()
                 .setSource(this, Uri.parse("models/logo.glb"))
                 .setIsFilamentGltf(true)
                 .setAsyncLoadEnabled(true)
-                .build()
-                .thenAccept(model -> {
-                    ArCenterConsoleActivity activity = weakActivity.get();
-                    if (activity != null) {
-                        activity.model3 = model;
-                    }
-                })
-                .exceptionally(throwable -> {
-                    Toast.makeText(
-                            this, "Unable to load model", Toast.LENGTH_LONG).show();
-                    return null;
-                });
-
-        ModelRenderable.builder()
+                .build();
+        model5 = ModelRenderable.builder()
                 .setSource(this, Uri.parse("models/feichuan.glb"))
                 .setIsFilamentGltf(true)
                 .setAsyncLoadEnabled(true)
-                .build()
-                .thenAccept(model -> {
-                    ArCenterConsoleActivity activity = weakActivity.get();
-                    if (activity != null) {
-                        activity.model5 = model;
-                    }
-                })
-                .exceptionally(throwable -> {
-                    Toast.makeText(
-                            this, "Unable to load model", Toast.LENGTH_LONG).show();
-                    return null;
-                });
-
-
-        ModelRenderable.builder()
+                .build();
+        model11 = ModelRenderable.builder()
                 .setSource(this, Uri.parse("models/xingqiu.glb"))
                 .setIsFilamentGltf(true)
                 .setAsyncLoadEnabled(true)
-                .build()
-                .thenAccept(model -> {
-                    ArCenterConsoleActivity activity = weakActivity.get();
-                    if (activity != null) {
-                        activity.model11 = model;
-                    }
-                })
-                .exceptionally(throwable -> {
-                    Toast.makeText(
-                            this, "Unable to load model", Toast.LENGTH_LONG).show();
-                    return null;
-                });
-
-
-        ModelRenderable.builder()
+                .build();
+        model7 = ModelRenderable.builder()
                 .setSource(this, Uri.parse("models/shijie2.glb"))
                 .setIsFilamentGltf(true)
                 .setAsyncLoadEnabled(true)
-                .build()
-                .thenAccept(model -> {
-                    ArCenterConsoleActivity activity = weakActivity.get();
-                    if (activity != null) {
-                        activity.model7 = model;
-                    }
-                })
-                .exceptionally(throwable -> {
-                    Toast.makeText(
-                            this, "Unable to load model", Toast.LENGTH_LONG).show();
-                    return null;
-                });
-
-
-        ModelRenderable.builder()
+                .build();
+        model8 = ModelRenderable.builder()
                 .setSource(this, Uri.parse("models/zhuanpan.glb"))
                 .setIsFilamentGltf(true)
                 .setAsyncLoadEnabled(true)
-                .build()
-                .thenAccept(model -> {
-                    ArCenterConsoleActivity activity = weakActivity.get();
-                    if (activity != null) {
-                        activity.model8 = model;
-                    }
-                })
-                .exceptionally(throwable -> {
-                    Toast.makeText(
-                            this, "Unable to load model", Toast.LENGTH_LONG).show();
-                    return null;
-                });
+                .build();
 
-
-        ModelRenderable.builder()
+        model9 = ModelRenderable.builder()
                 .setSource(this, Uri.parse("models/leida.glb"))
                 .setIsFilamentGltf(true)
                 .setAsyncLoadEnabled(true)
-                .build()
-                .thenAccept(model -> {
-                    ArCenterConsoleActivity activity = weakActivity.get();
-                    if (activity != null) {
-                        activity.model9 = model;
-                    }
-                })
-                .exceptionally(throwable -> {
-                    Toast.makeText(
-                            this, "Unable to load model", Toast.LENGTH_LONG).show();
-                    return null;
-                });
+                .build();
 
 
-        ModelRenderable.builder()
+        model10 = ModelRenderable.builder()
                 .setSource(this, Uri.parse("models/kongjianzhan.glb"))
                 .setIsFilamentGltf(true)
                 .setAsyncLoadEnabled(true)
-                .build()
-                .thenAccept(model -> {
-                    ArCenterConsoleActivity activity = weakActivity.get();
-                    if (activity != null) {
-                        activity.model10 = model;
-                    }
-                })
-                .exceptionally(throwable -> {
-                    Toast.makeText(
-                            this, "Unable to load model", Toast.LENGTH_LONG).show();
-                    return null;
-                });
-
-
-        ViewRenderable.builder()
+                .build();
+        viewRenderable = ViewRenderable.builder()
                 .setView(this, R.layout.view_center_console)
-                .build()
-                .thenAccept(viewRenderable -> {
-                    ArCenterConsoleActivity activity = weakActivity.get();
-                    if (activity != null) {
-                        activity.viewRenderable = viewRenderable;
-                    }
-                })
-                .exceptionally(throwable -> {
-                    Toast.makeText(this, "Unable to load model", Toast.LENGTH_LONG).show();
-                    return null;
-                });
-
-
-        ViewRenderable.builder()
+                .build();
+        viewRenderable2 = ViewRenderable.builder()
                 .setView(this, R.layout.view_space_station)
-                .build()
-                .thenAccept(viewRenderable -> {
-                    ArCenterConsoleActivity activity = weakActivity.get();
-                    if (activity != null) {
-                        activity.viewRenderable2 = viewRenderable;
-                    }
-                })
-                .exceptionally(throwable -> {
-                    Toast.makeText(this, "Unable to load model", Toast.LENGTH_LONG).show();
-                    return null;
-                });
-
-
-        ViewRenderable.builder()
+                .build();
+        viewRenderable3 = ViewRenderable.builder()
                 .setView(this, R.layout.view_make_record)
-                .build()
-                .thenAccept(viewRenderable -> {
-                    ArCenterConsoleActivity activity = weakActivity.get();
-                    if (activity != null) {
-                        activity.viewRenderable3 = viewRenderable;
-                    }
-                })
-                .exceptionally(throwable -> {
-                    Toast.makeText(this, "Unable to load model", Toast.LENGTH_LONG).show();
-                    return null;
-                });
-
-
-        ViewRenderable.builder()
+                .build();
+        viewRenderable4 = ViewRenderable.builder()
                 .setView(this, R.layout.view_query_inventory)
-                .build()
-                .thenAccept(viewRenderable -> {
-                    ArCenterConsoleActivity activity = weakActivity.get();
-                    if (activity != null) {
-                        activity.viewRenderable4 = viewRenderable;
-                    }
-                })
-                .exceptionally(throwable -> {
-                    Toast.makeText(this, "Unable to load model", Toast.LENGTH_LONG).show();
-                    return null;
-                });
-
-        ViewRenderable.builder()
+                .build();
+        viewRenderable5 = ViewRenderable.builder()
                 .setView(this, R.layout.view_expenditure_record)
-                .build()
-                .thenAccept(viewRenderable -> {
-                    ArCenterConsoleActivity activity = weakActivity.get();
-                    if (activity != null) {
-                        activity.viewRenderable5 = viewRenderable;
-                    }
-                })
-                .exceptionally(throwable -> {
-                    Toast.makeText(this, "Unable to load model", Toast.LENGTH_LONG).show();
-                    return null;
-                });
-        handlerModel = new Handler();
-        handlerModel.postDelayed(mAdModel, 1000);
-    }
+                .build();
 
-    Runnable mAdModel = () -> showObj();
+        CompletableFuture.allOf(model, model2, model8, model3, model5, model11, model7, model9, model10, viewRenderable, viewRenderable2, viewRenderable3, viewRenderable4, viewRenderable5)
+                .handle((ok, ex) -> {
+                    try {
+                        FootprintSelectionVisualizer selectionVisualizer = new FootprintSelectionVisualizer();
+                        transformationSystem = new TransformationSystem(getResources().getDisplayMetrics(), selectionVisualizer);
+                        arFragment.getArSceneView().getScene().addOnPeekTouchListener((hitTestResult, motionEvent) -> {
+                            transformationSystem.onTouch(hitTestResult, motionEvent);
+                        });
+                        //星球世界
+                        anchorNode = new AnchorNode();
+                        anchorNode.setParent(arFragment.getArSceneView().getScene());
 
-    private void showObj() {
-        FootprintSelectionVisualizer selectionVisualizer = new FootprintSelectionVisualizer();
-        transformationSystem = new TransformationSystem(getResources().getDisplayMetrics(), selectionVisualizer);
-        arFragment.getArSceneView().getScene().addOnPeekTouchListener((hitTestResult, motionEvent) -> {
-            transformationSystem.onTouch(hitTestResult, motionEvent);
-        });
+                        andy = new TransformableNode(transformationSystem);
+                        andy.setParent(anchorNode);
+                        andy.setRenderable(model.get()).animate(true).start();
+                        andy.setWorldScale(new Vector3(0.3f, 0.3f, 0.3f));
+                        andy.setLocalPosition(new Vector3(0f, 3.7f, -10.5f));
+                        andy.getRenderableInstance().setCulling(false);
+                        // 禁止缩放
+                        andy.getScaleController().setEnabled(false);
+                        andy.getRotationController().setEnabled(false);
+                        andy.getTranslationController().setEnabled(false);
+                        andy.select();
 
+                        //中控台
+                        addTitleNode();
 
-        //星球世界
-        anchorNode = new AnchorNode();
-        anchorNode.setParent(arFragment.getArSceneView().getScene());
+                        andy2 = new TransformableNode(transformationSystem);
+                        andy2.setParent(anchorNode);
+                        andy2.setRenderable(model2.get()).animate(true).start();
+                        andy2.setWorldScale(new Vector3(0.07f, 0.07f, 0.07f));
+                        andy2.setLocalPosition(new Vector3(0.2f, 0f, -3f));
+                        andy2.getRenderableInstance().setCulling(false);
 
-        andy = new TransformableNode(transformationSystem);
-        andy.setParent(anchorNode);
-        andy.setRenderable(this.model).animate(true).start();
-        andy.setWorldScale(new Vector3(0.3f, 0.3f, 0.3f));
-        andy.setLocalPosition(new Vector3(0f, 3.7f, -10.5f));
-        andy.getRenderableInstance().setCulling(false);
-        // 禁止缩放
-        andy.getScaleController().setEnabled(false);
-        andy.getRotationController().setEnabled(false);
-        andy.getTranslationController().setEnabled(false);
-        andy.select();
+                        // 禁止缩放，没禁止缩放，设置的倍数会失效，自动加载默认的大小
+                        andy2.getScaleController().setEnabled(false);
+                        andy2.getRotationController().setEnabled(false);
+                        andy2.getTranslationController().setEnabled(false);
+                        andy2.select();
 
-        //中控台
-        addTitleNode();
+                        andy2.setOnTapListener(new Node.OnTapListener() {
+                            @Override
+                            public void onTap(HitTestResult hitTestResult, MotionEvent motionEvent) {
+                                if (!ClickUtil.isFastClick(motionEvent.getDeviceId())) {
 
-        //小熊
-        andy2 = new TransformableNode(transformationSystem);
-        andy2.setParent(anchorNode);
-        andy2.setRenderable(this.model2).animate(true).start();
-        andy2.setWorldScale(new Vector3(0.07f, 0.07f, 0.07f));
-        andy2.setLocalPosition(new Vector3(0.2f, 0f, -3f));
-        andy2.getRenderableInstance().setCulling(false);
-
-        // 禁止缩放，没禁止缩放，设置的倍数会失效，自动加载默认的大小
-        andy2.getScaleController().setEnabled(false);
-        andy2.getRotationController().setEnabled(false);
-        andy2.getTranslationController().setEnabled(false);
-        andy2.select();
-
-        andy2.setOnTapListener(new Node.OnTapListener() {
-            @Override
-            public void onTap(HitTestResult hitTestResult, MotionEvent motionEvent) {
-                if (!ClickUtil.isFastClick(motionEvent.getDeviceId())) {
-
-                    driftingPlayDialog = new DriftingPlayDialog(ArCenterConsoleActivity.this);
-                    driftingPlayDialog.show();
-                    driftingPlayDialog.setOnClickCallback(type -> {
-                        if (type == DriftingPlayDialog.OPEN_PLAY) {//开启玩法
-                            if (andy8 != null) {
-                                anchorNode.removeChild(andy8);
-                            }
-                            //转盘
-                            andy8 = new TransformableNode(transformationSystem);
-                            andy8.setParent(anchorNode);
-                            andy8.setRenderable(model8).animate(true).start();
-                            andy8.setWorldScale(new Vector3(0.02f, 0.02f, 0.02f));
-                            andy8.setLocalPosition(new Vector3(1.3f, 0f, -2.2f));
-                            andy8.getRenderableInstance().setCulling(false);
-                            andy8.setLocalRotation(Quaternion.axisAngle(new Vector3(0f, 1f, 0f), -30f));
-                            // 禁止缩放，没禁止缩放，设置的倍数会失效，自动加载默认的大小
-                            andy8.getScaleController().setEnabled(false);
-                            andy8.getRotationController().setEnabled(false);
-                            andy8.getTranslationController().setEnabled(false);
-                            andy8.select();
-                            andy8.setOnTapListener(new Node.OnTapListener() {
-                                @Override
-                                public void onTap(HitTestResult hitTestResult, MotionEvent motionEvent) {
-                                    anchorNode.removeChild(andy8);
-                                    DriftTrackMapActivity.start(ArCenterConsoleActivity.this, 1, 1, 0, false);
+                                    driftingPlayDialog = new DriftingPlayDialog(ArCenterConsoleActivity.this);
+                                    driftingPlayDialog.show();
+                                    driftingPlayDialog.setOnClickCallback(type -> {
+                                        if (type == DriftingPlayDialog.OPEN_PLAY) {//开启玩法
+                                            try {
+                                                if (andy8 != null) {
+                                                    anchorNode.removeChild(andy8);
+                                                }
+                                                //转盘
+                                                andy8 = new TransformableNode(transformationSystem);
+                                                andy8.setParent(anchorNode);
+                                                andy8.setRenderable(model8.get()).animate(true).start();
+                                                andy8.setWorldScale(new Vector3(0.02f, 0.02f, 0.02f));
+                                                andy8.setLocalPosition(new Vector3(1.3f, 0f, -2.2f));
+                                                andy8.getRenderableInstance().setCulling(false);
+                                                andy8.setLocalRotation(Quaternion.axisAngle(new Vector3(0f, 1f, 0f), -30f));
+                                                // 禁止缩放，没禁止缩放，设置的倍数会失效，自动加载默认的大小
+                                                andy8.getScaleController().setEnabled(false);
+                                                andy8.getRotationController().setEnabled(false);
+                                                andy8.getTranslationController().setEnabled(false);
+                                                andy8.select();
+                                                andy8.setOnTapListener(new Node.OnTapListener() {
+                                                    @Override
+                                                    public void onTap(HitTestResult hitTestResult, MotionEvent motionEvent) {
+                                                        anchorNode.removeChild(andy8);
+                                                        DriftTrackMapActivity.start(ArCenterConsoleActivity.this, 1, 1, 0, false);
+                                                    }
+                                                });
+                                            } catch (ExecutionException e) {
+                                                e.printStackTrace();
+                                            } catch (InterruptedException e) {
+                                                e.printStackTrace();
+                                            }
+                                        } else if (type == DriftingPlayDialog.START_SPACE) {//空间站
+                                            if (mPresenter != null) {  //检测是否有空间站
+                                                mPresenter.spacecheck();
+                                            }
+                                        }
+                                    });
                                 }
-                            });
-                        } else if (type == DriftingPlayDialog.START_SPACE) {//空间站
-                            if (mPresenter != null) {  //检测是否有空间站
-                                mPresenter.spacecheck();
                             }
-                        }
-                    });
-                }
-            }
-        });
+                        });
 
-
-        if (Preferences.isDidAttend()) {
-            showAndy9();
-        } else {
-            RequestUtil.create().didAttend(new BaseDataCallBack<DidAttendEntity>() {
-                @Override
-                public void getData(BaseEntity<DidAttendEntity> entity) {
-                    if (entity != null && entity.getCode() == 200) {
-                        if (entity.getData().getAttend() == 1) {
-                            Preferences.setDidAttend(true);
+                        if (Preferences.isDidAttend()) {
                             showAndy9();
-                        }
-                    }
-                }
-            });
-        }
-
-
-        //飞船
-        andy5 = new TransformableNode(transformationSystem);
-        andy5.setParent(anchorNode);
-        andy5.setRenderable(this.model5).animate(true).start();
-        andy5.setWorldScale(new Vector3(0.3f, 0.3f, 0.3f));
-        andy5.setLocalPosition(new Vector3(0f, -1f, 0f));
-        andy5.getRenderableInstance().setCulling(false);
-        // 禁止缩放，没禁止缩放，设置的倍数会失效，自动加载默认的大小
-        andy5.getScaleController().setEnabled(false);
-        andy5.getRotationController().setEnabled(false);
-        andy5.getTranslationController().setEnabled(false);
-        andy5.select();
-        andy5.setOnTapListener(new Node.OnTapListener() {
-            @Override
-            public void onTap(HitTestResult hitTestResult, MotionEvent motionEvent) {
-                if (!ClickUtil.isFastClick(motionEvent.getDeviceId())) {
-                    exclusivePlanetDialog = new ExclusivePlanetDialog(ArCenterConsoleActivity.this);
-                    exclusivePlanetDialog.show();
-                    exclusivePlanetDialog.setOnClickCallback(type -> {
-                        if (type == ExclusivePlanetDialog.OPEN_PLAY) {
-                            RequestUtil.create().planetlocation(entity -> {
-                                if (entity != null && entity.getCode() == 200) {
-                                    if (entity.getData().getAnswer() == 0) {
-                                        MoveAwayPlanetaryActivity.start(ArCenterConsoleActivity.this, 1, false);
-                                    } else {
-                                        //隐藏节点
-                                        andy.setEnabled(false);
-                                        andy2.setEnabled(false);
-                                        andy3.setEnabled(false);
-                                        andy5.setEnabled(false);
-                                        andy11.setEnabled(false);
-                                        if (andy8 != null) {
-                                            anchorNode.removeChild(andy8);
+                        } else {
+                            RequestUtil.create().didAttend(new BaseDataCallBack<DidAttendEntity>() {
+                                @Override
+                                public void getData(BaseEntity<DidAttendEntity> entity) {
+                                    if (entity != null && entity.getCode() == 200) {
+                                        if (entity.getData().getAttend() == 1) {
+                                            Preferences.setDidAttend(true);
+                                            showAndy9();
                                         }
-                                        if (andy9 != null) {
-                                            andy9.setEnabled(false);
-                                        }
-                                        status = 2;
-                                        mTvChangeMode.setText("穿梭星云");
-                                        //世界2
-                                        andy7 = new TransformableNode(transformationSystem);
-                                        andy7.setParent(anchorNode);
-                                        andy7.setRenderable(model7).animate(true).start();
-                                        andy7.setLocalPosition(new Vector3(0f, -2f, 0f));
-                                        andy7.getRenderableInstance().setCulling(false);
-                                        // 禁止缩放，没禁止缩放，设置的倍数会失效，自动加载默认的大小
-                                        andy7.getScaleController().setEnabled(false);
-                                        andy7.getRotationController().setEnabled(false);
-                                        andy7.getTranslationController().setEnabled(false);
-                                        andy7.select();
-                                        //移除中控台
-                                        addDeleteNode();
                                     }
                                 }
                             });
-
                         }
-                    });
-                }
-            }
-        });
 
 
-        //logo
-        andy3 = new TransformableNode(transformationSystem);
-        andy3.setParent(anchorNode);
-        andy3.setRenderable(this.model3).animate(true).start();
-        andy3.setWorldScale(new Vector3(0.3f, 0.3f, 0.3f));
-        andy3.setLocalPosition(new Vector3(0f, 1f, -15f));
-        andy3.getRenderableInstance().setCulling(false);
-        // 禁止缩放，没禁止缩放，设置的倍数会失效，自动加载默认的大小
-        andy3.getScaleController().setEnabled(false);
-        andy3.getRotationController().setEnabled(false);
-        andy3.getTranslationController().setEnabled(false);
-        andy3.select();
-        andy3.setOnTapListener(new Node.OnTapListener() {
-            @Override
-            public void onTap(HitTestResult hitTestResult, MotionEvent motionEvent) {
-                if (!ClickUtil.isFastClick(motionEvent.getDeviceId())) {
-                    arAnnouncementDisplayDialog = new ArAnnouncementDisplayDialog(ArCenterConsoleActivity.this);
-                    arAnnouncementDisplayDialog.show();
-                }
-            }
-        });
+                        //飞船
+                        andy5 = new TransformableNode(transformationSystem);
+                        andy5.setParent(anchorNode);
+                        andy5.setRenderable(model5.get()).animate(true).start();
+                        andy5.setWorldScale(new Vector3(0.3f, 0.3f, 0.3f));
+                        andy5.setLocalPosition(new Vector3(0f, -1f, 0f));
+                        andy5.getRenderableInstance().setCulling(false);
+                        // 禁止缩放，没禁止缩放，设置的倍数会失效，自动加载默认的大小
+                        andy5.getScaleController().setEnabled(false);
+                        andy5.getRotationController().setEnabled(false);
+                        andy5.getTranslationController().setEnabled(false);
+                        andy5.select();
+                        andy5.setOnTapListener(new Node.OnTapListener() {
+                            @Override
+                            public void onTap(HitTestResult hitTestResult, MotionEvent motionEvent) {
+                                if (!ClickUtil.isFastClick(motionEvent.getDeviceId())) {
+                                    exclusivePlanetDialog = new ExclusivePlanetDialog(ArCenterConsoleActivity.this);
+                                    exclusivePlanetDialog.show();
+                                    exclusivePlanetDialog.setOnClickCallback(type -> {
+                                        if (type == ExclusivePlanetDialog.OPEN_PLAY) {
+                                            RequestUtil.create().planetlocation(entity -> {
+                                                if (entity != null && entity.getCode() == 200) {
+                                                    if (entity.getData().getAnswer() == 0) {
+                                                        MoveAwayPlanetaryActivity.start(ArCenterConsoleActivity.this, 1, false);
+                                                    } else {
+                                                        //隐藏节点
+                                                        try {
+                                                            andy.setEnabled(false);
+                                                            andy2.setEnabled(false);
+                                                            andy3.setEnabled(false);
+                                                            andy5.setEnabled(false);
+                                                            andy11.setEnabled(false);
+                                                            if (andy8 != null) {
+                                                                anchorNode.removeChild(andy8);
+                                                            }
+                                                            if (andy9 != null) {
+                                                                andy9.setEnabled(false);
+                                                            }
+                                                            status = 2;
+                                                            mTvChangeMode.setText("穿梭星云");
+                                                            //世界2
+                                                            andy7 = new TransformableNode(transformationSystem);
+                                                            andy7.setParent(anchorNode);
+                                                            andy7.setRenderable(model7.get()).animate(true).start();
+                                                            andy7.setLocalPosition(new Vector3(0f, -2f, 0f));
+                                                            andy7.getRenderableInstance().setCulling(false);
+                                                            // 禁止缩放，没禁止缩放，设置的倍数会失效，自动加载默认的大小
+                                                            andy7.getScaleController().setEnabled(false);
+                                                            andy7.getRotationController().setEnabled(false);
+                                                            andy7.getTranslationController().setEnabled(false);
+                                                            andy7.select();
+                                                            //移除中控台
+                                                            addDeleteNode();
+                                                        } catch (ExecutionException e) {
+                                                            e.printStackTrace();
+                                                        } catch (InterruptedException e) {
+                                                            e.printStackTrace();
+                                                        }
+                                                    }
+                                                }
+                                            });
+
+                                        }
+                                    });
+                                }
+                            }
+                        });
 
 
-        andy11 = new TransformableNode(transformationSystem);
-        andy11.setParent(anchorNode);
-        andy11.setRenderable(this.model11).animate(true).start();
-        andy11.setWorldScale(new Vector3(0.1f, 0.1f, 0.1f));
-        andy11.getRenderableInstance().setCulling(false);
-        // 禁止缩放，没禁止缩放，设置的倍数会失效，自动加载默认的大小
-        andy11.getScaleController().setEnabled(false);
-        andy11.getRotationController().setEnabled(false);
-        andy11.getTranslationController().setEnabled(false);
-        andy11.select();
-        andy11.setOnTapListener((hitTestResult, motionEvent) -> {
-            if (!ClickUtil.isFastClick(motionEvent.getDeviceId())) {
-                PlanetarySelectActivity.start(this, userInfoEntity.getPlanet().getLevel(), false);
-            }
-        });
+                        //logo
+                        andy3 = new TransformableNode(transformationSystem);
+                        andy3.setParent(anchorNode);
+                        andy3.setRenderable(model3.get()).animate(true).start();
+                        andy3.setWorldScale(new Vector3(0.3f, 0.3f, 0.3f));
+                        andy3.setLocalPosition(new Vector3(0f, 1f, -15f));
+                        andy3.getRenderableInstance().setCulling(false);
+                        // 禁止缩放，没禁止缩放，设置的倍数会失效，自动加载默认的大小
+                        andy3.getScaleController().setEnabled(false);
+                        andy3.getRotationController().setEnabled(false);
+                        andy3.getTranslationController().setEnabled(false);
+                        andy3.select();
+                        andy3.setOnTapListener(new Node.OnTapListener() {
+                            @Override
+                            public void onTap(HitTestResult hitTestResult, MotionEvent motionEvent) {
+                                if (!ClickUtil.isFastClick(motionEvent.getDeviceId())) {
+                                    arAnnouncementDisplayDialog = new ArAnnouncementDisplayDialog(ArCenterConsoleActivity.this);
+                                    arAnnouncementDisplayDialog.show();
+                                }
+                            }
+                        });
+
+                        andy11 = new TransformableNode(transformationSystem);
+                        andy11.setParent(anchorNode);
+                        andy11.setRenderable(model11.get()).animate(true).start();
+                        andy11.setWorldScale(new Vector3(0.1f, 0.1f, 0.1f));
+                        andy11.getRenderableInstance().setCulling(false);
+                        // 禁止缩放，没禁止缩放，设置的倍数会失效，自动加载默认的大小
+                        andy11.getScaleController().setEnabled(false);
+                        andy11.getRotationController().setEnabled(false);
+                        andy11.getTranslationController().setEnabled(false);
+                        andy11.select();
+                        andy11.setOnTapListener((hitTestResult, motionEvent) -> {
+                            if (!ClickUtil.isFastClick(motionEvent.getDeviceId())) {
+                                PlanetarySelectActivity.start(this, userInfoEntity.getPlanet().getLevel(), false);
+                            }
+                        });
+
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    return null;
+                });
+
+
+    }
+
+
+    private void showObj() {
+
 
     }
 
@@ -727,38 +579,44 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
 
 
     public void addTitleNode() {
-        titleNode = new Node();
-        titleNode.setParent(anchorNode);
-        titleNode.setRenderable(viewRenderable);
-        titleNode.setWorldScale(new Vector3(0.1f, 0.1f, 0.1f));
-        Quaternion rotation1 = Quaternion.axisAngle(new Vector3(0.0f, 1.0f, 0.0f), 90); // rotate y axis 90 degrees
-        Quaternion rotation2 = Quaternion.axisAngle(new Vector3(1.0f, 0.0f, 0.0f), -45); // rotate x axis 90 degrees
-        titleNode.setLocalRotation(Quaternion.multiply(rotation1, rotation2));
-        titleNode.setWorldPosition(new Vector3(-0.3f, -0.2f, 0.1f));
-        mLlContent = viewRenderable.getView().findViewById(R.id.ll_content);
-        mIvBorder1 = viewRenderable.getView().findViewById(R.id.border1);
-        mIvBorder2 = viewRenderable.getView().findViewById(R.id.border2);
-        mIvBorder3 = viewRenderable.getView().findViewById(R.id.border3);
-        mIvBorder4 = viewRenderable.getView().findViewById(R.id.border4);
-        mIvBorder5 = viewRenderable.getView().findViewById(R.id.border5);
-        mIvOperation = viewRenderable.getView().findViewById(R.id.iv_operation);
-        mIvDriftTrack = viewRenderable.getView().findViewById(R.id.iv_drift_track);
-        mIvStarTroopers = viewRenderable.getView().findViewById(R.id.iv_star_troopers);
-        mIvPhysicalstore = viewRenderable.getView().findViewById(R.id.iv_physical_store);
-        mIvRadioNews = viewRenderable.getView().findViewById(R.id.iv_radio_news);
-        mIvOperation.setOnClickListener(this);
-        mIvDriftTrack.setOnClickListener(this);
-        mIvStarTroopers.setOnClickListener(this);
-        mIvPhysicalstore.setOnClickListener(this);
-        mIvRadioNews.setOnClickListener(this);
-        //默认展示第一个
-        setBorderVisible(1);
-        arSceneView.getScene().addOnUpdateListener(new Scene.OnUpdateListener() {
-            @Override
-            public void onUpdate(FrameTime frameTime) {
-                titleNode.setWorldPosition(new Vector3(arSceneView.getScene().getCamera().getWorldPosition().x - 0.3f, arSceneView.getScene().getCamera().getWorldPosition().y - 0.2f, arSceneView.getScene().getCamera().getWorldPosition().z + 0.1f));
-            }
-        });
+        try {
+            titleNode = new Node();
+            titleNode.setParent(anchorNode);
+            titleNode.setRenderable(viewRenderable.get());
+            titleNode.setWorldScale(new Vector3(0.1f, 0.1f, 0.1f));
+            Quaternion rotation1 = Quaternion.axisAngle(new Vector3(0.0f, 1.0f, 0.0f), 90); // rotate y axis 90 degrees
+            Quaternion rotation2 = Quaternion.axisAngle(new Vector3(1.0f, 0.0f, 0.0f), -45); // rotate x axis 90 degrees
+            titleNode.setLocalRotation(Quaternion.multiply(rotation1, rotation2));
+            titleNode.setWorldPosition(new Vector3(-0.3f, -0.2f, 0.1f));
+            mLlContent = viewRenderable.get().getView().findViewById(R.id.ll_content);
+            mIvBorder1 = viewRenderable.get().getView().findViewById(R.id.border1);
+            mIvBorder2 = viewRenderable.get().getView().findViewById(R.id.border2);
+            mIvBorder3 = viewRenderable.get().getView().findViewById(R.id.border3);
+            mIvBorder4 = viewRenderable.get().getView().findViewById(R.id.border4);
+            mIvBorder5 = viewRenderable.get().getView().findViewById(R.id.border5);
+            mIvOperation = viewRenderable.get().getView().findViewById(R.id.iv_operation);
+            mIvDriftTrack = viewRenderable.get().getView().findViewById(R.id.iv_drift_track);
+            mIvStarTroopers = viewRenderable.get().getView().findViewById(R.id.iv_star_troopers);
+            mIvPhysicalstore = viewRenderable.get().getView().findViewById(R.id.iv_physical_store);
+            mIvRadioNews = viewRenderable.get().getView().findViewById(R.id.iv_radio_news);
+            mIvOperation.setOnClickListener(this);
+            mIvDriftTrack.setOnClickListener(this);
+            mIvStarTroopers.setOnClickListener(this);
+            mIvPhysicalstore.setOnClickListener(this);
+            mIvRadioNews.setOnClickListener(this);
+            //默认展示第一个
+            setBorderVisible(1);
+            arSceneView.getScene().addOnUpdateListener(new Scene.OnUpdateListener() {
+                @Override
+                public void onUpdate(FrameTime frameTime) {
+                    titleNode.setWorldPosition(new Vector3(arSceneView.getScene().getCamera().getWorldPosition().x - 0.3f, arSceneView.getScene().getCamera().getWorldPosition().y - 0.2f, arSceneView.getScene().getCamera().getWorldPosition().z + 0.1f));
+                }
+            });
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -1409,126 +1267,130 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
                 //空间站
                 andy10 = new TransformableNode(transformationSystem);
                 andy10.setParent(anchorNode);
-                andy10.setRenderable(model10).animate(true).start();
-                // 禁止缩放，没禁止缩放，设置的倍数会失效，自动加载默认的大小
-                andy10.getScaleController().setEnabled(false);
-                andy10.getRotationController().setEnabled(false);
-                andy10.getTranslationController().setEnabled(false);
-                andy10.select();
+                try {
+                    andy10.setRenderable(model10.get()).animate(true).start();
+                    // 禁止缩放，没禁止缩放，设置的倍数会失效，自动加载默认的大小
+                    andy10.getScaleController().setEnabled(false);
+                    andy10.getRotationController().setEnabled(false);
+                    andy10.getTranslationController().setEnabled(false);
+                    andy10.select();
+                    //移除中控台
+                    addDeleteNode();
 
-                //移除中控台
-                addDeleteNode();
+                    spacenode = new Node();
+                    spacenode.setParent(anchorNode);
+                    spacenode.setRenderable(viewRenderable2.get());
+                    spacenode.setWorldScale(new Vector3(1.42f, 1.42f, 3f));
+                    spacenode.setWorldPosition(new Vector3(0.05f, -1.66f, -4f));
+                    mTvWithdrawNow = viewRenderable2.get().getView().findViewById(R.id.tv_withdraw_now);
+                    mTvTodayMake = viewRenderable2.get().getView().findViewById(R.id.tv_today_make);
+                    mTvTodayMake2 = viewRenderable2.get().getView().findViewById(R.id.tv_today_make2);
+                    mTvWholeMake = viewRenderable2.get().getView().findViewById(R.id.tv_whole_make);
+                    mTvWholeMake2 = viewRenderable2.get().getView().findViewById(R.id.tv_whole_make2);
+                    mTvWholeIncome = viewRenderable2.get().getView().findViewById(R.id.tv_whole_income);
+                    mTvWholeIncome2 = viewRenderable2.get().getView().findViewById(R.id.tv_whole_income2);
+                    mTvWithdrawal = viewRenderable2.get().getView().findViewById(R.id.tv_withdrawal);
+                    mIvNoneNewOrder = viewRenderable2.get().getView().findViewById(R.id.iv_none_new_order);
+                    mIvHaveNewOrder = viewRenderable2.get().getView().findViewById(R.id.iv_have_new_order);
+                    mLlNewSpaceOrder = viewRenderable2.get().getView().findViewById(R.id.ll_new_space_order);
+                    mTvSelect = viewRenderable2.get().getView().findViewById(R.id.tv_select);
+                    mTvTimeLine = viewRenderable2.get().getView().findViewById(R.id.tv_timeliness);
+                    mTvWithdrawNow.setOnClickListener(ArCenterConsoleActivity.this);
+                    mTvSelect.setOnClickListener(ArCenterConsoleActivity.this);
 
-                spacenode = new Node();
-                spacenode.setParent(anchorNode);
-                spacenode.setRenderable(viewRenderable2);
-                spacenode.setWorldScale(new Vector3(1.42f, 1.42f, 3f));
-                spacenode.setWorldPosition(new Vector3(0.05f, -1.66f, -4f));
-                mTvWithdrawNow = viewRenderable2.getView().findViewById(R.id.tv_withdraw_now);
-                mTvTodayMake = viewRenderable2.getView().findViewById(R.id.tv_today_make);
-                mTvTodayMake2 = viewRenderable2.getView().findViewById(R.id.tv_today_make2);
-                mTvWholeMake = viewRenderable2.getView().findViewById(R.id.tv_whole_make);
-                mTvWholeMake2 = viewRenderable2.getView().findViewById(R.id.tv_whole_make2);
-                mTvWholeIncome = viewRenderable2.getView().findViewById(R.id.tv_whole_income);
-                mTvWholeIncome2 = viewRenderable2.getView().findViewById(R.id.tv_whole_income2);
-                mTvWithdrawal = viewRenderable2.getView().findViewById(R.id.tv_withdrawal);
-                mIvNoneNewOrder = viewRenderable2.getView().findViewById(R.id.iv_none_new_order);
-                mIvHaveNewOrder = viewRenderable2.getView().findViewById(R.id.iv_have_new_order);
-                mLlNewSpaceOrder = viewRenderable2.getView().findViewById(R.id.ll_new_space_order);
-                mTvSelect = viewRenderable2.getView().findViewById(R.id.tv_select);
-                mTvTimeLine = viewRenderable2.getView().findViewById(R.id.tv_timeliness);
-                mTvWithdrawNow.setOnClickListener(ArCenterConsoleActivity.this);
-                mTvSelect.setOnClickListener(ArCenterConsoleActivity.this);
-
-                recordnode = new Node();
-                recordnode.setParent(anchorNode);
-                recordnode.setRenderable(viewRenderable3);
-                recordnode.setWorldScale(new Vector3(0.8f, 0.8f, 0.8f));
-                Quaternion rotation1 = Quaternion.axisAngle(new Vector3(0.0f, 1f, 0f), 54);
-                Quaternion rotation2 = Quaternion.axisAngle(new Vector3(1f, 0f, 0f), -30);
-                recordnode.setLocalRotation(Quaternion.multiply(rotation1, rotation2));
-                recordnode.setWorldPosition(new Vector3(-3.5f, -1.1f, -1.45f));
-                mFlMakeState = viewRenderable3.getView().findViewById(R.id.fl_container);
-                mRcyMakeRecord = viewRenderable3.getView().findViewById(R.id.rcy_make_record);
-                recordnode.setOnTouchListener((hitTestResult1, motionEvent1) -> {
-                    rcyid = 2;
-                    return false;
-                });
-
-
-                inventorynode = new Node();
-                inventorynode.setParent(anchorNode);
-                inventorynode.setRenderable(viewRenderable4);
-                inventorynode.setWorldScale(new Vector3(0.8f, 0.8f, 0.8f));
-                Quaternion rotation3 = Quaternion.axisAngle(new Vector3(0.0f, 1f, 0f), 100);
-                Quaternion rotation4 = Quaternion.axisAngle(new Vector3(1f, 0f, 0f), -35);
-                inventorynode.setLocalRotation(Quaternion.multiply(rotation3, rotation4));
-                inventorynode.setLocalPosition(new Vector3(-4.2f, -1.05f, 1f));
-                mIvQueryInventory = viewRenderable4.getView().findViewById(R.id.iv_query_inventory);
-                mIvQueryInventory.setOnClickListener(ArCenterConsoleActivity.this);
+                    recordnode = new Node();
+                    recordnode.setParent(anchorNode);
+                    recordnode.setRenderable(viewRenderable3.get());
+                    recordnode.setWorldScale(new Vector3(0.8f, 0.8f, 0.8f));
+                    Quaternion rotation1 = Quaternion.axisAngle(new Vector3(0.0f, 1f, 0f), 54);
+                    Quaternion rotation2 = Quaternion.axisAngle(new Vector3(1f, 0f, 0f), -30);
+                    recordnode.setLocalRotation(Quaternion.multiply(rotation1, rotation2));
+                    recordnode.setWorldPosition(new Vector3(-3.5f, -1.1f, -1.45f));
+                    mFlMakeState = viewRenderable3.get().getView().findViewById(R.id.fl_container);
+                    mRcyMakeRecord = viewRenderable3.get().getView().findViewById(R.id.rcy_make_record);
+                    recordnode.setOnTouchListener((hitTestResult1, motionEvent1) -> {
+                        rcyid = 2;
+                        return false;
+                    });
 
 
-                expenditurenode = new Node();
-                expenditurenode.setParent(anchorNode);
-                expenditurenode.setRenderable(viewRenderable5);
-                expenditurenode.setWorldScale(new Vector3(0.8f, 0.8f, 0.8f));
-                Quaternion rotation5 = Quaternion.axisAngle(new Vector3(0.0f, 1f, 0f), 120);
-                Quaternion rotation6 = Quaternion.axisAngle(new Vector3(1f, 0f, 0f), -35);
-                expenditurenode.setLocalRotation(Quaternion.multiply(rotation5, rotation6));
-                expenditurenode.setLocalPosition(new Vector3(-3.3f, -1.05f, 3.4f));
-
-                mFlIncomeState = viewRenderable5.getView().findViewById(R.id.fl_container);
-                mRcyIncomeRecord = viewRenderable5.getView().findViewById(R.id.rcy_income_record);
-                expenditurenode.setOnTouchListener((hitTestResult1, motionEvent1) -> {
-                    rcyid = 3;
-                    return false;
-                });
+                    inventorynode = new Node();
+                    inventorynode.setParent(anchorNode);
+                    inventorynode.setRenderable(viewRenderable4.get());
+                    inventorynode.setWorldScale(new Vector3(0.8f, 0.8f, 0.8f));
+                    Quaternion rotation3 = Quaternion.axisAngle(new Vector3(0.0f, 1f, 0f), 100);
+                    Quaternion rotation4 = Quaternion.axisAngle(new Vector3(1f, 0f, 0f), -35);
+                    inventorynode.setLocalRotation(Quaternion.multiply(rotation3, rotation4));
+                    inventorynode.setLocalPosition(new Vector3(-4.2f, -1.05f, 1f));
+                    mIvQueryInventory = viewRenderable4.get().getView().findViewById(R.id.iv_query_inventory);
+                    mIvQueryInventory.setOnClickListener(ArCenterConsoleActivity.this);
 
 
-                recordnode2 = new Node();
-                recordnode2.setParent(anchorNode);
-                recordnode2.setRenderable(viewRenderable3);
-                recordnode2.setWorldScale(new Vector3(0.8f, 0.8f, 0.8f));
-                Quaternion rotation7 = Quaternion.axisAngle(new Vector3(0.0f, 1f, 0f), -54);
-                Quaternion rotation8 = Quaternion.axisAngle(new Vector3(1f, 0f, 0f), -30);
-                recordnode2.setLocalRotation(Quaternion.multiply(rotation7, rotation8));
-                recordnode2.setWorldPosition(new Vector3(3.5f, -1.1f, -1.45f));
+                    expenditurenode = new Node();
+                    expenditurenode.setParent(anchorNode);
+                    expenditurenode.setRenderable(viewRenderable5.get());
+                    expenditurenode.setWorldScale(new Vector3(0.8f, 0.8f, 0.8f));
+                    Quaternion rotation5 = Quaternion.axisAngle(new Vector3(0.0f, 1f, 0f), 120);
+                    Quaternion rotation6 = Quaternion.axisAngle(new Vector3(1f, 0f, 0f), -35);
+                    expenditurenode.setLocalRotation(Quaternion.multiply(rotation5, rotation6));
+                    expenditurenode.setLocalPosition(new Vector3(-3.3f, -1.05f, 3.4f));
 
-                inventorynode2 = new Node();
-                inventorynode2.setParent(anchorNode);
-                inventorynode2.setRenderable(viewRenderable4);
-                inventorynode2.setWorldScale(new Vector3(0.8f, 0.8f, 0.8f));
-                Quaternion rotation9 = Quaternion.axisAngle(new Vector3(0.0f, 1f, 0f), -100);
-                Quaternion rotation10 = Quaternion.axisAngle(new Vector3(1f, 0f, 0f), -35);
-                inventorynode2.setLocalRotation(Quaternion.multiply(rotation9, rotation10));
-                inventorynode2.setLocalPosition(new Vector3(4.2f, -1.05f, 1f));
+                    mFlIncomeState = viewRenderable5.get().getView().findViewById(R.id.fl_container);
+                    mRcyIncomeRecord = viewRenderable5.get().getView().findViewById(R.id.rcy_income_record);
+                    expenditurenode.setOnTouchListener((hitTestResult1, motionEvent1) -> {
+                        rcyid = 3;
+                        return false;
+                    });
 
 
-                expenditurenode2 = new Node();
-                expenditurenode2.setParent(anchorNode);
-                expenditurenode2.setRenderable(viewRenderable5);
-                expenditurenode2.setWorldScale(new Vector3(0.8f, 0.8f, 0.8f));
-                Quaternion rotation11 = Quaternion.axisAngle(new Vector3(0.0f, 1f, 0f), -120);
-                Quaternion rotation12 = Quaternion.axisAngle(new Vector3(1f, 0f, 0f), -35);
-                expenditurenode2.setLocalRotation(Quaternion.multiply(rotation11, rotation12));
-                expenditurenode2.setLocalPosition(new Vector3(3.3f, -1.05f, 3.4f));
+                    recordnode2 = new Node();
+                    recordnode2.setParent(anchorNode);
+                    recordnode2.setRenderable(viewRenderable3.get());
+                    recordnode2.setWorldScale(new Vector3(0.8f, 0.8f, 0.8f));
+                    Quaternion rotation7 = Quaternion.axisAngle(new Vector3(0.0f, 1f, 0f), -54);
+                    Quaternion rotation8 = Quaternion.axisAngle(new Vector3(1f, 0f, 0f), -30);
+                    recordnode2.setLocalRotation(Quaternion.multiply(rotation7, rotation8));
+                    recordnode2.setWorldPosition(new Vector3(3.5f, -1.1f, -1.45f));
 
-                handlerSpace = new Handler();
-                handlerSpace.postDelayed(mSpceRunnable, 60);
-                getInfo();
+                    inventorynode2 = new Node();
+                    inventorynode2.setParent(anchorNode);
+                    inventorynode2.setRenderable(viewRenderable4.get());
+                    inventorynode2.setWorldScale(new Vector3(0.8f, 0.8f, 0.8f));
+                    Quaternion rotation9 = Quaternion.axisAngle(new Vector3(0.0f, 1f, 0f), -100);
+                    Quaternion rotation10 = Quaternion.axisAngle(new Vector3(1f, 0f, 0f), -35);
+                    inventorynode2.setLocalRotation(Quaternion.multiply(rotation9, rotation10));
+                    inventorynode2.setLocalPosition(new Vector3(4.2f, -1.05f, 1f));
 
-                mRcyMakeRecord.setLayoutManager(new GridLayoutManager(ArCenterConsoleActivity.this, 2));
-                mRcyMakeRecord.setLoadingListener(ArCenterConsoleActivity.this);
-                makingRecordAdapter = new MakingRecordAdapter(new ArrayList<>(), 2);
-                mRcyMakeRecord.setAdapter(makingRecordAdapter);
-                getMakeData(makepage, true);
 
-                mRcyIncomeRecord.setLayoutManager(new LinearLayoutManager(ArCenterConsoleActivity.this));
-                mRcyIncomeRecord.setLoadingListener(ArCenterConsoleActivity.this);
-                incomeRecordAdapter = new IncomeRecordAdapter(new ArrayList<>(), 2);
-                mRcyIncomeRecord.setAdapter(incomeRecordAdapter);
-                getIncomeData(incomepage, true);
+                    expenditurenode2 = new Node();
+                    expenditurenode2.setParent(anchorNode);
+                    expenditurenode2.setRenderable(viewRenderable5.get());
+                    expenditurenode2.setWorldScale(new Vector3(0.8f, 0.8f, 0.8f));
+                    Quaternion rotation11 = Quaternion.axisAngle(new Vector3(0.0f, 1f, 0f), -120);
+                    Quaternion rotation12 = Quaternion.axisAngle(new Vector3(1f, 0f, 0f), -35);
+                    expenditurenode2.setLocalRotation(Quaternion.multiply(rotation11, rotation12));
+                    expenditurenode2.setLocalPosition(new Vector3(3.3f, -1.05f, 3.4f));
 
+                    handlerSpace = new Handler();
+                    handlerSpace.postDelayed(mSpceRunnable, 60);
+                    getInfo();
+
+                    mRcyMakeRecord.setLayoutManager(new GridLayoutManager(ArCenterConsoleActivity.this, 2));
+                    mRcyMakeRecord.setLoadingListener(ArCenterConsoleActivity.this);
+                    makingRecordAdapter = new MakingRecordAdapter(new ArrayList<>(), 2);
+                    mRcyMakeRecord.setAdapter(makingRecordAdapter);
+                    getMakeData(makepage, true);
+
+                    mRcyIncomeRecord.setLayoutManager(new LinearLayoutManager(ArCenterConsoleActivity.this));
+                    mRcyIncomeRecord.setLoadingListener(ArCenterConsoleActivity.this);
+                    incomeRecordAdapter = new IncomeRecordAdapter(new ArrayList<>(), 2);
+                    mRcyIncomeRecord.setAdapter(incomeRecordAdapter);
+                    getIncomeData(incomepage, true);
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -1540,16 +1402,22 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
 
     public void showAndy9() {
         //雷达
-        andy9 = new TransformableNode(transformationSystem);
-        andy9.setParent(anchorNode);
-        andy9.setRenderable(model9).animate(true).start();
-        andy9.setWorldScale(new Vector3(0.2f, 0.2f, 0.2f));
-        andy9.setLocalPosition(new Vector3(3f, -0.5f, -10f));
-        // 禁止缩放，没禁止缩放，设置的倍数会失效，自动加载默认的大小
-        andy9.getScaleController().setEnabled(false);
-        andy9.getRotationController().setEnabled(false);
-        andy9.getTranslationController().setEnabled(false);
-        andy9.select();
+        try {
+            andy9 = new TransformableNode(transformationSystem);
+            andy9.setParent(anchorNode);
+            andy9.setRenderable(model9.get()).animate(true).start();
+            andy9.setWorldScale(new Vector3(0.2f, 0.2f, 0.2f));
+            andy9.setLocalPosition(new Vector3(3f, -0.5f, -10f));
+            // 禁止缩放，没禁止缩放，设置的倍数会失效，自动加载默认的大小
+            andy9.getScaleController().setEnabled(false);
+            andy9.getRotationController().setEnabled(false);
+            andy9.getTranslationController().setEnabled(false);
+            andy9.select();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void showDialog(int status, String title, String content) {
@@ -1647,9 +1515,6 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (handlerModel != null) {
-            handlerReciver.removeCallbacks(mAdModel);
-        }
         removeHandler();
         RequestUtil.create().disDispose();
     }
@@ -1657,7 +1522,6 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
     public void removeHandler() {
         //移除监听，防止内存泄漏
         RongIM.getInstance().removeUnReadMessageCountChangedObserver(observer);
-
         if (handlerReciver != null) {
             handlerReciver.removeCallbacks(mAdRunnable);
         }
