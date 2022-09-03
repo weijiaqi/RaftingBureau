@@ -47,7 +47,7 @@ public class DeliveryDetailsModel extends BaseModel implements DeliveryDetailsCo
     }
 
     @Override
-    public Observable<BaseEntity<DeliveryDetailsEntity>> pathdetails(int message_id,int page,int limit) {
-        return mRepositoryManager.obtainRetrofitService(ApiService.class).pathdetails(message_id,page,limit);
+    public Observable<BaseEntity<DeliveryDetailsEntity>> pathdetails(int message_id,String code_city,int page,int limit) {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).pathdetails(message_id,code_city,page,limit);
     }
 }

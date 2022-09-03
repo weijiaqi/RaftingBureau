@@ -51,11 +51,11 @@ public class DeliveryDetailsPresenter extends BasePresenter<DeliveryDetailsContr
     /**
      * 传递详情
      */
-    public void pathdetails(int message_id, int page, int limit, boolean loadType) {
+    public void pathdetails(int message_id,String code_city, int page, int limit, boolean loadType) {
         if (mRootView != null) {
             mRootView.onloadStart();
         }
-        mModel.pathdetails(message_id, page, limit).subscribeOn(Schedulers.io())
+        mModel.pathdetails(message_id, code_city,page, limit).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
                 .subscribe(new ErrorHandleSubscriber<BaseEntity<DeliveryDetailsEntity>>(mErrorHandler) {

@@ -9,87 +9,14 @@
     <include layout="@layout/include_title" />
 
 
-        <LinearLayout
-            android:layout_below="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <RelativeLayout
-                android:id="@+id/rl_top"
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="106dp"
-                    android:background="@color/color_0b" />
-
-
-                <ImageView
-                    android:id="@+id/iv_planet_man"
-                    android:layout_width="85dp"
-                    android:layout_height="120dp"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="14dp"
-                     />
-
-                <TextView
-                    android:id="@+id/tv_drifting_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/iv_planet_man"
-                    android:layout_marginStart="25dp"
-                    android:layout_toRightOf="@+id/iv_planet_man"
-                    android:background="@drawable/rafting_frame"
-                    android:gravity="center"
-                    android:text="传递漂"
-                    android:textColor="@color/white"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:id="@+id/tv_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_drifting_name"
-                    android:layout_alignLeft="@+id/tv_drifting_name"
-                    android:layout_marginTop="10dp"
-                    android:text=""
-                    android:textColor="@color/white"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tv_planet"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_name"
-                    android:layout_alignLeft="@+id/tv_name"
-                    android:layout_marginTop="6dp"
-                    android:text=""
-                    android:textColor="@color/color_6ce"
-                    android:textSize="11sp" />
-            </RelativeLayout>
-
-            <View
-                android:id="@+id/line1"
-              android:visibility="gone"
-                android:layout_width="0.4dp"
-                android:layout_height="31dp"
-                android:layout_below="@+id/rl_top"
-                android:layout_marginStart="105dp"
-                android:layout_marginTop="-4dp"
-                android:background="@color/color_82_6d" />
-
-            <com.rb.core.xrecycleview.XRecyclerView
-                android:id="@+id/rcy_delivery"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/line1"
-                android:layout_marginStart="43dp"
-                android:layout_marginEnd="26dp" />
-        </LinearLayout>
+    <com.rb.core.xrecycleview.XRecyclerView
+        android:id="@+id/rcy_delivery"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="26dp" />
 
     <include layout="@layout/layout_show_state" />
 

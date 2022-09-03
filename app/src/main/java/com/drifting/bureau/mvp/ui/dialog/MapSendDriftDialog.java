@@ -175,12 +175,12 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
             if (!TextUtils.isEmpty(commentDetailsEntity.getVedio())) {  //视频
                 mRlViedeoPlay.setVisibility(View.VISIBLE);
                 mIvVideoPlay.setVisibility(View.VISIBLE);
-                mIvVideo.setVisibility(View.GONE);
+                mIvVideo.setVisibility(View.INVISIBLE);
                 GlideUtil.create().loadLongImage(context, commentDetailsEntity.getImage(), mIvPic);
             } else if (!TextUtils.isEmpty(commentDetailsEntity.getAudio())) {//语音
                 mRlVoicePlay.setVisibility(View.VISIBLE);
                 mIvPlay.setVisibility(View.VISIBLE);
-                mIvRecording.setVisibility(View.GONE);
+                mIvRecording.setVisibility(View.INVISIBLE);
                 mTvTip.setVisibility(View.GONE);
                 mVideoView.setVisibility(View.VISIBLE);
                 totaltime = VideoUtil.getLocalVideoDuration(commentDetailsEntity.getAudio());
@@ -189,7 +189,7 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
             } else if (!TextUtils.isEmpty(commentDetailsEntity.getAlbum())) {  //图片
                 mRlViedeoPlay.setVisibility(View.VISIBLE);
                 mIvVideoPlay.setVisibility(View.GONE);
-                mIvVideo.setVisibility(View.GONE);
+                mIvVideo.setVisibility(View.INVISIBLE);
                 GlideUtil.create().loadLongImage(context, commentDetailsEntity.getAlbum(), mIvPic);
             } else if (!TextUtils.isEmpty(commentDetailsEntity.getContent())) {  //判断文字不为空
                 mEtWord.setVisibility(View.VISIBLE);

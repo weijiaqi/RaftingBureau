@@ -1,5 +1,6 @@
 package com.drifting.bureau.mvp.ui.holder;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.DeliveryDetailsEntity;
+import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
 import com.drifting.bureau.mvp.ui.dialog.VoicePlayDialog;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.TextUtil;
@@ -60,12 +62,12 @@ public class DeliveryVoiceHolder extends BaseRecyclerHolder {
 
         TextUtil.setText(mTvPlanet, mDatas.get(position).getPlanet_level_name());
         TextUtil.setText(mTvName, mDatas.get(position).getUser_name());
-        int totaltime=VideoUtil.getLocalVideoDuration(mDatas.get(position).getContent());
-        TextUtil.setText(mTvTime,totaltime +"");
+        int totaltime=VideoUtil.getLocalVideoDuration(mDatas.get(position).getAudio());
+        TextUtil.setText(mTvTime,totaltime +"S");
         voiceWave.setDecibel(0);
 
         mRlVoicePlay.setOnClickListener(v -> {
-            voicePlayDialog = new VoicePlayDialog(context, mDatas.get(position).getContent(), totaltime);
+            voicePlayDialog = new VoicePlayDialog(context, mDatas.get(position).getAudio(), totaltime);
             voicePlayDialog.show();
         });
 

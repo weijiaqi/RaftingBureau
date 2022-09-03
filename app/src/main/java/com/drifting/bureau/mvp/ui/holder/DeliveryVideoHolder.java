@@ -1,6 +1,7 @@
 package com.drifting.bureau.mvp.ui.holder;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.DeliveryDetailsEntity;
+import com.drifting.bureau.mvp.ui.activity.index.SelectImageActivity;
 import com.drifting.bureau.mvp.ui.activity.index.VideoActivity;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.GlideUtil;
@@ -33,6 +35,8 @@ public class DeliveryVideoHolder extends BaseRecyclerHolder {
     ImageView mIvSelecet;
     @BindView(R.id.iv_add_friend)
     ImageView mIvAddFriend;
+    @BindView(R.id.iv_video_play)
+    ImageView mIvVideoPlay;
     private Context context;
 
     public DeliveryVideoHolder(View itemView) {
@@ -54,16 +58,30 @@ public class DeliveryVideoHolder extends BaseRecyclerHolder {
             mIvSelecet.setImageResource(R.drawable.delivery_unselect);
         }
         TextUtil.setText(mTvPlanet, mDatas.get(position).getPlanet_level_name());
-        GlideUtil.create().loadLongImage(context, mDatas.get(position).getImage(), mIvPic);
+
+
+        if (!TextUtils.isEmpty(mDatas.get(position).getAlbum())) {
+            mIvVideoPlay.setVisibility(View.GONE);
+            GlideUtil.create().loadLongImage(context, mDatas.get(position).getAlbum(), mIvPic);
+        } else {
+            mIvVideoPlay.setVisibility(View.VISIBLE);
+            GlideUtil.create().loadLongImage(context, mDatas.get(position).getImage(), mIvPic);
+        }
+
+
         mRlVideoPlay.setOnClickListener(v -> {
-            VideoActivity.start(context, mDatas.get(position).getContent(), false);
+            if (!TextUtils.isEmpty(mDatas.get(position).getAlbum())) {
+                SelectImageActivity.start(context,mDatas.get(position).getAlbum(),false);
+            }else {
+                VideoActivity.start(context, mDatas.get(position).getVedio(), false);
+            }
         });
         mIvAddFriend.setOnClickListener(v -> {
             RequestUtil.create().friendapply(mDatas.get(position).getUser_id(), entity -> {
                 if (entity != null) {
-                    if (entity.getCode()==200){
+                    if (entity.getCode() == 200) {
                         ToastUtil.showAddFriendDialog(context);
-                    }else {
+                    } else {
                         ToastUtil.showToast(entity.getMsg());
                     }
                 }

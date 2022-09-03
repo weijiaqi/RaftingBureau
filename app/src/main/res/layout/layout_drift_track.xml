@@ -37,10 +37,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="5dp"
-                android:ellipsize="end"
                 android:gravity="center"
                 android:maxEms="6"
                 android:singleLine="true"
+                android:ellipsize="end"
                 android:text="你的小太阳"
                 android:textColor="@color/white"
                 android:textSize="9sp" />

@@ -13,13 +13,13 @@
 
         <TextView
             android:id="@+id/tv_planet"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             android:layout_marginEnd="12dp"
-            android:layout_width="40dp"
-            android:singleLine="true"
             android:ellipsize="end"
             android:gravity="center"
+            android:singleLine="true"
             android:textColor="@color/color_6ce"
             android:textSize="11sp" />
 
@@ -90,13 +90,28 @@
 
             </LinearLayout>
 
-            <include
+            <RelativeLayout
                 android:id="@+id/rl_video_play"
-                layout="@layout/include_video_play"
-                android:layout_width="wrap_content"
+                android:layout_width="96dp"
                 android:layout_height="121dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="19dp" />
+                android:layout_marginBottom="19dp">
+
+                <ImageView
+                    android:id="@+id/iv_pic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/add_video_thumb" />
+
+                <ImageView
+                    android:id="@+id/iv_video_play"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/video_play"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
         </LinearLayout>
 
     </LinearLayout>

@@ -41,6 +41,6 @@ public interface DeliveryDetailsContract {
 
     //Model层定义接口,外部只需关心Model返回的数据,无需关心内部细节,即是否使用缓存
     interface Model extends IModel {
-        Observable<BaseEntity<DeliveryDetailsEntity>> pathdetails(int message_id,int page,int limit);
+        Observable<BaseEntity<DeliveryDetailsEntity>> pathdetails(int message_id,String code_city,int page,int limit);
     }
 }

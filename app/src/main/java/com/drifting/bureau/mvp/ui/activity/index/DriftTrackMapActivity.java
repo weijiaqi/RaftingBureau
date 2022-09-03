@@ -55,6 +55,7 @@ import com.baidu.mapapi.search.district.OnGetDistricSearchResultListener;
 import com.drifting.bureau.R;
 import com.drifting.bureau.app.application.RBureauApplication;
 import com.drifting.bureau.base.BaseManagerActivity;
+import com.drifting.bureau.data.entity.LatLngEntity;
 import com.drifting.bureau.data.event.BackSpaceEvent;
 import com.drifting.bureau.data.event.PaymentEvent;
 import com.drifting.bureau.data.event.TagEvent;
@@ -98,6 +99,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 import java.util.List;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -157,7 +159,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
     private List<OverlayOptions> options;
     private LayoutInflater inflater;
     private List<InfoWindow> infoWindowList;
-    private int status, explore_id, message_id, attend, message_id2, user_id, user_id2, total, postion, Msgtype, leftStatus, rightStatus;
+    private int status, explore_id, message_id, attend, CreateTopicId, user_id, user_id2, total, postion, Msgtype, leftStatus, rightStatus;
     private int PermisType;
     private String path;
     private UiSettings mUiSettings;
@@ -183,6 +185,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
     private MoreDetailsForMapEntity.FutureBean futureBea;
     private List<MoreDetailsForMapEntity.MessagePathBean> messagePathBeanList;
     private CommentDetailsEntity commentDetailsEntity;
+    private List<LatLngEntity> latLngEntityList;
 
     public static void start(Context context, int type, int explore_id, int message_id, boolean closePage) {
         Intent intent = new Intent(context, DriftTrackMapActivity.class);
@@ -283,17 +286,15 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
         } else if (Msgtype == 2) { //引导
             openNewDrift();
         } else {
-            getDetail(1);
+            getDetail(1, message_id);
         }
-
-
         AddListener();
     }
 
 
-    public void getDetail(int type) {
+    public void getDetail(int type, int id) {
         if (mPresenter != null) {
-            mPresenter.moreDetails(message_id, type);
+            mPresenter.moreDetails(id, type);
         }
     }
 
@@ -312,6 +313,9 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
                         setIsVisible(true);
                         getToUser(messagePathBeanList.get(marker.getZIndex()).getUser_id());
                     }
+                } else {
+                    setIsVisible(true);
+                    getToUser(messagePathBeanList.get(marker.getZIndex()).getUser_id());
                 }
                 return true;
             }
@@ -326,16 +330,23 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
         infoWindowList = new ArrayList<>();
         inflater = LayoutInflater.from(getApplicationContext());
         View view = inflater.inflate(R.layout.layout_show_message, null, false);
+        TextView mTvCityMore = view.findViewById(R.id.tv_city_more);
         TextView mTvTitle = view.findViewById(R.id.tv_title);
         TextView mTvReceiveTime = view.findViewById(R.id.tv_receive_time);
         TextView mTvShopNo = view.findViewById(R.id.tv_shop_no);
         mTvTitle.setText(getString(R.string.from_city, messagePathBeanList.get(index).getName_city()));
+        mTvCityMore.setVisibility(messagePathBeanList.get(index).getCity_attend() > 1 ? View.VISIBLE : View.GONE);
         if (messagePathBeanList.get(index).getHas_shop() == 0) {
             mTvShopNo.setVisibility(View.INVISIBLE);
         } else {
             mTvShopNo.setVisibility(View.INVISIBLE);
             mTvShopNo.setText("（" + messagePathBeanList.get(index).getShop_no() + "）");
         }
+        //城市更多参与人查看
+        mTvCityMore.setOnClickListener(view1 -> {
+            DeliveryDetailsActivity.start(this, messageBean.getId(), messagePathBeanList.get(index).getCode_city(), false);
+        });
+
         mInfoWindow = new InfoWindow(view, latLng, -80);
         infoWindowList.add(mInfoWindow);
         mTvReceiveTime.setOnClickListener(v -> {
@@ -351,11 +362,11 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
     }
 
 
-    public void showDetails(int type) {
-        if (type == 0) {
+    public void showDetails(int click) {
+        if (click == 0) {
             mPresenter.details(messageBean.getId(), 0, messagePathBeanList.get(0).getUser_id());
         } else {
-            mPresenter.details(messagePathBeanList.get(type).getComment_id(), 1, messagePathBeanList.get(type).getUser_id());
+            mPresenter.details(messagePathBeanList.get(click).getComment_id(), 1, messagePathBeanList.get(click).getUser_id());
         }
     }
 
@@ -457,15 +468,11 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
             futureBea = entity.getFuture();
             messagePathBeanList = entity.getMessage_path();
             attend = relevanceBean.getAttend();
-
             //展示开启新漂流
             mTvOpen.setVisibility(attend == 1 ? View.VISIBLE : View.GONE);
-
-
             if (messageBean.getId() == 0) {  //发起话题
                 openNewDrift();
             } else {
-                message_id2 = messageBean.getId();
                 MoreDetailsForMapEntity.MessagePathBean messagePathBean = new MoreDetailsForMapEntity.MessagePathBean();
                 messagePathBean.setUser_id(messageBean.getUser_id());
                 messagePathBean.setComment_id(-1);
@@ -475,19 +482,16 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
                 messagePathBean.setHas_shop(messageBean.getHas_shop());
                 messagePathBean.setShop_no(messageBean.getShop_no());
                 messagePathBean.setCity_attend(messageBean.getCity_attend());
+                messagePathBean.setCode_city(messageBean.getCode_city());
                 messagePathBeanList.add(0, messagePathBean);
                 MoreDetailsForMapEntity.MessagePathBean messagePathBean2 = new MoreDetailsForMapEntity.MessagePathBean();
+                messagePathBean2.setUser_id(futureBea.getUser_id());
                 messagePathBean2.setLat(futureBea.getLat());
                 messagePathBean2.setLng(futureBea.getLng());
                 messagePathBeanList.add(messagePathBean2);
 
-                if (messagePathBeanList.size() == 2) {
-                    getFromUser(messageBean.getUser_id());
-                    setIsVisible(false);
-                } else {
-                    getFromUser(messageBean.getUser_id());
-                    getToUser(messagePathBeanList.get(messagePathBeanList.size() - 2).getUser_id());
-                }
+                getFromUser(messageBean.getUser_id());
+                getToUser(messagePathBeanList.get(messagePathBeanList.size() - 1).getUser_id());
 
                 selectCity(messageBean.getName_city());
             }
@@ -518,7 +522,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
                         sb.append(skuListEntity.getGoods_sku().get(i).getSku_code());
                     }
                     if (mPresenter != null) {
-                        mPresenter.createOrder(message_id2, sb.toString());
+                        mPresenter.createOrder(CreateTopicId, sb.toString());
                     }
                 }
             });
@@ -529,7 +533,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
     @Override
     public void onCreatewithwordSuccess(CreatewithfileEntity entity) {
         if (entity != null) {
-            message_id2 = entity.getMessage_id();
+            CreateTopicId = entity.getMessage_id();
             if (status == 1) {
                 if (entity.getNeed_pay() == 1) {
                     if (mPresenter != null) {
@@ -562,9 +566,10 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
 
 
     public void refreshUi(int type) {
+        isNew = false;
         removeTrace();
         mBaiduMap.clear();
-        getDetail(type);  // 刷新界面
+        getDetail(type, CreateTopicId);  // 刷新界面
     }
 
 
@@ -607,6 +612,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
     public void setIsVisible(boolean type) {
         mRlRight.setVisibility(type ? View.VISIBLE : View.INVISIBLE);
         mLlRight.setVisibility(type ? View.VISIBLE : View.INVISIBLE);
+        mRlRIghtAddFriends.setVisibility(View.GONE);
     }
 
     /**
@@ -838,11 +844,12 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
 
 
     public BitmapDescriptor getIcon(int i) {
-        if (i == 0) {
-            return mbpStart;
+
+        if (i == messagePathBeanList.size() - 1) {
+            return mbpEnd;
         } else {
-            if (i == messagePathBeanList.size() - 1) {
-                return mbpEnd;
+            if (messagePathBeanList.get(i).getHas_shop() == 1) {
+                return mbpStart;
             } else {
                 return mbpCenter;
             }
@@ -948,8 +955,8 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
                     } else {
                         mBaiduMap.setMapStatus(MapStatusUpdateFactory.newLatLngBounds(builder.build()));
                     }
-                    if (isNew) {
-                        showNewInfoWindow(RBureauApplication.latLng);
+                    if (isNew) {  //开启新漂流
+                        getRandomLatLng();
                     } else {
                         setMapOption();
                     }
@@ -959,6 +966,28 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
             }
         }
     };
+
+
+    /**
+     * @description 获取随机城市经纬度
+     */
+
+    public void getRandomLatLng() {
+        latLngEntityList = new ArrayList<>();
+        if (!Preferences.getCity().contains("北京")) {
+            latLngEntityList.add(new LatLngEntity("北京", 39.914466, 116.403613));
+        }
+        if (!Preferences.getCity().contains("上海")) {
+            latLngEntityList.add(new LatLngEntity("上海", 31.234941, 121.477665));
+        }
+        if (!Preferences.getCity().contains("石家庄")) {
+            latLngEntityList.add(new LatLngEntity("石家庄", 38.039663, 114.51904));
+        }
+        if (!Preferences.getCity().contains("太原")) {
+            latLngEntityList.add(new LatLngEntity("太原", 37.868491, 112.55053));
+        }
+        showOpenMsg(RBureauApplication.latLng, latLngEntityList.get(new Random().nextInt(latLngEntityList.size())));
+    }
 
 
     @Override
@@ -1154,8 +1183,11 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
         removeTrace();
         mBaiduMap.clear();
         isNew = true;
-        setIsVisible(false);
         getFromUser(Integer.parseInt(Preferences.getUserId()));
+        setIsVisible(true);
+        mTvToName.setText("???");
+        mTvRightName.setText("来自 ? ? ?");
+        mIvMastorRight.setImageResource(R.drawable.dark_bear);
         if (!TextUtils.isEmpty(Preferences.getCity())) {
             selectCity(Preferences.getCity());
         }
@@ -1172,15 +1204,46 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
     /**
      * @description 开启新漂流
      */
+    public void showOpenMsg(LatLng latLng, LatLngEntity latLngEntity) {
+        //创建OverlayOptions的集合
+        options = new ArrayList<OverlayOptions>();
+        for (int i = 0; i < 2; i++) {
+            OverlayOptions option = new MarkerOptions().position(i == 0 ? latLng : new LatLng(latLngEntity.getLatitude(), latLngEntity.getLongitude()))
+                    .icon(i == 0 ? mbpStart : mbpEnd)
+                    .perspective(false) // 设置是否开启 marker 覆盖物近大远小效果，默认开启
+                    .anchor(0.5f, 0.5f); // 设置 marker 覆盖物的锚点比例，默认（0.5f, 1.0f）水平居中，垂直下对齐
+            options.add(option);
+        }
+        mBaiduMap.addOverlays(options);
+
+        //添加轨迹点
+        OverlayOptions ooGeoPolyline = new PolylineOptions()
+                .isGeodesic(true)
+                .width(6)
+                .color(0x7fFFFFFF)
+                // 折线经度跨180需增加此字段
+                .lineDirectionCross180(PolylineOptions.LineDirectionCross180.FROM_WEST_TO_EAST)
+                .points(getNewTrace(latLng, latLngEntity));// 折线坐标点列表 数目[2,10000]，且不能包含 null
+        Polyline mGeoPolyline = (Polyline) mBaiduMap.addOverlay(ooGeoPolyline);
+        mGeoPolyline.setDottedLine(true);
+
+        showNewInfoWindow(latLng);
+
+    }
+
+    private List<LatLng> getNewTrace(LatLng latLng, LatLngEntity latLngEntity) {
+        List<LatLng> points = new ArrayList<LatLng>();
+        points.add(latLng);
+        points.add(new LatLng(latLngEntity.getLatitude(), latLngEntity.getLongitude()));
+        return points;
+    }
+
+
+    /**
+     * @description 添加弹窗
+     */
+
     public void showNewInfoWindow(LatLng latLng) {
-
-        OverlayOptions option = new MarkerOptions().position(latLng)
-                .icon(mbpStart)
-                .perspective(false) // 设置是否开启 marker 覆盖物近大远小效果，默认开启
-                .anchor(0.5f, 0.5f); // 设置 marker 覆盖物的锚点比例，默认（0.5f, 1.0f）水平居中，垂直下对齐
-
-        mBaiduMap.addOverlay(option);
-
         inflater = LayoutInflater.from(getApplicationContext());
         View view = inflater.inflate(R.layout.layout_start_drifting, null, false);
         FrameLayout mFlNewMessage = view.findViewById(R.id.fl_new_message);
@@ -1190,10 +1253,8 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
         });
         mBaiduMap.showInfoWindow(mInfoWindow);
 
-        builder.zoom(10.0f);
-        mBaiduMap.setMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
-
     }
+
 
     public void OpenNewMsg() {
         RequestUtil.create().platformtimes(explore_id, entity -> {

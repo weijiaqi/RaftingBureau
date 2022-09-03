@@ -1,5 +1,6 @@
 package com.drifting.bureau.mvp.ui.dialog;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.view.View;
@@ -19,30 +20,24 @@ public class VoicePlayDialog extends BaseDialog implements View.OnClickListener{
     private ImageView mIvPlay;
     private TextView mTvTime;
     private String content;
+    private Context context;
     private int time;
 
     public VoicePlayDialog(@NonNull Context context,String content,int time) {
         super(context);
+        this.context=context;
         this.content=content;
         this.time=time;
         init();
     }
 
     public void init(){
-        setOnShowListener(new OnShowListener() {
-            @Override
-            public void onShow(DialogInterface dialogInterface) {
-                videoView.setDecibel(0);
-                startPlay();
-            }
+        setOnShowListener(dialogInterface -> {
+            videoView.setDecibel(0);
+            startPlay();
         });
 
-        setOnDismissListener(new OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                VideoUtil.stop(videoView,mIvPlay,mTvTime,time);
-            }
-        });
+        setOnDismissListener(dialog -> VideoUtil.stop(videoView,mIvPlay,mTvTime,time));
     }
 
     @Override
@@ -79,6 +74,6 @@ public class VoicePlayDialog extends BaseDialog implements View.OnClickListener{
     }
 
     public void startPlay(){
-        VideoUtil.startVoicePlay(content, time, mIvPlay, videoView, mTvTime);
+        PermissionDialog.startVoicePlay((Activity) context,content, time, mIvPlay, videoView, mTvTime);
     }
 }

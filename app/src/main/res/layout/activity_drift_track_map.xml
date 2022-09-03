@@ -157,7 +157,7 @@
                 android:layout_below="@+id/iv_mastor_left"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="4dp"
-                android:text="来自荒芜星"
+                android:text=""
                 android:textColor="@color/color_6ce"
                 android:textSize="11sp" />
         </RelativeLayout>
@@ -184,13 +184,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                android:text="你的小太阳"
+                android:text=""
+                android:maxEms="6"
+                android:singleLine="true"
+                android:ellipsize="end"
                 android:textColor="@color/color_6cec"
                 android:textSize="11sp"
                 android:textStyle="bold" />
 
             <RelativeLayout
                 android:id="@+id/rl_left_add_friend"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp">
@@ -249,7 +253,7 @@
                 android:layout_below="@+id/iv_mastor_right"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="4dp"
-                android:text="来自荒芜星"
+                android:text=""
                 android:textColor="@color/color_e7"
                 android:textSize="11sp" />
         </RelativeLayout>
@@ -277,13 +281,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                android:text="你的小太阳"
+                android:text=""
+                android:maxEms="6"
+                android:singleLine="true"
+                android:ellipsize="end"
                 android:textColor="@color/color_e7"
                 android:textSize="11sp"
                 android:textStyle="bold" />
 
 
             <RelativeLayout
+                android:visibility="gone"
                 android:id="@+id/rl_right_add_friend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

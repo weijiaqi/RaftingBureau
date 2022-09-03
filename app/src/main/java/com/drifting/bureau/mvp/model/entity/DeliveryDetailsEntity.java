@@ -58,7 +58,7 @@ public class DeliveryDetailsEntity {
             private String image;
             private Integer message_id;
             private Integer path_time;
-            private Integer type_id;
+
             private String user_name;
             private String user_id;
             private String planet_level_name;
@@ -66,6 +66,33 @@ public class DeliveryDetailsEntity {
             private Integer type;
             private String level_name;
             private String mascot;
+           private String audio;
+           private String vedio;
+           private String album;
+
+            public String getAudio() {
+                return audio;
+            }
+
+            public void setAudio(String audio) {
+                this.audio = audio;
+            }
+
+            public String getVedio() {
+                return vedio;
+            }
+
+            public void setVedio(String vedio) {
+                this.vedio = vedio;
+            }
+
+            public String getAlbum() {
+                return album;
+            }
+
+            public void setAlbum(String album) {
+                this.album = album;
+            }
 
             public String getMascot() {
                 return mascot;
@@ -123,13 +150,6 @@ public class DeliveryDetailsEntity {
                 this.path_time = path_time;
             }
 
-            public Integer getType_id() {
-                return type_id;
-            }
-
-            public void setType_id(Integer type_id) {
-                this.type_id = type_id;
-            }
 
             public String getUser_name() {
                 return user_name;

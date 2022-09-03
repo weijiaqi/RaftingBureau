@@ -132,7 +132,6 @@ import kotlin.Unit;
  */
 public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsolePresenter> implements FragmentOnAttachListener, BaseArFragment.OnSessionConfigurationListener,
         CleanArFragment.OnViewCreatedListener, View.OnClickListener, ArCenterConsoleContract.View, XRecyclerView.LoadingListener {
-
     @BindView(R.id.tv_bar)
     TextView mTvBar;
     @BindView(R.id.tv_change_mode)
@@ -478,20 +477,6 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
                                     driftingPlayDialog.setOnClickCallback(type -> {
                                         if (type == DriftingPlayDialog.OPEN_PLAY) {//开启玩法
                                             try {
-                                                if (!Preferences.isArRightHandGuide()) {  //启动引导页
-                                                    andy12 = new TransformableNode(transformationSystem);
-                                                    andy12.setParent(anchorNode);
-                                                    andy12.setRenderable(model12.get()).animate(true).start();
-                                                    andy12.setWorldScale(new Vector3(0.03f, 0.03f, 0.03f));
-                                                    andy12.setLocalPosition(new Vector3(0.6f, -0.2f, -2f));
-                                                    andy12.setLocalRotation(Quaternion.axisAngle(new Vector3(0f, 1f, 0f), -30f));
-                                                    andy12.getRenderableInstance().setCulling(false);
-                                                    // 禁止缩放，没禁止缩放，设置的倍数会失效，自动加载默认的大小
-                                                    andy12.getScaleController().setEnabled(false);
-                                                    andy12.getRotationController().setEnabled(false);
-                                                    andy12.getTranslationController().setEnabled(false);
-                                                    andy12.select();
-                                                }
                                                 if (andy8 != null) {
                                                     anchorNode.removeChild(andy8);
                                                 }
@@ -519,6 +504,22 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
                                                         DriftTrackMapActivity.start(ArCenterConsoleActivity.this, 1, 1, 0, false);
                                                     }
                                                 });
+
+                                                if (!Preferences.isArRightHandGuide()) {  //启动引导页
+                                                    andy12 = new TransformableNode(transformationSystem);
+                                                    andy12.setParent(anchorNode);
+                                                    andy12.setRenderable(model12.get()).animate(true).start();
+                                                    andy12.setWorldScale(new Vector3(0.03f, 0.03f, 0.03f));
+                                                    andy12.setLocalPosition(new Vector3(0.6f, -0.2f, -2f));
+                                                    andy12.setLocalRotation(Quaternion.axisAngle(new Vector3(0f, 1f, 0f), -30f));
+                                                    andy12.getRenderableInstance().setCulling(false);
+                                                    // 禁止缩放，没禁止缩放，设置的倍数会失效，自动加载默认的大小
+                                                    andy12.getScaleController().setEnabled(false);
+                                                    andy12.getRotationController().setEnabled(false);
+                                                    andy12.getTranslationController().setEnabled(false);
+                                                    andy12.select();
+                                                }
+
                                             } catch (ExecutionException e) {
                                                 e.printStackTrace();
                                             } catch (InterruptedException e) {

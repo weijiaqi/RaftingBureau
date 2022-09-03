@@ -138,21 +138,6 @@ public interface ApiService {
 
 
     /**
-     * 创建话题 （普通文字）
-     */
-    @FormUrlEncoded
-    @POST("v/message/createwithfile")
-    Observable<BaseEntity<CreatewithfileEntity>> createwithword(@Field("type_id") int status, @Field("explore_id") int explore_id, @Field("content") String content, @Field("message_id") int message_id);
-
-
-    /**
-     * 创建话题（支持文件上传，发起和参与话题共用）
-     */
-    @POST("v/message/createwithfile")
-    Observable<BaseEntity<CreatewithfileEntity>> createwithvoice(@Body MultipartBody shortVoice);
-
-
-    /**
      * 创建话题（V2-话题标签）
      */
     @POST("v/message/creatingwithfile/v2")
@@ -489,8 +474,8 @@ public interface ApiService {
      * @return
      */
     @FormUrlEncoded
-    @POST("v/message/path/details")
-    Observable<BaseEntity<DeliveryDetailsEntity>> pathdetails(@Field("message_id") int message_id, @Field("page") int page, @Field("limit") int limit);
+    @POST("v/message/path/attendInCity")
+    Observable<BaseEntity<DeliveryDetailsEntity>> pathdetails(@Field("message_id") int message_id,@Field("code_city") String code_city, @Field("page") int page, @Field("limit") int limit);
 
 
     /**
