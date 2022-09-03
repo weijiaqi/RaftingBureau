@@ -145,7 +145,7 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
         mRlStartVoice.setOnClickListener(this);
 
         //是否展示引导页
-        mapGuideView.setVisibility(!Preferences.isOrdinaryGuide()?View.VISIBLE:View.GONE);
+        mapGuideView.setVisibility(!Preferences.isPostGuide()?View.VISIBLE:View.GONE);
         mapGuideView.setOnClickCallback(() -> mapGuideView.setVisibility(View.INVISIBLE));
 
 

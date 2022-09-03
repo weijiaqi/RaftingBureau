@@ -23,13 +23,20 @@ public class Preferences {
     private static final String KEY_USER_ID = "user_id";
     private static final String KEY_USER_MASCOT = "user_mascot";
     private static final String KEY_USER_PASSWORD = "user_password";
-    private static final String KEY_USER_CITY= "user_city";
+    private static final String KEY_USER_CITY = "user_city";
     private static final String KEY_USER_IS_ANONY = "isanony";//是否为匿名状态
     private static final String KEY_USER_IS_ARMODEL = "isarmodel";//是否为AR模式
     private static final String KEY_USER_IS_DIDATTEND = "isdidAttend";//是否参与过漂流
     public static final String KEY_IS_TEST = "isTest"; //是不是测试环境
 
-    private static final String KEY_IS_ORDINARY = "is_ordinary";// 普通引导
+    private static final String KEY_IS_ORDINARY = "is_ar_ordinary";// 普通引导
+    private static final String KEY_IS_POST = "is_ar_post";// 普通发布引导
+    private static final String KEY_IS_AR = "is_ar";// AR引导
+    private static final String KEY_IS_AR_RIGHT_HAND = "is_ar_right_hand";// AR右手引导
+    private static final String KEY_IS_BEAR_AR = "is_ar_bear";// AR小熊引导
+    private static final String KEY_IS_AR_PLANET = "is_ar_planet";// AR星球答题引导
+    private static final String KEY_IS_AR_AIRPLANE = "is_ar_airplane";// AR星球飞机引导
+
     /**
      * 初始化构建
      */
@@ -99,21 +106,99 @@ public class Preferences {
     }
 
 
+    //普通版本引导
     public static boolean isOrdinaryGuide() {
         return !(getString(KEY_IS_ORDINARY) == null || "0".equals(getString(KEY_IS_ORDINARY))) && "1".equals(getString(KEY_IS_ORDINARY));
     }
 
-
-    //普通版本引导
-    public static void setOrdinaryGuide(boolean isMatch) {
-        if (isMatch) {
+    public static void setOrdinaryGuide(boolean isOrdinary) {
+        if (isOrdinary) {
             saveString(KEY_IS_ORDINARY, 1 + "");
         } else {
             saveString(KEY_IS_ORDINARY, 0 + "");
         }
     }
 
+    //普通版本发布漂流
+    public static boolean isPostGuide() {
+        return !(getString(KEY_IS_POST) == null || "0".equals(getString(KEY_IS_POST))) && "1".equals(getString(KEY_IS_POST));
+    }
 
+    public static void setPostGuide(boolean isOrdinary) {
+        if (isOrdinary) {
+            saveString(KEY_IS_POST, 1 + "");
+        } else {
+            saveString(KEY_IS_POST, 0 + "");
+        }
+    }
+
+
+    //AR版本主页引导
+    public static boolean isArGuide() {
+        return !(getString(KEY_IS_AR) == null || "0".equals(getString(KEY_IS_AR))) && "1".equals(getString(KEY_IS_AR));
+    }
+
+    public static void setArGuide(boolean isAr) {
+        if (isAr) {
+            saveString(KEY_IS_AR, 1 + "");
+        } else {
+            saveString(KEY_IS_AR, 0 + "");
+        }
+    }
+
+
+    //AR版本转盘右手引导
+    public static boolean isArRightHandGuide() {
+        return !(getString(KEY_IS_AR_RIGHT_HAND) == null || "0".equals(getString(KEY_IS_AR_RIGHT_HAND))) && "1".equals(getString(KEY_IS_AR_RIGHT_HAND));
+    }
+
+    public static void setArRightHandGuide(boolean isAr) {
+        if (isAr) {
+            saveString(KEY_IS_AR_RIGHT_HAND, 1 + "");
+        } else {
+            saveString(KEY_IS_AR_RIGHT_HAND, 0 + "");
+        }
+    }
+
+
+    //AR版本小熊引导
+    public static boolean isArBear() {
+        return !(getString(KEY_IS_BEAR_AR) == null || "0".equals(getString(KEY_IS_BEAR_AR))) && "1".equals(getString(KEY_IS_BEAR_AR));
+    }
+
+    public static void setArBear(boolean isAr) {
+        if (isAr) {
+            saveString(KEY_IS_BEAR_AR, 1 + "");
+        } else {
+            saveString(KEY_IS_BEAR_AR, 0 + "");
+        }
+    }
+
+    //AR版本星球飞机引导
+    public static boolean isArAirplane() {
+        return !(getString(KEY_IS_AR_AIRPLANE) == null || "0".equals(getString(KEY_IS_AR_AIRPLANE))) && "1".equals(getString(KEY_IS_AR_AIRPLANE));
+    }
+
+    public static void setArAirplane(boolean isAr) {
+        if (isAr) {
+            saveString(KEY_IS_AR_AIRPLANE, 1 + "");
+        } else {
+            saveString(KEY_IS_AR_AIRPLANE, 0 + "");
+        }
+    }
+
+    //AR星球答题引导
+    public static boolean isArPlanet() {
+        return !(getString(KEY_IS_AR_PLANET) == null || "0".equals(getString(KEY_IS_AR_PLANET))) && "1".equals(getString(KEY_IS_AR_PLANET));
+    }
+
+    public static void setArPlanet(boolean isAr) {
+        if (isAr) {
+            saveString(KEY_IS_AR_PLANET, 1 + "");
+        } else {
+            saveString(KEY_IS_AR_PLANET, 0 + "");
+        }
+    }
 
     //用户唯一标识符
     public static void saveToken(String token) {
@@ -133,9 +218,6 @@ public class Preferences {
     public static String getCity() {
         return getString(KEY_USER_CITY);
     }
-
-
-
 
 
     //用户第一次注册昵称
@@ -245,10 +327,26 @@ public class Preferences {
         boolean isTest = isTest();//测试环境
         String phone = getPhone();
         String password = getPassword();
+        //退出不重新加载引导
+        boolean isOrdinaryGuide = isOrdinaryGuide();
+        boolean isPostGuide = isPostGuide();
+        boolean isArGuide = isArGuide();
+        boolean isArRightHandGuide = isArRightHandGuide();
+        boolean isArBear = isArBear();
+        boolean isArAirplane = isArAirplane();
+        boolean isArPlanet = isArPlanet();
         clear();
         savePhone(phone);
         savePassword(password);
         saveTestState(isTest);//测试环境
+        //退出不重新加载引导
+        setOrdinaryGuide(isOrdinaryGuide);
+        setPostGuide(isPostGuide);
+        setArGuide(isArGuide);
+        setArRightHandGuide(isArRightHandGuide);
+        setArBear(isArBear);
+        setArAirplane(isArAirplane);
+        setArPlanet(isArPlanet);
     }
 
 

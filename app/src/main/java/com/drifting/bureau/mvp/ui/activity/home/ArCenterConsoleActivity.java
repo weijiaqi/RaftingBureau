@@ -72,6 +72,8 @@ import com.drifting.bureau.util.callback.BaseDataCallBack;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.drifting.bureau.view.CleanArFragment;
 import com.drifting.bureau.view.chart.LineChartView;
+import com.drifting.bureau.view.guide.ArGuideView;
+import com.drifting.bureau.view.guide.ArPlanetDialogGuiView;
 import com.google.android.filament.utils.HDRLoader;
 import com.google.ar.core.Config;
 import com.google.ar.core.Session;
@@ -141,6 +143,12 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
     TextView mTvAboutMe;
     @BindView(R.id.iv_hot)
     ImageView mIvHot;
+    @BindView(R.id.guide_view)
+    ArGuideView mGuideView;
+    @BindView(R.id.guide_planet_view)
+    ArPlanetDialogGuiView mGuidePlanetView;
+    @BindView(R.id.ll_explore_planet)
+    LinearLayout mLlExplorePlanet;
     private ImageView mIvBorder1, mIvBorder2, mIvBorder3, mIvBorder4, mIvBorder5, mIvOperation, mIvDriftTrack, mIvStarTroopers, mIvPhysicalstore, mIvRadioNews, mIvMastor, mIvLock, mIvDrink, mIvFindPlanet, mIvExplorePlay, mIvHaveNewOrder, mIvNoneNewOrder, mIvQueryInventory;
     private XRecyclerView mRcyWithdrawalsRecord, mRcyMakeRecord, mRcyIncomeRecord;
     private LinearLayout mLlContent, mLlReceiveTea, mLlTop, mLlNewSpaceOrder;
@@ -150,7 +158,7 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
     private HorizontalScrollView scrollView;
     private LineChartView lineChartView;
     private ArSceneView arSceneView;
-    private CompletableFuture<ModelRenderable> model, model2, model3, model5, model7, model8, model9, model10, model11;
+    private CompletableFuture<ModelRenderable> model, model2, model3, model4, model5, model7, model8, model9, model10, model11, model12;
     private CompletableFuture<ViewRenderable> viewRenderable, viewRenderable2, viewRenderable3, viewRenderable4, viewRenderable5;
     private int status = 1;
     private int id, explore_id, rcyid;
@@ -159,7 +167,7 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
     private AnchorNode anchorNode;
     private Node titleNode, spacenode, recordnode, recordnode2, inventorynode, inventorynode2, expenditurenode, expenditurenode2;
     private TransformationSystem transformationSystem;
-    private TransformableNode andy, andy2, andy3, andy5, andy7, andy8, andy9, andy10, andy11;
+    private TransformableNode andy, andy2, andy3, andy4, andy5, andy6, andy7, andy8, andy9, andy10, andy11, andy12;
     private View view;
     private Handler handlerReciver, handlerSpace;
     private ARWithRecordAdapter arWithRecordAdapter;
@@ -216,7 +224,73 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
                         .commit();
             }
         }
+
+
         loadModels();
+
+        //是否展示引导
+        mGuideView.setVisibility(!Preferences.isArGuide() ? View.VISIBLE : View.GONE);
+        mGuideView.setOnClickCallback(() -> {
+
+            mGuideView.setVisibility(View.GONE);
+
+            model4 = ModelRenderable
+                    .builder()
+                    .setSource(this
+                            , Uri.parse("models/youshou.glb"))
+                    .setIsFilamentGltf(true)
+                    .setAsyncLoadEnabled(true)
+                    .build();
+
+
+            ModelRenderable.builder()
+                    .setSource(this, Uri.parse("models/jiaoyin.glb"))
+                    .setIsFilamentGltf(true)
+                    .setAsyncLoadEnabled(true)
+                    .build()
+                    .thenAccept(model -> {
+                        if (anchorNode != null) {
+                            andy6 = new TransformableNode(transformationSystem);
+                            andy6.setParent(anchorNode);
+                            andy6.setRenderable(model).animate(false).start();
+                            andy6.setWorldScale(new Vector3(0.22f, 0.22f, 0.22f));
+                            andy6.setLocalPosition(new Vector3(0.25f, -1f, -1.1f));
+                            andy6.getRenderableInstance().setCulling(false);
+                            // 禁止缩放
+                            andy6.getScaleController().setEnabled(false);
+                            andy6.getRotationController().setEnabled(false);
+                            andy6.getTranslationController().setEnabled(false);
+                            andy6.select();
+
+                            new Handler().postDelayed(() -> {
+                                try {
+                                    if (andy6!=null){
+                                        andy4 = new TransformableNode(transformationSystem);
+                                        andy4.setParent(anchorNode);
+                                        andy4.setRenderable(model4.get()).animate(true).start();
+                                        andy4.setWorldScale(new Vector3(0.03f, 0.03f, 0.03f));
+                                        andy4.setLocalPosition(new Vector3(0.4f, 0f, -2f));
+                                        andy4.getRenderableInstance().setCulling(false);
+                                        // 禁止缩放
+                                        andy4.getScaleController().setEnabled(false);
+                                        andy4.getRotationController().setEnabled(false);
+                                        andy4.getTranslationController().setEnabled(false);
+                                        andy4.select();
+                                    }
+                                } catch (ExecutionException e) {
+                                    e.printStackTrace();
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            }, 3 * 1000);  //延迟10秒执行
+
+                        }
+                    })
+                    .exceptionally(throwable -> {
+                        return null;
+                    });
+        });
+
     }
 
     Runnable mAdRunnable = () -> getMessage();
@@ -246,9 +320,6 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
         this.arSceneView.getPlaneRenderer().setVisible(false); //隐藏小白点
 
 
-//        this.arSceneView.getRenderer().setMainLight(null);
-//        this.arSceneView.getRenderer().setIndirectLight(null);
-
         this.arSceneView.setFrameRateFactor(SceneView.FrameRate.FULL);
         ArSceneViewKt.setLightEstimationConfig(this.arSceneView, LightEstimationConfig.DISABLED);
         HDREnvironmentKt.loadEnvironmentAsync(
@@ -274,7 +345,6 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
     }
 
     public void loadModels() {
-
         model = ModelRenderable
                 .builder()
                 .setSource(this
@@ -320,12 +390,18 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
                 .setAsyncLoadEnabled(true)
                 .build();
 
-
         model10 = ModelRenderable.builder()
                 .setSource(this, Uri.parse("models/kongjianzhan.glb"))
                 .setIsFilamentGltf(true)
                 .setAsyncLoadEnabled(true)
                 .build();
+
+        model12 = ModelRenderable.builder()
+                .setSource(this, Uri.parse("models/zuoshou.glb"))
+                .setIsFilamentGltf(true)
+                .setAsyncLoadEnabled(true)
+                .build();
+
         viewRenderable = ViewRenderable.builder()
                 .setView(this, R.layout.view_center_console)
                 .build();
@@ -342,7 +418,7 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
                 .setView(this, R.layout.view_expenditure_record)
                 .build();
 
-        CompletableFuture.allOf(model, model2, model8, model3, model5, model11, model7, model9, model10, viewRenderable, viewRenderable2, viewRenderable3, viewRenderable4, viewRenderable5)
+        CompletableFuture.allOf(model, model2, model3, model5, model7, model8, model9, model10, model11, model12, viewRenderable, viewRenderable2, viewRenderable3, viewRenderable4, viewRenderable5)
                 .handle((ok, ex) -> {
                     try {
                         FootprintSelectionVisualizer selectionVisualizer = new FootprintSelectionVisualizer();
@@ -386,12 +462,36 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
                             @Override
                             public void onTap(HitTestResult hitTestResult, MotionEvent motionEvent) {
                                 if (!ClickUtil.isFastClick(motionEvent.getDeviceId())) {
+                                    if (andy6 != null || andy4 != null) {
+                                        Preferences.setArGuide(true);
+                                        if (andy6 != null) {
+                                            anchorNode.removeChild(andy6);
+                                            andy6=null;
+                                        }
+                                        if (andy4 != null) {
+                                            anchorNode.removeChild(andy4);
+                                        }
+                                    }
 
                                     driftingPlayDialog = new DriftingPlayDialog(ArCenterConsoleActivity.this);
                                     driftingPlayDialog.show();
                                     driftingPlayDialog.setOnClickCallback(type -> {
                                         if (type == DriftingPlayDialog.OPEN_PLAY) {//开启玩法
                                             try {
+                                                if (!Preferences.isArRightHandGuide()) {  //启动引导页
+                                                    andy12 = new TransformableNode(transformationSystem);
+                                                    andy12.setParent(anchorNode);
+                                                    andy12.setRenderable(model12.get()).animate(true).start();
+                                                    andy12.setWorldScale(new Vector3(0.03f, 0.03f, 0.03f));
+                                                    andy12.setLocalPosition(new Vector3(0.6f, -0.2f, -2f));
+                                                    andy12.setLocalRotation(Quaternion.axisAngle(new Vector3(0f, 1f, 0f), -30f));
+                                                    andy12.getRenderableInstance().setCulling(false);
+                                                    // 禁止缩放，没禁止缩放，设置的倍数会失效，自动加载默认的大小
+                                                    andy12.getScaleController().setEnabled(false);
+                                                    andy12.getRotationController().setEnabled(false);
+                                                    andy12.getTranslationController().setEnabled(false);
+                                                    andy12.select();
+                                                }
                                                 if (andy8 != null) {
                                                     anchorNode.removeChild(andy8);
                                                 }
@@ -411,6 +511,10 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
                                                 andy8.setOnTapListener(new Node.OnTapListener() {
                                                     @Override
                                                     public void onTap(HitTestResult hitTestResult, MotionEvent motionEvent) {
+                                                        if (andy12 != null) {
+                                                            Preferences.setArRightHandGuide(true);
+                                                            anchorNode.removeChild(andy12);
+                                                        }
                                                         anchorNode.removeChild(andy8);
                                                         DriftTrackMapActivity.start(ArCenterConsoleActivity.this, 1, 1, 0, false);
                                                     }
@@ -467,47 +571,54 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
                                     exclusivePlanetDialog.show();
                                     exclusivePlanetDialog.setOnClickCallback(type -> {
                                         if (type == ExclusivePlanetDialog.OPEN_PLAY) {
-                                            RequestUtil.create().planetlocation(entity -> {
-                                                if (entity != null && entity.getCode() == 200) {
-                                                    if (entity.getData().getAnswer() == 0) {
-                                                        MoveAwayPlanetaryActivity.start(ArCenterConsoleActivity.this, 1, false);
-                                                    } else {
-                                                        //隐藏节点
-                                                        try {
-                                                            andy.setEnabled(false);
-                                                            andy2.setEnabled(false);
-                                                            andy3.setEnabled(false);
-                                                            andy5.setEnabled(false);
-                                                            andy11.setEnabled(false);
-                                                            if (andy8 != null) {
-                                                                anchorNode.removeChild(andy8);
-                                                            }
-                                                            if (andy9 != null) {
-                                                                andy9.setEnabled(false);
-                                                            }
-                                                            status = 2;
-                                                            mTvChangeMode.setText("穿梭星云");
-                                                            //世界2
-                                                            andy7 = new TransformableNode(transformationSystem);
-                                                            andy7.setParent(anchorNode);
-                                                            andy7.setRenderable(model7.get()).animate(true).start();
-                                                            andy7.setLocalPosition(new Vector3(0f, -2f, 0f));
-                                                            andy7.getRenderableInstance().setCulling(false);
-                                                            // 禁止缩放，没禁止缩放，设置的倍数会失效，自动加载默认的大小
-                                                            andy7.getScaleController().setEnabled(false);
-                                                            andy7.getRotationController().setEnabled(false);
-                                                            andy7.getTranslationController().setEnabled(false);
-                                                            andy7.select();
-                                                            //移除中控台
-                                                            addDeleteNode();
-                                                        } catch (ExecutionException e) {
-                                                            e.printStackTrace();
-                                                        } catch (InterruptedException e) {
-                                                            e.printStackTrace();
+                                            try {
+                                                andy.setEnabled(false);
+                                                andy2.setEnabled(false);
+                                                andy3.setEnabled(false);
+                                                andy5.setEnabled(false);
+                                                andy11.setEnabled(false);
+                                                if (andy8 != null) {
+                                                    anchorNode.removeChild(andy8);
+                                                }
+                                                if (andy9 != null) {
+                                                    andy9.setEnabled(false);
+                                                }
+                                                status = 2;
+                                                mTvChangeMode.setText("穿梭星云");
+
+                                                RequestUtil.create().planetlocation(entity -> {
+                                                    if (entity != null && entity.getCode() == 200) {
+                                                        if (entity.getData().getAnswer() == 0) {
+                                                            mLlExplorePlanet.setVisibility(View.VISIBLE);
+                                                            mGuidePlanetView.setVisibility(!Preferences.isArPlanet() ? View.VISIBLE : View.GONE);
+                                                            mGuidePlanetView.setOnClickCallback(() -> {
+                                                                Preferences.setArPlanet(true);
+                                                                mGuidePlanetView.setVisibility(View.GONE);
+                                                            });
+                                                        } else {
+                                                            mLlExplorePlanet.setVisibility(View.GONE);
                                                         }
                                                     }
-                                                }
-                                            });
+                                                });
+
+                                                //世界2
+                                                andy7 = new TransformableNode(transformationSystem);
+                                                andy7.setParent(anchorNode);
+                                                andy7.setRenderable(model7.get()).animate(true).start();
+                                                andy7.setLocalPosition(new Vector3(0f, -2f, 0f));
+                                                andy7.getRenderableInstance().setCulling(false);
+                                                // 禁止缩放，没禁止缩放，设置的倍数会失效，自动加载默认的大小
+                                                andy7.getScaleController().setEnabled(false);
+                                                andy7.getRotationController().setEnabled(false);
+                                                andy7.getTranslationController().setEnabled(false);
+                                                andy7.select();
+                                                //移除中控台
+                                                addDeleteNode();
+                                            } catch (ExecutionException e) {
+                                                e.printStackTrace();
+                                            } catch (InterruptedException e) {
+                                                e.printStackTrace();
+                                            }
 
                                         }
                                     });
@@ -897,7 +1008,7 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
 
     }
 
-    @OnClick({R.id.tv_change_mode, R.id.rl_info, R.id.tv_about_me})
+    @OnClick({R.id.tv_change_mode, R.id.rl_info, R.id.tv_about_me, R.id.ll_explore_planet})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
@@ -914,6 +1025,9 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
                     if (userInfoEntity != null) {
                         PlanetarySelectActivity.start(this, userInfoEntity.getPlanet().getLevel(), false);
                     }
+                    break;
+                case R.id.ll_explore_planet:   //开启探寻
+                    MoveAwayPlanetaryActivity.start(ArCenterConsoleActivity.this, 1, false);
                     break;
                 case R.id.iv_explore_play:  //探索玩法
                     if (status == 1) {
@@ -978,7 +1092,7 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
      * @description跳回到主场景
      */
     public void nextMainNode() {
-        mTvChangeMode.setText("更换模式");
+        mTvChangeMode.setText("转换普通模式");
         andy.setEnabled(true);
         andy5.setEnabled(true);
         andy2.setEnabled(true);
@@ -988,6 +1102,7 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
             andy9.setEnabled(true);
         }
         if (status == 2) {
+            mLlExplorePlanet.setVisibility(View.GONE);
             anchorNode.removeChild(andy7);
         } else if (status == 3) {  //空间站
             anchorNode.removeChild(spacenode);
@@ -1407,7 +1522,7 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
             andy9.setParent(anchorNode);
             andy9.setRenderable(model9.get()).animate(true).start();
             andy9.setWorldScale(new Vector3(0.2f, 0.2f, 0.2f));
-            andy9.setLocalPosition(new Vector3(3f, -0.5f, -10f));
+            andy9.setLocalPosition(new Vector3(5f, -0.5f, -10f));
             // 禁止缩放，没禁止缩放，设置的倍数会失效，自动加载默认的大小
             andy9.getScaleController().setEnabled(false);
             andy9.getRotationController().setEnabled(false);

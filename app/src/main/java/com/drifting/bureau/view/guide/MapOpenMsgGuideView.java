@@ -6,36 +6,37 @@ import android.text.SpannableStringBuilder;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
-
 import android.widget.TextView;
+
 import com.drifting.bureau.R;
-import com.drifting.bureau.mvp.ui.activity.index.DriftTrackMapActivity;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.SpannableUtil;
 import com.jess.arms.utils.SystemUtil;
 
 /**
- * @Description: 首页引导
- * @Author : WeiJiaQI
- * @Time : 2022/9/1 15:58
+ * @author 卫佳琪1
+ * @description 开启漂流引导
+ * @time 19:19 19:19
  */
-public class IndexGuiView extends LinearLayout implements View.OnClickListener {
+
+public class MapOpenMsgGuideView extends LinearLayout implements View.OnClickListener {
 
     private Context mContext;
-    private IndexGuiView mGuideView;
     private TextView mTvBar, mTvTitle;
+    private MapOpenMsgGuideView mGuideView;
     private SpannableStringBuilder passer;
     private OnClickCallback onClickCallback;
-    public IndexGuiView(Context context) {
+
+    public MapOpenMsgGuideView(Context context) {
         super(context);
     }
 
-    public IndexGuiView(Context context, AttributeSet attrs) {
+    public MapOpenMsgGuideView(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContext = context;
     }
 
-    public IndexGuiView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public MapOpenMsgGuideView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
@@ -46,11 +47,14 @@ public class IndexGuiView extends LinearLayout implements View.OnClickListener {
         mTvBar = findViewById(R.id.tv_bar);
         mTvTitle = findViewById(R.id.tv_title);
         mGuideView.setOnClickListener(this);
+
+
+
         initDatas();
     }
 
     public void initDatas() {
-        passer = SpannableUtil.getBuilder(mContext, "欢迎来到元宇宙漂流局，\n 接下来请开启你的传递之旅\n").setForegroundColor(R.color.white).setTextSize(12).setBold().append("点击“传递漂”").setForegroundColor(R.color.color_6d).setBold().setTextSize(12).build();
+        passer = SpannableUtil.getBuilder(mContext, "“点击开启漂流”\n").setForegroundColor(R.color.color_6d).setTextSize(12).append("输入想要漂流的话题内容").setForegroundColor(R.color.white).setTextSize(12).build();
         mTvTitle.setText(passer);
         mTvBar.setHeight(SystemUtil.getStatusBarHeight(mContext));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -58,14 +62,12 @@ public class IndexGuiView extends LinearLayout implements View.OnClickListener {
         } else {
             mTvBar.setVisibility(GONE);
         }
-
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.guide_view:
-                Preferences.setOrdinaryGuide(true);
                 if (onClickCallback != null) {
                     onClickCallback.onClickType();
                 }

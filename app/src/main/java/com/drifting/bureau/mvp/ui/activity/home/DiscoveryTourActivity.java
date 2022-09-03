@@ -187,7 +187,7 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
         //是否展示引导
         mGuideView.setVisibility(!Preferences.isOrdinaryGuide()?View.VISIBLE:View.GONE);
         mGuideView.setOnClickCallback(() -> {
-            DriftTrackMapActivity.start(DiscoveryTourActivity.this, 1, 1, 0, false);
+            DriftTrackMapActivity.start(DiscoveryTourActivity.this, 2,1, 0, false);
             mGuideView.setVisibility(View.GONE);
         });
 

@@ -69,6 +69,15 @@ public class MoreDetailsForMapEntity {
             private String lng;
             private String lat;
             private Integer has_shop;
+            private Integer city_attend;
+
+            public Integer getCity_attend() {
+                return city_attend;
+            }
+
+            public void setCity_attend(Integer city_attend) {
+                this.city_attend = city_attend;
+            }
 
             public Integer getId() {
                 return id;
@@ -351,6 +360,15 @@ public class MoreDetailsForMapEntity {
             private String lng;
             private String lat;
             private Integer has_shop;
+            private Integer city_attend;
+
+            public Integer getCity_attend() {
+                return city_attend;
+            }
+
+            public void setCity_attend(Integer city_attend) {
+                this.city_attend = city_attend;
+            }
 
             public Integer getUser_id() {
                 return user_id;

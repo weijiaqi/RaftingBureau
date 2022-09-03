@@ -318,5 +318,6 @@
 
 
 
+  <include layout="@layout/layout_map_open_drifting_guide_view"/>
 
 </RelativeLayout>

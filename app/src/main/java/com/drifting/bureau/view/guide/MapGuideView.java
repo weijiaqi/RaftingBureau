@@ -87,7 +87,7 @@ public class MapGuideView extends LinearLayout implements View.OnClickListener {
                 showType(2);
                 break;
             case R.id.ll_bottom:
-               Preferences.setOrdinaryGuide(true);
+               Preferences.setPostGuide(true);
                 if (onClickCallback != null) {
                     onClickCallback.onClickType();
                 }

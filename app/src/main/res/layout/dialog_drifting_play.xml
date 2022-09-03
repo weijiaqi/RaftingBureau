@@ -1,115 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:src="@drawable/play_bear" />
+    android:layout_height="wrap_content">
 
 
     <RelativeLayout
+        android:id="@+id/rl_center"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="190dp"
-        android:background="@drawable/ar_play_bg">
+        android:layout_height="wrap_content">
 
-
-        <TextView
-            android:id="@+id/tv_title"
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="35dp"
-            android:text="请问你想要做什么？"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-
-
-        <TextView
-            android:id="@+id/tv_open_paly"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_title"
-            android:layout_marginStart="51dp"
-            android:layout_marginTop="13dp"
-            android:background="@drawable/ar_play_button"
-            android:gravity="center"
-            android:text="开启漂流玩法"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            android:textStyle="bold" />
-
-
-        <TextView
-            android:id="@+id/tv_start_space"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_title"
-            android:layout_marginStart="7dp"
-            android:layout_marginTop="13dp"
-            android:layout_toRightOf="@+id/tv_open_paly"
-            android:background="@drawable/ar_play_button"
-            android:gravity="center"
-            android:text="前往空间站"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            android:textStyle="bold" />
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/play_bear" />
 
 
         <RelativeLayout
-            android:id="@+id/rl_avatar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_open_paly"
-            android:layout_marginStart="51dp"
-            android:layout_marginTop="-3dp">
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="190dp"
+            android:background="@drawable/ar_play_bg">
+
 
             <TextView
+                android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="35dp"
+                android:text="请问你想要做什么？"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
+
+            <TextView
+                android:id="@+id/tv_open_paly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_title"
+                android:layout_marginStart="51dp"
                 android:layout_marginTop="13dp"
                 android:background="@drawable/ar_play_button"
-                android:backgroundTint="@color/color_00_cc"
                 android:gravity="center"
-                android:text="虚拟形象"
-                android:textColor="@color/color_white_4d"
+                android:text="开启漂流玩法"
+                android:textColor="@color/white"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
 
-            <ImageView
+            <TextView
+                android:id="@+id/tv_start_space"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="29dp"
-                android:src="@drawable/clock" />
+                android:layout_below="@+id/tv_title"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="13dp"
+                android:layout_toRightOf="@+id/tv_open_paly"
+                android:background="@drawable/ar_play_button"
+                android:gravity="center"
+                android:text="前往空间站"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+
+            <RelativeLayout
+                android:id="@+id/rl_avatar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_open_paly"
+                android:layout_marginStart="51dp"
+                android:layout_marginTop="-3dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="13dp"
+                    android:background="@drawable/ar_play_button"
+                    android:backgroundTint="@color/color_00_cc"
+                    android:gravity="center"
+                    android:text="虚拟形象"
+                    android:textColor="@color/color_white_4d"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="29dp"
+                    android:src="@drawable/clock" />
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/tv_youth_camp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_start_space"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="9dp"
+                android:layout_toRightOf="@+id/rl_avatar"
+                android:background="@drawable/ar_play_button"
+                android:gravity="center"
+                android:text="“青年创业营”"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:visibility="invisible" />
+
+
         </RelativeLayout>
-
-
-        <TextView
-            android:id="@+id/tv_youth_camp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_start_space"
-            android:layout_marginStart="7dp"
-            android:layout_marginTop="9dp"
-            android:layout_toRightOf="@+id/rl_avatar"
-            android:background="@drawable/ar_play_button"
-            android:gravity="center"
-            android:text="“青年创业营”"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:visibility="invisible" />
-
-
     </RelativeLayout>
+
+
+            <include layout="@layout/layout_ar_dialog_guide_view" />
 
 </RelativeLayout>

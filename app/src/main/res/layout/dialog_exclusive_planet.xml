@@ -1,55 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-
+    android:layout_height="wrap_content">
 
 
     <RelativeLayout
-        android:layout_marginTop="85dp"
+        android:id="@+id/rl_center"
+        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:background="@drawable/ar_play_bg"
-        android:layout_height="200dp">
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="85dp"
+            android:background="@drawable/ar_play_bg">
 
 
-        <TextView
-            android:id="@+id/tv_title"
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="55dp"
+                android:layout_marginEnd="31dp"
+                android:lineSpacingExtra="3dp"
+                android:text="\u3000\u3000可搭乘我寻找你的专属星球，\n请问是否搭乘？"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/tv_open_paly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_title"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="13dp"
+                android:layout_marginEnd="27dp"
+                android:background="@drawable/ar_play_button"
+                android:gravity="center"
+                android:text="寻找我的星球"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+
+        </RelativeLayout>
+
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="55dp"
-            android:layout_marginEnd="31dp"
-            android:lineSpacingExtra="3dp"
-            android:text="\u3000\u3000可搭乘我寻找你的专属星球，\n请问是否搭乘？"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-
-
-        <TextView
-            android:id="@+id/tv_open_paly"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_title"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="13dp"
-            android:layout_marginEnd="27dp"
-            android:background="@drawable/ar_play_button"
-            android:gravity="center"
-            android:text="寻找我的星球"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            android:textStyle="bold" />
-
-
+            android:src="@drawable/exclusive_planet" />
     </RelativeLayout>
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
 
-        android:src="@drawable/exclusive_planet" />
+
+    <include layout="@layout/layout_ar_airplane_dialog_guide_view" />
 
 </RelativeLayout>

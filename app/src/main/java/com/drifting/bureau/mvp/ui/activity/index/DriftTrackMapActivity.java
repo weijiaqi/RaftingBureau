@@ -81,6 +81,7 @@ import com.drifting.bureau.util.ViewUtil;
 
 import com.drifting.bureau.util.request.RequestUtil;
 
+import com.drifting.bureau.view.guide.MapOpenMsgGuideView;
 import com.jess.arms.di.component.AppComponent;
 
 import com.drifting.bureau.mvp.contract.DriftTrackMapContract;
@@ -146,6 +147,8 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
     RelativeLayout mRlLeftAddFriends;
     @BindView(R.id.rl_right_add_friend)
     RelativeLayout mRlRIghtAddFriends;
+    @BindView(R.id.guide_view)
+    MapOpenMsgGuideView mOpenGuideView;
     // 地图View实例
     private MapView mMapView;
     private BaiduMap mBaiduMap;
@@ -173,7 +176,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
     private BitmapDescriptor mbpStart = BitmapDescriptorFactory.fromResource(R.drawable.track_start);
     private BitmapDescriptor mbpCenter = BitmapDescriptorFactory.fromResource(R.drawable.track_center);
     private BitmapDescriptor mbpEnd = BitmapDescriptorFactory.fromResource(R.drawable.track_end);
-    private BitmapDescriptor mBlueTexture = BitmapDescriptorFactory.fromAsset("Icon_road_blue_arrow.png");
+
 
     private MoreDetailsForMapEntity.MessageBean messageBean;
     private MoreDetailsForMapEntity.RelevanceBean relevanceBean;
@@ -228,6 +231,15 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
             mIvRight.setImageResource(R.drawable.tran_detail);
         }
 
+        //是否展示引导
+        mOpenGuideView.setVisibility(!Preferences.isPostGuide() ? View.VISIBLE : View.GONE);
+        mOpenGuideView.setOnClickCallback(() -> {
+            mOpenGuideView.setVisibility(View.GONE);
+            if (RBureauApplication.latLng != null) {
+                OpenNewMsg();
+            }
+        });
+
         initListener();
     }
 
@@ -268,6 +280,8 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
             if (RBureauApplication.latLng != null) {
                 OpenNewMsg();
             }
+        } else if (Msgtype == 2) { //引导
+            openNewDrift();
         } else {
             getDetail(1);
         }
@@ -317,7 +331,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
         TextView mTvShopNo = view.findViewById(R.id.tv_shop_no);
         mTvTitle.setText(getString(R.string.from_city, messagePathBeanList.get(index).getName_city()));
         if (messagePathBeanList.get(index).getHas_shop() == 0) {
-            mTvShopNo.setVisibility(View.GONE);
+            mTvShopNo.setVisibility(View.INVISIBLE);
         } else {
             mTvShopNo.setVisibility(View.INVISIBLE);
             mTvShopNo.setText("（" + messagePathBeanList.get(index).getShop_no() + "）");
@@ -460,6 +474,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
                 messagePathBean.setName_city(messageBean.getName_city());
                 messagePathBean.setHas_shop(messageBean.getHas_shop());
                 messagePathBean.setShop_no(messageBean.getShop_no());
+                messagePathBean.setCity_attend(messageBean.getCity_attend());
                 messagePathBeanList.add(0, messagePathBean);
                 MoreDetailsForMapEntity.MessagePathBean messagePathBean2 = new MoreDetailsForMapEntity.MessagePathBean();
                 messagePathBean2.setLat(futureBea.getLat());

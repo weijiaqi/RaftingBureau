@@ -21,7 +21,30 @@
         app:contentInsetStart="0dp"
         tools:ignore="ContentDescription">
 
+        <LinearLayout
+            android:id="@+id/ll_step_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="14dp">
 
+            <com.hjq.shape.view.ShapeTextView
+                android:id="@+id/tv_change_mode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:drawableLeft="@drawable/toggle"
+                android:drawablePadding="4dp"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:text="转换元宇宙场景"
+                android:textColor="@color/color_82"
+                android:textSize="12sp"
+                app:shape_radius="100dp"
+                app:shape_solidColor="@color/color_0b" />
+
+        </LinearLayout>
 
 
         <LinearLayout

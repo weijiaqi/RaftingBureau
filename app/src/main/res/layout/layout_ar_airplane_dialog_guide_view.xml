@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.drifting.bureau.view.guide.ArAirplaneDialogGuiView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/guide_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/tv_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_black_cc000000"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/color_black_cc000000">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="47dp">
+
+            <FrameLayout
+                android:id="@+id/fl_top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="28dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/guide_ar_airplane_dialog_bottom" />
+
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="75dp"
+                    android:layout_marginTop="90dp"
+                    android:text="“点击开启漂流”"
+                    android:textColor="@color/color_6d"
+                    android:textSize="12sp" />
+            </FrameLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fl_top"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="29dp"
+                android:src="@drawable/guide_ar_airplane_dialog_button" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</com.drifting.bureau.view.guide.ArAirplaneDialogGuiView>

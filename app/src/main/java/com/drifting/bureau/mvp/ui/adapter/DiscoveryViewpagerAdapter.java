@@ -59,7 +59,6 @@ public class DiscoveryViewpagerAdapter extends PagerAdapter {
             if (!textView.getText().toString().equals("传递漂")) {
                 ToastUtil.showToast("暂未开放");
             } else {
-             //  TopicDetailActivity.start(context, list.get(position % list.size()).getId(), 0, false);
               DriftTrackMapActivity.start(context, list.get(position % list.size()).getId(), 0, false);
             }
         });
