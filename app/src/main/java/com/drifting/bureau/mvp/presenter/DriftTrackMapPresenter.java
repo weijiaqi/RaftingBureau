@@ -3,11 +3,14 @@ package com.drifting.bureau.mvp.presenter;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.media.MediaMetadataRetriever;
 import android.os.Build;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.FragmentActivity;
@@ -25,6 +28,7 @@ import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.AppUtil;
 import com.drifting.bureau.util.FileUtil;
 import com.drifting.bureau.util.LocationUtil;
+import com.drifting.bureau.util.ToastUtil;
 import com.hw.videoprocessor.VideoProcessor;
 import com.jess.arms.base.BaseEntity;
 import com.jess.arms.integration.AppManager;
@@ -353,7 +357,8 @@ public class DriftTrackMapPresenter extends BasePresenter<DriftTrackMapContract.
 
                     @Override
                     public void onFail(String msg) {
-
+                        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        activity.startActivity(intent);
                     }
                 });
 

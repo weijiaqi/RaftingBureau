@@ -50,7 +50,7 @@ public class IndexGuiView extends LinearLayout implements View.OnClickListener {
     }
 
     public void initDatas() {
-        passer = SpannableUtil.getBuilder(mContext, "欢迎来到元宇宙漂流局，\n 接下来请开启你的传递之旅\n").setForegroundColor(R.color.white).setTextSize(12).setBold().append("点击“传递漂”").setForegroundColor(R.color.color_6d).setBold().setTextSize(12).build();
+        passer = SpannableUtil.getBuilder(mContext, "欢迎来到元宇宙漂流局,\n接下来请开启你的传递之旅\n").setForegroundColor(R.color.white).setTextSize(12).setBold().append("点击“传递漂”").setForegroundColor(R.color.color_6d).setBold().setTextSize(12).build();
         mTvTitle.setText(passer);
         mTvBar.setHeight(SystemUtil.getStatusBarHeight(mContext));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {

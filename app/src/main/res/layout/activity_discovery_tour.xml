@@ -23,7 +23,6 @@
     <include layout="@layout/include_index_title" />
 
 
-
     <ImageView
         android:id="@+id/iv_start_discovery"
         android:layout_width="wrap_content"

@@ -178,8 +178,6 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
     private BitmapDescriptor mbpStart = BitmapDescriptorFactory.fromResource(R.drawable.track_start);
     private BitmapDescriptor mbpCenter = BitmapDescriptorFactory.fromResource(R.drawable.track_center);
     private BitmapDescriptor mbpEnd = BitmapDescriptorFactory.fromResource(R.drawable.track_end);
-
-
     private MoreDetailsForMapEntity.MessageBean messageBean;
     private MoreDetailsForMapEntity.RelevanceBean relevanceBean;
     private MoreDetailsForMapEntity.FutureBean futureBea;

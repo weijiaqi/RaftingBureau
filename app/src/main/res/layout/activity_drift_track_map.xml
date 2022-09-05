@@ -141,9 +141,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/ll_top"
-
             android:layout_marginStart="10dp"
-            android:layout_marginBottom="19dp">
+            android:layout_marginTop="8dp">
 
             <ImageView
                 android:id="@+id/iv_mastor_left"
@@ -156,7 +155,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/iv_mastor_left"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="4dp"
+
                 android:text=""
                 android:textColor="@color/color_6ce"
                 android:textSize="11sp" />
@@ -184,20 +183,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                android:text=""
+                android:ellipsize="end"
                 android:maxEms="6"
                 android:singleLine="true"
-                android:ellipsize="end"
+                android:text=""
                 android:textColor="@color/color_6cec"
                 android:textSize="11sp"
                 android:textStyle="bold" />
 
             <RelativeLayout
                 android:id="@+id/rl_left_add_friend"
-                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="9dp">
+                android:layout_marginTop="9dp"
+                android:visibility="gone">
 
 
                 <TextView
@@ -238,7 +237,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/ll_top"
             android:layout_marginStart="10dp"
-            android:layout_marginBottom="19dp"
+            android:layout_marginTop="8dp"
             android:layout_toRightOf="@+id/view_line">
 
             <ImageView
@@ -252,7 +251,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/iv_mastor_right"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="4dp"
                 android:text=""
                 android:textColor="@color/color_e7"
                 android:textSize="11sp" />
@@ -281,21 +279,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                android:text=""
+                android:ellipsize="end"
                 android:maxEms="6"
                 android:singleLine="true"
-                android:ellipsize="end"
+                android:text=""
                 android:textColor="@color/color_e7"
                 android:textSize="11sp"
                 android:textStyle="bold" />
 
 
             <RelativeLayout
-                android:visibility="gone"
                 android:id="@+id/rl_right_add_friend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="9dp">
+                android:layout_marginTop="9dp"
+                android:visibility="gone">
 
 
                 <TextView
@@ -324,8 +322,6 @@
     </RelativeLayout>
 
 
-
-
-  <include layout="@layout/layout_map_open_drifting_guide_view"/>
+    <include layout="@layout/layout_map_open_drifting_guide_view" />
 
 </RelativeLayout>
