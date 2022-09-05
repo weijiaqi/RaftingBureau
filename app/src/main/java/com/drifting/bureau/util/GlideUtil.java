@@ -33,7 +33,7 @@ public class GlideUtil {
 
 
     /**
-     * 加载约4:3长方形普通网络图片（普通图片/默认灰色图片占位）
+     * 加载约4:3长方形普通网络图片
      *
      * @param context   上下文
      * @param url       图片url链接
@@ -56,6 +56,30 @@ public class GlideUtil {
         }
     }
 
+
+    /**
+     * 加载约4:3长方形普通网络图片（无占位图）
+     *
+     * @param context   上下文
+     * @param url       图片url链接
+     * @param imageView ImageView控件
+     */
+    public void loadDefaultPic(Context context, String url, ImageView imageView) {
+        if (context == null || imageView == null) return;
+
+        if (!TextUtils.isEmpty(url)) {
+            RequestOptions options = new RequestOptions()
+                    .centerCrop()
+                    .placeholder(R.color.transparent)
+                    .error(R.color.transparent);
+            Glide.with(context)
+                    .load(url)
+                    .apply(options)
+                    .into(imageView);
+        } else {
+            imageView.setImageResource(R.color.transparent);
+        }
+    }
 
     /**
      * 展示长图

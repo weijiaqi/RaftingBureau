@@ -32,13 +32,12 @@
 
         <ImageView
             android:id="@+id/iv_planet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="315dp"
+            android:layout_height="248dp"
             android:layout_below="@+id/ll_top"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="-25dp"
-            android:src="@drawable/planetary_detail01" />
+            android:layout_marginTop="-25dp" />
 
 
         <LinearLayout
@@ -49,7 +48,6 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="65dp"
             android:layout_marginEnd="33dp"
-
             android:gravity="center"
             android:orientation="vertical">
 

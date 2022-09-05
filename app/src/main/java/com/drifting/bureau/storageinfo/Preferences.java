@@ -25,6 +25,7 @@ public class Preferences {
     private static final String KEY_USER_PASSWORD = "user_password";
     private static final String KEY_USER_CITY = "user_city";
     private static final String KEY_USER_IS_ANONY = "isanony";//是否为匿名状态
+    private static final String KEY_USER_IS_PRIVACY= "isprivacy";//是否同意隐私条款
     private static final String KEY_USER_IS_ARMODEL = "isarmodel";//是否为AR模式
     private static final String KEY_USER_IS_DIDATTEND = "isdidAttend";//是否参与过漂流
     public static final String KEY_IS_TEST = "isTest"; //是不是测试环境
@@ -70,6 +71,23 @@ public class Preferences {
             saveString(KEY_USER_IS_ANONY, 1 + "");
         } else {
             saveString(KEY_USER_IS_ANONY, 0 + "");
+        }
+    }
+
+
+
+    /**
+     * @return true已同意隐私条款 false退出应用
+     */
+    public static boolean isAgreePrivacy() {
+        return !(getString(KEY_USER_IS_PRIVACY) == null || "0".equals(getString(KEY_USER_IS_PRIVACY))) && "1".equals(getString(KEY_USER_IS_PRIVACY));
+    }
+
+    public static void setAgreePrivacy(boolean isAgreePrivacy) {
+        if (isAgreePrivacy) {
+            saveString(KEY_USER_IS_PRIVACY, 1 + "");
+        } else {
+            saveString(KEY_USER_IS_PRIVACY, 0 + "");
         }
     }
 
@@ -324,6 +342,9 @@ public class Preferences {
      * 退出登录清除用户数据
      */
     public static void clearUserLoginData() {
+        //是否同意隐私协议条款
+        boolean isPrivacy=isAgreePrivacy();
+
         boolean isTest = isTest();//测试环境
         String phone = getPhone();
         String password = getPassword();
@@ -336,6 +357,7 @@ public class Preferences {
         boolean isArAirplane = isArAirplane();
         boolean isArPlanet = isArPlanet();
         clear();
+        setAgreePrivacy(isPrivacy);
         savePhone(phone);
         savePassword(password);
         saveTestState(isTest);//测试环境

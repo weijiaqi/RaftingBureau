@@ -31,6 +31,7 @@ import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.mvp.ui.activity.index.ar.ARActivity;
 import com.drifting.bureau.mvp.ui.activity.web.ShowWebViewActivity;
 import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
+import com.drifting.bureau.mvp.ui.dialog.PrivacyPolicyDialog;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ARCoreUtil;
 import com.drifting.bureau.util.ClickUtil;
@@ -42,6 +43,7 @@ import com.drifting.bureau.util.animator.AnimatorUtil;
 import com.drifting.bureau.util.downloadutil.DownloadRequest;
 import com.drifting.bureau.util.manager.NotificationManager;
 import com.drifting.bureau.util.request.RequestUtil;
+import com.jess.arms.base.BaseDialog;
 import com.jess.arms.di.component.AppComponent;
 
 import java.io.File;
@@ -77,6 +79,8 @@ public class PullNewGuideActivity extends BaseManagerActivity {
     ImageView mIvPull7;
     @BindView(R.id.iv_new_user)
     ImageView mIvNewUser;
+
+    private PrivacyPolicyDialog privacyPolicyDialog;
 
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, PullNewGuideActivity.class);
@@ -114,6 +118,17 @@ public class PullNewGuideActivity extends BaseManagerActivity {
         statFloatAnim(mIvPull6);
         statScaleAnim(mIvPull7);
         statFloatAnim(mIvNewUser);
+
+        if (!Preferences.isAgreePrivacy()){
+            privacyPolicyDialog = new PrivacyPolicyDialog(this);
+            privacyPolicyDialog.setCancelable(false);
+            privacyPolicyDialog.show();
+            privacyPolicyDialog.setOnClickCallback(type -> {
+                if (type == PrivacyPolicyDialog.SELECT_EXIT_APP) {
+                    finish();
+                }
+            });
+        }
     }
 
     public void statScaleAnim(View view) {
@@ -187,12 +202,12 @@ public class PullNewGuideActivity extends BaseManagerActivity {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
                 case R.id.tv_create_planet: //建立星球
-                    if (IsVisibility()){
+                    if (IsVisibility()) {
                         SignLoginHintActivity.start(this, true);
                     }
                     break;
                 case R.id.tv_ar_select:  //AR查看
-                    if (IsVisibility()){
+                    if (IsVisibility()) {
                         RequestUtil.create().planetar(entity -> {
                             if (entity != null && entity.getCode() == 200) {
                                 if (!TextUtils.isEmpty(entity.getData().getAr_url())) {

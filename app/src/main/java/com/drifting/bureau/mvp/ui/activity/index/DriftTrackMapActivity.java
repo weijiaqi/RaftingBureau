@@ -485,6 +485,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
                 messagePathBean.setCode_city(messageBean.getCode_city());
                 messagePathBeanList.add(0, messagePathBean);
                 MoreDetailsForMapEntity.MessagePathBean messagePathBean2 = new MoreDetailsForMapEntity.MessagePathBean();
+                messagePathBean2.setCode_city(messagePathBean2.getCode_city());
                 messagePathBean2.setUser_id(futureBea.getUser_id());
                 messagePathBean2.setLat(futureBea.getLat());
                 messagePathBean2.setLng(futureBea.getLng());
@@ -848,10 +849,14 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
         if (i == messagePathBeanList.size() - 1) {
             return mbpEnd;
         } else {
-            if (messagePathBeanList.get(i).getHas_shop() == 1) {
+            if (i == 0) {
                 return mbpStart;
             } else {
-                return mbpCenter;
+                if (messagePathBeanList.get(i).getHas_shop() == 1) {
+                    return mbpStart;
+                } else {
+                    return mbpCenter;
+                }
             }
         }
     }
