@@ -87,7 +87,7 @@ public class PlanetarySelectActivity extends BaseManagerActivity<PlanetarySelect
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
         setStatusBarHeight(mTvBar);
-        mToolbarTitle.setText("星球分布");
+        mToolbarTitle.setText("派系星球分布");
         if (getIntent() != null) {
             postion = getIntent().getIntExtra(EXTRA_POSTION, 0);
         }
@@ -157,9 +157,7 @@ public class PlanetarySelectActivity extends BaseManagerActivity<PlanetarySelect
                     finish();
                     break;
                 case R.id.ll_move_away:
-                    if (assess_status == 1) {
-                        MoveAwayPlanetaryActivity.start(PlanetarySelectActivity.this, 1, false);
-                    }
+                    MoveAwayPlanetaryActivity.start(PlanetarySelectActivity.this, 1, false);
                     break;
             }
         }

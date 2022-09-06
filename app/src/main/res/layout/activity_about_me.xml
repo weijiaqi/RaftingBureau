@@ -45,7 +45,7 @@
                         android:layout_marginTop="11dp"
                         android:layout_marginEnd="30dp"
                         android:gravity="center"
-                        android:text="居住地"
+                        android:text="所属派系"
                         android:textColor="@color/color_99"
                         android:textSize="11sp" />
 
@@ -90,9 +90,9 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="85dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="29dp"
+                        android:gravity="center"
                         android:layout_marginTop="21dp"
                         android:text="身份"
                         android:textColor="@color/color_99"
@@ -100,11 +100,14 @@
 
                     <TextView
                         android:id="@+id/tv_identity"
-                        android:layout_width="wrap_content"
+                        android:layout_width="85dp"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="9dp"
                         android:layout_marginTop="2dp"
+                        android:layout_marginStart="20dp"
                         android:text=""
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
 
@@ -231,7 +234,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="居住地"
+                    android:text="所属派系"
                     android:textColor="@color/color_cc"
                     android:textSize="11sp" />
 
@@ -247,7 +250,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="建设度"
+                    android:text="完善度"
                     android:textColor="@color/color_cc"
                     android:textSize="11sp" />
 

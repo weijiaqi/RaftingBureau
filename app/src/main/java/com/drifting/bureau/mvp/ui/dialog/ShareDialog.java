@@ -4,9 +4,13 @@ import static com.drifting.bureau.app.api.Api.WEB_BASEURL;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.net.Uri;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -78,24 +82,34 @@ public class ShareDialog extends BaseDialog implements View.OnClickListener {
                 showLoading();
                 mHandler.postDelayed(() -> {
                     Bitmap bitmap = BitmapUtil.captureView(mRltop);
-                    PermissionDialog.requestPermissions((Activity) context, new PermissionDialog.PermissionCallBack() {
-                        @Override
-                        public void onSuccess() {
-                            BitmapUtil.saveImageToGallery(bitmap, context);
-                            dismiss();
-                            hideLoading();
-                            ToastUtil.showToast("保存相册成功");
-                        }
+                    Uri uri = Uri.parse(MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap, null, null));
+                    //系统调用分享
+                    hideLoading();
+                    Intent shareIntent = new Intent();
+                    shareIntent.setAction(Intent.ACTION_SEND);
+                    shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+                    shareIntent.setType("image/*");
+                    shareIntent = Intent.createChooser(shareIntent, "Share");
+                    context.startActivity(shareIntent);
 
-                        @Override
-                        public void onFailure() {
-                        }
-
-                        @Override
-                        public void onAlwaysFailure() {
-                            PermissionDialog.showDialog((Activity) context, "android.permission.WRITE_EXTERNAL_STORAGE");
-                        }
-                    });
+//                    PermissionDialog.requestPermissions((Activity) context, new PermissionDialog.PermissionCallBack() {
+//                        @Override
+//                        public void onSuccess() {
+//                            BitmapUtil.saveImageToGallery(bitmap, context);
+//                            dismiss();
+//                            hideLoading();
+//                            ToastUtil.showToast("保存相册成功");
+//                        }
+//
+//                        @Override
+//                        public void onFailure() {
+//                        }
+//
+//                        @Override
+//                        public void onAlwaysFailure() {
+//                            PermissionDialog.showDialog((Activity) context, "android.permission.WRITE_EXTERNAL_STORAGE");
+//                        }
+//                    });
                 }, 500);
                 break;
         }

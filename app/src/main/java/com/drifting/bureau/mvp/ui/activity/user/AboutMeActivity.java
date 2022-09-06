@@ -163,7 +163,7 @@ public class AboutMeActivity extends BaseManagerActivity<AboutMePresenter> imple
 
     public List<AoubtMeEntity> getData() {
         List<AoubtMeEntity> list = new ArrayList<>();
-        list.add(new AoubtMeEntity("漂流轨迹", "我的漂流"));
+        list.add(new AoubtMeEntity("漂流线程", "我的漂流"));
         list.add(new AoubtMeEntity("订单记录", "我的订单"));
         list.add(new AoubtMeEntity("星际战队", "战队成员"));
         list.add(new AoubtMeEntity("实体门店", "漂流局茶饮店"));
@@ -274,7 +274,7 @@ public class AboutMeActivity extends BaseManagerActivity<AboutMePresenter> imple
         toolbar_back.setOnClickListener(v -> {
             finish();
         });
-        toolbar_title.setText("星球分布");
+        toolbar_title.setText("派系星球分布");
         RequestUtil.create().planetlocation(entity -> {
             if (entity != null && entity.getCode() == 200) {
                 if (entity.getData().getShow() == 0) {  //不显示

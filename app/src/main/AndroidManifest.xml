@@ -215,6 +215,11 @@
 
 
         <activity
+            android:name=".mvp.ui.activity.index.DriftTrackCampusMapActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="DuplicateActivity" />
+
+        <activity
             android:name=".mvp.ui.activity.index.AddTopicActivity"
             android:screenOrientation="portrait" />
 
