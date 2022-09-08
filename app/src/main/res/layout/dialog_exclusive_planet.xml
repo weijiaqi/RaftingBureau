@@ -7,13 +7,18 @@
     <RelativeLayout
         android:id="@+id/rl_center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/exclusive_planet" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_marginTop="85dp"
+            android:layout_marginTop="100dp"
             android:background="@drawable/ar_play_bg">
 
 
@@ -22,11 +27,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="28dp"
-                android:layout_marginTop="55dp"
-                android:layout_marginEnd="31dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginHorizontal="31dp"
+                android:layout_marginBottom="76dp"
                 android:lineSpacingExtra="3dp"
-                android:text="\u3000\u3000可搭乘我寻找你的专属星球，\n请问是否搭乘？"
+                android:text="是否前往漂流科学研究院实验室，实验室具有超前的DBPI命运体心理智能模型，将为你寻找自己所属的派别宇宙，找到同频同类的所在，入驻所属派别星系，未来拥有自己的个人星球。"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -36,23 +41,20 @@
                 android:id="@+id/tv_open_paly"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_title"
                 android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
                 android:layout_marginTop="13dp"
                 android:layout_marginEnd="27dp"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/ar_play_button"
                 android:gravity="center"
-                android:text="寻找我的星球"
+                android:text="寻找我的派系"
                 android:textColor="@color/white"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
         </RelativeLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/exclusive_planet" />
     </RelativeLayout>
 
 

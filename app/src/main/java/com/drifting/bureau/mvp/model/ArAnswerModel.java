@@ -1,20 +1,18 @@
 package com.drifting.bureau.mvp.model;
-
 import android.app.Application;
 
 import com.drifting.bureau.app.api.ApiService;
-import com.drifting.bureau.mvp.contract.MoveAwayPlanetaryContract;
 import com.drifting.bureau.mvp.model.entity.QuestionAssessEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionEntity;
 import com.google.gson.Gson;
 import com.jess.arms.base.BaseEntity;
-import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
+import com.jess.arms.di.scope.ActivityScope;
+import javax.inject.Inject;
+import com.drifting.bureau.mvp.contract.ArAnswerContract;
 
 import java.util.List;
-
-import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
@@ -23,7 +21,7 @@ import okhttp3.RequestBody;
  * ================================================
  * Description:
  * <p>
- * Created by MVPArmsTemplate on 2022/06/01 11:04
+ * Created by MVPArmsTemplate on 2022/09/07 10:37
  * <a href="mailto:jess.yan.effort@gmail.com">Contact me</a>
  * <a href="https://github.com/JessYanCoding">Follow me</a>
  * <a href="https://github.com/JessYanCoding/MVPArms">Star me</a>
@@ -32,14 +30,14 @@ import okhttp3.RequestBody;
  * ================================================
  */
 @ActivityScope
-public class MoveAwayPlanetaryModel extends BaseModel implements MoveAwayPlanetaryContract.Model{
+public class ArAnswerModel extends BaseModel implements ArAnswerContract.Model{
     @Inject
     Gson mGson;
     @Inject
     Application mApplication;
 
     @Inject
-    public MoveAwayPlanetaryModel(IRepositoryManager repositoryManager) {
+    public ArAnswerModel(IRepositoryManager repositoryManager) {
         super(repositoryManager);
     }
 

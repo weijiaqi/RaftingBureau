@@ -53,21 +53,21 @@ public class ExclusivePlanetDialog extends BaseDialog implements View.OnClickLis
     @Override
     protected void initDatas() {
         super.initDatas();
-        if (!Preferences.isArAirplane()) {  //启动引导页
-            //设置距离底部为true
-            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT); // or wrap_content
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-            mRlCenter.setLayoutParams(layoutParams);
-            mGuideView.setVisibility(View.VISIBLE);
-        }
-
-        mGuideView.setOnClickCallback(() -> {
-            Preferences.setArAirplane(true);
-            dismiss();
-            if (onClickCallback != null) {
-                onClickCallback.onClickType(OPEN_PLAY);
-            }
-        });
+//        if (!Preferences.isArAirplane()) {  //启动引导页
+//            //设置距离底部为true
+//            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT); // or wrap_content
+//            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+//            mRlCenter.setLayoutParams(layoutParams);
+//            mGuideView.setVisibility(View.VISIBLE);
+//        }
+//
+//        mGuideView.setOnClickCallback(() -> {
+//            Preferences.setArAirplane(true);
+//            dismiss();
+//            if (onClickCallback != null) {
+//                onClickCallback.onClickType(OPEN_PLAY);
+//            }
+//        });
     }
 
     @Override

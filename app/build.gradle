@@ -115,8 +115,7 @@ dependencies {
     // 吐司框架：https://github.com/getActivity/ToastUtils
     implementation rootProject.ext.dependencies["ToastUtils"]
 
-    //Textview左右对齐排版
-    implementation rootProject.ext.dependencies["justifytextview"]
+
 
 
     def camerax_version = "1.1.0-beta01"

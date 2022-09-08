@@ -17,7 +17,7 @@ import okhttp3.RequestBody;
  * ================================================
  * Description:
  * <p>
- * Created by MVPArmsTemplate on 2022/06/01 11:04
+ * Created by MVPArmsTemplate on 2022/09/07 10:37
  * <a href="mailto:jess.yan.effort@gmail.com">Contact me</a>
  * <a href="https://github.com/JessYanCoding">Follow me</a>
  * <a href="https://github.com/JessYanCoding/MVPArms">Star me</a>
@@ -25,13 +25,13 @@ import okhttp3.RequestBody;
  * <a href="https://github.com/JessYanCoding/MVPArmsTemplate">模版请保持更新</a>
  * ================================================
  */
-public interface MoveAwayPlanetaryContract {
+public interface ArAnswerContract {
     //对于经常使用的关于UI的方法可以定义到IView中,如显示隐藏进度条,和显示文字消息
     interface View extends IView {
 
         void onQuestionListSuccess(List<QuestionEntity> list);
 
-        void  onQuestionAssessSuccess(QuestionAssessEntity entity);
+        void onQuestionAssessSuccess(QuestionAssessEntity entity);
 
         void onNetError();
 

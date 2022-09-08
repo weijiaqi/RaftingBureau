@@ -39,7 +39,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="10"
+            android:text="80"
             android:textColor="@color/color_6d4_7f"
             android:textSize="12sp" />
 
@@ -58,7 +58,7 @@
         android:text="很多时候你宁愿自己看一场电影也不愿参加聚会"
         android:textColor="@color/color_22"
         android:textSize="18sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
 
     <RelativeLayout

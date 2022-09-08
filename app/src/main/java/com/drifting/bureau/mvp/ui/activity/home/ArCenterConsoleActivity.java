@@ -263,7 +263,7 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
 
                             new Handler().postDelayed(() -> {
                                 try {
-                                    if (andy6!=null){
+                                    if (andy6 != null) {
                                         andy4 = new TransformableNode(transformationSystem);
                                         andy4.setParent(anchorNode);
                                         andy4.setRenderable(model4.get()).animate(true).start();
@@ -465,7 +465,7 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
                                         Preferences.setArGuide(true);
                                         if (andy6 != null) {
                                             anchorNode.removeChild(andy6);
-                                            andy6=null;
+                                            andy6 = null;
                                         }
                                         if (andy4 != null) {
                                             anchorNode.removeChild(andy4);
@@ -564,65 +564,64 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
                         andy5.getRotationController().setEnabled(false);
                         andy5.getTranslationController().setEnabled(false);
                         andy5.select();
-                        andy5.setOnTapListener(new Node.OnTapListener() {
-                            @Override
-                            public void onTap(HitTestResult hitTestResult, MotionEvent motionEvent) {
-                                if (!ClickUtil.isFastClick(motionEvent.getDeviceId())) {
-                                    exclusivePlanetDialog = new ExclusivePlanetDialog(ArCenterConsoleActivity.this);
-                                    exclusivePlanetDialog.show();
-                                    exclusivePlanetDialog.setOnClickCallback(type -> {
-                                        if (type == ExclusivePlanetDialog.OPEN_PLAY) {
-                                            try {
-                                                andy.setEnabled(false);
-                                                andy2.setEnabled(false);
-                                                andy3.setEnabled(false);
-                                                andy5.setEnabled(false);
-                                                andy11.setEnabled(false);
-                                                if (andy8 != null) {
-                                                    anchorNode.removeChild(andy8);
+                        andy5.setOnTapListener((hitTestResult, motionEvent) -> {
+                            if (!ClickUtil.isFastClick(motionEvent.getDeviceId())) {
+                                try {
+                                    andy.setEnabled(false);
+                                    andy2.setEnabled(false);
+                                    andy3.setEnabled(false);
+                                    andy5.setEnabled(false);
+                                    andy11.setEnabled(false);
+                                    if (andy8 != null) {
+                                        anchorNode.removeChild(andy8);
+                                    }
+                                    if (andy9 != null) {
+                                        andy9.setEnabled(false);
+                                    }
+                                    status = 2;
+                                    mTvChangeMode.setText("返回星环");
+//                                    RequestUtil.create().planetlocation(entity -> {
+//                                        if (entity != null && entity.getCode() == 200) {
+//                                            if (entity.getData().getAnswer() == 0) {
+//                                                mLlExplorePlanet.setVisibility(View.VISIBLE);
+//                                                mGuidePlanetView.setVisibility(!Preferences.isArPlanet() ? View.VISIBLE : View.GONE);
+//                                                mGuidePlanetView.setOnClickCallback(() -> {
+//                                                    Preferences.setArPlanet(true);
+//                                                    mGuidePlanetView.setVisibility(View.GONE);
+//                                                });
+//                                            } else {
+//                                                mLlExplorePlanet.setVisibility(View.GONE);
+//                                            }
+//                                        }
+//                                    });
+                                    //世界2
+                                    andy7 = new TransformableNode(transformationSystem);
+                                    andy7.setParent(anchorNode);
+                                    andy7.setRenderable(model7.get()).animate(true).start();
+                                    andy7.setLocalPosition(new Vector3(0f, -2f, 0f));
+                                    andy7.getRenderableInstance().setCulling(false);
+                                    // 禁止缩放，没禁止缩放，设置的倍数会失效，自动加载默认的大小
+                                    andy7.getScaleController().setEnabled(false);
+                                    andy7.getRotationController().setEnabled(false);
+                                    andy7.getTranslationController().setEnabled(false);
+                                    andy7.select();
+                                    andy7.setOnTapListener((hitTestResult1, motionEvent1) -> {
+                                        if (!ClickUtil.isFastClick(motionEvent1.getDeviceId())) {
+                                            exclusivePlanetDialog = new ExclusivePlanetDialog(ArCenterConsoleActivity.this);
+                                            exclusivePlanetDialog.show();
+                                            exclusivePlanetDialog.setOnClickCallback(type -> {
+                                                if (type == ExclusivePlanetDialog.OPEN_PLAY) {
+                                                    ArAnswerActivity.start(this,false);
                                                 }
-                                                if (andy9 != null) {
-                                                    andy9.setEnabled(false);
-                                                }
-                                                status = 2;
-                                                mTvChangeMode.setText("穿梭星云");
-
-                                                RequestUtil.create().planetlocation(entity -> {
-                                                    if (entity != null && entity.getCode() == 200) {
-                                                        if (entity.getData().getAnswer() == 0) {
-                                                            mLlExplorePlanet.setVisibility(View.VISIBLE);
-                                                            mGuidePlanetView.setVisibility(!Preferences.isArPlanet() ? View.VISIBLE : View.GONE);
-                                                            mGuidePlanetView.setOnClickCallback(() -> {
-                                                                Preferences.setArPlanet(true);
-                                                                mGuidePlanetView.setVisibility(View.GONE);
-                                                            });
-                                                        } else {
-                                                            mLlExplorePlanet.setVisibility(View.GONE);
-                                                        }
-                                                    }
-                                                });
-
-                                                //世界2
-                                                andy7 = new TransformableNode(transformationSystem);
-                                                andy7.setParent(anchorNode);
-                                                andy7.setRenderable(model7.get()).animate(true).start();
-                                                andy7.setLocalPosition(new Vector3(0f, -2f, 0f));
-                                                andy7.getRenderableInstance().setCulling(false);
-                                                // 禁止缩放，没禁止缩放，设置的倍数会失效，自动加载默认的大小
-                                                andy7.getScaleController().setEnabled(false);
-                                                andy7.getRotationController().setEnabled(false);
-                                                andy7.getTranslationController().setEnabled(false);
-                                                andy7.select();
-                                                //移除中控台
-                                                addDeleteNode();
-                                            } catch (ExecutionException e) {
-                                                e.printStackTrace();
-                                            } catch (InterruptedException e) {
-                                                e.printStackTrace();
-                                            }
-
+                                            });
                                         }
                                     });
+                                    //移除中控台
+                                    addDeleteNode();
+                                } catch (ExecutionException e) {
+                                    e.printStackTrace();
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
                                 }
                             }
                         });
@@ -1037,11 +1036,11 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
                         nextMainNode();
                     }
                     break;
-                case R.id.tv_change_mode:  //穿梭星云
+                case R.id.tv_change_mode:  //返回星环
                     if (status == 1) {
                         Preferences.setARModel(false);
                         DiscoveryTourActivity.start(this, true);
-                    } else {
+                    }else {
                         nextMainNode();
                     }
                     break;
@@ -1367,7 +1366,7 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
                 showMessage("检测到您还没拥有空间站,请去获取!");
             } else {
                 status = 3;
-                mTvChangeMode.setText("穿梭星云");
+                mTvChangeMode.setText("返回星环");
                 //隐藏节点
                 andy.setEnabled(false);
                 andy2.setEnabled(false);

@@ -2,23 +2,13 @@ package com.drifting.bureau.mvp.presenter;
 
 import android.app.Application;
 
-import com.drifting.bureau.mvp.contract.MoveAwayPlanetaryContract;
 import com.drifting.bureau.mvp.model.entity.QuestionAssessEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionEntity;
 import com.jess.arms.base.BaseEntity;
-import com.jess.arms.di.scope.ActivityScope;
-import com.jess.arms.http.imageloader.ImageLoader;
 import com.jess.arms.integration.AppManager;
+import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
-import com.jess.arms.utils.RxLifecycleUtils;
-
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.inject.Inject;
+import com.jess.arms.http.imageloader.ImageLoader;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -27,11 +17,22 @@ import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
+import javax.inject.Inject;
+
+import com.drifting.bureau.mvp.contract.ArAnswerContract;
+import com.jess.arms.utils.RxLifecycleUtils;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * ================================================
  * Description:
  * <p>
- * Created by MVPArmsTemplate on 2022/06/01 11:04
+ * Created by MVPArmsTemplate on 2022/09/07 10:37
  * <a href="mailto:jess.yan.effort@gmail.com">Contact me</a>
  * <a href="https://github.com/JessYanCoding">Follow me</a>
  * <a href="https://github.com/JessYanCoding/MVPArms">Star me</a>
@@ -40,7 +41,7 @@ import okhttp3.RequestBody;
  * ================================================
  */
 @ActivityScope
-public class MoveAwayPlanetaryPresenter extends BasePresenter<MoveAwayPlanetaryContract.Model, MoveAwayPlanetaryContract.View>{
+public class ArAnswerPresenter extends BasePresenter<ArAnswerContract.Model, ArAnswerContract.View> {
     @Inject
     RxErrorHandler mErrorHandler;
     @Inject
@@ -51,13 +52,13 @@ public class MoveAwayPlanetaryPresenter extends BasePresenter<MoveAwayPlanetaryC
     AppManager mAppManager;
 
     @Inject
-    public MoveAwayPlanetaryPresenter (MoveAwayPlanetaryContract.Model model, MoveAwayPlanetaryContract.View rootView) {
+    public ArAnswerPresenter(ArAnswerContract.Model model, ArAnswerContract.View rootView) {
         super(model, rootView);
     }
 
 
     /**
-     *问题列表（搬离星球）
+     * 问题列表（搬离星球）
      */
     public void questionlist() {
         mModel.questionlist().subscribeOn(Schedulers.io())
@@ -81,9 +82,8 @@ public class MoveAwayPlanetaryPresenter extends BasePresenter<MoveAwayPlanetaryC
     }
 
 
-
     /**
-     *答题测评（搬离星球）
+     * 答题测评（搬离星球）
      */
     public void questionassess(Map<String, String> map) {
         RequestBody requestBody = RequestBody.create(MediaType.parse("Content-Type, application/json"), new JSONObject(map).toString());
