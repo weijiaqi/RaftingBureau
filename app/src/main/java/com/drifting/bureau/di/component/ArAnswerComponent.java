@@ -2,12 +2,9 @@ package com.drifting.bureau.di.component;
 
 import dagger.BindsInstance;
 import dagger.Component;
-
-import com.drifting.bureau.mvp.contract.ArAnswerContract;
-import com.drifting.bureau.mvp.contract.ArCenterConsoleContract;
+import com.drifting.bureau.di.module.MoveAwayPlanetaryModule;
+import com.drifting.bureau.mvp.contract.MoveAwayPlanetaryContract;
 import com.jess.arms.di.component.AppComponent;
-import com.drifting.bureau.di.module.ArAnswerModule;
-
 import com.jess.arms.di.scope.ActivityScope;
 import com.drifting.bureau.mvp.ui.activity.home.ArAnswerActivity;
 
@@ -24,7 +21,7 @@ import com.drifting.bureau.mvp.ui.activity.home.ArAnswerActivity;
  * ================================================
  */
 @ActivityScope
-@Component(modules = ArAnswerModule.class, dependencies = AppComponent.class)
+@Component(modules = MoveAwayPlanetaryModule.class, dependencies = AppComponent.class)
 public interface ArAnswerComponent {
 
     void inject(ArAnswerActivity activity);
@@ -32,7 +29,7 @@ public interface ArAnswerComponent {
     @Component.Builder
     interface Builder {
         @BindsInstance
-        Builder view(ArAnswerContract.View view);
+        Builder view(MoveAwayPlanetaryContract.View view);
 
         Builder appComponent(AppComponent appComponent);
 

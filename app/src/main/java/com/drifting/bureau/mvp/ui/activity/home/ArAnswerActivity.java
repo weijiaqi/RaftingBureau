@@ -8,35 +8,30 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentOnAttachListener;
 import androidx.lifecycle.LifecycleOwnerKt;
-import androidx.recyclerview.widget.LinearLayoutManager;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.drifting.bureau.R;
-import com.drifting.bureau.data.event.AnswerCompletedEvent;
 import com.drifting.bureau.di.component.DaggerArAnswerComponent;
+import com.drifting.bureau.mvp.contract.MoveAwayPlanetaryContract;
 import com.drifting.bureau.mvp.model.entity.AnswerEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionAssessEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionEntity;
+import com.drifting.bureau.mvp.presenter.MoveAwayPlanetaryPresenter;
 import com.drifting.bureau.mvp.ui.adapter.ArAnswerAdapter;
 import com.drifting.bureau.mvp.ui.adapter.manager.ArCardLayoutManager;
-import com.drifting.bureau.mvp.ui.adapter.manager.CardSwipeLayoutManager;
 import com.drifting.bureau.mvp.ui.dialog.AttributeResultsDialog;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
-import com.drifting.bureau.util.GsonUtil;
 import com.drifting.bureau.util.ToastUtil;
-import com.drifting.bureau.util.animator.SwipeItemAnimator;
 import com.drifting.bureau.view.CleanArFragment;
 import com.google.android.filament.utils.HDRLoader;
 import com.google.ar.core.Config;
@@ -58,18 +53,12 @@ import com.gorisse.thomas.sceneform.environment.HDREnvironmentKt;
 import com.gorisse.thomas.sceneform.light.LightEstimationConfig;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
-import com.drifting.bureau.mvp.contract.ArAnswerContract;
-import com.drifting.bureau.mvp.presenter.ArAnswerPresenter;
-
-import org.greenrobot.eventbus.EventBus;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 import kotlin.Unit;
@@ -80,7 +69,7 @@ import kotlin.Unit;
  * @author AR 答题
  * module name is ArAnswerActivity
  */
-public class ArAnswerActivity extends BaseActivity<ArAnswerPresenter> implements ArAnswerContract.View, FragmentOnAttachListener, BaseArFragment.OnSessionConfigurationListener, CleanArFragment.OnViewCreatedListener {
+public class ArAnswerActivity extends BaseActivity<MoveAwayPlanetaryPresenter> implements MoveAwayPlanetaryContract.View, FragmentOnAttachListener, BaseArFragment.OnSessionConfigurationListener, CleanArFragment.OnViewCreatedListener {
 
     @BindView(R.id.rl_right)
     RelativeLayout mRlRight;
