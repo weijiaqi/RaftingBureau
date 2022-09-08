@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.drifting.bureau.R;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.SpannableUtil;
-import com.jess.arms.utils.SystemUtil;
+import com.drifting.bureau.util.SystemUtil;
 
 /**
  * @Description: 发送消息引导

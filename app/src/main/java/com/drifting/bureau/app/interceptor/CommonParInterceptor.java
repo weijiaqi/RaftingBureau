@@ -6,7 +6,7 @@ import com.drifting.bureau.app.application.RBureauApplication;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.AppUtil;
 import com.drifting.bureau.util.StringUtil;
-import com.jess.arms.utils.SystemUtil;
+import com.drifting.bureau.util.SystemUtil;
 
 import java.io.IOException;
 

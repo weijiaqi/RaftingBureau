@@ -3,8 +3,12 @@ package com.drifting.bureau.app.application;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
+
 import androidx.annotation.NonNull;
+
 import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.model.LatLng;
@@ -23,6 +27,7 @@ import com.jess.arms.base.delegate.AppDelegate;
 import com.jess.arms.base.delegate.AppLifecycles;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.Preconditions;
+import com.drifting.bureau.util.SystemUtil;
 import com.scwang.smart.refresh.footer.ClassicsFooter;
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
@@ -33,7 +38,9 @@ import com.scwang.smart.refresh.layout.listener.DefaultRefreshFooterCreator;
 import com.scwang.smart.refresh.layout.listener.DefaultRefreshHeaderCreator;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.umeng.commonsdk.UMConfigure;
+
 import java.util.Locale;
+
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
 import cat.ereza.customactivityoncrash.config.CaocConfig;
 import me.jessyan.autosize.AutoSize;
@@ -48,7 +55,9 @@ public class RBureauApplication extends Application implements App {
     private static Context mContext;
     private static String TAG = "RBureauApplication";
     public static boolean isForeground = false;
-    public static LatLng latLng ;
+    public static LatLng latLng;
+    public static final int PERMISSION_PROTOCOL = 0x1;
+
     /**
      * 这里会在 {@link BaseApplication#onCreate} 之前被调用,可以做一些较早的初始化
      * 常用于 MultiDex 以及插件化框架的初始化
@@ -73,8 +82,40 @@ public class RBureauApplication extends Application implements App {
         }
         instance = this;
         mContext = getApplicationContext();
-        initSDK();
+
+        initConfig();
     }
+
+
+    public void initConfig() {
+        if (SystemUtil.isMainProcess()) {
+            // SDK预初始化函数
+            // preInit预初始化函数耗时极少，不会影响App首次冷启动用户体验
+            UMConfigure.preInit(this, RBConstant.UM_INIT_APPKEY, AppUtil.getChannel(getApplicationContext()));
+            //初始化主线程资源
+            mHandler.sendEmptyMessage(PERMISSION_PROTOCOL);
+        }
+    }
+
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case PERMISSION_PROTOCOL:
+                    if (Preferences.isAgreePrivacy()) {
+                        mHandler.removeMessages(PERMISSION_PROTOCOL);
+                        initSDK();
+                    } else {
+                        mHandler.removeMessages(PERMISSION_PROTOCOL);
+                        mHandler.sendEmptyMessageDelayed(PERMISSION_PROTOCOL, 1000);
+                    }
+                    break;
+            }
+        }
+    };
+
 
     /**
      * @return 全局的上下文
@@ -123,7 +164,7 @@ public class RBureauApplication extends Application implements App {
         UMConfigure.init(this, RBConstant.UM_INIT_APPKEY, AppUtil.getChannel(getApplicationContext()), UMConfigure.DEVICE_TYPE_PHONE, "");
 
         //地图
-        SDKInitializer.setAgreePrivacy(getApplicationContext(),true);
+        SDKInitializer.setAgreePrivacy(getApplicationContext(), true);
         //在使用SDK各组件之前初始化context信息，传入ApplicationContext
         SDKInitializer.initialize(this);
         //自4.3.0起，百度地图SDK所有接口均支持百度坐标和国测局坐标，用此方法设置您使用的坐标类型.
@@ -232,7 +273,6 @@ public class RBureauApplication extends Application implements App {
         }
 
     }
-
 
 
     /**

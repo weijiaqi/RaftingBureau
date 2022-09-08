@@ -80,7 +80,7 @@ public class PullNewGuideActivity extends BaseManagerActivity {
     @BindView(R.id.iv_new_user)
     ImageView mIvNewUser;
 
-    private PrivacyPolicyDialog privacyPolicyDialog;
+
 
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, PullNewGuideActivity.class);
@@ -119,16 +119,6 @@ public class PullNewGuideActivity extends BaseManagerActivity {
         statScaleAnim(mIvPull7);
         statFloatAnim(mIvNewUser);
 
-        if (!Preferences.isAgreePrivacy()){
-            privacyPolicyDialog = new PrivacyPolicyDialog(this);
-            privacyPolicyDialog.setCancelable(false);
-            privacyPolicyDialog.show();
-            privacyPolicyDialog.setOnClickCallback(type -> {
-                if (type == PrivacyPolicyDialog.SELECT_EXIT_APP) {
-                    finish();
-                }
-            });
-        }
     }
 
     public void statScaleAnim(View view) {

@@ -8,7 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.drifting.bureau.R;
 import com.drifting.bureau.util.SpannableUtil;
-import com.jess.arms.utils.SystemUtil;
+import com.drifting.bureau.util.SystemUtil;
 
 /**
  * @author 卫佳琪1

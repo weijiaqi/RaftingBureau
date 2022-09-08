@@ -1,8 +1,9 @@
-package com.jess.arms.utils;
+package com.drifting.bureau.util;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -10,12 +11,47 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import com.drifting.bureau.app.application.RBureauApplication;
+
 /**
  * @Description:
  * @Author: wjq
  * @CreateDate: 2022/2/14 13:51
  */
 public class SystemUtil {
+
+
+    /**
+     * 包名判断是否为主进程
+     *
+     * @param
+     * @return
+     */
+    public static boolean isMainProcess() {
+        return RBureauApplication.getContext().getPackageName().equals(getCurrentProcessName());
+    }
+
+
+    /**
+     * 获取当前进程名
+     * @return 返回当前进程名
+     */
+    public static String getCurrentProcessName() {
+        try {
+            final int pid = android.os.Process.myPid();
+            ActivityManager activityManager = (ActivityManager) RBureauApplication.getContext()
+                    .getSystemService(Context.ACTIVITY_SERVICE);
+            for (ActivityManager.RunningAppProcessInfo appProcessInfo : activityManager
+                    .getRunningAppProcesses()) {
+                if (appProcessInfo.pid == pid) {
+                    return appProcessInfo.processName;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 
     public static String getUserAgent(Context context) {

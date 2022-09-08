@@ -13,16 +13,20 @@ import com.drifting.bureau.mvp.ui.activity.home.ArCenterConsoleActivity;
 import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
 
 import com.drifting.bureau.mvp.ui.activity.user.PullNewGuideActivity;
+import com.drifting.bureau.mvp.ui.dialog.PrivacyPolicyDialog;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.RongIMUtil;
 import com.jess.arms.di.component.AppComponent;
+import com.umeng.commonsdk.UMConfigure;
 
 import timber.log.Timber;
 
 
 public class SplashActivity extends BaseManagerActivity {
 
+    private PrivacyPolicyDialog privacyPolicyDialog;
     private Handler mHandler = new Handler();
+
 
     @Override
     public void setupActivityComponent(@NonNull AppComponent appComponent) {
@@ -36,7 +40,23 @@ public class SplashActivity extends BaseManagerActivity {
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
-        mHandler.postDelayed(mHomeRunnable, 1000);
+        if (!Preferences.isAgreePrivacy()) {
+            privacyPolicyDialog = new PrivacyPolicyDialog(this);
+            privacyPolicyDialog.setCancelable(false);
+            privacyPolicyDialog.show();
+            privacyPolicyDialog.setOnClickCallback(type -> {
+                if (type == PrivacyPolicyDialog.SELECT_EXIT_APP) {
+                    finish();
+                } else if (type == PrivacyPolicyDialog.SELECT_ENTER_APP) {
+                    Preferences.setAgreePrivacy(true);
+                    //友盟隐私合规授权
+                    UMConfigure.submitPolicyGrantResult(getApplicationContext(), true);
+                    mHandler.postDelayed(mHomeRunnable, 500);
+                }
+            });
+        } else {
+            mHandler.postDelayed(mHomeRunnable, 1000);
+        }
     }
 
     Runnable mHomeRunnable = () -> {
@@ -70,6 +90,8 @@ public class SplashActivity extends BaseManagerActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mHandler.removeCallbacks(mHomeRunnable);
+        if (mHandler != null) {
+            mHandler.removeCallbacks(mHomeRunnable);
+        }
     }
 }

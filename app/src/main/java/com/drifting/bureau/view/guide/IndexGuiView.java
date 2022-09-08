@@ -12,7 +12,7 @@ import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.ui.activity.index.DriftTrackMapActivity;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.SpannableUtil;
-import com.jess.arms.utils.SystemUtil;
+import com.drifting.bureau.util.SystemUtil;
 
 /**
  * @Description: 首页引导

@@ -40,7 +40,7 @@ import com.jess.arms.integration.lifecycle.ActivityLifecycleable;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.StatusBarUtil;
-import com.jess.arms.utils.SystemUtil;
+import com.drifting.bureau.util.SystemUtil;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
 import javax.inject.Inject;

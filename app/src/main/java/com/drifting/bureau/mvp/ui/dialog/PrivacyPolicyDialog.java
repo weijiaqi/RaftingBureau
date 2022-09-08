@@ -27,7 +27,7 @@ public class PrivacyPolicyDialog extends BaseDialog  implements View.OnClickList
 
     public static final int SELECT_EXIT_APP = 0x01;
 
-
+    public static final int SELECT_ENTER_APP = 0x02;
 
     public PrivacyPolicyDialog(@NonNull Context context) {
         super(context);
@@ -131,8 +131,10 @@ public class PrivacyPolicyDialog extends BaseDialog  implements View.OnClickList
                 }
                 break;
             case R.id.tv_agree:
-                Preferences.setAgreePrivacy(true);
                 dismiss();
+                if (onClickCallback != null) {
+                    onClickCallback.onClickType(SELECT_ENTER_APP);
+                }
                 break;
         }
     }

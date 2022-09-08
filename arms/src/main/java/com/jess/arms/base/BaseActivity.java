@@ -44,7 +44,6 @@ import com.jess.arms.integration.lifecycle.ActivityLifecycleable;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.StatusBarUtil;
-import com.jess.arms.utils.SystemUtil;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
 import javax.inject.Inject;
@@ -173,38 +172,6 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
             StatusBarUtil.setLightMode(this);
         }
         StatusBarUtil.setColor(this, getResources().getColor(statusBarColor), 0);
-    }
-
-
-    /**
-     * 动态设置状态栏的高度
-     *
-     * @param tvBar
-     */
-    public void setStatusBarHeight(TextView tvBar) {
-        if (tvBar == null) {
-            return;
-        }
-        tvBar.setHeight(SystemUtil.getStatusBarHeight(this));
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            tvBar.setVisibility(View.VISIBLE);
-        }
-    }
-
-    /**
-     * 动态设置状态栏的高度颜色
-     *
-     * @param tvBar
-     * @param isThemeColor
-     */
-    public void setStatusBarHeight(TextView tvBar, boolean isThemeColor) {
-        tvBar.setHeight(SystemUtil.getStatusBarHeight(this));
-        if (isThemeColor) {
-            tvBar.setBackgroundColor(getResources().getColor(R.color.color_01));
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            tvBar.setVisibility(View.VISIBLE);
-        }
     }
 
 
