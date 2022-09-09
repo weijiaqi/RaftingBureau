@@ -140,14 +140,15 @@ public class MoveAwayPlanetaryActivity extends BaseManagerActivity<MoveAwayPlane
     public void onQuestionAssessSuccess(QuestionAssessEntity entity) {
         if (entity != null) {
             Preferences.putHashMapData(null);
+            AnswerCompletedEvent answerCompletedEvent=new AnswerCompletedEvent();
+            answerCompletedEvent.setPl_id(entity.getPlanet().getPl_id());
+            EventBus.getDefault().post(answerCompletedEvent);
+
             attributeResultsDialog = new AttributeResultsDialog(this, entity);
             attributeResultsDialog.show();
             attributeResultsDialog.setOnClickCallback(status -> {
                 if (status == AttributeResultsDialog.SELECT_FINISH) {
                     if (type == 1) {
-                        AnswerCompletedEvent answerCompletedEvent=new AnswerCompletedEvent();
-                        answerCompletedEvent.setPl_id(entity.getPlanet().getPl_id());
-                        EventBus.getDefault().post(answerCompletedEvent);
                         finish();
                     } else {
                         DiscoveryTourActivity.start(this, true);
@@ -180,7 +181,7 @@ public class MoveAwayPlanetaryActivity extends BaseManagerActivity<MoveAwayPlane
                             Preferences.putHashMapData(map);
                         }
                         if (answerAdapter.getItemCount() != 1) {
-                            if (infos.size() == total - answerAdapter.getItemCount() + 1) {
+                            if (infos!=null&&infos.size() == total - answerAdapter.getItemCount() + 1) {
                                 int currentPosition = 0;
                                 View itemView = mRcyAnswer.getLayoutManager().findViewByPosition(currentPosition);
                                 itemView.setTag(SwipeItemAnimator.SWIPE_REMOVE_LEFT);

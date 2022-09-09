@@ -144,12 +144,12 @@ public class AboutMeActivity extends BaseManagerActivity<AboutMePresenter> imple
         mRcyList.setAdapter(aboutMeAdapter);
         aboutMeAdapter.setData(getData());
         if (userInfoEntity != null && userInfoEntity.getPlanet() != null) {
-            setUserInfo();
+            setUserInfo(1);
         }
     }
 
 
-    public void setUserInfo() {
+    public void setUserInfo(int status) {
         mTvPlace.setText(userInfoEntity.getPlanet().getName());
         mTvPlace2.setText(userInfoEntity.getPlanet().getName());
         mTvIdentity.setText(userInfoEntity.getUser().getLevel_name());
@@ -157,7 +157,9 @@ public class AboutMeActivity extends BaseManagerActivity<AboutMePresenter> imple
         mTvName.setText(userInfoEntity.getUser().getName());
         mTvSchedule.setText(userInfoEntity.getPlanet().getSchedule() + "%");
         mPrUpload.setProgress(userInfoEntity.getPlanet().getSchedule());
-        setTopSwipe();
+        if (status==1){
+            setTopSwipe();
+        }
     }
 
 
@@ -353,7 +355,7 @@ public class AboutMeActivity extends BaseManagerActivity<AboutMePresenter> imple
             RequestUtil.create().userplayer(Preferences.getUserId(), entity -> {
                 if (entity != null && entity.getCode() == 200) {
                     userInfoEntity = entity.getData();
-                    setUserInfo();
+                    setUserInfo(2);
                 }
             });
         }

@@ -11,12 +11,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.drifting.bureau.R;
+import com.drifting.bureau.data.event.AnswerCompletedEvent;
 import com.drifting.bureau.mvp.ui.activity.index.PlanetaryDetailActivity;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.animator.AnimatorUtil;
 import com.hjq.shape.view.ShapeTextView;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -240,6 +244,5 @@ public class PlanetaryDisFragment extends BaseFragment {
                 break;
         }
     }
-
 
 }
