@@ -139,6 +139,7 @@ public class MoveAwayPlanetaryActivity extends BaseManagerActivity<MoveAwayPlane
     @Override
     public void onQuestionAssessSuccess(QuestionAssessEntity entity) {
         if (entity != null) {
+            Preferences.putHashMapData(null);
             attributeResultsDialog = new AttributeResultsDialog(this, entity);
             attributeResultsDialog.show();
             attributeResultsDialog.setOnClickCallback(status -> {
