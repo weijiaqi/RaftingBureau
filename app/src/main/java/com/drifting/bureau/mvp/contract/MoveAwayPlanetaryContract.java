@@ -11,6 +11,7 @@ import com.jess.arms.mvp.IView;
 import java.util.List;
 
 import io.reactivex.Observable;
+import okhttp3.RequestBody;
 
 /**
  * ================================================
@@ -42,6 +43,6 @@ public interface MoveAwayPlanetaryContract {
     interface Model extends IModel {
         Observable<BaseEntity<List<QuestionEntity>>> questionlist();
 
-        Observable<BaseEntity<QuestionAssessEntity>> questionassess(String questions,String anwsers);
+        Observable<BaseEntity<QuestionAssessEntity>> questionassess(RequestBody body);
     }
 }

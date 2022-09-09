@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black">
@@ -13,14 +14,14 @@
 
     <LinearLayout
         android:id="@+id/ll_explore_planet"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ll_toolbar"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="10dp"
         android:gravity="end"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"
@@ -90,6 +91,35 @@
         android:textColor="@color/white"
         android:textSize="12sp" />
 
+
+    <RelativeLayout
+        android:id="@+id/rl_close"
+        android:layout_width="113dp"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="22dp"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/camera_bg">
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="49dp"
+            android:src="@drawable/camera_error" />
+
+        <ImageView
+            android:id="@+id/iv_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="49dp"
+            android:src="@drawable/camera_photo" />
+
+    </RelativeLayout>
 
     <include layout="@layout/layout_ar_guide_view" />
 

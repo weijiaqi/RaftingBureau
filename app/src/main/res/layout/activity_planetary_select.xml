@@ -16,10 +16,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/planetary_bg">
 
-
             <include layout="@layout/view_height_title_lay" />
-
-
+            
             <FrameLayout
                 android:id="@+id/main_fame"
                 android:layout_width="match_parent"
@@ -54,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="探寻星球中..."
+            android:text="可探寻星球"
             android:textColor="@color/white"
             android:textSize="11sp"
             android:textStyle="bold" />
@@ -67,9 +65,10 @@
 
         <TextView
             android:id="@+id/tv_three_day"
-            android:layout_marginTop="2dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:visibility="gone"
             android:text="@string/three_day"
             android:textColor="@color/color_white_cc"
             android:textSize="11sp" />

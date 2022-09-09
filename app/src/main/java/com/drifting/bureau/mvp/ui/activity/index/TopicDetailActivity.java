@@ -458,7 +458,7 @@ public class TopicDetailActivity extends BaseManagerActivity<TopicDetailPresente
         publicDialog.show();
         publicDialog.setCancelable(false);
         publicDialog.setTitleText("已成功发送");
-        publicDialog.setContentText("可在“关于我-漂流轨迹”中 查看漂流记录");
+        publicDialog.setContentText("可在“关于我-漂流线程”中 查看漂流记录");
         publicDialog.setButtonText("确定");
     }
 

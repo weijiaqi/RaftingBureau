@@ -64,6 +64,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -526,23 +527,24 @@ public interface ApiService {
     Observable<BaseEntity<TeaShopEntity>> nearby(@Field("name") String name, @Field("page") int page, @Field("limit") int limit, @Field("lng") String lng, @Field("lat") String lat);
 
 
-    /**
-     * 问题列表（搬离星球）
-     *
-     * @return
-     */
-    @GET("v/question/list")
-    Observable<BaseEntity<List<QuestionEntity>>> questionlist();
 
 
     /**
-     * 问题列表（搬离星球）
+     * 问题列表（增加场景）
      *
      * @return
      */
-    @FormUrlEncoded
-    @POST("v/question/assess")
-    Observable<BaseEntity<QuestionAssessEntity>> questionassess(@Field("questions") String questions, @Field("anwsers") String anwsers);
+    @GET("v/question/listWithScene")
+    Observable<BaseEntity<List<QuestionEntity>>> listWithScene();
+
+
+    /**
+     * 答题测评（场景版）
+     *
+     * @return
+     */
+    @POST("v/question/assessWithScene")
+    Observable<BaseEntity<QuestionAssessEntity>> questionassess(@Body RequestBody body);
 
 
     /**

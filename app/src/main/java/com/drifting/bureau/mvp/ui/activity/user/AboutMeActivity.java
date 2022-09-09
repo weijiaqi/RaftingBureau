@@ -144,12 +144,12 @@ public class AboutMeActivity extends BaseManagerActivity<AboutMePresenter> imple
         mRcyList.setAdapter(aboutMeAdapter);
         aboutMeAdapter.setData(getData());
         if (userInfoEntity != null && userInfoEntity.getPlanet() != null) {
-            setUserInfo();
+            setUserInfo(1);
         }
     }
 
 
-    public void setUserInfo() {
+    public void setUserInfo(int status) {
         mTvPlace.setText(userInfoEntity.getPlanet().getName());
         mTvPlace2.setText(userInfoEntity.getPlanet().getName());
         mTvIdentity.setText(userInfoEntity.getUser().getLevel_name());
@@ -157,13 +157,15 @@ public class AboutMeActivity extends BaseManagerActivity<AboutMePresenter> imple
         mTvName.setText(userInfoEntity.getUser().getName());
         mTvSchedule.setText(userInfoEntity.getPlanet().getSchedule() + "%");
         mPrUpload.setProgress(userInfoEntity.getPlanet().getSchedule());
-//        setTopSwipe();
+        if (status==1){
+            setTopSwipe();
+        }
     }
 
 
     public List<AoubtMeEntity> getData() {
         List<AoubtMeEntity> list = new ArrayList<>();
-        list.add(new AoubtMeEntity("漂流轨迹", "我的漂流"));
+        list.add(new AoubtMeEntity("漂流线程", "我的漂流"));
         list.add(new AoubtMeEntity("订单记录", "我的订单"));
         list.add(new AoubtMeEntity("星际战队", "战队成员"));
         list.add(new AoubtMeEntity("实体门店", "漂流局茶饮店"));
@@ -274,35 +276,33 @@ public class AboutMeActivity extends BaseManagerActivity<AboutMePresenter> imple
         toolbar_back.setOnClickListener(v -> {
             finish();
         });
-        toolbar_title.setText("星球分布");
-        RequestUtil.create().planetlocation(entity -> {
-            if (entity != null && entity.getCode() == 200) {
-                if (entity.getData().getShow() == 0) {  //不显示
-                    ll_move_away.setVisibility(View.GONE);
-                } else { //显示
-                    ll_move_away.setVisibility(View.VISIBLE);
-                    assess_after = entity.getData().getAssess_after();
-                    assess_status = entity.getData().getAssess_status();
-                    if (assess_status == 1) {//可以答题
-                        mTvSeek.setText("可探寻星球");
-                        mIvOpenSearch.setVisibility(View.VISIBLE);
-                        mTvThreeDay.setVisibility(View.GONE);
-                    } else {
-                        mTvSeek.setText("探寻星球中...");
-                        mTvThreeDay.setVisibility(View.VISIBLE);
-                        mTvThreeDay.setText(getString(R.string.three_day, assess_after + ""));
-                        mIvOpenSearch.setVisibility(View.GONE);
-                        statScaleAnim(mTvSeek);
-                        statFloatAnim(mIvRocket);
-                    }
-                }
-            }
-        });
+        toolbar_title.setText("派系星球分布");
+//        RequestUtil.create().planetlocation(entity -> {
+//            if (entity != null && entity.getCode() == 200) {
+//                if (entity.getData().getShow() == 0) {  //不显示
+//                    ll_move_away.setVisibility(View.GONE);
+//                } else { //显示
+//                    ll_move_away.setVisibility(View.VISIBLE);
+//                    assess_after = entity.getData().getAssess_after();
+//                    assess_status = entity.getData().getAssess_status();
+//                    if (assess_status == 1) {//可以答题
+//                        mTvSeek.setText("可探寻星球");
+//                        mIvOpenSearch.setVisibility(View.VISIBLE);
+//                        mTvThreeDay.setVisibility(View.GONE);
+//                    } else {
+//                        mTvSeek.setText("探寻星球中...");
+//                        mTvThreeDay.setVisibility(View.VISIBLE);
+//                        mTvThreeDay.setText(getString(R.string.three_day, assess_after + ""));
+//                        mIvOpenSearch.setVisibility(View.GONE);
+//                        statScaleAnim(mTvSeek);
+//                        statFloatAnim(mIvRocket);
+//                    }
+//                }
+//            }
+//        });
 
         ll_move_away.setOnClickListener(v -> {
-            if (assess_status == 1) {
-                MoveAwayPlanetaryActivity.start(AboutMeActivity.this, 1, false);
-            }
+            MoveAwayPlanetaryActivity.start(AboutMeActivity.this, 1, false);
         });
         topMenu.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         SmartSwipeWrapper topMenuWrapper = SmartSwipe.wrap(topMenu);
@@ -355,7 +355,7 @@ public class AboutMeActivity extends BaseManagerActivity<AboutMePresenter> imple
             RequestUtil.create().userplayer(Preferences.getUserId(), entity -> {
                 if (entity != null && entity.getCode() == 200) {
                     userInfoEntity = entity.getData();
-                    setUserInfo();
+                    setUserInfo(2);
                 }
             });
         }

@@ -13,7 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.baidu.mapapi.model.LatLng;
 import com.drifting.bureau.R;
+import com.drifting.bureau.app.application.RBureauApplication;
 import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.di.component.DaggerTeaShopComponent;
 import com.drifting.bureau.mvp.contract.TeaShopContract;
@@ -88,8 +90,14 @@ public class TeaShopActivity extends BaseManagerActivity<TeaShopPresenter> imple
         teaShopAdapter = new TeaShopAdapter(new ArrayList<>());
         mRcyPublic.setAdapter(teaShopAdapter);
 
-        if (mPresenter != null) {
-            mPresenter.getLocation(getActivity());
+        if (RBureauApplication.latLng != null) {
+            Longitude = RBureauApplication.latLng.longitude + "";
+            Latitude = RBureauApplication.latLng.latitude + "";
+            getData(mPage, true);
+        } else {
+            if (mPresenter != null) {
+                mPresenter.getLocation(getActivity());
+            }
         }
         mEtShaopName.setOnEditorActionListener((v, actionId, event) -> {
             if ((actionId == 0 || actionId == 3) && event != null) {

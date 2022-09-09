@@ -59,7 +59,7 @@ public class PlanetarySelectActivity extends BaseManagerActivity<PlanetarySelect
     LinearLayout mLlMoveAway;
     private static String EXTRA_POSTION = "extra_postion";
     private int postion;
-    private int assess_after, assess_status;
+//    private int assess_after, assess_status;
 
     public static void start(Context context, int postion, boolean closePage) {
         Intent intent = new Intent(context, PlanetarySelectActivity.class);
@@ -87,7 +87,7 @@ public class PlanetarySelectActivity extends BaseManagerActivity<PlanetarySelect
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
         setStatusBarHeight(mTvBar);
-        mToolbarTitle.setText("星球分布");
+        mToolbarTitle.setText("派系星球分布");
         if (getIntent() != null) {
             postion = getIntent().getIntExtra(EXTRA_POSTION, 0);
         }
@@ -95,29 +95,30 @@ public class PlanetarySelectActivity extends BaseManagerActivity<PlanetarySelect
     }
 
     public void initListener() {
-        RequestUtil.create().planetlocation(entity -> {
-            if (entity != null && entity.getCode() == 200) {
-                if (entity.getData().getShow() == 0) {  //不显示
-                    mLlMoveAway.setVisibility(View.GONE);
-                } else { //显示
-                    mLlMoveAway.setVisibility(View.VISIBLE);
-                    assess_after = entity.getData().getAssess_after();
-                    assess_status = entity.getData().getAssess_status();
-                    if (assess_status == 1) {//可以答题
-                        mTvSeek.setText("可探寻星球");
-                        mIvOpenSearch.setVisibility(View.VISIBLE);
-                        mTvThreeDay.setVisibility(View.GONE);
-                    } else {
-                        mTvSeek.setText("探寻星球中...");
-                        mTvThreeDay.setVisibility(View.VISIBLE);
-                        mTvThreeDay.setText(getString(R.string.three_day, assess_after + ""));
-                        mIvOpenSearch.setVisibility(View.GONE);
-                        statScaleAnim(mTvSeek);
-                        statFloatAnim(mIvRocket);
-                    }
-                }
-            }
-        });
+
+//        RequestUtil.create().planetlocation(entity -> {
+//            if (entity != null && entity.getCode() == 200) {
+//                if (entity.getData().getShow() == 0) {  //不显示
+//                    mLlMoveAway.setVisibility(View.GONE);
+//                } else { //显示
+//                    mLlMoveAway.setVisibility(View.VISIBLE);
+//                    assess_after = entity.getData().getAssess_after();
+//                    assess_status = entity.getData().getAssess_status();
+//                    if (assess_status == 1) {//可以答题
+//                        mTvSeek.setText("可探寻星球");
+//                        mIvOpenSearch.setVisibility(View.VISIBLE);
+//                        mTvThreeDay.setVisibility(View.GONE);
+//                    } else {
+//                        mTvSeek.setText("探寻星球中...");
+//                        mTvThreeDay.setVisibility(View.VISIBLE);
+//                        mTvThreeDay.setText(getString(R.string.three_day, assess_after + ""));
+//                        mIvOpenSearch.setVisibility(View.GONE);
+//                        statScaleAnim(mTvSeek);
+//                        statFloatAnim(mIvRocket);
+//                    }
+//                }
+//            }
+//        });
 
         Fragment fragment = PlanetaryDisFragment.newInstance(postion);
         getSupportFragmentManager().beginTransaction().replace(R.id.main_fame, fragment).commitAllowingStateLoss();
@@ -157,9 +158,7 @@ public class PlanetarySelectActivity extends BaseManagerActivity<PlanetarySelect
                     finish();
                     break;
                 case R.id.ll_move_away:
-                    if (assess_status == 1) {
-                        MoveAwayPlanetaryActivity.start(PlanetarySelectActivity.this, 1, false);
-                    }
+                    MoveAwayPlanetaryActivity.start(PlanetarySelectActivity.this, 1, false);
                     break;
             }
         }

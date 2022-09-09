@@ -49,7 +49,7 @@ public class AttributeResultsDialog extends BaseDialog implements View.OnClickLi
     protected void initEvents() {
         super.initEvents();
         username.setText("昵称：" + entity.getUser_name());
-        SpannableStringBuilder passer = SpannableUtil.getBuilder(context, "适宜居住星球： ").append(entity.getPlanet().getName()).setBold().setTextSize(14).build();
+        SpannableStringBuilder passer = SpannableUtil.getBuilder(context, "派系属性判定为： ").append(entity.getPlanet().getName()).setBold().setTextSize(14).build();
         planetname.setText(passer);
         desc.setText(entity.getPlanet().getDesc());
         List<Integer> list = new LinkedList<>();

@@ -19,7 +19,6 @@ public class ARCoreUtil {
      * @return
      */
     public static boolean checkArCoreAvailability(Context context) {
-
         String message;
         ArCoreApk.Availability availability = ArCoreApk.getInstance().checkAvailability(context);
         if (!Sceneform.isSupported(context)) {
@@ -27,7 +26,7 @@ public class ARCoreUtil {
         } else if (availability == availability.UNKNOWN_ERROR) {
             message = "此设备不支持 AR！";
         } else if (availability == availability.UNKNOWN_CHECKING) {
-            message = "请安装 Google Play Services以使用场景展示";
+            message = "请安装 Google Play Services插件以使用场景展示";
         } else if (availability == availability.UNKNOWN_TIMED_OUT) {
             message = "此设备不支持 AR！";
         } else if (availability == availability.UNSUPPORTED_DEVICE_NOT_CAPABLE) {

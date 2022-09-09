@@ -104,7 +104,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
 
-                                android:text="居住地_"
+                                android:text="所属派系_"
                                 android:textColor="@color/color_cc"
                                 android:textSize="8sp" />
 
@@ -126,7 +126,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="建设度_"
+                                android:text="完善度_"
                                 android:textColor="@color/color_cc"
                                 android:textSize="8sp" />
 

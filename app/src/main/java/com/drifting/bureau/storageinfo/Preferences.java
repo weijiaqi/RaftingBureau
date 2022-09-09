@@ -5,6 +5,16 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.location.Location;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonPrimitive;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
 /**
  * @author 卫佳琪1
  * @description 本地存储
@@ -24,6 +34,9 @@ public class Preferences {
     private static final String KEY_USER_MASCOT = "user_mascot";
     private static final String KEY_USER_PASSWORD = "user_password";
     private static final String KEY_USER_CITY = "user_city";
+
+    private static final String KEY_AR_ANSWER = "ar_answer";
+
     private static final String KEY_USER_IS_ANONY = "isanony";//是否为匿名状态
     private static final String KEY_USER_IS_PRIVACY= "isprivacy";//是否同意隐私条款
     private static final String KEY_USER_IS_ARMODEL = "isarmodel";//是否为AR模式
@@ -307,6 +320,53 @@ public class Preferences {
         return getString(KEY_USER_PASSWORD);
     }
 
+
+
+
+    /**
+     * 将map集合转化为json数据保存在sharePreferences中
+     *
+     * @param
+     * @param map map数据
+     * @return 保存结果
+     */
+    public static  <K,V> void putHashMapData(Map<K,V> map){
+        try {
+            String json = new Gson().toJson(map);
+            saveString(KEY_AR_ANSWER,json);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
+    /**
+     * 读取本地sharePreferences数据、转换成map集合
+     *
+     * @return HashMap
+     */
+    public static HashMap<String , String> getHashMapData(){
+        String localJson = getString(KEY_AR_ANSWER);
+        if (localJson==null ||localJson.equals("null")){
+            return null;
+        }
+
+        HashMap<String , String> map = new HashMap<>();
+        JsonObject object = JsonParser.parseString(localJson).getAsJsonObject();
+        Set<Map.Entry<String , JsonElement>> entrySet = object.entrySet();
+        for (Map.Entry<String , JsonElement> entry : entrySet) {
+            String entryKey =entry.getKey();
+            JsonPrimitive entryValue = (JsonPrimitive) entry.getValue();
+            map.put(entryKey ,entryValue.getAsString());
+        }
+
+        return map;
+    }
+
+
+
+
+
     public static void saveString(String key, String value) {
         SharedPreferences.Editor editor = getSharedPreferences().edit();
         editor.putString(key, value);
@@ -327,6 +387,7 @@ public class Preferences {
     public static boolean getBoolean(String key) {
         return getSharedPreferences().getBoolean(key, false);
     }
+
 
 
     /**

@@ -275,7 +275,6 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
         mDistrictSearch = DistrictSearch.newInstance();
         mDistrictSearch.setOnDistrictSearchListener(listener);
 
-
         if (Msgtype == 1) {  //开启新漂流
             openNewDrift();
             if (RBureauApplication.latLng != null) {
@@ -348,7 +347,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
         mInfoWindow = new InfoWindow(view, latLng, -80);
         infoWindowList.add(mInfoWindow);
         mTvReceiveTime.setOnClickListener(v -> {
-            showDetails(postion);
+            showInfoWindowDetails(postion);
         });
         TextView textView = new TextView(getApplicationContext());
         textView.setText("已传递等待漂出");
@@ -360,7 +359,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
     }
 
 
-    public void showDetails(int click) {
+    public void showInfoWindowDetails(int click) {
         if (click == 0) {
             mPresenter.details(messageBean.getId(), 0, messagePathBeanList.get(0).getUser_id());
         } else {
@@ -491,12 +490,11 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
 
                 getFromUser(messageBean.getUser_id());
                 getToUser(messagePathBeanList.get(messagePathBeanList.size() - 1).getUser_id());
-
                 selectCity(messageBean.getName_city());
             }
 
             if (type == 2) { // type=2 表示参与成功刷新dialog
-                showDetails(postion);
+                showInfoWindowDetails(postion);
             }
         }
     }
@@ -559,7 +557,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
         publicDialog.show();
         publicDialog.setCancelable(false);
         publicDialog.setTitleText("已成功发送");
-        publicDialog.setContentText("可在“关于我-漂流轨迹”中 查看漂流记录");
+        publicDialog.setContentText("可在“关于我-漂流线程”中 查看漂流记录");
         publicDialog.setButtonText("确定");
     }
 

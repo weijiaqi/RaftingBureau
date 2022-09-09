@@ -1,339 +1,349 @@
 <?xml version="1.0" encoding="utf-8"?><manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.drifting.bureau">
+xmlns:tools="http://schemas.android.com/tools"
+package="com.drifting.bureau">
 
-    <queries>
-        <package android:name="com.unionpay" />
-        <package android:name="com.unionpay.tsmservice" />
-        <package android:name="com.unionpay.tsmservice.mi" />
-        <package android:name="com.huawei.wallet" />
-    </queries>
+<queries>
+    <package android:name="com.unionpay" />
+    <package android:name="com.unionpay.tsmservice" />
+    <package android:name="com.unionpay.tsmservice.mi" />
+    <package android:name="com.huawei.wallet" />
+</queries>
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-    <uses-permission android:name="android.permission.NFC" />
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+<uses-permission android:name="android.permission.RECORD_AUDIO" />
+<uses-permission android:name="android.permission.CAMERA" />
+<uses-permission android:name="android.permission.CALL_PHONE" />
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+<uses-permission android:name="android.permission.NFC" />
 
-    <uses-feature android:name="android.hardware.nfc.hce" />
+<uses-feature android:name="android.hardware.nfc.hce" />
 
-    <uses-permission
-        android:name="android.permission.READ_LOGS"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-    <uses-permission
-        android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
-        tools:ignore="ProtectedPermissions" />
+<uses-permission
+    android:name="android.permission.READ_LOGS"
+    tools:ignore="ProtectedPermissions" />
+<uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+<uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+<uses-permission
+    android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+    tools:ignore="ProtectedPermissions" />
 
-    <uses-feature
-        android:name="android.hardware.camera.ar"
-        android:required="true" />
-    <queries>
-        <package android:name="com.autonavi.minimap" />
-        <package android:name="com.baidu.BaiduMap" />
-        <package android:name="com.tencent.map" />
-    </queries>
-    <application
-        android:name=".app.application.RBureauApplication"
-        android:allowBackup="true"
-        android:extractNativeLibs="true"
-        android:icon="@mipmap/icon_logo"
-        android:label="@string/app_name"
-        android:largeHeap="true"
-        android:networkSecurityConfig="@xml/network_security_config"
-        android:requestLegacyExternalStorage="true"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
-        <activity
-            android:name=".mvp.ui.activity.SplashActivity"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppSplash"
-            tools:ignore="Instantiatable">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+<uses-feature
+    android:name="android.hardware.camera.ar"
+    android:required="true" />
+<queries>
+    <package android:name="com.autonavi.minimap" />
+    <package android:name="com.baidu.BaiduMap" />
+    <package android:name="com.tencent.map" />
+</queries>
+<application
+    android:name=".app.application.RBureauApplication"
+    android:allowBackup="true"
+    android:extractNativeLibs="true"
+    android:icon="@mipmap/icon_logo"
+    android:label="@string/app_name"
+    android:largeHeap="true"
+    android:networkSecurityConfig="@xml/network_security_config"
+    android:requestLegacyExternalStorage="true"
+    android:supportsRtl="true"
+    android:theme="@style/AppTheme"
+    android:usesCleartextTraffic="true">
+    <activity
+        android:name=".mvp.ui.activity.SplashActivity"
+        android:exported="true"
+        android:screenOrientation="portrait"
+        android:theme="@style/AppSplash"
+        tools:ignore="Instantiatable">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
 
-        <!-- 只要依赖 AutoSize 就必须填写设计图尺寸, 否则报错, 不想使用 AutoSize 就不要依赖 AutoSize
+    <!-- 只要依赖 AutoSize 就必须填写设计图尺寸, 否则报错, 不想使用 AutoSize 就不要依赖 AutoSize
                                               只要填写完设计图的尺寸, AutoSize 就会自动启动, 以下 dp 尺寸是根据公式 px / (dpi / 160) 求出, 运算时使用测试机的 dpi 即可
                                               AutoSize 的详细介绍请看这里 https://juejin.im/post/5bce688e6fb9a05cf715d1c2
                                               -->
+    <meta-data
+        android:name="design_width_in_dp"
+        android:value="360" />
+    <meta-data
+        android:name="design_height_in_dp"
+        android:value="640" />
+
+    <!-- Arms 配置 -->
+    <meta-data
+        android:name="com.drifting.bureau.app.GlobalConfiguration"
+        android:value="ConfigModule" />
+
+    <meta-data
+        android:name="com.google.ar.core"
+        android:value="optional" />
+
+    <activity
+        android:name=".mvp.ui.activity.home.DiscoveryTourActivity"
+        android:configChanges="orientation|keyboardHidden|screenSize"
+        android:launchMode="singleTask"
+        android:screenOrientation="portrait"
+        android:windowSoftInputMode="adjustResize" />
+
+
+    <activity
+        android:name=".mvp.ui.activity.home.ArCenterConsoleActivity"
+        android:configChanges="orientation|keyboardHidden|screenSize"
+        android:launchMode="singleTask"
+        android:screenOrientation="portrait"
+        android:windowSoftInputMode="adjustResize" />
+
+
+    <activity
+        android:name=".mvp.ui.activity.home.ArAnswerActivity"
+        android:screenOrientation="portrait" />
+
+    <activity
+        android:name=".mvp.ui.activity.user.BuildGuideActivity"
+        android:screenOrientation="portrait" />
+
+    <activity
+        android:name=".mvp.ui.activity.user.PullNewGuideActivity"
+        android:screenOrientation="portrait" />
+
+    <activity
+        android:name=".mvp.ui.activity.user.SignLoginHintActivity"
+        android:screenOrientation="portrait" />
+    <activity
+        android:name=".mvp.ui.activity.user.LoginActivity"
+        android:screenOrientation="portrait" />
+    <activity
+        android:name=".mvp.ui.activity.user.ClaimPlanetActivity"
+        android:screenOrientation="portrait" />
+    <activity
+        android:name=".mvp.ui.activity.user.ArGuideActivity"
+        android:screenOrientation="portrait" />
+    <activity
+        android:name=".mvp.ui.activity.user.AboutMeActivity"
+        android:screenOrientation="portrait" />
+
+    <activity
+        android:name=".mvp.ui.activity.index.VideoActivity"
+        android:configChanges="orientation|screenSize|keyboardHidden"
+        android:screenOrientation="portrait" />
+    <activity
+        android:name=".mvp.ui.activity.index.VideoRecordingActivity"
+        android:screenOrientation="portrait" />
+    <activity
+        android:name=".mvp.ui.activity.web.ShowWebViewActivity"
+        android:screenOrientation="portrait" />
+    <activity
+        android:name=".mvp.ui.activity.pay.PaymentInfoActivity"
+        android:screenOrientation="portrait" />
+    <activity
+        android:name=".mvp.ui.activity.user.SetUpActivity"
+        android:screenOrientation="portrait" />
+
+    <activity
+        android:name=".mvp.ui.activity.index.DeliveryDetailsActivity"
+        android:screenOrientation="portrait" />
+    <activity
+        android:name=".mvp.ui.activity.index.SpaceCapsuleActivity"
+        android:screenOrientation="portrait" />
+    <activity
+        android:name=".mvp.ui.activity.index.GetSpaceStationActivity"
+        android:screenOrientation="portrait" />
+    <activity
+        android:name=".mvp.ui.activity.user.MyBlindBoxActivity"
+        android:screenOrientation="portrait" />
+    <activity
+        android:name=".mvp.ui.activity.user.MySpaceStationActivity"
+        android:screenOrientation="portrait" />
+    <activity
+        android:name=".mvp.ui.activity.user.IncomeRecordActivity"
+        android:screenOrientation="portrait" />
+    <activity
+        android:name=".mvp.ui.activity.user.MakingRecordActivity"
+        android:screenOrientation="portrait" />
+    <activity
+        android:name=".mvp.ui.activity.user.WithdrawalActivity"
+        android:screenOrientation="portrait" />
+    <activity
+        android:name=".mvp.ui.activity.user.AccountSettingsActivity"
+        android:screenOrientation="portrait" />
+    <activity
+        android:name=".mvp.ui.activity.user.DriftingTrackActivity"
+        android:screenOrientation="portrait" />
+    <activity
+        android:name=".mvp.ui.activity.user.OrderRecordActivity"
+        android:screenOrientation="portrait" />
+    <activity
+        android:name=".mvp.ui.activity.user.SpaceMarinesActivity"
+        android:screenOrientation="portrait" />
+    <activity
+        android:name=".mvp.ui.activity.index.TeaShopActivity"
+        android:screenOrientation="portrait" />
+    <activity
+        android:name=".mvp.ui.activity.index.CitySelectionActivity"
+        android:screenOrientation="portrait" />
+    <activity
+        android:name=".mvp.ui.activity.user.FeedBackActivity"
+        android:screenOrientation="portrait" />
+    <activity
+        android:name=".mvp.ui.activity.index.PlanetarySelectActivity"
+        android:screenOrientation="portrait" />
+    <activity
+        android:name=".mvp.ui.activity.index.PlanetaryDetailActivity"
+        android:screenOrientation="portrait" />
+    <activity
+        android:name=".mvp.ui.activity.index.MoveAwayPlanetaryActivity"
+        android:screenOrientation="portrait" />
+    <activity
+        android:name=".mvp.ui.activity.user.WithdrawalRecordActivity"
+        android:screenOrientation="portrait" />
+
+    <activity
+        android:name=".mvp.ui.activity.imkit.SessionListActivity"
+        android:screenOrientation="portrait" />
+
+    <activity
+        android:name=".mvp.ui.activity.index.TopicDetailActivity"
+        android:screenOrientation="portrait" />
+
+    <activity
+        android:name=".mvp.ui.activity.index.DriftTrackMapActivity"
+        android:screenOrientation="portrait" />
+
+
+    <activity
+        android:name=".mvp.ui.activity.index.DriftTrackCampusMapActivity"
+        android:screenOrientation="portrait"
+        tools:ignore="DuplicateActivity" />
+
+    <activity
+        android:name=".mvp.ui.activity.index.AddTopicActivity"
+        android:screenOrientation="portrait" />
+
+    <activity
+        android:name=".mvp.ui.activity.user.MessageCenterActivity"
+        android:exported="true"
+        android:screenOrientation="portrait">
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <data
+                android:host="${applicationId}"
+                android:pathPrefix="/conversationlist"
+                android:scheme="rong" />
+        </intent-filter>
+    </activity>
+
+    <activity
+        android:name=".mvp.ui.activity.user.FriendApplicationActivity"
+        android:screenOrientation="portrait" />
+
+    <activity
+        android:name=".mvp.ui.activity.index.AnnouncementDetailsActivity"
+        android:screenOrientation="portrait" />
+
+    <activity
+        android:name=".mvp.ui.activity.index.vr.SpaceStationVRActivity"
+        android:screenOrientation="portrait" />
+
+    <activity
+        android:name=".mvp.ui.activity.error.CustomErrorActivity"
+        android:screenOrientation="portrait" />
+
+    <activity
+        android:name=".mvp.ui.activity.index.NebulaActivity"
+        android:screenOrientation="portrait" />
+
+
+    <activity
+        android:name=".mvp.ui.activity.index.ar.ARActivity"
+        android:screenOrientation="portrait" />
+
+
+    <activity
+        android:name=".mvp.ui.activity.index.SelectImageActivity"
+        android:screenOrientation="portrait" />
+
+
+    <activity
+        android:name=".mvp.ui.activity.user.BlindBoxRecordActivity"
+        android:screenOrientation="portrait" />
+
+    <service
+        android:name=".util.downloadutil.DownLoadIntentService"
+        tools:ignore="InnerclassSeparator" />
+
+
+    <activity
+        android:name=".mvp.ui.activity.index.NebulaeActivity"
+        android:screenOrientation="portrait" />
+
+    <activity
+        android:name="com.unionpay.uppay.PayActivity"
+        android:configChanges="orientation|keyboardHidden"
+        android:excludeFromRecents="true"
+        android:label="@string/app_name"
+        android:screenOrientation="portrait"
+        android:windowSoftInputMode="adjustResize"></activity>
+    <activity
+        android:name="com.unionpay.UPPayWapActivity"
+        android:configChanges="orientation|keyboardHidden|fontScale"
+        android:screenOrientation="portrait"
+        android:windowSoftInputMode="adjustResize"></activity>
+
+    <activity
+        android:name=".wxapi.WXPayEntryActivity"
+        android:exported="true"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.Translucent" />
+
+    <provider
+        android:name=".util.downloadutil.DownLoadFileProvider"
+        android:authorities="${applicationId}.fileprovider"
+        android:exported="false"
+        android:grantUriPermissions="true"
+        tools:ignore="InnerclassSeparator,MissingClass">
         <meta-data
-            android:name="design_width_in_dp"
-            android:value="360" />
+            android:name="android.support.FILE_PROVIDER_PATHS"
+            android:resource="@xml/file_paths" />
+    </provider>
+
+    <provider
+        android:name="androidx.core.content.FileProvider"
+        android:authorities="${applicationId}.ar.codelab.name.provider"
+        android:exported="false"
+        android:grantUriPermissions="true">
         <meta-data
-            android:name="design_height_in_dp"
-            android:value="640" />
-
-        <!-- Arms 配置 -->
-        <meta-data
-            android:name="com.drifting.bureau.app.GlobalConfiguration"
-            android:value="ConfigModule" />
-
-        <meta-data
-            android:name="com.google.ar.core"
-            android:value="optional" />
-
-        <activity
-            android:name=".mvp.ui.activity.home.DiscoveryTourActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" />
+            android:name="android.support.FILE_PROVIDER_PATHS"
+            android:resource="@xml/file_paths" />
+    </provider>
 
 
-        <activity
-            android:name=".mvp.ui.activity.home.ArCenterConsoleActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" />
+    <activity
+        android:name=".mvp.ui.activity.imkit.MyConversationActivity"
+        android:exported="true"
+        android:screenOrientation="portrait">
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <data
+                android:host="${applicationId}"
+                android:pathPrefix="/conversation/"
+                android:scheme="rong" />
+        </intent-filter>
+    </activity>
 
-        <activity
-            android:name=".mvp.ui.activity.user.BuildGuideActivity"
-            android:screenOrientation="portrait" />
+    <meta-data
+        android:name="com.baidu.lbsapi.API_KEY"
+        android:value="i3gR2tUpT09kDBaMeEiQGX8FO3jGgrey" />
 
-        <activity
-            android:name=".mvp.ui.activity.user.PullNewGuideActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".mvp.ui.activity.user.SignLoginHintActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".mvp.ui.activity.user.LoginActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".mvp.ui.activity.user.ClaimPlanetActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".mvp.ui.activity.user.ArGuideActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".mvp.ui.activity.user.AboutMeActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".mvp.ui.activity.index.VideoActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".mvp.ui.activity.index.VideoRecordingActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".mvp.ui.activity.web.ShowWebViewActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".mvp.ui.activity.pay.PaymentInfoActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".mvp.ui.activity.user.SetUpActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".mvp.ui.activity.index.DeliveryDetailsActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".mvp.ui.activity.index.SpaceCapsuleActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".mvp.ui.activity.index.GetSpaceStationActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".mvp.ui.activity.user.MyBlindBoxActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".mvp.ui.activity.user.MySpaceStationActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".mvp.ui.activity.user.IncomeRecordActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".mvp.ui.activity.user.MakingRecordActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".mvp.ui.activity.user.WithdrawalActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".mvp.ui.activity.user.AccountSettingsActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".mvp.ui.activity.user.DriftingTrackActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".mvp.ui.activity.user.OrderRecordActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".mvp.ui.activity.user.SpaceMarinesActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".mvp.ui.activity.index.TeaShopActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".mvp.ui.activity.index.CitySelectionActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".mvp.ui.activity.user.FeedBackActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".mvp.ui.activity.index.PlanetarySelectActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".mvp.ui.activity.index.PlanetaryDetailActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".mvp.ui.activity.index.MoveAwayPlanetaryActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".mvp.ui.activity.user.WithdrawalRecordActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".mvp.ui.activity.imkit.SessionListActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".mvp.ui.activity.index.TopicDetailActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".mvp.ui.activity.index.DriftTrackMapActivity"
-            android:screenOrientation="portrait" />
-
-
-        <activity
-            android:name=".mvp.ui.activity.index.AddTopicActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".mvp.ui.activity.user.MessageCenterActivity"
-            android:exported="true"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data
-                    android:host="${applicationId}"
-                    android:pathPrefix="/conversationlist"
-                    android:scheme="rong" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".mvp.ui.activity.user.FriendApplicationActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".mvp.ui.activity.index.AnnouncementDetailsActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".mvp.ui.activity.index.vr.SpaceStationVRActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".mvp.ui.activity.error.CustomErrorActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".mvp.ui.activity.index.NebulaActivity"
-            android:screenOrientation="portrait" />
-
-
-        <activity
-            android:name=".mvp.ui.activity.index.ar.ARActivity"
-            android:screenOrientation="portrait" />
-
-
-        <activity
-            android:name=".mvp.ui.activity.index.SelectImageActivity"
-            android:screenOrientation="portrait" />
-
-
-        <activity
-            android:name=".mvp.ui.activity.user.BlindBoxRecordActivity"
-            android:screenOrientation="portrait" />
-
-        <service
-            android:name=".util.downloadutil.DownLoadIntentService"
-            tools:ignore="InnerclassSeparator" />
-
-
-        <activity
-            android:name=".mvp.ui.activity.index.NebulaeActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name="com.unionpay.uppay.PayActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:excludeFromRecents="true"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize"></activity>
-        <activity
-            android:name="com.unionpay.UPPayWapActivity"
-            android:configChanges="orientation|keyboardHidden|fontScale"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize"></activity>
-
-        <activity
-            android:name=".wxapi.WXPayEntryActivity"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@android:style/Theme.Translucent" />
-
-        <provider
-            android:name=".util.downloadutil.DownLoadFileProvider"
-            android:authorities="${applicationId}.fileprovider"
-            android:exported="false"
-            android:grantUriPermissions="true"
-            tools:ignore="InnerclassSeparator,MissingClass">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths" />
-        </provider>
-
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.ar.codelab.name.provider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths" />
-        </provider>
-
-
-        <activity
-            android:name=".mvp.ui.activity.imkit.MyConversationActivity"
-            android:exported="true"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data
-                    android:host="${applicationId}"
-                    android:pathPrefix="/conversation/"
-                    android:scheme="rong" />
-            </intent-filter>
-        </activity>
-
-        <meta-data
-            android:name="com.baidu.lbsapi.API_KEY"
-            android:value="i3gR2tUpT09kDBaMeEiQGX8FO3jGgrey" />
-
-    </application>
+</application>
 </manifest>

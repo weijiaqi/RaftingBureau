@@ -199,19 +199,21 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
     }
 
 
-    public void getUserInfo() {
+    public void getUserInfo(int status) {
         RequestUtil.create().userplayer(Preferences.getUserId(), entity -> {
             if (entity != null && entity.getCode() == 200) {
                 userInfoEntity = entity.getData();
                 Preferences.saveMascot(userInfoEntity.getUser().getMascot());
                 mTvAboutMe.setText(userInfoEntity.getPlanet().getName());
                 mTvEnergy.setText(userInfoEntity.getUser().getMeta_power());
-                RequestUtil.create().startup(entity1 -> {
-                    if (entity1 != null && entity1.getCode() == 200) {
-                        starUpIndexEntity = entity1.getData();
-                        mTvYouthCamp.setVisibility(!TextUtils.isEmpty(starUpIndexEntity.getUrl()) ? View.VISIBLE : View.INVISIBLE);
-                    }
-                });
+                if (status==1){
+                    RequestUtil.create().startup(entity1 -> {
+                        if (entity1 != null && entity1.getCode() == 200) {
+                            starUpIndexEntity = entity1.getData();
+                            mTvYouthCamp.setVisibility(!TextUtils.isEmpty(starUpIndexEntity.getUrl()) ? View.VISIBLE : View.INVISIBLE);
+                        }
+                    });
+                }
             }
         });
     }
@@ -382,7 +384,7 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
             viewPager.setOffscreenPageLimit(list.size());
             viewPager.setClipChildren(false);
             viewPager.setPageTransformer(true, new DiscoveryTransformer());
-            getUserInfo();
+            getUserInfo(1);
         }
     }
 
@@ -390,7 +392,7 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void AnswerCompletedEvent(AnswerCompletedEvent answerCompletedEvent) {
         if (answerCompletedEvent != null) {
-            getUserInfo();
+            getUserInfo(2);
         }
     }
 

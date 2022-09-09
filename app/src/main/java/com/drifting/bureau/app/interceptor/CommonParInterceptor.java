@@ -2,6 +2,7 @@ package com.drifting.bureau.app.interceptor;
 
 import android.text.TextUtils;
 
+import com.drifting.bureau.R;
 import com.drifting.bureau.app.application.RBureauApplication;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.AppUtil;
@@ -33,31 +34,16 @@ public class CommonParInterceptor implements Interceptor {
         String method = originalRequest.method();
         if (TextUtils.equals(method,"POST")){
             RequestBody oldBody = originalRequest.body();
-            if (oldBody instanceof FormBody){
-                FormBody formBody = (FormBody) originalRequest.body();
-                originalRequest = originalRequest.newBuilder().removeHeader("User-Agent")//移除旧的
-                        .addHeader("User-Agent", SystemUtil.getUserAgent(RBureauApplication.getContext()))//添加真正的头部
-                        .addHeader("Token", StringUtil.formatNullString(Preferences.getToken()))
-                        .addHeader("Version", StringUtil.formatNullString(AppUtil.getVerName(RBureauApplication.getContext()) + ""))
-                        .addHeader("Sign",StringUtil.formatNullString(AppUtil.getSign(Preferences.getPhone())))
-                        .addHeader("source","Android")
-                        .addHeader("Accept", "application/json")
-                        .post(formBody)
-                        .build();
-                response = chain.proceed(originalRequest);
-            }else {
-                MultipartBody multipartBody = (MultipartBody) originalRequest.body();
-                originalRequest = originalRequest.newBuilder().removeHeader("User-Agent")//移除旧的
-                        .addHeader("User-Agent", SystemUtil.getUserAgent(RBureauApplication.getContext()))//添加真正的头部
-                        .addHeader("Token", StringUtil.formatNullString(Preferences.getToken()))
-                        .addHeader("Version", StringUtil.formatNullString(AppUtil.getVerName(RBureauApplication.getContext()) + ""))
-                        .addHeader("Sign",StringUtil.formatNullString(AppUtil.getSign(Preferences.getPhone())))
-                        .addHeader("source","Android")
-                        .addHeader("Accept", "application/json")
-                        .post(multipartBody)
-                        .build();
-                response = chain.proceed(originalRequest);
-            }
+            originalRequest = originalRequest.newBuilder().removeHeader("User-Agent")//移除旧的
+                    .addHeader("User-Agent", SystemUtil.getUserAgent(RBureauApplication.getContext()))//添加真正的头部
+                    .addHeader("Token", StringUtil.formatNullString(Preferences.getToken()))
+                    .addHeader("Version", StringUtil.formatNullString(AppUtil.getVerName(RBureauApplication.getContext()) + ""))
+                    .addHeader("Sign",StringUtil.formatNullString(AppUtil.getSign(Preferences.getPhone())))
+                    .addHeader("source","Android")
+                    .addHeader("Accept", "application/json")
+                    .post(oldBody)
+                    .build();
+            response = chain.proceed(originalRequest);
         }else {
             Request request = new Request.Builder()
                     .removeHeader("User-Agent").addHeader("User-Agent",

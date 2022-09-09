@@ -17,6 +17,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
+import okhttp3.RequestBody;
 
 /**
  * ================================================
@@ -51,11 +52,11 @@ public class MoveAwayPlanetaryModel extends BaseModel implements MoveAwayPlaneta
 
     @Override
     public Observable<BaseEntity<List<QuestionEntity>>> questionlist() {
-        return mRepositoryManager.obtainRetrofitService(ApiService.class).questionlist();
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).listWithScene();
     }
 
     @Override
-    public Observable<BaseEntity<QuestionAssessEntity>> questionassess(String questions,String anwsers) {
-        return mRepositoryManager.obtainRetrofitService(ApiService.class).questionassess(questions,anwsers);
+    public Observable<BaseEntity<QuestionAssessEntity>> questionassess(RequestBody body) {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).questionassess(body);
     }
 }

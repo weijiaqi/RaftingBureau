@@ -12,7 +12,11 @@ import com.jess.arms.integration.AppManager;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.utils.RxLifecycleUtils;
 
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -20,6 +24,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 /**
  * ================================================
@@ -79,8 +85,9 @@ public class MoveAwayPlanetaryPresenter extends BasePresenter<MoveAwayPlanetaryC
     /**
      *答题测评（搬离星球）
      */
-    public void questionassess(String questions,String anwsers) {
-        mModel.questionassess(questions,anwsers).subscribeOn(Schedulers.io())
+    public void questionassess(Map<String, String> map) {
+        RequestBody requestBody = RequestBody.create(MediaType.parse("Content-Type, application/json"), new JSONObject(map).toString());
+        mModel.questionassess(requestBody).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
                 .subscribe(new ErrorHandleSubscriber<BaseEntity<QuestionAssessEntity>>(mErrorHandler) {

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -23,6 +24,7 @@ import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
 import com.drifting.bureau.mvp.ui.adapter.AnswerAdapter;
 import com.drifting.bureau.mvp.ui.adapter.manager.CardSwipeLayoutManager;
 import com.drifting.bureau.mvp.ui.dialog.AttributeResultsDialog;
+import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.animator.SwipeItemAnimator;
@@ -32,7 +34,9 @@ import com.jess.arms.di.component.AppComponent;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -51,11 +55,14 @@ public class MoveAwayPlanetaryActivity extends BaseManagerActivity<MoveAwayPlane
     RecyclerView mRcyAnswer;
     private AnswerAdapter answerAdapter;
     private AttributeResultsDialog attributeResultsDialog;
-    private StringBuilder builder1, builder2;
+
     private List<AnswerEntity> infos;
     private static String EXTRA_TYPE = "extra_type";
     private int type;
 
+    private List<QuestionEntity> questionEntityList;
+    private Map<String, String> map;
+    private int total;
     public static void start(Context context, int type, boolean closePage) {
         Intent intent = new Intent(context, MoveAwayPlanetaryActivity.class);
         intent.putExtra(EXTRA_TYPE, type);
@@ -95,16 +102,6 @@ public class MoveAwayPlanetaryActivity extends BaseManagerActivity<MoveAwayPlane
         mRcyAnswer.setItemAnimator(new SwipeItemAnimator());
         answerAdapter = new AnswerAdapter(new ArrayList<>(), list -> {
             infos = list;
-            builder1 = new StringBuilder();
-            builder2 = new StringBuilder();
-            if (!list.isEmpty()) {
-                builder1.append(list.get(0).getQuestionid());
-                builder2.append(list.get(0).getValue());
-                for (int i = 1, n = list.size(); i < n; i++) {
-                    builder1.append(",").append(list.get(i).getQuestionid());
-                    builder2.append(",").append(list.get(i).getValue());
-                }
-            }
         });
         mRcyAnswer.setAdapter(answerAdapter);
         if (mPresenter != null) {
@@ -115,24 +112,43 @@ public class MoveAwayPlanetaryActivity extends BaseManagerActivity<MoveAwayPlane
     @Override
     public void onQuestionListSuccess(List<QuestionEntity> list) {
         if (list != null && list.size() > 0) {
-            for (int i = 0; i < list.size(); i++) {
-                list.get(i).setPostion(i + 1);
+            questionEntityList = new ArrayList<>();
+            map = Preferences.getHashMapData();
+            if (map != null) {
+                for (int i = 0; i < list.size(); i++) {
+                    if (!map.containsKey(list.get(i).getQuestion_id() + "")) {
+                        questionEntityList.add(list.get(i));
+                    }
+                }
+            } else {
+                map = new HashMap<>();
+                questionEntityList = list;
             }
-            answerAdapter.setData(list);
+            for (int i = 0; i < questionEntityList.size(); i++) {
+                if (map != null) {
+                    questionEntityList.get(i).setPostion(map.size() + i + 1);
+                } else {
+                    questionEntityList.get(i).setPostion(i + 1);
+                }
+            }
+            total = questionEntityList.size();
+            answerAdapter.setData(questionEntityList);
         }
     }
 
     @Override
     public void onQuestionAssessSuccess(QuestionAssessEntity entity) {
         if (entity != null) {
+            Preferences.putHashMapData(null);
+            AnswerCompletedEvent answerCompletedEvent=new AnswerCompletedEvent();
+            answerCompletedEvent.setPl_id(entity.getPlanet().getPl_id());
+            EventBus.getDefault().post(answerCompletedEvent);
+
             attributeResultsDialog = new AttributeResultsDialog(this, entity);
             attributeResultsDialog.show();
             attributeResultsDialog.setOnClickCallback(status -> {
                 if (status == AttributeResultsDialog.SELECT_FINISH) {
                     if (type == 1) {
-                        AnswerCompletedEvent answerCompletedEvent=new AnswerCompletedEvent();
-                        answerCompletedEvent.setPl_id(entity.getPlanet().getPl_id());
-                        EventBus.getDefault().post(answerCompletedEvent);
                         finish();
                     } else {
                         DiscoveryTourActivity.start(this, true);
@@ -160,8 +176,12 @@ public class MoveAwayPlanetaryActivity extends BaseManagerActivity<MoveAwayPlane
                     break;
                 case R.id.tv_next:
                     if (mRcyAnswer != null && mRcyAnswer.getChildCount() > 0) {
-                        if (mRcyAnswer.getChildCount() != 1) {
-                            if (infos != null && infos.size() == 10 - answerAdapter.getItemCount() + 1) {
+                        if (infos != null) {
+                            map.put(infos.get(infos.size() - 1).getQuestionid() + "", infos.get(infos.size() - 1).getValue());
+                            Preferences.putHashMapData(map);
+                        }
+                        if (answerAdapter.getItemCount() != 1) {
+                            if (infos!=null&&infos.size() == total - answerAdapter.getItemCount() + 1) {
                                 int currentPosition = 0;
                                 View itemView = mRcyAnswer.getLayoutManager().findViewByPosition(currentPosition);
                                 itemView.setTag(SwipeItemAnimator.SWIPE_REMOVE_LEFT);
@@ -170,10 +190,8 @@ public class MoveAwayPlanetaryActivity extends BaseManagerActivity<MoveAwayPlane
                                 showMessage("请进行选择!");
                             }
                         } else {
-                            if (builder1 != null && builder2 != null) {
-                                if (mPresenter != null) {
-                                    mPresenter.questionassess(builder1.toString(), builder2.toString());
-                                }
+                            if (mPresenter != null) {
+                                mPresenter.questionassess(map);
                             }
                         }
                     }

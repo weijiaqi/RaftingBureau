@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <RelativeLayout
+        android:id="@+id/rl_center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/play_bear" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="155dp"
+            android:background="@drawable/ar_play_bg">
+
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginHorizontal="31dp"
+                android:layout_centerVertical="true"
+                android:lineSpacingExtra="3dp"
+                android:text="Hi，在这团圆的日子里终于等到你！元宇宙漂流局在此祝你中秋节日快乐！打卡拍照或截图并关注元宇宙漂流局公众号，点击中秋活动，上传照片（先报名再上传），参与投票评选活动。有机会获得VR眼镜、咖啡杯、空间站或奶茶实物奖励。"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+    <include layout="@layout/layout_ar_airplane_dialog_guide_view" />
+
+</RelativeLayout>
