@@ -11,5 +11,4 @@
 
     <include layout="@layout/include_ar_title" />
 
-
 </RelativeLayout>

@@ -23,7 +23,7 @@ import com.jess.arms.base.BottomDialog;
  * @Author : WeiJiaQI
  * @Time : 2022/8/17 19:08
  */
-public class ExclusivePlanetDialog extends BaseDialog implements View.OnClickListener {
+public class ExclusivePlanetDialog extends BottomDialog implements View.OnClickListener {
 
     public static final int OPEN_PLAY = 0x01;
 

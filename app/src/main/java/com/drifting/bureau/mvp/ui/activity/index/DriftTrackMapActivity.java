@@ -275,7 +275,6 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
         mDistrictSearch = DistrictSearch.newInstance();
         mDistrictSearch.setOnDistrictSearchListener(listener);
 
-
         if (Msgtype == 1) {  //开启新漂流
             openNewDrift();
             if (RBureauApplication.latLng != null) {
