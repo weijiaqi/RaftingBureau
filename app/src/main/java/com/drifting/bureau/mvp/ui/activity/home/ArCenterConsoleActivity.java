@@ -462,8 +462,6 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
         viewRenderable5 = ViewRenderable.builder()
                 .setView(this, R.layout.view_expenditure_record)
                 .build();
-
-
         CompletableFuture.allOf(model)
                 .handle((ok, ex) -> {
                     try {
@@ -472,7 +470,6 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
                         arFragment.getArSceneView().getScene().addOnPeekTouchListener((hitTestResult, motionEvent) -> {
                             transformationSystem.onTouch(hitTestResult, motionEvent);
                         });
-
                         anchorNode = new AnchorNode();
                         anchorNode.setParent(arFragment.getArSceneView().getScene());
                         //星球世界
@@ -487,12 +484,8 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
                         andy.getRotationController().setEnabled(false);
                         andy.getTranslationController().setEnabled(false);
                         andy.select();
-
-
                         //添加月亮
                         addMoon();
-
-
                         //中控台
                         addTitleNode();
 
@@ -590,14 +583,11 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
                         if (Preferences.isDidAttend()) {
                             showAndy9();
                         } else {
-                            RequestUtil.create().didAttend(new BaseDataCallBack<DidAttendEntity>() {
-                                @Override
-                                public void getData(BaseEntity<DidAttendEntity> entity) {
-                                    if (entity != null && entity.getCode() == 200) {
-                                        if (entity.getData().getAttend() == 1) {
-                                            Preferences.setDidAttend(true);
-                                            showAndy9();
-                                        }
+                            RequestUtil.create().didAttend(entity -> {
+                                if (entity != null && entity.getCode() == 200) {
+                                    if (entity.getData().getAttend() == 1) {
+                                        Preferences.setDidAttend(true);
+                                        showAndy9();
                                     }
                                 }
                             });
