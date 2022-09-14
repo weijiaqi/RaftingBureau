@@ -1,11 +1,16 @@
 package com.drifting.bureau.util;
 
+import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Context;
+import android.os.Build;
 import android.os.Handler;
 import android.widget.Toast;
 
 import com.google.ar.core.ArCoreApk;
 import com.google.ar.sceneform.Sceneform;
+
+import java.util.Objects;
 
 /**
  * 检查AR是否支持
@@ -42,6 +47,27 @@ public class ARCoreUtil {
         }
         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
         return false;
+    }
+
+
+    public static boolean checkSystemSupport(Activity activity) {
+        //checking whether the API version of the running Android >= 24 that means Android Nougat 7.0
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            String openGlVersion = ((ActivityManager) Objects.requireNonNull(activity.getSystemService(Context.ACTIVITY_SERVICE))).getDeviceConfigurationInfo().getGlEsVersion();
+            //checking whether the OpenGL version >= 3.0
+            if (Double.parseDouble(openGlVersion) >= 3.0) {
+                return true;
+            } else {
+                Toast.makeText(activity, "App needs OpenGl Version 3.0 or later", Toast.LENGTH_SHORT).show();
+                activity.finish();
+                return false;
+            }
+        } else {
+            Toast.makeText(activity, "App does not support required Build Version", Toast.LENGTH_SHORT).show();
+            activity.finish();
+            return false;
+        }
+
     }
 
 

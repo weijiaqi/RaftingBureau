@@ -9,7 +9,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentOnAttachListener;
 
 
-import androidx.lifecycle.LifecycleOwnerKt;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
@@ -37,7 +36,6 @@ import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.view.CleanArFragment;
-import com.google.android.filament.utils.HDRLoader;
 import com.google.ar.core.Config;
 import com.google.ar.core.Session;
 import com.google.ar.sceneform.AnchorNode;
@@ -53,11 +51,7 @@ import com.google.ar.sceneform.ux.BaseArFragment;
 import com.google.ar.sceneform.ux.FootprintSelectionVisualizer;
 import com.google.ar.sceneform.ux.TransformableNode;
 import com.google.ar.sceneform.ux.TransformationSystem;
-import com.gorisse.thomas.sceneform.ArSceneViewKt;
-import com.gorisse.thomas.sceneform.SceneViewKt;
-import com.gorisse.thomas.sceneform.environment.Environment;
-import com.gorisse.thomas.sceneform.environment.HDREnvironmentKt;
-import com.gorisse.thomas.sceneform.light.LightEstimationConfig;
+
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 
@@ -239,10 +233,10 @@ public class ArAnswerActivity extends BaseActivity<MoveAwayPlanetaryPresenter> i
                         anchorNode = new AnchorNode();
                         anchorNode.setParent(arFragment.getArSceneView().getScene());
 
-
                         andy = new TransformableNode(transformationSystem);
                         andy.setParent(anchorNode);
                         andy.setRenderable(model.get()).animate(true).start();
+                        model.get().setShadowCaster(false);
                         andy.setWorldScale(new Vector3(0.3f, 0.3f, 0.3f));
                         andy.setWorldPosition(new Vector3(0f, 0f, 0.5f));
                         andy.getRenderableInstance().setCulling(false);
@@ -257,6 +251,7 @@ public class ArAnswerActivity extends BaseActivity<MoveAwayPlanetaryPresenter> i
                         answerNode = new Node();
                         answerNode.setParent(anchorNode);
                         answerNode.setRenderable(viewRenderable.get());
+                        viewRenderable.get().setShadowCaster(false);
                         answerNode.setWorldScale(new Vector3(0.368f, 0.328f, 0.3f));
                         answerNode.setWorldPosition(new Vector3(0.009f, -0.14f, -1.980f));
                         mRcyAnswer = viewRenderable.get().getView().findViewById(R.id.rcy_answer);
@@ -319,6 +314,7 @@ public class ArAnswerActivity extends BaseActivity<MoveAwayPlanetaryPresenter> i
             andy2 = new TransformableNode(transformationSystem);
             andy2.setParent(anchorNode);
             andy2.setRenderable(model3.get()).animate(true).start();
+            model3.get().setShadowCaster(false);
             andy2.setWorldScale(new Vector3(0.3f, 0.3f, 0.3f));
             andy2.getRenderableInstance().setCulling(false);
             // 禁止缩放
@@ -326,7 +322,6 @@ public class ArAnswerActivity extends BaseActivity<MoveAwayPlanetaryPresenter> i
             andy2.getRotationController().setEnabled(false);
             andy2.getTranslationController().setEnabled(false);
             andy2.select();
-
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -450,6 +445,5 @@ public class ArAnswerActivity extends BaseActivity<MoveAwayPlanetaryPresenter> i
     protected void onDestroy() {
         super.onDestroy();
         arSceneView.destroySession();
-//        EngineInstance.destroyEngine();
     }
 }
