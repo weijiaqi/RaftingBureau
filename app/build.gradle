@@ -48,6 +48,10 @@ android {
             buildConfigField "boolean", "LOG_DEBUG", "true"
             buildConfigField "boolean", "USE_CANARY", "false"
             minifyEnabled false
+            // 调试模式开关
+            debuggable true
+            // 移除无用的资源
+        //    shrinkResources false
             signingConfig signingConfigs.debug
 //            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -55,6 +59,10 @@ android {
             buildConfigField "boolean", "LOG_DEBUG", "true"
             buildConfigField "boolean", "USE_CANARY", "false"
             minifyEnabled false
+            // 调试模式开关
+            debuggable false
+            // 移除无用的资源
+         //   shrinkResources true
             signingConfig signingConfigs.release
             //   proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -188,4 +196,6 @@ dependencies {
     //视频
     implementation 'com.github.CarGuo.GSYVideoPlayer:GSYVideoPlayer:v8.3.4-release-jitpack'
 
+    // 指示器框架：https://github.com/ongakuer/CircleIndicator
+    implementation 'me.relex:circleindicator:2.1.6'
 }

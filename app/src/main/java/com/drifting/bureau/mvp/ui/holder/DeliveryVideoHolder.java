@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.DeliveryDetailsEntity;
+import com.drifting.bureau.mvp.ui.activity.index.ImagePreviewActivity;
 import com.drifting.bureau.mvp.ui.activity.index.SelectImageActivity;
 import com.drifting.bureau.mvp.ui.activity.index.VideoActivity;
 import com.drifting.bureau.storageinfo.Preferences;
@@ -71,7 +72,7 @@ public class DeliveryVideoHolder extends BaseRecyclerHolder {
 
         mRlVideoPlay.setOnClickListener(v -> {
             if (!TextUtils.isEmpty(mDatas.get(position).getAlbum())) {
-                SelectImageActivity.start(context,mDatas.get(position).getAlbum(),false);
+                ImagePreviewActivity.start(context,mDatas.get(position).getAlbum());
             }else {
                 VideoActivity.start(context, mDatas.get(position).getVedio(), false);
             }

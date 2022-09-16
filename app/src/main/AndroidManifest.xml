@@ -269,7 +269,7 @@ package="com.drifting.bureau">
 
 
     <activity
-        android:name=".mvp.ui.activity.index.SelectImageActivity"
+        android:name=".mvp.ui.activity.index.ImagePreviewActivity"
         android:screenOrientation="portrait" />
 
 

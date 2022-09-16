@@ -175,7 +175,7 @@ public class RBureauApplication extends Application implements App {
      * 初始化腾讯bugly
      */
     private void initBugly() {
-        CrashReport.initCrashReport(getApplicationContext(), RBConstant.BUGLY_APPID, false);
+        CrashReport.initCrashReport(getApplicationContext(), RBConstant.BUGLY_APPID, AppUtil.isDebug());
     }
 
     public void initAutoSize() {

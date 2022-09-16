@@ -9,6 +9,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.text.TextUtils;
 
+import com.drifting.bureau.BuildConfig;
 import com.drifting.bureau.app.application.RBureauApplication;
 
 import java.util.List;
@@ -26,10 +27,21 @@ public class AppUtil {
     private static int VERCODE;
 
 
-    public static String  getSign(String phone){
-        if (!TextUtils.isEmpty(phone)){
-            return StringUtil.md5(phone+"gu940s");
-        }else {
+    /**
+     * 当前是否为调试模式
+     */
+    public static boolean isDebug() {
+        return BuildConfig.DEBUG;
+    }
+
+
+    /**
+     * @description 头部签名
+     */
+    public static String getSign(String phone) {
+        if (!TextUtils.isEmpty(phone)) {
+            return StringUtil.md5(phone + "gu940s");
+        } else {
             return "";
         }
     }
@@ -56,7 +68,7 @@ public class AppUtil {
     /**
      * @description 获取版本号
      */
-    public static int getVersionCode(Context context){
+    public static int getVersionCode(Context context) {
         if (VERCODE == 0)
             try {
                 String packageName = context.getPackageName();
@@ -118,6 +130,7 @@ public class AppUtil {
 
     /**
      * 判断程序是否在后台
+     *
      * @param context
      * @return
      */

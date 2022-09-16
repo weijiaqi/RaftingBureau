@@ -221,7 +221,8 @@ public class ArCenterConsoleActivity extends BaseManagerActivity<ArCenterConsole
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
-        setStatusBar(false);
+        setStatusBar(true);
+      //  setStatusBarHeight(mTvBar);
         getSupportFragmentManager().addFragmentOnAttachListener(this);
         if (savedInstanceState == null) {
             if (Sceneform.isSupported(this)) {

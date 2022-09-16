@@ -19,6 +19,7 @@ import com.drifting.bureau.mvp.model.entity.CommentDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.MoreDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.MoreDetailsForMapEntity;
 import com.drifting.bureau.mvp.ui.activity.index.AddTopicActivity;
+import com.drifting.bureau.mvp.ui.activity.index.ImagePreviewActivity;
 import com.drifting.bureau.mvp.ui.activity.index.SelectImageActivity;
 import com.drifting.bureau.mvp.ui.activity.index.VideoActivity;
 import com.drifting.bureau.mvp.ui.activity.index.VideoRecordingActivity;
@@ -275,7 +276,7 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
                             if (cameratype == 1) { //视频
                                 VideoActivity.start(context, path, false);
                             } else {  //查看图片
-                                SelectImageActivity.start(context, path, false);
+                                ImagePreviewActivity.start(context,path);
                             }
                         } else {
                             startCamera();
@@ -284,7 +285,7 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
                         if (!TextUtils.isEmpty(commentDetailsEntity.getVedio())) {
                             VideoActivity.start(context, commentDetailsEntity.getVedio(), false);
                         } else {
-                            SelectImageActivity.start(context, commentDetailsEntity.getAlbum(), false);
+                            ImagePreviewActivity.start(context,commentDetailsEntity.getAlbum());
                         }
                     }
                     break;

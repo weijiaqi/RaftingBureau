@@ -25,7 +25,6 @@ public class HowToPlayHolder extends BaseRecyclerHolder {
     }
 
     public void setData(@NonNull List<SpaceAboutEntity> listBeanList, int position) {
-
         mTvTitle.setText(listBeanList.get(position).getTitle());
         mTvContent.setText( listBeanList.get(position).getContent());
 

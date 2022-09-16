@@ -114,7 +114,8 @@ import io.rong.imlib.model.Conversation;
  * module name is DriftTrackMapActivity
  */
 public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPresenter> implements DriftTrackMapContract.View, TraceAnimationListener {
-
+    @BindView(R.id.tv_bar)
+    TextView mTvBar;
     @BindView(R.id.mFrameLayout)
     FrameLayout mFrameLayout;
     @BindView(R.id.tv_open)
@@ -221,7 +222,8 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
-        setStatusBar(true, R.color.color_01);
+        setStatusBar(true);
+        setStatusBarHeight(mTvBar);
         if (getIntent() != null) {
             Msgtype = getIntent().getExtras().getInt(EXTRA_TYPE);
             explore_id = getIntent().getExtras().getInt(EXTRA_EXPLORE_ID);

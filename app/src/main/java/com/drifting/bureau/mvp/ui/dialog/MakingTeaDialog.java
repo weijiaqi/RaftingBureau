@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.CommentDetailsEntity;
+import com.drifting.bureau.mvp.ui.activity.index.ImagePreviewActivity;
 import com.drifting.bureau.mvp.ui.activity.index.SelectImageActivity;
 import com.drifting.bureau.mvp.ui.activity.index.VideoActivity;
 import com.drifting.bureau.util.GlideUtil;
@@ -125,7 +126,7 @@ public class MakingTeaDialog extends BaseDialog implements View.OnClickListener 
                 if (!TextUtils.isEmpty(orderDetailEntity.getVedio())) {
                     VideoActivity.start(context, orderDetailEntity.getVedio(), false);
                 } else {//图片
-                    SelectImageActivity.start(context, orderDetailEntity.getAlbum(), false);
+                    ImagePreviewActivity.start(context,orderDetailEntity.getAlbum());
                 }
                 break;
             case R.id.tv_leave_space:   //丢回太空

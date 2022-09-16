@@ -20,6 +20,7 @@ import androidx.annotation.NonNull;
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.CommentDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.MoreDetailsEntity;
+import com.drifting.bureau.mvp.ui.activity.index.ImagePreviewActivity;
 import com.drifting.bureau.mvp.ui.activity.index.SelectImageActivity;
 import com.drifting.bureau.mvp.ui.activity.index.VideoActivity;
 import com.drifting.bureau.mvp.ui.activity.index.VideoRecordingActivity;
@@ -267,13 +268,13 @@ public class ReleaseDriftingDialog extends BaseDialog implements View.OnClickLis
                     if (!TextUtils.isEmpty(commentDetailsEntity.getVedio())) {
                         VideoActivity.start(context, commentDetailsEntity.getVedio(), false);
                     } else {
-                        SelectImageActivity.start(context, commentDetailsEntity.getAlbum(), false);
+                        ImagePreviewActivity.start(context,commentDetailsEntity.getAlbum());
                     }
                 } else {
                     if (type == 1) { //视频
                         VideoActivity.start(context, path, false);
                     } else {  //查看图片
-                        SelectImageActivity.start(context, path, false);
+                        ImagePreviewActivity.start(context,path);
                     }
                 }
                 break;
