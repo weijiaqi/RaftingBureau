@@ -123,5 +123,4 @@
     <include layout="@layout/layout_ar_guide_view" />
 
 
-    <include layout="@layout/layout_ar_planet_guide_view" />
 </RelativeLayout>

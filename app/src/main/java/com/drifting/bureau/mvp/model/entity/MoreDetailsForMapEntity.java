@@ -71,6 +71,15 @@ public class MoreDetailsForMapEntity {
         private Integer has_shop;
         private Integer city_attend;
         private String code_city;
+        private String name_city_complete;
+
+        public String getName_city_complete() {
+            return name_city_complete;
+        }
+
+        public void setName_city_complete(String name_city_complete) {
+            this.name_city_complete = name_city_complete;
+        }
 
         public String getCode_city() {
             return code_city;

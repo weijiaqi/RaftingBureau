@@ -6,13 +6,9 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
-
 import com.drifting.bureau.R;
-
 import com.drifting.bureau.mvp.model.entity.StarUpIndexEntity;
 import com.drifting.bureau.mvp.ui.activity.web.ShowWebViewActivity;
 import com.drifting.bureau.storageinfo.Preferences;
@@ -20,11 +16,8 @@ import com.drifting.bureau.util.AppUtil;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.request.RequestUtil;
-import com.drifting.bureau.view.guide.ArDialogGuiView;
-import com.jess.arms.base.BaseDialog;
 import com.jess.arms.base.BottomDialog;
 
-import java.util.concurrent.ExecutionException;
 
 /**
  * @author 卫佳琪1
@@ -32,12 +25,12 @@ import java.util.concurrent.ExecutionException;
  * @time 18:30 18:30
  */
 
-public class DriftingPlayDialog extends BaseDialog implements View.OnClickListener {
+public class DriftingPlayDialog extends BottomDialog implements View.OnClickListener {
 
     private Context context;
     private TextView mTvStartSpace, mTvOpenPlay, mTvYouthCamp;
-    private RelativeLayout mRlCenter;
-    private ArDialogGuiView mGuideView;
+
+
     public static final int START_SPACE = 0x01;
     public static final int OPEN_PLAY = 0x02;
     private StarUpIndexEntity starUpIndexEntity;
@@ -53,8 +46,7 @@ public class DriftingPlayDialog extends BaseDialog implements View.OnClickListen
         mTvStartSpace = findViewById(R.id.tv_start_space);
         mTvOpenPlay = findViewById(R.id.tv_open_paly);
         mTvYouthCamp = findViewById(R.id.tv_youth_camp);
-        mRlCenter = findViewById(R.id.rl_center);
-        mGuideView = findViewById(R.id.guide_view);
+
     }
 
     @Override
@@ -68,22 +60,6 @@ public class DriftingPlayDialog extends BaseDialog implements View.OnClickListen
     @Override
     protected void initDatas() {
         super.initDatas();
-        if (!Preferences.isArBear()){  //启动引导页
-            //设置距离底部为true
-            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT); // or wrap_content
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-            mRlCenter.setLayoutParams(layoutParams);
-            mGuideView.setVisibility(View.VISIBLE);
-        }
-
-        mGuideView.setOnClickCallback(() -> {
-            Preferences.setArBear(true);
-            dismiss();
-            if (onClickCallback != null) {
-                onClickCallback.onClickType(OPEN_PLAY);
-            }
-        });
-
         RequestUtil.create().startup(entity1 -> {
             if (entity1 != null && entity1.getCode() == 200) {
                 starUpIndexEntity = entity1.getData();

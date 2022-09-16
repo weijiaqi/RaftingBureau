@@ -88,13 +88,11 @@ public class RBureauApplication extends Application implements App {
 
 
     public void initConfig() {
-        if (SystemUtil.isMainProcess()) {
-            // SDK预初始化函数
-            // preInit预初始化函数耗时极少，不会影响App首次冷启动用户体验
-            UMConfigure.preInit(this, RBConstant.UM_INIT_APPKEY, AppUtil.getChannel(getApplicationContext()));
-            //初始化主线程资源
-            mHandler.sendEmptyMessage(PERMISSION_PROTOCOL);
-        }
+        // SDK预初始化函数
+        // preInit预初始化函数耗时极少，不会影响App首次冷启动用户体验
+        UMConfigure.preInit(this, RBConstant.UM_INIT_APPKEY, AppUtil.getChannel(getApplicationContext()));
+        //初始化主线程资源
+        mHandler.sendEmptyMessage(PERMISSION_PROTOCOL);
     }
 
 

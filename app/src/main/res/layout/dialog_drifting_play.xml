@@ -117,7 +117,4 @@
         </RelativeLayout>
     </RelativeLayout>
 
-
-            <include layout="@layout/layout_ar_dialog_guide_view" />
-
 </RelativeLayout>

@@ -143,7 +143,6 @@ public class ArAnswerActivity extends BaseActivity<MoveAwayPlanetaryPresenter> i
 
     public void initListener() {
 
-
         model = ModelRenderable
                 .builder()
                 .setSource(this
@@ -222,7 +221,7 @@ public class ArAnswerActivity extends BaseActivity<MoveAwayPlanetaryPresenter> i
                 .setView(this, R.layout.view_ar_answer)
                 .build();
 
-        CompletableFuture.allOf(model,model3,viewRenderable)
+        CompletableFuture.allOf(model, model3, viewRenderable)
                 .handle((ok, ex) -> {
                     try {
                         FootprintSelectionVisualizer selectionVisualizer = new FootprintSelectionVisualizer();
@@ -246,7 +245,7 @@ public class ArAnswerActivity extends BaseActivity<MoveAwayPlanetaryPresenter> i
                         andy.getTranslationController().setEnabled(false);
                         andy.select();
 
-                       setModel();
+                        setModel();
 
                         answerNode = new Node();
                         answerNode.setParent(anchorNode);
@@ -407,7 +406,7 @@ public class ArAnswerActivity extends BaseActivity<MoveAwayPlanetaryPresenter> i
         this.arSceneView.getPlaneRenderer().setVisible(false); //隐藏小白点
         this.arSceneView.setFrameRateFactor(SceneView.FrameRate.FULL);
 
-       // ArSceneViewKt.setLightEstimationConfig(this.arSceneView, LightEstimationConfig.DISABLED);
+        // ArSceneViewKt.setLightEstimationConfig(this.arSceneView, LightEstimationConfig.DISABLED);
 //        HDREnvironmentKt.loadEnvironmentAsync(
 //                HDRLoader.INSTANCE,
 //                this,

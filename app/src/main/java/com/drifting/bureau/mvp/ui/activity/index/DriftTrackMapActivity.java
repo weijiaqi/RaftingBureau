@@ -297,25 +297,22 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
 
 
     public void AddListener() {
-        mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                LatLng latLng = marker.getPosition();
-                if (marker.getZIndex() != options.size() - 1) {
-                    mBaiduMap.hideInfoWindow();
-                    showInfoWindow(latLng, marker.getZIndex());
-                    if (messagePathBeanList.get(marker.getZIndex()).getUser_id() == messageBean.getUser_id()) {
-                        setIsVisible(false);
-                    } else {
-                        setIsVisible(true);
-                        getToUser(messagePathBeanList.get(marker.getZIndex()).getUser_id());
-                    }
+        mBaiduMap.setOnMarkerClickListener(marker -> {
+            LatLng latLng = marker.getPosition();
+            if (marker.getZIndex() != options.size() - 1) {
+                mBaiduMap.hideInfoWindow();
+                showInfoWindow(latLng, marker.getZIndex());
+                if (messagePathBeanList.get(marker.getZIndex()).getUser_id() == messageBean.getUser_id()) {
+                    setIsVisible(false);
                 } else {
                     setIsVisible(true);
                     getToUser(messagePathBeanList.get(marker.getZIndex()).getUser_id());
                 }
-                return true;
+            } else {
+                setIsVisible(true);
+                getToUser(messagePathBeanList.get(marker.getZIndex()).getUser_id());
             }
+            return true;
         });
     }
 
@@ -490,7 +487,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
 
                 getFromUser(messageBean.getUser_id());
                 getToUser(messagePathBeanList.get(messagePathBeanList.size() - 1).getUser_id());
-                selectCity(messageBean.getName_city());
+                selectCity(messageBean.getName_city_complete());
             }
 
             if (type == 2) { // type=2 表示参与成功刷新dialog
@@ -1105,28 +1102,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
         mMapView.onPause();
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        //释放检索实例
-        mDistrictSearch.destroy();
-        //移除图层
-        removeTrace();
-        // 清除所有图层
-        mBaiduMap.clear();
-        // 在activity执行onDestroy时必须调用mMapView.onDestroy()
-        mMapView.onDestroy();
-    }
 
-    /**
-     * 移除图层
-     */
-    private void removeTrace() {
-        if (null != mTraceOverlay) {
-            mTraceOverlay.clear(); // 清除轨迹数据，但不会移除轨迹覆盖物
-            mTraceOverlay.remove(); // 移除轨迹覆盖物
-        }
-    }
 
     @OnClick({R.id.toolbar_back, R.id.tv_open, R.id.rl_left_add_friend, R.id.rl_right_add_friend, R.id.iv_right,})
     public void onClick(View view) {
@@ -1299,5 +1275,30 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
             }
         });
 
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //释放检索实例
+        mDistrictSearch.destroy();
+        //移除图层
+        removeTrace();
+        // 清除所有图层
+        mBaiduMap.clear();
+        // 在activity执行onDestroy时必须调用mMapView.onDestroy()
+        mMapView.onDestroy();
+        RequestUtil.create().disDispose();
+    }
+
+    /**
+     * 移除图层
+     */
+    private void removeTrace() {
+        if (null != mTraceOverlay) {
+            mTraceOverlay.clear(); // 清除轨迹数据，但不会移除轨迹覆盖物
+            mTraceOverlay.remove(); // 移除轨迹覆盖物
+        }
     }
 }

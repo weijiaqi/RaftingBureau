@@ -58,6 +58,4 @@
     </RelativeLayout>
 
 
-    <include layout="@layout/layout_ar_airplane_dialog_guide_view" />
-
 </RelativeLayout>

@@ -137,8 +137,8 @@ public class ArCenterConsolePresenter extends BasePresenter<ArCenterConsoleContr
     /**
      * 提现记录
      */
-    public void withdrawnLogs(int page, int limit, boolean loadType) {
-        mModel.withdrawnLogs(page, limit)
+    public void withdrawnLogs(int page, boolean loadType) {
+        mModel.withdrawnLogs(page, 10)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
@@ -353,9 +353,9 @@ public class ArCenterConsolePresenter extends BasePresenter<ArCenterConsoleContr
     /**
      * 制作记录
      */
-    public void ordermadelog(int page, int limit, boolean loadType) {
+    public void ordermadelog(int page,  boolean loadType) {
 
-        mModel.ordermadelog(page, limit)
+        mModel.ordermadelog(page, 10)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
@@ -391,9 +391,9 @@ public class ArCenterConsolePresenter extends BasePresenter<ArCenterConsoleContr
     /**
      * 收支记录
      */
-    public void spacebillogs(int page, int limit, boolean loadType) {
+    public void spacebillogs(int page, boolean loadType) {
 
-        mModel.spacebillogs(page, limit)
+        mModel.spacebillogs(page, 10)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
