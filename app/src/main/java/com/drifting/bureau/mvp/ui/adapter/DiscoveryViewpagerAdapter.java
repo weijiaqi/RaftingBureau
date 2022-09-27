@@ -13,8 +13,6 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.PlanetEntity;
-import com.drifting.bureau.mvp.ui.activity.home.ArAnswerActivity;
-import com.drifting.bureau.mvp.ui.activity.index.DriftTrackCampusMapActivity;
 import com.drifting.bureau.mvp.ui.activity.index.DriftTrackMapActivity;
 import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.ToastUtil;

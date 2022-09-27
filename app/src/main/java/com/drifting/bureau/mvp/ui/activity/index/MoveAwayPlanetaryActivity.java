@@ -88,9 +88,7 @@ public class MoveAwayPlanetaryActivity extends BaseManagerActivity<MoveAwayPlane
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
-        if (getIntent() != null) {
-            type = getIntent().getIntExtra(EXTRA_TYPE, 0);
-        }
+        type = getInt(EXTRA_TYPE);
         mToolbarTitle.setText(type == 1 ? "搬离星球" : "完善星球属性");
         initListener();
     }

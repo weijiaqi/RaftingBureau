@@ -63,7 +63,7 @@ public class MyBlindBoxHolder extends BaseRecyclerHolder {
                                 if (entity.getData().getSpace_times() == 1) {
                                     publicDialog.setContentText("获得“" + entity.getData().getName() + "”\n第一次获得已自动为你使用");
                                 } else {
-                                    publicDialog.setContentText("获得“" + entity.getData().getName() + "”\n可在空间中列表操作");
+                                    publicDialog.setContentText("获得“" + entity.getData().getName() + "”\n可在空间站中列表操作");
                                 }
                             } else {
                                 publicDialog.setContentText("获得“" + entity.getData().getName() + "”");

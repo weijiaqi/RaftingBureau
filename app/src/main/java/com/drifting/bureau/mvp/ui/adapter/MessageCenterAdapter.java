@@ -26,6 +26,8 @@ import java.util.List;
 public class MessageCenterAdapter extends IndicatorViewPager.IndicatorFragmentPagerAdapter {
     private List<MessageCenterEntity> mChannelDatas = new ArrayList<>();
 
+    private ImageView iv_message;
+
     public MessageCenterAdapter(FragmentManager fm) {
         super(fm);
     }
@@ -41,7 +43,7 @@ public class MessageCenterAdapter extends IndicatorViewPager.IndicatorFragmentPa
             return SessionListFragment.newInstance();
         } else if (mChannelDatas.get(position).getType() == 2) {
             return MessageFragment.newInstance(2);
-        }else {
+        } else {
             return RaftingBureaufriendFragment.newInstance();
         }
     }
@@ -52,9 +54,9 @@ public class MessageCenterAdapter extends IndicatorViewPager.IndicatorFragmentPa
             convertView = LayoutInflater.from(RBureauApplication.getContext()).inflate(R.layout.layout_tab_top, container, false);
         }
         TextView tv_tab_top_title = convertView.findViewById(R.id.tv_tab_top_title);
-        ImageView iv_message= convertView.findViewById(R.id.iv_message);
+        iv_message = convertView.findViewById(R.id.iv_message);
         tv_tab_top_title.setText(mChannelDatas.get(position).getTitle());
-        iv_message.setVisibility(mChannelDatas.get(position).isUnread()?View.VISIBLE:View.GONE);
+        iv_message.setVisibility(mChannelDatas.get(position).isUnread() ? View.VISIBLE : View.INVISIBLE);
 //        int witdh = getTextWidth(tv_tab_top_title);
 //        tv_tab_top_title.setWidth((int) (witdh * 1.06f));
         return convertView;
@@ -87,6 +89,5 @@ public class MessageCenterAdapter extends IndicatorViewPager.IndicatorFragmentPa
         this.mChannelDatas = mTabTitle;
         notifyDataSetChanged();
     }
-
 }
 

@@ -16,6 +16,7 @@ import com.drifting.bureau.util.AppUtil;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.request.RequestUtil;
+import com.jess.arms.base.BaseDialog;
 import com.jess.arms.base.BottomDialog;
 
 
@@ -25,7 +26,7 @@ import com.jess.arms.base.BottomDialog;
  * @time 18:30 18:30
  */
 
-public class DriftingPlayDialog extends BottomDialog implements View.OnClickListener {
+public class DriftingPlayDialog extends BaseDialog implements View.OnClickListener {
 
     private Context context;
     private TextView mTvStartSpace, mTvOpenPlay, mTvYouthCamp;

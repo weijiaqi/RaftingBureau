@@ -59,7 +59,7 @@ public class ShowWebViewActivity extends BaseManagerActivity implements WebLoadi
     }
 
 
-    public static void start(Context context, int type, String title, String url,boolean closePage) {
+    public static void start(Context context, int type, String title, String url, boolean closePage) {
         Intent intent = new Intent(context, ShowWebViewActivity.class);
         intent.putExtra(WEB_TYPE, type);
         intent.putExtra(WEB_TITLE, title);
@@ -81,14 +81,15 @@ public class ShowWebViewActivity extends BaseManagerActivity implements WebLoadi
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
-        mType = getIntent().getIntExtra(WEB_TYPE, 0);
-        mWebUrl = getIntent().getStringExtra(WEB_URL);
-        mTitle = getIntent().getStringExtra(WEB_TITLE);
+        mType = getInt(WEB_TYPE);
+        mWebUrl = getString(WEB_URL);
+        mTitle = getString(WEB_TITLE);
         initView();
     }
 
     public void initView() {
         mWebView = new CustomWebView(getApplicationContext(), true);
+        mWebView.setBackgroundColor(0); // 设置背景色
         mWebView.setWebLoadListener(this);
         mWebView.enAbleDownLoad(this);
         mWebView.setVerticalScrollBarEnabled(false); //垂直不显示滚动条

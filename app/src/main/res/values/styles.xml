@@ -10,18 +10,19 @@
     </style>
 
     <style name="Animation_Activity">
-        <!--        <item name="android:activityOpenEnterAnimation">@anim/translate_right_to_center</item>-->
-        <!--        <item name="android:activityOpenExitAnimation">@anim/translate_center_to_left</item>-->
-        <!--        <item name="android:activityCloseEnterAnimation">@anim/translate_left_to_center</item>-->
-        <!--        <item name="android:activityCloseExitAnimation">@anim/translate_center_to_right</item>-->
+                <item name="android:activityOpenEnterAnimation">@anim/translate_right_to_center</item>
+                <item name="android:activityOpenExitAnimation">@anim/translate_center_to_left</item>
+                <item name="android:activityCloseEnterAnimation">@anim/translate_left_to_center</item>
+                <item name="android:activityCloseExitAnimation">@anim/translate_center_to_right</item>
     </style>
 
     <!--设置背景图Theme-->
     <style name="AppSplash" parent="AppTheme">
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowAnimationStyle">@style/RemoveTransitions</item>
-       <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="LOLLIPOP">false</item>
+        <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="LOLLIPOP">false</item>
     </style>
+
 
     <!--移除转场效果-->
     <style name="RemoveTransitions">
@@ -155,9 +156,21 @@
     </style>
 
 
-    <declare-styleable name="StrokeTextView" >
-        <attr name="has_boder" format="boolean"/>
-        <attr name="border_width" format="dimension"/>
-        <attr name="border_color" format="color"/>
+    <declare-styleable name="StrokeTextView">
+        <attr name="has_boder" format="boolean" />
+        <attr name="border_width" format="dimension" />
+        <attr name="border_color" format="color" />
     </declare-styleable>
+
+
+
+    <!--自定义的网格属性-->
+    <declare-styleable name="PColumn">
+        <attr name="rowNumber" format="integer"/>
+        <attr name="columnNumber" format="integer"/>
+        <attr name="gridLineColor" format="color"/>
+        <attr name="gridLineWidth" format="float"/>
+    </declare-styleable>
+
+
 </resources>

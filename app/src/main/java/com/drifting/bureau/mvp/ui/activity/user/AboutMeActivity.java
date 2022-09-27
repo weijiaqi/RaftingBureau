@@ -40,7 +40,6 @@ import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.presenter.AboutMePresenter;
 import com.drifting.bureau.mvp.ui.activity.index.MoveAwayPlanetaryActivity;
 import com.drifting.bureau.mvp.ui.activity.index.PlanetarySelectActivity;
-import com.drifting.bureau.mvp.ui.activity.index.ar.ARActivity;
 import com.drifting.bureau.mvp.ui.adapter.AboutMeAdapter;
 import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
 import com.drifting.bureau.mvp.ui.fragment.PlanetaryDisFragment;
@@ -131,9 +130,7 @@ public class AboutMeActivity extends BaseManagerActivity<AboutMePresenter> imple
         setStatusBar(true);
         setStatusBarHeight(mTvBar);
         TextUtil.setRightImage(mIvRight, R.drawable.setting);
-        if (getIntent() != null) {
-            userInfoEntity = (UserInfoEntity) getIntent().getSerializableExtra(EXTRA_USERINFOENTITY);
-        }
+        userInfoEntity = (UserInfoEntity)getSerializable(EXTRA_USERINFOENTITY);
         initListener();
     }
 
@@ -220,7 +217,7 @@ public class AboutMeActivity extends BaseManagerActivity<AboutMePresenter> imple
                         public void handleMessage(Message msg) {
                             int fileSize = msg.getData().getInt("fileSize");
                             if (fileSize == new File(file).length()) {
-                                ARActivity.start(AboutMeActivity.this, file, false);
+                           //     ARActivity.start(AboutMeActivity.this, file, false);
                             } else {
                                 showNotificationDialog(url);
                             }

@@ -21,7 +21,6 @@ import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.CommentDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.MoreDetailsEntity;
 import com.drifting.bureau.mvp.ui.activity.index.ImagePreviewActivity;
-import com.drifting.bureau.mvp.ui.activity.index.SelectImageActivity;
 import com.drifting.bureau.mvp.ui.activity.index.VideoActivity;
 import com.drifting.bureau.mvp.ui.activity.index.VideoRecordingActivity;
 import com.drifting.bureau.storageinfo.Preferences;
@@ -167,8 +166,7 @@ public class ReleaseDriftingDialog extends BaseDialog implements View.OnClickLis
             }
             if (!TextUtils.isEmpty(commentDetailsEntity.getAudio())) {//语音
                 mRlVoicePlay.setVisibility(View.VISIBLE);
-
-                totaltime = VideoUtil.getLocalVideoDuration(commentDetailsEntity.getAudio());
+                totaltime = VideoUtil.getLocalVideoDuration(context,commentDetailsEntity.getAudio());
                 mTvTime.setText(totaltime + "S");
                 mVideoView.setDecibel(0);
             }

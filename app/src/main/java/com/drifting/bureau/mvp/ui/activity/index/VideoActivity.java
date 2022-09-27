@@ -59,10 +59,7 @@ public class VideoActivity extends BaseManagerActivity {
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
         mToobarTitle.setText("查看视频");
-        if (getIntent() != null) {
-            uri = getIntent().getStringExtra(EXTRA_URI);
-        }
-
+        uri = getString(EXTRA_URI);
         videoPlayer.setUp(uri, true, "");
         //增加title
         videoPlayer.getTitleTextView().setVisibility(View.GONE);

@@ -24,7 +24,6 @@ public class LogInOutDataUtil {
         Preferences.saveUserId(entity == null ? "" : entity.getUser_id());
         Preferences.savePhone(entity == null ? "" : entity.getMobile());
         Preferences.savePassword(entity == null ? "" : entity.getPassword());
-
     }
 
     public static void successOutClearData() {
@@ -37,6 +36,5 @@ public class LogInOutDataUtil {
         RongIM.getInstance().logout();
         Preferences.clear();
         AppManager.getAppManager().killAll();
-
     }
 }

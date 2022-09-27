@@ -75,7 +75,7 @@ public class AddTopicActivity extends BaseManagerActivity {
                     public View getView(FlowLayout parent, int position, TopicTagsEntity entity1) {
                         TextView tv = (TextView) LayoutInflater.from(AddTopicActivity.this).inflate(R.layout.layout_for_scrap,
                                 mScrapLayout, false);
-                        tv.setText(entity1.getTag_name());
+                        tv.setText("+"+entity1.getTag_name());
                         return tv;
                     }
                 });

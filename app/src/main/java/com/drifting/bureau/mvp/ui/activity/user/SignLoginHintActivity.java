@@ -41,6 +41,8 @@ public class SignLoginHintActivity extends BaseManagerActivity<SignLoginPresente
     @BindView(R.id.tv_other_phone)
     TextView mTvOtherPhone;
 
+    public static SignLoginHintActivity instance;
+
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, SignLoginHintActivity.class);
         context.startActivity(intent);
@@ -65,6 +67,7 @@ public class SignLoginHintActivity extends BaseManagerActivity<SignLoginPresente
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
+        instance=this;
         mTvContent.setText("你好！欢迎来到元宇宙漂流局\n请选择创建星球的方式");
         if (!TextUtils.isEmpty(Preferences.getPhone())) {
             mTvSignLogin.setText(Preferences.getPhone() + "一键登录");

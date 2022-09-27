@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFFFFFFF</color>
+    <color name="purple_200">#FF000000</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="black">#FF000000</color>
@@ -19,24 +19,29 @@
     <color name="color_01">#010103</color>
     <color name="transparent">#00000000</color>
     <color name="color_6d">#6DECEA</color>
+    <color name="color_15ae">#15AEEE</color>
     <color name="color_6c">#6CECC3</color>
     <color name="color_36">#36E8BC</color>
     <color name="color_99">#999999</color>
     <color name="color_70">#7044D8</color>
+    <color name="color_3ee">#1533EE</color>
     <color name="color_70_7f">#7f7044D8</color><!--50% -->
     <color name="color_d6">#D64CB6</color>
     <color name="color_d6_7f">#7fD64CB6</color><!--50% -->
-
+    <color name="color_eea">#EEA415</color>
     <color name="color_c5">#C54BBC</color>
     <color name="color_21">#21212A</color>
     <color name="color_8b">#8B46CF</color>
+    <color name="color_09">#09121F</color>
     <color name="color_fe">#FEFEFE</color>
     <color name="color_6ce">#6CECCB</color>
     <color name="color_cc">#CCCCCC</color>
     <color name="color_cb">#CB0B0B</color>
     <color name="color_00">#000000</color>
      <color name="color_86">#8646d1</color>
+    <color name="color_20">#20251F</color>
     <color name="color_00_cc">#cc000000</color><!--80% -->
+    <color name="color_f1f2">#F1F2ED</color>
     <!-- 熊猫色（黑白背景通吃） -->
     <color name="panda">#FF757575</color>
     <color name="color_0b">#0B1D2C</color>
@@ -46,6 +51,7 @@
     <color name="color_e3_7f">#7fE3E3E3</color><!--50% -->
     <color name="color_0de">#0D0E12</color>
     <color name="color_82">#82E7DC</color>
+    <color name="color_223d">#223DEE</color>
     <!--10% -->
     <color name="color_82_ed">#4d82E7DC</color><!--30% -->
     <!--50% -->
@@ -84,6 +90,7 @@
     <color name="color_97">#97FFF8</color>
     <color name="color_0101">#010101</color>
     <color name="color_1515">#151528</color>
+    <color name="color_6cec8">#6CECC8</color>
     <color name="color_31">#313348</color>
     <color name="color_35">#353946</color>
     <color name="color_1c">#1C1C20</color>
@@ -135,6 +142,9 @@
     <color name="color_be">#BE4ABE</color>
     <color name="color_0c">#0C38A7</color>
     <color name="color_6ad">#6ADAD8</color>
+    <color name="color_61">#61EEFA</color>
+    <color name="color_f5">#CCF5E9</color>
+    <color name="color_cd">#FFF0CD</color>
     <color name="color_black_19000000">#19000000</color><!-- #000000 10% -->
     <color name="color_black_26000000">#26000000</color><!-- #000000 15% -->
     <color name="color_black_33000000">#33000000</color><!-- #000000 20% -->

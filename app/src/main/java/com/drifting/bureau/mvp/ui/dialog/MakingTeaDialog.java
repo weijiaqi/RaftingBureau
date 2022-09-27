@@ -15,7 +15,6 @@ import androidx.annotation.NonNull;
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.CommentDetailsEntity;
 import com.drifting.bureau.mvp.ui.activity.index.ImagePreviewActivity;
-import com.drifting.bureau.mvp.ui.activity.index.SelectImageActivity;
 import com.drifting.bureau.mvp.ui.activity.index.VideoActivity;
 import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.VideoUtil;
@@ -32,6 +31,7 @@ public class MakingTeaDialog extends BaseDialog implements View.OnClickListener 
     private TextView mTvTime, mTvLeaveSpace, mTvMadeForHim, mTvWord, mTvTip, mTvAddTopic;
     private CommentDetailsEntity orderDetailEntity;
     private RelativeLayout mRlVideoPlay, mRlStartVoice, mRlVoicePlay;
+    private View mViewTop;
     private Context context;
     private int totaltime;
 
@@ -67,6 +67,7 @@ public class MakingTeaDialog extends BaseDialog implements View.OnClickListener 
         mIvVideo = findViewById(R.id.iv_video);
         mTvTip = findViewById(R.id.tv_tip);
         mIvRecording = findViewById(R.id.iv_recording);
+        mViewTop= findViewById(R.id.view_top);
     }
 
 
@@ -89,6 +90,7 @@ public class MakingTeaDialog extends BaseDialog implements View.OnClickListener 
         if (!TextUtils.isEmpty(orderDetailEntity.getImage())) {  //视频
             mRlVideoPlay.setVisibility(View.VISIBLE);
             mIvVideoPlay.setVisibility(View.VISIBLE);
+            mViewTop.setVisibility(View.VISIBLE);
             mIvVideo.setVisibility(View.INVISIBLE);
             GlideUtil.create().loadLongImage(context, orderDetailEntity.getImage(), mIvPic);
         } else if (!TextUtils.isEmpty(orderDetailEntity.getAudio())) { //语音
@@ -97,11 +99,12 @@ public class MakingTeaDialog extends BaseDialog implements View.OnClickListener 
             mVideoView.setVisibility(View.VISIBLE);
             mIvPlay.setVisibility(View.VISIBLE);
             mIvRecording.setVisibility(View.INVISIBLE);
-            totaltime = VideoUtil.getLocalVideoDuration(orderDetailEntity.getAudio());
+            totaltime = VideoUtil.getLocalVideoDuration(context,orderDetailEntity.getAudio());
             mTvTime.setText(totaltime + "S");
             mVideoView.setDecibel(0);
         } else if (!TextUtils.isEmpty(orderDetailEntity.getAlbum())) {  //图片
             mRlVideoPlay.setVisibility(View.VISIBLE);
+            mViewTop.setVisibility(View.VISIBLE);
             mIvVideo.setVisibility(View.INVISIBLE);
             GlideUtil.create().loadLongImage(context, orderDetailEntity.getAlbum(), mIvPic);
         } else if (!TextUtils.isEmpty(orderDetailEntity.getContent())) {  //判断文字不为空

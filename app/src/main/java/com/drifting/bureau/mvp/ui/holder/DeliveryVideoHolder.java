@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.DeliveryDetailsEntity;
 import com.drifting.bureau.mvp.ui.activity.index.ImagePreviewActivity;
-import com.drifting.bureau.mvp.ui.activity.index.SelectImageActivity;
 import com.drifting.bureau.mvp.ui.activity.index.VideoActivity;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.GlideUtil;

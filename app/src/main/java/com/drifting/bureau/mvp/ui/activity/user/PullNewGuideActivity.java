@@ -28,10 +28,8 @@ import androidx.annotation.Nullable;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.base.BaseManagerActivity;
-import com.drifting.bureau.mvp.ui.activity.index.ar.ARActivity;
 import com.drifting.bureau.mvp.ui.activity.web.ShowWebViewActivity;
 import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
-import com.drifting.bureau.mvp.ui.dialog.PrivacyPolicyDialog;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ARCoreUtil;
 import com.drifting.bureau.util.ClickUtil;
@@ -122,7 +120,7 @@ public class PullNewGuideActivity extends BaseManagerActivity {
     }
 
     public void statScaleAnim(View view) {
-        AnimatorUtil.ScaleAnim(view, 3000);
+        AnimatorUtil.ScaleAnim(view, 3000,1f,0.2f,0.5f);
     }
 
     public void statFloatAnim(View view) {
@@ -234,7 +232,7 @@ public class PullNewGuideActivity extends BaseManagerActivity {
                         public void handleMessage(Message msg) {
                             int fileSize = msg.getData().getInt("fileSize");
                             if (fileSize == new File(file).length()) {
-                                ARActivity.start(PullNewGuideActivity.this, file, false);
+                              //  ARActivity.start(PullNewGuideActivity.this, file, false);
                             } else {
                                 showNotificationDialog(url);
                             }

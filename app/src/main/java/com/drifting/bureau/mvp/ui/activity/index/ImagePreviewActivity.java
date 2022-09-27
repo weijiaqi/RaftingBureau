@@ -34,16 +34,14 @@ import me.relex.circleindicator.CircleIndicator;
  * @Author : WeiJiaQI
  * @Time : 2022/9/16 18:38
  */
-public class ImagePreviewActivity extends BaseManagerActivity  implements ViewPager.OnPageChangeListener{
+public class ImagePreviewActivity extends BaseManagerActivity implements ViewPager.OnPageChangeListener {
     @BindView(R.id.vp_image_preview_pager)
     ViewPager mViewPager;
     @BindView(R.id.ci_image_preview_indicator)
     CircleIndicator mCircleIndicatorView;
     @BindView(R.id.tv_image_preview_indicator)
     TextView mTextIndicatorView;
-
     private ImagePreviewAdapter mAdapter;
-
     private static final String INTENT_KEY_IN_IMAGE_LIST = "imageList";
     private static final String INTENT_KEY_IN_IMAGE_INDEX = "imageIndex";
 
@@ -96,7 +94,7 @@ public class ImagePreviewActivity extends BaseManagerActivity  implements ViewPa
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(false);
-        ArrayList<String> images = getIntent().getStringArrayListExtra(INTENT_KEY_IN_IMAGE_LIST);
+        ArrayList<String> images = getStringArrayList(INTENT_KEY_IN_IMAGE_LIST);
         if (images == null || images.isEmpty()) {
             finish();
             return;
@@ -122,7 +120,7 @@ public class ImagePreviewActivity extends BaseManagerActivity  implements ViewPa
                 mViewPager.addOnPageChangeListener(this);
             }
 
-            int index = getIntent().getIntExtra(INTENT_KEY_IN_IMAGE_INDEX,0);
+            int index = getInt(INTENT_KEY_IN_IMAGE_INDEX, 0);
             if (index < images.size()) {
                 mViewPager.setCurrentItem(index);
                 onPageSelected(index);
@@ -132,7 +130,8 @@ public class ImagePreviewActivity extends BaseManagerActivity  implements ViewPa
 
 
     @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+    }
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -141,11 +140,12 @@ public class ImagePreviewActivity extends BaseManagerActivity  implements ViewPa
     }
 
     @Override
-    public void onPageScrollStateChanged(int state) {}
+    public void onPageScrollStateChanged(int state) {
+    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        mViewPager.removeOnPageChangeListener(this);
+     //   mViewPager.removeOnPageChangeListener(this);
     }
 }

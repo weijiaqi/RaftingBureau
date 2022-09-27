@@ -47,7 +47,7 @@ public class FileUtil {
     @RequiresApi(api = Build.VERSION_CODES.N)
     public static String saveVideoPath(Context context) {
         String fileName = "video_" + new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date()) + ".mp4";
-        File appDir = StorageUtils.getCacheDirectory(context);
+        File appDir = StorageUtil.getCacheDirectory(context);
         if (!appDir.exists()) {
             appDir.mkdir();
         }

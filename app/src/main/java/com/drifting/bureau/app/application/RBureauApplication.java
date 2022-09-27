@@ -104,7 +104,12 @@ public class RBureauApplication extends Application implements App {
                 case PERMISSION_PROTOCOL:
                     if (Preferences.isAgreePrivacy()) {
                         mHandler.removeMessages(PERMISSION_PROTOCOL);
-                        initSDK();
+                        // 初始化 Toast 框架
+                        ToastUtils.init(getInstance());
+                        if (SystemUtil.isMainProcess()) {
+                            //初始化主线程资源
+                            initSDK();
+                        }
                     } else {
                         mHandler.removeMessages(PERMISSION_PROTOCOL);
                         mHandler.sendEmptyMessageDelayed(PERMISSION_PROTOCOL, 1000);
@@ -131,8 +136,6 @@ public class RBureauApplication extends Application implements App {
 
 
     private void initSDK() {
-        // 初始化 Toast 框架
-        ToastUtils.init(this);
         initAutoSize();
         //bugly异常捕捉
         initBugly();

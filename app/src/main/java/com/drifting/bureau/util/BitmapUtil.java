@@ -1,5 +1,6 @@
 package com.drifting.bureau.util;
 
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -8,18 +9,16 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.media.MediaMetadataRetriever;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.view.View;
 
-import com.jess.arms.utils.ArmsUtils;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -87,9 +86,9 @@ public class BitmapUtil {
         }
 
         //缩放法压缩
-        Matrix matrix=new Matrix();
-        matrix.setScale(0.5f,0.5f);
-        bitmap=Bitmap.createBitmap(bitmap,0,0,bitmap.getWidth(),bitmap.getHeight(),matrix,true);
+        Matrix matrix = new Matrix();
+        matrix.setScale(0.5f, 0.5f);
+        bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
         return bitmap;
     }
 
@@ -101,7 +100,7 @@ public class BitmapUtil {
      */
     public static File saveBitmapFile(Context context, Bitmap bitmap) {
         // 首先保存图片 创建文件夹
-        File appDir = StorageUtils.getCacheDirectory(context);
+        File appDir = StorageUtil.getCacheDirectory(context);
         if (!appDir.exists()) {
             appDir.mkdir();
         }
@@ -128,7 +127,7 @@ public class BitmapUtil {
      */
     public static void saveImageToGallery(Bitmap bmp, Context context) {
         // 首先保存图片 创建文件夹
-        File appDir = StorageUtils.getCacheDirectory(context);
+        File appDir = StorageUtil.getCacheDirectory(context);
         if (!appDir.exists()) {
             appDir.mkdir();
         }
@@ -211,4 +210,66 @@ public class BitmapUtil {
     }
 
 
+    private static Bitmap[] bitmaps;
+
+    /**
+     * 获取指定View的截图
+     *
+     * @param view
+     */
+
+    public static Bitmap getImageOfView(View view) {
+        int width1 = view.getMeasuredWidth();
+        int height1 = view.getMeasuredHeight();
+        Bitmap bmp1 = Bitmap.createBitmap(width1, height1,
+                Bitmap.Config.ARGB_8888);
+        view.draw(new Canvas(bmp1));
+        Canvas canvas = new Canvas(bmp1);
+        Paint paint = new Paint();
+        paint.setColor(Color.TRANSPARENT);
+        canvas.drawBitmap(bmp1, 0, 0, null);
+        return bmp1;
+    }
+
+
+    /**
+     * 实现bitmap一分为二的效果
+     * @param bitmap
+     * @return
+     */
+    public static void getCropBitmaps(Bitmap bitmap){
+        if (bitmap == null) {
+            return ;
+        }
+        int with = bitmap.getWidth(); // 得到图片的宽，高
+        int height = bitmap.getHeight();
+        int nw, nh, retX;
+        nw = with / 2;
+        nh = height;
+        retX = with / 2;
+        // 两张图片的容器
+        Bitmap[] bitmapArray = new Bitmap[2];
+        // 第一张图片从X坐标0的地方开始截取一半的宽度
+        Bitmap bmp = Bitmap.createBitmap(bitmap, 0, 0, nw, nh, null,
+                false);
+        // 第二张图片从X坐标为width一半的的地方开始截取一半的宽度
+        Bitmap bmp1 = Bitmap.createBitmap(bitmap, retX, 0, nw, nh, null,
+                false);
+        bitmapArray[0] = bmp;// 左边图片
+        bitmapArray[1] = bmp1;// 右边图片
+        if (bitmap != null && !bitmap.equals(bmp) && !bitmap.isRecycled()) {
+            bitmap.recycle();
+        }
+        bitmaps = bitmapArray;//缓存
+    }
+
+
+    /**
+     * 获取缓存的bitmap
+     *
+     * @return
+     */
+    public static Bitmap[] getBitmaps() {
+        return bitmaps;
+    }
 }

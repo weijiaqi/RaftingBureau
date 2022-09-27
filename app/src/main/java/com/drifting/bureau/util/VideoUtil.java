@@ -9,16 +9,19 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
+import androidx.core.content.FileProvider;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.app.application.RBureauApplication;
 import com.drifting.bureau.view.VoiceWave;
 import com.hw.videoprocessor.VideoProcessor;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -122,7 +125,6 @@ public class VideoUtil {
     }
 
 
-
     /**
      * @description 获取视频path
      */
@@ -140,19 +142,25 @@ public class VideoUtil {
      *
      * @return
      */
-    public static int getLocalVideoDuration(String videoPath) {
+    public static int getLocalVideoDuration(Context context,String videoPath) {
         //时长(毫秒)
-        int duration;
+        long duration;
         try {
             MediaMetadataRetriever mmr = new MediaMetadataRetriever();
-            mmr.setDataSource(videoPath, new HashMap<String, String>());
-            duration = Integer.parseInt(mmr.extractMetadata
-                    (MediaMetadataRetriever.METADATA_KEY_DURATION)) / 1000;
+            if (!videoPath.startsWith("http")) {
+                Uri newUri = FileProvider.getUriForFile(context, RBureauApplication.getContext().getPackageName() + ".fileprovider", new File(videoPath));
+                mmr.setDataSource(context, newUri);// videoPath 本地视频的路径
+            } else {
+                mmr.setDataSource(videoPath, new HashMap<String, String>());// videoPath 本地视频的路径
+            }
+//             duration = (fileSize*8) /(bitRate);//单位秒
+            duration = Long.parseLong(mmr.extractMetadata
+                    (MediaMetadataRetriever.METADATA_KEY_DURATION))/1000;
         } catch (Exception e) {
             e.printStackTrace();
             return 0;
         }
-        return duration;
+        return (int) duration;
     }
 
 

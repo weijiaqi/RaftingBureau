@@ -96,9 +96,7 @@ public class NebulaeActivity extends BaseManagerActivity<NebulaePresenter> imple
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
         setStatusBarHeight(mTvBar);
-        if (getIntent() != null) {
-            nebula = getIntent().getExtras().getString(EXTRA_NEBULA);
-        }
+        nebula = getString(EXTRA_NEBULA);
         mRcyList.setLayoutManager(new LinearLayoutManager(this));
         nebulaeListAdapter = new NebulaeListAdapter(new ArrayList<>(),nebula);
         mRcyList.setAdapter(nebulaeListAdapter);

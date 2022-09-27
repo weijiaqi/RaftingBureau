@@ -45,6 +45,8 @@ import com.drifting.bureau.data.event.VideoEvent;
 import com.drifting.bureau.di.component.DaggerVideoRecordingComponent;
 import com.drifting.bureau.mvp.contract.VideoRecordingContract;
 import com.drifting.bureau.mvp.presenter.VideoRecordingPresenter;
+import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
+import com.drifting.bureau.mvp.ui.dialog.RecordingDialog;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.TextUtil;
@@ -260,6 +262,16 @@ public class VideoRecordingActivity extends BaseManagerActivity<VideoRecordingPr
             // 申请音频权限
             if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
                 showMessage("检测到你未开启录音权限!");
+                PermissionDialog.requestAudioPermissions(this, new PermissionDialog.PermissionCallBack() {
+                    @Override
+                    public void onSuccess() {}
+                    @Override
+                    public void onFailure() {}
+                    @Override
+                    public void onAlwaysFailure() {
+                        PermissionDialog.showDialog(VideoRecordingActivity.this, "android.permission.RECORD_AUDIO");
+                    }
+                });
                 return;
             }
             recording = videoCapture.getOutput().prepareRecording(getActivity(), mediaStoreOutputOptions)
@@ -372,7 +384,7 @@ public class VideoRecordingActivity extends BaseManagerActivity<VideoRecordingPr
                 //TODO 显示视频
                 path = VideoUtil.getLocalVideoPath(getActivity(), data.getData());
                 if (path != null) {
-                    int time = VideoUtil.getLocalVideoDuration(path);
+                    int time = VideoUtil.getLocalVideoDuration(this,path);
                     if (time > 30) {
                         showMessage("视频选择时长不能超过30秒");
                     } else {

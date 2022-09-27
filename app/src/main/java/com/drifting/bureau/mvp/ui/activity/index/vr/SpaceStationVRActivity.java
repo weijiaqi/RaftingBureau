@@ -60,9 +60,7 @@ public class SpaceStationVRActivity extends BaseManagerActivity {
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
         mToolbarTitle.setText("空间站");
-        if (getIntent() != null) {
-            arurl = getIntent().getStringExtra(AR_URL);
-        }
+        arurl =getString(AR_URL);
         mVRPanoramaView.setTouchTrackingEnabled(true);
         mVRPanoramaView.setFullscreenButtonEnabled(false);
         mVRPanoramaView.setInfoButtonEnabled(false);

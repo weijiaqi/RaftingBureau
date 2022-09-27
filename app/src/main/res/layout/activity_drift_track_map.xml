@@ -5,7 +5,6 @@
     android:layout_height="match_parent">
 
 
-
     <FrameLayout
         android:id="@+id/mFrameLayout"
         android:layout_width="match_parent"
@@ -13,6 +12,28 @@
 
 
     <include layout="@layout/view_height_title_lay" />
+
+
+    <FrameLayout
+        android:visibility="gone"
+        android:id="@+id/fl_get_more"
+        android:layout_width="99dp"
+        android:layout_height="52dp"
+        android:layout_below="@+id/rl_toolbar"
+        android:layout_marginStart="25dp"
+        android:background="@drawable/get_more_box">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="25dp"
+            android:text="获取更多"
+            android:textColor="@color/color_00"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+    </FrameLayout>
 
 
     <com.hjq.shape.view.ShapeTextView

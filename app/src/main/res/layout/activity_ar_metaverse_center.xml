@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:id="@+id/ll_add"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="Orientation" />
+
+    <include
+        layout="@layout/include_ar_title"
+        android:visibility="invisible" />
+
+
+    <RelativeLayout
+        android:id="@+id/rl_info"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="end"
+        android:layout_marginEnd="29dp"
+        android:layout_marginBottom="122dp">
+
+        <TextView
+            android:id="@+id/iv_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/home_message"
+            android:drawablePadding="4dp"
+            android:gravity="center_horizontal"
+            android:text="电波"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/iv_hot"
+            android:layout_width="7dp"
+            android:layout_height="7dp"
+            android:layout_alignEnd="@+id/iv_message"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/shape_red_circle"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/tv_about_me"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:visibility="invisible"
+        android:layout_marginEnd="29dp"
+        android:layout_marginBottom="49dp"
+        android:drawableTop="@drawable/about_me"
+        android:drawablePadding="4dp"
+        android:gravity="center_horizontal"
+        android:text=""
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+</RelativeLayout>

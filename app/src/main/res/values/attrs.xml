@@ -75,4 +75,115 @@
         </attr>
     </declare-styleable>
 
+
+
+    <!-- 圆角矩形背景色 -->
+    <attr name="rv_backgroundColor" format="color" />
+    <!-- 圆角矩形背景色press -->
+    <attr name="rv_backgroundPressColor" format="color" />
+    <!-- 圆角弧度,单位dp-->
+    <attr name="rv_cornerRadius" format="dimension" />
+    <!-- 圆角弧度,单位dp-->
+    <attr name="rv_strokeWidth" format="dimension" />
+    <!-- 圆角边框颜色-->
+    <attr name="rv_strokeColor" format="color" />
+    <!-- 圆角边框颜色press -->
+    <attr name="rv_strokePressColor" format="color" />
+    <!-- 文字颜色press-->
+    <attr name="rv_textPressColor" format="color" />
+    <!-- 圆角弧度是高度一半-->
+    <attr name="rv_isRadiusHalfHeight" format="boolean" />
+    <!-- 圆角矩形宽高相等,取较宽高中大值-->
+    <attr name="rv_isWidthHeightEqual" format="boolean" />
+    <!-- 圆角弧度,单位dp,TopLeft-->
+    <attr name="rv_cornerRadius_TL" format="dimension" />
+    <!-- 圆角弧度,单位dp,TopRight-->
+    <attr name="rv_cornerRadius_TR" format="dimension" />
+    <!-- 圆角弧度,单位dp,BottomLeft-->
+    <attr name="rv_cornerRadius_BL" format="dimension" />
+    <!-- 圆角弧度,单位dp,BottomRight-->
+    <attr name="rv_cornerRadius_BR" format="dimension" />
+    <!-- 是否有Ripple效果,api21+有效-->
+    <attr name="rv_isRippleEnable" format="boolean" />
+
+    <!--报错添加的，咱也不知道，咱也不敢问-->
+    <attr name="rv_backgroundGradientAngle" format="integer" />
+    <attr name="rv_backgroundColorStart" format="color" />
+    <attr name="rv_backgroundColorEnd" format="color" />
+
+    <attr name="sysTopBarColorPrimary" format="reference|color" />
+
+    <declare-styleable name="RoundTextView">
+        <attr name="rv_backgroundGradientAngle" />
+        <attr name="rv_backgroundColorStart" />
+        <attr name="rv_backgroundColorEnd" />
+        <attr name="rv_backgroundColor" />
+        <attr name="rv_backgroundPressColor" />
+        <attr name="rv_cornerRadius" />
+        <attr name="rv_strokeWidth" />
+        <attr name="rv_strokeColor" />
+        <attr name="rv_strokePressColor" />
+        <attr name="rv_textPressColor" />
+        <attr name="rv_isRadiusHalfHeight" />
+        <attr name="rv_isWidthHeightEqual" />
+        <attr name="rv_cornerRadius_TL" />
+        <attr name="rv_cornerRadius_TR" />
+        <attr name="rv_cornerRadius_BL" />
+        <attr name="rv_cornerRadius_BR" />
+        <attr name="rv_isRippleEnable" />
+    </declare-styleable>
+
+    <declare-styleable name="RoundLinearLayout">
+        <attr name="rv_backgroundColor" />
+        <attr name="rv_backgroundPressColor" />
+        <attr name="rv_cornerRadius" />
+        <attr name="rv_strokeWidth" />
+        <attr name="rv_strokeColor" />
+        <attr name="rv_strokePressColor" />
+        <attr name="rv_isRadiusHalfHeight" />
+        <attr name="rv_isWidthHeightEqual" />
+        <attr name="rv_cornerRadius_TL" />
+        <attr name="rv_cornerRadius_TR" />
+        <attr name="rv_cornerRadius_BL" />
+        <attr name="rv_cornerRadius_BR" />
+        <attr name="rv_isRippleEnable" />
+    </declare-styleable>
+
+    <declare-styleable name="RoundRelativeLayout">
+        <attr name="rv_backgroundColor" />
+        <attr name="rv_backgroundPressColor" />
+        <attr name="rv_cornerRadius" />
+        <attr name="rv_strokeWidth" />
+        <attr name="rv_strokeColor" />
+        <attr name="rv_strokePressColor" />
+        <attr name="rv_isRadiusHalfHeight" />
+        <attr name="rv_isWidthHeightEqual" />
+        <attr name="rv_cornerRadius_TL" />
+        <attr name="rv_cornerRadius_TR" />
+        <attr name="rv_cornerRadius_BL" />
+        <attr name="rv_cornerRadius_BR" />
+        <attr name="rv_isRippleEnable" />
+    </declare-styleable>
+
+    <declare-styleable name="RatioImageView">
+        <attr name="aspect_ratio" format="float" />
+        <attr name="corner_radius" format="dimension" />
+        <attr name="left_top_radius" format="dimension" />
+        <attr name="right_top_radius" format="dimension" />
+        <attr name="right_bottom_radius" format="dimension" />
+        <attr name="left_bottom_radius" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="RoundAngleFrameLayout">
+        <attr name="radius" format="dimension" />
+        <attr name="topLeftRadius" format="dimension" />
+        <attr name="topRightRadius" format="dimension" />
+        <attr name="bottomLeftRadius" format="dimension" />
+        <attr name="bottomRightRadius" format="dimension" />
+
+        <attr name="scale" format="float" />
+        <attr name="scaleProvideX" format="float" />
+        <attr name="scaleProvideY" format="float" />
+        <attr name="offsetY" format="dimension" />
+    </declare-styleable>
 </resources>

@@ -87,9 +87,7 @@ public class NebulaActivity extends BaseManagerActivity<NebulaPresenter> impleme
     }
 
     public void initListener() {
-        if (getIntent() != null) {
-            message_id = getIntent().getExtras().getInt(EXTRA_MESSAGE_ID);
-        }
+        message_id =getInt(EXTRA_MESSAGE_ID);
         mRcyNebula.setLoadingListener(this);
         nebulaAdapter = new NebulaAdapter(new ArrayList<>());
         mRcyNebula.setLayoutManager(new LinearLayoutManager(this));

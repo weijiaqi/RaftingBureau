@@ -18,6 +18,8 @@ import com.drifting.bureau.mvp.model.entity.MakingRecordEntity;
 import com.drifting.bureau.mvp.model.entity.MessageReceiveEntity;
 import com.drifting.bureau.mvp.model.entity.MoreDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.OrderOneEntity;
+import com.drifting.bureau.mvp.model.entity.QuestionAssessEntity;
+import com.drifting.bureau.mvp.model.entity.QuestionEntity;
 import com.drifting.bureau.mvp.model.entity.SkuListEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceCheckEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceInfoEntity;
@@ -46,7 +48,11 @@ import javax.inject.Inject;
 import com.drifting.bureau.mvp.contract.ArCenterConsoleContract;
 import com.jess.arms.utils.RxLifecycleUtils;
 
+import org.json.JSONObject;
+
 import java.io.File;
+import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -453,6 +459,60 @@ public class ArCenterConsolePresenter extends BasePresenter<ArCenterConsoleContr
                         if (mRootView != null) {
                             mRootView.onNetError();
                         }
+                    }
+                });
+    }
+
+
+
+
+    /**
+     *问题列表（搬离星球）
+     */
+    public void questionlist() {
+        mModel.questionlist().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseEntity<List<QuestionEntity>>>(mErrorHandler) {
+                    @Override
+                    public void onNext(BaseEntity<List<QuestionEntity>> baseEntity) {
+                        if (mRootView != null) {
+                            if (baseEntity.getCode() == 200) {
+                                mRootView.onQuestionListSuccess(baseEntity.getData());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
+    }
+
+
+
+    /**
+     *答题测评（搬离星球）
+     */
+    public void questionassess(Map<String, String> map) {
+        RequestBody requestBody = RequestBody.create(MediaType.parse("Content-Type, application/json"), new JSONObject(map).toString());
+        mModel.questionassess(requestBody).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseEntity<QuestionAssessEntity>>(mErrorHandler) {
+                    @Override
+                    public void onNext(BaseEntity<QuestionAssessEntity> baseEntity) {
+                        if (mRootView != null) {
+                            if (baseEntity.getCode() == 200) {
+                                mRootView.onQuestionAssessSuccess(baseEntity.getData());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        t.printStackTrace();
                     }
                 });
     }

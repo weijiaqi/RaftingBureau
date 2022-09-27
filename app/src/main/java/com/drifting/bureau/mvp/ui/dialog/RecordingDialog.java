@@ -19,10 +19,16 @@ import androidx.annotation.RequiresApi;
 
 import com.buihha.audiorecorder.Mp3Recorder;
 import com.drifting.bureau.R;
+import com.drifting.bureau.mvp.ui.activity.index.NebulaeActivity;
+import com.drifting.bureau.util.BitmapUtil;
 import com.drifting.bureau.util.FileUtil;
-import com.drifting.bureau.util.StorageUtils;
+
+import com.drifting.bureau.util.StorageUtil;
+import com.drifting.bureau.util.ToastUtil;
+import com.drifting.bureau.util.VideoUtil;
 import com.drifting.bureau.view.CircleProgressView;
 import com.drifting.bureau.view.VoiceWave;
+import com.jess.arms.base.BaseDialog;
 import com.jess.arms.base.BottomDialog;
 
 import java.io.File;
@@ -34,7 +40,7 @@ import java.util.List;
 /**
  * 语音录制
  */
-public class RecordingDialog extends BottomDialog implements View.OnClickListener {
+public class RecordingDialog extends BaseDialog implements View.OnClickListener {
 
     private ImageView mIvNext;
 
@@ -130,16 +136,28 @@ public class RecordingDialog extends BottomDialog implements View.OnClickListene
                 break;
             case R.id.ll_start:
             case R.id.ll_prepare: //开始录音
-                startRecording();
+                PermissionDialog.requestPermissions(activity, new PermissionDialog.PermissionCallBack() {
+                    @Override
+                    public void onSuccess() {
+                        startRecording();
+                    }
+
+                    @Override
+                    public void onFailure() {
+
+                    }
+
+                    @Override
+                    public void onAlwaysFailure() {
+                        PermissionDialog.showDialog(activity, "android.permission.WRITE_EXTERNAL_STORAGE");
+                    }
+                });
                 break;
             case R.id.ll_play: //开始播放
                 startPlay();
                 break;
             case R.id.tv_delete: //删除
-                EndAudition();
-                deleteFile();
-                mRlplay.setVisibility(View.GONE);
-                mLlPrepare.setVisibility(View.VISIBLE);
+                deleteVoice();
                 break;
             case R.id.tv_end:  //完成
                 if (mMp3Path != null) {
@@ -156,6 +174,17 @@ public class RecordingDialog extends BottomDialog implements View.OnClickListene
                 break;
         }
     }
+
+    /**
+    * @description 删除录音
+    */
+    public void deleteVoice(){
+        EndAudition();
+        deleteFile();
+        mRlplay.setVisibility(View.GONE);
+        mLlPrepare.setVisibility(View.VISIBLE);
+    }
+
 
     public void close() {
         if (mPlayer != null) {
@@ -198,7 +227,6 @@ public class RecordingDialog extends BottomDialog implements View.OnClickListene
                     @Override
                     public void onStop() {
                         //停止录音
-                        mMp3Path = mRecorder.mp3File.getAbsolutePath();
                         InVoiceStatus();
                     }
 
@@ -214,14 +242,22 @@ public class RecordingDialog extends BottomDialog implements View.OnClickListene
                 });
                 if (!mRecorder.isRecording()) {
                     try {
-                        mRecorder.startRecording(StorageUtils.getCacheDirectory(activity).getAbsolutePath(), FileUtil.getVoicName());
+                        mRecorder.startRecording(StorageUtil.getCacheDirectory(activity).getAbsolutePath(), FileUtil.getVoicName());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             } else { //停止录音
-                if (time != 0) {
+                mMp3Path = mRecorder.mp3File.getAbsolutePath();
+                int duration = VideoUtil.getLocalVideoDuration(activity,mMp3Path);
+                if (duration==0){
+                    ToastUtil.showToast("说话时间太短!");
                     stopRecording();
+                    deleteVoice();
+                }else {
+                    if (time != 0) {
+                        stopRecording();
+                    }
                 }
             }
         } catch (Exception e) {
@@ -241,7 +277,6 @@ public class RecordingDialog extends BottomDialog implements View.OnClickListene
         mRlplay.setVisibility(View.VISIBLE);
         totaltime = time;
         mTvPlayTime.setText(totaltime + "S");
-
     }
 
     //停止录音

@@ -33,6 +33,7 @@ import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.VerifyUtil;
 import com.jess.arms.di.component.AppComponent;
+import com.jess.arms.integration.AppManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +58,7 @@ public class LoginActivity extends BaseManagerActivity<LoginPresenter> implement
     private LoginListAdapter loginListAdapter;
     private CountDownTimer timer;
     private int status = 1;
-    private String phone,code,nikename;
+    private String phone, code, nikename;
 
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, LoginActivity.class);
@@ -134,7 +135,7 @@ public class LoginActivity extends BaseManagerActivity<LoginPresenter> implement
                 mPresenter.getCode(mEtContent.getText().toString(), 1, status);
             }
         } else if (status == 2) {
-            code=mEtContent.getText().toString();
+            code = mEtContent.getText().toString();
             setData(code, 2, false);
             if (mPresenter != null) {
                 mEtContent.setText("");
@@ -145,7 +146,7 @@ public class LoginActivity extends BaseManagerActivity<LoginPresenter> implement
                 showMessage("请输入1~9字符!");
                 return;
             }
-            nikename=mEtContent.getText().toString();
+            nikename = mEtContent.getText().toString();
             setData(nikename, 2, false);
             if (mPresenter != null) {
                 mEtContent.setText("");
@@ -236,18 +237,19 @@ public class LoginActivity extends BaseManagerActivity<LoginPresenter> implement
             setEditHint("请输入昵称");
             status = 3;
         } else {
+            SignLoginHintActivity.instance.finish();
             LogInOutDataUtil.successInSetData(loginEntity);
             RongIMUtil.getInstance().connect(loginEntity.getRc_token(), new RongIMUtil.ConnectListener() {
                 @Override
                 public void onConnectSuccess() {
                     showMessage("登录成功");
-                    DiscoveryTourActivity.start(LoginActivity.this, true);
+                    DiscoveryTourActivity.start(LoginActivity.this,true);
                 }
 
                 @Override
                 public void onConnectError() {
                     //ToastUtil.showToast("会话消息故障!");
-                    DiscoveryTourActivity.start(LoginActivity.this, true);
+                    DiscoveryTourActivity.start(LoginActivity.this,true);
                 }
             });
         }

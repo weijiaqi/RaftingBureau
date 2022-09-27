@@ -78,10 +78,8 @@ public class DeliveryDetailsActivity extends BaseManagerActivity<DeliveryDetails
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
         mToolbarTitle.setText("传递详情");
-        if (getIntent() != null) {
-            id = getIntent().getIntExtra(EXTRA_MESSAGE_ID, 0);
-            codecity = getIntent().getStringExtra(EXTRA_CODE_CITY);
-        }
+        id = getInt(EXTRA_MESSAGE_ID);
+        codecity =getString(EXTRA_CODE_CITY);
         initListener();
     }
 

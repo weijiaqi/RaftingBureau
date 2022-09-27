@@ -159,11 +159,9 @@ public class TopicDetailActivity extends BaseManagerActivity<TopicDetailPresente
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
-        if (getIntent() != null) {
-            Msgtype = getIntent().getExtras().getInt(EXTRA_TYPE);
-            explore_id = getIntent().getExtras().getInt(EXTRA_EXPLORE_ID);
-            message_id = getIntent().getExtras().getInt(EXTRA_MESSAGE_ID);
-        }
+        Msgtype = getInt(EXTRA_TYPE);
+        explore_id = getInt(EXTRA_EXPLORE_ID);
+        message_id =getInt(EXTRA_MESSAGE_ID);
         if (message_id != 0) {
             mIvRight.setVisibility(View.VISIBLE);
             mIvRight.setImageResource(R.drawable.tran_detail);

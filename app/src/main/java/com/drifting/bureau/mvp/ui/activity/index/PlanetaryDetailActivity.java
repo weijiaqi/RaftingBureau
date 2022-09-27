@@ -23,7 +23,6 @@ import com.drifting.bureau.di.component.DaggerPlanetaryDetailComponent;
 import com.drifting.bureau.mvp.contract.PlanetaryDetailContract;
 import com.drifting.bureau.mvp.model.entity.PlanetaryDetailEntity;
 import com.drifting.bureau.mvp.presenter.PlanetaryDetailPresenter;
-import com.drifting.bureau.mvp.ui.activity.index.ar.ARActivity;
 import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
 import com.drifting.bureau.util.ARCoreUtil;
 import com.drifting.bureau.util.ClickUtil;
@@ -95,16 +94,11 @@ public class PlanetaryDetailActivity extends BaseManagerActivity<PlanetaryDetail
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
         mToolbarTitle.setText("星球详情");
-        if (getIntent() != null) {
-            type = getIntent().getIntExtra(EXTRA_TYPE, 0);
-        }
-
+        type = getInt(EXTRA_TYPE);
         if (mPresenter != null) {
             mPresenter.planetdetails(type);
         }
-
     }
-
 
 
     @Override
@@ -159,7 +153,7 @@ public class PlanetaryDetailActivity extends BaseManagerActivity<PlanetaryDetail
                         public void handleMessage(Message msg) {
                             int fileSize = msg.getData().getInt("fileSize");
                             if (fileSize == new File(file).length()) {
-                                ARActivity.start(PlanetaryDetailActivity.this, file, false);
+                             //   ARActivity.start(PlanetaryDetailActivity.this, file, false);
                             } else {
                                 showNotificationDialog(url);
                             }

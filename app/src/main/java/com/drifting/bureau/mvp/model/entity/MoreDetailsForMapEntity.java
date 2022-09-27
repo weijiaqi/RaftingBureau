@@ -72,6 +72,15 @@ public class MoreDetailsForMapEntity {
         private Integer city_attend;
         private String code_city;
         private String name_city_complete;
+        private int free;
+
+        public int getFree() {
+            return free;
+        }
+
+        public void setFree(int free) {
+            this.free = free;
+        }
 
         public String getName_city_complete() {
             return name_city_complete;

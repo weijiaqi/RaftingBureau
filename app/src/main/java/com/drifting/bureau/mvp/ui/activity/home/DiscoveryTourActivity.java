@@ -39,16 +39,18 @@ import com.drifting.bureau.mvp.model.entity.StarUpIndexEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.presenter.DiscoveryTourPresenter;
 import com.drifting.bureau.mvp.ui.activity.index.DriftTrackMapActivity;
+import com.drifting.bureau.mvp.ui.activity.index.LaboratoryActivity;
 import com.drifting.bureau.mvp.ui.activity.index.PlanetarySelectActivity;
 import com.drifting.bureau.mvp.ui.activity.index.SpaceCapsuleActivity;
-import com.drifting.bureau.mvp.ui.activity.index.VideoActivity;
+
+import com.drifting.bureau.mvp.ui.activity.unity.ARMetaverseCenterActivity;
 import com.drifting.bureau.mvp.ui.activity.user.AboutMeActivity;
 import com.drifting.bureau.mvp.ui.activity.user.MessageCenterActivity;
 import com.drifting.bureau.mvp.ui.activity.web.ShowWebViewActivity;
 import com.drifting.bureau.mvp.ui.adapter.DiscoveryViewpagerAdapter;
 import com.drifting.bureau.mvp.ui.dialog.ShareDialog;
 import com.drifting.bureau.storageinfo.Preferences;
-import com.drifting.bureau.util.ARCoreUtil;
+
 import com.drifting.bureau.util.AppUtil;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.StringUtil;
@@ -111,11 +113,13 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
     private AnimatorSet animatorSet;
     private Handler handler;
     private boolean isAnmiation = true;
-    private int id, user_id, explore_id;
+    private int id, explore_id;
     private DiscoveryViewpagerAdapter discoveryViewpagerAdapter;
     private UserInfoEntity userInfoEntity;
     private StarUpIndexEntity starUpIndexEntity;
     private ShareDialog shareDialog;
+
+
 
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, DiscoveryTourActivity.class);
@@ -185,9 +189,9 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
 
     public void loadUI() {
         //是否展示引导
-        mGuideView.setVisibility(!Preferences.isOrdinaryGuide()?View.VISIBLE:View.GONE);
+        mGuideView.setVisibility(!Preferences.isOrdinaryGuide() ? View.VISIBLE : View.GONE);
         mGuideView.setOnClickCallback(() -> {
-            DriftTrackMapActivity.start(DiscoveryTourActivity.this, 2,1, 0, false);
+            DriftTrackMapActivity.start(DiscoveryTourActivity.this, 2, 1, 0, false);
             mGuideView.setVisibility(View.GONE);
         });
 
@@ -206,7 +210,7 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
                 Preferences.saveMascot(userInfoEntity.getUser().getMascot());
                 mTvAboutMe.setText(userInfoEntity.getPlanet().getName());
                 mTvEnergy.setText(userInfoEntity.getUser().getMeta_power());
-                if (status==1){
+                if (status == 1) {
                     RequestUtil.create().startup(entity1 -> {
                         if (entity1 != null && entity1.getCode() == 200) {
                             starUpIndexEntity = entity1.getData();
@@ -247,7 +251,8 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
                 case R.id.rl_right:  //右边
-                    ShowWebViewActivity.start(this, 4, false);
+                    //   ShowWebViewActivity.start(this, 4, false);
+                    LaboratoryActivity.start(this, false);
                     break;
                 case R.id.rl_message: //开启新消息
                     DriftTrackMapActivity.start(this, explore_id, id, false);
@@ -264,10 +269,8 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
                     MessageCenterActivity.start(this, false);
                     break;
                 case R.id.ll_step_star:
-                    if (ARCoreUtil.checkArCoreAvailability(this)) {
-                        Preferences.setARModel(true);
-                        ArCenterConsoleActivity.start(this, true);
-                    }
+                    Preferences.setARModel(true);
+                    ARMetaverseCenterActivity.start(this, true);
                     break;
                 case R.id.tv_youth_camp:  //青年创业营
                     if (starUpIndexEntity != null) {
@@ -303,7 +306,6 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
         if (entity != null && entity.getId() != null) {
             if (entity.getId() != 0) {
                 id = entity.getId();
-                user_id = entity.getUser_id();
                 explore_id = entity.getExplore_id();
                 mTvMessage.setText(getString(R.string.from_nebula, entity.getNebula_name()));
                 handler.postDelayed(mAdRunnable, entity.getDrift_rest() * 1000);

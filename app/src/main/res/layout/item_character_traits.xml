@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="17dp"
+    android:layout_marginEnd="26dp">
+
+
+    <ImageView
+        android:id="@+id/iv_checked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/answer_checked" />
+
+    <TextView
+        android:id="@+id/tv_word"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="3dp"
+        android:layout_toRightOf="@+id/iv_checked"
+        android:lineSpacingExtra="2dp"
+        android:text="严谨派的人总是一丝不苟，他们极度严谨，极度自律，同时也极度可靠。"
+        android:textColor="@color/color_66"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@+id/tv_word"
+        android:layout_alignStart="@+id/tv_word"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="18dp"
+        android:background="@color/color_black_4d000000" />
+</RelativeLayout>

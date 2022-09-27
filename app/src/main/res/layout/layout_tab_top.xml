@@ -11,17 +11,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textStyle="bold"
-         android:text="漂流局友"
+        android:text="漂流局友"
         android:textColor="@color/black"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/iv_message"
         android:layout_width="5dp"
         android:layout_height="5dp"
         android:layout_alignTop="@+id/tv_tab_top_title"
-
         android:layout_toRightOf="@+id/tv_tab_top_title"
         android:src="@drawable/shape_red_circle" />
 </RelativeLayout>

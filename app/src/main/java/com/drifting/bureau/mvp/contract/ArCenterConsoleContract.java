@@ -10,6 +10,8 @@ import com.drifting.bureau.mvp.model.entity.MakingRecordEntity;
 import com.drifting.bureau.mvp.model.entity.MessageReceiveEntity;
 import com.drifting.bureau.mvp.model.entity.MoreDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.OrderOneEntity;
+import com.drifting.bureau.mvp.model.entity.QuestionAssessEntity;
+import com.drifting.bureau.mvp.model.entity.QuestionEntity;
 import com.drifting.bureau.mvp.model.entity.SkuListEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceCheckEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceInfoEntity;
@@ -18,8 +20,11 @@ import com.jess.arms.base.BaseEntity;
 import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IView;
 
+import java.util.List;
+
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 /**
  * ================================================
@@ -59,7 +64,6 @@ public interface ArCenterConsoleContract {
 
         void onOrderMakingSuccess();
 
-
         void myOrderMadeSuccess(MakingRecordEntity entity, boolean isNotData);
 
         void loadMakeFinish(boolean loadType, boolean isNotData);
@@ -75,7 +79,15 @@ public interface ArCenterConsoleContract {
         void onSpaceCheck(SpaceCheckEntity entity);
 
 
+        void onQuestionListSuccess(List<QuestionEntity> list);
+
+        void  onQuestionAssessSuccess(QuestionAssessEntity entity);
+
+
+
         void finishSuccess();
+
+
 
         void onNetError();
 
@@ -109,6 +121,8 @@ public interface ArCenterConsoleContract {
 
         Observable<BaseEntity<SpaceCheckEntity>> spacecheck();
 
+        Observable<BaseEntity<List<QuestionEntity>>> questionlist();
 
+        Observable<BaseEntity<QuestionAssessEntity>> questionassess(RequestBody body);
     }
 }

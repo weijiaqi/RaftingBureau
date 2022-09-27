@@ -27,7 +27,6 @@ import io.rong.imlib.model.Conversation;
 
 
 public class RaftingBureaufriendHolder extends BaseRecyclerHolder {
-
     @BindView(R.id.sl_slide)
     SlideLayout mSlSlide;
     @BindView(R.id.tv_delete)

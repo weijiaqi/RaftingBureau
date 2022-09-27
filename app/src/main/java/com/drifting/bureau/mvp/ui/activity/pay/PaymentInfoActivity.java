@@ -93,12 +93,10 @@ public class PaymentInfoActivity extends BaseManagerActivity<PaymentInfoPresente
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
         mToobarTitle.setText("订单支付");
-        if (getIntent() != null) {
-            type = getIntent().getIntExtra(EXRA_TYPE, 0);
-            sn = getIntent().getStringExtra(EXRA_SN);
-            total = getIntent().getStringExtra(EXRA_TOTAL);
-            totaltime = getIntent().getLongExtra(EXRA_TOTAL_TIME, 0);
-        }
+        type =getInt(EXRA_TYPE);
+        sn = getString(EXRA_SN);
+        total = getString(EXRA_TOTAL);
+        totaltime =getLong(EXRA_TOTAL_TIME);
         initListener();
     }
 

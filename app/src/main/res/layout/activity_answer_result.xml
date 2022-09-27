@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/answer_result_bg_one">
+
+
+    <include layout="@layout/include_tvbar_title" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_toolbar"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="19dp"
+                android:layout_marginBottom="13dp"
+                android:background="@drawable/answer_result_bg_two">
+
+
+                <com.hjq.shape.layout.ShapeRelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="22dp"
+                    android:layout_marginEnd="17dp"
+                    android:layout_marginBottom="45dp"
+                    app:shape_radius="5dp"
+                    app:shape_solidColor="@color/color_f1f2">
+
+
+                    <com.drifting.bureau.view.RoundLinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="29dp"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginEnd="10dp"
+                            android:adjustViewBounds="true"
+                            android:src="@drawable/answer_result_top" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginEnd="12dp">
+
+                            <com.drifting.bureau.view.FontTextView
+                                android:id="@+id/tv_faction"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="严谨派"
+                                android:textColor="@color/color_3ee"
+                                android:textSize="67sp" />
+
+
+                            <com.hjq.shape.layout.ShapeFrameLayout
+                                android:id="@+id/fl_key_words"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="7dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_toRightOf="@+id/tv_faction"
+                                app:shape_solidColor="@color/color_20">
+
+                                <com.drifting.bureau.view.FontTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ellipsize="end"
+                                    android:paddingHorizontal="14dp"
+                                    android:paddingVertical="1dp"
+                                    android:singleLine="true"
+                                    android:text="关键词"
+                                    android:textColor="@color/white"
+                                    android:textSize="14sp" />
+
+                            </com.hjq.shape.layout.ShapeFrameLayout>
+
+
+                            <com.drifting.bureau.view.FontTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/fl_key_words"
+                                android:layout_alignStart="@+id/fl_key_words"
+                                android:layout_marginTop="5dp"
+                                android:text="严谨保守、\n自律、专注力"
+                                android:textColor="@color/color_20"
+                                android:textSize="12sp" />
+
+                        </RelativeLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginEnd="10dp"
+                            android:background="@color/color_black_4d000000" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="14dp"
+                            android:layout_marginEnd="11dp"
+                            android:background="@drawable/answer_women_bg"
+                            android:paddingEnd="23dp">
+
+
+                            <TextView
+                                android:id="@+id/tv_fit"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="80dp"
+                                android:layout_marginTop="11dp"
+                                android:text="契合派系:谋略派"
+                                android:textColor="@color/color_15ae"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_attributes"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/tv_fit"
+                                android:layout_alignStart="@+id/tv_fit"
+                                android:layout_marginTop="6dp"
+                                android:ellipsize="none"
+                                android:maxLines="2"
+                                android:text="契合属性:组织管理；客观公正；责任感。契合属性:组织管理；客观公正；责任感。"
+                                android:textColor="@color/white"
+                                android:textSize="11sp"
+                                android:textStyle="bold" />
+
+
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="14dp"
+                            android:layout_marginEnd="11dp"
+                            android:background="@drawable/answer_men_bg"
+                            android:paddingEnd="23dp">
+
+
+                            <TextView
+                                android:id="@+id/tv_conflict"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="80dp"
+                                android:layout_marginTop="11dp"
+                                android:text="契合派系:谋略派"
+                                android:textColor="@color/color_eea"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_conflict_attributes"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/tv_conflict"
+                                android:layout_alignStart="@+id/tv_conflict"
+                                android:layout_marginTop="6dp"
+                                android:ellipsize="none"
+                                android:maxLines="2"
+                                android:text="契合属性:组织管理；客观公正；责任感。契合属性:组织管理；客观公正；责任感。"
+                                android:textColor="@color/white"
+                                android:textSize="11sp"
+                                android:textStyle="bold" />
+
+
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp">
+
+                            <com.hjq.shape.layout.ShapeRelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="17dp"
+                                android:layout_marginTop="70dp"
+                                app:shape_radius="5dp"
+                                app:shape_solidColor="@color/white">
+
+                                <TextView
+                                    android:id="@+id/tv_person_num"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_marginTop="28dp"
+                                    android:layout_marginEnd="5dp"
+                                    android:text="当前派别共有158254 人"
+                                    android:textColor="@color/color_223d"
+                                    android:textSize="12sp" />
+
+
+                                <com.drifting.bureau.view.radar.RadarView
+                                    android:id="@+id/radarview"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="245dp"
+                                    android:layout_below="@+id/tv_person_num"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_marginTop="19dp"
+                                    app:bgColor="@color/transparent"
+                                    app:dotColor="@color/color_c74"
+                                    app:labelColor="@color/color_00"
+                                    app:labelMargin="9dp"
+                                    app:labelSize="12sp"
+                                    app:netLineColor="@color/color_cc"
+                                    app:netLineNum="3"
+                                    app:netLineWidth="0.4dp"
+                                    app:radiantLineColor="@color/color_cc"
+                                    app:radiantLineWidth="0.4dp"
+                                    app:solidColor="@color/color_7f_c74"
+                                    app:strokeColor="@color/color_c74"
+                                    app:strokeWidth="1dp" />
+
+
+                            </com.hjq.shape.layout.ShapeRelativeLayout>
+
+
+                            <ImageView
+                                android:id="@+id/iv_bear"
+                                android:layout_width="81dp"
+                                android:layout_height="108dp"
+                                android:layout_marginStart="24dp"
+                                android:src="@drawable/play_bear" />
+
+                            <ImageView
+                                android:id="@+id/iv_my_attribute_value"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="7dp"
+                                android:layout_marginTop="12dp"
+                                android:layout_marginEnd="17dp"
+                                android:layout_toRightOf="@+id/iv_bear"
+
+                                android:src="@drawable/my_attribute_value" />
+
+                            <com.drifting.bureau.view.FontTextView
+                                android:id="@+id/tv_nikename"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/iv_my_attribute_value"
+                                android:layout_alignEnd="@+id/iv_my_attribute_value"
+                                android:layout_marginTop="8dp"
+                                android:text="昵称：你的小太阳"
+                                android:textColor="@color/color_00"
+                                android:textSize="12sp" />
+
+
+                        </RelativeLayout>
+
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="17dp"
+                            android:layout_marginTop="19dp"
+                            android:layout_marginBottom="3dp"
+                            android:src="@drawable/character_traits" />
+
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rcy_list"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:overScrollMode="never" />
+
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="17dp"
+                            android:layout_marginTop="19dp"
+                            android:src="@drawable/career_field" />
+
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="47dp"
+                            android:layout_marginTop="9dp"
+                            android:layout_marginEnd="44dp"
+                            android:layout_marginBottom="21dp"
+                            android:src="@drawable/career_field_pic" />
+
+
+                    </com.drifting.bureau.view.RoundLinearLayout>
+
+                </com.hjq.shape.layout.ShapeRelativeLayout>
+
+                <ImageView
+                    android:layout_width="71dp"
+                    android:layout_height="70dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="15dp"
+                    android:src="@drawable/navigator" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="19dp"
+
+                    android:src="@drawable/answer_result_bottom" />
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

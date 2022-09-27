@@ -210,7 +210,7 @@ public class DriftTrackMapPresenter extends BasePresenter<DriftTrackMapContract.
      * @return
      */
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public void compressVideo(Context context, int type, String content, int message_id, String videoPath, File voice, File image, String tag) {
+    public void compressVideo(Context context, int type, String content, int message_id, String videoPath, File voice, File image, String tag,int free) {
         String filepath = FileUtil.saveVideoPath(context);
         new Thread(() -> {
             boolean success = true;
@@ -238,20 +238,21 @@ public class DriftTrackMapPresenter extends BasePresenter<DriftTrackMapContract.
                 Timber.e("压缩成功---" + filepath);
                 double fileSize = FileUtil.getFileOrFilesSize(filepath, FileUtil.SIZETYPE_MB);
                 Timber.e("1----------" + fileSize);
-                createwithword(type, content, message_id, new File(filepath), voice, image, tag);
+                createwithword(type, content, message_id, new File(filepath), voice, image, tag,free);
             }
         }).start();
     }
 
 
     //发送漂流信息
-    public void createwithword(int type, String content, int message_id, File path, File voice, File image, String tag) {
+    public void createwithword(int type, String content, int message_id, File path, File voice, File image, String tag,int free) {
 
         RequestBody requestBody, requestBody2;
 
         MultipartBody.Builder multipartBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("message_id", message_id + "")
+                .addFormDataPart("free", free + "")
                 .addFormDataPart("tag", tag==null ?"":tag);
 
         //文字

@@ -9,9 +9,9 @@ import androidx.annotation.Nullable;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.base.BaseManagerActivity;
-import com.drifting.bureau.mvp.ui.activity.home.ArCenterConsoleActivity;
 import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
 
+import com.drifting.bureau.mvp.ui.activity.unity.ARMetaverseCenterActivity;
 import com.drifting.bureau.mvp.ui.activity.user.PullNewGuideActivity;
 import com.drifting.bureau.mvp.ui.dialog.PrivacyPolicyDialog;
 import com.drifting.bureau.storageinfo.Preferences;
@@ -81,7 +81,7 @@ public class SplashActivity extends BaseManagerActivity {
 
     public void startMainActivity() {
         if (Preferences.isARModel()) {
-            ArCenterConsoleActivity.start(SplashActivity.this, true);
+            ARMetaverseCenterActivity.start(SplashActivity.this, true);
         } else {
             DiscoveryTourActivity.start(SplashActivity.this, true);
         }

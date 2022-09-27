@@ -1,5 +1,6 @@
 package com.drifting.bureau.mvp.ui.activity.index;
 
+import android.animation.ValueAnimator;
 import android.app.Activity;
 
 import androidx.annotation.NonNull;
@@ -22,6 +23,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.baidu.mapapi.animation.Animation;
+import com.baidu.mapapi.animation.ScaleAnimation;
 import com.baidu.mapapi.map.ArcOptions;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BaiduMapOptions;
@@ -69,6 +72,8 @@ import com.drifting.bureau.mvp.model.entity.MoreDetailsForMapEntity;
 import com.drifting.bureau.mvp.model.entity.SkuListEntity;
 
 import com.drifting.bureau.mvp.ui.activity.pay.PaymentInfoActivity;
+import com.drifting.bureau.mvp.ui.dialog.CityReleaseDialog;
+import com.drifting.bureau.mvp.ui.dialog.EnablePrivilegesDialog;
 import com.drifting.bureau.mvp.ui.dialog.MapSendDriftDialog;
 import com.drifting.bureau.mvp.ui.dialog.PublicDialog;
 import com.drifting.bureau.mvp.ui.dialog.RaftingOrderDialog;
@@ -83,6 +88,7 @@ import com.drifting.bureau.util.ViewUtil;
 import com.drifting.bureau.util.request.RequestUtil;
 
 import com.drifting.bureau.view.guide.MapOpenMsgGuideView;
+import com.jess.arms.base.BaseDialog;
 import com.jess.arms.di.component.AppComponent;
 
 import com.drifting.bureau.mvp.contract.DriftTrackMapContract;
@@ -171,11 +177,15 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
     // 用于设置个性化地图的样式文件
     private static final String CUSTOM_FILE_NAME_GRAY = "dark.sty";
     private TraceOverlay mTraceOverlay;
-    private InfoWindow mInfoWindow, mInfoWindow2;
+    private InfoWindow mInfoWindow, mLastInfoWindow;
+    private Marker mMarkerFinger;
     //发布漂流
     private MapSendDriftDialog mapSendDriftDialog;
     private PublicDialog publicDialog;
     private RaftingOrderDialog raftingOrderDialog;
+    private CityReleaseDialog cityReleaseDialog;
+    private EnablePrivilegesDialog enablePrivilegesDialog;
+    //    private BitmapDescriptor finger = BitmapDescriptorFactory.fromResource(R.drawable.map_finger);
     private BitmapDescriptor mbpStart = BitmapDescriptorFactory.fromResource(R.drawable.track_start);
     private BitmapDescriptor mbpCenter = BitmapDescriptorFactory.fromResource(R.drawable.track_center);
     private BitmapDescriptor mbpEnd = BitmapDescriptorFactory.fromResource(R.drawable.track_end);
@@ -224,11 +234,9 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
         setStatusBarHeight(mTvBar);
-        if (getIntent() != null) {
-            Msgtype = getIntent().getExtras().getInt(EXTRA_TYPE);
-            explore_id = getIntent().getExtras().getInt(EXTRA_EXPLORE_ID);
-            message_id = getIntent().getExtras().getInt(EXTRA_MESSAGE_ID);
-        }
+        Msgtype = getInt(EXTRA_TYPE);
+        explore_id = getInt(EXTRA_EXPLORE_ID);
+        message_id = getInt(EXTRA_MESSAGE_ID);
         if (message_id != 0) {
             mIvRight.setVisibility(View.VISIBLE);
             mIvRight.setImageResource(R.drawable.tran_detail);
@@ -239,7 +247,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
         mOpenGuideView.setOnClickCallback(() -> {
             mOpenGuideView.setVisibility(View.GONE);
             if (RBureauApplication.latLng != null) {
-                OpenNewMsg();
+                SendNewMesg(false);
             }
         });
 
@@ -301,6 +309,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
     public void AddListener() {
         mBaiduMap.setOnMarkerClickListener(marker -> {
             LatLng latLng = marker.getPosition();
+
             if (marker.getZIndex() != options.size() - 1) {
                 mBaiduMap.hideInfoWindow();
                 showInfoWindow(latLng, marker.getZIndex());
@@ -352,8 +361,8 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
         textView.setText("已传递等待漂出");
         textView.setTextSize(12);
         textView.setTextColor(getColor(R.color.white));
-        mInfoWindow2 = new InfoWindow(textView, new LatLng(Double.parseDouble(messagePathBeanList.get(messagePathBeanList.size() - 1).getLat()), Double.parseDouble(messagePathBeanList.get(messagePathBeanList.size() - 1).getLng())), 80);
-        infoWindowList.add(mInfoWindow2);
+        mLastInfoWindow = new InfoWindow(textView, new LatLng(Double.parseDouble(messagePathBeanList.get(messagePathBeanList.size() - 1).getLat()), Double.parseDouble(messagePathBeanList.get(messagePathBeanList.size() - 1).getLng())), 80);
+        infoWindowList.add(mLastInfoWindow);
         mBaiduMap.showInfoWindows(infoWindowList);
     }
 
@@ -385,7 +394,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
             RequestUtil.create().platformtimes(explore_id, entity1 -> {
                 if (entity1 != null && entity1.getCode() == 200) {
                     total = entity1.getData().getAttend_times() + entity1.getData().getCommon_times();
-                    mapSendDriftDialog = new MapSendDriftDialog(getActivity(), 2, commentDetailsEntity, relevanceBean, total);
+                    mapSendDriftDialog = new MapSendDriftDialog(getActivity(), 2, commentDetailsEntity, relevanceBean, total,messageBean.getFree());
                     mapSendDriftDialog.show();
                     mapSendDriftDialog.setOnContentClickCallback(content -> {
                         if (RBureauApplication.latLng != null) {
@@ -398,14 +407,14 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
                         }
                     });
 
-                    mapSendDriftDialog.setOnStarrySkyClickCallback((type, word, path, list, cover, tag) -> {
+                    mapSendDriftDialog.setOnStarrySkyClickCallback((type, word, path, list, cover, tag) -> {  //参与
                         status = 2;
                         if (mPresenter != null) {
                             showLoading();
                             if (type == 1) {//视频
-                                mPresenter.compressVideo(DriftTrackMapActivity.this, type, word, 0, path, list != null ? new File(list.get(0).toString()) : null, cover != null ? BitmapUtil.saveBitmapFile(getActivity(), cover) : null, tag);
+                                mPresenter.compressVideo(DriftTrackMapActivity.this, type, word, commentDetailsEntity.getMessage_id(), path, list != null ? new File(list.get(0).toString()) : null, cover != null ? BitmapUtil.saveBitmapFile(getActivity(), cover) : null, tag,messageBean.getFree());
                             } else {
-                                mPresenter.createwithword(type, word, commentDetailsEntity.getMessage_id(), path != null ? new File(path) : null, list != null ? new File(list.get(0).toString()) : null, cover != null ? BitmapUtil.saveBitmapFile(this, cover) : null, tag);
+                                mPresenter.createwithword(type, word, commentDetailsEntity.getMessage_id(), path != null ? new File(path) : null, list != null ? new File(list.get(0).toString()) : null, cover != null ? BitmapUtil.saveBitmapFile(this, cover) : null, tag,messageBean.getFree());
                             }
                         }
                     });
@@ -445,7 +454,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
      * @description 参与话题
      */
     public void participate() {
-        if (total > 0) {   //有免费次数
+        if (total > 0 ||messageBean.getFree()==1) {   //有免费次数
             if (mPresenter != null) {
                 mPresenter.messageattending(commentDetailsEntity.getMessage_id());
             }
@@ -747,19 +756,6 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
      * @description 设置地图上的icon
      */
     public void setMapOption() {
-        //创建OverlayOptions的集合
-        options = new ArrayList<OverlayOptions>();
-        for (int i = 0; i < messagePathBeanList.size(); i++) {
-            OverlayOptions option = new MarkerOptions().position(new LatLng(Double.parseDouble(messagePathBeanList.get(i).getLat()), Double.parseDouble(messagePathBeanList.get(i).getLng())))
-                    .icon(getIcon(i))
-                    .perspective(false) // 设置是否开启 marker 覆盖物近大远小效果，默认开启
-                    .anchor(0.5f, 0.5f) // 设置 marker 覆盖物的锚点比例，默认（0.5f, 1.0f）水平居中，垂直下对齐
-                    .zIndex(i);
-            options.add(option);
-        }
-        //在地图上批量添加
-        mBaiduMap.addOverlays(options);
-
         //添加轨迹
         if (messagePathBeanList.size() == 2) {
             setLastLine();
@@ -780,6 +776,26 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
         } else {
             traceOption();
         }
+
+
+        //创建OverlayOptions的集合
+        options = new ArrayList<>();
+        for (int i = 0; i < messagePathBeanList.size(); i++) {
+            OverlayOptions option = new MarkerOptions().position(new LatLng(Double.parseDouble(messagePathBeanList.get(i).getLat()), Double.parseDouble(messagePathBeanList.get(i).getLng())))
+                    .icon(getIcon(i))
+                    .perspective(true) // 设置是否开启 marker 覆盖物近大远小效果，默认开启
+                    .anchor(0.5f, 0.5f) // 设置 marker 覆盖物的锚点比例，默认（0.5f, 1.0f）水平居中，垂直下对齐
+                    .zIndex(i);
+            options.add(option);
+        }
+        //在地图上批量添加
+        mBaiduMap.addOverlays(options);
+
+
+        //添加手指动画
+//        MarkerOptions markerOptionsFinger = new MarkerOptions().position(new LatLng(Double.parseDouble(messagePathBeanList.get(0).getLat()), Double.parseDouble(messagePathBeanList.get(0).getLng()))).icon(finger).anchor(0.5f, 0.5f); // 设置 marker 覆盖物的锚点比例，默认（0.5f, 1.0f）水平居中，垂直下对齐;
+//        mMarkerFinger = (Marker) (mBaiduMap.addOverlay(markerOptionsFinger));
+//        startScaleAnimation();
     }
 
 
@@ -1028,7 +1044,6 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
         } else {
             showInfoWindow(new LatLng(Double.parseDouble(messagePathBeanList.get(messagePathBeanList.size() - 2).getLat()), Double.parseDouble(messagePathBeanList.get(messagePathBeanList.size() - 2).getLng())), messagePathBeanList.size() - 2);
         }
-
         perfomRotate(0);
     }
 
@@ -1105,8 +1120,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
     }
 
 
-
-    @OnClick({R.id.toolbar_back, R.id.tv_open, R.id.rl_left_add_friend, R.id.rl_right_add_friend, R.id.iv_right,})
+    @OnClick({R.id.toolbar_back, R.id.tv_open, R.id.rl_left_add_friend, R.id.rl_right_add_friend, R.id.iv_right, R.id.fl_get_more})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
@@ -1135,6 +1149,11 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
                     if (messageBean != null) {
                         NebulaActivity.start(this, message_id, false);
                     }
+                    break;
+                case R.id.fl_get_more:  //获取更多
+                    enablePrivilegesDialog = new EnablePrivilegesDialog(this);
+                    enablePrivilegesDialog.show();
+
                     break;
             }
         }
@@ -1236,6 +1255,19 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
 
 
     public void OpenNewMsg() {
+        cityReleaseDialog = new CityReleaseDialog(this);
+        cityReleaseDialog.show();
+        cityReleaseDialog.setOnClickCallback(type -> {
+            if (type == CityReleaseDialog.SELECT_PAY) {  //付费
+                SendNewMesg(true);
+            } else if (type == CityReleaseDialog.SELECT_FREE) {//免费
+                SendNewMesg(false);
+            }
+        });
+    }
+
+
+    public void SendNewMesg(boolean isPay) {
         RequestUtil.create().platformtimes(explore_id, entity -> {
             if (entity != null && entity.getCode() == 200) {
                 total = entity.getData().getAttend_times() + entity.getData().getCommon_times();
@@ -1246,18 +1278,16 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
                     if (mPresenter != null) {
                         showLoading();
                         if (type == 1) { //视频
-                            mPresenter.compressVideo(DriftTrackMapActivity.this, type, word, 0, path, list != null ? new File(list.get(0).toString()) : null, cover != null ? BitmapUtil.saveBitmapFile(getActivity(), cover) : null, tag);
+                            mPresenter.compressVideo(DriftTrackMapActivity.this, type, word, 0, path, list != null ? new File(list.get(0).toString()) : null, cover != null ? BitmapUtil.saveBitmapFile(getActivity(), cover) : null, tag,isPay?0:1);
                         } else {
-                            mPresenter.createwithword(type, word, 0, path != null ? new File(path) : null, list != null ? new File(list.get(0).toString()) : null, cover != null ? BitmapUtil.saveBitmapFile(getActivity(), cover) : null, tag);
+                            mPresenter.createwithword(type, word, 0, path != null ? new File(path) : null, list != null ? new File(list.get(0).toString()) : null, cover != null ? BitmapUtil.saveBitmapFile(getActivity(), cover) : null, tag,isPay?0:1);
                         }
                     }
                 });
-
             }
         });
 
     }
-
 
     public void friendapply(int user_id, int type) {
         RequestUtil.create().friendapply(user_id + "", entity -> {
@@ -1277,6 +1307,44 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
             }
         });
 
+    }
+
+
+    /**
+     * 开启缩放动画
+     */
+    public void startScaleAnimation() {
+        mMarkerFinger.setAnimation(getScaleAnimation());
+        mMarkerFinger.startAnimation();
+    }
+
+
+    /**
+     * 创建缩放动画
+     */
+    private Animation getScaleAnimation() {
+        ScaleAnimation scaleAnimation = new ScaleAnimation(1f, 1.5f, 1f);
+        scaleAnimation.setDuration(2000);
+        scaleAnimation.setRepeatMode(Animation.RepeatMode.RESTART);// 动画重复模式
+        scaleAnimation.setRepeatCount(ValueAnimator.INFINITE);// 动画重复次数
+        scaleAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart() {
+            }
+
+            @Override
+            public void onAnimationEnd() {
+            }
+
+            @Override
+            public void onAnimationCancel() {
+            }
+
+            @Override
+            public void onAnimationRepeat() {
+            }
+        });
+        return scaleAnimation;
     }
 
 

@@ -80,10 +80,9 @@ public class WithdrawalActivity extends BaseManagerActivity<WithdrawalPresenter>
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
-        if (getIntent() != null) {  //1，空间站提现 2，分销提现
-            type = getIntent().getExtras().getInt(EXTRA_TYPE);
-            money = getIntent().getExtras().getString(EXTRA_MONEY);
-        }
+        //1，空间站提现 2，分销提现
+        type = getInt(EXTRA_TYPE);
+        money = getString(EXTRA_MONEY);
         initListener();
     }
 

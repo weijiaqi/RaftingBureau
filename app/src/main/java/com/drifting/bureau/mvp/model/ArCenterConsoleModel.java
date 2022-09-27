@@ -10,6 +10,8 @@ import com.drifting.bureau.mvp.model.entity.MakingRecordEntity;
 import com.drifting.bureau.mvp.model.entity.MessageReceiveEntity;
 import com.drifting.bureau.mvp.model.entity.MoreDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.OrderOneEntity;
+import com.drifting.bureau.mvp.model.entity.QuestionAssessEntity;
+import com.drifting.bureau.mvp.model.entity.QuestionEntity;
 import com.drifting.bureau.mvp.model.entity.SkuListEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceCheckEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceInfoEntity;
@@ -22,8 +24,11 @@ import com.jess.arms.di.scope.ActivityScope;
 import javax.inject.Inject;
 import com.drifting.bureau.mvp.contract.ArCenterConsoleContract;
 
+import java.util.List;
+
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 /**
  * ================================================
@@ -114,6 +119,16 @@ public class ArCenterConsoleModel extends BaseModel implements ArCenterConsoleCo
     @Override
     public Observable<BaseEntity<SpaceCheckEntity>> spacecheck() {
         return mRepositoryManager.obtainRetrofitService(ApiService.class).spacecheck();
+    }
+
+    @Override
+    public Observable<BaseEntity<List<QuestionEntity>>> questionlist() {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).listWithScene();
+    }
+
+    @Override
+    public Observable<BaseEntity<QuestionAssessEntity>> questionassess(RequestBody body) {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).questionassess(body);
     }
 
 }

@@ -60,12 +60,9 @@ public class AnnouncementDetailsActivity extends BaseManagerActivity {
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
-        if (getIntent() != null) {
-            title = getIntent().getExtras().getString(EXTRA_TITLE);
-            content = getIntent().getExtras().getString(EXTRA_CONTENT);
-            time = getIntent().getExtras().getString(EXTRA_TIME);
-        }
-
+        title =getString(EXTRA_TITLE);
+        content = getString(EXTRA_CONTENT);
+        time =getString(EXTRA_TIME);
         mTvTitle.setText(title);
         mTvContent.setText(content);
         mTvTime.setText(time);

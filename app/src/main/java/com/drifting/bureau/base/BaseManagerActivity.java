@@ -33,6 +33,7 @@ import com.drifting.bureau.util.callback.BaseDataCallBack;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.jess.arms.base.BaseEntity;
 import com.jess.arms.base.BaseFragment;
+import com.jess.arms.base.action.BundleAction;
 import com.jess.arms.base.delegate.IActivity;
 import com.jess.arms.integration.cache.Cache;
 import com.jess.arms.integration.cache.CacheType;
@@ -50,7 +51,7 @@ import butterknife.Unbinder;
 import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.Subject;
 
-public abstract class BaseManagerActivity<P extends IPresenter> extends AppCompatActivity implements IActivity, ActivityLifecycleable {
+public abstract class BaseManagerActivity<P extends IPresenter> extends AppCompatActivity implements IActivity, ActivityLifecycleable, BundleAction {
     protected final String TAG = this.getClass().getSimpleName();
     private final BehaviorSubject<ActivityEvent> mLifecycleSubject = BehaviorSubject.create();
     @Inject
@@ -305,4 +306,10 @@ public abstract class BaseManagerActivity<P extends IPresenter> extends AppCompa
     public boolean useFragment() {
         return true;
     }
+
+    @Override
+    public Bundle getBundle() {
+        return getIntent().getExtras();
+    }
+
 }

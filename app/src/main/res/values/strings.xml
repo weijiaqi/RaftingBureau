@@ -1,11 +1,13 @@
 <resources>
     <string name="app_name">元宇宙漂流局</string>
+    <string name="game_view_content_description">Game view</string>string>
     <string name="phone">验证码已经发送至%1$s的手机上，请输入</string>
     <string name="transmit"> 已传递%1$s人></string>
     <string name="free_times">(免费次数：%1$s)</string>
     <string name="three_day">(%1$s天以后可继续探寻)</string>
-   <string name="nebula_name">接收%1$s星云漂来的奶茶</string>
+    <string name="nebula_name">接收%1$s星云漂来的奶茶</string>
     <string name="time_left">（%1$s分钟后将会漂走哦）</string>
     <string name="from_city">从%1$s漂出一杯有故事的奶茶</string>
     <string name="from_nebula">%1$s星云漂来一杯奶茶</string>
+    <string name="which_stage">（第%1$s阶段）</string>
 </resources>

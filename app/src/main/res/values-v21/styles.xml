@@ -13,4 +13,27 @@
         <!--Android 5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色-->
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
+
+
+    <!--设置ArcoreTheme-->
+    <style name="AppArCore" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@color/transparent</item>
+        <!--        <item name="android:windowNoTitle">true</item>-->
+        <!--        <item name="android:windowFullscreen">true</item>-->
+        <!--        <item name="android:windowDrawsSystemBarBackgrounds">false</item>-->
+
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <!--Android 5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色-->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowAnimationStyle">@style/Animation.Activity.Translucent.Style</item>
+    </style>
+
+
+    <style name="Animation.Activity.Translucent.Style" parent="@android:style/Animation.Translucent">
+        <!--//进入时的动画-->
+        <item name="android:windowEnterAnimation">@anim/anim_float_window_enter</item>
+        <!--//退出时的动画-->
+        <item name="android:windowExitAnimation">@anim/anim_float_window_exit</item>
+    </style>
 </resources>

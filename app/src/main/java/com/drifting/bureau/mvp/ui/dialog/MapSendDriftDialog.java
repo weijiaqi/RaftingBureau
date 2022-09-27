@@ -11,16 +11,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
-
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.CommentDetailsEntity;
-import com.drifting.bureau.mvp.model.entity.MoreDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.MoreDetailsForMapEntity;
 import com.drifting.bureau.mvp.ui.activity.index.AddTopicActivity;
 import com.drifting.bureau.mvp.ui.activity.index.ImagePreviewActivity;
-import com.drifting.bureau.mvp.ui.activity.index.SelectImageActivity;
 import com.drifting.bureau.mvp.ui.activity.index.VideoActivity;
 import com.drifting.bureau.mvp.ui.activity.index.VideoRecordingActivity;
 import com.drifting.bureau.storageinfo.Preferences;
@@ -34,11 +30,9 @@ import com.drifting.bureau.view.VoiceWave;
 import com.drifting.bureau.view.guide.MapGuideView;
 import com.hjq.shape.layout.ShapeLinearLayout;
 import com.jess.arms.base.BaseDialog;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 
@@ -54,6 +48,7 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
     private ImageView mIvReleaseCamera, mIvReleaseRecording, mIvReleaseWord, mIvRecording, mIvPlay, mIvVideo, mIvVideoPlay, mIvPic, mIvReport;
     private TextView mTvTip, mTvTime, mTvAddTopic, mTvTitle, mTvParticipate, mTvIntoSpace, mTvNums, mTvByTime, mTvImprint;
     private EditText mEtWord;
+    private View mViewTop;
     private RelativeLayout mRlVoicePlay, mRlViedeoPlay, mRlStartVoice;
     private LinearLayout mLlStarrySky, mLlBottom, mLlParticipate, mLlJoin;
     private ShapeLinearLayout mLlImprint;
@@ -65,7 +60,7 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
 
     private List<Object> objectList;
     private List<String> strings;
-    private int status, total, totaltime, second;
+    private int status, total, totaltime, second,free;
 
     private int cameratype = -1;
     private String path, tag;
@@ -83,13 +78,14 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
         this.total = total;
     }
 
-    public MapSendDriftDialog(@NonNull Context context, int status, CommentDetailsEntity entity, MoreDetailsForMapEntity.RelevanceBean relevanceBean, int total) {
+    public MapSendDriftDialog(@NonNull Context context, int status, CommentDetailsEntity entity, MoreDetailsForMapEntity.RelevanceBean relevanceBean, int total,int free) {
         super(context);
         this.context = context;
         this.status = status;
         this.commentDetailsEntity = entity;
         this.relevanceBean = relevanceBean;
         this.total = total;
+        this.free=free;
     }
 
     @Override
@@ -101,6 +97,7 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
         mIvReleaseRecording = findViewById(R.id.iv_release_recording);
         mIvReleaseWord = findViewById(R.id.iv_release_word);
         mIvRecording = findViewById(R.id.iv_recording);
+        mViewTop=findViewById(R.id.view_top);
         mTvTip = findViewById(R.id.tv_tip);
         mTvTime = findViewById(R.id.tv_time);
         mVideoView = findViewById(R.id.videoView);
@@ -133,7 +130,6 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
         mIvReleaseRecording.setOnClickListener(this);
         mIvReleaseWord.setOnClickListener(this);
         mIvRecording.setOnClickListener(this);
-
         mIvVideo.setOnClickListener(this);
         mLlStarrySky.setOnClickListener(this);
         mIvPic.setOnClickListener(this);
@@ -153,7 +149,11 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
         if (status == 1) {  //编辑
             mIvReport.setVisibility(View.GONE);
             mLlStarrySky.setVisibility(View.VISIBLE);
-            mTvNums.setText(context.getString(R.string.free_times, total + ""));
+            if (free==1){
+                mTvNums.setText("可添加好友");
+            }else {
+                mTvNums.setText(context.getString(R.string.free_times, total + ""));
+            }
             toggleIcon(2);
         } else { //查看
             mTvTitle.setText("查看Ta的故事~~");
@@ -165,7 +165,6 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
             } else {
                 mTvAddTopic.setVisibility(View.GONE);
             }
-
             if (TextUtils.equals(Preferences.getUserId(), commentDetailsEntity.getUser_id() + "")) {
                 mIvReport.setVisibility(View.GONE);
             } else {
@@ -176,6 +175,7 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
             if (!TextUtils.isEmpty(commentDetailsEntity.getVedio())) {  //视频
                 mRlViedeoPlay.setVisibility(View.VISIBLE);
                 mIvVideoPlay.setVisibility(View.VISIBLE);
+                mViewTop.setVisibility(View.VISIBLE);
                 mIvVideo.setVisibility(View.INVISIBLE);
                 GlideUtil.create().loadLongImage(context, commentDetailsEntity.getImage(), mIvPic);
             } else if (!TextUtils.isEmpty(commentDetailsEntity.getAudio())) {//语音
@@ -184,11 +184,12 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
                 mIvRecording.setVisibility(View.INVISIBLE);
                 mTvTip.setVisibility(View.GONE);
                 mVideoView.setVisibility(View.VISIBLE);
-                totaltime = VideoUtil.getLocalVideoDuration(commentDetailsEntity.getAudio());
+                totaltime = VideoUtil.getLocalVideoDuration(context,commentDetailsEntity.getAudio());
                 mTvTime.setText(totaltime + "S");
                 mVideoView.setDecibel(0);
             } else if (!TextUtils.isEmpty(commentDetailsEntity.getAlbum())) {  //图片
                 mRlViedeoPlay.setVisibility(View.VISIBLE);
+                mViewTop.setVisibility(View.VISIBLE);
                 mIvVideoPlay.setVisibility(View.GONE);
                 mIvVideo.setVisibility(View.INVISIBLE);
                 GlideUtil.create().loadLongImage(context, commentDetailsEntity.getAlbum(), mIvPic);
@@ -221,7 +222,7 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
                 }
             } else {
                 mLlParticipate.setVisibility(View.VISIBLE);
-                if (total == 0) {
+                if (total == 0 || free==1) {
                     mTvNums.setText("可添加好友");
                 } else {
                     mTvNums.setText(context.getString(R.string.free_times, total + ""));
@@ -330,6 +331,7 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
                     mLlBottom.setVisibility(View.VISIBLE);
                     mEtWord.setVisibility(View.GONE);
                     mRlVoicePlay.setVisibility(View.VISIBLE);
+                    mViewTop.setVisibility(View.GONE);
                     break;
                 case R.id.tv_into_space:  //不感兴趣
                     if (onClickCallback != null) {
@@ -344,7 +346,6 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
         }
     }
 
-
     /**
      * @description 拍摄视频
      */
@@ -353,7 +354,6 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
         strings.add(Manifest.permission.READ_EXTERNAL_STORAGE);
         strings.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         strings.add(Manifest.permission.CAMERA);
-        strings.add(Manifest.permission.RECORD_AUDIO);
         if (PermissionDialog.requestPermissions((Activity) context, strings, 1)) {
             if (cameratype != -1 && !isCameraFirst) {
                 coverDialog = new CoverDialog(context);
@@ -412,7 +412,7 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
 
     public void setTag(String tag, String tagname) {
         this.tag = tag;
-        mTvAddTopic.setText(tagname);
+        mTvAddTopic.setText("#" + tagname);
     }
 
 

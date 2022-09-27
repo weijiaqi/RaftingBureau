@@ -88,9 +88,7 @@ public class PlanetarySelectActivity extends BaseManagerActivity<PlanetarySelect
         setStatusBar(true);
         setStatusBarHeight(mTvBar);
         mToolbarTitle.setText("派系星球分布");
-        if (getIntent() != null) {
-            postion = getIntent().getIntExtra(EXTRA_POSTION, 0);
-        }
+        postion = getInt(EXTRA_POSTION);
         initListener();
     }
 
