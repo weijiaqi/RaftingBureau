@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.hjq.shape.layout.ShapeLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingTop="29dp"
+    app:shape_radius="10dp"
+    app:shape_solidColor="@color/white">
+
+    <TextView
+        android:id="@+id/tv_cancellation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:lineSpacingExtra="2dp"
+        android:text="是否退出漂流心理实验室\n（将保留已测试的心理数据）"
+        android:textColor="@color/color_33"
+        android:textSize="14sp" />
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="29dp"
+        android:layout_marginBottom="19dp">
+
+        <com.hjq.shape.view.ShapeTextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="86dp"
+            android:layout_height="29dp"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:shape_endColor="@color/color_70"
+            app:shape_radius="100dp"
+            app:shape_startColor="@color/color_d6" />
+
+
+        <com.hjq.shape.view.ShapeTextView
+            android:id="@+id/tv_cofim"
+            android:layout_width="86dp"
+            android:layout_height="29dp"
+            android:layout_marginStart="19dp"
+            android:layout_toRightOf="@+id/tv_cancel"
+            android:gravity="center"
+            android:text="确定"
+            android:textColor="@color/color_00"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:shape_endColor="@color/color_6c"
+            app:shape_radius="100dp"
+            app:shape_startColor="@color/color_6d" />
+
+    </RelativeLayout>
+
+
+</com.hjq.shape.layout.ShapeLinearLayout>

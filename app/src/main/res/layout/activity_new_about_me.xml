@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+
+    <ImageView
+        android:id="@+id/iv_personBg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="-60dp"
+        android:src="@drawable/about_planet_one" />
+
+
+    <com.drifting.bureau.view.FontTextView
+        android:id="@+id/tv_person"
+        android:layout_width="155dp"
+        android:layout_height="155dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/doube_click"
+        android:gravity="center"
+        android:lineSpacingExtra="5dp"
+        android:text="进入\n个人星球"
+        android:textColor="@color/white"
+        android:textSize="17sp" />
+
+    <include layout="@layout/include_tvbar_title" />
+
+
+    <com.hjq.shape.view.ShapeTextView
+        android:id="@+id/tv_change_mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_toolbar"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="10dp"
+        android:drawableLeft="@drawable/toggle"
+        android:drawablePadding="4dp"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="4dp"
+        android:text="更换模式"
+        android:textColor="@color/color_82"
+        android:textSize="12sp"
+        app:shape_radius="100dp"
+        app:shape_solidColor="@color/color_0b" />
+
+
+    <com.drifting.bureau.view.FontTextView
+        android:id="@+id/tv_to_the_galaxy"
+        android:layout_width="121dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/tv_change_mode"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/about_airplane_bg"
+        android:gravity="center"
+        android:text="鉴别派系"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_to_the_galaxy"
+        android:layout_marginStart="24dp"
+        android:src="@drawable/about_airplane" />
+
+
+    <RelativeLayout
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="170dp">
+
+        <ImageView
+            android:id="@+id/iv_play_bear"
+            android:layout_width="match_parent"
+            android:layout_height="165dp"
+            android:src="@drawable/play_bear" />
+
+        <com.drifting.bureau.view.FontTextView
+            android:id="@+id/tv_attr"
+            android:layout_width="115dp"
+            android:layout_height="46dp"
+            android:layout_below="@+id/iv_play_bear"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-10dp"
+            android:background="@drawable/about_airplane_bg"
+            android:gravity="center"
+            android:text="查看我的属性"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="220dp">
+
+
+        <TextView
+            android:id="@+id/tv_drift_track"
+            android:layout_width="98dp"
+            android:layout_height="36dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="14dp"
+            android:background="@drawable/drift_track"
+            android:paddingStart="9dp"
+            android:paddingTop="10dp"
+            android:text="漂流轨迹"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_star_troopers"
+            android:layout_width="98dp"
+            android:layout_height="36dp"
+            android:layout_below="@+id/tv_drift_track"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="84dp"
+            android:background="@drawable/star_troopers"
+            android:paddingStart="9dp"
+            android:paddingTop="10dp"
+            android:text="星际战队"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/tv_physical_store"
+            android:layout_width="98dp"
+            android:layout_height="36dp"
+            android:layout_below="@+id/tv_star_troopers"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="31dp"
+            android:layout_marginEnd="75dp"
+            android:background="@drawable/physical_store"
+            android:paddingStart="9dp"
+            android:paddingTop="10dp"
+            android:text="实体门店"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/tv_order_record"
+            android:layout_width="98dp"
+            android:layout_height="36dp"
+            android:layout_below="@+id/tv_physical_store"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="14dp"
+            android:background="@drawable/order_record"
+            android:paddingStart="9dp"
+            android:paddingTop="10dp"
+            android:text="订单记录"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+
+        <ImageView
+            android:id="@+id/iv_turnplate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="-100dp"
+            android:src="@drawable/about_semicircle" />
+
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="175dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="5dp">
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="今日宝箱口令"
+                android:textColor="@color/color_00"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:layout_width="102dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/about_bottom_button"
+                android:gravity="center"
+                android:text="5 8 6 8"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingTop="3dp">
+
+
+            <TextView
+                android:id="@+id/tv_nikename"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="昵称：你的小太阳"
+                android:textColor="@color/color_00"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_faction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="派系：探索派"
+                android:textColor="@color/color_00"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_identity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="身份：星际开荒者"
+                android:textColor="@color/color_00"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</RelativeLayout>

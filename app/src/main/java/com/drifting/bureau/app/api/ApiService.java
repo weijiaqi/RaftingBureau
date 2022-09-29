@@ -548,6 +548,14 @@ public interface ApiService {
 
 
     /**
+     *答题结果
+     *
+     * @return
+     */
+    @GET("v/question/assessResult")
+    Observable<BaseEntity<QuestionAssessEntity>> assessResult();
+
+    /**
      * 添加位置信息
      *
      * @return

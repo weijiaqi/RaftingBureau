@@ -14,6 +14,7 @@ import android.util.SparseArray;
 import android.view.View;
 
 import com.drifting.bureau.R;
+import com.jess.arms.utils.ArmsUtils;
 
 import java.util.List;
 
@@ -22,24 +23,19 @@ import java.util.List;
  */
 public class RadarView extends View {
     private String TAG = "RadarView";
-
+    private Context mContext;
     private int textColor = Color.TRANSPARENT; //数值颜色
     private float textSize = 14;//数值字体大小，
     private int labelColor = Color.BLACK;//标签颜色
     private float labelSize = 16;//标签字体大小，
     private float labelMargin = 20;//标签距离最外层网的距离，
-
     private int netLineColor = Color.BLACK;//网的颜色
     private float netLineWidth = 1;//网线宽度
-
     private int netLineNum = 5;//网线层数
-
     private int radiantLineColor = Color.BLACK;//放射线颜色
     private float radiantLineWidth = 1;//放射线宽度
-
     private float strokeWidth = 3;//连接线宽度
     private int strokeColor = Color.YELLOW;//连接线颜色
-
     private int solidColor = Color.parseColor("#330000FF");//连接区域颜色
 
     private int dotColor = Color.BLACK;//点的颜色
@@ -62,11 +58,13 @@ public class RadarView extends View {
 
     public RadarView(Context context) {
         super(context);
+        this.mContext = context;
         init(null);
     }
 
     public RadarView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.mContext = context;
         init(attrs);
     }
 
@@ -206,7 +204,7 @@ public class RadarView extends View {
         }
         strokePath.reset();
         int viewHeight = canvas.getHeight();
-        int viewWidth = canvas.getWidth();
+        int viewWidth = canvas.getWidth()-ArmsUtils.dip2px(mContext,12);
 
 
         textPaint.setTextSize(labelSize);

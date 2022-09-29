@@ -41,7 +41,7 @@ public class DiscoveryTransformer  implements ViewPager.PageTransformer{
             //  view移动到右边，在屏幕之外
             view.setAlpha(0.5f);
             view.setPivotX(0);
-            view.setPivotY(-ArmsUtils.dip2px(RBureauApplication.getContext(),250));
+            view.setPivotY(-ArmsUtils.dip2px(RBureauApplication.getContext(),350));
             view.setScaleX(mMinScale);
             view.setScaleY(mMinScale);
         }
@@ -53,8 +53,8 @@ public class DiscoveryTransformer  implements ViewPager.PageTransformer{
         view.setScaleX(scaleFactor);
         view.setScaleY(scaleFactor);
 
-        view.setPivotX(pageWidth * (DEFAULT_CENTER + (DEFAULT_CENTER * -position)));
-        view.setPivotY(ArmsUtils.dip2px(RBureauApplication.getContext(),600));
+        view.setPivotX(pageWidth * (DEFAULT_CENTER + (DEFAULT_CENTER * -position))+ArmsUtils.dip2px(RBureauApplication.getContext(),150));
+        view.setPivotY(ArmsUtils.dip2px(RBureauApplication.getContext(),700));
     }
 
 
@@ -62,9 +62,8 @@ public class DiscoveryTransformer  implements ViewPager.PageTransformer{
         view.setAlpha(0.5f);
         view.setScaleX(mMinScale);
         view.setScaleY(mMinScale);
-
-        view.setPivotX(pageWidth * (DEFAULT_CENTER + (DEFAULT_CENTER * -position)));
-        view.setPivotY(ArmsUtils.dip2px(RBureauApplication.getContext(),600));
+        view.setPivotX(pageWidth * (DEFAULT_CENTER + (DEFAULT_CENTER * -position))+ArmsUtils.dip2px(RBureauApplication.getContext(),150));
+        view.setPivotY(ArmsUtils.dip2px(RBureauApplication.getContext(),700));
     }
 
 
@@ -75,7 +74,7 @@ public class DiscoveryTransformer  implements ViewPager.PageTransformer{
         view.setScaleX(scaleFactor);
         view.setScaleY(scaleFactor);
         view.setPivotX(pageWidth * ((1 - position) * DEFAULT_CENTER));
-        view.setPivotY(-ArmsUtils.dip2px(RBureauApplication.getContext(),250));
+        view.setPivotY(-ArmsUtils.dip2px(RBureauApplication.getContext(),350));
     }
 
 

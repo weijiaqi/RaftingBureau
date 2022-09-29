@@ -25,10 +25,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
-
 import com.drifting.bureau.R;
 import com.drifting.bureau.base.BaseManagerActivity;
-import com.drifting.bureau.data.event.AnswerCompletedEvent;
 import com.drifting.bureau.data.event.BackSpaceEvent;
 import com.drifting.bureau.data.event.MessageRefreshEvent;
 import com.drifting.bureau.di.component.DaggerDiscoveryTourComponent;
@@ -40,17 +38,14 @@ import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.presenter.DiscoveryTourPresenter;
 import com.drifting.bureau.mvp.ui.activity.index.DriftTrackMapActivity;
 import com.drifting.bureau.mvp.ui.activity.index.LaboratoryActivity;
-import com.drifting.bureau.mvp.ui.activity.index.PlanetarySelectActivity;
 import com.drifting.bureau.mvp.ui.activity.index.SpaceCapsuleActivity;
-
+import com.drifting.bureau.mvp.ui.activity.index.StarDistributionActivity;
 import com.drifting.bureau.mvp.ui.activity.unity.ARMetaverseCenterActivity;
-import com.drifting.bureau.mvp.ui.activity.user.AboutMeActivity;
 import com.drifting.bureau.mvp.ui.activity.user.MessageCenterActivity;
+import com.drifting.bureau.mvp.ui.activity.user.NewAboutMeActivity;
 import com.drifting.bureau.mvp.ui.activity.web.ShowWebViewActivity;
 import com.drifting.bureau.mvp.ui.adapter.DiscoveryViewpagerAdapter;
-import com.drifting.bureau.mvp.ui.dialog.ShareDialog;
 import com.drifting.bureau.storageinfo.Preferences;
-
 import com.drifting.bureau.util.AppUtil;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.StringUtil;
@@ -59,23 +54,16 @@ import com.drifting.bureau.util.animator.AnimatorUtil;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.drifting.bureau.view.DiscoveryTransformer;
 import com.drifting.bureau.view.guide.IndexGuiView;
-import com.google.vr.sdk.widgets.pano.VrPanoramaView;
-
 import com.jess.arms.di.component.AppComponent;
 import com.umeng.analytics.MobclickAgent;
-
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
-import java.io.InputStream;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.rong.imkit.RongIM;
 import io.rong.imkit.manager.UnReadMessageManager;
 import io.rong.imlib.model.Conversation;
-
 
 /**
  * Created on 2022/05/10 14:30
@@ -101,8 +89,6 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
     TextView mTvAboutMe;
     @BindView(R.id.iv_hot)
     ImageView mIvHot;
-    @BindView(R.id.vrPanoramaView)
-    VrPanoramaView mVRPanoramaView;
     @BindView(R.id.tv_youth_camp)
     TextView mTvYouthCamp;
     @BindView(R.id.tv_message)
@@ -115,10 +101,8 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
     private boolean isAnmiation = true;
     private int id, explore_id;
     private DiscoveryViewpagerAdapter discoveryViewpagerAdapter;
-    private UserInfoEntity userInfoEntity;
     private StarUpIndexEntity starUpIndexEntity;
-    private ShareDialog shareDialog;
-
+    private UserInfoEntity userInfoEntity;
 
 
     public static void start(Context context, boolean closePage) {
@@ -155,7 +139,6 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
         setStatusBarHeight(mTvBar);
-        loadPhotoSphere();
         loadUI();
     }
 
@@ -168,24 +151,6 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
         }
     }
 
-
-    private void loadPhotoSphere() {
-        mVRPanoramaView.setInfoButtonEnabled(false);//隐藏信息按钮
-        mVRPanoramaView.setStereoModeButtonEnabled(false);//隐藏cardboard按钮
-        mVRPanoramaView.setFullscreenButtonEnabled(false);//隐藏全屏按钮
-        VrPanoramaView.Options options = new VrPanoramaView.Options();
-        InputStream inputStream = null;
-        AssetManager assetManager = getAssets();
-        try {
-            inputStream = assetManager.open("discovery_bg.png");
-            options.inputType = VrPanoramaView.Options.TYPE_MONO;
-            mVRPanoramaView.loadImageFromBitmap(BitmapFactory.decodeStream(inputStream), options);
-            inputStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
 
     public void loadUI() {
         //是否展示引导
@@ -202,25 +167,6 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
         frame.setOnTouchListener((view, motionEvent) -> viewPager.onTouchEvent(motionEvent));
     }
 
-
-    public void getUserInfo(int status) {
-        RequestUtil.create().userplayer(Preferences.getUserId(), entity -> {
-            if (entity != null && entity.getCode() == 200) {
-                userInfoEntity = entity.getData();
-                Preferences.saveMascot(userInfoEntity.getUser().getMascot());
-                mTvAboutMe.setText(userInfoEntity.getPlanet().getName());
-                mTvEnergy.setText(userInfoEntity.getUser().getMeta_power());
-                if (status == 1) {
-                    RequestUtil.create().startup(entity1 -> {
-                        if (entity1 != null && entity1.getCode() == 200) {
-                            starUpIndexEntity = entity1.getData();
-                            mTvYouthCamp.setVisibility(!TextUtils.isEmpty(starUpIndexEntity.getUrl()) ? View.VISIBLE : View.INVISIBLE);
-                        }
-                    });
-                }
-            }
-        });
-    }
 
     public void unread() {
         RequestUtil.create().unread(entity1 -> {
@@ -246,21 +192,15 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
     }
 
 
-    @OnClick({R.id.rl_message, R.id.tv_about_me, R.id.tv_space_capsule, R.id.rl_info, R.id.ll_step_star, R.id.rl_right, R.id.tv_youth_camp, R.id.rl_explore_planet, R.id.tv_share_journey})
+    @OnClick({R.id.rl_message, R.id.tv_space_capsule, R.id.rl_info, R.id.ll_step_star, R.id.rl_right, R.id.tv_youth_camp, R.id.iv_enter_main})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
                 case R.id.rl_right:  //右边
-                    //   ShowWebViewActivity.start(this, 4, false);
-                    LaboratoryActivity.start(this, false);
+                    ShowWebViewActivity.start(this, 4, false);
                     break;
                 case R.id.rl_message: //开启新消息
                     DriftTrackMapActivity.start(this, explore_id, id, false);
-                    break;
-                case R.id.tv_about_me: //关于我
-                    if (userInfoEntity != null) {
-                        AboutMeActivity.start(this, userInfoEntity, false);
-                    }
                     break;
                 case R.id.tv_space_capsule: //太空舱
                     SpaceCapsuleActivity.start(this, false);
@@ -277,15 +217,13 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
                         ShowWebViewActivity.start(this, 0, "青年创业营", starUpIndexEntity.getUrl() + "?Sign=" + StringUtil.formatNullString(AppUtil.getSign(Preferences.getPhone())) + "&token=" + StringUtil.formatNullString(Preferences.getToken()), false);
                     }
                     break;
-                case R.id.rl_explore_planet://探索星球
-                    if (userInfoEntity != null) {
-                        PlanetarySelectActivity.start(this, userInfoEntity.getPlanet().getLevel(), false);
-                    }
-                    break;
-                case R.id.tv_share_journey: //分享旅程
-                    if (userInfoEntity != null) {
-                        shareDialog = new ShareDialog(this, userInfoEntity);
-                        shareDialog.show();
+                case R.id.iv_enter_main:  //进入主页
+                    if (userInfoEntity!=null){
+                        if (userInfoEntity.getPlanet().getLevel()==1){  //荒芜星
+                            StarDistributionActivity.start(this, false);
+                        }else {
+                            NewAboutMeActivity.start(this,false);
+                        }
                     }
                     break;
             }
@@ -386,18 +324,23 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
             viewPager.setOffscreenPageLimit(list.size());
             viewPager.setClipChildren(false);
             viewPager.setPageTransformer(true, new DiscoveryTransformer());
-            getUserInfo(1);
+
+
+
+            RequestUtil.create().userplayer(Preferences.getUserId(), entity -> {
+                if (entity != null && entity.getCode() == 200) {
+                    userInfoEntity = entity.getData();
+                    mTvEnergy.setText(userInfoEntity.getUser().getMeta_power());
+                    RequestUtil.create().startup(entity1 -> {
+                        if (entity1 != null && entity1.getCode() == 200) {
+                            starUpIndexEntity = entity1.getData();
+                            mTvYouthCamp.setVisibility(!TextUtils.isEmpty(starUpIndexEntity.getUrl()) ? View.VISIBLE : View.INVISIBLE);
+                        }
+                    });
+                }
+            });
         }
     }
-
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void AnswerCompletedEvent(AnswerCompletedEvent answerCompletedEvent) {
-        if (answerCompletedEvent != null) {
-            getUserInfo(2);
-        }
-    }
-
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void MessageRefreshEvent(MessageRefreshEvent event) {

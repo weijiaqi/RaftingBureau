@@ -8,7 +8,6 @@
 
     <include layout="@layout/include_tvbar_title" />
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -32,14 +31,14 @@
                 <TextView
                     android:id="@+id/tv_word"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
                     android:layout_marginTop="25dp"
                     android:lineSpacingExtra="3dp"
                     android:maxLines="3"
                     android:paddingStart="42dp"
                     android:paddingEnd="46dp"
                     android:scrollbars="vertical"
-                    android:text="当别人看到当别人看到你做着的一件事情时当别人看到你做着的一件事情时当别人看到你做着的一件事情时当别人看到你做着的一件事情时你做着的一件事情时，告诉你他曾做过一模一样的事，把他成功的方法告诉你后，你会?"
+                    android:text=""
                     android:textColor="@color/color_f5"
                     android:textSize="14sp" />
 
@@ -51,7 +50,7 @@
                     android:orientation="vertical"
                     android:paddingStart="42dp"
                     android:paddingEnd="46dp"
-                >
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/tv_text_selectA"
@@ -89,13 +88,13 @@
 
 
                 <RelativeLayout
-                    android:id="@+id/ll_pic"
-                    android:visibility="gone"
+                    android:id="@+id/rl_pic"
                     android:layout_width="match_parent"
                     android:layout_height="123dp"
                     android:layout_below="@+id/tv_word"
                     android:layout_marginTop="40dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
 
                     <FrameLayout
@@ -106,13 +105,11 @@
                         android:layout_marginEnd="19dp">
 
 
-                        <com.hjq.shape.view.ShapeImageView
+                        <ImageView
                             android:id="@+id/iv_answerA"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            app:shape="rectangle"
-                            app:shape_radius="10dp"
-                            app:shape_solidColor="@color/white" />
+                            android:src="@color/white" />
 
 
                         <ImageView
@@ -132,13 +129,11 @@
                         android:layout_marginEnd="37dp">
 
 
-                        <com.hjq.shape.view.ShapeImageView
+                        <ImageView
                             android:id="@+id/iv_answerB"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            app:shape="rectangle"
-                            app:shape_radius="10dp"
-                            app:shape_solidColor="@color/white" />
+                            android:src="@color/white" />
 
                         <ImageView
                             android:id="@+id/iv_pic_selectB"
@@ -176,7 +171,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="80dp"
-                    android:text="已成功解锁第一阶段 新的文明"
+                    android:text=""
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -201,6 +196,7 @@
 
 
                     <com.hjq.shape.view.ShapeTextView
+                        android:id="@+id/tv_exit"
                         android:layout_width="91dp"
                         android:layout_height="31dp"
                         android:layout_marginEnd="45dp"
@@ -210,6 +206,7 @@
                         android:textSize="14sp" />
 
                     <com.hjq.shape.view.ShapeTextView
+                        android:id="@+id/tv_continue"
                         android:layout_width="108dp"
                         android:layout_height="48dp"
                         android:background="@drawable/answer_button_bg"
@@ -229,7 +226,7 @@
 
         <com.hjq.shape.layout.ShapeLinearLayout
             android:id="@+id/ll_center"
-            android:layout_width="wrap_content"
+            android:layout_width="243dp"
             android:layout_height="67dp"
             android:layout_below="@+id/ll_top"
             android:layout_centerHorizontal="true"
@@ -240,16 +237,17 @@
 
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="133dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginHorizontal="19dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingStart="20dp">
 
                 <TextView
+                    android:id="@+id/tv_completeness"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="完成度"
+                    android:text=""
                     android:textColor="@color/color_6cec8"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -267,22 +265,23 @@
 
 
             <FrameLayout
-                android:layout_width="105dp"
+                android:layout_width="90dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="11dp">
 
                 <TextView
+                    android:id="@+id/tv_progress"
                     android:layout_width="90dp"
                     android:layout_height="59dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/schedule_bg"
-                    android:paddingStart="24dp"
+                    android:gravity="center_horizontal"
                     android:shadowColor="#8f2cd8b3"
                     android:shadowDx="0"
                     android:shadowDy="3"
                     android:shadowRadius="2.0"
-                    android:text="56%"
+                    android:text="0%"
                     android:textColor="@color/color_cd"
                     android:textSize="23sp" />
             </FrameLayout>

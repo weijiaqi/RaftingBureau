@@ -136,6 +136,9 @@
             android:name=".mvp.ui.activity.user.AboutMeActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".mvp.ui.activity.user.NewAboutMeActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".mvp.ui.activity.index.VideoActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait" />
@@ -268,6 +271,11 @@
 
         <activity
             android:name=".mvp.ui.activity.index.AnswerTestActivity"
+            android:screenOrientation="portrait" />
+
+
+        <activity
+            android:name=".mvp.ui.activity.index.StarDistributionActivity"
             android:screenOrientation="portrait" />
 
         <activity

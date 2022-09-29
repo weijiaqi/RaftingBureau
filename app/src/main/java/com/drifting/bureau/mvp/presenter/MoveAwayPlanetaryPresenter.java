@@ -60,6 +60,7 @@ public class MoveAwayPlanetaryPresenter extends BasePresenter<MoveAwayPlanetaryC
      *问题列表（搬离星球）
      */
     public void questionlist() {
+
         mModel.questionlist().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
@@ -86,6 +87,9 @@ public class MoveAwayPlanetaryPresenter extends BasePresenter<MoveAwayPlanetaryC
      *答题测评（搬离星球）
      */
     public void questionassess(Map<String, String> map) {
+        if (mRootView != null) {
+            mRootView.showLoading();
+        }
         RequestBody requestBody = RequestBody.create(MediaType.parse("Content-Type, application/json"), new JSONObject(map).toString());
         mModel.questionassess(requestBody).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -94,6 +98,7 @@ public class MoveAwayPlanetaryPresenter extends BasePresenter<MoveAwayPlanetaryC
                     @Override
                     public void onNext(BaseEntity<QuestionAssessEntity> baseEntity) {
                         if (mRootView != null) {
+                            mRootView.hideLoading();
                             if (baseEntity.getCode() == 200) {
                                 mRootView.onQuestionAssessSuccess(baseEntity.getData());
                             }
@@ -107,6 +112,33 @@ public class MoveAwayPlanetaryPresenter extends BasePresenter<MoveAwayPlanetaryC
                 });
     }
 
+
+
+
+
+    /**
+     *答题结果
+     */
+    public void assessResult() {
+        mModel.assessResult().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseEntity<QuestionAssessEntity>>(mErrorHandler) {
+                    @Override
+                    public void onNext(BaseEntity<QuestionAssessEntity> baseEntity) {
+                        if (mRootView != null) {
+                            if (baseEntity.getCode() == 200) {
+                                mRootView.onAssessResultSuccess(baseEntity.getData());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
+    }
 
     @Override
     public void onDestroy() {

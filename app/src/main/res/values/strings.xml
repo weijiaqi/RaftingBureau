@@ -10,4 +10,6 @@
     <string name="from_city">从%1$s漂出一杯有故事的奶茶</string>
     <string name="from_nebula">%1$s星云漂来一杯奶茶</string>
     <string name="which_stage">（第%1$s阶段）</string>
+    <string name="success_which_stage">已成功解锁第%1$s阶段</string>
+    <string name="which_stage_num">第%1$s阶段</string>
 </resources>

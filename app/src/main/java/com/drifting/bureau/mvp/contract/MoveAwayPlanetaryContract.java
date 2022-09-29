@@ -33,6 +33,8 @@ public interface MoveAwayPlanetaryContract {
 
         void  onQuestionAssessSuccess(QuestionAssessEntity entity);
 
+        void onAssessResultSuccess(QuestionAssessEntity list);
+
         void onNetError();
 
         Activity getActivity();
@@ -44,5 +46,7 @@ public interface MoveAwayPlanetaryContract {
         Observable<BaseEntity<List<QuestionEntity>>> questionlist();
 
         Observable<BaseEntity<QuestionAssessEntity>> questionassess(RequestBody body);
+
+        Observable<BaseEntity<QuestionAssessEntity>> assessResult();
     }
 }

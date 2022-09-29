@@ -1,15 +1,24 @@
 package com.drifting.bureau.util;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DecodeFormat;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.transition.Transition;
 import com.drifting.bureau.R;
+import com.drifting.bureau.mvp.ui.activity.user.NewAboutMeActivity;
+import com.jess.arms.utils.ArmsUtils;
 
 
 /**
@@ -107,11 +116,31 @@ public class GlideUtil {
         }
     }
 
+    public void loadViewLongImage(Context context, String url, View view) {
+        if (context == null || view == null) return;
+        if (!TextUtils.isEmpty(url)) {
+            Glide.with(context)
+                    .asBitmap()
+                    .load(url)
+                    .into(new SimpleTarget<Bitmap>() {
+                        @Override
+                        public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+                            Drawable drawable = new BitmapDrawable(resource);
+                            view.setBackground(drawable);
+                        }
+
+                    });
+
+        } else {
+            view.setBackgroundResource(context.getResources().getColor(R.color.black));
+        }
+    }
 
 
     /**
      * 3d图片保存
-     *  添加disallowHardwareConfig 解决保存图片闪退问题
+     * 添加disallowHardwareConfig 解决保存图片闪退问题
+     *
      * @param context
      * @param url
      * @param imageView
@@ -160,8 +189,6 @@ public class GlideUtil {
             imageView.setImageResource(R.drawable.icon_home_page);
         }
     }
-
-
 
 
     /**
@@ -230,4 +257,25 @@ public class GlideUtil {
     }
 
 
+    /**
+     * 加载普通圆角图片
+     *
+     * @param context   上下文
+     * @param url       图片url链接
+     * @param imageView ImageView控件
+     */
+    public void loadCornersPic(Context context, String url, ImageView imageView) {
+        if (context == null || imageView == null) return;
+        if (!TextUtils.isEmpty(url)) {
+            RequestOptions options = new RequestOptions()
+                    .placeholder(R.color.white)
+                    .bitmapTransform(new RoundedCorners(ArmsUtils.dip2px(context, 10)));
+            Glide.with(context)
+                    .load(url)
+                    .apply(options)
+                    .into(imageView);
+        } else {
+            imageView.setImageResource(R.color.white);
+        }
+    }
 }

@@ -59,4 +59,9 @@ public class MoveAwayPlanetaryModel extends BaseModel implements MoveAwayPlaneta
     public Observable<BaseEntity<QuestionAssessEntity>> questionassess(RequestBody body) {
         return mRepositoryManager.obtainRetrofitService(ApiService.class).questionassess(body);
     }
+
+    @Override
+    public Observable<BaseEntity<QuestionAssessEntity>> assessResult() {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).assessResult();
+    }
 }

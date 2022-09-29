@@ -102,9 +102,9 @@ public class MoveAwayPlanetaryActivity extends BaseManagerActivity<MoveAwayPlane
             infos = list;
         });
         mRcyAnswer.setAdapter(answerAdapter);
-        if (mPresenter != null) {
-            mPresenter.questionlist();
-        }
+//        if (mPresenter != null) {
+//            mPresenter.questionlist();
+//        }
     }
 
     @Override
@@ -157,6 +157,11 @@ public class MoveAwayPlanetaryActivity extends BaseManagerActivity<MoveAwayPlane
     }
 
     @Override
+    public void onAssessResultSuccess(QuestionAssessEntity list) {
+
+    }
+
+    @Override
     public void onNetError() {
 
     }
@@ -188,9 +193,9 @@ public class MoveAwayPlanetaryActivity extends BaseManagerActivity<MoveAwayPlane
                                 showMessage("请进行选择!");
                             }
                         } else {
-                            if (mPresenter != null) {
-                                mPresenter.questionassess(map);
-                            }
+//                            if (mPresenter != null) {
+//                                mPresenter.questionassess(map);
+//                            }
                         }
                     }
                     break;

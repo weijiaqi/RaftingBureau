@@ -92,12 +92,14 @@
 
 
                             <com.drifting.bureau.view.FontTextView
+                                android:id="@+id/tv_key_words"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/fl_key_words"
                                 android:layout_alignStart="@+id/fl_key_words"
                                 android:layout_marginTop="5dp"
-                                android:text="严谨保守、\n自律、专注力"
+                                android:breakStrategy="simple"
+                                android:text=""
                                 android:textColor="@color/color_20"
                                 android:textSize="12sp" />
 
@@ -208,20 +210,23 @@
                                     android:layout_alignParentEnd="true"
                                     android:layout_marginTop="28dp"
                                     android:layout_marginEnd="5dp"
-                                    android:text="当前派别共有158254 人"
+                                    android:text=""
                                     android:textColor="@color/color_223d"
                                     android:textSize="12sp" />
 
 
                                 <com.drifting.bureau.view.radar.RadarView
                                     android:id="@+id/radarview"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="245dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="230dp"
+
                                     android:layout_below="@+id/tv_person_num"
+                                    android:layout_centerHorizontal="true"
                                     android:layout_gravity="center_horizontal"
                                     android:layout_marginTop="19dp"
+                                    android:layout_marginBottom="15dp"
                                     app:bgColor="@color/transparent"
-                                    app:dotColor="@color/color_c74"
+                                    app:dotColor="@color/color_3ee"
                                     app:labelColor="@color/color_00"
                                     app:labelMargin="9dp"
                                     app:labelSize="12sp"
@@ -230,8 +235,8 @@
                                     app:netLineWidth="0.4dp"
                                     app:radiantLineColor="@color/color_cc"
                                     app:radiantLineWidth="0.4dp"
-                                    app:solidColor="@color/color_7f_c74"
-                                    app:strokeColor="@color/color_c74"
+                                    app:solidColor="@color/color_7f_15"
+                                    app:strokeColor="@color/color_3ee"
                                     app:strokeWidth="1dp" />
 
 
@@ -263,7 +268,7 @@
                                 android:layout_below="@+id/iv_my_attribute_value"
                                 android:layout_alignEnd="@+id/iv_my_attribute_value"
                                 android:layout_marginTop="8dp"
-                                android:text="昵称：你的小太阳"
+                                android:text=""
                                 android:textColor="@color/color_00"
                                 android:textSize="12sp" />
 
@@ -296,6 +301,7 @@
 
 
                         <ImageView
+                            android:id="@+id/iv_career_image"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="47dp"
@@ -318,13 +324,12 @@
                     android:src="@drawable/navigator" />
 
                 <ImageView
+                    android:id="@+id/iv_enter_prime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_marginStart="19dp"
-
                     android:src="@drawable/answer_result_bottom" />
-
 
             </RelativeLayout>
 

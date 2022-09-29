@@ -1,3 +1,3 @@
 rootProject.name = "RaftingBureau"
-include ':rbcore',   ':arms', ':app',"videoprocessor"
+include ':rbcore',   ':arms', ':app',":videoprocessor",":unityLibrary"
 

@@ -1,9 +1,12 @@
 package com.drifting.bureau.mvp.ui.activity.index;
 
+import static java.util.stream.Collectors.toList;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -23,6 +26,9 @@ import com.drifting.bureau.util.BitmapUtil;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.animator.AnimatorUtil;
 import com.jess.arms.di.component.AppComponent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -92,6 +98,9 @@ public class LaboratoryEnterActivity extends BaseManagerActivity {
         AnimatorUtil.setShowAnimation(mRlCenter, 3000, true);
         AnimatorUtil.setShowAnimation(mLlToolBar, 3000, true);
         AnimatorUtil.ScaleAnim(mFlFindSystem, 2000, 1f, 0.8f, 0.9f);
+
+
+
     }
 
 

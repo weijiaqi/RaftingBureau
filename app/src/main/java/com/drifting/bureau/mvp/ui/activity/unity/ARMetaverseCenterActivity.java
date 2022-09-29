@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -37,6 +38,7 @@ import com.drifting.bureau.mvp.model.entity.TeamStatisticEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.presenter.ArCenterConsolePresenter;
 import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
+import com.drifting.bureau.mvp.ui.activity.index.AnswerResultActivity;
 import com.drifting.bureau.mvp.ui.activity.index.DriftTrackMapActivity;
 import com.drifting.bureau.mvp.ui.activity.user.AboutMeActivity;
 import com.drifting.bureau.mvp.ui.activity.user.MessageCenterActivity;
@@ -98,6 +100,8 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
 
     private List<QuestionEntity> questionEntityList;
     private Map<String, String> map;
+    private int questionid, total;
+    private String value;
 
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, ARMetaverseCenterActivity.class);
@@ -133,7 +137,7 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
         getUserInfo();
         String cmdLine = updateUnityCommandLineArguments(getIntent().getStringExtra("unity"));
         getIntent().putExtra("unity", cmdLine);
-        mUnityPlayer = new UnityPlayer(this);
+        mUnityPlayer = new UnityPlayer(this, this);
         View playerView = mUnityPlayer.getView();
         mLlAdd.addView(playerView);
         mUnityPlayer.requestFocus();
@@ -198,6 +202,27 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
         });
     }
 
+
+    //答题结果
+    public void ReadAndWrite(int id, String vaule) {
+        this.questionid = id;
+        this.value = vaule;
+    }
+
+    //点击确定按钮
+    public void Areyousure() {
+        if (TextUtils.isEmpty(value) || value == null) {
+            showMessage("请进行选择!");
+            return;
+        }
+        map.put(questionid + "", value);
+        Preferences.putHashMapData(map);
+        if (map.size() == total) {
+            if (mPresenter != null) {
+                mPresenter.questionassess(map);
+            }
+        }
+    }
 
     @OnClick({R.id.tv_change_mode, R.id.rl_info, R.id.tv_about_me})
     public void onClick(View view) {
@@ -302,8 +327,10 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
     @Override
     protected void onResume() {
         super.onResume();
+
         if (MultiWindowSupport.getAllowResizableWindow(this) && !MultiWindowSupport.isMultiWindowModeChangedToTrue(this))
             return;
+
         mUnityPlayer.resume();
     }
 
@@ -491,9 +518,8 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
     @Override
     public void onQuestionListSuccess(List<QuestionEntity> list) {
         if (list != null && list.size() > 0) {
+            total = list.size();
             toggleType = 3;
-            mUnityPlayer.UnitySendMessage("Main Camera", "OpenPsychological", "");
-
             questionEntityList = new ArrayList<>();
             if (map != null) {
                 for (int i = 0; i < list.size(); i++) {
@@ -512,14 +538,18 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
                     questionEntityList.get(i).setPostion(i + 1);
                 }
             }
-            Log.d("11111111111", GsonUtil.toJson(questionEntityList));
-            mUnityPlayer.UnitySendMessage("Main Camera", "GetanswerJson", GsonUtil.toJson(questionEntityList));
+            mUnityPlayer.UnitySendMessage("Main Camera", "OpenPsychological", GsonUtil.toJson(questionEntityList));
         }
     }
 
     @Override
     public void onQuestionAssessSuccess(QuestionAssessEntity entity) {
-
+        if (entity != null) {
+            toggleType = 2;
+            mUnityPlayer.UnitySendMessage("Main Camera", "ClosePsychological", "");
+            Preferences.putHashMapData(null);
+            AnswerResultActivity.start(this, true);
+        }
     }
 
     @Override
