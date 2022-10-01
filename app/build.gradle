@@ -145,8 +145,6 @@ dependencies {
     //test
     //  debugImplementation rootProject.ext.dependencies["canary-debug"]
 
-
-
     //扫码
     implementation rootProject.ext.dependencies["zxing"]
 
@@ -204,4 +202,8 @@ dependencies {
     implementation 'me.relex:circleindicator:2.1.6'
 
 
+    //UNITY AR 引入
+    implementation files('libs/EasyAR.aar')
+    implementation files('libs/com.google.ar.core-1.23.0.aar')
+    implementation files('libs/com.google.ar.core-optional.aar')
 }

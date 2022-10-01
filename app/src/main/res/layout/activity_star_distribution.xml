@@ -13,7 +13,6 @@
         android:layout_below="@+id/ll_toolbar"
         android:layout_marginTop="30dp"
         android:background="@drawable/star_field_ring"
-
         android:orientation="vertical">
 
 
@@ -38,7 +37,6 @@
 
 
             <ImageView
-                android:id="@+id/iv_moon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="35dp"

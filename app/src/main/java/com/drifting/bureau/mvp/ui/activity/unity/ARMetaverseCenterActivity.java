@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -39,18 +41,22 @@ import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.presenter.ArCenterConsolePresenter;
 import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
 import com.drifting.bureau.mvp.ui.activity.index.AnswerResultActivity;
+import com.drifting.bureau.mvp.ui.activity.index.AnswerTestActivity;
 import com.drifting.bureau.mvp.ui.activity.index.DriftTrackMapActivity;
 import com.drifting.bureau.mvp.ui.activity.user.AboutMeActivity;
 import com.drifting.bureau.mvp.ui.activity.user.MessageCenterActivity;
+import com.drifting.bureau.mvp.ui.activity.user.MySpaceStationActivity;
 import com.drifting.bureau.mvp.ui.dialog.ArAnnouncementDisplayDialog;
 import com.drifting.bureau.mvp.ui.dialog.CityReleaseDialog;
 import com.drifting.bureau.mvp.ui.dialog.DriftingPlayDialog;
 import com.drifting.bureau.mvp.ui.dialog.ExclusivePlanetDialog;
+import com.drifting.bureau.mvp.ui.dialog.JumpPlanetDialog;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.GsonUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.request.RequestUtil;
+import com.drifting.bureau.view.MyFrameAnimation;
 import com.jess.arms.base.delegate.IFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.umeng.analytics.MobclickAgent;
@@ -90,7 +96,8 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
     ImageView mIvHot;
     @BindView(R.id.tv_about_me)
     TextView mTvAboutMe;
-
+    @BindView(R.id.rl_anim)
+    ImageView mRlAnim;
     private int toggleType = 1;
     protected UnityPlayer mUnityPlayer;
     private UserInfoEntity userInfoEntity;
@@ -98,9 +105,10 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
     private ArAnnouncementDisplayDialog arAnnouncementDisplayDialog;
     private ExclusivePlanetDialog exclusivePlanetDialog;
 
+    private JumpPlanetDialog jumpPlanetDialog;
     private List<QuestionEntity> questionEntityList;
     private Map<String, String> map;
-    private int questionid, total;
+    private int questionid, total, paixitype;
     private String value;
 
     public static void start(Context context, boolean closePage) {
@@ -134,18 +142,22 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(false);
         setStatusBarHeight(mTvBar);
+
         getUserInfo();
+
         String cmdLine = updateUnityCommandLineArguments(getIntent().getStringExtra("unity"));
         getIntent().putExtra("unity", cmdLine);
         mUnityPlayer = new UnityPlayer(this, this);
         View playerView = mUnityPlayer.getView();
         mLlAdd.addView(playerView);
         mUnityPlayer.requestFocus();
+
+        AnimationDrawable anim = (AnimationDrawable) mRlAnim.getBackground();
+        anim.start();
         new Handler().postDelayed(() -> {
-            mLlToolBar.setVisibility(View.VISIBLE);
-            mRlInfo.setVisibility(View.VISIBLE);
-            mTvAboutMe.setVisibility(View.VISIBLE);
-        }, 2000);
+            anim.stop();
+            mRlAnim.setVisibility(View.GONE);
+        }, 4500);
     }
 
 
@@ -180,12 +192,37 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
 
     //飞机
     public void Aircraft() {
-        toggleType = 2;
-        mUnityPlayer.UnitySendMessage("Main Camera", "OpenAircraft", "");
+        if (userInfoEntity != null) {
+            if (userInfoEntity.getPlanet().getLevel() == 1) {
+                toggleType = 2;
+                mUnityPlayer.UnitySendMessage("Main Camera", "OpenAircraft", "");
+            } else {
+                runOnUiThread(() -> {
+                    if (jumpPlanetDialog == null) {
+                        jumpPlanetDialog = new JumpPlanetDialog(ARMetaverseCenterActivity.this);
+                    }
+                    jumpPlanetDialog.show();
+                    jumpPlanetDialog.setOnClickCallback(type -> {
+                        toggleType = 2;
+                        if (type == JumpPlanetDialog.OPEN_PLAY) {  //跃迁派系主星
+                            paixitype = 1;
+                            mUnityPlayer.UnitySendMessage("Main Camera", "OpenPaiXiXingQiu", "");
+                        } else if (type == JumpPlanetDialog.OPEN_JUMP) { //前往重新鉴别
+                            mUnityPlayer.UnitySendMessage("Main Camera", "OpenAircraft", "");
+                        }
+                    });
+
+                });
+            }
+        }
+
+
     }
+
 
     //第二场景机器人点击
     public void Psychological() {
+
         runOnUiThread(() -> {
             if (exclusivePlanetDialog == null) {
                 exclusivePlanetDialog = new ExclusivePlanetDialog(ARMetaverseCenterActivity.this);
@@ -193,9 +230,10 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
             exclusivePlanetDialog.show();
             exclusivePlanetDialog.setOnClickCallback(type -> {
                 if (type == ExclusivePlanetDialog.OPEN_PLAY) {
-                    if (mPresenter != null) {
-                        mPresenter.questionlist();
-                    }
+//                    if (mPresenter != null) {
+//                        mPresenter.questionlist();
+//                    }
+                   AnswerTestActivity.start(this, false);
                 }
             });
 
@@ -207,14 +245,11 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
     public void ReadAndWrite(int id, String vaule) {
         this.questionid = id;
         this.value = vaule;
+        showMessage(value);
     }
 
     //点击确定按钮
     public void Areyousure() {
-        if (TextUtils.isEmpty(value) || value == null) {
-            showMessage("请进行选择!");
-            return;
-        }
         map.put(questionid + "", value);
         Preferences.putHashMapData(map);
         if (map.size() == total) {
@@ -222,6 +257,7 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
                 mPresenter.questionassess(map);
             }
         }
+
     }
 
     @OnClick({R.id.tv_change_mode, R.id.rl_info, R.id.tv_about_me})
@@ -234,7 +270,12 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
                         mUnityPlayer.UnitySendMessage("Main Camera", "ClosePsychological", "");
                     } else if (toggleType == 2) {
                         toggleType = 1;
-                        mUnityPlayer.UnitySendMessage("Main Camera", "CloseAircraft", "");
+                        if (paixitype == 1) {
+                            paixitype = 0;
+                            mUnityPlayer.UnitySendMessage("Main Camera", "ClosePaiXiXingQiu", "");
+                        } else {
+                            mUnityPlayer.UnitySendMessage("Main Camera", "CloseAircraft", "");
+                        }
                     } else {
                         Preferences.setARModel(false);
                         DiscoveryTourActivity.start(this, true);
@@ -511,7 +552,11 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
     @Override
     public void onSpaceCheck(SpaceCheckEntity entity) {
         if (entity != null) {
-            showMessage("检测到您还没拥有空间站,请去获取!");
+            if (entity.getStatus() == 0) {
+                showMessage("检测到您还没拥有空间站,请去获取!");
+            } else {
+                MySpaceStationActivity.start(this, false);
+            }
         }
     }
 
@@ -538,6 +583,7 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
                     questionEntityList.get(i).setPostion(i + 1);
                 }
             }
+            Log.e("111111111111111111",GsonUtil.toJson(questionEntityList));
             mUnityPlayer.UnitySendMessage("Main Camera", "OpenPsychological", GsonUtil.toJson(questionEntityList));
         }
     }
@@ -545,8 +591,8 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
     @Override
     public void onQuestionAssessSuccess(QuestionAssessEntity entity) {
         if (entity != null) {
-            toggleType = 2;
-            mUnityPlayer.UnitySendMessage("Main Camera", "ClosePsychological", "");
+            toggleType = 1;
+            mUnityPlayer.UnitySendMessage("Main Camera", "CloseAircraft", "");
             Preferences.putHashMapData(null);
             AnswerResultActivity.start(this, true);
         }

@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import com.drifting.bureau.mvp.model.entity.QuestionAssessEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionEntity;
+import com.drifting.bureau.mvp.model.entity.QuestionStagesEntity;
 import com.jess.arms.base.BaseEntity;
 import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IView;
@@ -35,6 +36,9 @@ public interface MoveAwayPlanetaryContract {
 
         void onAssessResultSuccess(QuestionAssessEntity list);
 
+
+        void onQuestionStagesSuccess(List<QuestionStagesEntity> list);
+
         void onNetError();
 
         Activity getActivity();
@@ -48,5 +52,7 @@ public interface MoveAwayPlanetaryContract {
         Observable<BaseEntity<QuestionAssessEntity>> questionassess(RequestBody body);
 
         Observable<BaseEntity<QuestionAssessEntity>> assessResult();
+
+        Observable<BaseEntity<List<QuestionStagesEntity>>> stages();
     }
 }

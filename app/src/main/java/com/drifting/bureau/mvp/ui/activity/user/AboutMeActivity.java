@@ -44,7 +44,7 @@ import com.drifting.bureau.mvp.ui.adapter.AboutMeAdapter;
 import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
 import com.drifting.bureau.mvp.ui.fragment.PlanetaryDisFragment;
 import com.drifting.bureau.storageinfo.Preferences;
-import com.drifting.bureau.util.ARCoreUtil;
+
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.FileUtil;
 import com.drifting.bureau.util.GlideUtil;
@@ -135,7 +135,7 @@ public class AboutMeActivity extends BaseManagerActivity<AboutMePresenter> imple
     }
 
     public void initListener() {
-        GlideUtil.create().loadLongImage(this, Preferences.getMascot(), mDrifting);
+        GlideUtil.create().loadLongImage(this,userInfoEntity.getUser().getMascot() , mDrifting);
         mRcyList.setLayoutManager(new GridLayoutManager(this, 3));
         aboutMeAdapter = new AboutMeAdapter(new ArrayList<>());
         mRcyList.setAdapter(aboutMeAdapter);
@@ -197,9 +197,7 @@ public class AboutMeActivity extends BaseManagerActivity<AboutMePresenter> imple
                     finish();
                     break;
                 case R.id.ar_selected:
-                    if (ARCoreUtil.checkArCoreAvailability(getActivity())) {
-                        startCamrea(userInfoEntity.getPlanet().getAr_url()); //开启AR
-                    }
+          
                     break;
             }
         }

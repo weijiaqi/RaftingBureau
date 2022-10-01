@@ -31,7 +31,7 @@ import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.mvp.ui.activity.web.ShowWebViewActivity;
 import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
 import com.drifting.bureau.storageinfo.Preferences;
-import com.drifting.bureau.util.ARCoreUtil;
+
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.FileUtil;
 import com.drifting.bureau.util.NotificationUtil;
@@ -195,17 +195,17 @@ public class PullNewGuideActivity extends BaseManagerActivity {
                     }
                     break;
                 case R.id.tv_ar_select:  //AR查看
-                    if (IsVisibility()) {
-                        RequestUtil.create().planetar(entity -> {
-                            if (entity != null && entity.getCode() == 200) {
-                                if (!TextUtils.isEmpty(entity.getData().getAr_url())) {
-                                    if (ARCoreUtil.checkArCoreAvailability(this)) {
-                                        startCamrea(entity.getData().getAr_url()); //开启AR
-                                    }
-                                }
-                            }
-                        });
-                    }
+//                    if (IsVisibility()) {
+//                        RequestUtil.create().planetar(entity -> {
+//                            if (entity != null && entity.getCode() == 200) {
+//                                if (!TextUtils.isEmpty(entity.getData().getAr_url())) {
+//                                    if (ARCoreUtil.checkArCoreAvailability(this)) {
+//                                        startCamrea(entity.getData().getAr_url()); //开启AR
+//                                    }
+//                                }
+//                            }
+//                        });
+//                    }
                     break;
             }
         }

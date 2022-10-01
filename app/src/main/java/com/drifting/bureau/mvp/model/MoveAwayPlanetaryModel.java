@@ -6,6 +6,7 @@ import com.drifting.bureau.app.api.ApiService;
 import com.drifting.bureau.mvp.contract.MoveAwayPlanetaryContract;
 import com.drifting.bureau.mvp.model.entity.QuestionAssessEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionEntity;
+import com.drifting.bureau.mvp.model.entity.QuestionStagesEntity;
 import com.google.gson.Gson;
 import com.jess.arms.base.BaseEntity;
 import com.jess.arms.di.scope.ActivityScope;
@@ -63,5 +64,10 @@ public class MoveAwayPlanetaryModel extends BaseModel implements MoveAwayPlaneta
     @Override
     public Observable<BaseEntity<QuestionAssessEntity>> assessResult() {
         return mRepositoryManager.obtainRetrofitService(ApiService.class).assessResult();
+    }
+
+    @Override
+    public Observable<BaseEntity<List<QuestionStagesEntity>>> stages() {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).stages();
     }
 }

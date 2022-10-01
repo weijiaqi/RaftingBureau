@@ -1,7 +1,6 @@
 package com.drifting.bureau.mvp.ui.activity.index;
 
 
-
 import android.animation.Animator;
 import android.app.Activity;
 import android.content.Context;
@@ -15,14 +14,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import com.drifting.bureau.R;
 import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.di.component.DaggerAnswerTestComponent;
 import com.drifting.bureau.mvp.contract.MoveAwayPlanetaryContract;
 import com.drifting.bureau.mvp.model.entity.QuestionAssessEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionEntity;
+import com.drifting.bureau.mvp.model.entity.QuestionStagesEntity;
 import com.drifting.bureau.mvp.presenter.MoveAwayPlanetaryPresenter;
 import com.drifting.bureau.mvp.ui.dialog.ExitPsychologyDialog;
 import com.drifting.bureau.storageinfo.Preferences;
@@ -35,10 +37,12 @@ import com.drifting.bureau.video.EmptyControlVideo;
 import com.jess.arms.di.component.AppComponent;
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
 import com.shuyu.gsyvideoplayer.listener.GSYSampleCallBack;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -93,6 +97,7 @@ public class AnswerTestActivity extends BaseManagerActivity<MoveAwayPlanetaryPre
             '六', '七', '八'};
     private SpannableStringBuilder passer, passerStage;
     private List<QuestionEntity> questionEntityList;
+    private List<QuestionStagesEntity> questionStagesEntityList;
     private ExitPsychologyDialog exitPsychologyDialog;
     private int currency = 0;
 
@@ -129,9 +134,12 @@ public class AnswerTestActivity extends BaseManagerActivity<MoveAwayPlanetaryPre
         mTvWord.setMovementMethod(ScrollingMovementMethod.getInstance());
         mTvTextSelectA.setMovementMethod(ScrollingMovementMethod.getInstance());
         mTvTextSelectB.setMovementMethod(ScrollingMovementMethod.getInstance());
+
+
         if (mPresenter != null) {
-            mPresenter.questionlist();
+            mPresenter.questionStages();
         }
+
     }
 
 
@@ -233,6 +241,14 @@ public class AnswerTestActivity extends BaseManagerActivity<MoveAwayPlanetaryPre
     @Override
     public void onAssessResultSuccess(QuestionAssessEntity list) {
 
+    }
+
+    @Override
+    public void onQuestionStagesSuccess(List<QuestionStagesEntity> entity) {
+        if (entity != null && entity.size() > 0) {
+            questionStagesEntityList = entity;
+            mPresenter.questionlist();
+        }
     }
 
 
@@ -338,7 +354,7 @@ public class AnswerTestActivity extends BaseManagerActivity<MoveAwayPlanetaryPre
 
         mRlAnswer.setVisibility(View.GONE);
         mVieoPlayer.setVisibility(View.VISIBLE);
-        mVieoPlayer.setUp("https://v.metagatestar.com/mp4/test.mp4", true, "");
+        mVieoPlayer.setUp(questionStagesEntityList.get(getPostion()).getUrl(), true, "");
         mVieoPlayer.startPlayLogic();
 
         mVieoPlayer.setVideoAllCallBack(new GSYSampleCallBack() {
@@ -348,7 +364,7 @@ public class AnswerTestActivity extends BaseManagerActivity<MoveAwayPlanetaryPre
                 super.onAutoComplete(url, objects);
                 mVieoPlayer.setVisibility(View.GONE);
                 mLlStageToggle.setVisibility(View.VISIBLE);
-                setStageToggle(getVaule(), "新的文明");
+                setStageToggle(getVaule(), questionStagesEntityList.get(getPostion()).getSubheading());
             }
         });
     }
@@ -356,8 +372,12 @@ public class AnswerTestActivity extends BaseManagerActivity<MoveAwayPlanetaryPre
 
     //获取当前阶段
     public String getVaule() {
+        return String.valueOf(data[getPostion()]);
+    }
+
+    public int getPostion(){
         int value = (int) (currency + 1) / 11;
-        return String.valueOf(data[value]);
+        return value;
     }
 
     /**
@@ -395,7 +415,7 @@ public class AnswerTestActivity extends BaseManagerActivity<MoveAwayPlanetaryPre
     //设置底部进度条文字
     public void setBottomText() {
         mTvCompleteness.setText(getString(R.string.which_stage_num, getVaule()));
-        mTvUnlockProgress.setText("新的文明");
+        mTvUnlockProgress.setText(questionStagesEntityList.get(getPostion()).getSubheading());
     }
 
     public void showLoading() {

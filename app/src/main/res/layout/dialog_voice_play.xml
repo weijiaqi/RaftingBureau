@@ -34,7 +34,6 @@
         android:layout_toRightOf="@+id/iv_play">
 
         <ImageView
-            android:id="@+id/iv_horizontal_line"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/drifting_horizontal_line" />

@@ -7,7 +7,6 @@
     android:orientation="vertical">
 
     <com.drifting.bureau.view.NestingScrollView
-        android:id="@+id/nv_scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
@@ -138,6 +137,7 @@
                 android:background="@drawable/ar_select"
                 android:gravity="center"
                 android:text="AR查看"
+                android:visibility="gone"
                 android:textColor="@color/white"
                 android:textSize="12sp"
                 android:textStyle="bold" />

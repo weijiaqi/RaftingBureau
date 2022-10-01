@@ -71,7 +71,6 @@
             android:background="@color/color_e3_7f" />
 
         <LinearLayout
-            android:id="@+id/ll_cancel_finish"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:orientation="horizontal">

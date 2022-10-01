@@ -165,7 +165,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="18dp"
             android:layout_marginEnd="14dp"
-            android:background="@drawable/order_record"
+            android:background="@drawable/new_order_record"
             android:paddingStart="9dp"
             android:paddingTop="10dp"
             android:text="订单记录"
@@ -219,7 +219,7 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/about_bottom_button"
                 android:gravity="center"
-                android:text="5 8 6 8"
+                android:text="敬 请 期 待"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
         </LinearLayout>

@@ -10,8 +10,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.AssetManager;
-import android.graphics.BitmapFactory;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -25,8 +24,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
+
 import com.drifting.bureau.R;
 import com.drifting.bureau.base.BaseManagerActivity;
+
 import com.drifting.bureau.data.event.BackSpaceEvent;
 import com.drifting.bureau.data.event.MessageRefreshEvent;
 import com.drifting.bureau.di.component.DaggerDiscoveryTourComponent;
@@ -37,10 +38,11 @@ import com.drifting.bureau.mvp.model.entity.StarUpIndexEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.presenter.DiscoveryTourPresenter;
 import com.drifting.bureau.mvp.ui.activity.index.DriftTrackMapActivity;
-import com.drifting.bureau.mvp.ui.activity.index.LaboratoryActivity;
+
 import com.drifting.bureau.mvp.ui.activity.index.SpaceCapsuleActivity;
 import com.drifting.bureau.mvp.ui.activity.index.StarDistributionActivity;
 import com.drifting.bureau.mvp.ui.activity.unity.ARMetaverseCenterActivity;
+import com.drifting.bureau.mvp.ui.activity.user.AboutMeActivity;
 import com.drifting.bureau.mvp.ui.activity.user.MessageCenterActivity;
 import com.drifting.bureau.mvp.ui.activity.user.NewAboutMeActivity;
 import com.drifting.bureau.mvp.ui.activity.web.ShowWebViewActivity;
@@ -56,9 +58,12 @@ import com.drifting.bureau.view.DiscoveryTransformer;
 import com.drifting.bureau.view.guide.IndexGuiView;
 import com.jess.arms.di.component.AppComponent;
 import com.umeng.analytics.MobclickAgent;
+
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.List;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.rong.imkit.RongIM;
@@ -192,7 +197,7 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
     }
 
 
-    @OnClick({R.id.rl_message, R.id.tv_space_capsule, R.id.rl_info, R.id.ll_step_star, R.id.rl_right, R.id.tv_youth_camp, R.id.iv_enter_main})
+    @OnClick({R.id.rl_message, R.id.tv_space_capsule, R.id.rl_info, R.id.ll_step_star, R.id.rl_right, R.id.tv_youth_camp, R.id.iv_enter_main, R.id.tv_about_me})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
@@ -218,12 +223,17 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
                     }
                     break;
                 case R.id.iv_enter_main:  //进入主页
-                    if (userInfoEntity!=null){
-                        if (userInfoEntity.getPlanet().getLevel()==1){  //荒芜星
+                    if (userInfoEntity != null) {
+                        if (userInfoEntity.getPlanet().getLevel() == 1) {  //荒芜星
                             StarDistributionActivity.start(this, false);
-                        }else {
-                            NewAboutMeActivity.start(this,false);
+                        } else {
+                            NewAboutMeActivity.start(this, false);
                         }
+                    }
+                    break;
+                case R.id.tv_about_me:  //关于我们
+                    if (userInfoEntity != null) {
+                        AboutMeActivity.start(this, userInfoEntity, false);
                     }
                     break;
             }
@@ -325,22 +335,32 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
             viewPager.setClipChildren(false);
             viewPager.setPageTransformer(true, new DiscoveryTransformer());
 
+            getUserInfo();
 
-
-            RequestUtil.create().userplayer(Preferences.getUserId(), entity -> {
-                if (entity != null && entity.getCode() == 200) {
-                    userInfoEntity = entity.getData();
-                    mTvEnergy.setText(userInfoEntity.getUser().getMeta_power());
-                    RequestUtil.create().startup(entity1 -> {
-                        if (entity1 != null && entity1.getCode() == 200) {
-                            starUpIndexEntity = entity1.getData();
-                            mTvYouthCamp.setVisibility(!TextUtils.isEmpty(starUpIndexEntity.getUrl()) ? View.VISIBLE : View.INVISIBLE);
-                        }
-                    });
-                }
-            });
         }
     }
+
+
+    public void getUserInfo() {
+        RequestUtil.create().userplayer(Preferences.getUserId(), entity -> {
+            if (entity != null && entity.getCode() == 200) {
+                userInfoEntity = entity.getData();
+                mTvAboutMe.setVisibility(userInfoEntity.getPlanet().getLevel() == 1 ? View.VISIBLE : View.GONE);
+                mTvAboutMe.setText(userInfoEntity.getPlanet().getName());
+                mTvEnergy.setText(userInfoEntity.getUser().getMeta_power());
+
+                RequestUtil.create().startup(entity1 -> {
+                    if (entity1 != null && entity1.getCode() == 200) {
+                        starUpIndexEntity = entity1.getData();
+                        mTvYouthCamp.setVisibility(!TextUtils.isEmpty(starUpIndexEntity.getUrl()) ? View.VISIBLE : View.INVISIBLE);
+                    }
+                });
+
+            }
+        });
+
+    }
+
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void MessageRefreshEvent(MessageRefreshEvent event) {

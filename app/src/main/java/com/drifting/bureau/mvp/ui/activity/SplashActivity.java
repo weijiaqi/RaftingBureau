@@ -3,6 +3,8 @@ package com.drifting.bureau.mvp.ui.activity;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,18 +14,31 @@ import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
 
 import com.drifting.bureau.mvp.ui.activity.unity.ARMetaverseCenterActivity;
+import com.drifting.bureau.mvp.ui.activity.user.NewAboutMeActivity;
 import com.drifting.bureau.mvp.ui.activity.user.PullNewGuideActivity;
 import com.drifting.bureau.mvp.ui.dialog.PrivacyPolicyDialog;
 import com.drifting.bureau.storageinfo.Preferences;
+import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.RongIMUtil;
+import com.drifting.bureau.video.EmptyControlVideo;
 import com.jess.arms.di.component.AppComponent;
+import com.shuyu.gsyvideoplayer.GSYVideoManager;
+import com.shuyu.gsyvideoplayer.listener.GSYSampleCallBack;
 import com.umeng.commonsdk.UMConfigure;
 
+import org.w3c.dom.Text;
+
+import butterknife.BindView;
+import butterknife.OnClick;
 import timber.log.Timber;
 
 
 public class SplashActivity extends BaseManagerActivity {
 
+    @BindView(R.id.video_player)
+    EmptyControlVideo mVieoPlayer;
+    @BindView(R.id.tv_next)
+    TextView mTvNext;
     private PrivacyPolicyDialog privacyPolicyDialog;
     private Handler mHandler = new Handler();
 
@@ -55,11 +70,38 @@ public class SplashActivity extends BaseManagerActivity {
                 }
             });
         } else {
-            mHandler.postDelayed(mHomeRunnable, 1000);
+            mHandler.postDelayed(mHomeRunnable, 500);
         }
     }
 
     Runnable mHomeRunnable = () -> {
+        mVieoPlayer.setUp("https://v.metapeza.com/afile/vedio/start.mp4", true, "");
+        mVieoPlayer.startPlayLogic();
+        mVieoPlayer.setVideoAllCallBack(new GSYSampleCallBack() {
+
+            @Override
+            public void onAutoComplete(String url, Object... objects) {
+                super.onAutoComplete(url, objects);
+                startActivity();
+            }
+        });
+        mTvNext.setVisibility(View.VISIBLE);
+    };
+
+
+
+    @OnClick({R.id.tv_next})
+    public void onClick(View view) {
+        if (!ClickUtil.isFastClick(view.getId())) {
+            switch (view.getId()) {
+                case R.id.tv_next:
+                    startActivity();
+                    break;
+            }
+        }
+    }
+
+    public void startActivity() {
         if (!Preferences.isAnony()) {
             PullNewGuideActivity.start(SplashActivity.this, true);
         } else {
@@ -76,7 +118,7 @@ public class SplashActivity extends BaseManagerActivity {
                 }
             });
         }
-    };
+    }
 
 
     public void startMainActivity() {
@@ -87,9 +129,24 @@ public class SplashActivity extends BaseManagerActivity {
         }
     }
 
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mVieoPlayer.onVideoPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mVieoPlayer.onVideoResume();
+    }
+
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        GSYVideoManager.releaseAllVideos();
         if (mHandler != null) {
             mHandler.removeCallbacks(mHomeRunnable);
         }

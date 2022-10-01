@@ -131,6 +131,7 @@
         android:layout_marginBottom="135dp"
         android:background="@drawable/ar_view"
         android:gravity="center"
+        android:visibility="gone"
         android:text="AR查看荒芜星"
         android:textColor="@color/white"
         android:textSize="14sp"
@@ -144,7 +145,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="82dp"
+        android:layout_marginBottom="102dp"
         android:background="@drawable/solid_blue_block_button"
         android:gravity="center"
         android:text="建立自己的星球"
@@ -190,7 +191,6 @@
 
 
     <RelativeLayout
-        android:id="@+id/rl_agree"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

@@ -138,7 +138,6 @@
 
 
             <FrameLayout
-                android:id="@+id/fl_to_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/ll_center"

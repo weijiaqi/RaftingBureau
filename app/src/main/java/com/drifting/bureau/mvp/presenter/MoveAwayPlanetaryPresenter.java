@@ -5,6 +5,7 @@ import android.app.Application;
 import com.drifting.bureau.mvp.contract.MoveAwayPlanetaryContract;
 import com.drifting.bureau.mvp.model.entity.QuestionAssessEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionEntity;
+import com.drifting.bureau.mvp.model.entity.QuestionStagesEntity;
 import com.jess.arms.base.BaseEntity;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.http.imageloader.ImageLoader;
@@ -40,7 +41,7 @@ import okhttp3.RequestBody;
  * ================================================
  */
 @ActivityScope
-public class MoveAwayPlanetaryPresenter extends BasePresenter<MoveAwayPlanetaryContract.Model, MoveAwayPlanetaryContract.View>{
+public class MoveAwayPlanetaryPresenter extends BasePresenter<MoveAwayPlanetaryContract.Model, MoveAwayPlanetaryContract.View> {
     @Inject
     RxErrorHandler mErrorHandler;
     @Inject
@@ -51,16 +52,15 @@ public class MoveAwayPlanetaryPresenter extends BasePresenter<MoveAwayPlanetaryC
     AppManager mAppManager;
 
     @Inject
-    public MoveAwayPlanetaryPresenter (MoveAwayPlanetaryContract.Model model, MoveAwayPlanetaryContract.View rootView) {
+    public MoveAwayPlanetaryPresenter(MoveAwayPlanetaryContract.Model model, MoveAwayPlanetaryContract.View rootView) {
         super(model, rootView);
     }
 
 
     /**
-     *问题列表（搬离星球）
+     * 问题列表（搬离星球）
      */
     public void questionlist() {
-
         mModel.questionlist().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
@@ -82,9 +82,8 @@ public class MoveAwayPlanetaryPresenter extends BasePresenter<MoveAwayPlanetaryC
     }
 
 
-
     /**
-     *答题测评（搬离星球）
+     * 答题测评（搬离星球）
      */
     public void questionassess(Map<String, String> map) {
         if (mRootView != null) {
@@ -113,11 +112,8 @@ public class MoveAwayPlanetaryPresenter extends BasePresenter<MoveAwayPlanetaryC
     }
 
 
-
-
-
     /**
-     *答题结果
+     * 答题结果
      */
     public void assessResult() {
         mModel.assessResult().subscribeOn(Schedulers.io())
@@ -129,6 +125,31 @@ public class MoveAwayPlanetaryPresenter extends BasePresenter<MoveAwayPlanetaryC
                         if (mRootView != null) {
                             if (baseEntity.getCode() == 200) {
                                 mRootView.onAssessResultSuccess(baseEntity.getData());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
+    }
+
+
+    /**
+     * 答题过程阶段
+     */
+    public void questionStages() {
+        mModel.stages().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseEntity<List<QuestionStagesEntity>>>(mErrorHandler) {
+                    @Override
+                    public void onNext(BaseEntity<List<QuestionStagesEntity>> baseEntity) {
+                        if (mRootView != null) {
+                            if (baseEntity.getCode() == 200) {
+                                mRootView.onQuestionStagesSuccess(baseEntity.getData());
                             }
                         }
                     }

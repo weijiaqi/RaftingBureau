@@ -40,6 +40,7 @@ import com.drifting.bureau.mvp.model.entity.PlatformTimesEntity;
 import com.drifting.bureau.mvp.model.entity.PrizeEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionAssessEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionEntity;
+import com.drifting.bureau.mvp.model.entity.QuestionStagesEntity;
 import com.drifting.bureau.mvp.model.entity.RaftingBureaufriendEntity;
 import com.drifting.bureau.mvp.model.entity.SandPayQueryEntity;
 import com.drifting.bureau.mvp.model.entity.SkuListEntity;
@@ -527,6 +528,13 @@ public interface ApiService {
     Observable<BaseEntity<TeaShopEntity>> nearby(@Field("name") String name, @Field("page") int page, @Field("limit") int limit, @Field("lng") String lng, @Field("lat") String lat);
 
 
+    /**
+     *答题过程阶段
+     *
+     * @return
+     */
+    @GET("v/question/stages")
+    Observable<BaseEntity<List<QuestionStagesEntity>>> stages();
 
 
     /**

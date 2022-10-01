@@ -24,4 +24,7 @@
             android:overScrollMode="never"
             tools:listitem="@layout/rc_conversationlist_item" />
     </io.rong.imkit.widget.refresh.SmartRefreshLayout>
+
+
+
 </LinearLayout>

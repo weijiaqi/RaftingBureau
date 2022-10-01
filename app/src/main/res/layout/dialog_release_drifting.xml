@@ -118,7 +118,6 @@
             app:shape_startColor="@color/color_6c">
 
             <TextView
-                android:id="@+id/tv_starry_sky"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

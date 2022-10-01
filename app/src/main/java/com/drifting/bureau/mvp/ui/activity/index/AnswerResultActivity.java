@@ -25,6 +25,7 @@ import com.drifting.bureau.di.component.DaggerAnswerTestComponent;
 import com.drifting.bureau.mvp.contract.MoveAwayPlanetaryContract;
 import com.drifting.bureau.mvp.model.entity.QuestionAssessEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionEntity;
+import com.drifting.bureau.mvp.model.entity.QuestionStagesEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.presenter.MoveAwayPlanetaryPresenter;
 import com.drifting.bureau.mvp.ui.activity.user.AboutMeActivity;
@@ -135,20 +136,16 @@ public class AnswerResultActivity extends BaseManagerActivity<MoveAwayPlanetaryP
         list.add(new AnswerColorEntiy(15, "谋略派", R.color.color_06a));
         list.add(new AnswerColorEntiy(16, "沟通派", R.color.color_c1));
         list.add(new AnswerColorEntiy(17, "教导派", R.color.color_85d));
-
         if (mPresenter != null) {
             mPresenter.assessResult();
         }
-
     }
 
     public List<String> getList() {
-
         List<String> list = new ArrayList<>();
         list.add("严谨派的人总是一丝不苟，他们极度严谨，极度自律，同时也极度可靠。");
         list.add("严谨派往往比较传统、保守，他们在工作场所会带来严肃和保守的气氛。这有时会使其他类型的人感到这样的工作环境很无趣。");
         list.add("他们具有很强的条理性和准确性，对于细节有很强的记忆和判断。");
-
         return list;
     }
 
@@ -229,6 +226,10 @@ public class AnswerResultActivity extends BaseManagerActivity<MoveAwayPlanetaryP
         }
     }
 
+    @Override
+    public void onQuestionStagesSuccess(List<QuestionStagesEntity> list) {
+
+    }
 
 
     @OnClick({R.id.toolbar_back,R.id.iv_enter_prime})

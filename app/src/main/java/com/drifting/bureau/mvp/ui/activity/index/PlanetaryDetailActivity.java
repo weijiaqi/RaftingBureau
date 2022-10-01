@@ -24,7 +24,7 @@ import com.drifting.bureau.mvp.contract.PlanetaryDetailContract;
 import com.drifting.bureau.mvp.model.entity.PlanetaryDetailEntity;
 import com.drifting.bureau.mvp.presenter.PlanetaryDetailPresenter;
 import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
-import com.drifting.bureau.util.ARCoreUtil;
+
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.FileUtil;
 import com.drifting.bureau.util.GlideUtil;
@@ -60,8 +60,7 @@ public class PlanetaryDetailActivity extends BaseManagerActivity<PlanetaryDetail
     TextView mTvAttribute;
     @BindView(R.id.tv_num)
     TextView mTvNum;
-    @BindView(R.id.tv_Ar)
-    TextView mTvAr;
+
     private static String EXTRA_TYPE = "extra_type";
     private String ArUrl;
     private int type;
@@ -106,7 +105,7 @@ public class PlanetaryDetailActivity extends BaseManagerActivity<PlanetaryDetail
         if (entity != null) {
             mTvNum.setText(entity.getPeople() + "");
             ArUrl = entity.getAr_url();
-            mTvAr.setVisibility(!TextUtils.isEmpty(ArUrl) ? View.VISIBLE : View.GONE);
+
             GlideUtil.create().loadDefaultPic(this, entity.getImage_url(), mIvPlanet);
             mTvName.setText(entity.getName());
             mTvDesc.setText(entity.getDesc());
@@ -132,11 +131,11 @@ public class PlanetaryDetailActivity extends BaseManagerActivity<PlanetaryDetail
                     finish();
                     break;
                 case R.id.tv_Ar:  //AR体验
-                    if (!TextUtils.isEmpty(ArUrl)) {
-                        if (ARCoreUtil.checkArCoreAvailability(getActivity())) {
-                            startCamrea(ArUrl); //开启AR
-                        }
-                    }
+//                    if (!TextUtils.isEmpty(ArUrl)) {
+//                        if (ARCoreUtil.checkArCoreAvailability(getActivity())) {
+//                            startCamrea(ArUrl); //开启AR
+//                        }
+//                    }
                     break;
             }
         }

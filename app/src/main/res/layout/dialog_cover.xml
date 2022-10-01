@@ -28,7 +28,6 @@
 
 
         <LinearLayout
-            android:id="@+id/ll_cancel_finish"
             android:layout_width="match_parent"
             android:layout_height="29dp"
             android:layout_marginBottom="45dp"

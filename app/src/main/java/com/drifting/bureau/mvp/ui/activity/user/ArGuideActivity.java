@@ -11,7 +11,9 @@ import androidx.annotation.Nullable;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.base.BaseManagerActivity;
-import com.drifting.bureau.util.ARCoreUtil;
+
+import com.drifting.bureau.mvp.ui.activity.unity.ARMetaverseCenterActivity;
+import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
 import com.jess.arms.di.component.AppComponent;
 
@@ -53,12 +55,8 @@ public class ArGuideActivity extends BaseManagerActivity {
                     finish();
                     break;
                 case R.id.tv_enter:  //进入AR版本
-                    if (ARCoreUtil.checkArCoreAvailability(this)) {
-                        if(ClaimPlanetActivity.claimPlanetActivity!=null){
-                            ClaimPlanetActivity.claimPlanetActivity.finish();
-                        }
-                       // ArCenterConsoleActivity.start(this,true);
-                    }
+                    Preferences.setARModel(true);
+                    ARMetaverseCenterActivity.start(this, true);
                     break;
             }
         }

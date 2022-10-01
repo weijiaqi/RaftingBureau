@@ -28,6 +28,8 @@ import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.mvp.ui.activity.index.AnswerResultActivity;
 import com.drifting.bureau.mvp.ui.activity.index.LaboratoryActivity;
 import com.drifting.bureau.mvp.ui.activity.index.TeaShopActivity;
+import com.drifting.bureau.mvp.ui.activity.unity.ArGeRenXingQiuActivity;
+import com.drifting.bureau.mvp.ui.activity.unity.ArPaiXiXingQiuActivity;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.GlideUtil;
@@ -144,7 +146,7 @@ public class NewAboutMeActivity extends BaseManagerActivity {
     }
 
 
-    @OnClick({R.id.toolbar_back, R.id.iv_right, R.id.tv_drift_track, R.id.tv_star_troopers, R.id.tv_physical_store, R.id.tv_order_record, R.id.tv_to_the_galaxy,R.id.tv_attr})
+    @OnClick({R.id.toolbar_back, R.id.iv_right, R.id.tv_drift_track, R.id.tv_star_troopers, R.id.tv_physical_store, R.id.tv_order_record, R.id.tv_to_the_galaxy,R.id.tv_attr,R.id.tv_change_mode,R.id.tv_person})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
@@ -171,6 +173,12 @@ public class NewAboutMeActivity extends BaseManagerActivity {
                     break;
                 case R.id.tv_attr: //查看我得属性
                     AnswerResultActivity.start(this,false);
+                    break;
+                case R.id.tv_change_mode:  //跳转到派系星球
+                    ArPaiXiXingQiuActivity.start(this,false);
+                    break;
+                case R.id.tv_person:  //进入个人星球
+                    ArGeRenXingQiuActivity.start(this,false);
                     break;
             }
         }

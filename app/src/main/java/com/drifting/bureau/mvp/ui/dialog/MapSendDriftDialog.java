@@ -330,7 +330,12 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
 
                     mLlBottom.setVisibility(View.VISIBLE);
                     mEtWord.setVisibility(View.GONE);
+
+
+                    //删除语音
+                    deleteVoice();
                     mRlVoicePlay.setVisibility(View.VISIBLE);
+
                     mViewTop.setVisibility(View.GONE);
                     break;
                 case R.id.tv_into_space:  //不感兴趣

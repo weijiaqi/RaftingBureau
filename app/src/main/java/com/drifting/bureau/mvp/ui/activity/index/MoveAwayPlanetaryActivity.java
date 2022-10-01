@@ -19,6 +19,7 @@ import com.drifting.bureau.mvp.contract.MoveAwayPlanetaryContract;
 import com.drifting.bureau.mvp.model.entity.AnswerEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionAssessEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionEntity;
+import com.drifting.bureau.mvp.model.entity.QuestionStagesEntity;
 import com.drifting.bureau.mvp.presenter.MoveAwayPlanetaryPresenter;
 import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
 import com.drifting.bureau.mvp.ui.adapter.AnswerAdapter;
@@ -158,6 +159,11 @@ public class MoveAwayPlanetaryActivity extends BaseManagerActivity<MoveAwayPlane
 
     @Override
     public void onAssessResultSuccess(QuestionAssessEntity list) {
+
+    }
+
+    @Override
+    public void onQuestionStagesSuccess(List<QuestionStagesEntity> list) {
 
     }
 
