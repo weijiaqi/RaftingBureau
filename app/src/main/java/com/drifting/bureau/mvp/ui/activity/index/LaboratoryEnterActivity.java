@@ -112,7 +112,7 @@ public class LaboratoryEnterActivity extends BaseManagerActivity {
                     finish();
                     break;
                 case R.id.fl_find_system:
-                    AnswerTestActivity.start(this, false);
+                   AnswerTestActivity.start(this, true);
                     break;
             }
         }

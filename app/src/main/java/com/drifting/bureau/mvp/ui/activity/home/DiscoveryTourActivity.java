@@ -28,6 +28,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.drifting.bureau.R;
 import com.drifting.bureau.base.BaseManagerActivity;
 
+import com.drifting.bureau.data.event.AnswerCompletedEvent;
 import com.drifting.bureau.data.event.BackSpaceEvent;
 import com.drifting.bureau.data.event.MessageRefreshEvent;
 import com.drifting.bureau.di.component.DaggerDiscoveryTourComponent;
@@ -176,10 +177,8 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
     public void unread() {
         RequestUtil.create().unread(entity1 -> {
             if (entity1 != null && entity1.getCode() == 200) {
-                if (entity1.getData().getIndex_msg() == 0) {
-                    mIvHot.setVisibility(View.GONE);
-                } else {
-                    mIvHot.setVisibility(View.VISIBLE);
+                if (mIvHot!=null){
+                    mIvHot.setVisibility(entity1.getData().getIndex_msg() == 0?View.GONE:View.VISIBLE);
                 }
             }
         });
@@ -335,13 +334,13 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
             viewPager.setClipChildren(false);
             viewPager.setPageTransformer(true, new DiscoveryTransformer());
 
-            getUserInfo();
+            getUserInfo(1);
 
         }
     }
 
 
-    public void getUserInfo() {
+    public void getUserInfo(int status) {
         RequestUtil.create().userplayer(Preferences.getUserId(), entity -> {
             if (entity != null && entity.getCode() == 200) {
                 userInfoEntity = entity.getData();
@@ -349,13 +348,16 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
                 mTvAboutMe.setText(userInfoEntity.getPlanet().getName());
                 mTvEnergy.setText(userInfoEntity.getUser().getMeta_power());
 
-                RequestUtil.create().startup(entity1 -> {
-                    if (entity1 != null && entity1.getCode() == 200) {
-                        starUpIndexEntity = entity1.getData();
-                        mTvYouthCamp.setVisibility(!TextUtils.isEmpty(starUpIndexEntity.getUrl()) ? View.VISIBLE : View.INVISIBLE);
-                    }
-                });
-
+                if (status == 1) {
+                    RequestUtil.create().startup(entity1 -> {
+                        if (entity1 != null && entity1.getCode() == 200) {
+                            starUpIndexEntity = entity1.getData();
+                            if (mTvYouthCamp!=null){
+                                mTvYouthCamp.setVisibility(!TextUtils.isEmpty(starUpIndexEntity.getUrl()) ? View.VISIBLE : View.INVISIBLE);
+                            }
+                        }
+                    });
+                }
             }
         });
 
@@ -367,6 +369,12 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
         if (event != null) {
             unread();
         }
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void AnswerCompletedEvent(AnswerCompletedEvent answerCompletedEvent) {
+        getUserInfo(2);
     }
 
 

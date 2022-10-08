@@ -38,8 +38,10 @@ import com.drifting.bureau.mvp.contract.AboutMeContract;
 import com.drifting.bureau.mvp.model.entity.AoubtMeEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.presenter.AboutMePresenter;
+import com.drifting.bureau.mvp.ui.activity.index.LaboratoryActivity;
 import com.drifting.bureau.mvp.ui.activity.index.MoveAwayPlanetaryActivity;
 import com.drifting.bureau.mvp.ui.activity.index.PlanetarySelectActivity;
+import com.drifting.bureau.mvp.ui.activity.index.StarDistributionActivity;
 import com.drifting.bureau.mvp.ui.adapter.AboutMeAdapter;
 import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
 import com.drifting.bureau.mvp.ui.fragment.PlanetaryDisFragment;
@@ -154,9 +156,9 @@ public class AboutMeActivity extends BaseManagerActivity<AboutMePresenter> imple
         mTvName.setText(userInfoEntity.getUser().getName());
         mTvSchedule.setText(userInfoEntity.getPlanet().getSchedule() + "%");
         mPrUpload.setProgress(userInfoEntity.getPlanet().getSchedule());
-        if (status==1){
-            setTopSwipe();
-        }
+//        if (status==1){
+//            setTopSwipe();
+//        }
     }
 
 
@@ -191,7 +193,8 @@ public class AboutMeActivity extends BaseManagerActivity<AboutMePresenter> imple
                     AccountSettingsActivity.start(this, false);
                     break;
                 case R.id.tv_select: //查看
-                    PlanetarySelectActivity.start(this, userInfoEntity.getPlanet().getLevel(), false);
+                   // PlanetarySelectActivity.start(this, userInfoEntity.getPlanet().getLevel(), false);
+                    StarDistributionActivity.start(this, false);
                     break;
                 case R.id.tv_explore: //探索
                     finish();

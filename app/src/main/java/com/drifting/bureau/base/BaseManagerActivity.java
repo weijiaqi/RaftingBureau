@@ -238,7 +238,9 @@ public abstract class BaseManagerActivity<P extends IPresenter> extends AppCompa
      */
     public void showVersionDialog(VersionUpdateEntity data) {
         VersionUpdateDialog versionUpdateDialog = new VersionUpdateDialog(this, data.getUrl() + "?" + System.currentTimeMillis(), data.getStatus(), data.getMessage(), data.getVersion());
-        versionUpdateDialog.show();
+        if (!isFinishing()){
+            versionUpdateDialog.show();
+        }
     }
 
 

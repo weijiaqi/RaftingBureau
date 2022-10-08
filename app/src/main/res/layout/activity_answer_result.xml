@@ -63,7 +63,7 @@
                                 android:id="@+id/tv_faction"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="严谨派"
+                                android:text=""
                                 android:textColor="@color/color_3ee"
                                 android:textSize="67sp" />
 
@@ -128,7 +128,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="80dp"
                                 android:layout_marginTop="11dp"
-                                android:text="契合派系:谋略派"
+                                android:text=""
                                 android:textColor="@color/color_15ae"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
@@ -142,7 +142,7 @@
                                 android:layout_marginTop="6dp"
                                 android:ellipsize="none"
                                 android:maxLines="2"
-                                android:text="契合属性:组织管理；客观公正；责任感。契合属性:组织管理；客观公正；责任感。"
+                                android:text=""
                                 android:textColor="@color/white"
                                 android:textSize="11sp"
                                 android:textStyle="bold" />
@@ -167,7 +167,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="80dp"
                                 android:layout_marginTop="11dp"
-                                android:text="契合派系:谋略派"
+                                android:text=""
                                 android:textColor="@color/color_eea"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
@@ -181,7 +181,7 @@
                                 android:layout_marginTop="6dp"
                                 android:ellipsize="none"
                                 android:maxLines="2"
-                                android:text="契合属性:组织管理；客观公正；责任感。契合属性:组织管理；客观公正；责任感。"
+                                android:text=""
                                 android:textColor="@color/white"
                                 android:textSize="11sp"
                                 android:textStyle="bold" />
@@ -307,7 +307,7 @@
                             android:layout_marginTop="9dp"
                             android:layout_marginEnd="44dp"
                             android:layout_marginBottom="21dp"
-                            android:src="@drawable/career_field_pic" />
+                          />
 
 
                     </com.drifting.bureau.view.RoundLinearLayout>

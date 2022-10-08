@@ -11,7 +11,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
+
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.CommentDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.MoreDetailsForMapEntity;
@@ -30,9 +32,11 @@ import com.drifting.bureau.view.VoiceWave;
 import com.drifting.bureau.view.guide.MapGuideView;
 import com.hjq.shape.layout.ShapeLinearLayout;
 import com.jess.arms.base.BaseDialog;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 
@@ -60,7 +64,7 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
 
     private List<Object> objectList;
     private List<String> strings;
-    private int status, total, totaltime, second,free;
+    private int status, total, totaltime, second, free;
 
     private int cameratype = -1;
     private String path, tag;
@@ -78,14 +82,14 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
         this.total = total;
     }
 
-    public MapSendDriftDialog(@NonNull Context context, int status, CommentDetailsEntity entity, MoreDetailsForMapEntity.RelevanceBean relevanceBean, int total,int free) {
+    public MapSendDriftDialog(@NonNull Context context, int status, CommentDetailsEntity entity, MoreDetailsForMapEntity.RelevanceBean relevanceBean, int total, int free) {
         super(context);
         this.context = context;
         this.status = status;
         this.commentDetailsEntity = entity;
         this.relevanceBean = relevanceBean;
         this.total = total;
-        this.free=free;
+        this.free = free;
     }
 
     @Override
@@ -97,7 +101,7 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
         mIvReleaseRecording = findViewById(R.id.iv_release_recording);
         mIvReleaseWord = findViewById(R.id.iv_release_word);
         mIvRecording = findViewById(R.id.iv_recording);
-        mViewTop=findViewById(R.id.view_top);
+        mViewTop = findViewById(R.id.view_top);
         mTvTip = findViewById(R.id.tv_tip);
         mTvTime = findViewById(R.id.tv_time);
         mVideoView = findViewById(R.id.videoView);
@@ -142,16 +146,16 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
         mRlStartVoice.setOnClickListener(this);
 
         //是否展示引导页
-        mapGuideView.setVisibility(!Preferences.isPostGuide()?View.VISIBLE:View.GONE);
+        mapGuideView.setVisibility(!Preferences.isPostGuide() ? View.VISIBLE : View.GONE);
         mapGuideView.setOnClickCallback(() -> mapGuideView.setVisibility(View.INVISIBLE));
 
 
         if (status == 1) {  //编辑
             mIvReport.setVisibility(View.GONE);
             mLlStarrySky.setVisibility(View.VISIBLE);
-            if (free==1){
+            if (free == 1) {
                 mTvNums.setText("可添加好友");
-            }else {
+            } else {
                 mTvNums.setText(context.getString(R.string.free_times, total + ""));
             }
             toggleIcon(2);
@@ -184,7 +188,7 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
                 mIvRecording.setVisibility(View.INVISIBLE);
                 mTvTip.setVisibility(View.GONE);
                 mVideoView.setVisibility(View.VISIBLE);
-                totaltime = VideoUtil.getLocalVideoDuration(context,commentDetailsEntity.getAudio());
+                totaltime = VideoUtil.getLocalVideoDuration(context, commentDetailsEntity.getAudio());
                 mTvTime.setText(totaltime + "S");
                 mVideoView.setDecibel(0);
             } else if (!TextUtils.isEmpty(commentDetailsEntity.getAlbum())) {  //图片
@@ -222,7 +226,7 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
                 }
             } else {
                 mLlParticipate.setVisibility(View.VISIBLE);
-                if (total == 0 || free==1) {
+                if (total == 0 || free == 1) {
                     mTvNums.setText("可添加好友");
                 } else {
                     mTvNums.setText(context.getString(R.string.free_times, total + ""));
@@ -277,7 +281,7 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
                             if (cameratype == 1) { //视频
                                 VideoActivity.start(context, path, false);
                             } else {  //查看图片
-                                ImagePreviewActivity.start(context,path);
+                                ImagePreviewActivity.start(context, path);
                             }
                         } else {
                             startCamera();
@@ -286,7 +290,7 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
                         if (!TextUtils.isEmpty(commentDetailsEntity.getVedio())) {
                             VideoActivity.start(context, commentDetailsEntity.getVedio(), false);
                         } else {
-                            ImagePreviewActivity.start(context,commentDetailsEntity.getAlbum());
+                            ImagePreviewActivity.start(context, commentDetailsEntity.getAlbum());
                         }
                     }
                     break;
@@ -319,24 +323,42 @@ public class MapSendDriftDialog extends BaseDialog implements View.OnClickListen
                     mLlImprint.setVisibility(View.GONE);
                     mLlStarrySky.setVisibility(View.VISIBLE);
                     mIvReport.setVisibility(View.GONE);
-
-
-                    if (!TextUtils.isEmpty(mEtWord.getText().toString())) {
+                    if (!TextUtils.isEmpty(mEtWord.getText().toString())) {  //文字不为空
                         mEtWord.setText("");
                         mEtWord.setFocusableInTouchMode(true);
                         mEtWord.setCursorVisible(true);
                         mEtWord.setFocusable(true);
+                        mEtWord.setVisibility(View.GONE);
+                    }
+                    if (!TextUtils.isEmpty(commentDetailsEntity.getAlbum())) {  //图片不为空
+                        mIvPic.setImageResource(R.drawable.add_video_thumb);
+                        mRlViedeoPlay.setVisibility(View.GONE);
+                        mViewTop.setVisibility(View.GONE);
+                        mIvVideo.setVisibility(View.VISIBLE);
+                    }
+
+                    if (!TextUtils.isEmpty(commentDetailsEntity.getAudio())) {//语音不为空
+                        VideoUtil.stop(mVideoView, mIvPlay, mTvTime, totaltime);
+                        mIvPlay.setVisibility(View.GONE);
+                        mIvRecording.setVisibility(View.VISIBLE);
+                        mVideoView.setDecibel(0);
+                        mVideoView.setVisibility(View.GONE);
+                        mTvTime.setText("");
+                        mTvTime.setVisibility(View.GONE);
+                        mTvTip.setVisibility(View.VISIBLE);
+                    }
+
+                    if (!TextUtils.isEmpty(commentDetailsEntity.getVedio())) {  //视频不为空
+                        mIvPic.setImageResource(R.drawable.add_video_thumb);
+                        mIvVideoPlay.setVisibility(View.GONE);
+                        mViewTop.setVisibility(View.GONE);
+                        mIvVideo.setVisibility(View.VISIBLE);
+                        mRlViedeoPlay.setVisibility(View.GONE);
                     }
 
                     mLlBottom.setVisibility(View.VISIBLE);
-                    mEtWord.setVisibility(View.GONE);
-
-
-                    //删除语音
-                    deleteVoice();
                     mRlVoicePlay.setVisibility(View.VISIBLE);
 
-                    mViewTop.setVisibility(View.GONE);
                     break;
                 case R.id.tv_into_space:  //不感兴趣
                     if (onClickCallback != null) {

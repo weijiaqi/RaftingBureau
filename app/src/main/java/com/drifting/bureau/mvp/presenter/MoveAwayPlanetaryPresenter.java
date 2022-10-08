@@ -116,6 +116,9 @@ public class MoveAwayPlanetaryPresenter extends BasePresenter<MoveAwayPlanetaryC
      * 答题结果
      */
     public void assessResult() {
+        if (mRootView != null) {
+            mRootView.showLoading();
+        }
         mModel.assessResult().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
@@ -123,6 +126,7 @@ public class MoveAwayPlanetaryPresenter extends BasePresenter<MoveAwayPlanetaryC
                     @Override
                     public void onNext(BaseEntity<QuestionAssessEntity> baseEntity) {
                         if (mRootView != null) {
+                            mRootView.hideLoading();
                             if (baseEntity.getCode() == 200) {
                                 mRootView.onAssessResultSuccess(baseEntity.getData());
                             }

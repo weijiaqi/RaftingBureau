@@ -7,6 +7,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
@@ -59,7 +61,10 @@ import com.jess.arms.di.component.AppComponent;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.Objects;
@@ -264,9 +269,13 @@ public class VideoRecordingActivity extends BaseManagerActivity<VideoRecordingPr
                 showMessage("检测到你未开启录音权限!");
                 PermissionDialog.requestAudioPermissions(this, new PermissionDialog.PermissionCallBack() {
                     @Override
-                    public void onSuccess() {}
+                    public void onSuccess() {
+                    }
+
                     @Override
-                    public void onFailure() {}
+                    public void onFailure() {
+                    }
+
                     @Override
                     public void onAlwaysFailure() {
                         PermissionDialog.showDialog(VideoRecordingActivity.this, "android.permission.RECORD_AUDIO");
@@ -384,7 +393,7 @@ public class VideoRecordingActivity extends BaseManagerActivity<VideoRecordingPr
                 //TODO 显示视频
                 path = VideoUtil.getLocalVideoPath(getActivity(), data.getData());
                 if (path != null) {
-                    int time = VideoUtil.getLocalVideoDuration(this,path);
+                    int time = VideoUtil.getLocalVideoDuration(this, path);
                     if (time > 30) {
                         showMessage("视频选择时长不能超过30秒");
                     } else {
@@ -393,11 +402,40 @@ public class VideoRecordingActivity extends BaseManagerActivity<VideoRecordingPr
                 }
             } else {
                 index = 2;
-                path = VideoUtil.getLocalVideoPath(getActivity(), data.getData());
-                sendEvent();
+                path = VideoUtil.getLocalVideoPath(getActivity(), uri);
+                convertToJpg(path, path.substring(0, path.lastIndexOf('.') + 1) + "jpg");
             }
         }
     }
+
+    /**
+     * 转换成JPG格式图片 并将原照片删除
+     *
+     * @param pngFilePath png或者bmp照片
+     * @param jpgFilePath jpg照片
+     */
+    private void convertToJpg(String pngFilePath, String jpgFilePath) {
+        Bitmap bitmap = BitmapFactory.decodeFile(pngFilePath);
+        try {
+            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(jpgFilePath));
+            if (bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos)) {
+                bos.flush();
+            }
+            bos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            bitmap.recycle();
+            bitmap = null;
+        }
+        //删除非JPG照片
+        if (!pngFilePath.equals(jpgFilePath)) {
+            File oldImg = new File(pngFilePath);
+            oldImg.delete();
+        }
+        sendEvent();
+    }
+
 
     public void sendEvent() {
         VideoEvent videoEvent = new VideoEvent();
@@ -407,6 +445,7 @@ public class VideoRecordingActivity extends BaseManagerActivity<VideoRecordingPr
         EventBus.getDefault().post(videoEvent);
         finish();
     }
+
 
     @Override
     public void showMessage(@NonNull String message) {

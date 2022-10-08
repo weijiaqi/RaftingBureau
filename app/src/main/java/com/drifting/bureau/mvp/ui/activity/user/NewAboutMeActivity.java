@@ -25,6 +25,7 @@ import com.bumptech.glide.request.transition.Transition;
 import com.drifting.bureau.R;
 import com.drifting.bureau.WebUrlConstant;
 import com.drifting.bureau.base.BaseManagerActivity;
+import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.ui.activity.index.AnswerResultActivity;
 import com.drifting.bureau.mvp.ui.activity.index.LaboratoryActivity;
 import com.drifting.bureau.mvp.ui.activity.index.TeaShopActivity;
@@ -77,7 +78,7 @@ public class NewAboutMeActivity extends BaseManagerActivity {
     @BindView(R.id.rl_bg)
     RelativeLayout mRlBg;
     private SpannableStringBuilder passerNikename, passerFaction, passerIdentity;
-
+    private UserInfoEntity userInfoEntity;
 
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, NewAboutMeActivity.class);
@@ -107,38 +108,39 @@ public class NewAboutMeActivity extends BaseManagerActivity {
     public void getUserInfo() {
         RequestUtil.create().userplayer(Preferences.getUserId(), entity -> {
             if (entity != null && entity.getCode() == 200) {
-                GlideUtil.create().loadLongImage(this, entity.getData().getUser().getMascot(), mIvPlayBear);
-                passerNikename = SpannableUtil.getBuilder(this, "昵称：").setForegroundColor(R.color.color_66).setTextSize(12).append(entity.getData().getUser().getName()).setForegroundColor(R.color.color_00).setTextSize(14).setBold().build();
+                userInfoEntity=entity.getData();
+                GlideUtil.create().loadLongImage(this, userInfoEntity.getUser().getMascot(), mIvPlayBear);
+                passerNikename = SpannableUtil.getBuilder(this, "昵称：").setForegroundColor(R.color.color_66).setTextSize(12).append(userInfoEntity.getUser().getName()).setForegroundColor(R.color.color_00).setTextSize(14).setBold().build();
                 mTvNikeName.setText(passerNikename);
-                passerFaction = SpannableUtil.getBuilder(this, "派系：").setForegroundColor(R.color.color_66).setTextSize(12).append(entity.getData().getPlanet().getName()).setForegroundColor(R.color.color_00).setTextSize(14).setBold().build();
+                passerFaction = SpannableUtil.getBuilder(this, "派系：").setForegroundColor(R.color.color_66).setTextSize(12).append(userInfoEntity.getPlanet().getName()).setForegroundColor(R.color.color_00).setTextSize(14).setBold().build();
                 mTvFaction.setText(passerFaction);
-                passerIdentity = SpannableUtil.getBuilder(this, "身份：").setForegroundColor(R.color.color_66).setTextSize(12).append(entity.getData().getUser().getLevel_name()).setForegroundColor(R.color.color_00).setTextSize(14).setBold().build();
+                passerIdentity = SpannableUtil.getBuilder(this, "身份：").setForegroundColor(R.color.color_66).setTextSize(12).append(userInfoEntity.getUser().getLevel_name()).setForegroundColor(R.color.color_00).setTextSize(14).setBold().build();
                 mTvIdentity.setText(passerIdentity);
 
-                 //背景
-                GlideUtil.create().loadViewLongImage(this, WebUrlConstant.ABOUT_DEF +"/android/"+ entity.getData().getPlanet().getLevel() + ".jpg", mRlBg);
+                //背景
+                GlideUtil.create().loadViewLongImage(this, WebUrlConstant.ABOUT_DEF + "/android/" +userInfoEntity.getPlanet().getLevel() + ".jpg", mRlBg);
                 //底部背景
-                GlideUtil.create().loadViewLongImage(this, entity.getData().getPlanet().getLevel() == 11 ? WebUrlConstant.BOOTOM_DEF_11 : WebUrlConstant.BOOTOM_DEF, mLlBottom);
+                GlideUtil.create().loadViewLongImage(this, userInfoEntity.getPlanet().getLevel() == 11 ? WebUrlConstant.BOOTOM_DEF_11 : WebUrlConstant.BOOTOM_DEF, mLlBottom);
                 //查看我得属性背景
-                GlideUtil.create().loadViewLongImage(this, WebUrlConstant.ABOUT_DEF + entity.getData().getPlanet().getLevel() + "/attr.png", mTvAttr);
+                GlideUtil.create().loadViewLongImage(this, WebUrlConstant.ABOUT_DEF +userInfoEntity.getPlanet().getLevel() + "/attr.png", mTvAttr);
                 //前往派系
-                GlideUtil.create().loadViewLongImage(this, WebUrlConstant.ABOUT_DEF + entity.getData().getPlanet().getLevel() + "/galaxy.png", mTvGalaxy);
+                GlideUtil.create().loadViewLongImage(this, WebUrlConstant.ABOUT_DEF + userInfoEntity.getPlanet().getLevel() + "/galaxy.png", mTvGalaxy);
                 // 进入个人星球
-                GlideUtil.create().loadViewLongImage(this, WebUrlConstant.ABOUT_DEF + entity.getData().getPlanet().getLevel() + "/person.png", mTvPerson);
+                GlideUtil.create().loadViewLongImage(this, WebUrlConstant.ABOUT_DEF + userInfoEntity.getPlanet().getLevel() + "/person.png", mTvPerson);
                 // 进入个人星球背景
-                GlideUtil.create().loadLongImage(this, WebUrlConstant.ABOUT_DEF + entity.getData().getPlanet().getLevel() + "/personBg.png", mIvPersonBg);
+                GlideUtil.create().loadLongImage(this, WebUrlConstant.ABOUT_DEF + userInfoEntity.getPlanet().getLevel() + "/personBg.png", mIvPersonBg);
                 //订单记录
-                GlideUtil.create().loadViewLongImage(this, WebUrlConstant.ABOUT_DEF + entity.getData().getPlanet().getLevel() + "/record.png", mTvOrderRecord);
+                GlideUtil.create().loadViewLongImage(this, WebUrlConstant.ABOUT_DEF + userInfoEntity.getPlanet().getLevel() + "/record.png", mTvOrderRecord);
                 //订单记录
-                GlideUtil.create().loadViewLongImage(this, WebUrlConstant.ABOUT_DEF + entity.getData().getPlanet().getLevel() + "/record.png", mTvOrderRecord);
+                GlideUtil.create().loadViewLongImage(this, WebUrlConstant.ABOUT_DEF + userInfoEntity.getPlanet().getLevel() + "/record.png", mTvOrderRecord);
                 //实体门店
-                GlideUtil.create().loadViewLongImage(this, WebUrlConstant.ABOUT_DEF + entity.getData().getPlanet().getLevel() + "/shop.png", mTvPhysicalStore);
+                GlideUtil.create().loadViewLongImage(this, WebUrlConstant.ABOUT_DEF + userInfoEntity.getPlanet().getLevel() + "/shop.png", mTvPhysicalStore);
                 //星际战队
-                GlideUtil.create().loadViewLongImage(this, WebUrlConstant.ABOUT_DEF + entity.getData().getPlanet().getLevel() + "/team.png", mTvStarTroopers);
+                GlideUtil.create().loadViewLongImage(this, WebUrlConstant.ABOUT_DEF + userInfoEntity.getPlanet().getLevel() + "/team.png", mTvStarTroopers);
                 //  漂流轨迹
-                GlideUtil.create().loadViewLongImage(this, WebUrlConstant.ABOUT_DEF + entity.getData().getPlanet().getLevel() + "/track.png", mTvDriftTrack);
+                GlideUtil.create().loadViewLongImage(this, WebUrlConstant.ABOUT_DEF + userInfoEntity.getPlanet().getLevel() + "/track.png", mTvDriftTrack);
                 //圆盘
-                GlideUtil.create().loadLongImage(this, WebUrlConstant.ABOUT_DEF + entity.getData().getPlanet().getLevel() + "/turnplate.png", mIvTurnplate);
+                GlideUtil.create().loadLongImage(this, WebUrlConstant.ABOUT_DEF + userInfoEntity.getPlanet().getLevel() + "/turnplate.png", mIvTurnplate);
 
             }
         });
@@ -146,7 +148,7 @@ public class NewAboutMeActivity extends BaseManagerActivity {
     }
 
 
-    @OnClick({R.id.toolbar_back, R.id.iv_right, R.id.tv_drift_track, R.id.tv_star_troopers, R.id.tv_physical_store, R.id.tv_order_record, R.id.tv_to_the_galaxy,R.id.tv_attr,R.id.tv_change_mode,R.id.tv_person})
+    @OnClick({R.id.toolbar_back, R.id.iv_right, R.id.tv_drift_track, R.id.tv_star_troopers, R.id.tv_physical_store, R.id.tv_order_record, R.id.tv_to_the_galaxy, R.id.tv_attr, R.id.tv_change_mode, R.id.tv_person})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
@@ -172,13 +174,15 @@ public class NewAboutMeActivity extends BaseManagerActivity {
                     LaboratoryActivity.start(this, false);
                     break;
                 case R.id.tv_attr: //查看我得属性
-                    AnswerResultActivity.start(this,false);
+                    AnswerResultActivity.start(this, false);
                     break;
                 case R.id.tv_change_mode:  //跳转到派系星球
-                    ArPaiXiXingQiuActivity.start(this,false);
+                    if (userInfoEntity!=null){
+                        ArPaiXiXingQiuActivity.start(this, userInfoEntity.getPlanet().getLevel(),false);
+                    }
                     break;
                 case R.id.tv_person:  //进入个人星球
-                    ArGeRenXingQiuActivity.start(this,false);
+                    ArGeRenXingQiuActivity.start(this, false);
                     break;
             }
         }

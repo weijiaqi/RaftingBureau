@@ -30,8 +30,7 @@ import butterknife.OnClick;
  * @Time : 2022/5/17 16:04
  */
 public class VideoActivity extends BaseManagerActivity {
-    @BindView(R.id.toolbar_title)
-    TextView mToobarTitle;
+
     @BindView(R.id.video_player)
     StandardGSYVideoPlayer videoPlayer;
     private static final String EXTRA_URI = "extra_uri";
@@ -58,13 +57,15 @@ public class VideoActivity extends BaseManagerActivity {
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
-        mToobarTitle.setText("查看视频");
+
         uri = getString(EXTRA_URI);
         videoPlayer.setUp(uri, true, "");
         //增加title
         videoPlayer.getTitleTextView().setVisibility(View.GONE);
         //设置返回键
-        videoPlayer.getBackButton().setVisibility(View.GONE);
+        videoPlayer.getBackButton().setOnClickListener(v -> {
+            finish();
+        });
 
 
         //设置全屏按键功能,这是使用的是选择屏幕，而不是全屏

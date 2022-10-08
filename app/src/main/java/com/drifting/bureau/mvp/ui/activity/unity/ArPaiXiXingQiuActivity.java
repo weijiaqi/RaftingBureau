@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -52,9 +53,12 @@ public class ArPaiXiXingQiuActivity extends BaseManagerActivity implements IUnit
     @BindView(R.id.rl_right)
     RelativeLayout mRlright;
     protected UnityPlayer mUnityPlayer; // don't change the name of this variable; referenced from native code
+    private int level;
+    private static final String INTENT_LEVEL = "intent_level";
 
-    public static void start(Context context, boolean closePage) {
+    public static void start(Context context, int level, boolean closePage) {
         Intent intent = new Intent(context, ArPaiXiXingQiuActivity.class);
+        intent.putExtra(INTENT_LEVEL, level);
         context.startActivity(intent);
         if (closePage) ((Activity) context).finish();
     }
@@ -75,7 +79,7 @@ public class ArPaiXiXingQiuActivity extends BaseManagerActivity implements IUnit
         setStatusBarHeight(mTvBar);
         mRlright.setVisibility(View.GONE);
         mTvChangeMode.setText("返回");
-
+        level = getInt(INTENT_LEVEL);
         String cmdLine = updateUnityCommandLineArguments(getIntent().getStringExtra("unity"));
         getIntent().putExtra("unity", cmdLine);
         mUnityPlayer = new UnityPlayer(this, this);
@@ -87,9 +91,8 @@ public class ArPaiXiXingQiuActivity extends BaseManagerActivity implements IUnit
         new Handler().postDelayed(() -> {
             anim.stop();
             mRlAnim.setVisibility(View.GONE);
+            mUnityPlayer.UnitySendMessage("Main Camera", "Controlfactions", level + "");
         }, 4500);
-
-
         mUnityPlayer.UnitySendMessage("Main Camera", "OpenPaiXiXingQiu", "");
     }
 

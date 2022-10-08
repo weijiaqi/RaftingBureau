@@ -394,7 +394,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
             RequestUtil.create().platformtimes(explore_id, entity1 -> {
                 if (entity1 != null && entity1.getCode() == 200) {
                     total = entity1.getData().getAttend_times() + entity1.getData().getCommon_times();
-                    mapSendDriftDialog = new MapSendDriftDialog(getActivity(), 2, commentDetailsEntity, relevanceBean, total,messageBean.getFree());
+                    mapSendDriftDialog = new MapSendDriftDialog(getActivity(), 2, commentDetailsEntity, relevanceBean, total, messageBean.getFree());
                     mapSendDriftDialog.show();
                     mapSendDriftDialog.setOnContentClickCallback(content -> {
                         if (RBureauApplication.latLng != null) {
@@ -412,16 +412,16 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
                         if (mPresenter != null) {
                             showLoading();
                             if (type == 1) {//视频
-                                mPresenter.compressVideo(DriftTrackMapActivity.this, type, word, commentDetailsEntity.getMessage_id(), path, list != null ? new File(list.get(0).toString()) : null, cover != null ? BitmapUtil.saveBitmapFile(getActivity(), cover) : null, tag,messageBean.getFree());
+                                mPresenter.compressVideo(DriftTrackMapActivity.this, type, word, commentDetailsEntity.getMessage_id(), path, list != null ? new File(list.get(0).toString()) : null, cover != null ? BitmapUtil.saveBitmapFile(getActivity(), cover) : null, tag, messageBean.getFree());
                             } else {
-                                mPresenter.createwithword(type, word, commentDetailsEntity.getMessage_id(), path != null ? new File(path) : null, list != null ? new File(list.get(0).toString()) : null, cover != null ? BitmapUtil.saveBitmapFile(this, cover) : null, tag,messageBean.getFree());
+                                mPresenter.createwithword(type, word, commentDetailsEntity.getMessage_id(), path != null ? new File(path) : null, list != null ? new File(list.get(0).toString()) : null, cover != null ? BitmapUtil.saveBitmapFile(this, cover) : null, tag, messageBean.getFree());
                             }
                         }
                     });
                     mapSendDriftDialog.setOnClickCallback(type -> {
                         if (type == ReleaseDriftingDialog.SELECT_FINISH) {
                             RequestUtil.create().messagethrow(message_id, entity2 -> {
-                                if (entity2.getCode() == 200) {
+                                if (entity2!=null &&entity2.getCode() == 200) {
                                     mapSendDriftDialog.dismiss();
                                     publicDialog = new PublicDialog(this);
                                     publicDialog.show();
@@ -454,7 +454,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
      * @description 参与话题
      */
     public void participate() {
-        if (total > 0 ||messageBean.getFree()==1) {   //有免费次数
+        if (total > 0 || messageBean.getFree() == 1) {   //有免费次数
             if (mPresenter != null) {
                 mPresenter.messageattending(commentDetailsEntity.getMessage_id());
             }
@@ -648,9 +648,13 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
         this.user_id2 = user_id;
         RequestUtil.create().userplayer(user_id + "", entity -> {
             if (entity != null && entity.getCode() == 200) {
-                mTvToName.setText(entity.getData().getUser().getName());
+                if (!TextUtils.isEmpty(entity.getData().getUser().getName())) {
+                    mTvToName.setText(entity.getData().getUser().getName());
+                }
                 GlideUtil.create().loadLongImage(this, entity.getData().getUser().getMascot(), mIvMastorRight);
-                mTvRightName.setText("来自" + entity.getData().getPlanet().getName());
+                if (!TextUtils.isEmpty(entity.getData().getPlanet().getName())) {
+                    mTvRightName.setText("来自" + entity.getData().getPlanet().getName());
+                }
                 if (user_id == Integer.parseInt(Preferences.getUserId())) {
                     mRlRIghtAddFriends.setVisibility(View.GONE);
                 } else {
@@ -1278,9 +1282,9 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
                     if (mPresenter != null) {
                         showLoading();
                         if (type == 1) { //视频
-                            mPresenter.compressVideo(DriftTrackMapActivity.this, type, word, 0, path, list != null ? new File(list.get(0).toString()) : null, cover != null ? BitmapUtil.saveBitmapFile(getActivity(), cover) : null, tag,isPay?0:1);
+                            mPresenter.compressVideo(DriftTrackMapActivity.this, type, word, 0, path, list != null ? new File(list.get(0).toString()) : null, cover != null ? BitmapUtil.saveBitmapFile(getActivity(), cover) : null, tag, isPay ? 0 : 1);
                         } else {
-                            mPresenter.createwithword(type, word, 0, path != null ? new File(path) : null, list != null ? new File(list.get(0).toString()) : null, cover != null ? BitmapUtil.saveBitmapFile(getActivity(), cover) : null, tag,isPay?0:1);
+                            mPresenter.createwithword(type, word, 0, path != null ? new File(path) : null, list != null ? new File(list.get(0).toString()) : null, cover != null ? BitmapUtil.saveBitmapFile(getActivity(), cover) : null, tag, isPay ? 0 : 1);
                         }
                     }
                 });

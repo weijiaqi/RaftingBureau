@@ -79,6 +79,7 @@ public class LaboratoryActivity extends BaseManagerActivity {
                     Intent intent = new Intent(this, LaboratoryEnterActivity.class);
                     startActivity(intent);
                     overridePendingTransition(0, 0);
+                    finish();
                     break;
             }
         }

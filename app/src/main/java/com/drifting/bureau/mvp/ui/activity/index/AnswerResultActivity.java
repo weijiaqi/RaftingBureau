@@ -35,6 +35,7 @@ import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.SpannableUtil;
 import com.drifting.bureau.util.ToastUtil;
+import com.drifting.bureau.util.ViewUtil;
 import com.drifting.bureau.view.radar.RadarItem;
 import com.drifting.bureau.view.radar.RadarView;
 import com.jess.arms.di.component.AppComponent;
@@ -171,11 +172,11 @@ public class AnswerResultActivity extends BaseManagerActivity<MoveAwayPlanetaryP
                 if (next.getPl_id() == entity.getPlanet().getPl_id()) {
                     mTvFaction.setTextColor(getResources().getColor(next.getColor()));
                 }
-                if (next.getPl_id()==entity.getPlanet().getAgree_id()) {
+                if (next.getPl_id() == entity.getPlanet().getAgree_id()) {
                     passerFit = SpannableUtil.getBuilder(this, "契合派系: ").setForegroundColor(R.color.color_cc).setTextSize(11).append(entity.getPlanet().getAgree_with()).setForegroundColor(next.getColor()).setTextSize(14).setBold().build();
                     mTvFit.setText(passerFit);
                 }
-                if (next.getPl_id()==entity.getPlanet().getConflict_id()) {
+                if (next.getPl_id() == entity.getPlanet().getConflict_id()) {
                     passerConflict = SpannableUtil.getBuilder(this, "冲突派系: ").setForegroundColor(R.color.color_cc).setTextSize(11).append(entity.getPlanet().getConflict_with()).setForegroundColor(next.getColor()).setTextSize(14).setBold().build();
                     mTvConflict.setText(passerConflict);
                 }
@@ -221,7 +222,7 @@ public class AnswerResultActivity extends BaseManagerActivity<MoveAwayPlanetaryP
             characterTraitsAdapter.setData(stringList);
 
             mTvKeyWords.setText(entity.getPlanet().getKey_words());
-            GlideUtil.create().loadLongImage(this,entity.getPlanet().getCareer_image(),mIvCareerImage);
+            GlideUtil.create().loadLongImage(this, entity.getPlanet().getCareer_image(), mIvCareerImage);
 
         }
     }
@@ -231,8 +232,16 @@ public class AnswerResultActivity extends BaseManagerActivity<MoveAwayPlanetaryP
 
     }
 
+    public void showLoading() {
+        ViewUtil.create().show(this);
+    }
 
-    @OnClick({R.id.toolbar_back,R.id.iv_enter_prime})
+    public void hideLoading() {
+        ViewUtil.create().dismiss();
+    }
+
+
+    @OnClick({R.id.toolbar_back, R.id.iv_enter_prime})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
@@ -240,7 +249,7 @@ public class AnswerResultActivity extends BaseManagerActivity<MoveAwayPlanetaryP
                     finish();
                     break;
                 case R.id.iv_enter_prime:
-                    NewAboutMeActivity.start(this,false);
+                    NewAboutMeActivity.start(this, false);
                     break;
             }
         }

@@ -76,7 +76,7 @@ public class StarDistributionActivity extends BaseManagerActivity<PlanetarySelec
                     finish();
                     break;
                 case R.id.tv_star_field_go:
-                    LaboratoryActivity.start(this, false);
+                    LaboratoryActivity.start(this, true);
                     break;
             }
         }

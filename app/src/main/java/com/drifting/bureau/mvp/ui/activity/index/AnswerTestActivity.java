@@ -20,6 +20,7 @@ import androidx.annotation.Nullable;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.base.BaseManagerActivity;
+import com.drifting.bureau.data.event.AnswerCompletedEvent;
 import com.drifting.bureau.di.component.DaggerAnswerTestComponent;
 import com.drifting.bureau.mvp.contract.MoveAwayPlanetaryContract;
 import com.drifting.bureau.mvp.model.entity.QuestionAssessEntity;
@@ -37,6 +38,8 @@ import com.drifting.bureau.video.EmptyControlVideo;
 import com.jess.arms.di.component.AppComponent;
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
 import com.shuyu.gsyvideoplayer.listener.GSYSampleCallBack;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -94,7 +97,7 @@ public class AnswerTestActivity extends BaseManagerActivity<MoveAwayPlanetaryPre
     @BindView(R.id.tv_progress)
     TextView mTvProgress;
     private static final char[] data = new char[]{'一', '二', '三', '四', '五',
-            '六', '七', '八'};
+            '六', '七', '八','九'};
     private SpannableStringBuilder passer, passerStage;
     private List<QuestionEntity> questionEntityList;
     private List<QuestionStagesEntity> questionStagesEntityList;
@@ -230,9 +233,11 @@ public class AnswerTestActivity extends BaseManagerActivity<MoveAwayPlanetaryPre
     public void onQuestionAssessSuccess(QuestionAssessEntity entity) {
         if (entity != null) {
             Preferences.putHashMapData(null);
-//            AnswerCompletedEvent answerCompletedEvent = new AnswerCompletedEvent();
-//            answerCompletedEvent.setPl_id(entity.getPlanet().getPl_id());
-//            EventBus.getDefault().post(answerCompletedEvent);
+            AnswerCompletedEvent answerCompletedEvent = new AnswerCompletedEvent();
+            answerCompletedEvent.setPl_id(entity.getPlanet().getPl_id());
+            EventBus.getDefault().post(answerCompletedEvent);
+
+
             AnswerResultActivity.start(this, true);
         }
 

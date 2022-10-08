@@ -18,19 +18,10 @@
     <include layout="@layout/include_index_title" />
 
 
-    <ImageView
-        android:id="@+id/iv_enter_main"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ll_toolbar"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="135dp"
-        android:src="@drawable/search_system" />
-
     <FrameLayout
         android:id="@+id/frame"
         android:layout_width="match_parent"
-        android:layout_height="510dp"
+        android:layout_height="460dp"
         android:layout_alignParentBottom="true"
         android:clipChildren="false">
 
@@ -51,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="270dp">
+        android:layout_marginBottom="220dp">
 
         <ImageView
             android:id="@+id/iv_rocket"
@@ -147,10 +138,9 @@
         android:drawablePadding="4dp"
         android:gravity="center_horizontal"
         android:text=""
-        android:visibility="gone"
         android:textColor="@color/white"
         android:textSize="12sp"
-         />
+        android:visibility="gone" />
 
 
     <TextView
@@ -183,6 +173,14 @@
         android:textStyle="bold"
         android:visibility="invisible" />
 
+    <ImageView
+        android:id="@+id/iv_enter_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_toolbar"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="135dp"
+        android:src="@drawable/search_system" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
