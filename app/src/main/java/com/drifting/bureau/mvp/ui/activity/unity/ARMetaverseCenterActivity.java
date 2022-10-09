@@ -193,7 +193,7 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
         if (userInfoEntity != null) {
             if (userInfoEntity.getPlanet().getLevel() == 1) {
                 toggleType = 2;
-                mUnityPlayer.UnitySendMessage("Main Camera", "OpenAircraft", "");
+                mUnityPlayer.UnitySendMessage("Main Camera", "OpenAircraft", userInfoEntity.getPlanet().getLevel() + "");
             } else {
                 runOnUiThread(() -> {
                     if (jumpPlanetDialog == null) {
@@ -231,7 +231,7 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
                     if (mPresenter != null) {
                         mPresenter.questionlist();
                     }
-               //    AnswerTestActivity.start(this, false);
+                    //    AnswerTestActivity.start(this, false);
                 }
             });
 
@@ -581,8 +581,8 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
                     questionEntityList.get(i).setPostion(i + 1);
                 }
             }
-            Log.e("111111111111111111",GsonUtil.toJson(questionEntityList));
-            mUnityPlayer.UnitySendMessage("Main Camera", "OpenPsychological", " [{\"A\":\"我会被情感羁绊，自己或别人能通过感情影响我\",\"B\":\"感情就是感情，但是要按事务的规则和条理去处理\",\"postion\":1,\"q_type\":0,\"question\":\"当处理和执行事务时，你会如何考虑？\",\"question_id\":8},{\"A\":\"他们仅需要一小段时间就能了解我是怎样的人\",\"B\":\"他们可能需要很久和我接触，才能了解我的性格和习惯\",\"postion\":2,\"q_type\":0,\"question\":\"在别人对你的印象中，你觉得通常别人要花费\",\"question_id\":96},{\"A\":\"每分每秒我都觉得不可以浪费\",\"B\":\"人的一生很长，我不必把自己搞得很紧张，过一天算一天多好\",\"postion\":3,\"q_type\":0,\"question\":\"在你看来，时间是很重要的事情吗？\",\"question_id\":11},{\"A\":\"我会让他找出原有解决的方法，按照原有方法去做就轻松解决难题，不要多想其他的方法才更实际\",\"B\":\"我会告诉他，唯有创新创造更好的做事方法才是提升自己的道路，不要沿用他人成功的方法\",\"postion\":4,\"q_type\":0,\"question\":\"如果你的朋友在生活或工作中遇到困难需要你给予指导意见时，你更倾向于告诉他\",\"question_id\":91},{\"A\":\"太好了，前人之路后人之师，都是成功过，我当然愿意按照这方法去做\",\"B\":\"他做过的不一定我去做就行，而且这样我是没有掌握到新的方法，我会尝试新的方法\",\"postion\":5,\"q_type\":0,\"question\":\"当别人看到你做着的一件事情时，告诉你他曾做过一模一样的事，把他成功的方法告诉你后，你会\",\"question_id\":101},{\"A\":\"建造\",\"B\":\"发明\",\"postion\":6,\"q_type\":0,\"question\":\"在建造与发明之间，你认为哪个词汇是更重要的？\",\"question_id\":23},{\"A\":\"我会选择和最好的朋友合租在一起，这样有伴一起生活才有意思\",\"B\":\"重新开始的话，我宁愿自己一个居住，住处就是我独处的个人空间，这让我放松\",\"postion\":7,\"q_type\":0,\"question\":\"如果漂流在异地，你能重新选择自己的生活方式，来，选择你喜欢的方式\",\"question_id\":66},{\"A\":\"我觉得事实就是最扎实的，我愿意选择一些讲述事实的课程\",\"B\":\"我认为必须先有概念，没有概念就没有继续的延伸，我选择讲述概念的课程\",\"postion\":8,\"q_type\":0,\"question\":\"假设清华北大聘请了你，问你意愿，你会选择教授哪种课程？\",\"question_id\":60}]");
+            Log.e("111111111111111111", GsonUtil.toJson(questionEntityList));
+            mUnityPlayer.UnitySendMessage("Main Camera", "OpenPsychological", GsonUtil.toJson(questionEntityList));
         }
     }
 

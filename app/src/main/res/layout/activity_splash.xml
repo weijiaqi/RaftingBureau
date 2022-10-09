@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:background="@color/color_00">
-
 
 
     <com.drifting.bureau.video.EmptyControlVideo
@@ -15,16 +15,16 @@
 
     <TextView
         android:id="@+id/tv_next"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="40dp"
-        android:layout_marginRight="18dp"
-        android:text="跳过"
-        android:textSize="12sp"
-        android:textColor="@color/white"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/track_frame"
         android:gravity="center"
-        android:background="@drawable/track_frame" />
+        android:text="跳过"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:visibility="gone" />
 
 </RelativeLayout>

@@ -243,6 +243,5 @@
         </RelativeLayout>
     </RelativeLayout>
 
-
     <include layout="@layout/layout_index_guide_view" />
 </RelativeLayout>

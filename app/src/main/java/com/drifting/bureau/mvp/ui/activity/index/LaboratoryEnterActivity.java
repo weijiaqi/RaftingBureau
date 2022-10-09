@@ -99,8 +99,6 @@ public class LaboratoryEnterActivity extends BaseManagerActivity {
         AnimatorUtil.setShowAnimation(mLlToolBar, 3000, true);
         AnimatorUtil.ScaleAnim(mFlFindSystem, 2000, 1f, 0.8f, 0.9f);
 
-
-
     }
 
 
