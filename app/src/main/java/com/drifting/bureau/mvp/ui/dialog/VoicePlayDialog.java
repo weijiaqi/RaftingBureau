@@ -14,6 +14,12 @@ import com.drifting.bureau.util.VideoUtil;
 import com.drifting.bureau.view.VoiceWave;
 import com.jess.arms.base.BaseDialog;
 
+/**
+ * @description   语音播放对话框
+ * @author 卫佳琪1
+ * @time 19:25 19:25
+ */
+
 public class VoicePlayDialog extends BaseDialog implements View.OnClickListener{
 
     private VoiceWave videoView;

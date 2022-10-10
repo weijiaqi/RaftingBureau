@@ -2,6 +2,7 @@ package com.drifting.bureau.mvp.model;
 import android.app.Application;
 
 import com.drifting.bureau.app.api.ApiService;
+import com.drifting.bureau.mvp.model.entity.BoxEntity;
 import com.drifting.bureau.mvp.model.entity.CommentDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
 import com.drifting.bureau.mvp.model.entity.CreatewithfileEntity;
@@ -14,6 +15,8 @@ import com.jess.arms.mvp.BaseModel;
 import com.jess.arms.di.scope.ActivityScope;
 import javax.inject.Inject;
 import com.drifting.bureau.mvp.contract.DriftTrackMapContract;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
@@ -82,5 +85,10 @@ public class DriftTrackMapModel extends BaseModel implements DriftTrackMapContra
     @Override
     public Observable<BaseEntity<CreateOrderEntity>> createOrder(int type_id, String sku_codes) {
         return mRepositoryManager.obtainRetrofitService(ApiService.class).createOrder(type_id, sku_codes);
+    }
+
+    @Override
+    public Observable<BaseEntity<List<BoxEntity>>> getbox() {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).getbox();
     }
 }

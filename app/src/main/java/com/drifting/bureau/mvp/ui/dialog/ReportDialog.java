@@ -14,6 +14,12 @@ import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.jess.arms.base.BaseDialog;
 
+/**
+ * @description  举报
+ * @author 卫佳琪1
+ * @time 18:07 18:07
+ */
+
 public class ReportDialog extends BaseDialog implements View.OnClickListener {
 
     private CheckBox mCkYellow, mCkPolitics, mCkVerbal, mCkOther;

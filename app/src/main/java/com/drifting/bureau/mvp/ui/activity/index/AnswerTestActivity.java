@@ -238,7 +238,7 @@ public class AnswerTestActivity extends BaseManagerActivity<MoveAwayPlanetaryPre
             EventBus.getDefault().post(answerCompletedEvent);
 
 
-            AnswerResultActivity.start(this, true);
+            AnswerResultActivity.start(this, 1,true);
         }
 
     }

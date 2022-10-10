@@ -6,11 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,6 +30,7 @@ import com.drifting.bureau.mvp.model.entity.QuestionEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionStagesEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.presenter.MoveAwayPlanetaryPresenter;
+import com.drifting.bureau.mvp.ui.activity.unity.ARMetaverseCenterActivity;
 import com.drifting.bureau.mvp.ui.activity.user.AboutMeActivity;
 import com.drifting.bureau.mvp.ui.activity.user.NewAboutMeActivity;
 import com.drifting.bureau.mvp.ui.adapter.CharacterTraitsAdapter;
@@ -91,8 +94,12 @@ public class AnswerResultActivity extends BaseManagerActivity<MoveAwayPlanetaryP
     private List<AnswerColorEntiy> list;
     private List<RadarItem> radarItemList;
 
-    public static void start(Context context, boolean closePage) {
+    private static final String INTENT_TYPE = "intent_type";
+    private int mType = -1;
+
+    public static void start(Context context, int type, boolean closePage) {
         Intent intent = new Intent(context, AnswerResultActivity.class);
+        intent.putExtra(INTENT_TYPE, type);
         context.startActivity(intent);
         if (closePage) ((Activity) context).finish();
     }
@@ -117,6 +124,7 @@ public class AnswerResultActivity extends BaseManagerActivity<MoveAwayPlanetaryP
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
         setStatusBarHeight(mTvBar);
+        mType = getInt(INTENT_TYPE);
         mToolBarTitle.setText("结果分析");
 
         list = new ArrayList<>();
@@ -241,12 +249,13 @@ public class AnswerResultActivity extends BaseManagerActivity<MoveAwayPlanetaryP
     }
 
 
+
     @OnClick({R.id.toolbar_back, R.id.iv_enter_prime})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
                 case R.id.toolbar_back:
-                    finish();
+                    finshActivity();
                     break;
                 case R.id.iv_enter_prime:
                     NewAboutMeActivity.start(this, false);
@@ -255,6 +264,24 @@ public class AnswerResultActivity extends BaseManagerActivity<MoveAwayPlanetaryP
         }
     }
 
+    /**
+     * 注意:
+     * super.onBackPressed()会自动调用finish()方法,关闭当前Activity.
+     */
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finshActivity();
+    }
+
+
+    public void finshActivity(){
+        if (mType == 2) {
+            ARMetaverseCenterActivity.start(this, true);
+        } else {
+            finish();
+        }
+    }
 
     @Override
     public void onNetError() {

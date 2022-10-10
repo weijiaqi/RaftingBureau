@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.baidu.mapapi.model.LatLng;
 import com.drifting.bureau.app.application.RBureauApplication;
+import com.drifting.bureau.mvp.model.entity.BoxEntity;
 import com.drifting.bureau.mvp.model.entity.CommentDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
 import com.drifting.bureau.mvp.model.entity.CreatewithfileEntity;
@@ -227,7 +228,7 @@ public class DriftTrackMapPresenter extends BasePresenter<DriftTrackMapContract.
                         .output(filepath)
                         .outWidth(originWidth)
                         .outHeight(originHeight)
-                        .bitrate(bitrate / 5)
+                        .bitrate(bitrate / 2)
                         .process();
             } catch (Exception e) {
                 success = false;
@@ -402,6 +403,33 @@ public class DriftTrackMapPresenter extends BasePresenter<DriftTrackMapContract.
                     }
                 });
     }
+
+
+
+    /**
+     * 探索方式列表
+     */
+    public void getBox() {
+        mModel.getbox().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseEntity<List<BoxEntity>>>(mErrorHandler) {
+                    @Override
+                    public void onNext(BaseEntity<List<BoxEntity>> baseEntity) {
+                        if (mRootView != null) {
+                            if (baseEntity.getCode() == 200) {
+                                mRootView.OnBoxSuccess(baseEntity.getData());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();

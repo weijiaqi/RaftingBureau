@@ -27,7 +27,7 @@ public class ApiProxy {
             OkHttpClient okHttpClient = new OkHttpClient.Builder()
 //                .readTimeout(20, TimeUnit.SECONDS)
 //                .writeTimeout(60, TimeUnit.SECONDS)
-                    .connectTimeout(20, TimeUnit.SECONDS)
+                    .connectTimeout(1000*180L, TimeUnit.SECONDS)
                     .addInterceptor(new CommonParInterceptor())
                     .build();
             Retrofit sRetrofit = new Retrofit.Builder()
@@ -45,7 +45,7 @@ public class ApiProxy {
     public static ApiService getDownLoad() {
         if (apiDownload == null) {
             OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                    .connectTimeout(20, TimeUnit.SECONDS)
+                    .connectTimeout(1000*180L, TimeUnit.SECONDS)
                     .addNetworkInterceptor(new DownLoadInterceptor())
                     .build();
             Retrofit retrofit = new Retrofit.Builder()

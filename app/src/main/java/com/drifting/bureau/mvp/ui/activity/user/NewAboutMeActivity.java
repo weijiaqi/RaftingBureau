@@ -37,6 +37,7 @@ import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.SpannableUtil;
 import com.drifting.bureau.util.TextUtil;
 import com.drifting.bureau.util.request.RequestUtil;
+import com.drifting.bureau.view.LetterSpacingTextView;
 import com.jess.arms.di.component.AppComponent;
 
 import butterknife.BindView;
@@ -77,6 +78,8 @@ public class NewAboutMeActivity extends BaseManagerActivity {
     ImageView mIvTurnplate;
     @BindView(R.id.rl_bg)
     RelativeLayout mRlBg;
+    @BindView(R.id.tv_password)
+    LetterSpacingTextView mTvPassWord;
     private SpannableStringBuilder passerNikename, passerFaction, passerIdentity;
     private UserInfoEntity userInfoEntity;
 
@@ -108,7 +111,7 @@ public class NewAboutMeActivity extends BaseManagerActivity {
     public void getUserInfo() {
         RequestUtil.create().userplayer(Preferences.getUserId(), entity -> {
             if (entity != null && entity.getCode() == 200) {
-                userInfoEntity=entity.getData();
+                userInfoEntity = entity.getData();
                 GlideUtil.create().loadLongImage(this, userInfoEntity.getUser().getMascot(), mIvPlayBear);
                 passerNikename = SpannableUtil.getBuilder(this, "昵称：").setForegroundColor(R.color.color_66).setTextSize(12).append(userInfoEntity.getUser().getName()).setForegroundColor(R.color.color_00).setTextSize(14).setBold().build();
                 mTvNikeName.setText(passerNikename);
@@ -118,11 +121,11 @@ public class NewAboutMeActivity extends BaseManagerActivity {
                 mTvIdentity.setText(passerIdentity);
 
                 //背景
-                GlideUtil.create().loadViewLongImage(this, WebUrlConstant.ABOUT_DEF + "/android/" +userInfoEntity.getPlanet().getLevel() + ".jpg", mRlBg);
+                GlideUtil.create().loadViewLongImage(this, WebUrlConstant.ABOUT_DEF + "/android/" + userInfoEntity.getPlanet().getLevel() + ".jpg", mRlBg);
                 //底部背景
                 GlideUtil.create().loadViewLongImage(this, userInfoEntity.getPlanet().getLevel() == 11 ? WebUrlConstant.BOOTOM_DEF_11 : WebUrlConstant.BOOTOM_DEF, mLlBottom);
                 //查看我得属性背景
-                GlideUtil.create().loadViewLongImage(this, WebUrlConstant.ABOUT_DEF +userInfoEntity.getPlanet().getLevel() + "/attr.png", mTvAttr);
+                GlideUtil.create().loadViewLongImage(this, WebUrlConstant.ABOUT_DEF + userInfoEntity.getPlanet().getLevel() + "/attr.png", mTvAttr);
                 //前往派系
                 GlideUtil.create().loadViewLongImage(this, WebUrlConstant.ABOUT_DEF + userInfoEntity.getPlanet().getLevel() + "/galaxy.png", mTvGalaxy);
                 // 进入个人星球
@@ -144,7 +147,8 @@ public class NewAboutMeActivity extends BaseManagerActivity {
 
             }
         });
-
+//        mTvPassWord.setLetterSpacing(20);
+//        mTvPassWord.setText("1234");
     }
 
 
@@ -174,17 +178,21 @@ public class NewAboutMeActivity extends BaseManagerActivity {
                     LaboratoryActivity.start(this, false);
                     break;
                 case R.id.tv_attr: //查看我得属性
-                    AnswerResultActivity.start(this, false);
+                    AnswerResultActivity.start(this, 1,false);
                     break;
                 case R.id.tv_change_mode:  //跳转到派系星球
-                    if (userInfoEntity!=null){
-                        ArPaiXiXingQiuActivity.start(this, userInfoEntity.getPlanet().getLevel(),false);
-                    }
+                    ArPaiXiXingQiuActivity.start(this, false);
                     break;
                 case R.id.tv_person:  //进入个人星球
                     ArGeRenXingQiuActivity.start(this, false);
                     break;
             }
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        RequestUtil.create().disDispose();
+        super.onDestroy();
     }
 }

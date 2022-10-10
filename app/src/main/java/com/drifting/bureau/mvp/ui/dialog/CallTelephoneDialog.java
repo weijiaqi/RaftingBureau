@@ -13,6 +13,11 @@ import androidx.annotation.NonNull;
 import com.drifting.bureau.R;
 import com.jess.arms.base.BaseDialog;
 
+/**
+ * @Description: 拨打电话
+ * @Author     : WeiJiaQI
+ * @Time       : 2022/10/9 18:04
+ */
 public class CallTelephoneDialog extends BaseDialog implements View.OnClickListener {
 
     private TextView mTvTelePhone, mTvCall, mTvCancel;

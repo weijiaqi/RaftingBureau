@@ -22,6 +22,12 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+/**
+ * @description  版本更新
+ * @author 卫佳琪1
+ * @time 18:07 18:07
+ */
+
 public class VersionUpdateDialog extends BaseDialog implements View.OnClickListener {
     private Context mContext;
     private TextView mTvVersionCode, mTvContent;

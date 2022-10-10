@@ -2,6 +2,7 @@ package com.drifting.bureau.mvp.contract;
 
 import android.app.Activity;
 
+import com.drifting.bureau.mvp.model.entity.BoxEntity;
 import com.drifting.bureau.mvp.model.entity.CommentDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
 import com.drifting.bureau.mvp.model.entity.CreatewithfileEntity;
@@ -12,6 +13,8 @@ import com.drifting.bureau.mvp.model.entity.SkuListEntity;
 import com.jess.arms.base.BaseEntity;
 import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IView;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
@@ -44,6 +47,8 @@ public interface DriftTrackMapContract {
 
         void onCreateOrderSuccess(CreateOrderEntity entity);
 
+        void OnBoxSuccess(List<BoxEntity> list);
+
         void onLocationSuccess();
 
         void onNetError();
@@ -68,5 +73,6 @@ public interface DriftTrackMapContract {
 
         Observable<BaseEntity<CreateOrderEntity>> createOrder(int type_id, String sku_codes);
 
+        Observable<BaseEntity<List<BoxEntity>>> getbox();
     }
 }

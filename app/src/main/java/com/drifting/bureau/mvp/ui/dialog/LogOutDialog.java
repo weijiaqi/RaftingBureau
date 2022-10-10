@@ -9,6 +9,12 @@ import androidx.annotation.NonNull;
 import com.drifting.bureau.R;
 import com.jess.arms.base.BaseDialog;
 
+/**
+ * @description  注销账户
+ * @author 卫佳琪1
+ * @time 18:06 18:06
+ */
+
 public class LogOutDialog extends BaseDialog implements View.OnClickListener {
     public static final int SELECT_FINISH = 0x01;
     private TextView mTvCofim, mTvCancel;

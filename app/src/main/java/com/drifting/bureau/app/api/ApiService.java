@@ -4,6 +4,7 @@ package com.drifting.bureau.app.api;
 import com.drifting.bureau.mvp.model.entity.AnnouncementEntity;
 import com.drifting.bureau.mvp.model.entity.BarrageEntity;
 import com.drifting.bureau.mvp.model.entity.BlindBoxRecordEntity;
+import com.drifting.bureau.mvp.model.entity.BoxEntity;
 import com.drifting.bureau.mvp.model.entity.BoxOpenEntity;
 import com.drifting.bureau.mvp.model.entity.CommentDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
@@ -829,4 +830,13 @@ public interface ApiService {
      */
     @GET("v/topic/tags/list")
     Observable<BaseEntity<List<TopicTagsEntity>>> tagslist();
+
+    /**
+     * 地图上保险柜
+     *
+     * @return
+     */
+    @GET("v/sdb/get_box")
+    Observable<BaseEntity<List<BoxEntity>>> getbox();
+
 }

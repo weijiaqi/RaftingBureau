@@ -14,6 +14,12 @@ import com.jess.arms.base.BaseDialog;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @description  空间站奖品预览
+ * @author 卫佳琪1
+ * @time 18:06 18:06
+ */
+
 public class PrizepreviewDialog extends BaseDialog {
     private RecyclerView mRcyPrize;
     private Context context;

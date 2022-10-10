@@ -213,7 +213,8 @@
                 android:textStyle="bold" />
 
 
-            <TextView
+            <com.drifting.bureau.view.LetterSpacingTextView
+                android:id="@+id/tv_password"
                 android:layout_width="102dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"

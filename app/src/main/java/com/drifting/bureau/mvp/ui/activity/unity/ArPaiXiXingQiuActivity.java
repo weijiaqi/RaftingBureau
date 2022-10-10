@@ -21,11 +21,14 @@ import androidx.annotation.Nullable;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.base.BaseManagerActivity;
+import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
 import com.drifting.bureau.mvp.ui.activity.user.AboutMeActivity;
 import com.drifting.bureau.mvp.ui.activity.user.MessageCenterActivity;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
+import com.drifting.bureau.util.ToastUtil;
+import com.drifting.bureau.util.request.RequestUtil;
 import com.hjq.shape.view.ShapeTextView;
 import com.jess.arms.di.component.AppComponent;
 import com.unity3d.player.IUnityPlayerLifecycleEvents;
@@ -53,12 +56,12 @@ public class ArPaiXiXingQiuActivity extends BaseManagerActivity implements IUnit
     @BindView(R.id.rl_right)
     RelativeLayout mRlright;
     protected UnityPlayer mUnityPlayer; // don't change the name of this variable; referenced from native code
-    private int level;
-    private static final String INTENT_LEVEL = "intent_level";
 
-    public static void start(Context context, int level, boolean closePage) {
+    private UserInfoEntity userInfoEntity;
+
+    public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, ArPaiXiXingQiuActivity.class);
-        intent.putExtra(INTENT_LEVEL, level);
+
         context.startActivity(intent);
         if (closePage) ((Activity) context).finish();
     }
@@ -79,7 +82,7 @@ public class ArPaiXiXingQiuActivity extends BaseManagerActivity implements IUnit
         setStatusBarHeight(mTvBar);
         mRlright.setVisibility(View.GONE);
         mTvChangeMode.setText("返回");
-        level = getInt(INTENT_LEVEL);
+
         String cmdLine = updateUnityCommandLineArguments(getIntent().getStringExtra("unity"));
         getIntent().putExtra("unity", cmdLine);
         mUnityPlayer = new UnityPlayer(this, this);
@@ -91,11 +94,29 @@ public class ArPaiXiXingQiuActivity extends BaseManagerActivity implements IUnit
         new Handler().postDelayed(() -> {
             anim.stop();
             mRlAnim.setVisibility(View.GONE);
-            mUnityPlayer.UnitySendMessage("Main Camera", "Controlfactions", level + "");
         }, 4500);
-        mUnityPlayer.UnitySendMessage("Main Camera", "OpenPaiXiXingQiu", "");
+
+        RequestUtil.create().userplayer(Preferences.getUserId(), entity -> {
+            if (entity != null && entity.getCode() == 200) {
+                userInfoEntity=entity.getData();
+                mUnityPlayer.UnitySendMessage("Main Camera", "OpenPaiXiXingQiu", userInfoEntity.getPlanet().getLevel() + "");
+            }
+        });
     }
 
+
+    //进入个人星球
+    public void GeRenXingQiu() {
+        mUnityPlayer.UnitySendMessage("Main Camera", "ClosePaiXiXingQiu", "");
+        mUnityPlayer.UnitySendMessage("Main Camera", "OpenGeRenXingQiu", "");
+    }
+
+
+    //进入派系星球
+    public void PaiXiXingQiu() {
+        mUnityPlayer.UnitySendMessage("Main Camera", "CloseGeRenXingQiu", "");
+        mUnityPlayer.UnitySendMessage("Main Camera", "OpenPaiXiXingQiu", userInfoEntity.getPlanet().getLevel() + "");
+    }
 
     @OnClick({R.id.tv_change_mode})
     public void onClick(View view) {
@@ -144,6 +165,7 @@ public class ArPaiXiXingQiuActivity extends BaseManagerActivity implements IUnit
     @Override
     protected void onDestroy() {
         mUnityPlayer.destroy();
+        RequestUtil.create().disDispose();
         super.onDestroy();
     }
 

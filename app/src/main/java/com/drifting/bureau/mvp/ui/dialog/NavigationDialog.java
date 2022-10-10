@@ -12,6 +12,12 @@ import com.drifting.bureau.R;
 import com.drifting.bureau.util.MapsUtil;
 import com.jess.arms.base.BaseDialog;
 
+/**
+ * @description  导航跳转
+ * @author 卫佳琪1
+ * @time 18:06 18:06
+ */
+
 public class NavigationDialog extends BaseDialog implements View.OnClickListener {
 
     private Context context;

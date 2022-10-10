@@ -12,6 +12,12 @@ import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.jess.arms.base.BaseDialog;
 
+/**
+ * @description 空间站兑换码
+ * @author 卫佳琪1
+ * @time 18:05 18:05
+ */
+
 public class ExchangeCodeDialog extends BaseDialog implements View.OnClickListener {
 
     private EditText mEtCode;

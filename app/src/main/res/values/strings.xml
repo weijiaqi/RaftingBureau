@@ -9,4 +9,5 @@
     <string name="from_nebula">%1$s星云漂来一杯奶茶</string>
     <string name="which_stage">（第%1$s阶段）</string>
     <string name="which_stage_num">第%1$s阶段</string>
+    <string name="box">“%1$s”的保险柜</string>
 </resources>

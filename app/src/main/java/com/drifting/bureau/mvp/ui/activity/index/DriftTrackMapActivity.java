@@ -9,10 +9,8 @@ import androidx.annotation.RequiresApi;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,6 +36,7 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
 
+import com.baidu.mapapi.map.Overlay;
 import com.baidu.mapapi.map.OverlayOptions;
 
 import com.baidu.mapapi.map.Polyline;
@@ -64,13 +63,12 @@ import com.drifting.bureau.data.event.PaymentEvent;
 import com.drifting.bureau.data.event.TagEvent;
 import com.drifting.bureau.data.event.VideoEvent;
 import com.drifting.bureau.di.component.DaggerDriftTrackMapComponent;
+import com.drifting.bureau.mvp.model.entity.BoxEntity;
 import com.drifting.bureau.mvp.model.entity.CommentDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
 import com.drifting.bureau.mvp.model.entity.CreatewithfileEntity;
-
 import com.drifting.bureau.mvp.model.entity.MoreDetailsForMapEntity;
 import com.drifting.bureau.mvp.model.entity.SkuListEntity;
-
 import com.drifting.bureau.mvp.ui.activity.pay.PaymentInfoActivity;
 import com.drifting.bureau.mvp.ui.dialog.CityReleaseDialog;
 import com.drifting.bureau.mvp.ui.dialog.EnablePrivilegesDialog;
@@ -84,20 +82,14 @@ import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.ViewUtil;
-
 import com.drifting.bureau.util.request.RequestUtil;
-
 import com.drifting.bureau.view.guide.MapOpenMsgGuideView;
-import com.jess.arms.base.BaseDialog;
 import com.jess.arms.di.component.AppComponent;
-
 import com.drifting.bureau.mvp.contract.DriftTrackMapContract;
 import com.drifting.bureau.mvp.presenter.DriftTrackMapPresenter;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -163,7 +155,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
     private BaiduMap mBaiduMap;
     private MapStatus.Builder builder;
     private DistrictSearch mDistrictSearch;
-    private List<OverlayOptions> options;
+    private List<OverlayOptions> options, optionsBox;
     private LayoutInflater inflater;
     private List<InfoWindow> infoWindowList;
     private int status, explore_id, message_id, attend, CreateTopicId, user_id, user_id2, total, postion, Msgtype, leftStatus, rightStatus;
@@ -177,8 +169,9 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
     // 用于设置个性化地图的样式文件
     private static final String CUSTOM_FILE_NAME_GRAY = "dark.sty";
     private TraceOverlay mTraceOverlay;
-    private InfoWindow mInfoWindow, mLastInfoWindow;
+    private InfoWindow mInfoWindow, mLastInfoWindow, mBoxInfoWindow;
     private Marker mMarkerFinger;
+    private List<Overlay> mMarkerOpenList, mMarkerBox;
     //发布漂流
     private MapSendDriftDialog mapSendDriftDialog;
     private PublicDialog publicDialog;
@@ -186,15 +179,21 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
     private CityReleaseDialog cityReleaseDialog;
     private EnablePrivilegesDialog enablePrivilegesDialog;
     //    private BitmapDescriptor finger = BitmapDescriptorFactory.fromResource(R.drawable.map_finger);
+
+
     private BitmapDescriptor mbpStart = BitmapDescriptorFactory.fromResource(R.drawable.track_start);
     private BitmapDescriptor mbpCenter = BitmapDescriptorFactory.fromResource(R.drawable.track_center);
     private BitmapDescriptor mbpEnd = BitmapDescriptorFactory.fromResource(R.drawable.track_end);
+
+    BitmapDescriptor[] boxpic = {BitmapDescriptorFactory.fromResource(R.drawable.free_box), BitmapDescriptorFactory.fromResource(R.drawable.toll_lock_box), BitmapDescriptorFactory.fromResource(R.drawable.toll_unlock_box)};
+
     private MoreDetailsForMapEntity.MessageBean messageBean;
     private MoreDetailsForMapEntity.RelevanceBean relevanceBean;
     private MoreDetailsForMapEntity.FutureBean futureBea;
     private List<MoreDetailsForMapEntity.MessagePathBean> messagePathBeanList;
     private CommentDetailsEntity commentDetailsEntity;
     private List<LatLngEntity> latLngEntityList;
+    private List<BoxEntity> boxEntityList;
 
     public static void start(Context context, int type, int explore_id, int message_id, boolean closePage) {
         Intent intent = new Intent(context, DriftTrackMapActivity.class);
@@ -251,6 +250,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
             }
         });
 
+
         initListener();
     }
 
@@ -285,6 +285,8 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
         mDistrictSearch = DistrictSearch.newInstance();
         mDistrictSearch.setOnDistrictSearchListener(listener);
 
+        inflater = LayoutInflater.from(getApplicationContext());
+
         if (Msgtype == 1) {  //开启新漂流
             openNewDrift();
             if (RBureauApplication.latLng != null) {
@@ -309,7 +311,9 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
     public void AddListener() {
         mBaiduMap.setOnMarkerClickListener(marker -> {
             LatLng latLng = marker.getPosition();
-
+            if (mMarkerOpenList != null && mMarkerOpenList.contains(marker)) {
+                return false;
+            }
             if (marker.getZIndex() != options.size() - 1) {
                 mBaiduMap.hideInfoWindow();
                 showInfoWindow(latLng, marker.getZIndex());
@@ -333,7 +337,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
     public void showInfoWindow(LatLng latLng, int index) {
         this.postion = index;
         infoWindowList = new ArrayList<>();
-        inflater = LayoutInflater.from(getApplicationContext());
+
         View view = inflater.inflate(R.layout.layout_show_message, null, false);
         TextView mTvCityMore = view.findViewById(R.id.tv_city_more);
         TextView mTvTitle = view.findViewById(R.id.tv_title);
@@ -421,7 +425,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
                     mapSendDriftDialog.setOnClickCallback(type -> {
                         if (type == ReleaseDriftingDialog.SELECT_FINISH) {
                             RequestUtil.create().messagethrow(message_id, entity2 -> {
-                                if (entity2!=null &&entity2.getCode() == 200) {
+                                if (entity2 != null && entity2.getCode() == 200) {
                                     mapSendDriftDialog.dismiss();
                                     publicDialog = new PublicDialog(this);
                                     publicDialog.show();
@@ -504,6 +508,8 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
             if (type == 2) { // type=2 表示参与成功刷新dialog
                 showInfoWindowDetails(postion);
             }
+
+            //mPresenter.getBox();
         }
     }
 
@@ -584,6 +590,51 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
             PaymentInfoActivity.start(this, 1, entity.getSn(), entity.getTotal_amount(), 0, false);
         }
     }
+
+    @Override
+    public void OnBoxSuccess(List<BoxEntity> list) {
+        if (list.size() > 0) {
+            boxEntityList = list;
+            //创建OverlayOptions的集合
+            optionsBox = new ArrayList<>();
+            for (int i = 0; i < boxEntityList.size(); i++) {
+                LatLng latLng = new LatLng(Double.parseDouble(boxEntityList.get(i).getLat()), Double.parseDouble(boxEntityList.get(i).getLng()));
+                OverlayOptions option = new MarkerOptions().position(latLng)
+                        .icon(getBoxIcon(i))
+                        .perspective(true) // 设置是否开启 marker 覆盖物近大远小效果，默认开启
+                        .anchor(0.5f, 0.5f) // 设置 marker 覆盖物的锚点比例，默认（0.5f, 1.0f）水平居中，垂直下对齐
+                        .zIndex(i);
+                optionsBox.add(option);
+
+                View view = inflater.inflate(R.layout.layout_show_box, null, false);
+                TextView mTvTitle = view.findViewById(R.id.tv_title);
+                mTvTitle.setText(getString(R.string.box, boxEntityList.get(i).getName()));
+                if (boxEntityList.get(i).getType() == 1) { //免费
+                    mTvTitle.setBackgroundResource(R.drawable.free_box_bg);
+                } else {
+                    mTvTitle.setBackgroundResource(R.drawable.toll_box_bg);
+                }
+                mBoxInfoWindow = new InfoWindow(view, latLng, -120);
+                mBaiduMap.showInfoWindow(mBoxInfoWindow);
+            }
+            //在地图上批量添加
+
+            mMarkerBox = mBaiduMap.addOverlays(optionsBox);
+        }
+    }
+
+    public BitmapDescriptor getBoxIcon(int i) {
+        if (boxEntityList.get(i).getEquity() == 1) { //有锁
+            return boxpic[1];
+        } else {
+            if (boxEntityList.get(i).getType() == 1) {//免费
+                return boxpic[0];
+            } else {
+                return boxpic[2];
+            }
+        }
+    }
+
 
     @Override
     public void onLocationSuccess() {
@@ -1216,8 +1267,8 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
                     .anchor(0.5f, 0.5f); // 设置 marker 覆盖物的锚点比例，默认（0.5f, 1.0f）水平居中，垂直下对齐
             options.add(option);
         }
-        mBaiduMap.addOverlays(options);
 
+        mMarkerOpenList = mBaiduMap.addOverlays(options);
         //添加轨迹点
         OverlayOptions ooGeoPolyline = new PolylineOptions()
                 .isGeodesic(true)
@@ -1246,7 +1297,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
      */
 
     public void showNewInfoWindow(LatLng latLng) {
-        inflater = LayoutInflater.from(getApplicationContext());
+
         View view = inflater.inflate(R.layout.layout_start_drifting, null, false);
         FrameLayout mFlNewMessage = view.findViewById(R.id.fl_new_message);
         mInfoWindow = new InfoWindow(view, latLng, -80);
