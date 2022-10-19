@@ -52,8 +52,8 @@ public class PaymentInfoPresenter extends BasePresenter<PaymentInfoContract.Mode
      * 支付订单
      */
 
-    public void payOrder(String sn, String terminal,int type) {
-        mModel.payOrder(sn, terminal)
+    public void payOrder(String sn, String terminal,String coupon_code, String use_scene, int type) {
+        mModel.payOrder(sn, terminal,coupon_code,use_scene)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))

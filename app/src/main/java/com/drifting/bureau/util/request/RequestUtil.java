@@ -5,15 +5,19 @@ import android.util.SparseArray;
 
 import com.drifting.bureau.app.api.ApiProxy;
 import com.drifting.bureau.mvp.model.entity.AnnouncementEntity;
+import com.drifting.bureau.mvp.model.entity.AvailableEntity;
 import com.drifting.bureau.mvp.model.entity.BoxOpenEntity;
 import com.drifting.bureau.mvp.model.entity.DidAttendEntity;
 import com.drifting.bureau.mvp.model.entity.FriendEntity;
 import com.drifting.bureau.mvp.model.entity.FriendInfoEntity;
 import com.drifting.bureau.mvp.model.entity.MySpaceStationEntity;
 import com.drifting.bureau.mvp.model.entity.MyTreasuryEntity;
+import com.drifting.bureau.mvp.model.entity.OpenBoxEntity;
 import com.drifting.bureau.mvp.model.entity.PlanetArEntity;
 import com.drifting.bureau.mvp.model.entity.PlanetLocationEntity;
+import com.drifting.bureau.mvp.model.entity.PlanetPasswordEntity;
 import com.drifting.bureau.mvp.model.entity.PlatformTimesEntity;
+import com.drifting.bureau.mvp.model.entity.PreviewBoxEntity;
 import com.drifting.bureau.mvp.model.entity.StarUpIndexEntity;
 import com.drifting.bureau.mvp.model.entity.SysmessageEntity;
 import com.drifting.bureau.mvp.model.entity.TopicTagsEntity;
@@ -875,6 +879,166 @@ public class RequestUtil {
                     }
                 });
     }
+
+
+    /**
+     * 开保险柜
+     */
+    public void openbox( int key,int type,String code,  BaseDataCallBack<OpenBoxEntity> callBack) {
+        ApiProxy.getApiService().openbox(key,type,code)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new BaseObserver<BaseEntity<OpenBoxEntity>>() {
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+                        mDisposables.put(mRequestCount++, disposable);
+                    }
+
+                    @Override
+                    public void onNext(BaseEntity<OpenBoxEntity> entity) {
+                        if (callBack != null) {
+                            callBack.getData(entity);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (callBack != null) {
+                            callBack.getData(null);
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 填写快递信息
+     */
+    public void addexpress(int id,String name,String phone,String address, BaseDataCallBack callBack) {
+        ApiProxy.getApiService().addexpress(id,name,phone,address)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new BaseObserver<BaseEntity>() {
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+                        mDisposables.put(mRequestCount++, disposable);
+                    }
+
+                    @Override
+                    public void onNext(BaseEntity entity) {
+                        if (callBack != null) {
+                            callBack.getData(entity);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (callBack != null) {
+                            callBack.getData(null);
+                        }
+                    }
+                });
+    }
+
+
+
+    /**
+     * 星球口令
+     */
+    public void planetpassword(BaseDataCallBack<PlanetPasswordEntity> callBack) {
+        ApiProxy.getApiService().planetpassword()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new BaseObserver<BaseEntity<PlanetPasswordEntity>>() {
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+                        mDisposables.put(mRequestCount++, disposable);
+                    }
+
+                    @Override
+                    public void onNext(BaseEntity<PlanetPasswordEntity> entity) {
+                        if (callBack != null) {
+                            callBack.getData(entity);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (callBack != null) {
+                            callBack.getData(null);
+                        }
+                    }
+                });
+    }
+
+
+
+    /**
+     * 盲盒奖品预览（城市分布盲盒）
+     */
+    public void previewBox(BaseDataCallBack<PreviewBoxEntity> callBack) {
+        ApiProxy.getApiService().previewBox()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new BaseObserver<BaseEntity<PreviewBoxEntity>>() {
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+                        mDisposables.put(mRequestCount++, disposable);
+                    }
+
+                    @Override
+                    public void onNext(BaseEntity<PreviewBoxEntity> entity) {
+                        if (callBack != null) {
+                            callBack.getData(entity);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (callBack != null) {
+                            callBack.getData(null);
+                        }
+                    }
+                });
+    }
+
+
+
+
+
+    /**
+     * 可用券数量
+     */
+    public void available(String scene,BaseDataCallBack<AvailableEntity> callBack) {
+        ApiProxy.getApiService().available(scene)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new BaseObserver<BaseEntity<AvailableEntity>>() {
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+                        mDisposables.put(mRequestCount++, disposable);
+                    }
+
+                    @Override
+                    public void onNext(BaseEntity<AvailableEntity> entity) {
+                        if (callBack != null) {
+                            callBack.getData(entity);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (callBack != null) {
+                            callBack.getData(null);
+                        }
+                    }
+                });
+    }
+
 
 
     /**

@@ -10,4 +10,7 @@
     <string name="which_stage">（第%1$s阶段）</string>
     <string name="which_stage_num">第%1$s阶段</string>
     <string name="box">“%1$s”的保险柜</string>
+    <string name="full_reduction">满%1$s元可用</string>
+
+    <string name="discount_price">(-%1$s元)</string>
 </resources>

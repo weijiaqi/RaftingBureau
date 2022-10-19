@@ -124,12 +124,28 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tv_star_troopers"
+            android:id="@+id/tv_coupon"
             android:layout_width="98dp"
             android:layout_height="36dp"
             android:layout_below="@+id/tv_drift_track"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="77dp"
+            android:paddingStart="9dp"
+            android:paddingTop="10dp"
+            android:text="我的卡券"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/tv_star_troopers"
+            android:layout_width="98dp"
+            android:layout_height="36dp"
+            android:layout_below="@+id/tv_coupon"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="84dp"
             android:background="@drawable/star_troopers"
             android:paddingStart="9dp"
@@ -146,7 +162,7 @@
             android:layout_height="36dp"
             android:layout_below="@+id/tv_star_troopers"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="31dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="75dp"
             android:background="@drawable/physical_store"
             android:paddingStart="9dp"
@@ -163,7 +179,7 @@
             android:layout_height="36dp"
             android:layout_below="@+id/tv_physical_store"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="14dp"
             android:background="@drawable/new_order_record"
             android:paddingStart="9dp"
@@ -176,8 +192,8 @@
 
         <ImageView
             android:id="@+id/iv_turnplate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="195dp"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="13dp"
             android:layout_marginEnd="-100dp"
@@ -220,7 +236,7 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/about_bottom_button"
                 android:gravity="center"
-                android:text="敬 请 期 待"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="14sp" />
         </LinearLayout>

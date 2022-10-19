@@ -34,7 +34,6 @@ public class CommonParInterceptor implements Interceptor {
         Request originalRequest = chain.request();
         String method = originalRequest.method();
         if (TextUtils.equals(method,"POST")){
-
             RequestBody oldBody = originalRequest.body();
             originalRequest = originalRequest.newBuilder().removeHeader("User-Agent")//移除旧的
                     .addHeader("User-Agent", SystemUtil.getUserAgent(RBureauApplication.getContext()))//添加真正的头部

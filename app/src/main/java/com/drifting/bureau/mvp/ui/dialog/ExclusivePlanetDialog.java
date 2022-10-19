@@ -9,14 +9,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import com.drifting.bureau.R;
 import com.drifting.bureau.util.ClickUtil;
-import com.jess.arms.base.BottomDialog;
+import com.jess.arms.base.BaseDialog;
 
 /**
  * @Description: 领取专属星球
  * @Author : WeiJiaQI
  * @Time : 2022/8/17 19:08
  */
-public class ExclusivePlanetDialog extends BottomDialog implements View.OnClickListener {
+public class ExclusivePlanetDialog extends BaseDialog implements View.OnClickListener {
 
     public static final int OPEN_PLAY = 0x01;
 

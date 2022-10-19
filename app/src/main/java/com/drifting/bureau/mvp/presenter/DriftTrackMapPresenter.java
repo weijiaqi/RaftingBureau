@@ -20,6 +20,7 @@ import com.drifting.bureau.app.application.RBureauApplication;
 import com.drifting.bureau.mvp.model.entity.BoxEntity;
 import com.drifting.bureau.mvp.model.entity.CommentDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
+import com.drifting.bureau.mvp.model.entity.CreateOrderOpenBoxEntity;
 import com.drifting.bureau.mvp.model.entity.CreatewithfileEntity;
 import com.drifting.bureau.mvp.model.entity.MoreDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.MoreDetailsForMapEntity;
@@ -189,7 +190,7 @@ public class DriftTrackMapPresenter extends BasePresenter<DriftTrackMapContract.
                     public void onNext(BaseEntity<SkuListEntity> entity) {
                         if (mRootView != null) {
                             if (entity.getCode() == 200) {
-                                mRootView.onSkuListSuccess(entity.getData());
+                                mRootView.onSkuListSuccess(entity.getData(),message_id);
                             } else {
                                 mRootView.showMessage(entity.getMsg());
                             }
@@ -211,7 +212,7 @@ public class DriftTrackMapPresenter extends BasePresenter<DriftTrackMapContract.
      * @return
      */
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public void compressVideo(Context context, int type, String content, int message_id, String videoPath, File voice, File image, String tag,int free) {
+    public void compressVideo(Context context, int type, String content, int message_id, String videoPath, File voice, File image, String tag, int free) {
         String filepath = FileUtil.saveVideoPath(context);
         new Thread(() -> {
             boolean success = true;
@@ -239,14 +240,14 @@ public class DriftTrackMapPresenter extends BasePresenter<DriftTrackMapContract.
                 Timber.e("压缩成功---" + filepath);
                 double fileSize = FileUtil.getFileOrFilesSize(filepath, FileUtil.SIZETYPE_MB);
                 Timber.e("1----------" + fileSize);
-                createwithword(type, content, message_id, new File(filepath), voice, image, tag,free);
+                createwithword(type, content, message_id, new File(filepath), voice, image, tag, free);
             }
         }).start();
     }
 
 
     //发送漂流信息
-    public void createwithword(int type, String content, int message_id, File path, File voice, File image, String tag,int free) {
+    public void createwithword(int type, String content, int message_id, File path, File voice, File image, String tag, int free) {
 
         RequestBody requestBody, requestBody2;
 
@@ -254,7 +255,7 @@ public class DriftTrackMapPresenter extends BasePresenter<DriftTrackMapContract.
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("message_id", message_id + "")
                 .addFormDataPart("free", free + "")
-                .addFormDataPart("tag", tag==null ?"":tag);
+                .addFormDataPart("tag", tag == null ? "" : tag);
 
         //文字
         if (content != null && !TextUtils.isEmpty(content)) {
@@ -311,7 +312,7 @@ public class DriftTrackMapPresenter extends BasePresenter<DriftTrackMapContract.
     /**
      * 创建订单(话题漂流)
      */
-    public void createOrder(int message_id, String sku_codes) {
+    public void createOrder(int message_id, String sku_codes,int id) {
         mModel.createOrder(message_id, sku_codes).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
@@ -320,7 +321,7 @@ public class DriftTrackMapPresenter extends BasePresenter<DriftTrackMapContract.
                     public void onNext(BaseEntity<CreateOrderEntity> entity) {
                         if (mRootView != null) {
                             if (entity.getCode() == 200) {
-                                mRootView.onCreateOrderSuccess(entity.getData());
+                                mRootView.onCreateOrderSuccess(entity.getData(),id);
                             } else {
                                 mRootView.showMessage(entity.getMsg());
                             }
@@ -337,7 +338,6 @@ public class DriftTrackMapPresenter extends BasePresenter<DriftTrackMapContract.
     }
 
 
-
     /**
      * 获取经纬度
      */
@@ -349,8 +349,8 @@ public class DriftTrackMapPresenter extends BasePresenter<DriftTrackMapContract.
                     @Override
                     public void onSuccess(Location location) {
                         try {
-                            RBureauApplication.latLng=new LatLng(location.getLatitude(),location.getLongitude());
-                            Preferences.saveCity(AppUtil.getAddress(activity,location).get(0).getLocality());
+                            RBureauApplication.latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                            Preferences.saveCity(AppUtil.getAddress(activity, location).get(0).getLocality());
                             getLoaction(location.getLongitude() + "", location.getLatitude() + "");
                         } catch (Exception e) {
                             Log.e(activity.getPackageName(), e.toString());
@@ -405,7 +405,6 @@ public class DriftTrackMapPresenter extends BasePresenter<DriftTrackMapContract.
     }
 
 
-
     /**
      * 探索方式列表
      */
@@ -419,6 +418,31 @@ public class DriftTrackMapPresenter extends BasePresenter<DriftTrackMapContract.
                         if (mRootView != null) {
                             if (baseEntity.getCode() == 200) {
                                 mRootView.OnBoxSuccess(baseEntity.getData());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
+    }
+
+
+    /**
+     * 每日开盲盒，购买下订单
+     */
+    public void createOrderOpenBoxDaily(String box_no, int box_type) {
+        mModel.createOrderOpenBoxDaily(box_no, box_type).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseEntity<CreateOrderOpenBoxEntity>>(mErrorHandler) {
+                    @Override
+                    public void onNext(BaseEntity<CreateOrderOpenBoxEntity> baseEntity) {
+                        if (mRootView != null) {
+                            if (baseEntity.getCode() == 200) {
+                                mRootView.OnCreateOrderOpenBoxDailySuccess(baseEntity.getData());
                             }
                         }
                     }

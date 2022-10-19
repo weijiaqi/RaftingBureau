@@ -4,6 +4,7 @@ package com.drifting.bureau.mvp.ui.activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -39,6 +40,8 @@ public class SplashActivity extends BaseManagerActivity {
     EmptyControlVideo mVieoPlayer;
     @BindView(R.id.tv_next)
     TextView mTvNext;
+    @BindView(R.id.rl_center)
+    RelativeLayout mRlCenter;
     private PrivacyPolicyDialog privacyPolicyDialog;
     private Handler mHandler = new Handler();
 
@@ -66,28 +69,30 @@ public class SplashActivity extends BaseManagerActivity {
                     Preferences.setAgreePrivacy(true);
                     //友盟隐私合规授权
                     UMConfigure.submitPolicyGrantResult(getApplicationContext(), true);
-                    mHandler.postDelayed(mHomeRunnable, 500);
+
+                    mVieoPlayer.setUp("https://v.metapeza.com/afile/vedio/start.mp4", true, "");
+                    mVieoPlayer.startPlayLogic();
+                    mVieoPlayer.setVideoAllCallBack(new GSYSampleCallBack() {
+
+                        @Override
+                        public void onAutoComplete(String url, Object... objects) {
+                            super.onAutoComplete(url, objects);
+                            startActivity();
+                        }
+                    });
+                    mTvNext.setVisibility(View.VISIBLE);
                 }
             });
         } else {
+            mRlCenter.setBackgroundResource(R.drawable.layer_splash);
             mHandler.postDelayed(mHomeRunnable, 500);
         }
     }
 
     Runnable mHomeRunnable = () -> {
-        mVieoPlayer.setUp("https://v.metapeza.com/afile/vedio/start.mp4", true, "");
-        mVieoPlayer.startPlayLogic();
-        mVieoPlayer.setVideoAllCallBack(new GSYSampleCallBack() {
-
-            @Override
-            public void onAutoComplete(String url, Object... objects) {
-                super.onAutoComplete(url, objects);
-                startActivity();
-            }
-        });
-        mTvNext.setVisibility(View.VISIBLE);
+        mVieoPlayer.setVisibility(View.GONE);
+        startActivity();
     };
-
 
 
     @OnClick({R.id.tv_next})

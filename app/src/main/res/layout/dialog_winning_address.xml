@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:windowSoftInputMode="adjustPan">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rl_top"
+                android:layout_width="290dp"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/winning_bg"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="22dp">
+
+                    <ImageView
+                        android:id="@+id/iv_pic"
+                        android:layout_width="210dp"
+                        android:layout_height="270dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="-20dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="姓名"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+
+                    <com.hjq.shape.view.ShapeEditText
+                        android:id="@+id/et_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:paddingHorizontal="10dp"
+                        android:text=""
+                        android:hint="输入您的姓名"
+                        android:textColorHint="@color/color_99"
+                        android:singleLine="true"
+                        android:textColor="@color/color_58"
+                        android:textSize="12sp"
+                        app:shape_radius="4dp"
+                        app:shape_strokeEndColor="@color/color_5a"
+                        app:shape_strokeStartColor="@color/color_51"
+                        app:shape_strokeWidth="1dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="联系电话"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+
+                    <com.hjq.shape.view.ShapeEditText
+                        android:id="@+id/et_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:paddingHorizontal="10dp"
+                        android:text=""
+                        android:hint="输入您的联系电话"
+                        android:textColorHint="@color/color_99"
+                        android:singleLine="true"
+                        android:textColor="@color/color_58"
+                        android:textSize="12sp"
+                        app:shape_radius="4dp"
+                        app:shape_strokeEndColor="@color/color_5a"
+                        app:shape_strokeStartColor="@color/color_51"
+                        app:shape_strokeWidth="1dp" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="收货地址"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+
+                    <com.hjq.shape.view.ShapeEditText
+                        android:id="@+id/et_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="15dp"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:paddingHorizontal="10dp"
+                        android:text=""
+                        android:hint="输入您的收货地址"
+                        android:textColorHint="@color/color_99"
+                        android:textColor="@color/color_58"
+                        android:textSize="12sp"
+                        app:shape_radius="4dp"
+                        android:singleLine="true"
+                        app:shape_strokeEndColor="@color/color_5a"
+                        app:shape_strokeStartColor="@color/color_51"
+                        app:shape_strokeWidth="1dp" />
+                </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/iv_close"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/winning_close" />
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/iv_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="18dp"
+                android:src="@drawable/winning_submit" />
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

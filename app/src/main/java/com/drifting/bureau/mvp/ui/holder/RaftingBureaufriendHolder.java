@@ -17,6 +17,7 @@ import com.drifting.bureau.mvp.ui.adapter.RaftingBureaufriendAdapter;
 import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.TextUtil;
 import com.drifting.bureau.util.request.RequestUtil;
+import com.jess.arms.base.BaseHolder;
 import com.jess.arms.base.BaseRecyclerHolder;
 
 import java.util.List;
@@ -26,7 +27,7 @@ import io.rong.imkit.utils.RouteUtils;
 import io.rong.imlib.model.Conversation;
 
 
-public class RaftingBureaufriendHolder extends BaseRecyclerHolder {
+public class RaftingBureaufriendHolder extends BaseHolder<RaftingBureaufriendEntity.FriendsBean> {
     @BindView(R.id.sl_slide)
     SlideLayout mSlSlide;
     @BindView(R.id.tv_delete)
@@ -49,13 +50,15 @@ public class RaftingBureaufriendHolder extends BaseRecyclerHolder {
     }
 
 
-    public void setData(@NonNull List<RaftingBureaufriendEntity.FriendsBean> data, int position) {
-        GlideUtil.create().loadCirclePic(context, data.get(position).getProfile_photo(), mIvHead);
-        TextUtil.setText(mTvName, data.get(position).getFriend_user_name());
-        TextUtil.setText(mTvIdentity, data.get(position).getPlanet_name() + "  " + data.get(position).getFriend_level_name());
+
+    @Override
+    public void setData(@NonNull RaftingBureaufriendEntity.FriendsBean data, int position) {
+        GlideUtil.create().loadCirclePic(context, data.getProfile_photo(), mIvHead);
+        TextUtil.setText(mTvName, data.getFriend_user_name());
+        TextUtil.setText(mTvIdentity, data.getPlanet_name() + "  " + data.getFriend_level_name());
 
         mTvDelete.setOnClickListener(v -> {
-            RequestUtil.create().frienddelete(data.get(position).getUser_id(), entity -> {
+            RequestUtil.create().frienddelete(data.getUser_id(), entity -> {
                 if (entity != null && entity.getCode() == 200) {
                     mSlSlide.close();
                     adapter.remove(position);
@@ -68,8 +71,8 @@ public class RaftingBureaufriendHolder extends BaseRecyclerHolder {
                 //启动单聊会话页面 在哪里点击的就在哪里调用
                 Conversation.ConversationType conversationType =Conversation.ConversationType.PRIVATE;
                 //RongyunUserID RongyunUserName 对方信息
-                String targetId =data.get(position).getFriend_user_id()+"";//这个是对方的id
-                String title =data.get(position).getFriend_user_name();//这个可以设置对方的名字
+                String targetId =data.getFriend_user_id()+"";//这个是对方的id
+                String title =data.getFriend_user_name();//这个可以设置对方的名字
                 Bundle bundle = new Bundle();
                 if (!TextUtils.isEmpty(title)) {
                     bundle.putString(RouteUtils.TITLE, title); //会话页面标题

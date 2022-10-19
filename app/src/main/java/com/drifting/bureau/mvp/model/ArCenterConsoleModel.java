@@ -2,8 +2,10 @@ package com.drifting.bureau.mvp.model;
 import android.app.Application;
 
 import com.drifting.bureau.app.api.ApiService;
+import com.drifting.bureau.mvp.model.entity.BoxEntity;
 import com.drifting.bureau.mvp.model.entity.CommentDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
+import com.drifting.bureau.mvp.model.entity.CreateOrderOpenBoxEntity;
 import com.drifting.bureau.mvp.model.entity.CreatewithfileEntity;
 import com.drifting.bureau.mvp.model.entity.IncomeRecordEntity;
 import com.drifting.bureau.mvp.model.entity.MakingRecordEntity;
@@ -129,6 +131,16 @@ public class ArCenterConsoleModel extends BaseModel implements ArCenterConsoleCo
     @Override
     public Observable<BaseEntity<QuestionAssessEntity>> questionassess(RequestBody body) {
         return mRepositoryManager.obtainRetrofitService(ApiService.class).questionassess(body);
+    }
+
+    @Override
+    public Observable<BaseEntity<List<BoxEntity>>> getbox() {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).getbox();
+    }
+
+    @Override
+    public Observable<BaseEntity<CreateOrderOpenBoxEntity>> createOrderOpenBoxDaily(String box_no, int box_type) {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).createOrderOpenBoxDaily(box_no,box_type);
     }
 
 }

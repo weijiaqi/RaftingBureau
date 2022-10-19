@@ -60,6 +60,31 @@ public class DateUtil {
         }
     }
 
+
+    /**
+     * unix时间戳转换成yyyy年MM月格式
+     *
+     * @param unixTime
+     * @return
+     */
+    public static String unixToYMD(String unixTime) {
+        try {
+            String s = (Long.parseLong(unixTime) * 1000) + "";
+            String res;
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日");
+            long lt = new Long(s);
+            Date date = new Date(lt);
+            res = simpleDateFormat.format(date);
+            return res;
+        } catch (Exception e) {
+            if (TextUtils.isEmpty(unixTime)) {
+                unixTime = "";
+            }
+            return unixTime;
+        }
+    }
+
+
     /**
      * unix时间戳转换成MM-dd HH:mm样式
      *

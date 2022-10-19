@@ -17,7 +17,6 @@ import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.jess.arms.base.BaseDialog;
-import com.jess.arms.base.BottomDialog;
 
 
 /**

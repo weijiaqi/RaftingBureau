@@ -2,12 +2,15 @@ package com.drifting.bureau.app.api;
 
 
 import com.drifting.bureau.mvp.model.entity.AnnouncementEntity;
+import com.drifting.bureau.mvp.model.entity.AvailableEntity;
 import com.drifting.bureau.mvp.model.entity.BarrageEntity;
 import com.drifting.bureau.mvp.model.entity.BlindBoxRecordEntity;
 import com.drifting.bureau.mvp.model.entity.BoxEntity;
 import com.drifting.bureau.mvp.model.entity.BoxOpenEntity;
 import com.drifting.bureau.mvp.model.entity.CommentDetailsEntity;
+import com.drifting.bureau.mvp.model.entity.CouponsMineEntity;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
+import com.drifting.bureau.mvp.model.entity.CreateOrderOpenBoxEntity;
 import com.drifting.bureau.mvp.model.entity.CreatewithfileEntity;
 import com.drifting.bureau.mvp.model.entity.DeliveryDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.DidAttendEntity;
@@ -29,6 +32,8 @@ import com.drifting.bureau.mvp.model.entity.MyTreasuryEntity;
 import com.drifting.bureau.mvp.model.entity.MysteryboxEntity;
 import com.drifting.bureau.mvp.model.entity.NebulaEntity;
 import com.drifting.bureau.mvp.model.entity.NebulaListEntity;
+import com.drifting.bureau.mvp.model.entity.OpenBoxEntity;
+import com.drifting.bureau.mvp.model.entity.OpenBoxListEntity;
 import com.drifting.bureau.mvp.model.entity.OrderDetailEntity;
 import com.drifting.bureau.mvp.model.entity.OrderOneEntity;
 import com.drifting.bureau.mvp.model.entity.OrderRecordEntity;
@@ -36,8 +41,10 @@ import com.drifting.bureau.mvp.model.entity.PayOrderEntity;
 import com.drifting.bureau.mvp.model.entity.PlanetArEntity;
 import com.drifting.bureau.mvp.model.entity.PlanetEntity;
 import com.drifting.bureau.mvp.model.entity.PlanetLocationEntity;
+import com.drifting.bureau.mvp.model.entity.PlanetPasswordEntity;
 import com.drifting.bureau.mvp.model.entity.PlanetaryDetailEntity;
 import com.drifting.bureau.mvp.model.entity.PlatformTimesEntity;
+import com.drifting.bureau.mvp.model.entity.PreviewBoxEntity;
 import com.drifting.bureau.mvp.model.entity.PrizeEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionAssessEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionEntity;
@@ -207,7 +214,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("v/order/payOrderAll")
-    Observable<BaseEntity<PayOrderEntity>> payOrder(@Field("sn") String sn, @Field("terminal") String terminal);
+    Observable<BaseEntity<PayOrderEntity>> payOrder(@Field("sn") String sn, @Field("terminal") String terminal,@Field("coupon_code") String coupon_code,@Field("use_scene") String use_scene);
 
 
     /**
@@ -282,7 +289,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("v/withdraw/apply")
-    Observable<BaseEntity> withdrawapply(@Field("name") String name, @Field("account") String account, @Field("money") String money, @Field("bank_name") String bank_name,@Field("op_type") int op_type);
+    Observable<BaseEntity> withdrawapply(@Field("name") String name, @Field("account") String account, @Field("money") String money, @Field("bank_name") String bank_name, @Field("op_type") int op_type);
 
 
     /**
@@ -390,7 +397,6 @@ public interface ApiService {
     Observable<BaseEntity<List<MyTreasuryEntity>>> storagemine();
 
 
-
     /**
      * 公告
      *
@@ -398,8 +404,6 @@ public interface ApiService {
      */
     @GET("v/announcement/latest")
     Observable<BaseEntity<List<AnnouncementEntity>>> latest();
-
-
 
 
     /**
@@ -478,7 +482,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("v/message/path/attendInCity")
-    Observable<BaseEntity<DeliveryDetailsEntity>> pathdetails(@Field("message_id") int message_id,@Field("code_city") String code_city, @Field("page") int page, @Field("limit") int limit);
+    Observable<BaseEntity<DeliveryDetailsEntity>> pathdetails(@Field("message_id") int message_id, @Field("code_city") String code_city, @Field("page") int page, @Field("limit") int limit);
 
 
     /**
@@ -530,7 +534,7 @@ public interface ApiService {
 
 
     /**
-     *答题过程阶段
+     * 答题过程阶段
      *
      * @return
      */
@@ -557,7 +561,7 @@ public interface ApiService {
 
 
     /**
-     *答题结果
+     * 答题结果
      *
      * @return
      */
@@ -757,7 +761,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("v/order/sandPayQuery")
-    Observable<BaseEntity<SandPayQueryEntity>> sandPayQuery(@Field("sn") String sn,@Field("terminal") String terminal);
+    Observable<BaseEntity<SandPayQueryEntity>> sandPayQuery(@Field("sn") String sn, @Field("terminal") String terminal);
 
 
     /**
@@ -796,7 +800,7 @@ public interface ApiService {
     Observable<BaseEntity<NebulaListEntity>> nebulalist();
 
     /**
-     *青年创业营
+     * 青年创业营
      *
      * @return
      */
@@ -805,7 +809,7 @@ public interface ApiService {
 
 
     /**
-     *是否参与过漂流
+     * 是否参与过漂流
      *
      * @return
      */
@@ -824,7 +828,7 @@ public interface ApiService {
 
 
     /**
-     *话题标签
+     * 话题标签
      *
      * @return
      */
@@ -838,5 +842,81 @@ public interface ApiService {
      */
     @GET("v/sdb/get_box")
     Observable<BaseEntity<List<BoxEntity>>> getbox();
+
+
+    /**
+     * 开保险柜
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/sdb/open_box")
+    Observable<BaseEntity<OpenBoxEntity>> openbox(@Field("key") int key, @Field("type") int type, @Field("code") String code);
+
+
+    /**
+     * 填写快递信息
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/sdb/add_express")
+    Observable<BaseEntity> addexpress(@Field("safe_box_open_record_id") int id, @Field("people_name") String people_name, @Field("mobile") String mobile, @Field("address") String address);
+
+    /**
+     * 星球口令
+     *
+     * @return
+     */
+    @GET("v/planet/password")
+    Observable<BaseEntity<PlanetPasswordEntity>> planetpassword();
+
+    /**
+     * 盲盒奖品预览（城市分布盲盒）
+     *
+     * @return
+     */
+    @GET("v/award/previewBox")
+    Observable<BaseEntity<PreviewBoxEntity>> previewBox();
+
+
+    /**
+     * 每日开盲盒，购买下订单
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/order/createOrderOpenBoxDaily")
+    Observable<BaseEntity<CreateOrderOpenBoxEntity>> createOrderOpenBoxDaily(@Field("box_no") String box_no, @Field("box_type") int box_type);
+
+
+    /**
+     * 开保险柜记录
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/sdb/open_box_list")
+    Observable<BaseEntity<OpenBoxListEntity>> openboxlist(@Field("page") int page, @Field("limit") int limit);
+
+
+    /**
+     * 我的优惠券
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/coupons/mine")
+    Observable<BaseEntity<CouponsMineEntity>> couponsmine(@Field("page") int page, @Field("limit") int limit,@Field("status") int status,@Field("use_scene") String use_scene);
+
+
+    /**
+     * 可用券数量
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/coupons/available")
+    Observable<BaseEntity<AvailableEntity>> available(@Field("use_scene") String scene);
 
 }

@@ -2,8 +2,10 @@ package com.drifting.bureau.mvp.contract;
 
 import android.app.Activity;
 
+import com.drifting.bureau.mvp.model.entity.BoxEntity;
 import com.drifting.bureau.mvp.model.entity.CommentDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
+import com.drifting.bureau.mvp.model.entity.CreateOrderOpenBoxEntity;
 import com.drifting.bureau.mvp.model.entity.CreatewithfileEntity;
 import com.drifting.bureau.mvp.model.entity.IncomeRecordEntity;
 import com.drifting.bureau.mvp.model.entity.MakingRecordEntity;
@@ -83,11 +85,12 @@ public interface ArCenterConsoleContract {
 
         void  onQuestionAssessSuccess(QuestionAssessEntity entity);
 
+        void OnBoxSuccess(List<BoxEntity> list);
+
+        void OnCreateOrderOpenBoxDailySuccess(CreateOrderOpenBoxEntity entity);
 
 
         void finishSuccess();
-
-
 
         void onNetError();
 
@@ -124,5 +127,9 @@ public interface ArCenterConsoleContract {
         Observable<BaseEntity<List<QuestionEntity>>> questionlist();
 
         Observable<BaseEntity<QuestionAssessEntity>> questionassess(RequestBody body);
+
+        Observable<BaseEntity<List<BoxEntity>>> getbox();
+
+        Observable<BaseEntity<CreateOrderOpenBoxEntity>> createOrderOpenBoxDaily(String box_no, int box_type);
     }
 }

@@ -13,7 +13,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar"
+        android:layout_marginHorizontal="14dp"
         android:layout_marginTop="10dp" />
 
     <include layout="@layout/layout_show_state" />
+
+
 </RelativeLayout>

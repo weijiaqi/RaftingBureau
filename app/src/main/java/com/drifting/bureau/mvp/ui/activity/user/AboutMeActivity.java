@@ -102,7 +102,7 @@ public class AboutMeActivity extends BaseManagerActivity<AboutMePresenter> imple
     ImageView mDrifting;
     private AboutMeAdapter aboutMeAdapter;
     private UserInfoEntity userInfoEntity;
-    private int assess_after, assess_status;
+
     private static final String EXTRA_USERINFOENTITY = "userinfo_entity";
 
     public static void start(Context context, UserInfoEntity entity, boolean closePage) {
@@ -165,6 +165,7 @@ public class AboutMeActivity extends BaseManagerActivity<AboutMePresenter> imple
     public List<AoubtMeEntity> getData() {
         List<AoubtMeEntity> list = new ArrayList<>();
         list.add(new AoubtMeEntity("漂流线程", "我的漂流"));
+        list.add(new AoubtMeEntity("我的卡券", "我拥有的卡券"));
         list.add(new AoubtMeEntity("订单记录", "我的订单"));
         list.add(new AoubtMeEntity("星际战队", "战队成员"));
         list.add(new AoubtMeEntity("实体门店", "漂流局茶饮店"));

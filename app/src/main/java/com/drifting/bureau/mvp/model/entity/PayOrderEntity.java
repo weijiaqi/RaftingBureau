@@ -4,105 +4,114 @@ import com.google.gson.annotations.SerializedName;
 
 public class PayOrderEntity {
 
-        private String sn;
-        private String tn;
-        private Integer scene;
-        private String trade_no;
-        private String nonceStr;
-        @SerializedName("package")
-        private String packageX;
-        private String partnerId;
-        private String prepayId;
-        private String timeStamp;
-        private String sign;
-        private String appId;
+    private String sn;
+    private String tn;
+    private Integer scene;
+    private String trade_no;
+    private String nonceStr;
+    @SerializedName("package")
+    private String packageX;
+    private String partnerId;
+    private String prepayId;
+    private String timeStamp;
+    private String sign;
+    private String appId;
+    private Integer need_pay;
 
-        public String getSn() {
-            return sn;
-        }
+    public Integer getNeed_pay() {
+        return need_pay;
+    }
 
-        public void setSn(String sn) {
-            this.sn = sn;
-        }
+    public void setNeed_pay(Integer need_pay) {
+        this.need_pay = need_pay;
+    }
 
-        public String getTn() {
-            return tn;
-        }
+    public String getSn() {
+        return sn;
+    }
 
-        public void setTn(String tn) {
-            this.tn = tn;
-        }
+    public void setSn(String sn) {
+        this.sn = sn;
+    }
 
-        public Integer getScene() {
-            return scene;
-        }
+    public String getTn() {
+        return tn;
+    }
 
-        public void setScene(Integer scene) {
-            this.scene = scene;
-        }
+    public void setTn(String tn) {
+        this.tn = tn;
+    }
 
-        public String getTrade_no() {
-            return trade_no;
-        }
+    public Integer getScene() {
+        return scene;
+    }
 
-        public void setTrade_no(String trade_no) {
-            this.trade_no = trade_no;
-        }
+    public void setScene(Integer scene) {
+        this.scene = scene;
+    }
 
-        public String getNonceStr() {
-            return nonceStr;
-        }
+    public String getTrade_no() {
+        return trade_no;
+    }
 
-        public void setNonceStr(String nonceStr) {
-            this.nonceStr = nonceStr;
-        }
+    public void setTrade_no(String trade_no) {
+        this.trade_no = trade_no;
+    }
 
-        public String getPackageX() {
-            return packageX;
-        }
+    public String getNonceStr() {
+        return nonceStr;
+    }
 
-        public void setPackageX(String packageX) {
-            this.packageX = packageX;
-        }
+    public void setNonceStr(String nonceStr) {
+        this.nonceStr = nonceStr;
+    }
 
-        public String getPartnerId() {
-            return partnerId;
-        }
+    public String getPackageX() {
+        return packageX;
+    }
 
-        public void setPartnerId(String partnerId) {
-            this.partnerId = partnerId;
-        }
+    public void setPackageX(String packageX) {
+        this.packageX = packageX;
+    }
 
-        public String getPrepayId() {
-            return prepayId;
-        }
+    public String getPartnerId() {
+        return partnerId;
+    }
 
-        public void setPrepayId(String prepayId) {
-            this.prepayId = prepayId;
-        }
+    public void setPartnerId(String partnerId) {
+        this.partnerId = partnerId;
+    }
 
-        public String getTimeStamp() {
-            return timeStamp;
-        }
+    public String getPrepayId() {
+        return prepayId;
+    }
 
-        public void setTimeStamp(String timeStamp) {
-            this.timeStamp = timeStamp;
-        }
+    public void setPrepayId(String prepayId) {
+        this.prepayId = prepayId;
+    }
 
-        public String getSign() {
-            return sign;
-        }
+    public String getTimeStamp() {
+        return timeStamp;
+    }
 
-        public void setSign(String sign) {
-            this.sign = sign;
-        }
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
+    }
 
-        public String getAppId() {
-            return appId;
-        }
+    public String getSign() {
+        return sign;
+    }
 
-        public void setAppId(String appId) {
-            this.appId = appId;
-        }
+    public void setSign(String sign) {
+        this.sign = sign;
+    }
+
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
+    }
 
 }

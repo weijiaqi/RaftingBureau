@@ -55,7 +55,6 @@ public class ShareDialog extends BaseDialog implements View.OnClickListener {
         mTvSavePic = findViewById(R.id.tv_save_pic);
         mRltop = findViewById(R.id.rl_top);
         mIvCode = findViewById(R.id.iv_code);
-
     }
 
     @Override
@@ -122,6 +121,7 @@ public class ShareDialog extends BaseDialog implements View.OnClickListener {
 
     public void hideLoading() {
         ViewUtil.create().dismiss();
+        dismiss();
     }
 
 }

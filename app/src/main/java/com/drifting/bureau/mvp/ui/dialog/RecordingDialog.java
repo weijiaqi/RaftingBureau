@@ -19,8 +19,6 @@ import androidx.annotation.RequiresApi;
 
 import com.buihha.audiorecorder.Mp3Recorder;
 import com.drifting.bureau.R;
-import com.drifting.bureau.mvp.ui.activity.index.NebulaeActivity;
-import com.drifting.bureau.util.BitmapUtil;
 import com.drifting.bureau.util.FileUtil;
 
 import com.drifting.bureau.util.StorageUtil;
@@ -29,7 +27,6 @@ import com.drifting.bureau.util.VideoUtil;
 import com.drifting.bureau.view.CircleProgressView;
 import com.drifting.bureau.view.VoiceWave;
 import com.jess.arms.base.BaseDialog;
-import com.jess.arms.base.BottomDialog;
 
 import java.io.File;
 import java.io.IOException;

@@ -48,8 +48,8 @@ public class PaymentInfoModel extends BaseModel implements PaymentInfoContract.M
     }
 
     @Override
-    public Observable<BaseEntity<PayOrderEntity>> payOrder(String sn,String terminal) {
-        return mRepositoryManager.obtainRetrofitService(ApiService.class).payOrder(sn,terminal);
+    public Observable<BaseEntity<PayOrderEntity>> payOrder(String sn,String terminal,String coupon_code,String use_scene) {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).payOrder(sn,terminal,coupon_code,use_scene);
     }
 
     @Override

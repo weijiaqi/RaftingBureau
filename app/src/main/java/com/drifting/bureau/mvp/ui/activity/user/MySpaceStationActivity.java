@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,7 +22,6 @@ import com.drifting.bureau.data.event.WithdrawEvent;
 import com.drifting.bureau.di.component.DaggerMySpaceStationComponent;
 import com.drifting.bureau.mvp.contract.MySpaceStationContract;
 import com.drifting.bureau.mvp.model.entity.CommentDetailsEntity;
-import com.drifting.bureau.mvp.model.entity.OrderDetailEntity;
 import com.drifting.bureau.mvp.model.entity.OrderOneEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceInfoEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
@@ -38,6 +38,7 @@ import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.DateUtil;
 import com.drifting.bureau.util.GlideUtil;
+import com.drifting.bureau.util.GsonUtil;
 import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.request.RequestUtil;
@@ -212,6 +213,7 @@ public class MySpaceStationActivity extends BaseManagerActivity<MySpaceStationPr
     @Override
     public void onSpcaeInfoSuccess(SpaceInfoEntity entity) {
         if (entity != null) {
+//            Log.e("1111111111", GsonUtil.toJson(entity));
             ar_url = entity.getAr_url();
             GlideUtil.create().loadLongImage(this, entity.getBackground(), mIvPic);
             mTvlevelName.setText(entity.getLevel_name());
@@ -225,6 +227,7 @@ public class MySpaceStationActivity extends BaseManagerActivity<MySpaceStationPr
     @Override
     public void onOrderOneSuccess(OrderOneEntity entity) {
         if (entity != null) {
+
             orderOneEntity = entity;
             if (orderOneEntity.getTimeout() == 0) {
                 setOrderGone(true);

@@ -5,6 +5,7 @@ import android.app.Activity;
 import com.drifting.bureau.mvp.model.entity.BoxEntity;
 import com.drifting.bureau.mvp.model.entity.CommentDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
+import com.drifting.bureau.mvp.model.entity.CreateOrderOpenBoxEntity;
 import com.drifting.bureau.mvp.model.entity.CreatewithfileEntity;
 import com.drifting.bureau.mvp.model.entity.DriftingTrackEntity;
 import com.drifting.bureau.mvp.model.entity.MoreDetailsEntity;
@@ -41,13 +42,15 @@ public interface DriftTrackMapContract {
 
         void onMessageAttendingSuccess();
 
-        void onSkuListSuccess(SkuListEntity skuListEntity);
+        void onSkuListSuccess(SkuListEntity skuListEntity,int id);
 
         void onCreatewithwordSuccess(CreatewithfileEntity entity);
 
-        void onCreateOrderSuccess(CreateOrderEntity entity);
+        void onCreateOrderSuccess(CreateOrderEntity entity,int id);
 
         void OnBoxSuccess(List<BoxEntity> list);
+
+        void OnCreateOrderOpenBoxDailySuccess(CreateOrderOpenBoxEntity entity);
 
         void onLocationSuccess();
 
@@ -74,5 +77,7 @@ public interface DriftTrackMapContract {
         Observable<BaseEntity<CreateOrderEntity>> createOrder(int type_id, String sku_codes);
 
         Observable<BaseEntity<List<BoxEntity>>> getbox();
+
+        Observable<BaseEntity<CreateOrderOpenBoxEntity>> createOrderOpenBoxDaily(String box_no,int box_type);
     }
 }

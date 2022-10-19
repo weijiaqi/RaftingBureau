@@ -12,6 +12,5 @@ public class WebUrlConstant {
     public static final String BOOTOM_DEF_11="https://static.metapeza.com/cfile/img/clique/bottom.png";   //底部
     public static final String BOOTOM_DEF="https://static.metapeza.com/cfile/img/clique/bottomDef.png";   //底部
 
-
     public static final String ABOUT_DEF="https://static.metapeza.com/cfile/img/clique/";   //底部
 }

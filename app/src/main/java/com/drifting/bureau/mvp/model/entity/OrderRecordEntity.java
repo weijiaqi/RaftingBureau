@@ -49,13 +49,68 @@ public class OrderRecordEntity {
         private Integer status;
         private Integer explore_id;
         private String money;
+        private String order_money;
         private Integer pay_time;
         private Integer created_at_int;
         private Integer timeout;
         private List<OrderSubBean> order_sub;
         private Integer platform_gift;
         private Integer write_off;
+        private Integer wake_up_pay;
+        private String coupon_code;
+        private String coupon_name;
 
+        private String coupon_money;
+
+        private String use_scene;
+
+        public String getUse_scene() {
+            return use_scene;
+        }
+
+        public void setUse_scene(String use_scene) {
+            this.use_scene = use_scene;
+        }
+
+        public String getOrder_money() {
+            return order_money;
+        }
+
+        public void setOrder_money(String order_money) {
+            this.order_money = order_money;
+        }
+
+        public String getCoupon_money() {
+            return coupon_money;
+        }
+
+        public void setCoupon_money(String coupon_money) {
+            this.coupon_money = coupon_money;
+        }
+
+        public Integer getWake_up_pay() {
+            return wake_up_pay;
+        }
+
+        public void setWake_up_pay(Integer wake_up_pay) {
+            this.wake_up_pay = wake_up_pay;
+        }
+
+        public String getCoupon_code() {
+            return coupon_code;
+        }
+
+        public void setCoupon_code(String coupon_code) {
+            this.coupon_code = coupon_code;
+        }
+
+        public String getCoupon_name() {
+            return coupon_name;
+        }
+
+        public void setCoupon_name(String coupon_name) {
+            this.coupon_name = coupon_name;
+        }
 
         public String getMoney() {
             return money;

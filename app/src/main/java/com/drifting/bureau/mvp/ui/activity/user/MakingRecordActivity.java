@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -20,6 +21,7 @@ import com.drifting.bureau.mvp.model.entity.MakingRecordEntity;
 import com.drifting.bureau.mvp.presenter.MakingRecordPresenter;
 import com.drifting.bureau.mvp.ui.adapter.MakingRecordAdapter;
 import com.drifting.bureau.util.ClickUtil;
+import com.drifting.bureau.util.GsonUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.ViewUtil;
 import com.jess.arms.di.component.AppComponent;
@@ -116,6 +118,7 @@ public class MakingRecordActivity extends BaseManagerActivity<MakingRecordPresen
             makingRecordAdapter.clearData();
         }
         List<MakingRecordEntity.ListBean> list = entity.getList();
+
         if (list != null && list.size() > 0) {
             if (isNotData) {
                 mPage = 2;

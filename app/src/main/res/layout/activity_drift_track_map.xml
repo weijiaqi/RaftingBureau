@@ -2,26 +2,67 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    android:background="@color/black">
 
     <FrameLayout
         android:id="@+id/mFrameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-
     <include layout="@layout/view_height_title_lay" />
 
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_toolbar"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_rules_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rules_description"
+            android:gravity="center"
+            android:text="1.规则说明"
+            android:textColor="@color/color_00"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_list_prizes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="13dp"
+            android:background="@drawable/list_prizes"
+            android:gravity="center"
+            android:text="2.奖品名单"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_winning_record"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/lieutenant_records"
+            android:gravity="center"
+            android:text="3.中奖记录"
+            android:textColor="@color/color_00"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+
     <FrameLayout
-        android:visibility="gone"
         android:id="@+id/fl_get_more"
         android:layout_width="99dp"
         android:layout_height="52dp"
         android:layout_below="@+id/rl_toolbar"
         android:layout_marginStart="25dp"
-        android:background="@drawable/get_more_box">
+        android:background="@drawable/get_more_box"
+        android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"
@@ -34,6 +75,26 @@
             android:textStyle="bold" />
 
     </FrameLayout>
+
+
+    <com.hjq.shape.view.ShapeTextView
+        android:id="@+id/tv_share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_toolbar"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="15dp"
+        android:drawableLeft="@drawable/box_share"
+        android:drawablePadding="5dp"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="3dp"
+        android:text="分享"
+        android:textColor="@color/white"
+        android:textSize="11sp"
+        app:shape_radius="100dp"
+        app:shape_strokeColor="@color/white"
+        app:shape_strokeWidth="1dp" />
 
 
     <com.hjq.shape.view.ShapeTextView

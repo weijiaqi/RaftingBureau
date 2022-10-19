@@ -5,6 +5,7 @@ import com.drifting.bureau.app.api.ApiService;
 import com.drifting.bureau.mvp.model.entity.BoxEntity;
 import com.drifting.bureau.mvp.model.entity.CommentDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
+import com.drifting.bureau.mvp.model.entity.CreateOrderOpenBoxEntity;
 import com.drifting.bureau.mvp.model.entity.CreatewithfileEntity;
 import com.drifting.bureau.mvp.model.entity.MoreDetailsForMapEntity;
 import com.drifting.bureau.mvp.model.entity.SkuListEntity;
@@ -90,5 +91,10 @@ public class DriftTrackMapModel extends BaseModel implements DriftTrackMapContra
     @Override
     public Observable<BaseEntity<List<BoxEntity>>> getbox() {
         return mRepositoryManager.obtainRetrofitService(ApiService.class).getbox();
+    }
+
+    @Override
+    public Observable<BaseEntity<CreateOrderOpenBoxEntity>> createOrderOpenBoxDaily(String box_no,int box_type) {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).createOrderOpenBoxDaily(box_no,box_type);
     }
 }

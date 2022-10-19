@@ -406,7 +406,7 @@ public class TopicDetailActivity extends BaseManagerActivity<TopicDetailPresente
     @Override
     public void onCreateOrderSuccess(CreateOrderEntity entity) {
         if (entity != null) {
-            PaymentInfoActivity.start(this, 1, entity.getSn(), entity.getTotal_amount(), 0, false);
+         //   PaymentInfoActivity.start(this, 1, entity.getSn(), entity.getTotal_amount(), 0, false);
         }
     }
 
@@ -435,12 +435,12 @@ public class TopicDetailActivity extends BaseManagerActivity<TopicDetailPresente
     }
 
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void PaymentEvent(PaymentEvent event) {  //购买成功回调
-        if (event != null) {
-            sendSuccess();
-        }
-    }
+//    @Subscribe(threadMode = ThreadMode.MAIN)
+//    public void PaymentEvent(PaymentEvent event) {  //购买成功回调
+//        if (event != null) {
+//            sendSuccess();
+//        }
+//    }
 
 
     /**

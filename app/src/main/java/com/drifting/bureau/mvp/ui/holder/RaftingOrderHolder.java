@@ -8,16 +8,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.drifting.bureau.R;
+import com.drifting.bureau.mvp.model.entity.RaftingBureaufriendEntity;
 import com.drifting.bureau.mvp.model.entity.SkuListEntity;
+import com.drifting.bureau.mvp.ui.adapter.RaftingOrderAdapter;
 import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.TextUtil;
+import com.jess.arms.base.BaseHolder;
 import com.jess.arms.base.BaseRecyclerHolder;
 
 import java.util.List;
 
 import butterknife.BindView;
 
-public class RaftingOrderHolder extends BaseRecyclerHolder {
+public class RaftingOrderHolder  extends BaseHolder<SkuListEntity.GoodsSkuBean> {
 
     @BindView(R.id.tv_rafting_type)
     TextView mTvRaftingType;
@@ -31,16 +34,18 @@ public class RaftingOrderHolder extends BaseRecyclerHolder {
     ImageView mIvPic;
     private Context context;
 
-    public RaftingOrderHolder(View itemView) {
+    private RaftingOrderAdapter adapter;
+    public RaftingOrderHolder(View itemView, RaftingOrderAdapter adapter) {
         super(itemView);
         context = itemView.getContext();
+        this.adapter = adapter;
     }
 
-    public void setData(@NonNull List<SkuListEntity.GoodsSkuBean> listBeanList, int position) {
-        TextUtil.setText(mTvRaftingType, listBeanList.get(position).getName());
-        TextUtil.setText(mTvPrice, "￥" + listBeanList.get(position).getPrice());
-        TextUtil.setText(mTvDesc, listBeanList.get(position).getDesc());
-        mViewBottomLine.setVisibility(position == listBeanList.size() - 1 ? View.GONE : View.VISIBLE);
-        GlideUtil.create().loadNormalPic(context,  listBeanList.get(position).getSmall_image(), mIvPic);
+    public void setData(@NonNull SkuListEntity.GoodsSkuBean goodsSkuBean, int position) {
+        TextUtil.setText(mTvRaftingType, goodsSkuBean.getName());
+        TextUtil.setText(mTvPrice, "￥" + goodsSkuBean.getPrice());
+        TextUtil.setText(mTvDesc, goodsSkuBean.getDesc());
+        mViewBottomLine.setVisibility(position == adapter.getItemCount() - 1 ? View.GONE : View.VISIBLE);
+        GlideUtil.create().loadNormalPic(context, goodsSkuBean.getSmall_image(), mIvPic);
     }
 }

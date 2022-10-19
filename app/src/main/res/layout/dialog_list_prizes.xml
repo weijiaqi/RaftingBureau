@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="404dp"
+    android:orientation="vertical">
+
+    <com.hjq.shape.layout.ShapeRelativeLayout
+        android:id="@+id/rl_next"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:gravity="center"
+        android:layout_marginBottom="-2dp"
+        app:shape_solidColor="@color/color_f1eb"
+        app:shape_topLeftRadius="23dp">
+
+
+        <com.hjq.shape.view.ShapeView
+            android:layout_width="37dp"
+            android:layout_height="6dp"
+            app:shape_radius="3dp"
+            app:shape_solidColor="@color/color_black_33000000" />
+
+
+    </com.hjq.shape.layout.ShapeRelativeLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="404dp"
+        android:overScrollMode="never"
+
+        android:scrollbars="none">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="404dp"
+
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_pic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+               />
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

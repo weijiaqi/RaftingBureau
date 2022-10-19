@@ -10,8 +10,10 @@ import android.util.Log;
 import androidx.annotation.RequiresApi;
 
 import com.drifting.bureau.app.application.RBureauApplication;
+import com.drifting.bureau.mvp.model.entity.BoxEntity;
 import com.drifting.bureau.mvp.model.entity.CommentDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
+import com.drifting.bureau.mvp.model.entity.CreateOrderOpenBoxEntity;
 import com.drifting.bureau.mvp.model.entity.CreatewithfileEntity;
 import com.drifting.bureau.mvp.model.entity.IncomeRecordEntity;
 import com.drifting.bureau.mvp.model.entity.MakingRecordEntity;
@@ -518,6 +520,53 @@ public class ArCenterConsolePresenter extends BasePresenter<ArCenterConsoleContr
     }
 
 
+    /**
+     * 探索方式列表
+     */
+    public void getBox() {
+        mModel.getbox().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseEntity<List<BoxEntity>>>(mErrorHandler) {
+                    @Override
+                    public void onNext(BaseEntity<List<BoxEntity>> baseEntity) {
+                        if (mRootView != null) {
+                            if (baseEntity.getCode() == 200) {
+                                mRootView.OnBoxSuccess(baseEntity.getData());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
+    }
+
+    /**
+     * 每日开盲盒，购买下订单
+     */
+    public void createOrderOpenBoxDaily(String box_no, int box_type) {
+        mModel.createOrderOpenBoxDaily(box_no, box_type).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseEntity<CreateOrderOpenBoxEntity>>(mErrorHandler) {
+                    @Override
+                    public void onNext(BaseEntity<CreateOrderOpenBoxEntity> baseEntity) {
+                        if (mRootView != null) {
+                            if (baseEntity.getCode() == 200) {
+                                mRootView.OnCreateOrderOpenBoxDailySuccess(baseEntity.getData());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
+    }
 
 
     /**

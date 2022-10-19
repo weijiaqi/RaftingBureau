@@ -29,7 +29,7 @@ public abstract class BaseDialog extends Dialog {
     protected OnContentClickCallback onContentClickCallback;
     protected OnTypeClickCallback onTypeClickCallback;
     protected OnMoreClickCallback onMoreClickCallback;
-
+    protected OnAddressClickCallback onAddressClickCallback;
     protected OnStarrySkyClickCallback onStarrySkyClickCallback;
 
     public BaseDialog(@NonNull Context context) {
@@ -146,4 +146,13 @@ public abstract class BaseDialog extends Dialog {
     public void setOnStarrySkyClickCallback(OnStarrySkyClickCallback onStarrySkyClickCallback) {
         this.onStarrySkyClickCallback = onStarrySkyClickCallback;
     }
+
+    public interface OnAddressClickCallback {
+        void onAddressClick(String name, String phone, String address);
+    }
+
+    public void setOnAddressClickCallback(OnAddressClickCallback onAddressClickCallback) {
+        this.onAddressClickCallback = onAddressClickCallback;
+    }
+
 }

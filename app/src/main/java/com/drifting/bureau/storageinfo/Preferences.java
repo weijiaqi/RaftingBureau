@@ -38,7 +38,8 @@ public class Preferences {
     private static final String KEY_AR_ANSWER = "ar_answer";
 
     private static final String KEY_USER_IS_ANONY = "isanony";//是否为匿名状态
-    private static final String KEY_USER_IS_PRIVACY= "isprivacy";//是否同意隐私条款
+    private static final String KEY_USER_IS_PRIVACY= "isprivacy";//是否同意隐私条款、
+
     private static final String KEY_USER_IS_ARMODEL = "isarmodel";//是否为AR模式
     private static final String KEY_USER_IS_DIDATTEND = "isdidAttend";//是否参与过漂流
     public static final String KEY_IS_TEST = "isTest"; //是不是测试环境

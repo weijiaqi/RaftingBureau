@@ -13,7 +13,7 @@ import com.jess.arms.base.DefaultAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyTreasuryAdapter  extends DefaultAdapter {
+public class MyTreasuryAdapter  extends DefaultAdapter<MyTreasuryEntity> {
 
     private List<MyTreasuryEntity> selectEntities = new ArrayList<>();
 

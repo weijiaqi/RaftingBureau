@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.widget.CheckBox;
 
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.security.MessageDigest;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -51,6 +52,34 @@ public class StringUtil {
         return result;
     }
 
+
+    /**
+     * * 两个Double数相减 *
+     *
+     * @param v1 *
+     * @param v2 *
+     * @return Double
+     */
+    public static Double sub(Double v1, Double v2) {
+        BigDecimal b1 = new BigDecimal(v1.toString());
+        BigDecimal b2 = new BigDecimal(v2.toString());
+        return new Double(b1.subtract(b2).doubleValue());
+    }
+
+
+
+    /**
+     * * 两个Double数相乘 *
+     *
+     * @param v1 *
+     * @param v2 *
+     * @return Double
+     */
+    public static Double mul(Double v1, Double v2) {
+        BigDecimal b1 = new BigDecimal(v1.toString());
+        BigDecimal b2 = new BigDecimal(v2.toString());
+        return new Double(b1.multiply(b2).doubleValue());
+    }
 
     /**
      * 判断字符串非空判断

@@ -30,8 +30,13 @@ public class BaseRecyclerHolder extends RecyclerView.ViewHolder {
 
     public BaseRecyclerHolder(View itemView) {
         super(itemView);
-        if (ThirdViewUtil.isUseAutolayout()) AutoUtils.autoSize(itemView);//适配
-        ThirdViewUtil.bindTarget(this, itemView);//绑定
+
+        //屏幕适配
+        if (ThirdViewUtil.isUseAutolayout()) {
+            AutoUtils.autoSize(itemView);
+        }
+        //绑定 ButterKnife
+        ThirdViewUtil.bindTarget(this, itemView);
     }
 
     /**
