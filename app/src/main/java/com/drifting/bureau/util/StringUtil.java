@@ -54,6 +54,20 @@ public class StringUtil {
 
 
     /**
+     * a为一个带有未知位小数的实数
+     * 对其取b位小数
+     */
+    public  static double getDouble(double a, int b) {
+        int x = 0;
+        int y = 1;
+        for (int i = 0; i < b; i++) {
+            y = y * 10;
+        }
+        x = (int) (a * y);
+        return (double) x / y;
+    }
+
+    /**
      * * 两个Double数相减 *
      *
      * @param v1 *
@@ -65,7 +79,6 @@ public class StringUtil {
         BigDecimal b2 = new BigDecimal(v2.toString());
         return new Double(b1.subtract(b2).doubleValue());
     }
-
 
 
     /**
@@ -227,9 +240,9 @@ public class StringUtil {
     public static String distanceFormat(double distance) {
         DecimalFormat df = new DecimalFormat("#.00");
         if (distance < 1000) {
-            return  new Double(distance).intValue() + "m";
+            return new Double(distance).intValue() + "m";
         } else {
-            return  df.format(distance / 1000) + "km";
+            return df.format(distance / 1000) + "km";
         }
     }
 
@@ -247,7 +260,7 @@ public class StringUtil {
             return false;
         }
 
-        if (v1!=null&v2!=null){
+        if (v1 != null & v2 != null) {
 
             String[] str1 = v1.split("\\.");
             String[] str2 = v2.split("\\.");

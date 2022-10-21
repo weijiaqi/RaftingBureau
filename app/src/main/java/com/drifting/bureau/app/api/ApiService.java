@@ -910,6 +910,17 @@ public interface ApiService {
     Observable<BaseEntity<CouponsMineEntity>> couponsmine(@Field("page") int page, @Field("limit") int limit,@Field("status") int status,@Field("use_scene") String use_scene);
 
 
+
+    /**
+     *支付可用优惠券列表
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("v/coupons/listForScene")
+    Observable<BaseEntity<CouponsMineEntity>> listForScene(@Field("page") int page, @Field("limit") int limit,@Field("status") int status,@Field("use_scene") String use_scene);
+
+
     /**
      * 可用券数量
      *

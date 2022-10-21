@@ -5,14 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
-import android.text.TextUtils;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
+
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,15 +21,15 @@ import com.drifting.bureau.R;
 import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.data.entity.AnswerColorEntiy;
 import com.drifting.bureau.di.component.DaggerAnswerResultComponent;
-import com.drifting.bureau.di.component.DaggerAnswerTestComponent;
+
 import com.drifting.bureau.mvp.contract.MoveAwayPlanetaryContract;
 import com.drifting.bureau.mvp.model.entity.QuestionAssessEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionStagesEntity;
-import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
+
 import com.drifting.bureau.mvp.presenter.MoveAwayPlanetaryPresenter;
 import com.drifting.bureau.mvp.ui.activity.unity.ARMetaverseCenterActivity;
-import com.drifting.bureau.mvp.ui.activity.user.AboutMeActivity;
+
 import com.drifting.bureau.mvp.ui.activity.user.NewAboutMeActivity;
 import com.drifting.bureau.mvp.ui.adapter.CharacterTraitsAdapter;
 import com.drifting.bureau.util.ClickUtil;
@@ -171,6 +169,9 @@ public class AnswerResultActivity extends BaseManagerActivity<MoveAwayPlanetaryP
     @Override
     public void onAssessResultSuccess(QuestionAssessEntity entity) {
         if (entity != null) {
+
+
+
             mTvNikeName.setText("昵称：" + entity.getUser_name());
             mTvFaction.setText(entity.getPlanet().getName());
 

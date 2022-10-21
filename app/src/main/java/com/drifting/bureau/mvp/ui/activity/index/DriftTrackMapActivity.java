@@ -336,12 +336,10 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
             LatLng latLng = marker.getPosition();
             if (mMarkerBox.contains(marker)) {   //点击盲盒
                 if (boxEntityList.get(marker.getZIndex()).getType() == 1) {
-                    RequestUtil.create().userplayer(Preferences.getUserId(), entity -> {
-                        boxPasswordDialog = new BoxPasswordDialog(this, entity.getData());
-                        boxPasswordDialog.show();
-                        boxPasswordDialog.setOnContentClickCallback(content -> {
-                            openBox(marker, content);
-                        });
+                    boxPasswordDialog = new BoxPasswordDialog(this);
+                    boxPasswordDialog.show();
+                    boxPasswordDialog.setOnContentClickCallback(content -> {
+                        openBox(marker, content);
                     });
                 } else {  //1有锁，2无锁
                     if (boxEntityList.get(marker.getZIndex()).getEquity() == 1) {
@@ -689,7 +687,6 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
             //创建OverlayOptions的集合
             optionsBox = new ArrayList<>();
             infoBoxWindowList = new ArrayList<>();
-
             for (int i = 0; i < boxEntityList.size(); i++) {
                 LatLng latLng = new LatLng(Double.parseDouble(boxEntityList.get(i).getLat()), Double.parseDouble(boxEntityList.get(i).getLng()));
                 OverlayOptions option = new MarkerOptions().position(latLng)
@@ -698,7 +695,6 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
                         .anchor(0.5f, 0.5f) // 设置 marker 覆盖物的锚点比例，默认（0.5f, 1.0f）水平居中，垂直下对齐
                         .zIndex(i);
                 optionsBox.add(option);
-
                 View view = inflater.inflate(R.layout.layout_show_box, null, false);
                 TextView mTvTitle = view.findViewById(R.id.tv_title);
                 mTvTitle.setText(getString(R.string.box, boxEntityList.get(i).getName()));
@@ -712,10 +708,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
             }
             //在地图上批量添加
             mMarkerBox = mBaiduMap.addOverlays(optionsBox);
-
             mBaiduMap.showInfoWindows(infoBoxWindowList);
-
-
         }
     }
 

@@ -45,8 +45,10 @@ public class ArGeRenXingQiuActivity extends BaseManagerActivity implements IUnit
     ShapeTextView mTvChangeMode;
     @BindView(R.id.rl_right)
     RelativeLayout mRlright;
+
     protected UnityPlayer mUnityPlayer; // don't change the name of this variable; referenced from native code
     private UserInfoEntity userInfoEntity;
+
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, ArGeRenXingQiuActivity.class);
         context.startActivity(intent);
@@ -69,7 +71,6 @@ public class ArGeRenXingQiuActivity extends BaseManagerActivity implements IUnit
         setStatusBarHeight(mTvBar);
         mRlright.setVisibility(View.GONE);
         mTvChangeMode.setText("返回");
-
         String cmdLine = updateUnityCommandLineArguments(getIntent().getStringExtra("unity"));
         getIntent().putExtra("unity", cmdLine);
         mUnityPlayer = new UnityPlayer(this, this);
@@ -81,6 +82,12 @@ public class ArGeRenXingQiuActivity extends BaseManagerActivity implements IUnit
         new Handler().postDelayed(() -> {
             anim.stop();
             mRlAnim.setVisibility(View.GONE);
+            RequestUtil.create().userplayer(Preferences.getUserId(), entity -> {
+                if (entity != null && entity.getCode() == 200) {
+                    userInfoEntity = entity.getData();
+                    mUnityPlayer.UnitySendMessage("Main Camera", "XunZhang", userInfoEntity.getPlanet().getStatus() + "");
+                }
+            });
         }, 4500);
 
         mUnityPlayer.UnitySendMessage("Main Camera", "OpenGeRenXingQiu", "");
@@ -92,18 +99,13 @@ public class ArGeRenXingQiuActivity extends BaseManagerActivity implements IUnit
         mUnityPlayer.UnitySendMessage("Main Camera", "OpenGeRenXingQiu", "");
     }
 
-
     //进入派系星球
     public void PaiXiXingQiu() {
         mUnityPlayer.UnitySendMessage("Main Camera", "CloseGeRenXingQiu", "");
-        RequestUtil.create().userplayer(Preferences.getUserId(), entity -> {
-            if (entity != null && entity.getCode() == 200) {
-                userInfoEntity=entity.getData();
-                mUnityPlayer.UnitySendMessage("Main Camera", "OpenPaiXiXingQiu", userInfoEntity.getPlanet().getLevel() + "");
-            }
-        });
+        if (userInfoEntity!=null){
+            mUnityPlayer.UnitySendMessage("Main Camera", "OpenPaiXiXingQiu", userInfoEntity.getPlanet().getLevel() + "");
+        }
     }
-
 
     @OnClick({R.id.tv_change_mode})
     public void onClick(View view) {

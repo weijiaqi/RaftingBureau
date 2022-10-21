@@ -182,7 +182,6 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
                 }
             }
         });
-
     }
 
 

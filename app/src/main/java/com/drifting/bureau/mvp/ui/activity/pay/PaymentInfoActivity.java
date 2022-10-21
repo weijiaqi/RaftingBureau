@@ -51,6 +51,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import butterknife.BindView;
@@ -167,10 +168,7 @@ public class PaymentInfoActivity extends BaseManagerActivity<PaymentInfoPresente
             scene = scenes[type];
         }
         if (wake == 1) {  //1唤起过支付
-            mRlCoupon.setClickable(false);
-            if (!TextUtils.isEmpty(coupon_code)) {   //优惠券码 不为空
-                mTvUsable.setText(coupon_name + getString(R.string.discount_price, coupon_money));
-            }
+            mTvUsable.setText(coupon_name + getString(R.string.discount_price, coupon_money));
         }else {
             RequestUtil.create().available(scene, entity -> {
                 if (entity != null && entity.getCode() == 200) {
@@ -178,7 +176,6 @@ public class PaymentInfoActivity extends BaseManagerActivity<PaymentInfoPresente
                 }
             });
         }
-
         mTvClockview.setEndTime(curTime);
     }
 
@@ -205,7 +202,11 @@ public class PaymentInfoActivity extends BaseManagerActivity<PaymentInfoPresente
                 finish();
                 break;
             case R.id.rl_coupon:  //可使用优惠券
-                CouponAvailableActivity.start(this, listBean, total, scene, false);
+                if (type==4 &&wake==1){
+                    showMessage("当前无法重新选择优惠券!");
+                }else {
+                    CouponAvailableActivity.start(this, listBean, total, scene, false);
+                }
                 break;
             case R.id.rl_wechat:
                 setCheckStatus(1);
@@ -271,7 +272,7 @@ public class PaymentInfoActivity extends BaseManagerActivity<PaymentInfoPresente
         if (event != null) {
             this.listBean = event.getListBean();
             if (listBean.getCoupon_type() == 1) {  //折扣
-                discount = StringUtil.sub(Double.parseDouble(total), StringUtil.mul(Double.parseDouble(total), listBean.getDiscount_rate())) + "";
+                discount = StringUtil.getDouble(StringUtil.sub(Double.parseDouble(total), StringUtil.mul(Double.parseDouble(total), listBean.getDiscount_rate())),2)+"";
             } else if (listBean.getCoupon_type() == 2) {//免单
                 discount = total;
             } else {   ////满减和代金券

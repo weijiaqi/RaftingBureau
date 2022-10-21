@@ -160,8 +160,10 @@ public class NewAboutMeActivity extends BaseManagerActivity {
     public void getPlanetPwd() {
         RequestUtil.create().planetpassword(entity -> {
             if (entity!=null &&entity.getCode() == 200) {
-                mTvPassWord.setLetterSpacing(20);
-                mTvPassWord.setText(entity.getData().getPassword());
+                if (mTvPassWord!=null){
+                    mTvPassWord.setLetterSpacing(20);
+                    mTvPassWord.setText(entity.getData().getPassword());
+                }
             }
         });
     }

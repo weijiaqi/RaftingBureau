@@ -145,7 +145,7 @@
             android:layout_height="36dp"
             android:layout_below="@+id/tv_coupon"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="84dp"
             android:background="@drawable/star_troopers"
             android:paddingStart="9dp"
@@ -162,7 +162,7 @@
             android:layout_height="36dp"
             android:layout_below="@+id/tv_star_troopers"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="75dp"
             android:background="@drawable/physical_store"
             android:paddingStart="9dp"
@@ -195,7 +195,7 @@
             android:layout_width="200dp"
             android:layout_height="195dp"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="-100dp"
             android:src="@drawable/about_semicircle" />
 

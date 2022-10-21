@@ -756,34 +756,33 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
      * @time 14:00 14:00
      */
     public void DianJiMangHe(int key, int type, int equity) {
-        showMessage("------"+key+"--------"+type+"--------"+equity);
-//        this.keys = key;
-//        this.types = type;
-//        if (types == 1) {  //免费
-//            RequestUtil.create().userplayer(Preferences.getUserId(), entity -> {
-//                boxPasswordDialog = new BoxPasswordDialog(this, entity.getData());
-//                boxPasswordDialog.show();
-//                boxPasswordDialog.setOnContentClickCallback(content -> {
-//                    openBox(keys, types, content);
-//                });
-//            });
-//        } else {
-//            if (equity == 1) {  //有锁
-//                runOnUiThread(() -> {
-//                    enablePrivilegesDialog = new EnablePrivilegesDialog(this);
-//                    enablePrivilegesDialog.show();
-//                    enablePrivilegesDialog.setOnClickCallback(type2 -> {
-//                        if (type2 == EnablePrivilegesDialog.OPEN_PRIVILEGE) {
-//                            if (mPresenter != null) {
-//                                mPresenter.createOrderOpenBoxDaily(keys + "", 1);
-//                            }
-//                        }
-//                    });
-//                });
-//            } else {
-//                openBox(keys, types, "");
-//            }
-//        }
+        this.keys = key;
+        this.types = type;
+        if (types == 1) {  //免费
+            runOnUiThread(() -> {
+                boxPasswordDialog = new BoxPasswordDialog(this);
+                boxPasswordDialog.show();
+                boxPasswordDialog.setOnContentClickCallback(content -> {
+                    openBox(keys, types, content);
+                });
+            });
+        } else {
+            if (equity == 1) {  //有锁
+                runOnUiThread(() -> {
+                    enablePrivilegesDialog = new EnablePrivilegesDialog(this);
+                    enablePrivilegesDialog.show();
+                    enablePrivilegesDialog.setOnClickCallback(type2 -> {
+                        if (type2 == EnablePrivilegesDialog.OPEN_PRIVILEGE) {
+                            if (mPresenter != null) {
+                                mPresenter.createOrderOpenBoxDaily(keys + "", 1);
+                            }
+                        }
+                    });
+                });
+            } else {
+                openBox(keys, types, "");
+            }
+        }
     }
 
 
@@ -871,4 +870,6 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
     public void showMessage(@NonNull String message) {
         ToastUtil.showToast(message);
     }
+
+
 }

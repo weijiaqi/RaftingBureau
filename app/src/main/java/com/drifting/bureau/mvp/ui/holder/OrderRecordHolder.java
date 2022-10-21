@@ -143,7 +143,7 @@ public class OrderRecordHolder extends BaseRecyclerHolder {
         TextUtil.setText(mTvPrice, "￥" + listBeanList.get(position).getOrder_money());
         mTvWriteOff.setOnClickListener(v -> {
             if (listBeanList.get(position).getStatus() == 0) {  //未支付
-                PaymentInfoActivity.start(context, 4, listBeanList.get(position).getSn(), listBeanList.get(position).getOrder_money(), Remaining_time, listBeanList.get(position).getWake_up_pay(),listBeanList.get(position).getCoupon_name(), listBeanList.get(position).getCoupon_code(),listBeanList.get(position).getCoupon_money(),listBeanList.get(position).getUse_scene(),false);
+                PaymentInfoActivity.start(context, 4, listBeanList.get(position).getSn(), listBeanList.get(position).getOrder_money(), Remaining_time, listBeanList.get(position).getWake_up_pay(),listBeanList.get(position).getCoupon_name(),"",listBeanList.get(position).getCoupon_money(),listBeanList.get(position).getUse_scene(),false);
             } else {
                 if (listBeanList.get(position).getWrite_off() != 1) {
                     RequestUtil.create().writeOffInfo(listBeanList.get(position).getOrder_id(), entity -> {

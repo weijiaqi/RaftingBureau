@@ -6,6 +6,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import com.drifting.bureau.R;
@@ -29,7 +30,7 @@ public class DriftingPlayDialog extends BaseDialog implements View.OnClickListen
 
     private Context context;
     private TextView mTvStartSpace, mTvOpenPlay, mTvYouthCamp;
-
+    private RelativeLayout mRlCenter;
 
     public static final int START_SPACE = 0x01;
     public static final int OPEN_PLAY = 0x02;
@@ -46,7 +47,7 @@ public class DriftingPlayDialog extends BaseDialog implements View.OnClickListen
         mTvStartSpace = findViewById(R.id.tv_start_space);
         mTvOpenPlay = findViewById(R.id.tv_open_paly);
         mTvYouthCamp = findViewById(R.id.tv_youth_camp);
-
+        mRlCenter= findViewById(R.id.rl_center);
     }
 
     @Override
@@ -55,6 +56,7 @@ public class DriftingPlayDialog extends BaseDialog implements View.OnClickListen
         mTvStartSpace.setOnClickListener(this);
         mTvOpenPlay.setOnClickListener(this);
         mTvYouthCamp.setOnClickListener(this);
+        mRlCenter.setOnClickListener(this);
     }
 
     @Override
@@ -93,6 +95,9 @@ public class DriftingPlayDialog extends BaseDialog implements View.OnClickListen
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
+                case R.id.rl_center:
+                    dismiss();
+                    break;
                 case R.id.tv_start_space:
                     dismiss();
                     if (onClickCallback != null) {

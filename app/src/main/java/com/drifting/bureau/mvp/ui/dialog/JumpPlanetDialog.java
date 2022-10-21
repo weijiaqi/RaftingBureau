@@ -5,6 +5,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,19 +15,19 @@ import com.drifting.bureau.util.ClickUtil;
 import com.jess.arms.base.BaseDialog;
 
 /**
- * @description   跳过主星球
  * @author 卫佳琪1
+ * @description 跳过主星球
  * @time 16:59 16:59
  */
 
-public class JumpPlanetDialog  extends BaseDialog  implements View.OnClickListener{
+public class JumpPlanetDialog extends BaseDialog implements View.OnClickListener {
 
     public static final int OPEN_PLAY = 0x01;
 
     public static final int OPEN_JUMP = 0x02;
 
-    private TextView mTvOpenPlay,mTvJump;
-
+    private TextView mTvOpenPlay, mTvJump;
+    private RelativeLayout mRlContent;
 
     public JumpPlanetDialog(@NonNull Context context) {
         super(context);
@@ -36,7 +37,8 @@ public class JumpPlanetDialog  extends BaseDialog  implements View.OnClickListen
     protected void initView() {
         super.initView();
         mTvOpenPlay = findViewById(R.id.tv_open_paly);
-        mTvJump= findViewById(R.id.tv_open_jump);
+        mTvJump = findViewById(R.id.tv_open_jump);
+        mRlContent = findViewById(R.id.rl_content);
     }
 
     @Override
@@ -44,6 +46,7 @@ public class JumpPlanetDialog  extends BaseDialog  implements View.OnClickListen
         super.initEvents();
         mTvOpenPlay.setOnClickListener(this);
         mTvJump.setOnClickListener(this);
+        mRlContent.setOnClickListener(this);
     }
 
 
@@ -69,11 +72,13 @@ public class JumpPlanetDialog  extends BaseDialog  implements View.OnClickListen
     }
 
 
-
     @Override
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
+                case R.id.rl_content:
+                    dismiss();
+                    break;
                 case R.id.tv_open_paly:
                     dismiss();
                     if (onClickCallback != null) {

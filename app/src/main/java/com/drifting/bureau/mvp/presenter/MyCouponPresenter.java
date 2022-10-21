@@ -90,6 +90,49 @@ public class MyCouponPresenter extends BasePresenter<MyCouponContract.Model, MyC
     }
 
 
+
+
+    /**
+     *卡券记录
+     */
+    public void listForScene(int page, int limit,int status,String scene, boolean loadType) {
+        if (mRootView != null) {
+            mRootView.onloadStart();
+        }
+        mModel.listForScene(page, limit,status,scene)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<BaseEntity<CouponsMineEntity>>(mErrorHandler) {
+                    @Override
+                    public void onNext(BaseEntity<CouponsMineEntity> baseEntity) {
+                        if (mRootView != null) {
+                            if (baseEntity.getCode() == 200) {
+                                if (baseEntity.getData().getList() == null || baseEntity.getData().getList().size() == 0) {
+                                    mRootView.loadState(ViewUtil.NOT_DATA);
+                                    mRootView.loadFinish(loadType, true);
+                                } else {
+                                    mRootView.loadState(ViewUtil.HAS_DATA);
+                                    mRootView.loadFinish(loadType, false);
+                                }
+                                mRootView.onCouponsMineSuccess(baseEntity.getData(), loadType);
+                            } else {
+                                mRootView.loadState(ViewUtil.NOT_SERVER);
+                                mRootView.loadFinish(loadType, false);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        Log.e("错误信息", t.getMessage().toString() + "");
+                        mRootView.loadState(ViewUtil.NOT_SERVER);
+                        t.printStackTrace();
+                    }
+                });
+    }
+
+
     @Override
     public void onDestroy() {
         super.onDestroy();

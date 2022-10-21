@@ -49,4 +49,9 @@ public class MyCouponModel extends BaseModel implements MyCouponContract.Model{
     public Observable<BaseEntity<CouponsMineEntity>> couponsmine(int page, int limit,int status,String scene) {
         return mRepositoryManager.obtainRetrofitService(ApiService.class).couponsmine(page,limit,status,scene);
     }
+
+    @Override
+    public Observable<BaseEntity<CouponsMineEntity>> listForScene(int page, int limit, int status, String scene) {
+        return mRepositoryManager.obtainRetrofitService(ApiService.class).listForScene(page,limit,status,scene);
+    }
 }

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,7 +38,8 @@ public class CouponAvailableHolder extends BaseHolder<CouponsMineEntity.ListBean
     TextView mTvDesc;
     @BindView(R.id.iv_coupon_type)
     ImageView mIvCouponType;
-
+     @BindView(R.id.rl_content)
+    RelativeLayout mRlContent;
     @BindView(R.id.ck_sellect)
     CheckBox mCkSelect;
     private Context context;
@@ -150,7 +152,7 @@ public class CouponAvailableHolder extends BaseHolder<CouponsMineEntity.ListBean
             }
         }
 
-        mCkSelect.setOnClickListener(view -> {
+        mRlContent.setOnClickListener(view -> {
             if (data.getType()==0){
                 mAdapter.onItemCheckChange(data);
             }

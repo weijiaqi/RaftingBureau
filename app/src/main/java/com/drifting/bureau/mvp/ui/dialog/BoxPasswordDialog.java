@@ -19,8 +19,10 @@ import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.ui.activity.index.StarDistributionActivity;
 import com.drifting.bureau.mvp.ui.activity.user.NewAboutMeActivity;
 import com.drifting.bureau.mvp.ui.adapter.KeyboardAdapter;
+import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.ToastUtil;
+import com.drifting.bureau.util.request.RequestUtil;
 import com.jess.arms.base.BaseDialog;
 import com.jess.arms.base.BaseRecyclerAdapter;
 
@@ -52,12 +54,11 @@ public class BoxPasswordDialog extends BaseDialog implements BaseRecyclerAdapter
 
     private final LinkedList<String> mRecordList = new LinkedList<>();
 
-    private UserInfoEntity userInfoEntity;
 
-    public BoxPasswordDialog(@NonNull Context context, UserInfoEntity userInfoEntity) {
+
+    public BoxPasswordDialog(@NonNull Context context) {
         super(context);
         this.context = context;
-        this.userInfoEntity = userInfoEntity;
     }
 
     @Override
@@ -138,12 +139,14 @@ public class BoxPasswordDialog extends BaseDialog implements BaseRecyclerAdapter
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
                 case R.id.iv_get_pwd:
-                    if (userInfoEntity.getPlanet().getLevel() == 1) {
-                        ToastUtil.showToast("心理测试参与完成之后才可以获取口令哦!");
-                        StarDistributionActivity.start(context, false);
-                    } else {
-                        NewAboutMeActivity.start(context, false);
-                    }
+                    RequestUtil.create().userplayer(Preferences.getUserId(), entity -> {
+                        if (entity.getData().getPlanet().getLevel() == 1) {
+                            ToastUtil.showToast("心理测试参与完成之后才可以获取口令哦!");
+                            StarDistributionActivity.start(context, false);
+                        } else {
+                            NewAboutMeActivity.start(context, false);
+                        }
+                    });
                     break;
                 case R.id.iv_submit:
                     //     判断密码是否已经输入完毕

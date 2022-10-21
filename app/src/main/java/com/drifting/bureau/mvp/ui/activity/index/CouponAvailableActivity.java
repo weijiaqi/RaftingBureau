@@ -115,7 +115,7 @@ public class CouponAvailableActivity extends BaseManagerActivity<MyCouponPresent
 
     public void getData(int mPage, boolean loadType) {
         if (mPresenter != null) {
-            mPresenter.openboxlist(mPage, limit, 0, scene, loadType);
+            mPresenter.listForScene(mPage, limit, 0, scene, loadType);
         }
     }
 
