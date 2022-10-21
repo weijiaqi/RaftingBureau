@@ -115,7 +115,9 @@ public class ArPaiXiXingQiuActivity extends BaseManagerActivity implements IUnit
     //进入派系星球
     public void PaiXiXingQiu() {
         mUnityPlayer.UnitySendMessage("Main Camera", "CloseGeRenXingQiu", "");
-        mUnityPlayer.UnitySendMessage("Main Camera", "OpenPaiXiXingQiu", userInfoEntity.getPlanet().getLevel() + "");
+        if (userInfoEntity!=null){
+            mUnityPlayer.UnitySendMessage("Main Camera", "OpenPaiXiXingQiu", userInfoEntity.getPlanet().getLevel() + "");
+        }
     }
 
     @OnClick({R.id.tv_change_mode})

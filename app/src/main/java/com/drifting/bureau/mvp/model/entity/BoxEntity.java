@@ -10,8 +10,17 @@ public class BoxEntity {
         private String lng;
         private String name;
         private Integer type;
+        private Integer is_kongtou;
 
-        public Integer getEquity() {
+    public Integer getIs_kongtou() {
+        return is_kongtou;
+    }
+
+    public void setIs_kongtou(Integer is_kongtou) {
+        this.is_kongtou = is_kongtou;
+    }
+
+    public Integer getEquity() {
             return equity;
         }
 

@@ -884,8 +884,8 @@ public class RequestUtil {
     /**
      * 开保险柜
      */
-    public void openbox( int key,int type,String code,  BaseDataCallBack<OpenBoxEntity> callBack) {
-        ApiProxy.getApiService().openbox(key,type,code)
+    public void openbox( int key,int type,String code, int is_kongtou, BaseDataCallBack<OpenBoxEntity> callBack) {
+        ApiProxy.getApiService().openbox(key,type,code,is_kongtou)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new BaseObserver<BaseEntity<OpenBoxEntity>>() {

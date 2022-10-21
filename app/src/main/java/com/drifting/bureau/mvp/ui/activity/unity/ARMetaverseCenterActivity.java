@@ -131,7 +131,7 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
     private PublicDialog publicDialog;
     private List<QuestionEntity> questionEntityList;
     private Map<String, String> map;
-    private int questionid, total, paixitype, keys, types;
+    private int questionid, total, paixitype, keys, types,is_kongtous;
     private String value;
     private OrderOneEntity orderOneEntity;
     private SpaceInfoEntity spaceInfoEntity;
@@ -755,15 +755,16 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
      * @author 卫佳琪1
      * @time 14:00 14:00
      */
-    public void DianJiMangHe(int key, int type, int equity) {
+    public void DianJiMangHe(int key, int type, int equity,int is_kongtou) {
         this.keys = key;
         this.types = type;
+        this.is_kongtous = is_kongtou;
         if (types == 1) {  //免费
             runOnUiThread(() -> {
                 boxPasswordDialog = new BoxPasswordDialog(this);
                 boxPasswordDialog.show();
                 boxPasswordDialog.setOnContentClickCallback(content -> {
-                    openBox(keys, types, content);
+                    openBox(keys, types, content,is_kongtous);
                 });
             });
         } else {
@@ -780,14 +781,14 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
                     });
                 });
             } else {
-                openBox(keys, types, "");
+                openBox(keys, types, "",is_kongtous);
             }
         }
     }
 
 
-    public void openBox(int key, int type, String content) {
-        RequestUtil.create().openbox(key, type, content, entity1 -> {
+    public void openBox(int key, int type, String content,int is_kongtou) {
+        RequestUtil.create().openbox(key, type, content, is_kongtou,entity1 -> {
             if (entity1.getCode() == 200) {
                 if (boxPasswordDialog != null) {
                     boxPasswordDialog.dismiss();
@@ -844,7 +845,7 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void PaymentEvent(PaymentEvent event) {  //购买成功回调
         if (event != null) {
-            openBox(keys, types, "");
+            openBox(keys, types, "",is_kongtous);
         }
     }
 

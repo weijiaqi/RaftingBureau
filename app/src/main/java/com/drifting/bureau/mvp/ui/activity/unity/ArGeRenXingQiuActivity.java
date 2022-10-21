@@ -85,7 +85,7 @@ public class ArGeRenXingQiuActivity extends BaseManagerActivity implements IUnit
             RequestUtil.create().userplayer(Preferences.getUserId(), entity -> {
                 if (entity != null && entity.getCode() == 200) {
                     userInfoEntity = entity.getData();
-                    mUnityPlayer.UnitySendMessage("Main Camera", "XunZhang", userInfoEntity.getPlanet().getStatus() + "");
+                    mUnityPlayer.UnitySendMessage("Main Camera", "XunZhang", userInfoEntity.getUser().getStatus() + "");
                 }
             });
         }, 4500);

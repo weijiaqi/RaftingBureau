@@ -851,7 +851,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("v/sdb/open_box")
-    Observable<BaseEntity<OpenBoxEntity>> openbox(@Field("key") int key, @Field("type") int type, @Field("code") String code);
+    Observable<BaseEntity<OpenBoxEntity>> openbox(@Field("key") int key, @Field("type") int type, @Field("code") String code,@Field("is_kongtou") int is_kongtou);
 
 
     /**

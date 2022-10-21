@@ -382,7 +382,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
 
 
     public void openBox(Marker marker, String code) {
-        RequestUtil.create().openbox(boxEntityList.get(marker.getZIndex()).getKey(), boxEntityList.get(marker.getZIndex()).getType(), code, entity1 -> {
+        RequestUtil.create().openbox(boxEntityList.get(marker.getZIndex()).getKey(), boxEntityList.get(marker.getZIndex()).getType(), code, boxEntityList.get(marker.getZIndex()).getIs_kongtou(),entity1 -> {
             if (entity1.getCode() == 200) {
                 if (boxPasswordDialog != null) {
                     boxPasswordDialog.dismiss();
