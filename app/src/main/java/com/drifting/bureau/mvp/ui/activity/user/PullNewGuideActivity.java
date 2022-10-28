@@ -190,9 +190,10 @@ public class PullNewGuideActivity extends BaseManagerActivity {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
                 case R.id.tv_create_planet: //建立星球
-                    if (IsVisibility()) {
-                        SignLoginHintActivity.start(this, true);
-                    }
+//                    if (IsVisibility()) {
+//                        SignLoginHintActivity.start(this, true);
+//                    }
+                    SignLoginHintActivity.start(this, true);
                     break;
                 case R.id.tv_ar_select:  //AR查看
 //                    if (IsVisibility()) {

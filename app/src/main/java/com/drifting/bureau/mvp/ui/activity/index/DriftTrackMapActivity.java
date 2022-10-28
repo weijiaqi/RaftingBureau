@@ -382,15 +382,13 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
 
 
     public void openBox(Marker marker, String code) {
-        RequestUtil.create().openbox(boxEntityList.get(marker.getZIndex()).getKey(), boxEntityList.get(marker.getZIndex()).getType(), code, boxEntityList.get(marker.getZIndex()).getIs_kongtou(),entity1 -> {
-            if (entity1.getCode() == 200) {
+        RequestUtil.create().openbox(boxEntityList.get(marker.getZIndex()).getKey(), boxEntityList.get(marker.getZIndex()).getType(), code, boxEntityList.get(marker.getZIndex()).getIs_kongtou(), entity1 -> {
+            if (entity1!=null &&entity1.getData()!=null &&entity1.getCode() == 200) {
                 if (boxPasswordDialog != null) {
                     boxPasswordDialog.dismiss();
                 }
-
                 marker.remove();
                 mBaiduMap.hideInfoWindow(infoBoxWindowList.get(marker.getZIndex()));
-
                 if (entity1.getData().getIs_fictitious() == 1) {  //虚拟
                     welfareVoucherDialog = new WelfareVoucherDialog(this, entity1.getData());
                     welfareVoucherDialog.show();
@@ -413,12 +411,10 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
                         });
                     });
                 }
-
             } else {
                 showMessage(entity1.getMsg());
             }
         });
-
     }
 
     /**
@@ -533,10 +529,8 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
                                     showMessage(entity2.getMsg());
                                 }
                             });
-
                         }
                     });
-
                 }
             });
         }
@@ -608,7 +602,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
     }
 
     @Override
-    public void onSkuListSuccess(SkuListEntity skuListEntity,int id) {
+    public void onSkuListSuccess(SkuListEntity skuListEntity, int id) {
         if (skuListEntity != null) {
             raftingOrderDialog = new RaftingOrderDialog(this, skuListEntity);
             raftingOrderDialog.show();
@@ -622,7 +616,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
                         sb.append(skuListEntity.getGoods_sku().get(i).getSku_code());
                     }
                     if (mPresenter != null) {
-                        mPresenter.createOrder(CreateTopicId, sb.toString(),id);
+                        mPresenter.createOrder(CreateTopicId, sb.toString(), id);
                     }
                 }
             });
@@ -674,16 +668,20 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
 
 
     @Override
-    public void onCreateOrderSuccess(CreateOrderEntity entity,int id) {
+    public void onCreateOrderSuccess(CreateOrderEntity entity, int id) {
         if (entity != null) {
-            PaymentInfoActivity.start(this, id==0?1:2, entity.getSn(), entity.getTotal_amount(),  false);
+            PaymentInfoActivity.start(this, id == 0 ? 1 : 2, entity.getSn(), entity.getTotal_amount(), false);
         }
     }
 
     @Override
     public void OnBoxSuccess(List<BoxEntity> list) {
         if (list.size() > 0) {
-            boxEntityList = list.subList(0,10);
+            if (list.size() > 10) {
+                boxEntityList = list.subList(0, 10);
+            } else {
+                boxEntityList = list;
+            }
             //创建OverlayOptions的集合
             optionsBox = new ArrayList<>();
             infoBoxWindowList = new ArrayList<>();
@@ -794,8 +792,8 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
      */
     public void getToUser(int user_id) {
         this.user_id2 = user_id;
-        RequestUtil.create().userplayer(user_id + "", entity -> {
-            if (entity != null && entity.getCode() == 200) {
+        RequestUtil.create().userplayer(user_id2 + "", entity -> {
+            if (entity != null && entity.getData() != null && entity.getCode() == 200) {
                 if (!TextUtils.isEmpty(entity.getData().getUser().getName())) {
                     mTvToName.setText(entity.getData().getUser().getName());
                 }
@@ -803,11 +801,11 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
                 if (!TextUtils.isEmpty(entity.getData().getPlanet().getName())) {
                     mTvRightName.setText("来自" + entity.getData().getPlanet().getName());
                 }
-                if (user_id == Integer.parseInt(Preferences.getUserId())) {
+                if (user_id2 == Integer.parseInt(Preferences.getUserId())) {
                     mRlRIghtAddFriends.setVisibility(View.GONE);
                 } else {
                     mRlRIghtAddFriends.setVisibility(View.VISIBLE);
-                    isFriend(user_id, 2);
+                    isFriend(user_id2, 2);
                 }
             }
         });
@@ -1247,7 +1245,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void PaymentEvent(PaymentEvent event) {  //购买成功回调
         if (event != null) {
-            if (event.getType() == 1 || event.getType()==2) {
+            if (event.getType() == 1 || event.getType() == 2) {
                 sendSuccess();
             } else {
                 openBox(mMarker, "");
@@ -1305,8 +1303,10 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
                     break;
                 case R.id.tv_share:  //分享
                     RequestUtil.create().userplayer(Preferences.getUserId(), entity -> {
-                        shareBoxDialog = new ShareBoxDialog(this, entity.getData());
-                        shareBoxDialog.show();
+                        if (entity!=null &&entity.getData()!=null &&entity.getCode()==200){
+                            shareBoxDialog = new ShareBoxDialog(this, entity.getData());
+                            shareBoxDialog.show();
+                        }
                     });
                     break;
                 case R.id.tv_winning_record:  //中奖记录
@@ -1317,14 +1317,14 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
                     break;
                 case R.id.tv_list_prizes:  //奖品名单
                     RequestUtil.create().previewBox(entity -> {
-                        if (entity!=null &&entity.getCode()==200){
+                        if (entity != null && entity.getCode() == 200) {
                             if (listPrizesDialog == null) {
-                                listPrizesDialog = new ListPrizesDialog(DriftTrackMapActivity.this,entity.getData().getImage1());
+                                listPrizesDialog = new ListPrizesDialog(DriftTrackMapActivity.this, entity.getData().getImage1());
                             }
                             listPrizesDialog.show();
                         }
                     });
-                     break;
+                    break;
             }
         }
     }

@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
+import com.drifting.bureau.mvp.ui.activity.home.NewDiscoveryTourActivity;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.base.BaseManagerActivity;
@@ -59,7 +60,7 @@ public class ClaimPlanetActivity extends BaseManagerActivity {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
                 case R.id.tv_enter_rb:
-                    DiscoveryTourActivity.start(this, true);
+                    NewDiscoveryTourActivity.start(this, true);
                     break;
                 case R.id.tv_perfect:  //进入AR版本
                     ArGuideActivity.start(this,false);

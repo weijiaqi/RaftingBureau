@@ -17,6 +17,7 @@ import com.drifting.bureau.mvp.contract.SignLoginContract;
 import com.drifting.bureau.mvp.model.entity.LoginEntity;
 import com.drifting.bureau.mvp.presenter.SignLoginPresenter;
 import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
+import com.drifting.bureau.mvp.ui.activity.home.NewDiscoveryTourActivity;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.LogInOutDataUtil;
@@ -105,13 +106,13 @@ public class SignLoginHintActivity extends BaseManagerActivity<SignLoginPresente
             @Override
             public void onConnectSuccess() {
                 showMessage("登录成功");
-                DiscoveryTourActivity.start(SignLoginHintActivity.this, true);
+                NewDiscoveryTourActivity.start(SignLoginHintActivity.this, true);
             }
 
             @Override
             public void onConnectError() {
                 //ToastUtil.showToast("会话消息故障!");
-                DiscoveryTourActivity.start(SignLoginHintActivity.this, true);
+                NewDiscoveryTourActivity.start(SignLoginHintActivity.this, true);
             }
         });
     }

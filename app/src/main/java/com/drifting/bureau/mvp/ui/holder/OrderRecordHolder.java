@@ -66,36 +66,26 @@ public class OrderRecordHolder extends BaseRecyclerHolder {
         TextUtil.setText(mTvTime, "订单时间：" + DateUtil.unxiToDateYMDHM(listBeanList.get(position).getCreated_at_int() + ""));
         orderListAdapter.setData(listBeanList.get(position).getOrder_sub());
 
-        if (listBeanList.get(position).getExplore_id() == 0) {  //0是盲盒
-            if (listBeanList.get(position).getStatus() == 0 && listBeanList.get(position).getTimeout() != 0) {  //未支付
-                mTvWriteOff.setVisibility(View.VISIBLE);
-                mTvWriteOff.setText("立即付款");
-            } else {
-                mTvWriteOff.setVisibility(View.GONE);
-            }
-        } else {
-            mTvWriteOff.setVisibility(View.VISIBLE);
-            if (listBeanList.get(position).getWrite_off() == 1) {
-                mTvWriteOff.setText("已核销");
-                mTvWriteOff.setClickable(false);
-                mTvWriteOff.setTextColor(context.getColor(R.color.color_99));
-            } else {
-                if (listBeanList.get(position).getStatus() == 0) {  //未支付
-                    mTvWriteOff.setText("立即付款");
-                } else {
-                    mTvWriteOff.setText("立即核销");
-                }
-                mTvWriteOff.setClickable(true);
-                mTvWriteOff.setTextColor(context.getColor(R.color.white));
-            }
-        }
-
         if (listBeanList.get(position).getPlatform_gift() == 1) { //是平台赠送
             mTvStatus.getTextColorBuilder().setTextColor(context.getColor(R.color.color_ff)).intoTextColor();
             mTvStatus.setText("平台赠送");
             mLlPayMent.setVisibility(View.GONE);
-            mTvWriteOff.setVisibility(View.GONE);
-        } else {
+            if (listBeanList.get(position).getExplore_id() == 0) {  //0是盲盒
+                mTvWriteOff.setVisibility(View.GONE);
+            } else {  //1是奶茶
+                mTvWriteOff.setVisibility(View.VISIBLE);
+                if (listBeanList.get(position).getWrite_off() == 1) {
+                    mTvWriteOff.setText("已核销");
+                    mTvWriteOff.setClickable(false);
+                    mTvWriteOff.setTextColor(context.getColor(R.color.color_99));
+                } else {
+                    mTvWriteOff.setText("立即核销");
+                    mTvWriteOff.setClickable(true);
+                    mTvWriteOff.setTextColor(context.getColor(R.color.white));
+                }
+            }
+        } else { //不是平台赠送
+
             if (listBeanList.get(position).getStatus() == 0) {  //未支付
                 mTvStatus.getTextColorBuilder().setTextGradientColors(context.getColor(R.color.color_d6), context.getColor(R.color.color_70)).intoTextColor();
                 mTvStatus.setText("未付款");
@@ -133,17 +123,33 @@ public class OrderRecordHolder extends BaseRecyclerHolder {
                 }
 
             } else if (listBeanList.get(position).getStatus() == 1) {  //已支付
-                mTvStatus.getTextColorBuilder().setTextGradientColors(context.getColor(R.color.color_6c), context.getColor(R.color.color_6d)).intoTextColor();
-                mTvStatus.setText("已付款");
-                mLlPayMent.setVisibility(View.GONE);
-                mTvWriteOff.setVisibility(View.GONE);
+
+                if (listBeanList.get(position).getExplore_id() == 0) {  //0是盲盒
+                    mTvWriteOff.setVisibility(View.GONE);
+                } else { //1是奶茶
+                    mTvWriteOff.setVisibility(View.VISIBLE);
+                    if (listBeanList.get(position).getWrite_off() == 1) {
+                        mTvWriteOff.setText("已核销");
+                        mTvWriteOff.setClickable(false);
+                        mTvWriteOff.setTextColor(context.getColor(R.color.color_99));
+                    } else {
+                        mTvWriteOff.setText("立即核销");
+                    }
+                    mTvWriteOff.setClickable(true);
+                    mTvWriteOff.setTextColor(context.getColor(R.color.white));
+                }
             }
+
+            mTvStatus.getTextColorBuilder().setTextGradientColors(context.getColor(R.color.color_6c), context.getColor(R.color.color_6d)).intoTextColor();
+            mTvStatus.setText("已付款");
+            mLlPayMent.setVisibility(View.GONE);
+
         }
 
         TextUtil.setText(mTvPrice, "￥" + listBeanList.get(position).getOrder_money());
         mTvWriteOff.setOnClickListener(v -> {
             if (listBeanList.get(position).getStatus() == 0) {  //未支付
-                PaymentInfoActivity.start(context, 4, listBeanList.get(position).getSn(), listBeanList.get(position).getOrder_money(), Remaining_time, listBeanList.get(position).getWake_up_pay(),listBeanList.get(position).getCoupon_name(),"",listBeanList.get(position).getCoupon_money(),listBeanList.get(position).getUse_scene(),false);
+                PaymentInfoActivity.start(context, 4, listBeanList.get(position).getSn(), listBeanList.get(position).getOrder_money(), Remaining_time, listBeanList.get(position).getWake_up_pay(), listBeanList.get(position).getCoupon_name(), "", listBeanList.get(position).getCoupon_money(), listBeanList.get(position).getUse_scene(), false);
             } else {
                 if (listBeanList.get(position).getWrite_off() != 1) {
                     RequestUtil.create().writeOffInfo(listBeanList.get(position).getOrder_id(), entity -> {

@@ -22,6 +22,7 @@ import com.drifting.bureau.mvp.model.entity.QuestionEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionStagesEntity;
 import com.drifting.bureau.mvp.presenter.MoveAwayPlanetaryPresenter;
 import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
+import com.drifting.bureau.mvp.ui.activity.home.NewDiscoveryTourActivity;
 import com.drifting.bureau.mvp.ui.adapter.AnswerAdapter;
 import com.drifting.bureau.mvp.ui.adapter.manager.CardSwipeLayoutManager;
 import com.drifting.bureau.mvp.ui.dialog.AttributeResultsDialog;
@@ -150,7 +151,7 @@ public class MoveAwayPlanetaryActivity extends BaseManagerActivity<MoveAwayPlane
                     if (type == 1) {
                         finish();
                     } else {
-                        DiscoveryTourActivity.start(this, true);
+                        NewDiscoveryTourActivity.start(this, true);
                     }
                 }
             });

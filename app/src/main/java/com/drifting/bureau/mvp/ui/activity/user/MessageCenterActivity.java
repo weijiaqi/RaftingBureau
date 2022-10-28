@@ -64,7 +64,7 @@ public class MessageCenterActivity extends BaseManagerActivity<MessageCenterPres
     private IndicatorViewPager indicatorViewPager;
     private List<MessageCenterEntity> mTabTitle;
     private MessageCenterAdapter messageCenterAdapter;
-    private int Sys_msg = 0;
+    private int Sys_msg,Sys_friend = 0;
 
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, MessageCenterActivity.class);
@@ -121,6 +121,7 @@ public class MessageCenterActivity extends BaseManagerActivity<MessageCenterPres
     public void initListener() {
         mIndicatorTablayout.setOnTransitionListener(new OnTransitionViewListener().setValueFromRes(this,
                 R.color.white, R.color.color_99, R.dimen.tab_message_nor_size, R.dimen.tab_message_nor_size));
+        viewPager.setSaveEnabled(false);
         indicatorViewPager = new IndicatorViewPager(mIndicatorTablayout, viewPager);
         indicatorViewPager.setIndicatorScrollBar(new LayoutBar(this, R.layout.layout_indicator_view));
         setTextTypeface(0, Typeface.BOLD);
@@ -135,9 +136,10 @@ public class MessageCenterActivity extends BaseManagerActivity<MessageCenterPres
         RequestUtil.create().unread(entity -> {
             if (entity != null && entity.getCode() == 200) {
                 Sys_msg = entity.getData().getSys_msg();
+                Sys_friend= entity.getData().getFriends();
                 mTabTitle.add(new MessageCenterEntity(1, "星际会话", false));
-                mTabTitle.add(new MessageCenterEntity(2, "接收电波", entity.getData().getSys_msg() == 0 ? false : true));
-                mTabTitle.add(new MessageCenterEntity(3, "星际联络人", entity.getData().getFriends() == 0 ? false : true));
+                mTabTitle.add(new MessageCenterEntity(2, "接收电波", Sys_msg == 0 ? false : true));
+                mTabTitle.add(new MessageCenterEntity(3, "星际联络人", Sys_friend == 0 ? false : true));
                 messageCenterAdapter.setData(mTabTitle);
                 if (indicatorViewPager != null) {
                     indicatorViewPager.setAdapter(messageCenterAdapter);

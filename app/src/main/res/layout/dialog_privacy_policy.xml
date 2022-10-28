@@ -49,9 +49,9 @@
             android:src="@drawable/safety" />
 
         <TextView
-            android:layout_marginStart="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:text="我们会严格按照《网络安全法》、《信息网络传播保护条例》等保护您的个人信息"
             android:textColor="@color/color_66"
             android:textSize="11sp" />
@@ -72,9 +72,9 @@
             android:src="@drawable/authorize" />
 
         <TextView
-            android:layout_marginStart="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:text="我们会严格按照《网络安全法》、《信息网络传播保护条例》等保护您的个人信息"
             android:textColor="@color/color_66"
             android:textSize="11sp" />
@@ -82,16 +82,33 @@
     </LinearLayout>
 
 
-    <TextView
-        android:id="@+id/tv_privacy"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="25dp"
-        android:layout_marginTop="20dp"
-        android:textSize="12sp"
-        android:textColor="@color/color_33"
-        android:text="点击“同意”，即表示你已阅读并同意更新后的《用户注册协议》及《用户隐私政策》" />
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="25dp">
 
+        <CheckBox
+            android:id="@+id/ck_protocol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:button="@drawable/selector_protocol"
+            android:textColor="@color/white"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/tv_privacy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@+id/ck_protocol"
+            android:text="点击“同意”，即表示你已阅读并同意更新后的《用户注册协议》及《用户隐私政策》"
+            android:textColor="@color/color_33"
+            android:textSize="12sp" />
+
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"

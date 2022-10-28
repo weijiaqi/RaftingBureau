@@ -152,7 +152,7 @@ public class DiscoveryTourPresenter extends BasePresenter<DiscoveryTourContract.
 
 
     /**
-     * 探索方式列表
+     *  获取经纬度
      */
     public void getLoaction(String lng, String lat) {
         mModel.information(lng, lat).subscribeOn(Schedulers.io())
@@ -188,7 +188,7 @@ public class DiscoveryTourPresenter extends BasePresenter<DiscoveryTourContract.
                     public void onNext(BaseEntity<List<PlanetEntity>> baseEntity) {
                         if (mRootView != null) {
                             if (baseEntity.getCode() == 200) {
-                                mRootView.onExploretypeSuccess(baseEntity.getData());
+                         //    mRootView.onExploretypeSuccess(baseEntity.getData());
                             }
                         }
                     }

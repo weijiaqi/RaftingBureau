@@ -88,7 +88,11 @@ public class SpaceStationVRActivity extends BaseManagerActivity {
                         VrPanoramaView.Options options = new VrPanoramaView.Options();
                         //设置图片类型为单通道图片
                         options.inputType = VrPanoramaView.Options.TYPE_MONO;
-                        mVRPanoramaView.loadImageFromBitmap(bitmap, options);
+                        try {
+                            mVRPanoramaView.loadImageFromBitmap(bitmap, options);
+                        }catch (Exception e){
+                            Log.e(TAG, e.toString());
+                        }
                     }
                 }
             }.execute();

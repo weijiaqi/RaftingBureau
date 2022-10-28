@@ -43,6 +43,7 @@ import com.drifting.bureau.mvp.model.entity.TeamStatisticEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.presenter.ArCenterConsolePresenter;
 import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
+import com.drifting.bureau.mvp.ui.activity.home.NewDiscoveryTourActivity;
 import com.drifting.bureau.mvp.ui.activity.index.AnswerResultActivity;
 import com.drifting.bureau.mvp.ui.activity.index.AnswerTestActivity;
 import com.drifting.bureau.mvp.ui.activity.index.DriftTrackMapActivity;
@@ -317,8 +318,7 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
                             mUnityPlayer.UnitySendMessage("Main Camera", "CloseAircraft", "");
                         }
                     } else {
-                        Preferences.setARModel(false);
-                        DiscoveryTourActivity.start(this, true);
+                        NewDiscoveryTourActivity.start(this, 1,true);
                     }
                     break;
                 case R.id.rl_info:

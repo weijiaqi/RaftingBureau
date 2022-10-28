@@ -40,7 +40,7 @@
             android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/iv_message"
+            android:id="@+id/iv_unread"
             android:layout_width="5dp"
             android:layout_height="5dp"
             android:layout_centerVertical="true"

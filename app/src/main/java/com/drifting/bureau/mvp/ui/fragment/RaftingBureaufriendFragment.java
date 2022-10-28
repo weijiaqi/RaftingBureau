@@ -116,8 +116,10 @@ public class RaftingBureaufriendFragment extends BaseFragment<RaftingBureaufrien
     @Override
     public void onFriendMineSuccess(int type, RaftingBureaufriendEntity entity) {
         if (entity != null) {
-            mTvNum.setVisibility(entity.getApply() == 0 ? View.GONE : View.VISIBLE);
-            mTvNum.setText(entity.getApply() + "");
+            if (entity.getApply()!=null){
+                mTvNum.setVisibility(entity.getApply() == 0 ? View.GONE : View.VISIBLE);
+                mTvNum.setText(entity.getApply() + "");
+            }
             List<RaftingBureaufriendEntity.FriendsBean> list = entity.getFriends();
             if (list.size() > 0) {
                 raftingBureaufriendAdapter.setData(list);

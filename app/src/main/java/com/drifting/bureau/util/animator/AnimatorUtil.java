@@ -36,6 +36,18 @@ public class AnimatorUtil {
         translationYAnim.start();
     }
 
+    /**
+     * @description 上下抖动动画
+     */
+    private static int[] times = new int[]{300, 600, 900};
+
+    public static void ObjectAnim(View view, int type, int delay, int value) {
+        ObjectAnimator translationYAnim = ObjectAnimator.ofFloat(view, TRANSLATION_Y, -value, value, -value);
+        translationYAnim.setDuration(delay);
+        translationYAnim.setStartDelay(times[type]);
+        translationYAnim.setRepeatCount(ValueAnimator.INFINITE);
+        translationYAnim.start();
+    }
 
     /**
      * @description 透明缩放组合动画
@@ -77,14 +89,13 @@ public class AnimatorUtil {
     }
 
 
-
     /**
      * 3D翻转动画
      *
      * @param rootView
      * @author QiuLong
      */
-    public static void start3DRotateAnimator(final View rootView,Animator.AnimatorListener listener) {
+    public static void start3DRotateAnimator(final View rootView, Animator.AnimatorListener listener) {
         final float from = 180;
         final float to = from == 0 ? 180 : 0;
 

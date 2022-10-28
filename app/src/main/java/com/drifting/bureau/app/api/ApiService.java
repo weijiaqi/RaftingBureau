@@ -13,6 +13,7 @@ import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
 import com.drifting.bureau.mvp.model.entity.CreateOrderOpenBoxEntity;
 import com.drifting.bureau.mvp.model.entity.CreatewithfileEntity;
 import com.drifting.bureau.mvp.model.entity.DeliveryDetailsEntity;
+import com.drifting.bureau.mvp.model.entity.DesireCounterEntity;
 import com.drifting.bureau.mvp.model.entity.DidAttendEntity;
 import com.drifting.bureau.mvp.model.entity.DriftingTrackEntity;
 import com.drifting.bureau.mvp.model.entity.ExploreTimesEntity;
@@ -836,7 +837,7 @@ public interface ApiService {
     Observable<BaseEntity<List<TopicTagsEntity>>> tagslist();
 
     /**
-     * 地图上保险柜
+     * 地图上魔法柜
      *
      * @return
      */
@@ -845,7 +846,7 @@ public interface ApiService {
 
 
     /**
-     * 开保险柜
+     * 开魔法柜
      *
      * @return
      */
@@ -891,7 +892,7 @@ public interface ApiService {
 
 
     /**
-     * 开保险柜记录
+     * 开魔法柜记录
      *
      * @return
      */
@@ -930,4 +931,22 @@ public interface ApiService {
     @POST("v/coupons/available")
     Observable<BaseEntity<AvailableEntity>> available(@Field("use_scene") String scene);
 
+
+    /**
+     * 期待统计结果
+     *
+     * @return
+     */
+    @GET("v/gz/desireCounter")
+    Observable<BaseEntity<DesireCounterEntity>> desireCounter();
+
+
+
+    /**
+     * 参与期待
+     *
+     * @return
+     */
+    @POST("v/gz/desire")
+    Observable<BaseEntity> desire();
 }

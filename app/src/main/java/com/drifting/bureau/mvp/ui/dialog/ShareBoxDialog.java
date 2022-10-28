@@ -73,38 +73,34 @@ public class ShareBoxDialog  extends BaseDialog implements View.OnClickListener 
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.iv_save:
-                showLoading();
-                mHandler.postDelayed(() -> {
-                    Bitmap bitmap = BitmapUtil.captureView(mRltop);
-                    Uri uri = Uri.parse(MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap, null, null));
-                    //系统调用分享
-                    hideLoading();
-                    Intent shareIntent = new Intent();
-                    shareIntent.setAction(Intent.ACTION_SEND);
-                    shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
-                    shareIntent.setType("image/*");
-                    shareIntent = Intent.createChooser(shareIntent, "Share");
-                    context.startActivity(shareIntent);
+                PermissionDialog.requestPermissions((Activity) context, new PermissionDialog.PermissionCallBack() {
+                    @Override
+                    public void onSuccess() {
+                        showLoading();
+                        mHandler.postDelayed(() -> {
+                            Bitmap bitmap = BitmapUtil.captureView(mRltop);
+                            Uri uri = Uri.parse(MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap, null, null));
+                            //系统调用分享
+                            hideLoading();
+                            Intent shareIntent = new Intent();
+                            shareIntent.setAction(Intent.ACTION_SEND);
+                            shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+                            shareIntent.setType("image/*");
+                            shareIntent = Intent.createChooser(shareIntent, "Share");
+                            context.startActivity(shareIntent);
 
-//                    PermissionDialog.requestPermissions((Activity) context, new PermissionDialog.PermissionCallBack() {
-//                        @Override
-//                        public void onSuccess() {
-//                            BitmapUtil.saveImageToGallery(bitmap, context);
-//                            dismiss();
-//                            hideLoading();
-//                            ToastUtil.showToast("保存相册成功");
-//                        }
-//
-//                        @Override
-//                        public void onFailure() {
-//                        }
-//
-//                        @Override
-//                        public void onAlwaysFailure() {
-//                            PermissionDialog.showDialog((Activity) context, "android.permission.WRITE_EXTERNAL_STORAGE");
-//                        }
-//                    });
-                }, 500);
+                        }, 500);
+                    }
+
+                    @Override
+                    public void onFailure() {
+                    }
+
+                    @Override
+                    public void onAlwaysFailure() {
+                        PermissionDialog.showDialog((Activity) context, "android.permission.WRITE_EXTERNAL_STORAGE");
+                    }
+                });
                 break;
         }
     }

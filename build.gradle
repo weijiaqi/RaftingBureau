@@ -20,6 +20,8 @@ buildscript {
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.0'
 
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        //渠道包
+        classpath 'com.tencent.vasdolly:plugin:3.0.4'
     }
 }
 

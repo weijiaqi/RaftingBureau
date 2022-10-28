@@ -212,7 +212,7 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
                     MessageCenterActivity.start(this, false);
                     break;
                 case R.id.ll_step_star:
-                    Preferences.setARModel(true);
+                 //   Preferences.setARModel(true);
                     ARMetaverseCenterActivity.start(this, true);
                     break;
                 case R.id.tv_youth_camp:  //青年创业营
@@ -322,26 +322,26 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
     }
 
 
-    @Override
-    public void onExploretypeSuccess(List<PlanetEntity> entityList) {
-        if (entityList != null && entityList.size() > 0) {
-            list = entityList;
-            discoveryViewpagerAdapter = new DiscoveryViewpagerAdapter(this, list);
-            viewPager.setAdapter(discoveryViewpagerAdapter);
-            viewPager.setCurrentItem(list.size() * 100);
-            viewPager.setOffscreenPageLimit(list.size());
-            viewPager.setClipChildren(false);
-            viewPager.setPageTransformer(true, new DiscoveryTransformer());
-
-            getUserInfo(1);
-
-        }
-    }
+//    @Override
+//    public void onExploretypeSuccess(List<PlanetEntity> entityList) {
+//        if (entityList != null && entityList.size() > 0) {
+//            list = entityList;
+//            discoveryViewpagerAdapter = new DiscoveryViewpagerAdapter(this, list);
+//            viewPager.setAdapter(discoveryViewpagerAdapter);
+//            viewPager.setCurrentItem(list.size() * 100);
+//            viewPager.setOffscreenPageLimit(list.size());
+//            viewPager.setClipChildren(false);
+//            viewPager.setPageTransformer(true, new DiscoveryTransformer());
+//
+//            getUserInfo(1);
+//
+//        }
+//    }
 
 
     public void getUserInfo(int status) {
         RequestUtil.create().userplayer(Preferences.getUserId(), entity -> {
-            if (entity != null && entity.getCode() == 200) {
+            if (entity != null  && entity.getData()!=null && entity.getCode() == 200) {
                 userInfoEntity = entity.getData();
                 mTvAboutMe.setVisibility(userInfoEntity.getPlanet().getLevel() == 1 ? View.VISIBLE : View.GONE);
                 mTvAboutMe.setText(userInfoEntity.getPlanet().getName());

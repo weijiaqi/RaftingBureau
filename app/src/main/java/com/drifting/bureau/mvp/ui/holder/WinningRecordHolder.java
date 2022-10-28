@@ -102,7 +102,6 @@ public class WinningRecordHolder extends BaseRecyclerHolder {
                             }
                         });
                     });
-
                 });
             }
         }

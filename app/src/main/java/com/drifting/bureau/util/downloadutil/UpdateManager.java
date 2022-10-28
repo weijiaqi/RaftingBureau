@@ -1,5 +1,6 @@
 package com.drifting.bureau.util.downloadutil;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -9,6 +10,7 @@ import android.provider.Settings;
 import androidx.core.content.FileProvider;
 
 import com.drifting.bureau.app.api.ApiProxy;
+import com.drifting.bureau.util.ToastUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,6 +29,28 @@ import okio.Okio;
  * App更新管理类
  */
 public class UpdateManager {
+
+
+    /**
+     * 调用第三方浏览器打开
+     *
+     * @param context
+     * @param url     要浏览的资源地址
+     */
+    public static void openBrowser(Context context, String url) {
+        final Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(url));
+       // 注意此处的判断intent.resolveActivity()可以返回显示该Intent的Activity对应的组件名
+        // 官方解释 : Name of the component implementing an activity that can display the intent
+        if (intent.resolveActivity(context.getPackageManager()) != null) {
+            final ComponentName componentName = intent.resolveActivity(context.getPackageManager()); // 打印Log   ComponentName到底是什么 L.d("componentName = " + componentName.getClassName());
+            context.startActivity(Intent.createChooser(intent, "请选择浏览器"));
+        } else {
+            ToastUtil.showToast("请下载浏览器");
+        }
+    }
+
 
     /**
      * 是否需要更新,需要则下载
@@ -86,15 +110,15 @@ public class UpdateManager {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             installAllowed = context.getPackageManager().canRequestPackageInstalls();
             if (installAllowed) {
-                installAPK(context,apkPath);
+                installAPK(context, apkPath);
             } else {
                 Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, Uri.parse("package:" + context.getPackageName()));
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
-                installAPK(context,apkPath);
+                installAPK(context, apkPath);
             }
         } else {
-            installAPK(context,apkPath);
+            installAPK(context, apkPath);
         }
     }
 
@@ -111,14 +135,13 @@ public class UpdateManager {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             intent.addCategory("android.intent.category.DEFAULT");
-            apkuri = FileProvider.getUriForFile(context.getApplicationContext(), context.getApplicationContext().getPackageName()+".fileprovider", apkFile);
+            apkuri = FileProvider.getUriForFile(context.getApplicationContext(), context.getApplicationContext().getPackageName() + ".fileprovider", apkFile);
         } else {
             apkuri = Uri.parse("file://" + apkFile.toString());
         }
         intent.setDataAndType(apkuri, "application/vnd.android.package-archive");
         context.startActivity(intent);
     }
-
 
 
     /**

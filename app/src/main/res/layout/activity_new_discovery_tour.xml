@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layoutAnimation="@anim/layout_from_right"
+    android:background="@drawable/new_discovery_bg"
+    tools:layoutAnimation="@null">
+
+    <include layout="@layout/include_index_title" />
+
+
+    <RelativeLayout
+        android:id="@+id/rl_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_toolbar"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="end"
+        android:layout_marginEnd="19dp">
+
+        <TextView
+            android:id="@+id/tv_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/new_home_message"
+            android:drawablePadding="-3dp"
+            android:gravity="center_horizontal"
+            android:shadowColor="@color/color_d7"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="10"
+            android:text="电波"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/iv_hot"
+            android:layout_width="7dp"
+            android:layout_height="7dp"
+            android:layout_alignEnd="@+id/tv_message"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/shape_red_circle"
+            android:visibility="gone"
+        />
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/tv_space_capsule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_info"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="19dp"
+        android:drawableTop="@drawable/new_space_capsule"
+        android:drawablePadding="-3dp"
+        android:gravity="center_horizontal"
+        android:shadowColor="@color/color_d01"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="10"
+        android:text="空间站"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+
+
+    <TextView
+        android:id="@+id/tv_about_me"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_space_capsule"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="19dp"
+        android:drawableTop="@drawable/new_about_me"
+        android:drawablePadding="-3dp"
+        android:gravity="center_horizontal"
+        android:shadowColor="@color/color_1a7"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="10"
+        android:text="关于我"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+
+
+    <RelativeLayout
+        android:id="@+id/rl_transfer_drift"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/iv_enter"
+        android:layout_marginStart="21dp">
+
+        <ImageView
+            android:id="@+id/iv_find_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="33dp"
+            android:src="@drawable/find_box" />
+
+
+        <ImageView
+            android:id="@+id/iv_received_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="42dp"
+            android:layout_toRightOf="@+id/iv_find_box"
+            android:visibility="invisible"
+            android:src="@drawable/received_message" />
+
+
+        <RelativeLayout
+            android:id="@+id/rl_ship"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_find_box"
+            android:layout_marginTop="-5dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/transfer_drift" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/halo"
+                android:visibility="invisible" />
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+    <ImageView
+        android:id="@+id/iv_enter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:src="@drawable/enter_meta" />
+
+
+    <ImageView
+        android:id="@+id/iv_public_floaters"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/iv_enter"
+        android:layout_marginStart="55dp"
+        android:layout_toRightOf="@+id/iv_enter"
+        android:src="@drawable/public_floaters" />
+
+
+    <ImageView
+        android:id="@+id/iv_encounter_drift"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_enter"
+        android:layout_marginStart="65dp"
+        android:src="@drawable/encounter_drift" />
+
+
+    <RelativeLayout
+        android:id="@+id/rl_my_faction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="-30dp">
+
+
+        <ImageView
+            android:id="@+id/iv_my_faction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/my_faction" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_my_faction"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/chassis" />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

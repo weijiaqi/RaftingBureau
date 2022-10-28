@@ -25,6 +25,7 @@ import com.drifting.bureau.mvp.contract.LoginContract;
 import com.drifting.bureau.mvp.model.entity.LoginEntity;
 import com.drifting.bureau.mvp.presenter.LoginPresenter;
 import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
+import com.drifting.bureau.mvp.ui.activity.home.NewDiscoveryTourActivity;
 import com.drifting.bureau.mvp.ui.adapter.LoginListAdapter;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.LogInOutDataUtil;
@@ -243,13 +244,13 @@ public class LoginActivity extends BaseManagerActivity<LoginPresenter> implement
                 @Override
                 public void onConnectSuccess() {
                     showMessage("登录成功");
-                    DiscoveryTourActivity.start(LoginActivity.this,true);
+                    NewDiscoveryTourActivity.start(LoginActivity.this,true);
                 }
 
                 @Override
                 public void onConnectError() {
                     //ToastUtil.showToast("会话消息故障!");
-                    DiscoveryTourActivity.start(LoginActivity.this,true);
+                    NewDiscoveryTourActivity.start(LoginActivity.this,true);
                 }
             });
         }

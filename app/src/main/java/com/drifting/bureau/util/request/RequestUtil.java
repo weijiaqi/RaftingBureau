@@ -7,6 +7,7 @@ import com.drifting.bureau.app.api.ApiProxy;
 import com.drifting.bureau.mvp.model.entity.AnnouncementEntity;
 import com.drifting.bureau.mvp.model.entity.AvailableEntity;
 import com.drifting.bureau.mvp.model.entity.BoxOpenEntity;
+import com.drifting.bureau.mvp.model.entity.DesireCounterEntity;
 import com.drifting.bureau.mvp.model.entity.DidAttendEntity;
 import com.drifting.bureau.mvp.model.entity.FriendEntity;
 import com.drifting.bureau.mvp.model.entity.FriendInfoEntity;
@@ -882,7 +883,7 @@ public class RequestUtil {
 
 
     /**
-     * 开保险柜
+     * 开魔法柜
      */
     public void openbox( int key,int type,String code, int is_kongtou, BaseDataCallBack<OpenBoxEntity> callBack) {
         ApiProxy.getApiService().openbox(key,type,code,is_kongtou)
@@ -1040,6 +1041,69 @@ public class RequestUtil {
     }
 
 
+
+    /**
+     * 期待统计结果
+     */
+    public void desireCounter(BaseDataCallBack<DesireCounterEntity> callBack) {
+        ApiProxy.getApiService().desireCounter()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new BaseObserver<BaseEntity<DesireCounterEntity>>() {
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+                        mDisposables.put(mRequestCount++, disposable);
+                    }
+
+                    @Override
+                    public void onNext(BaseEntity<DesireCounterEntity> entity) {
+                        if (callBack != null) {
+                            callBack.getData(entity);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (callBack != null) {
+                            callBack.getData(null);
+                        }
+                    }
+                });
+    }
+
+
+
+
+    /**
+     *参与期待
+     */
+    public void desire(BaseDataCallBack callBack) {
+        ApiProxy.getApiService().desire()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new BaseObserver<BaseEntity>() {
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+                        mDisposables.put(mRequestCount++, disposable);
+                    }
+
+                    @Override
+                    public void onNext(BaseEntity entity) {
+                        if (callBack != null) {
+                            callBack.getData(entity);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (callBack != null) {
+                            callBack.getData(null);
+                        }
+                    }
+                });
+    }
 
     /**
      * 取消订阅

@@ -15,6 +15,7 @@ import com.drifting.bureau.R;
 import com.drifting.bureau.app.receiver.NetworkUtil;
 import com.drifting.bureau.data.event.UpdateProgressEvent;
 import com.drifting.bureau.util.downloadutil.DownLoadIntentService;
+import com.drifting.bureau.util.downloadutil.UpdateManager;
 import com.drifting.bureau.util.manager.NotificationManager;
 import com.jess.arms.base.BaseDialog;
 
@@ -108,18 +109,20 @@ public class VersionUpdateDialog extends BaseDialog implements View.OnClickListe
                 dismiss();
                 break;
             case R.id.tv_upload:
-                if (mIsToUpdate!=1){
-                    dismiss();
-                }
-                if (DownLoadIntentService.isDownLoad) {
-                    if (NetworkUtil.isWifi(mContext)) {
-                        downLoad((Activity) mContext);
-                    } else {
-                        if (NetworkUtil.checkNetworkState(mContext)) {
-                            showWifiDialog((Activity) mContext);
-                        }
-                    }
-                }
+//                if (mIsToUpdate!=1){
+//                    dismiss();
+//                }
+//                if (DownLoadIntentService.isDownLoad) {
+//                    if (NetworkUtil.isWifi(mContext)) {
+//                        downLoad((Activity) mContext);
+//                    } else {
+//                        if (NetworkUtil.checkNetworkState(mContext)) {
+//                            showWifiDialog((Activity) mContext);
+//                        }
+//                    }
+//                }
+                   UpdateManager.openBrowser(mContext,mVersionUrl);
+
                 break;
         }
     }

@@ -5,6 +5,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import com.drifting.bureau.R;
@@ -20,6 +21,7 @@ public class ExclusivePlanetDialog extends BaseDialog implements View.OnClickLis
 
     public static final int OPEN_PLAY = 0x01;
 
+    private RelativeLayout mRlCenter;
     private TextView mTvOpenPlay;
 
 
@@ -31,13 +33,14 @@ public class ExclusivePlanetDialog extends BaseDialog implements View.OnClickLis
     @Override
     protected void initView() {
         super.initView();
+        mRlCenter=findViewById(R.id.rl_center);
         mTvOpenPlay = findViewById(R.id.tv_open_paly);
-
     }
 
     @Override
     protected void initEvents() {
         super.initEvents();
+        mRlCenter.setOnClickListener(this);
         mTvOpenPlay.setOnClickListener(this);
     }
 
@@ -67,6 +70,9 @@ public class ExclusivePlanetDialog extends BaseDialog implements View.OnClickLis
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
+                case R.id.rl_center:
+                    dismiss();
+                    break;
                 case R.id.tv_open_paly:
                     dismiss();
                     if (onClickCallback != null) {

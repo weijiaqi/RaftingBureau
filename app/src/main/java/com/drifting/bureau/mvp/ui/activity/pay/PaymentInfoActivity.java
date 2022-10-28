@@ -229,7 +229,6 @@ public class PaymentInfoActivity extends BaseManagerActivity<PaymentInfoPresente
                     showMessage("请选择支付方式");
                     return;
                 }
-
                 if (coupon_code != null && !TextUtils.isEmpty(coupon_code)) {   //使用了优惠券
                     currencyDialog = new CurrencyDialog(PaymentInfoActivity.this);
                     currencyDialog.show();

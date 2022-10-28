@@ -110,22 +110,6 @@ public class AppUtil {
     }
 
 
-    /**
-     * 获取腾讯打包工具生成的渠道信息，直接运行或无渠道信息默认"a_drifting"
-     *
-     * @param context
-     * @return
-     */
-    public static String getChannel(Context context) {
-        String channelName = SubChannelUtil.getChannel(context);
-        if (!TextUtils.isEmpty(channelName)) {
-            return channelName;
-        }
-        if (TextUtils.isEmpty(channelName)) {
-            channelName = "a_drifting";
-        }
-        return channelName;
-    }
 
 
     /**

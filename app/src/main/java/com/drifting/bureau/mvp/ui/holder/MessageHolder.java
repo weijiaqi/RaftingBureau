@@ -36,8 +36,8 @@ public class MessageHolder extends BaseRecyclerHolder {
     TextView mTvTitle;
     @BindView(R.id.tv_content)
     TextView mTvContent;
-    @BindView(R.id.iv_message)
-    ImageView mIvMessage;
+    @BindView(R.id.iv_unread)
+    ImageView mIvUnRead;
     @BindView(R.id.tv_date)
     TextView mTvDate;
     private Context context;
@@ -51,7 +51,7 @@ public class MessageHolder extends BaseRecyclerHolder {
         TextUtil.setText(mTvTitle, listBeanList.get(position).getTitle());
         TextUtil.setText(mTvDate, DateUtil.unxiToCompanyDateYMDHM(listBeanList.get(position).getCreated_at_int()+""));
         TextUtil.setText(mTvContent, listBeanList.get(position).getContent());
-        mIvMessage.setVisibility(listBeanList.get(position).getIs_read() == 0 ? View.VISIBLE : View.GONE);
+        mIvUnRead.setVisibility(listBeanList.get(position).getIs_read() == 0 ? View.VISIBLE : View.GONE);
         mRlContent.setOnClickListener(view -> {
             if (listBeanList.get(position).getIs_read() == 0) {
                 RequestUtil.create().markread(listBeanList.get(position).getSys_msg_id(), entity -> {

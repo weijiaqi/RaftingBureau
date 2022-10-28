@@ -1,36 +1,25 @@
 package com.drifting.bureau.mvp.ui.activity;
 
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import com.drifting.bureau.R;
 import com.drifting.bureau.base.BaseManagerActivity;
-import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
-
+import com.drifting.bureau.mvp.ui.activity.home.NewDiscoveryTourActivity;
 import com.drifting.bureau.mvp.ui.activity.unity.ARMetaverseCenterActivity;
-import com.drifting.bureau.mvp.ui.activity.user.NewAboutMeActivity;
 import com.drifting.bureau.mvp.ui.activity.user.PullNewGuideActivity;
 import com.drifting.bureau.mvp.ui.dialog.PrivacyPolicyDialog;
 import com.drifting.bureau.storageinfo.Preferences;
-import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.RongIMUtil;
 import com.drifting.bureau.video.EmptyControlVideo;
 import com.jess.arms.di.component.AppComponent;
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
 import com.shuyu.gsyvideoplayer.listener.GSYSampleCallBack;
 import com.umeng.commonsdk.UMConfigure;
-
-import org.w3c.dom.Text;
-
 import butterknife.BindView;
-import butterknife.OnClick;
 import timber.log.Timber;
 
 
@@ -38,8 +27,7 @@ public class SplashActivity extends BaseManagerActivity {
 
     @BindView(R.id.video_player)
     EmptyControlVideo mVieoPlayer;
-    @BindView(R.id.tv_next)
-    TextView mTvNext;
+
     @BindView(R.id.rl_center)
     RelativeLayout mRlCenter;
     private PrivacyPolicyDialog privacyPolicyDialog;
@@ -69,7 +57,6 @@ public class SplashActivity extends BaseManagerActivity {
                     Preferences.setAgreePrivacy(true);
                     //友盟隐私合规授权
                     UMConfigure.submitPolicyGrantResult(getApplicationContext(), true);
-
                     mVieoPlayer.setUp("https://v.metapeza.com/afile/vedio/start.mp4", true, "");
                     mVieoPlayer.startPlayLogic();
                     mVieoPlayer.setVideoAllCallBack(new GSYSampleCallBack() {
@@ -80,7 +67,6 @@ public class SplashActivity extends BaseManagerActivity {
                             startActivity();
                         }
                     });
-                    mTvNext.setVisibility(View.VISIBLE);
                 }
             });
         } else {
@@ -95,16 +81,7 @@ public class SplashActivity extends BaseManagerActivity {
     };
 
 
-    @OnClick({R.id.tv_next})
-    public void onClick(View view) {
-        if (!ClickUtil.isFastClick(view.getId())) {
-            switch (view.getId()) {
-                case R.id.tv_next:
-                    startActivity();
-                    break;
-            }
-        }
-    }
+
 
     public void startActivity() {
         if (!Preferences.isAnony()) {
@@ -130,7 +107,7 @@ public class SplashActivity extends BaseManagerActivity {
         if (Preferences.isARModel()) {
             ARMetaverseCenterActivity.start(SplashActivity.this, true);
         } else {
-            DiscoveryTourActivity.start(SplashActivity.this, true);
+            NewDiscoveryTourActivity.start(SplashActivity.this, true);
         }
     }
 

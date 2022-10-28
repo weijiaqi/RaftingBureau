@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/iv_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="-1dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/public_top" />
+
+    <RelativeLayout
+        android:id="@+id/rl_center"
+        android:layout_width="match_parent"
+        android:layout_height="325dp"
+        android:layout_below="@+id/iv_top"
+        android:layout_marginTop="-2dp"
+        android:background="@drawable/public_center">
+
+
+        <ImageView
+            android:layout_width="151dp"
+            android:layout_height="176dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="7dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/public_bear" />
+
+
+        <ImageView
+            android:id="@+id/iv_psychological_cup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="69dp"
+            android:src="@drawable/psychological_cup" />
+
+
+        <ImageView
+            android:id="@+id/iv_emotion_cup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_psychological_cup"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="23dp"
+            android:src="@drawable/emotion_cup" />
+
+
+        <ImageView
+            android:id="@+id/iv_stars_cup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="40dp"
+            android:layout_marginBottom="3dp"
+            android:src="@drawable/stars_cup" />
+
+
+        <ImageView
+            android:id="@+id/iv_workplace_cup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="25dp"
+            android:layout_marginBottom="3dp"
+            android:layout_toRightOf="@+id/iv_stars_cup"
+            android:src="@drawable/workplace_cup" />
+
+
+        <ImageView
+            android:id="@+id/iv_sinology_cup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="25dp"
+            android:layout_marginBottom="3dp"
+            android:layout_toRightOf="@+id/iv_workplace_cup"
+            android:src="@drawable/sinology_cup" />
+
+
+        <RelativeLayout
+            android:id="@+id/rl_expect"
+            android:layout_width="144dp"
+            android:layout_height="95dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="75dp"
+            android:layout_marginEnd="87dp"
+            android:background="@drawable/public_message">
+
+            <TextView
+                android:id="@+id/tv_nums"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:shadowColor="@color/color_71"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="10"
+                android:text="0"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <com.hjq.shape.view.ShapeTextView
+                android:id="@+id/tv_expect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_nums"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="3dp"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="2dp"
+                android:text="我也期待"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:shape_radius="10dp"
+                app:shape_solidColor="@color/color_ff2b" />
+
+        </RelativeLayout>
+
+
+        <ImageView
+            android:layout_width="95dp"
+            android:layout_height="91dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="37dp"
+            android:layout_marginEnd="3dp"
+            android:scaleType="center"
+            android:src="@drawable/about_open" />
+
+    </RelativeLayout>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_center"
+        android:layout_marginTop="-4dp"
+        android:background="@drawable/public_bottom" />
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <ImageView
+            android:id="@+id/iv_piaoliuju"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/piaoliuju" />
+
+
+        <ImageView
+            android:id="@+id/iv_cooperation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_piaoliuju"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="40dp"
+            android:src="@drawable/cooperation" />
+
+
+        <ImageView
+            android:id="@+id/iv_exit_shop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_piaoliuju"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/exit_shop" />
+    </RelativeLayout>
+
+
+    <include layout="@layout/layout_guide1" />
+
+</RelativeLayout>
