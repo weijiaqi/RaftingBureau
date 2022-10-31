@@ -179,6 +179,8 @@
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_announcement_details.xml" value="0.286231884057971" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_ar_display.xml" value="0.25" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_ar_guide.xml" value="0.3177083333333333" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/activity_ar_metaverse_center.xml" value="0.24592391304347827" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/activity_ar_paixixingqiu.xml" value="0.24592391304347827" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_ar_starry_sky.xml" value="0.21614583333333334" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_blind_box_record.xml" value="0.19791666666666666" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_build_guide.xml" value="0.335" />
@@ -202,6 +204,7 @@
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_my_space_station.xml" value="0.5" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_nebula.xml" value="0.20425724637681159" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_nebulae.xml" value="0.1910551454624403" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/activity_new_about_me.xml" value="0.33" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_new_discovery_tour.xml" value="0.3161231884057971" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_payment_info.xml" value="0.33" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_planetary_detail.xml" value="0.25" />
@@ -213,7 +216,7 @@
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_select_image.xml" value="0.3183876811594203" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_session_list.xml" value="0.31567028985507245" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_set_up.xml" value="0.2644927536231884" />
-        <entry key="..\:/Drifting/app/src/main/res/layout/activity_show_web.xml" value="0.335" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/activity_show_web.xml" value="0.23541666666666666" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_sign_login_hint.xml" value="0.2644927536231884" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_space_capsule.xml" value="0.19114583333333332" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_space_marines.xml" value="0.33" />
@@ -292,6 +295,7 @@
         <entry key="..\:/Drifting/app/src/main/res/layout/item_blind_box_record.xml" value="0.30434782608695654" />
         <entry key="..\:/Drifting/app/src/main/res/layout/item_city_list.xml" value="0.10872855701311807" />
         <entry key="..\:/Drifting/app/src/main/res/layout/item_conversationlist.xml" value="0.31567028985507245" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/item_coupon_available.xml" value="0.24592391304347827" />
         <entry key="..\:/Drifting/app/src/main/res/layout/item_delivery_details.xml" value="0.30842391304347827" />
         <entry key="..\:/Drifting/app/src/main/res/layout/item_delivery_video.xml" value="0.25" />
         <entry key="..\:/Drifting/app/src/main/res/layout/item_delivery_voice.xml" value="0.335" />

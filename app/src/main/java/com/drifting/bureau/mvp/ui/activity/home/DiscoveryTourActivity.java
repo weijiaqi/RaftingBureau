@@ -267,6 +267,11 @@ public class DiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPres
         }
     }
 
+    @Override
+    public void onCheckVersionSuccess() {
+
+    }
+
 
     @Override
     public void onLocationSuccess() {

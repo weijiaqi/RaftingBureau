@@ -88,6 +88,7 @@ public class DiscoveryTourPresenter extends BasePresenter<DiscoveryTourContract.
                             if (StringUtil.compareVersions(data.getData().getVersion(), StringUtil.getVersion(activity))) {
                                 showVersionDialog(activity, data.getData());
                             }
+                            mRootView.onCheckVersionSuccess();
                         }
                     }
 

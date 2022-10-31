@@ -85,7 +85,7 @@ public class NewAboutMeActivity extends BaseManagerActivity {
     @BindView(R.id.tv_password)
     LetterSpacingTextView mTvPassWord;
     @BindView(R.id.tv_coupon)
-     TextView mTvCoupon;
+    TextView mTvCoupon;
     private SpannableStringBuilder passerNikename, passerFaction, passerIdentity;
     private UserInfoEntity userInfoEntity;
 
@@ -117,8 +117,9 @@ public class NewAboutMeActivity extends BaseManagerActivity {
 
     public void getUserInfo() {
         RequestUtil.create().userplayer(Preferences.getUserId(), entity -> {
-            if (entity != null && entity.getCode() == 200) {
+            if (entity != null && entity.getData() != null && entity.getCode() == 200) {
                 userInfoEntity = entity.getData();
+
                 GlideUtil.create().loadLongImage(this, userInfoEntity.getUser().getMascot(), mIvPlayBear);
                 passerNikename = SpannableUtil.getBuilder(this, "昵称：").setForegroundColor(R.color.color_66).setTextSize(12).append(userInfoEntity.getUser().getName()).setForegroundColor(R.color.color_00).setTextSize(14).setBold().build();
                 mTvNikeName.setText(passerNikename);
@@ -159,8 +160,8 @@ public class NewAboutMeActivity extends BaseManagerActivity {
 
     public void getPlanetPwd() {
         RequestUtil.create().planetpassword(entity -> {
-            if (entity!=null &&entity.getData()!=null &&entity.getCode() == 200) {
-                if (mTvPassWord!=null){
+            if (entity != null && entity.getData() != null && entity.getCode() == 200) {
+                if (mTvPassWord != null) {
                     mTvPassWord.setLetterSpacing(20);
                     mTvPassWord.setText(entity.getData().getPassword());
                 }
@@ -169,7 +170,7 @@ public class NewAboutMeActivity extends BaseManagerActivity {
     }
 
 
-    @OnClick({R.id.toolbar_back, R.id.iv_right, R.id.tv_drift_track, R.id.tv_star_troopers, R.id.tv_physical_store, R.id.tv_order_record, R.id.tv_to_the_galaxy, R.id.tv_attr, R.id.tv_change_mode, R.id.tv_person,R.id.tv_coupon})
+    @OnClick({R.id.toolbar_back, R.id.iv_right, R.id.tv_drift_track, R.id.tv_star_troopers, R.id.tv_physical_store, R.id.tv_order_record, R.id.tv_to_the_galaxy, R.id.tv_attr, R.id.tv_change_mode, R.id.tv_person, R.id.tv_coupon})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {

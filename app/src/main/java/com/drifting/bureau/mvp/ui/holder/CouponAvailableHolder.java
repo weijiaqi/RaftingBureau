@@ -16,6 +16,7 @@ import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.CouponsMineEntity;
 import com.drifting.bureau.mvp.model.entity.MyTreasuryEntity;
 import com.drifting.bureau.mvp.ui.adapter.CouponAvailableAdapter;
+import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.DateUtil;
 import com.drifting.bureau.util.SpannableUtil;
 import com.drifting.bureau.util.TextUtil;
@@ -46,6 +47,7 @@ public class CouponAvailableHolder extends BaseHolder<CouponsMineEntity.ListBean
 
     private CouponAvailableAdapter mAdapter;
     private SpannableStringBuilder passerFit;
+    private CouponsMineEntity.ListBean mData;
     public CouponAvailableHolder(View itemView, CouponAvailableAdapter myTreasuryAdapter) {
         super(itemView);
         context = itemView.getContext();
@@ -54,7 +56,7 @@ public class CouponAvailableHolder extends BaseHolder<CouponsMineEntity.ListBean
 
     @Override
     public void setData(@NonNull CouponsMineEntity.ListBean data, int position) {
-
+        mData = data;
         if (data.getCoupon_type() == 1) {
             if (data.getType() == 0) {
                 passerFit = SpannableUtil.getBuilder(context, data.getDiscount_rate() * 10 + "").setForegroundColor(R.color.color_e5).setTextSize(20).setBold().append("折").setForegroundColor(R.color.color_e5).setTextSize(12).setBold().build();
@@ -152,10 +154,24 @@ public class CouponAvailableHolder extends BaseHolder<CouponsMineEntity.ListBean
             }
         }
 
-        mRlContent.setOnClickListener(view -> {
-            if (data.getType()==0){
-                mAdapter.onItemCheckChange(data);
+        mCkSelect.setOnClickListener(this);
+        mRlContent.setOnClickListener(this);
+
+    }
+
+
+    @Override
+    public void onClick(View view) {
+        super.onClick(view);
+        if (!ClickUtil.isFastClick(view.getId())) {
+            switch (view.getId()) {
+                case R.id.ck_sellect:
+                case R.id.rl_content:
+                    if (mData.getType()==0){
+                        mAdapter.onItemCheckChange(mData);
+                    }
+                    break;
             }
-        });
+        }
     }
 }

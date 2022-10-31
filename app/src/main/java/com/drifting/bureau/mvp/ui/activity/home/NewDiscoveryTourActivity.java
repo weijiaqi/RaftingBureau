@@ -153,8 +153,7 @@ public class NewDiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourP
         statFloatAnim(mIvEncounter, 2);
         AnimatorUtil.ScaleAnim(mIvEnter, 2000, 1f, 0.9f, 0.9f);
         AnimatorUtil.ScaleAnim(mRlMyFaction, 2000, 1f, 0.9f, 0.9f);
-        //获取用户信息
-        getUserInfo();
+
         if (mPresenter != null) {
             mPresenter.getLocation(this);
         }
@@ -285,6 +284,12 @@ public class NewDiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourP
                 IntoSpace();
             }
         }
+    }
+
+    @Override
+    public void onCheckVersionSuccess() {
+        //获取用户信息
+        getUserInfo();
     }
 
 

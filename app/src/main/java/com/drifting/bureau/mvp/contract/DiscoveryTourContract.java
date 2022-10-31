@@ -30,6 +30,8 @@ public interface DiscoveryTourContract {
 
         void onMessageReceiveSuccess(MessageReceiveEntity entity);
 
+        void onCheckVersionSuccess();
+
         void onLocationSuccess();
 
         void finishSuccess();

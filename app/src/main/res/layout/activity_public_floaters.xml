@@ -102,7 +102,7 @@
                 android:shadowDx="0"
                 android:shadowDy="0"
                 android:shadowRadius="10"
-                android:text="0"
+                android:text="共0人期待"
                 android:textColor="@color/white"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -113,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_nums"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="5dp"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="2dp"
                 android:text="我也期待"

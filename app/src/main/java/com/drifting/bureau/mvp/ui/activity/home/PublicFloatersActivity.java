@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import com.drifting.bureau.R;
 import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.mvp.model.entity.DesireCounterEntity;
+import com.drifting.bureau.mvp.ui.activity.web.ShowWebViewActivity;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.SpannableUtil;
 import com.drifting.bureau.util.ToastUtil;
@@ -120,8 +121,8 @@ public class PublicFloatersActivity extends BaseManagerActivity {
                         });
                     }
                     break;
-                case R.id.iv_cooperation:
-
+                case R.id.iv_cooperation:  //咨询师合作处
+                    ShowWebViewActivity.start(this,5,false);
                     break;
                 case R.id.iv_exit_shop:
                     finish();

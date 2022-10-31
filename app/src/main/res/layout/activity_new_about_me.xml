@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="-60dp"
-        android:src="@drawable/about_planet_one" />
+        />
 
 
     <com.drifting.bureau.view.FontTextView
@@ -23,7 +23,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="60dp"
         android:layout_marginEnd="10dp"
-        android:background="@drawable/doube_click"
+
         android:gravity="center"
         android:lineSpacingExtra="5dp"
         android:text="进入\n个人星球"
@@ -58,7 +58,7 @@
         android:layout_below="@+id/tv_change_mode"
         android:layout_marginStart="27dp"
         android:layout_marginTop="60dp"
-        android:background="@drawable/about_airplane_bg"
+
         android:gravity="center"
         android:text="鉴别派系"
         android:textColor="@color/white"
@@ -92,7 +92,6 @@
             android:layout_below="@+id/iv_play_bear"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="-10dp"
-            android:background="@drawable/about_airplane_bg"
             android:gravity="center"
             android:text="查看我的属性"
             android:textColor="@color/white"
@@ -115,7 +114,6 @@
             android:layout_height="36dp"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="14dp"
-            android:background="@drawable/drift_track"
             android:paddingStart="9dp"
             android:paddingTop="10dp"
             android:text="漂流轨迹"
@@ -147,7 +145,6 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="84dp"
-            android:background="@drawable/star_troopers"
             android:paddingStart="9dp"
             android:paddingTop="10dp"
             android:text="星际战队"
@@ -164,7 +161,6 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="75dp"
-            android:background="@drawable/physical_store"
             android:paddingStart="9dp"
             android:paddingTop="10dp"
             android:text="实体门店"
@@ -181,7 +177,6 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="14dp"
-            android:background="@drawable/new_order_record"
             android:paddingStart="9dp"
             android:paddingTop="10dp"
             android:text="订单记录"

@@ -794,7 +794,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
         this.user_id2 = user_id;
         RequestUtil.create().userplayer(user_id2 + "", entity -> {
             if (entity != null && entity.getData() != null && entity.getCode() == 200) {
-                if (!TextUtils.isEmpty(entity.getData().getUser().getName())) {
+                if (!TextUtils.isEmpty(entity.getData().getUser().getName()) && mTvToName!=null) {
                     mTvToName.setText(entity.getData().getUser().getName());
                 }
                 GlideUtil.create().loadLongImage(this, entity.getData().getUser().getMascot(), mIvMastorRight);

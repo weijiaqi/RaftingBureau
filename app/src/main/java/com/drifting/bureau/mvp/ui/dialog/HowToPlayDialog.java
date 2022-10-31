@@ -36,7 +36,7 @@ public class HowToPlayDialog extends BaseDialog {
     @Override
     protected void initDatas() {
         super.initDatas();
-        mRcyList = findViewById(R.id.rcy_list);
+        mRcyList = findViewById(R.id.rcy_play);
     }
 
     @Override

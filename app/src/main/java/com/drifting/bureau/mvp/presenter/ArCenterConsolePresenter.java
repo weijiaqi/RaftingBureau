@@ -29,7 +29,6 @@ import com.drifting.bureau.mvp.model.entity.TeamStatisticEntity;
 import com.drifting.bureau.util.FileUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.ViewUtil;
-import com.hw.videoprocessor.VideoProcessor;
 import com.jess.arms.base.BaseEntity;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
@@ -41,18 +40,11 @@ import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import timber.log.Timber;
-
 import javax.inject.Inject;
-
 import com.drifting.bureau.mvp.contract.ArCenterConsoleContract;
 import com.jess.arms.utils.RxLifecycleUtils;
-
 import org.json.JSONObject;
-
-import java.io.File;
 import java.util.List;
 import java.util.Map;
 import java.util.Timer;

@@ -134,18 +134,20 @@ public class MessageCenterActivity extends BaseManagerActivity<MessageCenterPres
         mTabTitle = new ArrayList();
         mTabTitle.clear();
         RequestUtil.create().unread(entity -> {
-            if (entity != null && entity.getCode() == 200) {
-                Sys_msg = entity.getData().getSys_msg();
-                Sys_friend= entity.getData().getFriends();
-                mTabTitle.add(new MessageCenterEntity(1, "星际会话", false));
-                mTabTitle.add(new MessageCenterEntity(2, "接收电波", Sys_msg == 0 ? false : true));
-                mTabTitle.add(new MessageCenterEntity(3, "星际联络人", Sys_friend == 0 ? false : true));
-                messageCenterAdapter.setData(mTabTitle);
-                if (indicatorViewPager != null) {
-                    indicatorViewPager.setAdapter(messageCenterAdapter);
-                    indicatorViewPager.setPageOffscreenLimit(mTabTitle.size() - 1);
-                    if (messageCenterAdapter != null && messageCenterAdapter.getCount() > 0) {
-                        indicatorViewPager.setCurrentItem(0, false);
+            if (entity != null  && entity.getCode() == 200) {
+                if (entity.getData().getSys_msg()!=null &&entity.getData().getFriends()!=null){
+                    Sys_msg = entity.getData().getSys_msg();
+                    Sys_friend= entity.getData().getFriends();
+                    mTabTitle.add(new MessageCenterEntity(1, "星际会话", false));
+                    mTabTitle.add(new MessageCenterEntity(2, "接收电波", Sys_msg == 0 ? false : true));
+                    mTabTitle.add(new MessageCenterEntity(3, "星际联络人", Sys_friend == 0 ? false : true));
+                    messageCenterAdapter.setData(mTabTitle);
+                    if (indicatorViewPager != null) {
+                        indicatorViewPager.setAdapter(messageCenterAdapter);
+                        indicatorViewPager.setPageOffscreenLimit(mTabTitle.size() - 1);
+                        if (messageCenterAdapter != null && messageCenterAdapter.getCount() > 0) {
+                            indicatorViewPager.setCurrentItem(0, false);
+                        }
                     }
                 }
             }

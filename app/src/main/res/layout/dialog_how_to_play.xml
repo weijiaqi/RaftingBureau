@@ -6,7 +6,7 @@
     android:background="@drawable/space_play">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcy_list"
+        android:id="@+id/rcy_play"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginVertical="30dp"

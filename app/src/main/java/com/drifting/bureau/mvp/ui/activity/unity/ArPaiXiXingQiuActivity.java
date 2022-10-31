@@ -61,7 +61,6 @@ public class ArPaiXiXingQiuActivity extends BaseManagerActivity implements IUnit
 
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, ArPaiXiXingQiuActivity.class);
-
         context.startActivity(intent);
         if (closePage) ((Activity) context).finish();
     }

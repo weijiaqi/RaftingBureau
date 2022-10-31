@@ -4,6 +4,7 @@ import static com.drifting.bureau.WebUrlConstant.USER_ACT;
 import static com.drifting.bureau.WebUrlConstant.USER_LICENSE;
 import static com.drifting.bureau.WebUrlConstant.USER_PRIVACY;
 import static com.drifting.bureau.WebUrlConstant.USER_PURCHASE;
+import static com.drifting.bureau.WebUrlConstant.USER_TANT;
 
 import android.app.Activity;
 import android.content.Context;
@@ -129,6 +130,10 @@ public class ShowWebViewActivity extends BaseManagerActivity implements WebLoadi
             case 4:
                 mTvTitle.setText("元能量攻略");
                 mWebView.loadUrl(USER_ACT);
+                break;
+            case 5:
+                mTvTitle.setText("咨询师合作处");
+                mWebView.loadUrl(USER_TANT);
                 break;
         }
     }

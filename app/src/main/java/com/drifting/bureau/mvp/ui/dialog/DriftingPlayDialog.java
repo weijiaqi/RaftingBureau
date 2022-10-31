@@ -29,7 +29,7 @@ import com.jess.arms.base.BaseDialog;
 public class DriftingPlayDialog extends BaseDialog implements View.OnClickListener {
 
     private Context context;
-    private TextView mTvStartSpace, mTvOpenPlay, mTvYouthCamp;
+    private TextView mTvStartSpace, mTvOpenPlay ;
     private RelativeLayout mRlCenter;
 
     public static final int START_SPACE = 0x01;
@@ -46,7 +46,7 @@ public class DriftingPlayDialog extends BaseDialog implements View.OnClickListen
         super.initView();
         mTvStartSpace = findViewById(R.id.tv_start_space);
         mTvOpenPlay = findViewById(R.id.tv_open_paly);
-        mTvYouthCamp = findViewById(R.id.tv_youth_camp);
+        //mTvYouthCamp = findViewById(R.id.tv_youth_camp);
         mRlCenter= findViewById(R.id.rl_center);
     }
 
@@ -55,19 +55,19 @@ public class DriftingPlayDialog extends BaseDialog implements View.OnClickListen
         super.initEvents();
         mTvStartSpace.setOnClickListener(this);
         mTvOpenPlay.setOnClickListener(this);
-        mTvYouthCamp.setOnClickListener(this);
+//        mTvYouthCamp.setOnClickListener(this);
         mRlCenter.setOnClickListener(this);
     }
 
     @Override
     protected void initDatas() {
         super.initDatas();
-        RequestUtil.create().startup(entity1 -> {
-            if (entity1 != null && entity1.getCode() == 200) {
-                starUpIndexEntity = entity1.getData();
-                mTvYouthCamp.setVisibility(!TextUtils.isEmpty(starUpIndexEntity.getUrl()) ? View.VISIBLE : View.GONE);
-            }
-        });
+//        RequestUtil.create().startup(entity1 -> {
+//            if (entity1 != null && entity1.getCode() == 200) {
+//                starUpIndexEntity = entity1.getData();
+//                mTvYouthCamp.setVisibility(!TextUtils.isEmpty(starUpIndexEntity.getUrl()) ? View.VISIBLE : View.GONE);
+//            }
+//        });
     }
 
     @Override
@@ -110,10 +110,10 @@ public class DriftingPlayDialog extends BaseDialog implements View.OnClickListen
                         onClickCallback.onClickType(OPEN_PLAY);
                     }
                     break;
-                case R.id.tv_youth_camp:
-                    dismiss();
-                    ShowWebViewActivity.start(context, 0, "青年创业营", starUpIndexEntity.getUrl() + "?Sign=" + StringUtil.formatNullString(AppUtil.getSign(Preferences.getPhone())) + "&token=" + StringUtil.formatNullString(Preferences.getToken()), false);
-                    break;
+//                case R.id.tv_youth_camp:
+//                    dismiss();
+//                    ShowWebViewActivity.start(context, 0, "青年创业营", starUpIndexEntity.getUrl() + "?Sign=" + StringUtil.formatNullString(AppUtil.getSign(Preferences.getPhone())) + "&token=" + StringUtil.formatNullString(Preferences.getToken()), false);
+//                    break;
             }
         }
     }

@@ -5,11 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,11 +15,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import com.drifting.bureau.R;
 import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.data.event.PaymentEvent;
@@ -42,21 +37,18 @@ import com.drifting.bureau.mvp.model.entity.SpaceInfoEntity;
 import com.drifting.bureau.mvp.model.entity.TeamStatisticEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.presenter.ArCenterConsolePresenter;
-import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
 import com.drifting.bureau.mvp.ui.activity.home.NewDiscoveryTourActivity;
 import com.drifting.bureau.mvp.ui.activity.index.AnswerResultActivity;
-import com.drifting.bureau.mvp.ui.activity.index.AnswerTestActivity;
 import com.drifting.bureau.mvp.ui.activity.index.DriftTrackMapActivity;
 import com.drifting.bureau.mvp.ui.activity.pay.PaymentInfoActivity;
 import com.drifting.bureau.mvp.ui.activity.user.AboutMeActivity;
 import com.drifting.bureau.mvp.ui.activity.user.IncomeRecordActivity;
 import com.drifting.bureau.mvp.ui.activity.user.MakingRecordActivity;
 import com.drifting.bureau.mvp.ui.activity.user.MessageCenterActivity;
-
 import com.drifting.bureau.mvp.ui.activity.user.WithdrawalActivity;
+import com.drifting.bureau.mvp.ui.activity.web.ShowWebViewActivity;
 import com.drifting.bureau.mvp.ui.dialog.ArAnnouncementDisplayDialog;
 import com.drifting.bureau.mvp.ui.dialog.BoxPasswordDialog;
-
 import com.drifting.bureau.mvp.ui.dialog.DriftingPlayDialog;
 import com.drifting.bureau.mvp.ui.dialog.EnablePrivilegesDialog;
 import com.drifting.bureau.mvp.ui.dialog.ExclusivePlanetDialog;
@@ -73,21 +65,17 @@ import com.drifting.bureau.util.GsonUtil;
 import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.request.RequestUtil;
-
 import com.jess.arms.di.component.AppComponent;
 import com.umeng.analytics.MobclickAgent;
 import com.unity3d.player.IUnityPlayerLifecycleEvents;
 import com.unity3d.player.MultiWindowSupport;
 import com.unity3d.player.UnityPlayer;
-
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -132,7 +120,7 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
     private PublicDialog publicDialog;
     private List<QuestionEntity> questionEntityList;
     private Map<String, String> map;
-    private int questionid, total, paixitype, keys, types,is_kongtous;
+    private int questionid, total, paixitype, keys, types, is_kongtous;
     private String value;
     private OrderOneEntity orderOneEntity;
     private SpaceInfoEntity spaceInfoEntity;
@@ -183,13 +171,11 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
             mRlAnim.setVisibility(View.GONE);
             getBox();
         }, 4500);
-
     }
 
 
     /**
      * @description 获取盲盒列表
-     * @author 卫佳琪1
      * @time 14:28 14:28
      */
 
@@ -250,7 +236,6 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
                             mUnityPlayer.UnitySendMessage("Main Camera", "OpenAircraft", "");
                         }
                     });
-
                 });
             }
         }
@@ -298,10 +283,13 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
         }
     }
 
-    @OnClick({R.id.tv_change_mode, R.id.rl_info, R.id.tv_about_me})
+    @OnClick({R.id.tv_change_mode, R.id.rl_info, R.id.tv_about_me, R.id.rl_right})
     public void onClick(View view) {
         if (!ClickUtil.isFastClick(view.getId())) {
             switch (view.getId()) {
+                case R.id.rl_right:
+                    ShowWebViewActivity.start(this, 4, false);
+                    break;
                 case R.id.tv_change_mode:
                     if (toggleType == 4) {
                         toggleType = 1;
@@ -318,7 +306,7 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
                             mUnityPlayer.UnitySendMessage("Main Camera", "CloseAircraft", "");
                         }
                     } else {
-                        NewDiscoveryTourActivity.start(this, 1,true);
+                        NewDiscoveryTourActivity.start(this, 1, true);
                     }
                     break;
                 case R.id.rl_info:
@@ -755,7 +743,7 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
      * @author 卫佳琪1
      * @time 14:00 14:00
      */
-    public void DianJiMangHe(int key, int type, int equity,int is_kongtou) {
+    public void DianJiMangHe(int key, int type, int equity, int is_kongtou) {
         this.keys = key;
         this.types = type;
         this.is_kongtous = is_kongtou;
@@ -764,7 +752,7 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
                 boxPasswordDialog = new BoxPasswordDialog(this);
                 boxPasswordDialog.show();
                 boxPasswordDialog.setOnContentClickCallback(content -> {
-                    openBox(keys, types, content,is_kongtous);
+                    openBox(keys, types, content, is_kongtous);
                 });
             });
         } else {
@@ -781,14 +769,14 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
                     });
                 });
             } else {
-                openBox(keys, types, "",is_kongtous);
+                openBox(keys, types, "", is_kongtous);
             }
         }
     }
 
 
-    public void openBox(int key, int type, String content,int is_kongtou) {
-        RequestUtil.create().openbox(key, type, content, is_kongtou,entity1 -> {
+    public void openBox(int key, int type, String content, int is_kongtou) {
+        RequestUtil.create().openbox(key, type, content, is_kongtou, entity1 -> {
             if (entity1.getCode() == 200) {
                 if (boxPasswordDialog != null) {
                     boxPasswordDialog.dismiss();
@@ -845,7 +833,7 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void PaymentEvent(PaymentEvent event) {  //购买成功回调
         if (event != null) {
-            openBox(keys, types, "",is_kongtous);
+            openBox(keys, types, "", is_kongtous);
         }
     }
 

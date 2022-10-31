@@ -138,11 +138,11 @@ public class OrderRecordHolder extends BaseRecyclerHolder {
                     mTvWriteOff.setClickable(true);
                     mTvWriteOff.setTextColor(context.getColor(R.color.white));
                 }
-            }
 
-            mTvStatus.getTextColorBuilder().setTextGradientColors(context.getColor(R.color.color_6c), context.getColor(R.color.color_6d)).intoTextColor();
-            mTvStatus.setText("已付款");
-            mLlPayMent.setVisibility(View.GONE);
+                mTvStatus.getTextColorBuilder().setTextGradientColors(context.getColor(R.color.color_6c), context.getColor(R.color.color_6d)).intoTextColor();
+                mTvStatus.setText("已付款");
+                mLlPayMent.setVisibility(View.GONE);
+            }
 
         }
 
