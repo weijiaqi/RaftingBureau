@@ -242,4 +242,7 @@ dependencies {
 
     //获取渠道包
     implementation 'com.tencent.vasdolly:helper:3.0.4'
+
+    //MMKV 存储数据
+    implementation 'com.tencent:mmkv:1.2.14'
 }

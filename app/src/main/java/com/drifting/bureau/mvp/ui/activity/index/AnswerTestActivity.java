@@ -28,6 +28,7 @@ import com.drifting.bureau.mvp.model.entity.QuestionEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionStagesEntity;
 import com.drifting.bureau.mvp.presenter.MoveAwayPlanetaryPresenter;
 import com.drifting.bureau.mvp.ui.dialog.ExitPsychologyDialog;
+import com.drifting.bureau.storageinfo.MMKVUtils;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.GlideUtil;
@@ -162,7 +163,7 @@ public class AnswerTestActivity extends BaseManagerActivity<MoveAwayPlanetaryPre
     public void onQuestionListSuccess(List<QuestionEntity> list) {
         if (list != null && list.size() > 0) {
             questionEntityList = new ArrayList<>();
-            map = Preferences.getHashMapData();
+            map = MMKVUtils.getInstance().getHashMapData();
             if (map != null) {
                 List<QuestionEntity> list1 = new ArrayList<>();
                 for (int i = 0; i < list.size(); i++) {
@@ -232,7 +233,7 @@ public class AnswerTestActivity extends BaseManagerActivity<MoveAwayPlanetaryPre
     @Override
     public void onQuestionAssessSuccess(QuestionAssessEntity entity) {
         if (entity != null) {
-            Preferences.putHashMapData(null);
+            MMKVUtils.getInstance().putHashMapData(null);
             AnswerCompletedEvent answerCompletedEvent = new AnswerCompletedEvent();
             answerCompletedEvent.setPl_id(entity.getPlanet().getPl_id());
             EventBus.getDefault().post(answerCompletedEvent);
@@ -324,7 +325,7 @@ public class AnswerTestActivity extends BaseManagerActivity<MoveAwayPlanetaryPre
         mTvProgress.setText((int) (((float) (currency + 1) / total) * 100) + "%");
         new Handler().postDelayed(() -> {
             map.put(questionEntityList.get(currency).getQuestion_id() + "", status == 1 ? "A" : "B");
-            Preferences.putHashMapData(map);
+            MMKVUtils.getInstance().putHashMapData(map);
 
             if (map.size() == total) {  //答完
                 showMessage("答题完成");

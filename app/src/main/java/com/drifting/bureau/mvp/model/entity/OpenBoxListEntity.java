@@ -51,7 +51,7 @@ public class OpenBoxListEntity {
         private String people_name;
         private String mobile;
         private String address;
-        private Integer is_fictitious;
+        private int is_fictitious;
         private String is_express;
         private String express_name;
         private String express_no;
@@ -131,11 +131,11 @@ public class OpenBoxListEntity {
             this.address = address;
         }
 
-        public Integer getIs_fictitious() {
+        public int getIs_fictitious() {
             return is_fictitious;
         }
 
-        public void setIs_fictitious(Integer is_fictitious) {
+        public void setIs_fictitious(int is_fictitious) {
             this.is_fictitious = is_fictitious;
         }
 

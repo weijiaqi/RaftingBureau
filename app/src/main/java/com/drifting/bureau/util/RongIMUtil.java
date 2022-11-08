@@ -76,7 +76,6 @@ public class RongIMUtil {
             public void onDatabaseOpened(RongIMClient.DatabaseOpenStatus databaseOpenStatus) {
             }
         });
-
     }
 
 

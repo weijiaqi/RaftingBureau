@@ -6,7 +6,6 @@
     android:fitsSystemWindows="true"
     android:background="@color/color_00">
 
-
     <com.drifting.bureau.video.EmptyControlVideo
         android:id="@+id/video_player"
         android:layout_width="match_parent"

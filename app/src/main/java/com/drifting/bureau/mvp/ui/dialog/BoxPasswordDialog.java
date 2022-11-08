@@ -140,11 +140,13 @@ public class BoxPasswordDialog extends BaseDialog implements BaseRecyclerAdapter
             switch (view.getId()) {
                 case R.id.iv_get_pwd:
                     RequestUtil.create().userplayer(Preferences.getUserId(), entity -> {
-                        if (entity.getData().getPlanet().getLevel() == 1) {
-                            ToastUtil.showToast("心理测试参与完成之后才可以获取口令哦!");
-                            StarDistributionActivity.start(context, false);
-                        } else {
-                            NewAboutMeActivity.start(context, false);
+                        if (entity!=null &&entity.getData()!=null &&entity.getCode()==200){
+                            if (entity.getData().getPlanet().getLevel() == 1) {
+                                ToastUtil.showToast("心理测试参与完成之后才可以获取口令哦!");
+                                StarDistributionActivity.start(context, false);
+                            } else {
+                                NewAboutMeActivity.start(context, false);
+                            }
                         }
                     });
                     break;

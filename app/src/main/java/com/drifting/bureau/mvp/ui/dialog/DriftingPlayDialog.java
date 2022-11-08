@@ -11,6 +11,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.StarUpIndexEntity;
+import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
+import com.drifting.bureau.mvp.ui.activity.index.StarDistributionActivity;
+import com.drifting.bureau.mvp.ui.activity.user.NewAboutMeActivity;
 import com.drifting.bureau.mvp.ui.activity.web.ShowWebViewActivity;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.AppUtil;
@@ -29,45 +32,48 @@ import com.jess.arms.base.BaseDialog;
 public class DriftingPlayDialog extends BaseDialog implements View.OnClickListener {
 
     private Context context;
-    private TextView mTvStartSpace, mTvOpenPlay ;
+    private TextView mTvOpenJump, mTvOpenPlay,mTvYouthCamp ;
     private RelativeLayout mRlCenter;
 
-    public static final int START_SPACE = 0x01;
+    public static final int YOUTH_CAP = 0x01;
     public static final int OPEN_PLAY = 0x02;
-    private StarUpIndexEntity starUpIndexEntity;
+    public static final int OPEN_JUMP = 0x03;
+    private UserInfoEntity userInfoEntity;
 
-    public DriftingPlayDialog(@NonNull Context context) {
+    public DriftingPlayDialog(@NonNull Context context,UserInfoEntity userInfoEntity) {
         super(context);
         this.context = context;
+        this.userInfoEntity=userInfoEntity;
     }
 
     @Override
     protected void initView() {
         super.initView();
-        mTvStartSpace = findViewById(R.id.tv_start_space);
+        mTvOpenJump = findViewById(R.id.tv_open_jump);
         mTvOpenPlay = findViewById(R.id.tv_open_paly);
-        //mTvYouthCamp = findViewById(R.id.tv_youth_camp);
+        mTvYouthCamp = findViewById(R.id.tv_youth_camp);
         mRlCenter= findViewById(R.id.rl_center);
     }
 
     @Override
     protected void initEvents() {
         super.initEvents();
-        mTvStartSpace.setOnClickListener(this);
+        mTvOpenJump.setOnClickListener(this);
         mTvOpenPlay.setOnClickListener(this);
-//        mTvYouthCamp.setOnClickListener(this);
+        mTvYouthCamp.setOnClickListener(this);
         mRlCenter.setOnClickListener(this);
     }
 
     @Override
     protected void initDatas() {
         super.initDatas();
-//        RequestUtil.create().startup(entity1 -> {
-//            if (entity1 != null && entity1.getCode() == 200) {
-//                starUpIndexEntity = entity1.getData();
-//                mTvYouthCamp.setVisibility(!TextUtils.isEmpty(starUpIndexEntity.getUrl()) ? View.VISIBLE : View.GONE);
-//            }
-//        });
+        if (userInfoEntity!=null){
+            if (userInfoEntity.getPlanet().getLevel() == 1) {  //荒芜星
+                mTvYouthCamp.setVisibility(View.INVISIBLE);
+            } else {
+                mTvYouthCamp.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     @Override
@@ -98,10 +104,10 @@ public class DriftingPlayDialog extends BaseDialog implements View.OnClickListen
                 case R.id.rl_center:
                     dismiss();
                     break;
-                case R.id.tv_start_space:
+                case R.id.tv_youth_camp:
                     dismiss();
                     if (onClickCallback != null) {
-                        onClickCallback.onClickType(START_SPACE);
+                        onClickCallback.onClickType(YOUTH_CAP);
                     }
                     break;
                 case R.id.tv_open_paly:
@@ -110,10 +116,12 @@ public class DriftingPlayDialog extends BaseDialog implements View.OnClickListen
                         onClickCallback.onClickType(OPEN_PLAY);
                     }
                     break;
-//                case R.id.tv_youth_camp:
-//                    dismiss();
-//                    ShowWebViewActivity.start(context, 0, "青年创业营", starUpIndexEntity.getUrl() + "?Sign=" + StringUtil.formatNullString(AppUtil.getSign(Preferences.getPhone())) + "&token=" + StringUtil.formatNullString(Preferences.getToken()), false);
-//                    break;
+                case R.id.tv_open_jump:
+                    dismiss();
+                    if (onClickCallback != null) {
+                        onClickCallback.onClickType(OPEN_JUMP);
+                    }
+                    break;
             }
         }
     }

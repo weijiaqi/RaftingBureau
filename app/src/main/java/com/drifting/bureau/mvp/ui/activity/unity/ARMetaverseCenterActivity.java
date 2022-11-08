@@ -15,8 +15,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import com.drifting.bureau.R;
 import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.data.event.PaymentEvent;
@@ -59,6 +61,7 @@ import com.drifting.bureau.mvp.ui.dialog.MyTreasuryDialog;
 import com.drifting.bureau.mvp.ui.dialog.PublicDialog;
 import com.drifting.bureau.mvp.ui.dialog.WelfareVoucherDialog;
 import com.drifting.bureau.mvp.ui.dialog.WinningAddressDialog;
+import com.drifting.bureau.storageinfo.MMKVUtils;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.GsonUtil;
@@ -70,12 +73,15 @@ import com.umeng.analytics.MobclickAgent;
 import com.unity3d.player.IUnityPlayerLifecycleEvents;
 import com.unity3d.player.MultiWindowSupport;
 import com.unity3d.player.UnityPlayer;
+
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -190,16 +196,21 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
     public void LittleBear() {
         runOnUiThread(() -> {
             if (driftingPlayDialog == null) {
-                driftingPlayDialog = new DriftingPlayDialog(ARMetaverseCenterActivity.this);
+                driftingPlayDialog = new DriftingPlayDialog(ARMetaverseCenterActivity.this, userInfoEntity);
             }
             driftingPlayDialog.show();
             driftingPlayDialog.setOnClickCallback(type -> {
                 if (type == DriftingPlayDialog.OPEN_PLAY) {//开启玩法
                     DriftTrackMapActivity.start(ARMetaverseCenterActivity.this, 1, 1, 0, false);
-                } else if (type == DriftingPlayDialog.START_SPACE) {//空间站
-                    if (mPresenter != null) {  //检测是否有空间站
-                        mPresenter.spacecheck();
+                } else if (type == DriftingPlayDialog.OPEN_JUMP) {//鉴别派系属性
+
+                    if (mPresenter != null) {
+                        mPresenter.questionlist();
                     }
+                } else if (type == DriftingPlayDialog.YOUTH_CAP) {  //跃迁派系主星
+                    toggleType = 2;
+                    paixitype = 1;
+                    mUnityPlayer.UnitySendMessage("Main Camera", "OpenPaiXiXingQiu", userInfoEntity.getPlanet().getLevel() + "");
                 }
             });
         });
@@ -215,38 +226,56 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
         });
     }
 
-    //飞机
-    public void Aircraft() {
-        if (userInfoEntity != null) {
-            if (userInfoEntity.getPlanet().getLevel() == 1) {
-                toggleType = 2;
-                mUnityPlayer.UnitySendMessage("Main Camera", "OpenAircraft", userInfoEntity.getPlanet().getLevel() + "");
-            } else {
-                runOnUiThread(() -> {
-                    if (jumpPlanetDialog == null) {
-                        jumpPlanetDialog = new JumpPlanetDialog(ARMetaverseCenterActivity.this);
-                    }
-                    jumpPlanetDialog.show();
-                    jumpPlanetDialog.setOnClickCallback(type -> {
-                        toggleType = 2;
-                        if (type == JumpPlanetDialog.OPEN_PLAY) {  //跃迁派系主星
-                            paixitype = 1;
-                            mUnityPlayer.UnitySendMessage("Main Camera", "OpenPaiXiXingQiu", userInfoEntity.getPlanet().getLevel() + "");
-                        } else if (type == JumpPlanetDialog.OPEN_JUMP) { //前往重新鉴别
-                            mUnityPlayer.UnitySendMessage("Main Camera", "OpenAircraft", "");
-                        }
-                    });
-                });
-            }
-        }
+    //打开空间站
+    public void OpenKJZ(){
+        toggleType = 4;
+    }
+
+//    //飞机
+//    public void Aircraft() {
+//        if (userInfoEntity != null) {
+//            if (userInfoEntity.getPlanet().getLevel() == 1) {
+//                toggleType = 2;
+//                mUnityPlayer.UnitySendMessage("Main Camera", "OpenAircraft", userInfoEntity.getPlanet().getLevel() + "");
+//            } else {
+//                runOnUiThread(() -> {
+//                    if (jumpPlanetDialog == null) {
+//                        jumpPlanetDialog = new JumpPlanetDialog(ARMetaverseCenterActivity.this);
+//                    }
+//                    jumpPlanetDialog.show();
+//                    jumpPlanetDialog.setOnClickCallback(type -> {
+//                        toggleType = 2;
+//                        if (type == JumpPlanetDialog.OPEN_PLAY) {  //跃迁派系主星
+//                            paixitype = 1;
+//                            mUnityPlayer.UnitySendMessage("Main Camera", "OpenPaiXiXingQiu", userInfoEntity.getPlanet().getLevel() + "");
+//                        } else if (type == JumpPlanetDialog.OPEN_JUMP) { //前往重新鉴别
+//                            mUnityPlayer.UnitySendMessage("Main Camera", "OpenAircraft", "");
+//                        }
+//                    });
+//                });
+//            }
+//        }
+//    }
 
 
+    //进入个人星球
+    public void GeRenXingQiu() {
+        mUnityPlayer.UnitySendMessage("Main Camera", "ClosePaiXiXingQiu", "");
+        mUnityPlayer.UnitySendMessage("Main Camera", "OpenGeRenXingQiu", "");
     }
 
 
-    //第二场景机器人点击
-    public void Psychological() {
+    //进入派系星球
+    public void PaiXiXingQiu() {
+        mUnityPlayer.UnitySendMessage("Main Camera", "CloseGeRenXingQiu", "");
+        if (userInfoEntity != null) {
+            mUnityPlayer.UnitySendMessage("Main Camera", "OpenPaiXiXingQiu", userInfoEntity.getPlanet().getLevel() + "");
+        }
+    }
 
+
+    //任意门前面机器人点击
+    public void LianLuoGuan() {
         runOnUiThread(() -> {
             if (exclusivePlanetDialog == null) {
                 exclusivePlanetDialog = new ExclusivePlanetDialog(ARMetaverseCenterActivity.this);
@@ -257,7 +286,6 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
                     if (mPresenter != null) {
                         mPresenter.questionlist();
                     }
-                    //    AnswerTestActivity.start(this, false);
                 }
             });
 
@@ -275,7 +303,7 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
     //点击确定按钮
     public void Areyousure() {
         map.put(questionid + "", value);
-        Preferences.putHashMapData(map);
+        MMKVUtils.getInstance().putHashMapData(map);
         if (map.size() == total) {
             if (mPresenter != null) {
                 mPresenter.questionassess(map);
@@ -291,22 +319,24 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
                     ShowWebViewActivity.start(this, 4, false);
                     break;
                 case R.id.tv_change_mode:
-                    if (toggleType == 4) {
-                        toggleType = 1;
-                        mUnityPlayer.UnitySendMessage("Main Camera", "CloseKongJianZhan", "");
-                    } else if (toggleType == 3) {
-                        toggleType = 2;
-                        mUnityPlayer.UnitySendMessage("Main Camera", "ClosePsychological", "");
-                    } else if (toggleType == 2) {
-                        toggleType = 1;
-                        if (paixitype == 1) {
-                            paixitype = 0;
-                            mUnityPlayer.UnitySendMessage("Main Camera", "ClosePaiXiXingQiu", "");
-                        } else {
-                            mUnityPlayer.UnitySendMessage("Main Camera", "CloseAircraft", "");
+                    if (toggleType == 4 || toggleType == 3 || toggleType == 2) {
+                        if (toggleType == 4) {
+                            mUnityPlayer.UnitySendMessage("Main Camera", "CloseKongJianZhan", "");
+                        } else if (toggleType == 3) {
+                            mUnityPlayer.UnitySendMessage("Main Camera", "ClosePsychological", "");
+                        } else if (toggleType == 2) {
+                            if (paixitype == 1) {
+                                paixitype = 0;
+                                mUnityPlayer.UnitySendMessage("Main Camera", "CloseGeRenXingQiu", "");
+                                mUnityPlayer.UnitySendMessage("Main Camera", "ClosePaiXiXingQiu", "");
+                            } else {
+                                mUnityPlayer.UnitySendMessage("Main Camera", "CloseAircraft", "");
+                            }
                         }
+                        toggleType = 1;
                     } else {
-                        NewDiscoveryTourActivity.start(this, 1, true);
+                        MMKVUtils.getInstance().setARModel(false);
+                        NewDiscoveryTourActivity.start(this, true);
                     }
                     break;
                 case R.id.rl_info:
@@ -707,7 +737,7 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
             total = list.size();
             toggleType = 3;
             questionEntityList = new ArrayList<>();
-            map = Preferences.getHashMapData();
+            map = MMKVUtils.getInstance().getHashMapData();
             if (map != null) {
                 for (int i = 0; i < list.size(); i++) {
                     if (!map.containsKey(list.get(i).getQuestion_id() + "")) {
@@ -732,7 +762,7 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
     @Override
     public void onQuestionAssessSuccess(QuestionAssessEntity entity) {
         if (entity != null) {
-            Preferences.putHashMapData(null);
+            MMKVUtils.getInstance().putHashMapData(null);
             AnswerResultActivity.start(this, 2, true);
         }
     }

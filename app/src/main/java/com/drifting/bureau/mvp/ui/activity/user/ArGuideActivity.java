@@ -13,6 +13,7 @@ import com.drifting.bureau.R;
 import com.drifting.bureau.base.BaseManagerActivity;
 
 import com.drifting.bureau.mvp.ui.activity.unity.ARMetaverseCenterActivity;
+import com.drifting.bureau.storageinfo.MMKVUtils;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
 import com.jess.arms.di.component.AppComponent;
@@ -55,7 +56,7 @@ public class ArGuideActivity extends BaseManagerActivity {
                     finish();
                     break;
                 case R.id.tv_enter:  //进入AR版本
-                    Preferences.setARModel(true);
+                    MMKVUtils.getInstance().setARModel(true);
                     ARMetaverseCenterActivity.start(this, true);
                     break;
             }

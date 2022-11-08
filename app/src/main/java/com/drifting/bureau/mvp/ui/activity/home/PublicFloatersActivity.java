@@ -143,10 +143,7 @@ public class PublicFloatersActivity extends BaseManagerActivity {
                     setCupStatus(5);
                     break;
                 case R.id.rl_cup_guide:  //引导点击
-                    if (mediaPlayer != null) {
-                        mediaPlayer.stop();
-                        mediaPlayer.release();
-                    }
+                    stop();
                     mRlCupGuide.setVisibility(View.INVISIBLE);
                     mRlexpect.setVisibility(View.VISIBLE);
                     break;
@@ -164,13 +161,11 @@ public class PublicFloatersActivity extends BaseManagerActivity {
         mIvGuide3.setVisibility(View.INVISIBLE);
         mIvGuide4.setVisibility(View.INVISIBLE);
         mIvGuide5.setVisibility(View.INVISIBLE);
-
         if (type == 1) {
             mIvGuide1.setVisibility(View.VISIBLE);
             mTvCupDesc.setText("通过一杯“心理杯”，未来将会有心理陪伴师为你提供免费时长的心理解惑。");
             mTvCupName.setText(getString(R.string.buy_cup, "心理杯"));
             mediaPlayer = MediaPlayer.create(this, R.raw.guide1);
-
         } else if (type == 2) {
             mIvGuide2.setVisibility(View.VISIBLE);
             mTvCupDesc.setText("通过一杯“情感杯”，未来将会有情感咨询师为你提供免费时长的情感答疑。");
@@ -192,13 +187,27 @@ public class PublicFloatersActivity extends BaseManagerActivity {
             mTvCupName.setText(getString(R.string.buy_cup, "国学杯"));
             mediaPlayer = MediaPlayer.create(this, R.raw.guide5);
         }
-
         mediaPlayer.start();
     }
 
     @Override
+    protected void onStop() {
+        stop();
+        super.onStop();
+    }
+
+
+    public void stop(){
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            mediaPlayer=null;
+        }
+    }
+
+    @Override
     protected void onDestroy() {
-        super.onDestroy();
         RequestUtil.create().disDispose();
+        super.onDestroy();
     }
 }

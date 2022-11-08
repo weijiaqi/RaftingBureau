@@ -4,14 +4,18 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.RelativeLayout;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import com.drifting.bureau.R;
+import com.drifting.bureau.WebUrlConstant;
 import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.mvp.ui.activity.home.NewDiscoveryTourActivity;
 import com.drifting.bureau.mvp.ui.activity.unity.ARMetaverseCenterActivity;
 import com.drifting.bureau.mvp.ui.activity.user.PullNewGuideActivity;
 import com.drifting.bureau.mvp.ui.dialog.PrivacyPolicyDialog;
+import com.drifting.bureau.storageinfo.MMKVUtils;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.RongIMUtil;
 import com.drifting.bureau.video.EmptyControlVideo;
@@ -19,6 +23,7 @@ import com.jess.arms.di.component.AppComponent;
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
 import com.shuyu.gsyvideoplayer.listener.GSYSampleCallBack;
 import com.umeng.commonsdk.UMConfigure;
+
 import butterknife.BindView;
 import timber.log.Timber;
 
@@ -27,7 +32,6 @@ public class SplashActivity extends BaseManagerActivity {
 
     @BindView(R.id.video_player)
     EmptyControlVideo mVieoPlayer;
-
     @BindView(R.id.rl_center)
     RelativeLayout mRlCenter;
     private PrivacyPolicyDialog privacyPolicyDialog;
@@ -57,10 +61,9 @@ public class SplashActivity extends BaseManagerActivity {
                     Preferences.setAgreePrivacy(true);
                     //友盟隐私合规授权
                     UMConfigure.submitPolicyGrantResult(getApplicationContext(), true);
-                    mVieoPlayer.setUp("https://v.metapeza.com/afile/vedio/start.mp4", true, "");
+                    mVieoPlayer.setUp(WebUrlConstant.SPLASH_VIDEO, true, "");
                     mVieoPlayer.startPlayLogic();
                     mVieoPlayer.setVideoAllCallBack(new GSYSampleCallBack() {
-
                         @Override
                         public void onAutoComplete(String url, Object... objects) {
                             super.onAutoComplete(url, objects);
@@ -79,8 +82,6 @@ public class SplashActivity extends BaseManagerActivity {
         mVieoPlayer.setVisibility(View.GONE);
         startActivity();
     };
-
-
 
 
     public void startActivity() {
@@ -104,7 +105,7 @@ public class SplashActivity extends BaseManagerActivity {
 
 
     public void startMainActivity() {
-        if (Preferences.isARModel()) {
+        if (MMKVUtils.getInstance().isARModel()) {
             ARMetaverseCenterActivity.start(SplashActivity.this, true);
         } else {
             NewDiscoveryTourActivity.start(SplashActivity.this, true);

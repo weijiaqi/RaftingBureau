@@ -37,6 +37,7 @@ import com.drifting.bureau.mvp.ui.activity.user.MessageCenterActivity;
 import com.drifting.bureau.mvp.ui.activity.user.NewAboutMeActivity;
 import com.drifting.bureau.mvp.ui.activity.web.ShowWebViewActivity;
 import com.drifting.bureau.mvp.ui.dialog.ExpectDialog;
+import com.drifting.bureau.storageinfo.MMKVUtils;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.AppUtil;
 import com.drifting.bureau.util.ClickUtil;
@@ -65,7 +66,6 @@ import retrofit2.http.PUT;
  * @Time : 2022/10/25 9:46
  */
 public class NewDiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourPresenter> implements DiscoveryTourContract.View {
-
     @BindView(R.id.ll_step_star)
     LinearLayout mLlStepStar;
     @BindView(R.id.tv_bar)
@@ -95,17 +95,9 @@ public class NewDiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourP
     private int id, explore_id;
     private boolean isAnmiation = true;
     private ExpectDialog expectDialog;
-    private static final String INTENT_TYPE = "intent_type";
-    private int mType = -1;
+
     public static void start(Context context, boolean closePage) {
         Intent intent = new Intent(context, NewDiscoveryTourActivity.class);
-        context.startActivity(intent);
-        if (closePage) ((Activity) context).finish();
-    }
-
-    public static void start(Context context,int type, boolean closePage) {
-        Intent intent = new Intent(context, NewDiscoveryTourActivity.class);
-        intent.putExtra(INTENT_TYPE, type);
         context.startActivity(intent);
         if (closePage) ((Activity) context).finish();
     }
@@ -129,10 +121,6 @@ public class NewDiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourP
     public void initData(@Nullable Bundle savedInstanceState) {
         setStatusBar(true);
         setStatusBarHeight(mTvBar);
-        mType = getInt(INTENT_TYPE);
-        if (mType==1){
-            Preferences.setARModel(false);
-        }
         mLlStepStar.setVisibility(View.GONE);
         loadUI();
     }
@@ -202,7 +190,7 @@ public class NewDiscoveryTourActivity extends BaseManagerActivity<DiscoveryTourP
                     MessageCenterActivity.start(this, false);
                     break;
                 case R.id.iv_enter:
-                    Preferences.setARModel(true);
+                    MMKVUtils.getInstance().setARModel(true);
                     ARMetaverseCenterActivity.start(this, true);
                     break;
                 case R.id.rl_my_faction:  //进入主页

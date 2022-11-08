@@ -195,6 +195,7 @@
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_feed_back.xml" value="0.17" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_get_space_station.xml" value="0.33" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_home.xml" value="0.33" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/activity_jump_planet.xml" value="0.5" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_main.xml" value="0.2703804347826087" />
         <entry key="..\:/Drifting/app/src/main/res/layout/activity_message_center.xml" value="0.2346014492753623" />
@@ -325,6 +326,7 @@
         <entry key="..\:/Drifting/app/src/main/res/layout/item_space_barrage.xml" value="0.25" />
         <entry key="..\:/Drifting/app/src/main/res/layout/item_space_station.xml" value="0.165" />
         <entry key="..\:/Drifting/app/src/main/res/layout/item_tea_shop.xml" value="0.335" />
+        <entry key="..\:/Drifting/app/src/main/res/layout/item_winning_record.xml" value="0.24592391304347827" />
         <entry key="..\:/Drifting/app/src/main/res/layout/layout_ar_not_data.xml" value="0.3" />
         <entry key="..\:/Drifting/app/src/main/res/layout/layout_drift_track.xml" value="0.33" />
         <entry key="..\:/Drifting/app/src/main/res/layout/layout_for_scrap.xml" value="0.3177083333333333" />

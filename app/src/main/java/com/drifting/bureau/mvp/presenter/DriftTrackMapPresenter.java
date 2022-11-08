@@ -406,7 +406,7 @@ public class DriftTrackMapPresenter extends BasePresenter<DriftTrackMapContract.
 
 
     /**
-     * 探索方式列表
+     *  展示保险柜
      */
     public void getBox() {
         mModel.getbox().subscribeOn(Schedulers.io())

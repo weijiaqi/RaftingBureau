@@ -35,12 +35,12 @@ public class Preferences {
     private static final String KEY_USER_PASSWORD = "user_password";
     private static final String KEY_USER_CITY = "user_city";
 
-    private static final String KEY_AR_ANSWER = "ar_answer";
+
 
     private static final String KEY_USER_IS_ANONY = "isanony";//是否为匿名状态
     private static final String KEY_USER_IS_PRIVACY= "isprivacy";//是否同意隐私条款、
 
-    private static final String KEY_USER_IS_ARMODEL = "isarmodel";//是否为AR模式
+
     private static final String KEY_USER_IS_DIDATTEND = "isdidAttend";//是否参与过漂流
     public static final String KEY_IS_TEST = "isTest"; //是不是测试环境
 
@@ -105,20 +105,6 @@ public class Preferences {
     }
 
 
-    /**
-     * @return true选择AR模式  false选择普通模式
-     */
-    public static boolean isARModel() {
-        return !(getString(KEY_USER_IS_ARMODEL) == null || "0".equals(getString(KEY_USER_IS_ARMODEL))) && "1".equals(getString(KEY_USER_IS_ARMODEL));
-    }
-
-    public static void setARModel(boolean isARModel) {
-        if (isARModel) {
-            saveString(KEY_USER_IS_ARMODEL, 1 + "");
-        } else {
-            saveString(KEY_USER_IS_ARMODEL, 0 + "");
-        }
-    }
 
 
     /**
@@ -270,50 +256,6 @@ public class Preferences {
 
 
 
-    /**
-     * 将map集合转化为json数据保存在sharePreferences中
-     *
-     * @param
-     * @param map map数据
-     * @return 保存结果
-     */
-    public static  <K,V> void putHashMapData(Map<K,V> map){
-        try {
-            String json = new Gson().toJson(map);
-            saveString(KEY_AR_ANSWER,json);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-
-    /**
-     * 读取本地sharePreferences数据、转换成map集合
-     *
-     * @return HashMap
-     */
-    public static HashMap<String , String> getHashMapData(){
-        String localJson = getString(KEY_AR_ANSWER);
-        if (localJson==null ||localJson.equals("null")){
-            return null;
-        }
-
-        HashMap<String , String> map = new HashMap<>();
-        JsonObject object = JsonParser.parseString(localJson).getAsJsonObject();
-        Set<Map.Entry<String , JsonElement>> entrySet = object.entrySet();
-        for (Map.Entry<String , JsonElement> entry : entrySet) {
-            String entryKey =entry.getKey();
-            JsonPrimitive entryValue = (JsonPrimitive) entry.getValue();
-            map.put(entryKey ,entryValue.getAsString());
-        }
-
-        return map;
-    }
-
-
-
-
-
     public static void saveString(String key, String value) {
         SharedPreferences.Editor editor = getSharedPreferences().edit();
         editor.putString(key, value);
@@ -362,6 +304,7 @@ public class Preferences {
         boolean isArGuide = isArGuide();
 
         clear();
+        MMKVUtils.getInstance().clearAll();
         setAgreePrivacy(isPrivacy);
         savePhone(phone);
         savePassword(password);

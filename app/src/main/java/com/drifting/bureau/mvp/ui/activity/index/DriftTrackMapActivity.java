@@ -9,8 +9,10 @@ import androidx.annotation.RequiresApi;
 
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -267,7 +269,6 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
             }
         });
 
-
         initListener();
     }
 
@@ -301,7 +302,6 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
         mBaiduMap.setMaxAndMinZoomLevel(13, 6);
         mDistrictSearch = DistrictSearch.newInstance();
         mDistrictSearch.setOnDistrictSearchListener(listener);
-
         inflater = LayoutInflater.from(getApplicationContext());
 
         if (Msgtype == 1) {  //开启新漂流
@@ -383,36 +383,38 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
 
     public void openBox(Marker marker, String code) {
         RequestUtil.create().openbox(boxEntityList.get(marker.getZIndex()).getKey(), boxEntityList.get(marker.getZIndex()).getType(), code, boxEntityList.get(marker.getZIndex()).getIs_kongtou(), entity1 -> {
-            if (entity1!=null &&entity1.getData()!=null &&entity1.getCode() == 200) {
-                if (boxPasswordDialog != null) {
-                    boxPasswordDialog.dismiss();
-                }
-                marker.remove();
-                mBaiduMap.hideInfoWindow(infoBoxWindowList.get(marker.getZIndex()));
-                if (entity1.getData().getIs_fictitious() == 1) {  //虚拟
-                    welfareVoucherDialog = new WelfareVoucherDialog(this, entity1.getData());
-                    welfareVoucherDialog.show();
-                } else {  //实物
-                    winningAddressDialog = new WinningAddressDialog(this, entity1.getData().getImage());
-                    winningAddressDialog.show();
-                    winningAddressDialog.setOnAddressClickCallback((name, phone, address) -> {
-                        RequestUtil.create().addexpress(entity1.getData().getSafe_box_open_record_id(), name, phone, address, entity2 -> {
-                            if (entity2 != null && entity2.getCode() == 200) {
-                                winningAddressDialog.dismiss();
-                                publicDialog = new PublicDialog(this);
-                                publicDialog.show();
-                                publicDialog.setCancelable(false);
-                                publicDialog.setTitleText("恭喜");
-                                publicDialog.setContentText("您的奖品已发放");
-                                publicDialog.setButtonText("确定");
-                            } else {
-                                showMessage(entity2.getMsg());
-                            }
+            if (entity1!=null &&entity1.getData()!=null) {
+                if (entity1.getCode() == 200){
+                    if (boxPasswordDialog != null) {
+                        boxPasswordDialog.dismiss();
+                    }
+                    marker.remove();
+                    mBaiduMap.hideInfoWindow(infoBoxWindowList.get(marker.getZIndex()));
+                    if (entity1.getData().getIs_fictitious() == 1) {  //虚拟
+                        welfareVoucherDialog = new WelfareVoucherDialog(this, entity1.getData());
+                        welfareVoucherDialog.show();
+                    } else {  //实物
+                        winningAddressDialog = new WinningAddressDialog(this, entity1.getData().getImage());
+                        winningAddressDialog.show();
+                        winningAddressDialog.setOnAddressClickCallback((name, phone, address) -> {
+                            RequestUtil.create().addexpress(entity1.getData().getSafe_box_open_record_id(), name, phone, address, entity2 -> {
+                                if (entity2 != null && entity2.getCode() == 200) {
+                                    winningAddressDialog.dismiss();
+                                    publicDialog = new PublicDialog(this);
+                                    publicDialog.show();
+                                    publicDialog.setCancelable(false);
+                                    publicDialog.setTitleText("恭喜");
+                                    publicDialog.setContentText("您的奖品已发放");
+                                    publicDialog.setButtonText("确定");
+                                } else {
+                                    showMessage(entity2.getMsg());
+                                }
+                            });
                         });
-                    });
+                    }
+                }else {
+                    showMessage(entity1.getMsg());
                 }
-            } else {
-                showMessage(entity1.getMsg());
             }
         });
     }
@@ -458,10 +460,12 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
 
 
     public void showInfoWindowDetails(int click) {
-        if (click == 0) {
-            mPresenter.details(messageBean.getId(), 0, messagePathBeanList.get(0).getUser_id());
-        } else {
-            mPresenter.details(messagePathBeanList.get(click).getComment_id(), 1, messagePathBeanList.get(click).getUser_id());
+        if (messagePathBeanList.size()>0){
+            if (click == 0) {
+                mPresenter.details(messageBean.getId(), 0, messagePathBeanList.get(0).getUser_id());
+            } else {
+                mPresenter.details(messagePathBeanList.get(click).getComment_id(), 1, messagePathBeanList.get(click).getUser_id());
+            }
         }
     }
 
@@ -898,8 +902,7 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
 
     public void selectCity(String name) {
         mDistrictSearch.searchDistrict(new DistrictSearchOption()
-                .cityName(name)
-                .districtName(""));
+                .cityName(name));
     }
 
     /**
@@ -1511,16 +1514,18 @@ public class DriftTrackMapActivity extends BaseManagerActivity<DriftTrackMapPres
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
-        //释放检索实例
-        mDistrictSearch.destroy();
         //移除图层
         removeTrace();
         // 清除所有图层
         mBaiduMap.clear();
         // 在activity执行onDestroy时必须调用mMapView.onDestroy()
         mMapView.onDestroy();
+        //释放检索实例
+        if (null != mDistrictSearch) {
+            mDistrictSearch.destroy();
+        }
         RequestUtil.create().disDispose();
+        super.onDestroy();
     }
 
     /**

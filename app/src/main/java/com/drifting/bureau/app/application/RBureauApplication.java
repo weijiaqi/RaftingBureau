@@ -39,6 +39,7 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.DefaultRefreshFooterCreator;
 import com.scwang.smart.refresh.layout.listener.DefaultRefreshHeaderCreator;
 import com.tencent.bugly.crashreport.CrashReport;
+import com.tencent.mmkv.MMKV;
 import com.tencent.vasdolly.helper.ChannelReaderUtil;
 import com.umeng.commonsdk.UMConfigure;
 
@@ -139,6 +140,7 @@ public class RBureauApplication extends Application implements App {
 
 
     private void initSDK() {
+
         initAutoSize();
         //bugly异常捕捉
         initBugly();
@@ -302,6 +304,7 @@ public class RBureauApplication extends Application implements App {
      */
     private void initApi() {
         Preferences.initialize(this);
+        MMKV.initialize(this);
         if (Preferences.isTest()) {
             Api.API_SERVER = "http://106.75.116.154:9092/";
         }

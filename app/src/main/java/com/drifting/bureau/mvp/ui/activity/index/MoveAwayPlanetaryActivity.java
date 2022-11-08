@@ -26,6 +26,7 @@ import com.drifting.bureau.mvp.ui.activity.home.NewDiscoveryTourActivity;
 import com.drifting.bureau.mvp.ui.adapter.AnswerAdapter;
 import com.drifting.bureau.mvp.ui.adapter.manager.CardSwipeLayoutManager;
 import com.drifting.bureau.mvp.ui.dialog.AttributeResultsDialog;
+import com.drifting.bureau.storageinfo.MMKVUtils;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.ToastUtil;
@@ -113,7 +114,7 @@ public class MoveAwayPlanetaryActivity extends BaseManagerActivity<MoveAwayPlane
     public void onQuestionListSuccess(List<QuestionEntity> list) {
         if (list != null && list.size() > 0) {
             questionEntityList = new ArrayList<>();
-            map = Preferences.getHashMapData();
+            map = MMKVUtils.getInstance().getHashMapData();
             if (map != null) {
                 for (int i = 0; i < list.size(); i++) {
                     if (!map.containsKey(list.get(i).getQuestion_id() + "")) {
@@ -139,7 +140,7 @@ public class MoveAwayPlanetaryActivity extends BaseManagerActivity<MoveAwayPlane
     @Override
     public void onQuestionAssessSuccess(QuestionAssessEntity entity) {
         if (entity != null) {
-            Preferences.putHashMapData(null);
+            MMKVUtils.getInstance().putHashMapData(null);
             AnswerCompletedEvent answerCompletedEvent=new AnswerCompletedEvent();
             answerCompletedEvent.setPl_id(entity.getPlanet().getPl_id());
             EventBus.getDefault().post(answerCompletedEvent);
@@ -188,7 +189,7 @@ public class MoveAwayPlanetaryActivity extends BaseManagerActivity<MoveAwayPlane
                     if (mRcyAnswer != null && mRcyAnswer.getChildCount() > 0) {
                         if (infos != null) {
                             map.put(infos.get(infos.size() - 1).getQuestionid() + "", infos.get(infos.size() - 1).getValue());
-                            Preferences.putHashMapData(map);
+                            MMKVUtils.getInstance().putHashMapData(map);
                         }
                         if (answerAdapter.getItemCount() != 1) {
                             if (infos!=null&&infos.size() == total - answerAdapter.getItemCount() + 1) {
