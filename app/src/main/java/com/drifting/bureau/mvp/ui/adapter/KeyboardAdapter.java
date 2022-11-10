@@ -3,12 +3,7 @@ package com.drifting.bureau.mvp.ui.adapter;
 import android.view.View;
 
 import com.drifting.bureau.R;
-import com.drifting.bureau.mvp.model.entity.SpaceAboutEntity;
 import com.drifting.bureau.mvp.ui.holder.BoxPasswordHolder;
-import com.drifting.bureau.mvp.ui.holder.DeliveryVideoHolder;
-import com.drifting.bureau.mvp.ui.holder.DeliveryVoiceHolder;
-import com.drifting.bureau.mvp.ui.holder.DeliveryWordHolder;
-import com.drifting.bureau.mvp.ui.holder.IncomeRecordHolder;
 import com.drifting.bureau.mvp.ui.holder.SimpleHolder;
 import com.jess.arms.base.BaseRecyclerAdapter;
 import com.jess.arms.base.BaseRecyclerHolder;

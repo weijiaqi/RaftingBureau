@@ -12,7 +12,6 @@ import android.os.Message;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
-import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.view.View;
@@ -31,7 +30,6 @@ import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.mvp.ui.activity.web.ShowWebViewActivity;
 import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
 import com.drifting.bureau.storageinfo.Preferences;
-
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.FileUtil;
 import com.drifting.bureau.util.NotificationUtil;
@@ -41,7 +39,6 @@ import com.drifting.bureau.util.animator.AnimatorUtil;
 import com.drifting.bureau.util.downloadutil.DownloadRequest;
 import com.drifting.bureau.util.manager.NotificationManager;
 import com.drifting.bureau.util.request.RequestUtil;
-import com.jess.arms.base.BaseDialog;
 import com.jess.arms.di.component.AppComponent;
 
 import java.io.File;

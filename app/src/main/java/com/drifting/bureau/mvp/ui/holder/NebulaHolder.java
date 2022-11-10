@@ -14,7 +14,6 @@ import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.NebulaEntity;
 import com.drifting.bureau.mvp.ui.activity.index.NebulaeActivity;
 import com.drifting.bureau.util.TextUtil;
-import com.drifting.bureau.util.ToastUtil;
 import com.hjq.shape.view.ShapeView;
 import com.jess.arms.base.BaseRecyclerHolder;
 import com.jess.arms.utils.ArmsUtils;

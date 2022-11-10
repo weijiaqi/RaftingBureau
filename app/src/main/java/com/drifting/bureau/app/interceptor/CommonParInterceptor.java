@@ -1,9 +1,7 @@
 package com.drifting.bureau.app.interceptor;
 
 import android.text.TextUtils;
-import android.util.Log;
 
-import com.drifting.bureau.R;
 import com.drifting.bureau.app.application.RBureauApplication;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.AppUtil;
@@ -12,9 +10,7 @@ import com.drifting.bureau.util.SystemUtil;
 
 import java.io.IOException;
 
-import okhttp3.FormBody;
 import okhttp3.Interceptor;
-import okhttp3.MultipartBody;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;

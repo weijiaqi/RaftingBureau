@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.baidu.mapapi.model.LatLng;
 import com.drifting.bureau.R;
 import com.drifting.bureau.app.application.RBureauApplication;
 import com.drifting.bureau.base.BaseManagerActivity;

@@ -2,17 +2,10 @@ package com.drifting.bureau.mvp.ui.activity.index;
 
 import android.animation.ValueAnimator;
 import android.app.Activity;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-
 import android.content.Context;
 import android.content.Intent;
-import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +15,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import com.baidu.mapapi.animation.Animation;
 import com.baidu.mapapi.animation.ScaleAnimation;
@@ -37,13 +34,10 @@ import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
-
 import com.baidu.mapapi.map.Overlay;
 import com.baidu.mapapi.map.OverlayOptions;
-
 import com.baidu.mapapi.map.Polyline;
 import com.baidu.mapapi.map.PolylineOptions;
-
 import com.baidu.mapapi.map.UiSettings;
 import com.baidu.mapapi.map.track.TraceAnimationListener;
 import com.baidu.mapapi.map.track.TraceOptions;
@@ -55,7 +49,6 @@ import com.baidu.mapapi.search.district.DistrictResult;
 import com.baidu.mapapi.search.district.DistrictSearch;
 import com.baidu.mapapi.search.district.DistrictSearchOption;
 import com.baidu.mapapi.search.district.OnGetDistricSearchResultListener;
-
 import com.drifting.bureau.R;
 import com.drifting.bureau.app.application.RBureauApplication;
 import com.drifting.bureau.base.BaseManagerActivity;
@@ -65,21 +58,19 @@ import com.drifting.bureau.data.event.PaymentEvent;
 import com.drifting.bureau.data.event.TagEvent;
 import com.drifting.bureau.data.event.VideoEvent;
 import com.drifting.bureau.di.component.DaggerDriftTrackMapComponent;
+import com.drifting.bureau.mvp.contract.DriftTrackMapContract;
 import com.drifting.bureau.mvp.model.entity.BoxEntity;
 import com.drifting.bureau.mvp.model.entity.CommentDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
 import com.drifting.bureau.mvp.model.entity.CreateOrderOpenBoxEntity;
 import com.drifting.bureau.mvp.model.entity.CreatewithfileEntity;
 import com.drifting.bureau.mvp.model.entity.MoreDetailsForMapEntity;
-
 import com.drifting.bureau.mvp.model.entity.SkuListEntity;
-
+import com.drifting.bureau.mvp.presenter.DriftTrackMapPresenter;
 import com.drifting.bureau.mvp.ui.activity.pay.PaymentInfoActivity;
-
 import com.drifting.bureau.mvp.ui.dialog.BoxPasswordDialog;
 import com.drifting.bureau.mvp.ui.dialog.CityReleaseDialog;
 import com.drifting.bureau.mvp.ui.dialog.EnablePrivilegesDialog;
-
 import com.drifting.bureau.mvp.ui.dialog.ListPrizesDialog;
 import com.drifting.bureau.mvp.ui.dialog.MapSendDriftDialog;
 import com.drifting.bureau.mvp.ui.dialog.PublicDialog;
@@ -94,13 +85,9 @@ import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.ViewUtil;
-
 import com.drifting.bureau.util.request.RequestUtil;
 import com.drifting.bureau.view.guide.MapOpenMsgGuideView;
-
 import com.jess.arms.di.component.AppComponent;
-import com.drifting.bureau.mvp.contract.DriftTrackMapContract;
-import com.drifting.bureau.mvp.presenter.DriftTrackMapPresenter;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -111,7 +98,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-
 import java.util.List;
 import java.util.Random;
 

@@ -11,7 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.drifting.bureau.R;
-import com.drifting.bureau.di.component.DaggerBlindBoxRecordComponent;
 import com.drifting.bureau.di.component.DaggerBoxRecordComponent;
 import com.drifting.bureau.mvp.contract.BlindBoxRecordContract;
 import com.drifting.bureau.mvp.model.entity.BlindBoxRecordEntity;

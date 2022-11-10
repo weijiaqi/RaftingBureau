@@ -4,7 +4,6 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 
-import com.drifting.bureau.util.TextUtil;
 import com.jess.arms.base.BaseRecyclerHolder;
 
 import java.util.List;

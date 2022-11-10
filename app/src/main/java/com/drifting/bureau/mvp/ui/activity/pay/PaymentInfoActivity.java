@@ -17,31 +17,23 @@ import androidx.annotation.Nullable;
 import com.drifting.bureau.R;
 import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.data.event.CouponAvailableEvent;
-import com.drifting.bureau.data.event.MessageEvent;
 import com.drifting.bureau.data.event.PaymentEvent;
 import com.drifting.bureau.di.component.DaggerPaymentInfoComponent;
 import com.drifting.bureau.mvp.contract.PaymentInfoContract;
-import com.drifting.bureau.mvp.model.entity.AvailableEntity;
 import com.drifting.bureau.mvp.model.entity.CouponsMineEntity;
 import com.drifting.bureau.mvp.model.entity.PayOrderEntity;
 import com.drifting.bureau.mvp.model.entity.SandPayQueryEntity;
-import com.drifting.bureau.mvp.model.entity.SysmessageMineEntity;
 import com.drifting.bureau.mvp.presenter.PaymentInfoPresenter;
-import com.drifting.bureau.mvp.ui.activity.SplashActivity;
 import com.drifting.bureau.mvp.ui.activity.index.CouponAvailableActivity;
-import com.drifting.bureau.mvp.ui.activity.user.AccountSettingsActivity;
 import com.drifting.bureau.mvp.ui.dialog.CurrencyDialog;
 import com.drifting.bureau.pay.WXPay;
-import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.GsonUtil;
 import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.ViewUtil;
-import com.drifting.bureau.util.callback.BaseDataCallBack;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.drifting.bureau.view.ClockView;
 import com.hjq.shape.view.ShapeTextView;
-import com.jess.arms.base.BaseEntity;
 import com.jess.arms.di.component.AppComponent;
 import com.unionpay.UPPayAssistEx;
 
@@ -51,13 +43,8 @@ import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DecimalFormat;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.OnClick;
-import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
-import cat.ereza.customactivityoncrash.config.CaocConfig;
 
 
 /**

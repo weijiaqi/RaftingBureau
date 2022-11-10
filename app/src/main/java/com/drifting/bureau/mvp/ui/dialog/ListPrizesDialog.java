@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 
 import com.drifting.bureau.R;
-
 import com.drifting.bureau.util.GlideUtil;
 import com.hjq.shape.layout.ShapeRelativeLayout;
 import com.jess.arms.base.BaseDialog;

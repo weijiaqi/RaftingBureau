@@ -4,9 +4,7 @@ import android.app.Activity;
 
 import com.drifting.bureau.mvp.model.entity.BoxEntity;
 import com.drifting.bureau.mvp.model.entity.CommentDetailsEntity;
-import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
 import com.drifting.bureau.mvp.model.entity.CreateOrderOpenBoxEntity;
-import com.drifting.bureau.mvp.model.entity.CreatewithfileEntity;
 import com.drifting.bureau.mvp.model.entity.IncomeRecordEntity;
 import com.drifting.bureau.mvp.model.entity.MakingRecordEntity;
 import com.drifting.bureau.mvp.model.entity.MessageReceiveEntity;
@@ -14,7 +12,6 @@ import com.drifting.bureau.mvp.model.entity.MoreDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.OrderOneEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionAssessEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionEntity;
-import com.drifting.bureau.mvp.model.entity.SkuListEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceCheckEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceInfoEntity;
 import com.drifting.bureau.mvp.model.entity.TeamStatisticEntity;
@@ -25,7 +22,6 @@ import com.jess.arms.mvp.IView;
 import java.util.List;
 
 import io.reactivex.Observable;
-import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
 /**

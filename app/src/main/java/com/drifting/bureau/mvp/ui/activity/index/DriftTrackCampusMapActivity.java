@@ -16,9 +16,7 @@ import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.UiSettings;
-import com.baidu.mapapi.search.district.DistrictSearch;
 import com.drifting.bureau.R;
-import com.drifting.bureau.app.application.RBureauApplication;
 import com.drifting.bureau.base.BaseManagerActivity;
 import com.jess.arms.di.component.AppComponent;
 

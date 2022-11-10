@@ -7,7 +7,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -18,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
 import com.drifting.bureau.R;
+import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.data.event.WithdrawEvent;
 import com.drifting.bureau.di.component.DaggerMySpaceStationComponent;
 import com.drifting.bureau.mvp.contract.MySpaceStationContract;
@@ -32,17 +32,14 @@ import com.drifting.bureau.mvp.ui.dialog.MakingTeaDialog;
 import com.drifting.bureau.mvp.ui.dialog.MySpaceStationDialog;
 import com.drifting.bureau.mvp.ui.dialog.MyTreasuryDialog;
 import com.drifting.bureau.mvp.ui.dialog.PublicDialog;
-
 import com.drifting.bureau.mvp.ui.dialog.ShareDialog;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.DateUtil;
 import com.drifting.bureau.util.GlideUtil;
-import com.drifting.bureau.util.GsonUtil;
 import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.request.RequestUtil;
-import com.drifting.bureau.base.BaseManagerActivity;
 import com.jess.arms.di.component.AppComponent;
 
 import org.greenrobot.eventbus.Subscribe;

@@ -10,7 +10,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -27,7 +26,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.base.BaseManagerActivity;
-
 import com.drifting.bureau.data.event.AnswerCompletedEvent;
 import com.drifting.bureau.data.event.BackSpaceEvent;
 import com.drifting.bureau.data.event.MessageRefreshEvent;
@@ -39,7 +37,6 @@ import com.drifting.bureau.mvp.model.entity.StarUpIndexEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.presenter.DiscoveryTourPresenter;
 import com.drifting.bureau.mvp.ui.activity.index.DriftTrackMapActivity;
-
 import com.drifting.bureau.mvp.ui.activity.index.SpaceCapsuleActivity;
 import com.drifting.bureau.mvp.ui.activity.index.StarDistributionActivity;
 import com.drifting.bureau.mvp.ui.activity.unity.ARMetaverseCenterActivity;
@@ -55,7 +52,6 @@ import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.animator.AnimatorUtil;
 import com.drifting.bureau.util.request.RequestUtil;
-import com.drifting.bureau.view.DiscoveryTransformer;
 import com.drifting.bureau.view.guide.IndexGuiView;
 import com.jess.arms.di.component.AppComponent;
 import com.umeng.analytics.MobclickAgent;

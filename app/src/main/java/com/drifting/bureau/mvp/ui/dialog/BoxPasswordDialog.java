@@ -1,21 +1,16 @@
 package com.drifting.bureau.mvp.ui.dialog;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Handler;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.drifting.bureau.R;
-import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.ui.activity.index.StarDistributionActivity;
 import com.drifting.bureau.mvp.ui.activity.user.NewAboutMeActivity;
 import com.drifting.bureau.mvp.ui.adapter.KeyboardAdapter;
@@ -25,7 +20,6 @@ import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.jess.arms.base.BaseDialog;
 import com.jess.arms.base.BaseRecyclerAdapter;
-
 
 import java.util.ArrayList;
 import java.util.Arrays;

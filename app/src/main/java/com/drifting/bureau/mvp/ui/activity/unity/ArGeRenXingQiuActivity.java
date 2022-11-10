@@ -23,7 +23,6 @@ import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
-import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.hjq.shape.view.ShapeTextView;
 import com.jess.arms.di.component.AppComponent;

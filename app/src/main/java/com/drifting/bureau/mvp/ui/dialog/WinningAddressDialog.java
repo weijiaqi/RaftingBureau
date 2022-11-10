@@ -1,9 +1,6 @@
 package com.drifting.bureau.mvp.ui.dialog;
 
-import static com.drifting.bureau.app.api.Api.WEB_BASEURL;
-
 import android.content.Context;
-import android.graphics.BitmapFactory;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -11,14 +8,11 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 
 import com.drifting.bureau.R;
-import com.drifting.bureau.mvp.model.entity.OpenBoxEntity;
 import com.drifting.bureau.util.ClickUtil;
-import com.drifting.bureau.util.EncodingHandler;
 import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.jess.arms.base.BaseDialog;
-import com.jess.arms.utils.ArmsUtils;
 
 /**
  * @Description: 中奖地址

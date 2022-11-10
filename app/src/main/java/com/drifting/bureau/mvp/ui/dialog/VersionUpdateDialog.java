@@ -12,7 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.drifting.bureau.R;
-import com.drifting.bureau.app.receiver.NetworkUtil;
+import com.drifting.bureau.WebUrlConstant;
 import com.drifting.bureau.data.event.UpdateProgressEvent;
 import com.drifting.bureau.util.downloadutil.DownLoadIntentService;
 import com.drifting.bureau.util.downloadutil.UpdateManager;
@@ -121,8 +121,7 @@ public class VersionUpdateDialog extends BaseDialog implements View.OnClickListe
 //                        }
 //                    }
 //                }
-                   UpdateManager.openBrowser(mContext,mVersionUrl);
-
+                   UpdateManager.openBrowser(mContext, WebUrlConstant.USER_DOWNLOAD);
                 break;
         }
     }
@@ -188,20 +187,12 @@ public class VersionUpdateDialog extends BaseDialog implements View.OnClickListe
         currencyDialog.setText("去设置");
         currencyDialog.setTitleText(permissionsTitle, permissionsDescribe);
         currencyDialog.setCanceledOnTouchOutside(false);
-        currencyDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
-            @Override
-            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                return true;
-            }
-        });
-        currencyDialog.setOnClickCallback(new BaseDialog.OnClickCallback() {
-            @Override
-            public void onClickType(int type) {
-                mTvUpload.setText("下载中");
-                DownLoadIntentService.startUpdateService(activity, mVersionUrl);
-                if (type == CurrencyDialog.SELECT_FINISH) {
-                    NotificationManager.openNotification(activity);
-                }
+        currencyDialog.setOnKeyListener((dialog, keyCode, event) -> true);
+        currencyDialog.setOnClickCallback(type -> {
+            mTvUpload.setText("下载中");
+            DownLoadIntentService.startUpdateService(activity, mVersionUrl);
+            if (type == CurrencyDialog.SELECT_FINISH) {
+                NotificationManager.openNotification(activity);
             }
         });
     }

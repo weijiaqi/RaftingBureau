@@ -1,15 +1,11 @@
 package com.drifting.bureau.util;
 
-import static io.rong.imkit.utils.FileTypeUtils.formatFileSize;
-
 import android.content.Context;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
-import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 

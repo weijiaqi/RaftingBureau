@@ -6,8 +6,8 @@ import android.app.Activity;
 
 import com.drifting.bureau.app.application.RBureauApplication;
 import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
-import com.drifting.bureau.util.request.CloseUtil;
 import com.drifting.bureau.util.SystemUtil;
+import com.drifting.bureau.util.request.CloseUtil;
 
 import java.io.File;
 import java.io.FileOutputStream;

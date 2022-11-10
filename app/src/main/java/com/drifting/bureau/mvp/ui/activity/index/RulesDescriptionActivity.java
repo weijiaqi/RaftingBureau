@@ -1,26 +1,21 @@
 package com.drifting.bureau.mvp.ui.activity.index;
 
 import android.app.Activity;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.drifting.bureau.R;
 import com.drifting.bureau.base.BaseManagerActivity;
-import com.drifting.bureau.mvp.model.entity.PreviewBoxEntity;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.GlideUtil;
-import com.drifting.bureau.util.callback.BaseDataCallBack;
 import com.drifting.bureau.util.request.RequestUtil;
-import com.jess.arms.base.BaseEntity;
 import com.jess.arms.di.component.AppComponent;
 
 import butterknife.BindView;

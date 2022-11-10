@@ -5,15 +5,9 @@ import android.view.View;
 import androidx.annotation.NonNull;
 
 import com.drifting.bureau.R;
-import com.drifting.bureau.mvp.model.entity.BlindBoxRecordEntity;
 import com.drifting.bureau.mvp.model.entity.CouponsMineEntity;
-import com.drifting.bureau.mvp.model.entity.MyTreasuryEntity;
-import com.drifting.bureau.mvp.ui.holder.BlindBoxHolder;
 import com.drifting.bureau.mvp.ui.holder.CouponAvailableHolder;
-import com.drifting.bureau.mvp.ui.holder.MyTreasuryHolder;
 import com.jess.arms.base.BaseHolder;
-import com.jess.arms.base.BaseRecyclerAdapter;
-import com.jess.arms.base.BaseRecyclerHolder;
 import com.jess.arms.base.DefaultAdapter;
 
 import java.util.ArrayList;

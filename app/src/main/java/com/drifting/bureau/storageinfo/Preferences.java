@@ -3,17 +3,6 @@ package com.drifting.bureau.storageinfo;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.location.Location;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.JsonPrimitive;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * @author 卫佳琪1
@@ -24,7 +13,6 @@ import java.util.Set;
 public class Preferences {
     private static Context mContext;
     public static final String SP_NAME = "config";
-
     private static final String KEY_USER_NAME = "user_name";
     private static final String KEY_RC_TOKEN = "rc_token";
     private static final String KEY_USER_PHOTO = "user_photo";

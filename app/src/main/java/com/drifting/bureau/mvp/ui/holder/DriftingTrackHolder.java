@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.DriftingTrackEntity;
 import com.drifting.bureau.mvp.ui.activity.index.DriftTrackMapActivity;
-import com.drifting.bureau.mvp.ui.activity.index.TopicDetailActivity;
 import com.drifting.bureau.util.DateUtil;
 import com.drifting.bureau.util.TextUtil;
 import com.hjq.shape.view.ShapeTextView;

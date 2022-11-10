@@ -42,11 +42,13 @@ import com.drifting.bureau.mvp.presenter.ArCenterConsolePresenter;
 import com.drifting.bureau.mvp.ui.activity.home.NewDiscoveryTourActivity;
 import com.drifting.bureau.mvp.ui.activity.index.AnswerResultActivity;
 import com.drifting.bureau.mvp.ui.activity.index.DriftTrackMapActivity;
+import com.drifting.bureau.mvp.ui.activity.index.StarDistributionActivity;
 import com.drifting.bureau.mvp.ui.activity.pay.PaymentInfoActivity;
 import com.drifting.bureau.mvp.ui.activity.user.AboutMeActivity;
 import com.drifting.bureau.mvp.ui.activity.user.IncomeRecordActivity;
 import com.drifting.bureau.mvp.ui.activity.user.MakingRecordActivity;
 import com.drifting.bureau.mvp.ui.activity.user.MessageCenterActivity;
+import com.drifting.bureau.mvp.ui.activity.user.NewAboutMeActivity;
 import com.drifting.bureau.mvp.ui.activity.user.WithdrawalActivity;
 import com.drifting.bureau.mvp.ui.activity.web.ShowWebViewActivity;
 import com.drifting.bureau.mvp.ui.dialog.ArAnnouncementDisplayDialog;
@@ -229,6 +231,9 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
     //打开空间站
     public void OpenKJZ(){
         toggleType = 4;
+        if (mPresenter!=null){
+            mPresenter.spacecheck();
+        }
     }
 
 //    //飞机
@@ -262,6 +267,9 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
     public void GeRenXingQiu() {
         mUnityPlayer.UnitySendMessage("Main Camera", "ClosePaiXiXingQiu", "");
         mUnityPlayer.UnitySendMessage("Main Camera", "OpenGeRenXingQiu", "");
+        if (userInfoEntity != null) {
+            mUnityPlayer.UnitySendMessage("Main Camera", "XunZhang", userInfoEntity.getUser().getStatus() + "");
+        }
     }
 
 
@@ -344,7 +352,11 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
                     break;
                 case R.id.tv_about_me:
                     if (userInfoEntity != null) {
-                        AboutMeActivity.start(this, userInfoEntity, false);
+                        if (userInfoEntity.getPlanet().getLevel() == 1){
+                            StarDistributionActivity.start(this, false);
+                        }else {
+                            NewAboutMeActivity.start(this, false);
+                        }
                     }
                     break;
             }
@@ -393,10 +405,8 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
     @Override
     protected void onStop() {
         super.onStop();
-
         if (!MultiWindowSupport.getAllowResizableWindow(this))
             return;
-
         mUnityPlayer.pause();
     }
 
@@ -723,9 +733,9 @@ public class ARMetaverseCenterActivity extends BaseManagerActivity<ArCenterConso
     public void onSpaceCheck(SpaceCheckEntity entity) {
         if (entity != null) {
             if (entity.getStatus() == 0) {
-                showMessage("检测到您还没拥有空间站,请去获取!");
+                mUnityPlayer.UnitySendMessage("Main Camera", "SpaceEvent", 0+"");
             } else {
-//                MySpaceStationActivity.start(this, false);
+                mUnityPlayer.UnitySendMessage("Main Camera", "SpaceEvent", 1+"");
                 mPresenter.spaceinfo(Preferences.getUserId());
             }
         }

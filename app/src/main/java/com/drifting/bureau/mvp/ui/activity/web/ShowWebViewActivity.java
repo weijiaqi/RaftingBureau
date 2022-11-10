@@ -25,7 +25,6 @@ import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.ViewUtil;
 import com.drifting.bureau.view.customWebview.CustomWebView;
 import com.drifting.bureau.view.customWebview.WebLoadingListener;
-
 import com.jess.arms.di.component.AppComponent;
 
 import butterknife.BindView;

@@ -4,9 +4,7 @@ import android.view.View;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.CouponsMineEntity;
-import com.drifting.bureau.mvp.model.entity.OpenBoxListEntity;
 import com.drifting.bureau.mvp.ui.holder.MyCouponRecordHolder;
-import com.drifting.bureau.mvp.ui.holder.WinningRecordHolder;
 import com.jess.arms.base.BaseRecyclerAdapter;
 import com.jess.arms.base.BaseRecyclerHolder;
 

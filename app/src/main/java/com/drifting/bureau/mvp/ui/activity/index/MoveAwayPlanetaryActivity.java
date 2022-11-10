@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -13,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.drifting.bureau.R;
+import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.data.event.AnswerCompletedEvent;
 import com.drifting.bureau.di.component.DaggerMoveAwayPlanetaryComponent;
 import com.drifting.bureau.mvp.contract.MoveAwayPlanetaryContract;
@@ -21,17 +21,14 @@ import com.drifting.bureau.mvp.model.entity.QuestionAssessEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionStagesEntity;
 import com.drifting.bureau.mvp.presenter.MoveAwayPlanetaryPresenter;
-import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
 import com.drifting.bureau.mvp.ui.activity.home.NewDiscoveryTourActivity;
 import com.drifting.bureau.mvp.ui.adapter.AnswerAdapter;
 import com.drifting.bureau.mvp.ui.adapter.manager.CardSwipeLayoutManager;
 import com.drifting.bureau.mvp.ui.dialog.AttributeResultsDialog;
 import com.drifting.bureau.storageinfo.MMKVUtils;
-import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.animator.SwipeItemAnimator;
-import com.drifting.bureau.base.BaseManagerActivity;
 import com.jess.arms.di.component.AppComponent;
 
 import org.greenrobot.eventbus.EventBus;

@@ -18,9 +18,7 @@ import com.drifting.bureau.mvp.ui.activity.user.MySpaceStationActivity;
 import com.drifting.bureau.mvp.ui.activity.user.OrderRecordActivity;
 import com.drifting.bureau.util.DateUtil;
 import com.drifting.bureau.util.TextUtil;
-import com.drifting.bureau.util.callback.BaseDataCallBack;
 import com.drifting.bureau.util.request.RequestUtil;
-import com.jess.arms.base.BaseEntity;
 import com.jess.arms.base.BaseRecyclerHolder;
 
 import org.greenrobot.eventbus.EventBus;

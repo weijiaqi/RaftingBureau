@@ -10,19 +10,18 @@ import android.os.Build;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.FragmentActivity;
 
 import com.baidu.mapapi.model.LatLng;
 import com.drifting.bureau.app.application.RBureauApplication;
+import com.drifting.bureau.mvp.contract.DriftTrackMapContract;
 import com.drifting.bureau.mvp.model.entity.BoxEntity;
 import com.drifting.bureau.mvp.model.entity.CommentDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
 import com.drifting.bureau.mvp.model.entity.CreateOrderOpenBoxEntity;
 import com.drifting.bureau.mvp.model.entity.CreatewithfileEntity;
-import com.drifting.bureau.mvp.model.entity.MoreDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.MoreDetailsForMapEntity;
 import com.drifting.bureau.mvp.model.entity.SkuListEntity;
 import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
@@ -30,13 +29,20 @@ import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.AppUtil;
 import com.drifting.bureau.util.FileUtil;
 import com.drifting.bureau.util.LocationUtil;
-import com.drifting.bureau.util.ToastUtil;
 import com.hw.videoprocessor.VideoProcessor;
 import com.jess.arms.base.BaseEntity;
-import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
-import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
+import com.jess.arms.integration.AppManager;
+import com.jess.arms.mvp.BasePresenter;
+import com.jess.arms.utils.PermissionUtil;
+import com.jess.arms.utils.RxLifecycleUtils;
+import com.tbruyelle.rxpermissions2.RxPermissions;
+
+import java.io.File;
+import java.util.List;
+
+import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -46,16 +52,6 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import timber.log.Timber;
-
-import javax.inject.Inject;
-
-import com.drifting.bureau.mvp.contract.DriftTrackMapContract;
-import com.jess.arms.utils.PermissionUtil;
-import com.jess.arms.utils.RxLifecycleUtils;
-import com.tbruyelle.rxpermissions2.RxPermissions;
-
-import java.io.File;
-import java.util.List;
 
 /**
  * ================================================

@@ -11,15 +11,11 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.drifting.bureau.R;
-import com.drifting.bureau.data.event.MyBlindBoxRefreshEvent;
 import com.drifting.bureau.data.event.WinningRecordEvent;
-import com.drifting.bureau.di.component.DaggerBoxRecordComponent;
 import com.drifting.bureau.di.component.DaggerWinningRecordComponent;
 import com.drifting.bureau.mvp.contract.WinningRecordContract;
 import com.drifting.bureau.mvp.model.entity.OpenBoxListEntity;
-import com.drifting.bureau.mvp.model.entity.SysmessageMineEntity;
 import com.drifting.bureau.mvp.presenter.WinningRecordPresenter;
-import com.drifting.bureau.mvp.ui.adapter.MessageAdapter;
 import com.drifting.bureau.mvp.ui.adapter.WinningRecordAdapter;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.ViewUtil;

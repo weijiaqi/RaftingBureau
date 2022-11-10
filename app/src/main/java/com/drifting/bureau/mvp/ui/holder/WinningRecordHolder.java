@@ -11,7 +11,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.drifting.bureau.R;
-import com.drifting.bureau.data.event.MyBlindBoxRefreshEvent;
 import com.drifting.bureau.data.event.WinningRecordEvent;
 import com.drifting.bureau.mvp.model.entity.OpenBoxListEntity;
 import com.drifting.bureau.mvp.ui.dialog.PublicDialog;
@@ -21,7 +20,6 @@ import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.TextUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.request.RequestUtil;
-import com.jess.arms.base.BaseDialog;
 import com.jess.arms.base.BaseRecyclerHolder;
 
 import org.greenrobot.eventbus.EventBus;

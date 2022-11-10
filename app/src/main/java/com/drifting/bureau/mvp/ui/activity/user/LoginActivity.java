@@ -24,7 +24,6 @@ import com.drifting.bureau.di.component.DaggerLoginComponent;
 import com.drifting.bureau.mvp.contract.LoginContract;
 import com.drifting.bureau.mvp.model.entity.LoginEntity;
 import com.drifting.bureau.mvp.presenter.LoginPresenter;
-import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
 import com.drifting.bureau.mvp.ui.activity.home.NewDiscoveryTourActivity;
 import com.drifting.bureau.mvp.ui.adapter.LoginListAdapter;
 import com.drifting.bureau.util.ClickUtil;
@@ -34,7 +33,6 @@ import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.VerifyUtil;
 import com.jess.arms.di.component.AppComponent;
-import com.jess.arms.integration.AppManager;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -17,7 +17,6 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
 import com.drifting.bureau.R;
-import com.drifting.bureau.mvp.ui.activity.user.NewAboutMeActivity;
 import com.jess.arms.utils.ArmsUtils;
 
 

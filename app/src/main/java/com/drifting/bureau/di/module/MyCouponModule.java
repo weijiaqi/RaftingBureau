@@ -1,9 +1,10 @@
 package com.drifting.bureau.di.module;
-import com.jess.arms.di.scope.ActivityScope;
-import dagger.Binds;
-import dagger.Module;
+
 import com.drifting.bureau.mvp.contract.MyCouponContract;
 import com.drifting.bureau.mvp.model.MyCouponModel;
+
+import dagger.Binds;
+import dagger.Module;
 
 /**
  * ================================================

@@ -4,24 +4,11 @@ package com.drifting.bureau.util.animator;
 import static android.view.View.TRANSLATION_Y;
 
 import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
-import android.graphics.Bitmap;
 import android.view.View;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.DecelerateInterpolator;
-import android.view.animation.ScaleAnimation;
-import android.view.animation.TranslateAnimation;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import androidx.constraintlayout.widget.ConstraintLayout;
-
-import com.drifting.bureau.util.BitmapUtil;
 
 
 public class AnimatorUtil {

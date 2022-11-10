@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,7 +23,6 @@ import com.drifting.bureau.mvp.contract.PlanetaryDetailContract;
 import com.drifting.bureau.mvp.model.entity.PlanetaryDetailEntity;
 import com.drifting.bureau.mvp.presenter.PlanetaryDetailPresenter;
 import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
-
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.FileUtil;
 import com.drifting.bureau.util.GlideUtil;

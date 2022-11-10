@@ -1,25 +1,18 @@
 package com.drifting.bureau.mvp.ui.dialog;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
+
 import com.drifting.bureau.R;
-import com.drifting.bureau.mvp.model.entity.StarUpIndexEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
-import com.drifting.bureau.mvp.ui.activity.index.StarDistributionActivity;
-import com.drifting.bureau.mvp.ui.activity.user.NewAboutMeActivity;
-import com.drifting.bureau.mvp.ui.activity.web.ShowWebViewActivity;
-import com.drifting.bureau.storageinfo.Preferences;
-import com.drifting.bureau.util.AppUtil;
 import com.drifting.bureau.util.ClickUtil;
-import com.drifting.bureau.util.StringUtil;
-import com.drifting.bureau.util.request.RequestUtil;
 import com.jess.arms.base.BaseDialog;
 
 

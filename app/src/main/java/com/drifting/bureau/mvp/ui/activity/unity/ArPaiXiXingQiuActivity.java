@@ -7,7 +7,6 @@ import android.content.res.Configuration;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -22,12 +21,8 @@ import androidx.annotation.Nullable;
 import com.drifting.bureau.R;
 import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
-import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
-import com.drifting.bureau.mvp.ui.activity.user.AboutMeActivity;
-import com.drifting.bureau.mvp.ui.activity.user.MessageCenterActivity;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
-import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.hjq.shape.view.ShapeTextView;
 import com.jess.arms.di.component.AppComponent;
@@ -108,6 +103,9 @@ public class ArPaiXiXingQiuActivity extends BaseManagerActivity implements IUnit
     public void GeRenXingQiu() {
         mUnityPlayer.UnitySendMessage("Main Camera", "ClosePaiXiXingQiu", "");
         mUnityPlayer.UnitySendMessage("Main Camera", "OpenGeRenXingQiu", "");
+        if (userInfoEntity != null) {
+            mUnityPlayer.UnitySendMessage("Main Camera", "XunZhang", userInfoEntity.getUser().getStatus() + "");
+        }
     }
 
 

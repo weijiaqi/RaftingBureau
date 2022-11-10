@@ -7,14 +7,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -22,10 +19,8 @@ import androidx.annotation.NonNull;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
-import com.drifting.bureau.mvp.ui.activity.index.NebulaeActivity;
 import com.drifting.bureau.util.BitmapUtil;
 import com.drifting.bureau.util.EncodingHandler;
-import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.ViewUtil;
 import com.jess.arms.base.BaseDialog;
 import com.jess.arms.utils.ArmsUtils;

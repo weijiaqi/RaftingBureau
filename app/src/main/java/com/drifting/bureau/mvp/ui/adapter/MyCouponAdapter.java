@@ -14,9 +14,7 @@ import androidx.viewpager.widget.PagerAdapter;
 import com.drifting.bureau.R;
 import com.drifting.bureau.app.application.RBureauApplication;
 import com.drifting.bureau.data.entity.WinningRecordEntity;
-import com.drifting.bureau.mvp.ui.fragment.BoxRecordFragment;
 import com.drifting.bureau.mvp.ui.fragment.MyCouponFragment;
-import com.drifting.bureau.mvp.ui.fragment.WinningRecordFragment;
 import com.jess.arms.utils.ArmsUtils;
 import com.rb.core.tab.view.indicator.IndicatorViewPager;
 

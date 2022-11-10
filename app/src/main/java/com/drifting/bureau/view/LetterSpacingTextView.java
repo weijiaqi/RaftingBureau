@@ -9,15 +9,10 @@ package com.drifting.bureau.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-
 import android.text.Spannable;
-
 import android.text.SpannableString;
-
 import android.text.style.ScaleXSpan;
-
 import android.util.AttributeSet;
-
 import android.widget.TextView;
 
 @SuppressLint("AppCompatCustomView")

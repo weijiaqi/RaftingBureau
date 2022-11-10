@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
 import com.drifting.bureau.R;
+import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.data.event.WithdrawEvent;
 import com.drifting.bureau.di.component.DaggerSpaceMarinesComponent;
 import com.drifting.bureau.mvp.contract.SpaceMarinesContract;
@@ -26,7 +27,6 @@ import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.request.RequestUtil;
-import com.drifting.bureau.base.BaseManagerActivity;
 import com.jess.arms.di.component.AppComponent;
 
 import org.greenrobot.eventbus.Subscribe;

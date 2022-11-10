@@ -10,10 +10,15 @@ public class WebUrlConstant {
     public static final String USER_ACT=Api.WEB_BASEURL+"act/registerDes";  //元能量攻略
     public static final String USER_TANT=Api.WEB_BASEURL+"act/consultant";  //咨询师合作处
 
+    public static final String USER_DOWNLOAD=Api.WEB_BASEURL+"download";  //用户下载
+
     public static final String SPLASH_VIDEO="https://v.metapeza.com/afile/vedio/start.mp4";  //启动页视频
 
     public static final String BOOTOM_DEF_11="https://static.metapeza.com/cfile/img/clique/bottom.png";   //底部
     public static final String BOOTOM_DEF="https://static.metapeza.com/cfile/img/clique/bottomDef.png";   //底部
 
     public static final String ABOUT_DEF="https://static.metapeza.com/cfile/img/clique/";   //底部
+
+
+
 }

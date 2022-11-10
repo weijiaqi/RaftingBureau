@@ -7,7 +7,6 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatTextView;
 
 import com.drifting.bureau.R;
 import com.hjq.shape.view.ShapeTextView;

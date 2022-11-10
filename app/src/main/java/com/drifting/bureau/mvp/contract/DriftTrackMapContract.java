@@ -7,8 +7,6 @@ import com.drifting.bureau.mvp.model.entity.CommentDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
 import com.drifting.bureau.mvp.model.entity.CreateOrderOpenBoxEntity;
 import com.drifting.bureau.mvp.model.entity.CreatewithfileEntity;
-import com.drifting.bureau.mvp.model.entity.DriftingTrackEntity;
-import com.drifting.bureau.mvp.model.entity.MoreDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.MoreDetailsForMapEntity;
 import com.drifting.bureau.mvp.model.entity.SkuListEntity;
 import com.jess.arms.base.BaseEntity;

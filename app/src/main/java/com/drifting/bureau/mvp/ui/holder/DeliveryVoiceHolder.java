@@ -1,6 +1,5 @@
 package com.drifting.bureau.mvp.ui.holder;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,7 +8,6 @@ import android.widget.TextView;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.DeliveryDetailsEntity;
-import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
 import com.drifting.bureau.mvp.ui.dialog.VoicePlayDialog;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.TextUtil;

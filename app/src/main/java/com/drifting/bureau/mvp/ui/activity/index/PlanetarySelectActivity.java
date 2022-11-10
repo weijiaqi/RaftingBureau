@@ -9,17 +9,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
 import com.drifting.bureau.R;
+import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.data.event.AnswerCompletedEvent;
 import com.drifting.bureau.mvp.ui.fragment.PlanetaryDisFragment;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.animator.AnimatorUtil;
 import com.drifting.bureau.util.request.RequestUtil;
-import com.drifting.bureau.base.BaseManagerActivity;
 import com.jess.arms.di.component.AppComponent;
+
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 

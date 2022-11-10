@@ -1,6 +1,5 @@
 package com.drifting.bureau.di.component;
 
-import com.drifting.bureau.di.module.BlindBoxRecordModule;
 import com.drifting.bureau.di.module.MyCouponModule;
 import com.drifting.bureau.mvp.contract.MyCouponContract;
 import com.drifting.bureau.mvp.ui.activity.index.CouponAvailableActivity;

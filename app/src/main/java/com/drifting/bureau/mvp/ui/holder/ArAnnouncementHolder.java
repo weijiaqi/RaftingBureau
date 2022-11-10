@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.AnnouncementEntity;
 import com.drifting.bureau.util.DateUtil;
-import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.TextUtil;
 import com.jess.arms.base.BaseRecyclerHolder;
 

@@ -1,7 +1,6 @@
 package com.drifting.bureau.mvp.ui.dialog;
 
 import android.content.Context;
-import android.preference.Preference;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
@@ -18,10 +17,8 @@ import androidx.annotation.NonNull;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.ui.activity.web.ShowWebViewActivity;
-import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.StringUtil;
-import com.drifting.bureau.util.ToastUtil;
 import com.jess.arms.base.BaseDialog;
 
 /**

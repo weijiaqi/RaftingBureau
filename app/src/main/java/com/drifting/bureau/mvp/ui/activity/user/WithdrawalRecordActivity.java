@@ -22,7 +22,6 @@ import com.drifting.bureau.mvp.ui.adapter.IncomeRecordAdapter;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.ViewUtil;
-
 import com.jess.arms.di.component.AppComponent;
 import com.rb.core.xrecycleview.XRecyclerView;
 

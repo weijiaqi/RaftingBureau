@@ -6,10 +6,9 @@ import android.text.SpannableStringBuilder;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
-
 import android.widget.TextView;
+
 import com.drifting.bureau.R;
-import com.drifting.bureau.mvp.ui.activity.index.DriftTrackMapActivity;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.SpannableUtil;
 import com.drifting.bureau.util.SystemUtil;

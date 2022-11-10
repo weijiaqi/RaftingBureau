@@ -7,7 +7,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
+
 import com.drifting.bureau.R;
 import com.drifting.bureau.util.ClickUtil;
 import com.jess.arms.base.BaseDialog;

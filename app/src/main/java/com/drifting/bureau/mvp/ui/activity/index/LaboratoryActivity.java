@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,10 +14,8 @@ import androidx.annotation.Nullable;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.base.BaseManagerActivity;
-
 import com.drifting.bureau.util.BitmapUtil;
 import com.drifting.bureau.util.ClickUtil;
-
 import com.drifting.bureau.util.animator.AnimatorUtil;
 import com.jess.arms.di.component.AppComponent;
 

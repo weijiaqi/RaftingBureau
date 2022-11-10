@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
-
 import com.drifting.bureau.R;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 

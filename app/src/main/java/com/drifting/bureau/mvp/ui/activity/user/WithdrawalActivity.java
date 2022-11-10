@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.drifting.bureau.R;
+import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.data.event.WithdrawEvent;
 import com.drifting.bureau.di.component.DaggerWithdrawalComponent;
 import com.drifting.bureau.mvp.contract.WithdrawalContract;
@@ -21,7 +22,6 @@ import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.TextUtil;
 import com.drifting.bureau.util.ToastUtil;
-import com.drifting.bureau.base.BaseManagerActivity;
 import com.jess.arms.base.BaseDialog;
 import com.jess.arms.di.component.AppComponent;
 

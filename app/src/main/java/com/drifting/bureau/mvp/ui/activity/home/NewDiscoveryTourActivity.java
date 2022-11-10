@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -21,11 +20,9 @@ import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.data.event.AnswerCompletedEvent;
 import com.drifting.bureau.data.event.BackSpaceEvent;
 import com.drifting.bureau.data.event.MessageRefreshEvent;
-import com.drifting.bureau.di.component.DaggerDiscoveryTourComponent;
 import com.drifting.bureau.di.component.DaggerNewDiscoveryTourComponent;
 import com.drifting.bureau.mvp.contract.DiscoveryTourContract;
 import com.drifting.bureau.mvp.model.entity.MessageReceiveEntity;
-import com.drifting.bureau.mvp.model.entity.PlanetEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.presenter.DiscoveryTourPresenter;
 import com.drifting.bureau.mvp.ui.activity.index.DriftTrackMapActivity;
@@ -39,9 +36,7 @@ import com.drifting.bureau.mvp.ui.activity.web.ShowWebViewActivity;
 import com.drifting.bureau.mvp.ui.dialog.ExpectDialog;
 import com.drifting.bureau.storageinfo.MMKVUtils;
 import com.drifting.bureau.storageinfo.Preferences;
-import com.drifting.bureau.util.AppUtil;
 import com.drifting.bureau.util.ClickUtil;
-import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.animator.AnimatorUtil;
 import com.drifting.bureau.util.request.RequestUtil;
@@ -51,14 +46,11 @@ import com.umeng.analytics.MobclickAgent;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.rong.imkit.RongIM;
 import io.rong.imkit.manager.UnReadMessageManager;
 import io.rong.imlib.model.Conversation;
-import retrofit2.http.PUT;
 
 /**
  * @Description: 新版首页

@@ -1,20 +1,13 @@
 package com.drifting.bureau.mvp.presenter;
 
 import android.app.Application;
-import android.content.Context;
-import android.media.MediaMetadataRetriever;
-import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
 
-import androidx.annotation.RequiresApi;
-
-import com.drifting.bureau.app.application.RBureauApplication;
+import com.drifting.bureau.mvp.contract.ArCenterConsoleContract;
 import com.drifting.bureau.mvp.model.entity.BoxEntity;
 import com.drifting.bureau.mvp.model.entity.CommentDetailsEntity;
-import com.drifting.bureau.mvp.model.entity.CreateOrderEntity;
 import com.drifting.bureau.mvp.model.entity.CreateOrderOpenBoxEntity;
-import com.drifting.bureau.mvp.model.entity.CreatewithfileEntity;
 import com.drifting.bureau.mvp.model.entity.IncomeRecordEntity;
 import com.drifting.bureau.mvp.model.entity.MakingRecordEntity;
 import com.drifting.bureau.mvp.model.entity.MessageReceiveEntity;
@@ -22,18 +15,26 @@ import com.drifting.bureau.mvp.model.entity.MoreDetailsEntity;
 import com.drifting.bureau.mvp.model.entity.OrderOneEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionAssessEntity;
 import com.drifting.bureau.mvp.model.entity.QuestionEntity;
-import com.drifting.bureau.mvp.model.entity.SkuListEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceCheckEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceInfoEntity;
 import com.drifting.bureau.mvp.model.entity.TeamStatisticEntity;
-import com.drifting.bureau.util.FileUtil;
 import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.ViewUtil;
 import com.jess.arms.base.BaseEntity;
-import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
-import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.http.imageloader.ImageLoader;
+import com.jess.arms.integration.AppManager;
+import com.jess.arms.mvp.BasePresenter;
+import com.jess.arms.utils.RxLifecycleUtils;
+
+import org.json.JSONObject;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -41,14 +42,6 @@ import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
-import javax.inject.Inject;
-import com.drifting.bureau.mvp.contract.ArCenterConsoleContract;
-import com.jess.arms.utils.RxLifecycleUtils;
-import org.json.JSONObject;
-import java.util.List;
-import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * ================================================

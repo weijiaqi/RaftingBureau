@@ -67,7 +67,6 @@ import com.drifting.bureau.mvp.model.entity.TopicTagsEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;
 import com.drifting.bureau.mvp.model.entity.VersionUpdateEntity;
 import com.drifting.bureau.mvp.model.entity.WriteOffInfoEntity;
-import com.drifting.bureau.view.chart.EnergyChartView;
 import com.jess.arms.base.BaseEntity;
 
 import java.util.List;

@@ -1,16 +1,13 @@
 package com.drifting.bureau.di.component;
 
+import com.drifting.bureau.di.module.NebulaeModule;
+import com.drifting.bureau.mvp.contract.NebulaeContract;
+import com.drifting.bureau.mvp.ui.activity.index.NebulaeActivity;
+import com.jess.arms.di.component.AppComponent;
+import com.jess.arms.di.scope.ActivityScope;
+
 import dagger.BindsInstance;
 import dagger.Component;
-
-import com.drifting.bureau.mvp.contract.NebulaContract;
-import com.drifting.bureau.mvp.contract.NebulaeContract;
-import com.drifting.bureau.mvp.ui.activity.index.NebulaActivity;
-import com.jess.arms.di.component.AppComponent;
-import com.drifting.bureau.di.module.NebulaeModule;
-
-import com.jess.arms.di.scope.ActivityScope;
-import com.drifting.bureau.mvp.ui.activity.index.NebulaeActivity;
 
 /**
  * ================================================

@@ -43,12 +43,12 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.drifting.bureau.R;
+import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.data.event.VideoEvent;
 import com.drifting.bureau.di.component.DaggerVideoRecordingComponent;
 import com.drifting.bureau.mvp.contract.VideoRecordingContract;
 import com.drifting.bureau.mvp.presenter.VideoRecordingPresenter;
 import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
-import com.drifting.bureau.mvp.ui.dialog.RecordingDialog;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.TextUtil;
@@ -56,7 +56,6 @@ import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.VideoUtil;
 import com.drifting.bureau.view.CircleProgressButtonView;
 import com.google.common.util.concurrent.ListenableFuture;
-import com.drifting.bureau.base.BaseManagerActivity;
 import com.jess.arms.di.component.AppComponent;
 
 import org.greenrobot.eventbus.EventBus;

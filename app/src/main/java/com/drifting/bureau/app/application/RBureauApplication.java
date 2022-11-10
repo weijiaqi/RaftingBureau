@@ -6,7 +6,6 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -21,7 +20,7 @@ import com.drifting.bureau.mvp.ui.activity.error.CustomErrorActivity;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.AppUtil;
 import com.drifting.bureau.util.RongIMUtil;
-import com.drifting.bureau.util.ToastUtil;
+import com.drifting.bureau.util.SystemUtil;
 import com.hjq.toast.ToastUtils;
 import com.jess.arms.base.App;
 import com.jess.arms.base.BaseApplication;
@@ -29,7 +28,6 @@ import com.jess.arms.base.delegate.AppDelegate;
 import com.jess.arms.base.delegate.AppLifecycles;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.Preconditions;
-import com.drifting.bureau.util.SystemUtil;
 import com.scwang.smart.refresh.footer.ClassicsFooter;
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;

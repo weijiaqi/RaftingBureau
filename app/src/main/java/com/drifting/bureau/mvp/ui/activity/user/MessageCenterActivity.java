@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.drifting.bureau.R;
+import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.data.entity.MessageCenterEntity;
 import com.drifting.bureau.data.event.MessageCenterEvent;
 import com.drifting.bureau.data.event.MessageEvent;
@@ -26,8 +27,6 @@ import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.callback.BaseDataCallBack;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.drifting.bureau.view.NoScrollViewPager;
-import com.drifting.bureau.base.BaseManagerActivity;
-
 import com.jess.arms.base.BaseEntity;
 import com.jess.arms.di.component.AppComponent;
 import com.rb.core.tab.view.indicator.IndicatorViewPager;

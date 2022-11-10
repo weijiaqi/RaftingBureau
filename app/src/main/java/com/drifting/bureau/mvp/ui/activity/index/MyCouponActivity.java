@@ -1,11 +1,6 @@
 package com.drifting.bureau.mvp.ui.activity.index;
 
 import android.app.Activity;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.viewpager.widget.ViewPager;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -13,16 +8,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.viewpager.widget.ViewPager;
+
 import com.drifting.bureau.R;
 import com.drifting.bureau.data.entity.WinningRecordEntity;
-import com.drifting.bureau.di.component.DaggerMyCouponComponent;
 import com.drifting.bureau.mvp.ui.adapter.MyCouponAdapter;
 import com.drifting.bureau.util.ClickUtil;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
-
-import com.drifting.bureau.mvp.contract.MyCouponContract;
-import com.drifting.bureau.mvp.presenter.MyCouponPresenter;
 import com.rb.core.tab.view.indicator.IndicatorViewPager;
 import com.rb.core.tab.view.indicator.ScrollIndicatorView;
 import com.rb.core.tab.view.indicator.slidebar.LayoutBar;

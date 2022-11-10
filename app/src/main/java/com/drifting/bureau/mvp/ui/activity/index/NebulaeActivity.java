@@ -1,12 +1,6 @@
 package com.drifting.bureau.mvp.ui.activity.index;
 
 import android.app.Activity;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -19,10 +13,17 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.drifting.bureau.R;
 import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.di.component.DaggerNebulaeComponent;
+import com.drifting.bureau.mvp.contract.NebulaeContract;
 import com.drifting.bureau.mvp.model.entity.NebulaListEntity;
+import com.drifting.bureau.mvp.presenter.NebulaePresenter;
 import com.drifting.bureau.mvp.ui.adapter.NebulaeListAdapter;
 import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
 import com.drifting.bureau.util.AssessUtil;
@@ -33,8 +34,6 @@ import com.drifting.bureau.util.ToastUtil;
 import com.drifting.bureau.util.ViewUtil;
 import com.drifting.bureau.view.chart.EnergyChartView;
 import com.jess.arms.di.component.AppComponent;
-import com.drifting.bureau.mvp.contract.NebulaeContract;
-import com.drifting.bureau.mvp.presenter.NebulaePresenter;
 
 import java.util.ArrayList;
 import java.util.List;

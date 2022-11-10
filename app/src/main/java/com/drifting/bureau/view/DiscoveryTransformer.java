@@ -5,7 +5,6 @@ import android.view.View;
 import androidx.viewpager.widget.ViewPager;
 
 import com.drifting.bureau.app.application.RBureauApplication;
-import com.drifting.bureau.util.animator.AnimatorUtil;
 import com.jess.arms.utils.ArmsUtils;
 
 

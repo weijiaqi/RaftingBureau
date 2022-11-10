@@ -1,4 +1,5 @@
 package com.drifting.bureau.view.guide;
+
 import android.content.Context;
 import android.os.Build;
 import android.text.SpannableStringBuilder;
@@ -6,6 +7,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.drifting.bureau.R;
 import com.drifting.bureau.util.SpannableUtil;
 import com.drifting.bureau.util.SystemUtil;

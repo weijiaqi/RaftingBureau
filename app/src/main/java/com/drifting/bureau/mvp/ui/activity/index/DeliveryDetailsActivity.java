@@ -8,9 +8,11 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.drifting.bureau.R;
 import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.di.component.DaggerDeliveryDetailsComponent;
@@ -24,7 +26,9 @@ import com.drifting.bureau.util.ViewUtil;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.jess.arms.di.component.AppComponent;
 import com.rb.core.xrecycleview.XRecyclerView;
+
 import java.util.List;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 

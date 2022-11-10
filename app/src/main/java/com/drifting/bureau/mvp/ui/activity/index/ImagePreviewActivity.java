@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,12 +14,9 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.base.BaseManagerActivity;
-
 import com.drifting.bureau.mvp.ui.adapter.ImagePreviewAdapter;
-
 import com.jess.arms.base.RecyclerPagerAdapter;
 import com.jess.arms.di.component.AppComponent;
-
 
 import java.util.ArrayList;
 import java.util.Collections;

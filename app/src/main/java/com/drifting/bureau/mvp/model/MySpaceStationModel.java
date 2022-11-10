@@ -5,7 +5,6 @@ import android.app.Application;
 import com.drifting.bureau.app.api.ApiService;
 import com.drifting.bureau.mvp.contract.MySpaceStationContract;
 import com.drifting.bureau.mvp.model.entity.CommentDetailsEntity;
-import com.drifting.bureau.mvp.model.entity.OrderDetailEntity;
 import com.drifting.bureau.mvp.model.entity.OrderOneEntity;
 import com.drifting.bureau.mvp.model.entity.SpaceInfoEntity;
 import com.drifting.bureau.mvp.model.entity.UserInfoEntity;

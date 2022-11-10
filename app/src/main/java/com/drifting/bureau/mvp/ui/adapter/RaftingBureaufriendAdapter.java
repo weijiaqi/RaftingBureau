@@ -8,8 +8,6 @@ import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.RaftingBureaufriendEntity;
 import com.drifting.bureau.mvp.ui.holder.RaftingBureaufriendHolder;
 import com.jess.arms.base.BaseHolder;
-import com.jess.arms.base.BaseRecyclerAdapter;
-import com.jess.arms.base.BaseRecyclerHolder;
 import com.jess.arms.base.DefaultAdapter;
 
 import java.util.List;

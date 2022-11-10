@@ -8,15 +8,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.drifting.bureau.R;
-import com.drifting.bureau.mvp.model.entity.RaftingBureaufriendEntity;
 import com.drifting.bureau.mvp.model.entity.SkuListEntity;
 import com.drifting.bureau.mvp.ui.adapter.RaftingOrderAdapter;
 import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.TextUtil;
 import com.jess.arms.base.BaseHolder;
-import com.jess.arms.base.BaseRecyclerHolder;
-
-import java.util.List;
 
 import butterknife.BindView;
 

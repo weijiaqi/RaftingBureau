@@ -6,26 +6,20 @@ import android.database.Cursor;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Handler;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.RequiresApi;
 import androidx.core.content.FileProvider;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.app.application.RBureauApplication;
 import com.drifting.bureau.view.VoiceWave;
-import com.hw.videoprocessor.VideoProcessor;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-
-import timber.log.Timber;
 
 public class VideoUtil {
 

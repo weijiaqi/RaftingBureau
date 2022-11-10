@@ -16,12 +16,10 @@ import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.data.event.TagEvent;
 import com.drifting.bureau.mvp.model.entity.TopicTagsEntity;
 import com.drifting.bureau.util.ClickUtil;
-import com.drifting.bureau.util.callback.BaseDataCallBack;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.drifting.bureau.view.flowlayout.FlowLayout;
 import com.drifting.bureau.view.flowlayout.TagAdapter;
 import com.drifting.bureau.view.flowlayout.TagFlowLayout;
-import com.jess.arms.base.BaseEntity;
 import com.jess.arms.di.component.AppComponent;
 
 import org.greenrobot.eventbus.EventBus;

@@ -29,6 +29,7 @@ import com.drifting.bureau.mvp.ui.activity.SplashActivity;
 import com.drifting.bureau.mvp.ui.dialog.VersionUpdateDialog;
 import com.drifting.bureau.util.AppUtil;
 import com.drifting.bureau.util.StringUtil;
+import com.drifting.bureau.util.SystemUtil;
 import com.drifting.bureau.util.callback.BaseDataCallBack;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.jess.arms.base.BaseEntity;
@@ -41,7 +42,6 @@ import com.jess.arms.integration.lifecycle.ActivityLifecycleable;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.StatusBarUtil;
-import com.drifting.bureau.util.SystemUtil;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
 import javax.inject.Inject;

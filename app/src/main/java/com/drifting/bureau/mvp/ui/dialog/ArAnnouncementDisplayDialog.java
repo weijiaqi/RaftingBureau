@@ -5,17 +5,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import androidx.annotation.NonNull;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.AnnouncementEntity;
-
 import com.drifting.bureau.mvp.ui.adapter.ArAnnouncementDisplayAdapter;
-
 import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.jess.arms.base.BaseDialog;

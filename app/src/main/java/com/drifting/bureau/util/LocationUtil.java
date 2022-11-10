@@ -10,7 +10,6 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 

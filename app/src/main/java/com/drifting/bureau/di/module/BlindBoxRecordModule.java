@@ -1,8 +1,10 @@
 package com.drifting.bureau.di.module;
-import dagger.Binds;
-import dagger.Module;
+
 import com.drifting.bureau.mvp.contract.BlindBoxRecordContract;
 import com.drifting.bureau.mvp.model.BlindBoxRecordModel;
+
+import dagger.Binds;
+import dagger.Module;
 
 /**
  * ================================================

@@ -13,7 +13,6 @@ import androidx.annotation.Nullable;
 import com.drifting.bureau.R;
 import com.drifting.bureau.app.application.RBureauApplication;
 import com.drifting.bureau.data.event.AnswerCompletedEvent;
-
 import com.drifting.bureau.di.component.DaggerAccountSettingsComponent;
 import com.drifting.bureau.mvp.contract.AccountSettingsContract;
 import com.drifting.bureau.mvp.presenter.AccountSettingsPresenter;
@@ -28,11 +27,8 @@ import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.LogInOutDataUtil;
 import com.drifting.bureau.util.StringUtil;
 import com.drifting.bureau.util.ToastUtil;
-import com.drifting.bureau.util.callback.BaseDataCallBack;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.jess.arms.base.BaseActivity;
-import com.jess.arms.base.BaseDialog;
-import com.jess.arms.base.BaseEntity;
 import com.jess.arms.di.component.AppComponent;
 
 import org.greenrobot.eventbus.EventBus;
@@ -41,7 +37,6 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
 import cat.ereza.customactivityoncrash.config.CaocConfig;
-
 
 /**
  * Created on 2022/05/27 16:31

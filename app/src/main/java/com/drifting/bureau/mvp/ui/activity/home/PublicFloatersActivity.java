@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.view.View;
@@ -21,14 +20,9 @@ import com.drifting.bureau.mvp.model.entity.DesireCounterEntity;
 import com.drifting.bureau.mvp.ui.activity.web.ShowWebViewActivity;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.SpannableUtil;
-import com.drifting.bureau.util.ToastUtil;
-import com.drifting.bureau.util.callback.BaseDataCallBack;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.hjq.shape.view.ShapeTextView;
-import com.jess.arms.base.BaseEntity;
 import com.jess.arms.di.component.AppComponent;
-
-import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.OnClick;

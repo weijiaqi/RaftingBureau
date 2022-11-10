@@ -29,7 +29,6 @@ import com.drifting.bureau.mvp.model.entity.QuestionStagesEntity;
 import com.drifting.bureau.mvp.presenter.MoveAwayPlanetaryPresenter;
 import com.drifting.bureau.mvp.ui.dialog.ExitPsychologyDialog;
 import com.drifting.bureau.storageinfo.MMKVUtils;
-import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.SpannableUtil;

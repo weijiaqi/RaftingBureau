@@ -3,7 +3,6 @@ package com.drifting.bureau.mvp.ui.holder;
 import android.content.Context;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -14,14 +13,11 @@ import androidx.annotation.NonNull;
 
 import com.drifting.bureau.R;
 import com.drifting.bureau.mvp.model.entity.CouponsMineEntity;
-import com.drifting.bureau.mvp.model.entity.MyTreasuryEntity;
 import com.drifting.bureau.mvp.ui.adapter.CouponAvailableAdapter;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.DateUtil;
 import com.drifting.bureau.util.SpannableUtil;
 import com.drifting.bureau.util.TextUtil;
-import com.drifting.bureau.util.ToastUtil;
-import com.hjq.shape.view.ShapeTextView;
 import com.jess.arms.base.BaseHolder;
 
 import butterknife.BindView;

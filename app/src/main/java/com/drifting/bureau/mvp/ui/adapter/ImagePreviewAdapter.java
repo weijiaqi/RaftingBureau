@@ -3,8 +3,6 @@ package com.drifting.bureau.mvp.ui.adapter;
 import android.view.View;
 
 import com.drifting.bureau.R;
-import com.drifting.bureau.mvp.model.entity.SpaceAboutEntity;
-import com.drifting.bureau.mvp.ui.holder.HowToPlayHolder;
 import com.drifting.bureau.mvp.ui.holder.ImagePreviewHolder;
 import com.jess.arms.base.BaseRecyclerAdapter;
 import com.jess.arms.base.BaseRecyclerHolder;

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.drifting.bureau.R;
+import com.drifting.bureau.base.BaseManagerActivity;
 import com.drifting.bureau.data.entity.CityEntity;
 import com.drifting.bureau.di.component.DaggerCitySelectionComponent;
 import com.drifting.bureau.mvp.contract.CitySelectionContract;
@@ -27,7 +28,6 @@ import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.GsonUtil;
 import com.drifting.bureau.util.ViewUtil;
 import com.drifting.bureau.view.location.QuickLocationBar;
-import com.drifting.bureau.base.BaseManagerActivity;
 import com.jess.arms.di.component.AppComponent;
 
 import java.util.ArrayList;

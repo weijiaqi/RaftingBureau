@@ -1,15 +1,13 @@
 package com.drifting.bureau.di.component;
-import dagger.BindsInstance;
-import dagger.Component;
 
+import com.drifting.bureau.di.module.WinningRecordModule;
 import com.drifting.bureau.mvp.contract.WinningRecordContract;
-import com.drifting.bureau.mvp.contract.WithdrawalContract;
 import com.drifting.bureau.mvp.ui.fragment.WinningRecordFragment;
 import com.jess.arms.di.component.AppComponent;
-import com.drifting.bureau.di.module.WinningRecordModule;
-
 import com.jess.arms.di.scope.ActivityScope;
-import com.drifting.bureau.mvp.ui.activity.index.WinningRecordActivity;
+
+import dagger.BindsInstance;
+import dagger.Component;
 
 /**
  * ================================================

@@ -1,12 +1,7 @@
 package com.drifting.bureau.mvp.ui.activity.index;
 
-import static java.util.stream.Collectors.toList;
-
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -17,18 +12,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-
 import com.drifting.bureau.R;
 import com.drifting.bureau.base.BaseManagerActivity;
-
-import com.drifting.bureau.mvp.ui.activity.home.DiscoveryTourActivity;
 import com.drifting.bureau.util.BitmapUtil;
 import com.drifting.bureau.util.ClickUtil;
 import com.drifting.bureau.util.animator.AnimatorUtil;
 import com.jess.arms.di.component.AppComponent;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;

@@ -13,7 +13,6 @@ import com.drifting.bureau.mvp.contract.DiscoveryTourContract;
 import com.drifting.bureau.mvp.model.entity.MessageReceiveEntity;
 import com.drifting.bureau.mvp.model.entity.PlanetEntity;
 import com.drifting.bureau.mvp.model.entity.VersionUpdateEntity;
-import com.drifting.bureau.mvp.ui.dialog.PermissionDialog;
 import com.drifting.bureau.mvp.ui.dialog.VersionUpdateDialog;
 import com.drifting.bureau.storageinfo.Preferences;
 import com.drifting.bureau.util.AppUtil;

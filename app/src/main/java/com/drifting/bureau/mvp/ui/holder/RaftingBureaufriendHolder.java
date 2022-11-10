@@ -18,9 +18,6 @@ import com.drifting.bureau.util.GlideUtil;
 import com.drifting.bureau.util.TextUtil;
 import com.drifting.bureau.util.request.RequestUtil;
 import com.jess.arms.base.BaseHolder;
-import com.jess.arms.base.BaseRecyclerHolder;
-
-import java.util.List;
 
 import butterknife.BindView;
 import io.rong.imkit.utils.RouteUtils;
